@@ -13,6 +13,87 @@ public class RegressionTest1 {
     public void test501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test501");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
+        tarArchiveInputStream4.close();
+        int int6 = tarArchiveInputStream4.getRecordSize();
+        long long8 = tarArchiveInputStream4.skip(1711950206838L);
+        java.io.InputStream inputStream9 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
+        int int14 = tarArchiveInputStream13.getRecordSize();
+        long long16 = tarArchiveInputStream13.skip((long) (short) 0);
+        tarArchiveInputStream13.mark((int) '4');
+        java.io.OutputStream outputStream19 = null;
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream20 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream19);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream21 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream20);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream21);
+        tarArchiveInputStream13.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream22);
+        org.apache.commons.compress.archivers.ar.ArArchiveOutputStream arArchiveOutputStream24 = new org.apache.commons.compress.archivers.ar.ArArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream22);
+        tarArchiveInputStream4.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream22);
+        java.io.OutputStream outputStream26 = null;
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream27 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream26);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream28 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream27);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream29 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream28);
+        org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream cpioArchiveOutputStream30 = new org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream29);
+        tarArchiveOutputStream29.closeEntry();
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream32 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream29);
+        java.lang.String str33 = tarArchiveOutputStream32.getName();
+        tarArchiveInputStream4.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream32);
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream35 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream36 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) arArchiveInputStream35);
+        arArchiveInputStream35.close();
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 100 + "'", int6 == 100);
+        org.junit.Assert.assertTrue("'" + long8 + "' != '" + 0L + "'", long8 == 0L);
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 100 + "'", int14 == 100);
+        org.junit.Assert.assertTrue("'" + long16 + "' != '" + 0L + "'", long16 == 0L);
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "tar" + "'", str33, "tar");
+    }
+
+    @Test
+    public void test502() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test502");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        java.io.OutputStream outputStream2 = null;
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream3 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream2);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream3);
+        long long5 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream1, (java.io.OutputStream) tarArchiveOutputStream3);
+        cpioArchiveInputStream1.closeEntry();
+        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream7 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
+        long long9 = jarArchiveInputStream7.skip((long) (short) 0);
+        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry10 = jarArchiveInputStream7.getNextZipEntry();
+        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry11 = jarArchiveInputStream7.getNextJarEntry();
+        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry12 = jarArchiveInputStream7.getNextJarEntry();
+        long long14 = jarArchiveInputStream7.skip((long) 49152);
+        long long16 = jarArchiveInputStream7.skip(1711950209033L);
+        jarArchiveInputStream7.mark((-1));
+        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream19 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) jarArchiveInputStream7);
+        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry20 = jarArchiveInputStream7.getNextZipEntry();
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream21 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) jarArchiveInputStream7);
+        // The following exception was thrown during execution in test generation
+        try {
+            jarArchiveInputStream7.close();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
+        org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
+        org.junit.Assert.assertNull(zipArchiveEntry10);
+        org.junit.Assert.assertNull(jarArchiveEntry11);
+        org.junit.Assert.assertNull(jarArchiveEntry12);
+        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 0L + "'", long14 == 0L);
+        org.junit.Assert.assertTrue("'" + long16 + "' != '" + 0L + "'", long16 == 0L);
+        org.junit.Assert.assertNull(zipArchiveEntry20);
+    }
+
+    @Test
+    public void test503() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test503");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -78,9 +159,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test502() throws Throwable {
+    public void test504() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test502");
+            System.out.format("%n%s%n", "RegressionTest1.test504");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -122,18 +203,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test503() throws Throwable {
+    public void test505() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test503");
+            System.out.format("%n%s%n", "RegressionTest1.test505");
         byte[] byteArray0 = null;
         boolean boolean2 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray0, (int) (short) -1);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
 
     @Test
-    public void test504() throws Throwable {
+    public void test506() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test504");
+            System.out.format("%n%s%n", "RegressionTest1.test506");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -159,9 +240,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test505() throws Throwable {
+    public void test507() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test505");
+            System.out.format("%n%s%n", "RegressionTest1.test507");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -226,9 +307,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test506() throws Throwable {
+    public void test508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test506");
+            System.out.format("%n%s%n", "RegressionTest1.test508");
         byte[] byteArray1 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) '#');
         boolean boolean3 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray1, 512);
         boolean boolean5 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray1, (int) (short) -1);
@@ -245,9 +326,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test507() throws Throwable {
+    public void test509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test507");
+            System.out.format("%n%s%n", "RegressionTest1.test509");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -358,9 +439,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test508() throws Throwable {
+    public void test510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test508");
+            System.out.format("%n%s%n", "RegressionTest1.test510");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -406,10 +487,10 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test509() throws Throwable {
+    public void test511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test509");
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711906348543L);
+            System.out.format("%n%s%n", "RegressionTest1.test511");
+        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711950225508L);
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream2, 0, 100);
@@ -485,9 +566,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test510() throws Throwable {
+    public void test512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test510");
+            System.out.format("%n%s%n", "RegressionTest1.test512");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -546,9 +627,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test511() throws Throwable {
+    public void test513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test511");
+            System.out.format("%n%s%n", "RegressionTest1.test513");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -571,9 +652,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test512() throws Throwable {
+    public void test514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test512");
+            System.out.format("%n%s%n", "RegressionTest1.test514");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -667,9 +748,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test513() throws Throwable {
+    public void test515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test513");
+            System.out.format("%n%s%n", "RegressionTest1.test515");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -739,9 +820,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test514() throws Throwable {
+    public void test516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test514");
+            System.out.format("%n%s%n", "RegressionTest1.test516");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -829,9 +910,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test515() throws Throwable {
+    public void test517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test515");
+            System.out.format("%n%s%n", "RegressionTest1.test517");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -871,7 +952,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream72 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) zipArchiveInputStream71);
         int int73 = zipArchiveInputStream71.read();
         boolean boolean74 = zipArchiveInputStream71.markSupported();
-        byte[] byteArray76 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906338563L);
+        byte[] byteArray76 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950215756L);
         int int79 = zipArchiveInputStream71.read(byteArray76, 1024, 52);
         int int82 = arArchiveInputStream8.read(byteArray76, 0, 8192);
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream83 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
@@ -901,15 +982,15 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int73 + "' != '" + (-1) + "'", int73 == (-1));
         org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
         org.junit.Assert.assertNotNull(byteArray76);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[3, -73, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[76, 58, 47, -104]");
         org.junit.Assert.assertTrue("'" + int79 + "' != '" + (-1) + "'", int79 == (-1));
         org.junit.Assert.assertTrue("'" + int82 + "' != '" + (-1) + "'", int82 == (-1));
     }
 
     @Test
-    public void test516() throws Throwable {
+    public void test518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test516");
+            System.out.format("%n%s%n", "RegressionTest1.test518");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -940,9 +1021,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test517() throws Throwable {
+    public void test519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test517");
+            System.out.format("%n%s%n", "RegressionTest1.test519");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1006,9 +1087,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test518() throws Throwable {
+    public void test520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test518");
+            System.out.format("%n%s%n", "RegressionTest1.test520");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1056,9 +1137,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test519() throws Throwable {
+    public void test521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test519");
+            System.out.format("%n%s%n", "RegressionTest1.test521");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1079,9 +1160,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test520() throws Throwable {
+    public void test522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test520");
+            System.out.format("%n%s%n", "RegressionTest1.test522");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -1139,9 +1220,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test521() throws Throwable {
+    public void test523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test521");
+            System.out.format("%n%s%n", "RegressionTest1.test523");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -1165,9 +1246,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test522() throws Throwable {
+    public void test524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test522");
+            System.out.format("%n%s%n", "RegressionTest1.test524");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -1194,9 +1275,70 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test523() throws Throwable {
+    public void test525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test523");
+            System.out.format("%n%s%n", "RegressionTest1.test525");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
+        tarArchiveInputStream4.close();
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        int int10 = tarArchiveInputStream4.read(byteArray7, (-1), (int) (short) 1);
+        byte[] byteArray16 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
+        long long17 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray16);
+        int int20 = tarArchiveInputStream4.read(byteArray16, 8192, 40960);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream4, (int) (byte) 10);
+        tarArchiveInputStream22.close();
+        long long25 = tarArchiveInputStream22.skip((long) 2);
+        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream26 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) tarArchiveInputStream22);
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream27 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) jarArchiveInputStream26);
+        java.io.InputStream inputStream28 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream29 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream28);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream32 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream28, 0, 100);
+        tarArchiveInputStream32.reset();
+        tarArchiveInputStream32.reset();
+        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream35 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream32);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream38 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream32, (int) '#', (int) 'a');
+        int int39 = tarArchiveInputStream38.available();
+        tarArchiveInputStream38.setDebug(true);
+        long long43 = tarArchiveInputStream38.skip(168427530L);
+        org.apache.commons.compress.archivers.tar.TarArchiveEntry tarArchiveEntry44 = tarArchiveInputStream38.getNextTarEntry();
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream45 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream38);
+        arArchiveInputStream45.close();
+        java.io.InputStream inputStream47 = null;
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream49 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream47, 8);
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream50 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream49);
+        tarArchiveInputStream49.close();
+        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream52 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream49);
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream53 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) zipArchiveInputStream52);
+        byte[] byteArray55 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) '#');
+        boolean boolean57 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray55, 512);
+        int int60 = zipArchiveInputStream52.read(byteArray55, 10, (int) (short) 1);
+        int int63 = arArchiveInputStream45.read(byteArray55, 33188, 64);
+        int int64 = arArchiveInputStream27.read(byteArray55);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100, 10, 0, 10, 10]");
+        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 167774820L + "'", long17 == 167774820L);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
+        org.junit.Assert.assertTrue("'" + long25 + "' != '" + 0L + "'", long25 == 0L);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertTrue("'" + long43 + "' != '" + 0L + "'", long43 == 0L);
+        org.junit.Assert.assertNull(tarArchiveEntry44);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[35, 0, 0, 0]");
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + (-1) + "'", int60 == (-1));
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + (-1) + "'", int63 == (-1));
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + (-1) + "'", int64 == (-1));
+    }
+
+    @Test
+    public void test526() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test526");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -1247,9 +1389,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test524() throws Throwable {
+    public void test527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test524");
+            System.out.format("%n%s%n", "RegressionTest1.test527");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -1279,9 +1421,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test525() throws Throwable {
+    public void test528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test525");
+            System.out.format("%n%s%n", "RegressionTest1.test528");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1344,9 +1486,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test526() throws Throwable {
+    public void test529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test526");
+            System.out.format("%n%s%n", "RegressionTest1.test529");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -1420,9 +1562,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test527() throws Throwable {
+    public void test530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test527");
+            System.out.format("%n%s%n", "RegressionTest1.test530");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         long long4 = tarArchiveInputStream2.skip((long) (short) -1);
@@ -1462,9 +1604,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test528() throws Throwable {
+    public void test531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test528");
+            System.out.format("%n%s%n", "RegressionTest1.test531");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -1541,9 +1683,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test529() throws Throwable {
+    public void test532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test529");
+            System.out.format("%n%s%n", "RegressionTest1.test532");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -1633,9 +1775,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test530() throws Throwable {
+    public void test533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test530");
+            System.out.format("%n%s%n", "RegressionTest1.test533");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1695,9 +1837,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test531() throws Throwable {
+    public void test534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test531");
+            System.out.format("%n%s%n", "RegressionTest1.test534");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1726,9 +1868,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test532() throws Throwable {
+    public void test535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test532");
+            System.out.format("%n%s%n", "RegressionTest1.test535");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1765,9 +1907,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test533() throws Throwable {
+    public void test536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test533");
+            System.out.format("%n%s%n", "RegressionTest1.test536");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1823,9 +1965,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test534() throws Throwable {
+    public void test537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test534");
+            System.out.format("%n%s%n", "RegressionTest1.test537");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1877,9 +2019,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test535() throws Throwable {
+    public void test538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test535");
+            System.out.format("%n%s%n", "RegressionTest1.test538");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -1925,9 +2067,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test536() throws Throwable {
+    public void test539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test536");
+            System.out.format("%n%s%n", "RegressionTest1.test539");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.io.InputStream inputStream2 = null;
@@ -2017,9 +2159,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test537() throws Throwable {
+    public void test540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test537");
+            System.out.format("%n%s%n", "RegressionTest1.test540");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -2052,7 +2194,7 @@ public class RegressionTest1 {
         tarArchiveInputStream4.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream34);
         java.io.InputStream inputStream40 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream42 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream40, 8);
-        long long44 = tarArchiveInputStream42.skip(1711906337575L);
+        long long44 = tarArchiveInputStream42.skip(1711950214803L);
         java.io.OutputStream outputStream45 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream47 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream45, 32);
         tarArchiveOutputStream47.closeEntry();
@@ -2108,9 +2250,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test538() throws Throwable {
+    public void test541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test538");
+            System.out.format("%n%s%n", "RegressionTest1.test541");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -2141,9 +2283,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test539() throws Throwable {
+    public void test542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test539");
+            System.out.format("%n%s%n", "RegressionTest1.test542");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -2200,9 +2342,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test540() throws Throwable {
+    public void test543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test540");
+            System.out.format("%n%s%n", "RegressionTest1.test543");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -2227,9 +2369,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test541() throws Throwable {
+    public void test544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test541");
+            System.out.format("%n%s%n", "RegressionTest1.test544");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -2242,7 +2384,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream12 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream8, 0, 100);
         tarArchiveInputStream12.close();
         tarArchiveInputStream12.close();
-        long long16 = tarArchiveInputStream12.skip(1711906331397L);
+        long long16 = tarArchiveInputStream12.skip(1711950208464L);
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream17 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream12);
         java.io.InputStream inputStream18 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream19 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream18);
@@ -2280,9 +2422,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test542() throws Throwable {
+    public void test545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test542");
+            System.out.format("%n%s%n", "RegressionTest1.test545");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -2367,9 +2509,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test543() throws Throwable {
+    public void test546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test543");
+            System.out.format("%n%s%n", "RegressionTest1.test546");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -2467,9 +2609,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test544() throws Throwable {
+    public void test547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test544");
+            System.out.format("%n%s%n", "RegressionTest1.test547");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -2573,9 +2715,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test545() throws Throwable {
+    public void test548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test545");
+            System.out.format("%n%s%n", "RegressionTest1.test548");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -2656,9 +2798,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test546() throws Throwable {
+    public void test549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test546");
+            System.out.format("%n%s%n", "RegressionTest1.test549");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
+        tarArchiveInputStream4.reset();
+        long long7 = tarArchiveInputStream4.skip((long) 2);
+        int int8 = tarArchiveInputStream4.read();
+        tarArchiveInputStream4.close();
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream10 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
+    }
+
+    @Test
+    public void test550() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test550");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -2725,9 +2883,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test547() throws Throwable {
+    public void test551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test547");
+            System.out.format("%n%s%n", "RegressionTest1.test551");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -2752,9 +2910,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test548() throws Throwable {
+    public void test552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test548");
+            System.out.format("%n%s%n", "RegressionTest1.test552");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         long long4 = tarArchiveInputStream2.skip(0L);
@@ -2805,9 +2963,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test549() throws Throwable {
+    public void test553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test549");
+            System.out.format("%n%s%n", "RegressionTest1.test553");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream3 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream(inputStream0, "org.apache.commons.compress.archivers.ArchiveException", true);
         int int4 = zipArchiveInputStream3.available();
@@ -2837,9 +2995,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test550() throws Throwable {
+    public void test554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test550");
+            System.out.format("%n%s%n", "RegressionTest1.test554");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream1 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream2 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream1);
@@ -2923,9 +3081,45 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test551() throws Throwable {
+    public void test555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test551");
+            System.out.format("%n%s%n", "RegressionTest1.test555");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
+        tarArchiveInputStream4.close();
+        tarArchiveInputStream4.close();
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream7 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
+        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream8 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) arArchiveInputStream7);
+        org.apache.commons.compress.archivers.zip.ZipLong zipLong10 = new org.apache.commons.compress.archivers.zip.ZipLong(100L);
+        java.lang.Object obj11 = zipLong10.clone();
+        long long12 = zipLong10.getValue();
+        byte[] byteArray13 = zipLong10.getBytes();
+        boolean boolean15 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray13, 2048);
+        int int18 = zipArchiveInputStream8.read(byteArray13, (int) (short) 4, 10);
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream19 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) zipArchiveInputStream8);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream20 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) zipArchiveInputStream8);
+        java.io.OutputStream outputStream21 = null;
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream21);
+        java.lang.String str23 = tarArchiveOutputStream22.getDefaultFileExtension();
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream26 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream22, (int) ' ', 2);
+        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream28 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream26, 4096);
+        long long30 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) tarArchiveInputStream20, (java.io.OutputStream) tarArchiveOutputStream26, 97);
+        tarArchiveOutputStream26.closeArchiveEntry();
+        org.junit.Assert.assertNotNull(obj11);
+        org.junit.Assert.assertTrue("'" + long12 + "' != '" + 100L + "'", long12 == 100L);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[100, 0, 0, 0]");
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + (-1) + "'", int18 == (-1));
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "tar" + "'", str23, "tar");
+        org.junit.Assert.assertTrue("'" + long30 + "' != '" + 0L + "'", long30 == 0L);
+    }
+
+    @Test
+    public void test556() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test556");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -2990,9 +3184,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test552() throws Throwable {
+    public void test557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test552");
+            System.out.format("%n%s%n", "RegressionTest1.test557");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3046,9 +3240,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test553() throws Throwable {
+    public void test558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test553");
+            System.out.format("%n%s%n", "RegressionTest1.test558");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3113,9 +3307,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test554() throws Throwable {
+    public void test559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test554");
+            System.out.format("%n%s%n", "RegressionTest1.test559");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3203,9 +3397,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test555() throws Throwable {
+    public void test560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test555");
+            System.out.format("%n%s%n", "RegressionTest1.test560");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3249,9 +3443,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test556() throws Throwable {
+    public void test561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test556");
+            System.out.format("%n%s%n", "RegressionTest1.test561");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3288,9 +3482,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test557() throws Throwable {
+    public void test562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test557");
+            System.out.format("%n%s%n", "RegressionTest1.test562");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         int int2 = cpioArchiveInputStream1.available();
@@ -3355,9 +3549,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test558() throws Throwable {
+    public void test563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test558");
+            System.out.format("%n%s%n", "RegressionTest1.test563");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3414,9 +3608,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test559() throws Throwable {
+    public void test564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test559");
+            System.out.format("%n%s%n", "RegressionTest1.test564");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3457,15 +3651,15 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test560() throws Throwable {
+    public void test565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test560");
+            System.out.format("%n%s%n", "RegressionTest1.test565");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
         int int5 = tarArchiveInputStream4.getRecordSize();
         int int6 = tarArchiveInputStream4.read();
-        byte[] byteArray8 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906332030L);
+        byte[] byteArray8 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950209033L);
         int int11 = tarArchiveInputStream4.read(byteArray8, (int) (short) -1, 24576);
         java.io.InputStream inputStream12 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream13 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream12);
@@ -3493,14 +3687,14 @@ public class RegressionTest1 {
         boolean boolean49 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray37, (int) (byte) 0);
         boolean boolean51 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray37, 4);
         int int54 = tarArchiveInputStream16.read(byteArray37, (int) (short) 100, (int) (byte) 1);
-        byte[] byteArray56 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906340577L);
+        byte[] byteArray56 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950218098L);
         int int59 = tarArchiveInputStream16.read(byteArray56, 2048, 8192);
         int int62 = tarArchiveInputStream4.read(byteArray56, (-1), (int) (short) 10);
         int int63 = tarArchiveInputStream4.available();
         org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
         org.junit.Assert.assertTrue("'" + int6 + "' != '" + (-1) + "'", int6 == (-1));
         org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[126, -99, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[9, 32, 47, -104]");
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + (-1) + "'", int11 == (-1));
         org.junit.Assert.assertTrue("'" + long20 + "' != '" + 0L + "'", long20 == 0L);
         org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
@@ -3515,16 +3709,16 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
         org.junit.Assert.assertTrue("'" + int54 + "' != '" + (-1) + "'", int54 == (-1));
         org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[-31, -66, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[114, 67, 47, -104]");
         org.junit.Assert.assertTrue("'" + int59 + "' != '" + (-1) + "'", int59 == (-1));
         org.junit.Assert.assertTrue("'" + int62 + "' != '" + (-1) + "'", int62 == (-1));
         org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
     }
 
     @Test
-    public void test561() throws Throwable {
+    public void test566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test561");
+            System.out.format("%n%s%n", "RegressionTest1.test566");
         byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
         org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
         org.apache.commons.compress.archivers.zip.ZipLong zipLong6 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
@@ -3546,9 +3740,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test562() throws Throwable {
+    public void test567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test562");
+            System.out.format("%n%s%n", "RegressionTest1.test567");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -3583,9 +3777,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test563() throws Throwable {
+    public void test568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test563");
+            System.out.format("%n%s%n", "RegressionTest1.test568");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3652,9 +3846,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test564() throws Throwable {
+    public void test569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test564");
+            System.out.format("%n%s%n", "RegressionTest1.test569");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3688,9 +3882,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test565() throws Throwable {
+    public void test570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test565");
+            System.out.format("%n%s%n", "RegressionTest1.test570");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3763,9 +3957,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test566() throws Throwable {
+    public void test571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test566");
+            System.out.format("%n%s%n", "RegressionTest1.test571");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -3829,9 +4023,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test567() throws Throwable {
+    public void test572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test567");
+            System.out.format("%n%s%n", "RegressionTest1.test572");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -3867,9 +4061,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test568() throws Throwable {
+    public void test573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test568");
+            System.out.format("%n%s%n", "RegressionTest1.test573");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -3945,9 +4139,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test569() throws Throwable {
+    public void test574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test569");
+            System.out.format("%n%s%n", "RegressionTest1.test574");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -3979,9 +4173,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test570() throws Throwable {
+    public void test575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test570");
+            System.out.format("%n%s%n", "RegressionTest1.test575");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -4020,9 +4214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test571() throws Throwable {
+    public void test576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test571");
+            System.out.format("%n%s%n", "RegressionTest1.test576");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -4113,9 +4307,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test572() throws Throwable {
+    public void test577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test572");
+            System.out.format("%n%s%n", "RegressionTest1.test577");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -4184,9 +4378,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test573() throws Throwable {
+    public void test578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test573");
+            System.out.format("%n%s%n", "RegressionTest1.test578");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -4254,9 +4448,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test574() throws Throwable {
+    public void test579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test574");
+            System.out.format("%n%s%n", "RegressionTest1.test579");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -4307,9 +4501,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test575() throws Throwable {
+    public void test580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test575");
+            System.out.format("%n%s%n", "RegressionTest1.test580");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -4348,15 +4542,15 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test576() throws Throwable {
+    public void test581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test576");
+            System.out.format("%n%s%n", "RegressionTest1.test581");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
         tarArchiveInputStream4.close();
         int int6 = tarArchiveInputStream4.getRecordSize();
-        long long8 = tarArchiveInputStream4.skip(1711906329884L);
+        long long8 = tarArchiveInputStream4.skip(1711950206838L);
         java.io.InputStream inputStream9 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
@@ -4396,9 +4590,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test577() throws Throwable {
+    public void test582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test577");
+            System.out.format("%n%s%n", "RegressionTest1.test582");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -4449,9 +4643,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test578() throws Throwable {
+    public void test583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test578");
+            System.out.format("%n%s%n", "RegressionTest1.test583");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -4492,9 +4686,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test579() throws Throwable {
+    public void test584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test579");
+            System.out.format("%n%s%n", "RegressionTest1.test584");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -4543,15 +4737,15 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test580() throws Throwable {
+    public void test585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test580");
+            System.out.format("%n%s%n", "RegressionTest1.test585");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
         tarArchiveInputStream4.close();
         int int6 = tarArchiveInputStream4.getRecordSize();
-        long long8 = tarArchiveInputStream4.skip(1711906329884L);
+        long long8 = tarArchiveInputStream4.skip(1711950206838L);
         java.io.InputStream inputStream9 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
@@ -4585,9 +4779,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test581() throws Throwable {
+    public void test586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test581");
+            System.out.format("%n%s%n", "RegressionTest1.test586");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -4601,7 +4795,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry11 = jarArchiveInputStream7.getNextJarEntry();
         org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry12 = jarArchiveInputStream7.getNextJarEntry();
         long long14 = jarArchiveInputStream7.skip((long) 49152);
-        long long16 = jarArchiveInputStream7.skip(1711906332030L);
+        long long16 = jarArchiveInputStream7.skip(1711950209033L);
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream17 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) jarArchiveInputStream7);
         long long19 = cpioArchiveInputStream17.skip(0L);
         int int20 = cpioArchiveInputStream17.read();
@@ -4647,9 +4841,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test582() throws Throwable {
+    public void test587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test582");
+            System.out.format("%n%s%n", "RegressionTest1.test587");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -4726,9 +4920,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test583() throws Throwable {
+    public void test588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test583");
+            System.out.format("%n%s%n", "RegressionTest1.test588");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -4798,9 +4992,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test584() throws Throwable {
+    public void test589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test584");
+            System.out.format("%n%s%n", "RegressionTest1.test589");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -4862,9 +5056,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test585() throws Throwable {
+    public void test590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test585");
+            System.out.format("%n%s%n", "RegressionTest1.test590");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream2);
@@ -4887,9 +5081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test586() throws Throwable {
+    public void test591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test586");
+            System.out.format("%n%s%n", "RegressionTest1.test591");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -4954,9 +5148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test587() throws Throwable {
+    public void test592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test587");
+            System.out.format("%n%s%n", "RegressionTest1.test592");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -5035,9 +5229,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test588() throws Throwable {
+    public void test593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test588");
+            System.out.format("%n%s%n", "RegressionTest1.test593");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5095,9 +5289,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test589() throws Throwable {
+    public void test594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test589");
+            System.out.format("%n%s%n", "RegressionTest1.test594");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5149,9 +5343,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test590() throws Throwable {
+    public void test595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test590");
+            System.out.format("%n%s%n", "RegressionTest1.test595");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5213,9 +5407,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test591() throws Throwable {
+    public void test596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test591");
+            System.out.format("%n%s%n", "RegressionTest1.test596");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5285,9 +5479,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test592() throws Throwable {
+    public void test597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test592");
+            System.out.format("%n%s%n", "RegressionTest1.test597");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5315,9 +5509,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test593() throws Throwable {
+    public void test598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test593");
+            System.out.format("%n%s%n", "RegressionTest1.test598");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5380,9 +5574,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test594() throws Throwable {
+    public void test599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test594");
+            System.out.format("%n%s%n", "RegressionTest1.test599");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5403,9 +5597,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test595() throws Throwable {
+    public void test600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test595");
+            System.out.format("%n%s%n", "RegressionTest1.test600");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5468,9 +5662,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test596() throws Throwable {
+    public void test601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test596");
+            System.out.format("%n%s%n", "RegressionTest1.test601");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5499,9 +5693,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test597() throws Throwable {
+    public void test602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test597");
+            System.out.format("%n%s%n", "RegressionTest1.test602");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -5544,9 +5738,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test598() throws Throwable {
+    public void test603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test598");
+            System.out.format("%n%s%n", "RegressionTest1.test603");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5595,9 +5789,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test599() throws Throwable {
+    public void test604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test599");
+            System.out.format("%n%s%n", "RegressionTest1.test604");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5671,9 +5865,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test600() throws Throwable {
+    public void test605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test600");
+            System.out.format("%n%s%n", "RegressionTest1.test605");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5746,9 +5940,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test601() throws Throwable {
+    public void test606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test601");
+            System.out.format("%n%s%n", "RegressionTest1.test606");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5808,9 +6002,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test602() throws Throwable {
+    public void test607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test602");
+            System.out.format("%n%s%n", "RegressionTest1.test607");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5835,9 +6029,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test603() throws Throwable {
+    public void test608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test603");
+            System.out.format("%n%s%n", "RegressionTest1.test608");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5882,9 +6076,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test604() throws Throwable {
+    public void test609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test604");
+            System.out.format("%n%s%n", "RegressionTest1.test609");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -5925,9 +6119,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test605() throws Throwable {
+    public void test610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test605");
+            System.out.format("%n%s%n", "RegressionTest1.test610");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -5973,9 +6167,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test606() throws Throwable {
+    public void test611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test606");
+            System.out.format("%n%s%n", "RegressionTest1.test611");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6032,9 +6226,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test607() throws Throwable {
+    public void test612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test607");
+            System.out.format("%n%s%n", "RegressionTest1.test612");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -6133,9 +6327,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test608() throws Throwable {
+    public void test613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test608");
+            System.out.format("%n%s%n", "RegressionTest1.test613");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6193,9 +6387,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test609() throws Throwable {
+    public void test614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test609");
+            System.out.format("%n%s%n", "RegressionTest1.test614");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6212,9 +6406,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test610() throws Throwable {
+    public void test615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test610");
+            System.out.format("%n%s%n", "RegressionTest1.test615");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6250,7 +6444,7 @@ public class RegressionTest1 {
         int int58 = tarArchiveInputStream23.read(byteArray46, 24576, (int) (short) 10);
         org.apache.commons.compress.archivers.ArchiveInputStream archiveInputStream59 = archiveStreamFactory17.createArchiveInputStream("tar", (java.io.InputStream) tarArchiveInputStream23);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream60 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) archiveInputStream59);
-        byte[] byteArray62 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906331001L);
+        byte[] byteArray62 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950208064L);
         boolean boolean64 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray62, 0);
         int int65 = archiveInputStream59.read(byteArray62);
         int int68 = tarArchiveInputStream13.read(byteArray62, (-1), (int) '4');
@@ -6272,19 +6466,19 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int58 + "' != '" + (-1) + "'", int58 == (-1));
         org.junit.Assert.assertNotNull(archiveInputStream59);
         org.junit.Assert.assertNotNull(byteArray62);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[121, -103, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[64, 28, 47, -104]");
         org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
         org.junit.Assert.assertTrue("'" + int65 + "' != '" + (-1) + "'", int65 == (-1));
         org.junit.Assert.assertTrue("'" + int68 + "' != '" + (-1) + "'", int68 == (-1));
         org.junit.Assert.assertTrue("'" + int69 + "' != '" + (-1) + "'", int69 == (-1));
-        org.junit.Assert.assertTrue("'" + long70 + "' != '" + 2509347193L + "'", long70 == 2509347193L);
+        org.junit.Assert.assertTrue("'" + long70 + "' != '" + 2553224256L + "'", long70 == 2553224256L);
         org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + false + "'", boolean72 == false);
     }
 
     @Test
-    public void test611() throws Throwable {
+    public void test616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test611");
+            System.out.format("%n%s%n", "RegressionTest1.test616");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6320,9 +6514,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test612() throws Throwable {
+    public void test617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test612");
+            System.out.format("%n%s%n", "RegressionTest1.test617");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -6353,9 +6547,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test613() throws Throwable {
+    public void test618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test613");
+            System.out.format("%n%s%n", "RegressionTest1.test618");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6438,9 +6632,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test614() throws Throwable {
+    public void test619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test614");
+            System.out.format("%n%s%n", "RegressionTest1.test619");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6504,9 +6698,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test615() throws Throwable {
+    public void test620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test615");
+            System.out.format("%n%s%n", "RegressionTest1.test620");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6560,9 +6754,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test616() throws Throwable {
+    public void test621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test616");
+            System.out.format("%n%s%n", "RegressionTest1.test621");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6643,9 +6837,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test617() throws Throwable {
+    public void test622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test617");
+            System.out.format("%n%s%n", "RegressionTest1.test622");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6717,9 +6911,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test618() throws Throwable {
+    public void test623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test618");
+            System.out.format("%n%s%n", "RegressionTest1.test623");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6781,9 +6975,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test619() throws Throwable {
+    public void test624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test619");
+            System.out.format("%n%s%n", "RegressionTest1.test624");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6876,9 +7070,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test620() throws Throwable {
+    public void test625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test620");
+            System.out.format("%n%s%n", "RegressionTest1.test625");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -6962,9 +7156,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test621() throws Throwable {
+    public void test626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test621");
+            System.out.format("%n%s%n", "RegressionTest1.test626");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7004,9 +7198,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test622() throws Throwable {
+    public void test627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test622");
+            System.out.format("%n%s%n", "RegressionTest1.test627");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7034,9 +7228,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test623() throws Throwable {
+    public void test628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test623");
+            System.out.format("%n%s%n", "RegressionTest1.test628");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -7131,9 +7325,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test624() throws Throwable {
+    public void test629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test624");
+            System.out.format("%n%s%n", "RegressionTest1.test629");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7174,9 +7368,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test625() throws Throwable {
+    public void test630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test625");
+            System.out.format("%n%s%n", "RegressionTest1.test630");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7218,9 +7412,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test626() throws Throwable {
+    public void test631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test626");
+            System.out.format("%n%s%n", "RegressionTest1.test631");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7253,9 +7447,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test627() throws Throwable {
+    public void test632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test627");
+            System.out.format("%n%s%n", "RegressionTest1.test632");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -7326,9 +7520,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test628() throws Throwable {
+    public void test633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test628");
+            System.out.format("%n%s%n", "RegressionTest1.test633");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         cpioArchiveInputStream1.mark(2048);
@@ -7360,9 +7554,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test629() throws Throwable {
+    public void test634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test629");
+            System.out.format("%n%s%n", "RegressionTest1.test634");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7404,9 +7598,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test630() throws Throwable {
+    public void test635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test630");
+            System.out.format("%n%s%n", "RegressionTest1.test635");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7498,9 +7692,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test631() throws Throwable {
+    public void test636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test631");
+            System.out.format("%n%s%n", "RegressionTest1.test636");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -7536,9 +7730,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test632() throws Throwable {
+    public void test637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test632");
+            System.out.format("%n%s%n", "RegressionTest1.test637");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7555,9 +7749,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test633() throws Throwable {
+    public void test638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test633");
+            System.out.format("%n%s%n", "RegressionTest1.test638");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -7609,9 +7803,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test634() throws Throwable {
+    public void test639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test634");
+            System.out.format("%n%s%n", "RegressionTest1.test639");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7624,18 +7818,18 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream12 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) cpioArchiveInputStream8);
         org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream13 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) cpioArchiveInputStream8);
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream14 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) arArchiveInputStream13);
-        byte[] byteArray16 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906362537L);
+        byte[] byteArray16 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950238758L);
         int int17 = arArchiveInputStream13.read(byteArray16);
         org.junit.Assert.assertTrue("'" + long11 + "' != '" + 0L + "'", long11 == 0L);
         org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[-87, 20, -110, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[38, -108, 47, -104]");
         org.junit.Assert.assertTrue("'" + int17 + "' != '" + (-1) + "'", int17 == (-1));
     }
 
     @Test
-    public void test635() throws Throwable {
+    public void test640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test635");
+            System.out.format("%n%s%n", "RegressionTest1.test640");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7711,9 +7905,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test636() throws Throwable {
+    public void test641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test636");
+            System.out.format("%n%s%n", "RegressionTest1.test641");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7760,7 +7954,7 @@ public class RegressionTest1 {
         int int84 = arArchiveInputStream8.read(byteArray74, (int) (byte) 1, 32);
         int int85 = arArchiveInputStream8.read();
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream86 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
-        byte[] byteArray88 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906362537L);
+        byte[] byteArray88 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950238758L);
         int int89 = arArchiveInputStream8.read(byteArray88);
         org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
         org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
@@ -7796,14 +7990,14 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int84 + "' != '" + (-1) + "'", int84 == (-1));
         org.junit.Assert.assertTrue("'" + int85 + "' != '" + (-1) + "'", int85 == (-1));
         org.junit.Assert.assertNotNull(byteArray88);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[-87, 20, -110, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[38, -108, 47, -104]");
         org.junit.Assert.assertTrue("'" + int89 + "' != '" + (-1) + "'", int89 == (-1));
     }
 
     @Test
-    public void test637() throws Throwable {
+    public void test642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test637");
+            System.out.format("%n%s%n", "RegressionTest1.test642");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7848,9 +8042,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test638() throws Throwable {
+    public void test643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test638");
+            System.out.format("%n%s%n", "RegressionTest1.test643");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -7883,9 +8077,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test639() throws Throwable {
+    public void test644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test639");
+            System.out.format("%n%s%n", "RegressionTest1.test644");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -7975,9 +8169,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test640() throws Throwable {
+    public void test645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test640");
+            System.out.format("%n%s%n", "RegressionTest1.test645");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8020,9 +8214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test641() throws Throwable {
+    public void test646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test641");
+            System.out.format("%n%s%n", "RegressionTest1.test646");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8051,9 +8245,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test642() throws Throwable {
+    public void test647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test642");
+            System.out.format("%n%s%n", "RegressionTest1.test647");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -8095,9 +8289,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test643() throws Throwable {
+    public void test648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test643");
+            System.out.format("%n%s%n", "RegressionTest1.test648");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -8121,9 +8315,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test644() throws Throwable {
+    public void test649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test644");
+            System.out.format("%n%s%n", "RegressionTest1.test649");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8187,9 +8381,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test645() throws Throwable {
+    public void test650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test645");
+            System.out.format("%n%s%n", "RegressionTest1.test650");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8263,9 +8457,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test646() throws Throwable {
+    public void test651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test646");
+            System.out.format("%n%s%n", "RegressionTest1.test651");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8289,9 +8483,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test647() throws Throwable {
+    public void test652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test647");
+            System.out.format("%n%s%n", "RegressionTest1.test652");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -8329,9 +8523,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test648() throws Throwable {
+    public void test653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test648");
+            System.out.format("%n%s%n", "RegressionTest1.test653");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8381,9 +8575,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test649() throws Throwable {
+    public void test654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test649");
+            System.out.format("%n%s%n", "RegressionTest1.test654");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -8449,9 +8643,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test650() throws Throwable {
+    public void test655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test650");
+            System.out.format("%n%s%n", "RegressionTest1.test655");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         int int2 = cpioArchiveInputStream1.available();
@@ -8543,9 +8737,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test651() throws Throwable {
+    public void test656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test651");
+            System.out.format("%n%s%n", "RegressionTest1.test656");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8601,9 +8795,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test652() throws Throwable {
+    public void test657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test652");
+            System.out.format("%n%s%n", "RegressionTest1.test657");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -8629,9 +8823,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test653() throws Throwable {
+    public void test658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test653");
+            System.out.format("%n%s%n", "RegressionTest1.test658");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8670,9 +8864,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test654() throws Throwable {
+    public void test659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test654");
+            System.out.format("%n%s%n", "RegressionTest1.test659");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -8718,9 +8912,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test655() throws Throwable {
+    public void test660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test655");
+            System.out.format("%n%s%n", "RegressionTest1.test660");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8771,9 +8965,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test656() throws Throwable {
+    public void test661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test656");
+            System.out.format("%n%s%n", "RegressionTest1.test661");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8796,9 +8990,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test657() throws Throwable {
+    public void test662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test657");
+            System.out.format("%n%s%n", "RegressionTest1.test662");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8881,9 +9075,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test658() throws Throwable {
+    public void test663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test658");
+            System.out.format("%n%s%n", "RegressionTest1.test663");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -8936,9 +9130,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test659() throws Throwable {
+    public void test664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test659");
+            System.out.format("%n%s%n", "RegressionTest1.test664");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -8959,9 +9153,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test660() throws Throwable {
+    public void test665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test660");
+            System.out.format("%n%s%n", "RegressionTest1.test665");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -9047,9 +9241,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test661() throws Throwable {
+    public void test666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test661");
+            System.out.format("%n%s%n", "RegressionTest1.test666");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9142,9 +9336,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test662() throws Throwable {
+    public void test667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test662");
+            System.out.format("%n%s%n", "RegressionTest1.test667");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9209,9 +9403,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test663() throws Throwable {
+    public void test668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test663");
+            System.out.format("%n%s%n", "RegressionTest1.test668");
         byte[] byteArray1 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) 2);
         boolean boolean3 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray1, 32);
         long long4 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray1);
@@ -9222,9 +9416,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test664() throws Throwable {
+    public void test669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test664");
+            System.out.format("%n%s%n", "RegressionTest1.test669");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9278,9 +9472,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test665() throws Throwable {
+    public void test670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test665");
+            System.out.format("%n%s%n", "RegressionTest1.test670");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9385,9 +9579,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test666() throws Throwable {
+    public void test671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test666");
+            System.out.format("%n%s%n", "RegressionTest1.test671");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -9418,9 +9612,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test667() throws Throwable {
+    public void test672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test667");
+            System.out.format("%n%s%n", "RegressionTest1.test672");
         byte[] byteArray5 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
         long long6 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray5);
         boolean boolean8 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray5, (int) (short) 0);
@@ -9438,9 +9632,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test668() throws Throwable {
+    public void test673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test668");
+            System.out.format("%n%s%n", "RegressionTest1.test673");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -9474,9 +9668,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test669() throws Throwable {
+    public void test674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test669");
+            System.out.format("%n%s%n", "RegressionTest1.test674");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -9508,9 +9702,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test670() throws Throwable {
+    public void test675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test670");
+            System.out.format("%n%s%n", "RegressionTest1.test675");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9523,7 +9717,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream12 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) cpioArchiveInputStream8);
         org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream13 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) cpioArchiveInputStream8);
         long long15 = cpioArchiveInputStream8.skip((long) (byte) 0);
-        long long17 = cpioArchiveInputStream8.skip(1711906348265L);
+        long long17 = cpioArchiveInputStream8.skip(1711950225252L);
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.compress.archivers.ArchiveEntry archiveEntry18 = cpioArchiveInputStream8.getNextEntry();
@@ -9537,9 +9731,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test671() throws Throwable {
+    public void test676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test671");
+            System.out.format("%n%s%n", "RegressionTest1.test676");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9623,9 +9817,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test672() throws Throwable {
+    public void test677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test672");
+            System.out.format("%n%s%n", "RegressionTest1.test677");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -9663,9 +9857,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test673() throws Throwable {
+    public void test678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test673");
+            System.out.format("%n%s%n", "RegressionTest1.test678");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9729,9 +9923,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test674() throws Throwable {
+    public void test679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test674");
+            System.out.format("%n%s%n", "RegressionTest1.test679");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9802,9 +9996,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test675() throws Throwable {
+    public void test680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test675");
+            System.out.format("%n%s%n", "RegressionTest1.test680");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9837,9 +10031,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test676() throws Throwable {
+    public void test681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test676");
+            System.out.format("%n%s%n", "RegressionTest1.test681");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9857,9 +10051,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test677() throws Throwable {
+    public void test682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test677");
+            System.out.format("%n%s%n", "RegressionTest1.test682");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -9892,9 +10086,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test678() throws Throwable {
+    public void test683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test678");
+            System.out.format("%n%s%n", "RegressionTest1.test683");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -9977,9 +10171,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test679() throws Throwable {
+    public void test684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test679");
+            System.out.format("%n%s%n", "RegressionTest1.test684");
         byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
         org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
         org.apache.commons.compress.archivers.zip.ZipLong zipLong6 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
@@ -10000,9 +10194,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test680() throws Throwable {
+    public void test685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test680");
+            System.out.format("%n%s%n", "RegressionTest1.test685");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10085,9 +10279,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test681() throws Throwable {
+    public void test686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test681");
+            System.out.format("%n%s%n", "RegressionTest1.test686");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -10163,9 +10357,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test682() throws Throwable {
+    public void test687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test682");
+            System.out.format("%n%s%n", "RegressionTest1.test687");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10230,9 +10424,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test683() throws Throwable {
+    public void test688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test683");
+            System.out.format("%n%s%n", "RegressionTest1.test688");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10323,9 +10517,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test684() throws Throwable {
+    public void test689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test684");
+            System.out.format("%n%s%n", "RegressionTest1.test689");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10411,9 +10605,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test685() throws Throwable {
+    public void test690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test685");
+            System.out.format("%n%s%n", "RegressionTest1.test690");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10436,9 +10630,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test686() throws Throwable {
+    public void test691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test686");
+            System.out.format("%n%s%n", "RegressionTest1.test691");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream3 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream(inputStream0, "org.apache.commons.compress.archivers.ArchiveException", true);
         java.io.InputStream inputStream4 = null;
@@ -10476,9 +10670,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test687() throws Throwable {
+    public void test692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test687");
+            System.out.format("%n%s%n", "RegressionTest1.test692");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -10520,9 +10714,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test688() throws Throwable {
+    public void test693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test688");
+            System.out.format("%n%s%n", "RegressionTest1.test693");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10544,9 +10738,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test689() throws Throwable {
+    public void test694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test689");
+            System.out.format("%n%s%n", "RegressionTest1.test694");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -10592,9 +10786,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test690() throws Throwable {
+    public void test695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test690");
+            System.out.format("%n%s%n", "RegressionTest1.test695");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -10688,9 +10882,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test691() throws Throwable {
+    public void test696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test691");
+            System.out.format("%n%s%n", "RegressionTest1.test696");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10732,9 +10926,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test692() throws Throwable {
+    public void test697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test692");
+            System.out.format("%n%s%n", "RegressionTest1.test697");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -10789,9 +10983,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test693() throws Throwable {
+    public void test698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test693");
+            System.out.format("%n%s%n", "RegressionTest1.test698");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10829,10 +11023,10 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test694() throws Throwable {
+    public void test699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test694");
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711906354825L);
+            System.out.format("%n%s%n", "RegressionTest1.test699");
+        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711950231324L);
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream2, 0, 100);
@@ -10897,9 +11091,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test695() throws Throwable {
+    public void test700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test695");
+            System.out.format("%n%s%n", "RegressionTest1.test700");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -10957,9 +11151,32 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test696() throws Throwable {
+    public void test701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test696");
+            System.out.format("%n%s%n", "RegressionTest1.test701");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
+        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
+        int int5 = tarArchiveInputStream4.getRecordSize();
+        long long7 = tarArchiveInputStream4.skip((long) 64);
+        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
+        int int9 = arArchiveInputStream8.available();
+        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream10 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
+        boolean boolean11 = jarArchiveInputStream10.markSupported();
+        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry12 = jarArchiveInputStream10.getNextJarEntry();
+        jarArchiveInputStream10.close();
+        jarArchiveInputStream10.mark((int) 'a');
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNull(jarArchiveEntry12);
+    }
+
+    @Test
+    public void test702() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test702");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -10987,9 +11204,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test697() throws Throwable {
+    public void test703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test697");
+            System.out.format("%n%s%n", "RegressionTest1.test703");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11037,9 +11254,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test698() throws Throwable {
+    public void test704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test698");
+            System.out.format("%n%s%n", "RegressionTest1.test704");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11102,9 +11319,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test699() throws Throwable {
+    public void test705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test699");
+            System.out.format("%n%s%n", "RegressionTest1.test705");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -11154,9 +11371,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test700() throws Throwable {
+    public void test706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test700");
+            System.out.format("%n%s%n", "RegressionTest1.test706");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11188,7 +11405,7 @@ public class RegressionTest1 {
         jarArchiveOutputStream35.setUseLanguageEncodingFlag(true);
         long long47 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) arArchiveInputStream8, (java.io.OutputStream) jarArchiveOutputStream35);
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream48 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
-        long long50 = zipArchiveInputStream48.skip(1711906340577L);
+        long long50 = zipArchiveInputStream48.skip(1711950218098L);
         org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
         org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
         org.junit.Assert.assertNotNull(byteArray16);
@@ -11208,9 +11425,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test701() throws Throwable {
+    public void test707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test701");
+            System.out.format("%n%s%n", "RegressionTest1.test707");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11275,9 +11492,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test702() throws Throwable {
+    public void test708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test702");
+            System.out.format("%n%s%n", "RegressionTest1.test708");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11324,9 +11541,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test703() throws Throwable {
+    public void test709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test703");
+            System.out.format("%n%s%n", "RegressionTest1.test709");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -11397,9 +11614,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test704() throws Throwable {
+    public void test710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test704");
+            System.out.format("%n%s%n", "RegressionTest1.test710");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11486,9 +11703,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test705() throws Throwable {
+    public void test711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test705");
+            System.out.format("%n%s%n", "RegressionTest1.test711");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11540,9 +11757,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test706() throws Throwable {
+    public void test712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test706");
+            System.out.format("%n%s%n", "RegressionTest1.test712");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11640,9 +11857,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test707() throws Throwable {
+    public void test713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test707");
+            System.out.format("%n%s%n", "RegressionTest1.test713");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11694,9 +11911,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test708() throws Throwable {
+    public void test714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test708");
+            System.out.format("%n%s%n", "RegressionTest1.test714");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11765,9 +11982,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test709() throws Throwable {
+    public void test715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test709");
+            System.out.format("%n%s%n", "RegressionTest1.test715");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11792,7 +12009,7 @@ public class RegressionTest1 {
         boolean boolean32 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray29, 1);
         int int33 = jarArchiveInputStream18.read(byteArray29);
         int int36 = tarArchiveInputStream4.read(byteArray29, 1024, 40960);
-        long long38 = tarArchiveInputStream4.skip(1711906378857L);
+        long long38 = tarArchiveInputStream4.skip(1711950255205L);
         org.junit.Assert.assertNotNull(byteArray7);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
         org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
@@ -11811,9 +12028,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test710() throws Throwable {
+    public void test716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test710");
+            System.out.format("%n%s%n", "RegressionTest1.test716");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11913,9 +12130,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test711() throws Throwable {
+    public void test717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test711");
+            System.out.format("%n%s%n", "RegressionTest1.test717");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -11936,9 +12153,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test712() throws Throwable {
+    public void test718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test712");
+            System.out.format("%n%s%n", "RegressionTest1.test718");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12007,9 +12224,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test713() throws Throwable {
+    public void test719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test713");
+            System.out.format("%n%s%n", "RegressionTest1.test719");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12039,9 +12256,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test714() throws Throwable {
+    public void test720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test714");
+            System.out.format("%n%s%n", "RegressionTest1.test720");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12129,18 +12346,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test715() throws Throwable {
+    public void test721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test715");
+            System.out.format("%n%s%n", "RegressionTest1.test721");
         byte[] byteArray0 = null;
         boolean boolean2 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray0, 0);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
 
     @Test
-    public void test716() throws Throwable {
+    public void test722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test716");
+            System.out.format("%n%s%n", "RegressionTest1.test722");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -12193,9 +12410,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test717() throws Throwable {
+    public void test723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test717");
+            System.out.format("%n%s%n", "RegressionTest1.test723");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12254,9 +12471,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test718() throws Throwable {
+    public void test724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test718");
+            System.out.format("%n%s%n", "RegressionTest1.test724");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12355,9 +12572,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test719() throws Throwable {
+    public void test725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test719");
+            System.out.format("%n%s%n", "RegressionTest1.test725");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -12405,9 +12622,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test720() throws Throwable {
+    public void test726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test720");
+            System.out.format("%n%s%n", "RegressionTest1.test726");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -12452,9 +12669,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test721() throws Throwable {
+    public void test727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test721");
+            System.out.format("%n%s%n", "RegressionTest1.test727");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -12505,9 +12722,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test722() throws Throwable {
+    public void test728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test722");
+            System.out.format("%n%s%n", "RegressionTest1.test728");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream2);
@@ -12519,9 +12736,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test723() throws Throwable {
+    public void test729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test723");
+            System.out.format("%n%s%n", "RegressionTest1.test729");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12574,9 +12791,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test724() throws Throwable {
+    public void test730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test724");
+            System.out.format("%n%s%n", "RegressionTest1.test730");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12637,15 +12854,15 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test725() throws Throwable {
+    public void test731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test725");
+            System.out.format("%n%s%n", "RegressionTest1.test731");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
         tarArchiveInputStream4.close();
         int int6 = tarArchiveInputStream4.getRecordSize();
-        long long8 = tarArchiveInputStream4.skip(1711906329884L);
+        long long8 = tarArchiveInputStream4.skip(1711950206838L);
         java.io.InputStream inputStream9 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
@@ -12719,9 +12936,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test726() throws Throwable {
+    public void test732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test726");
+            System.out.format("%n%s%n", "RegressionTest1.test732");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12778,9 +12995,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test727() throws Throwable {
+    public void test733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test727");
+            System.out.format("%n%s%n", "RegressionTest1.test733");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -12793,7 +13010,7 @@ public class RegressionTest1 {
         int int10 = cpioArchiveInputStream1.read();
         int int11 = cpioArchiveInputStream1.available();
         boolean boolean12 = cpioArchiveInputStream1.markSupported();
-        long long14 = cpioArchiveInputStream1.skip(1711906332078L);
+        long long14 = cpioArchiveInputStream1.skip(1711950209073L);
         int int15 = cpioArchiveInputStream1.read();
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream17 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1, 10);
         java.io.InputStream inputStream18 = null;
@@ -12839,9 +13056,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test728() throws Throwable {
+    public void test734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test728");
+            System.out.format("%n%s%n", "RegressionTest1.test734");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12876,9 +13093,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test729() throws Throwable {
+    public void test735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test729");
+            System.out.format("%n%s%n", "RegressionTest1.test735");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12942,9 +13159,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test730() throws Throwable {
+    public void test736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test730");
+            System.out.format("%n%s%n", "RegressionTest1.test736");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -12986,9 +13203,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test731() throws Throwable {
+    public void test737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test731");
+            System.out.format("%n%s%n", "RegressionTest1.test737");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13047,9 +13264,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test732() throws Throwable {
+    public void test738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test732");
+            System.out.format("%n%s%n", "RegressionTest1.test738");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13121,9 +13338,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test733() throws Throwable {
+    public void test739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test733");
+            System.out.format("%n%s%n", "RegressionTest1.test739");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13222,9 +13439,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test734() throws Throwable {
+    public void test740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test734");
+            System.out.format("%n%s%n", "RegressionTest1.test740");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13242,16 +13459,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test735() throws Throwable {
+    public void test741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test735");
+            System.out.format("%n%s%n", "RegressionTest1.test741");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         long long4 = tarArchiveInputStream2.skip(0L);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream5 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream2);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream5);
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream7 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream5);
-        long long9 = tarArchiveInputStream5.skip(1711906402372L);
+        long long9 = tarArchiveInputStream5.skip(1711950278609L);
         java.io.InputStream inputStream10 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream11 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream10);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream14 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream10, 0, 100);
@@ -13282,9 +13499,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test736() throws Throwable {
+    public void test742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test736");
+            System.out.format("%n%s%n", "RegressionTest1.test742");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13384,9 +13601,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test737() throws Throwable {
+    public void test743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test737");
+            System.out.format("%n%s%n", "RegressionTest1.test743");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13414,9 +13631,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test738() throws Throwable {
+    public void test744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test738");
+            System.out.format("%n%s%n", "RegressionTest1.test744");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13444,9 +13661,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test739() throws Throwable {
+    public void test745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test739");
+            System.out.format("%n%s%n", "RegressionTest1.test745");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13459,9 +13676,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test740() throws Throwable {
+    public void test746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test740");
+            System.out.format("%n%s%n", "RegressionTest1.test746");
         byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
         org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
         boolean boolean7 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray4, 1);
@@ -13481,9 +13698,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test741() throws Throwable {
+    public void test747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test741");
+            System.out.format("%n%s%n", "RegressionTest1.test747");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13521,9 +13738,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test742() throws Throwable {
+    public void test748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test742");
+            System.out.format("%n%s%n", "RegressionTest1.test748");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13560,9 +13777,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test743() throws Throwable {
+    public void test749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test743");
+            System.out.format("%n%s%n", "RegressionTest1.test749");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13628,9 +13845,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test744() throws Throwable {
+    public void test750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test744");
+            System.out.format("%n%s%n", "RegressionTest1.test750");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -13667,7 +13884,7 @@ public class RegressionTest1 {
         boolean boolean48 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray36, (int) (byte) 0);
         boolean boolean50 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray36, 4);
         int int53 = tarArchiveInputStream15.read(byteArray36, (int) (short) 100, (int) (byte) 1);
-        byte[] byteArray55 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906340577L);
+        byte[] byteArray55 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950218098L);
         int int58 = tarArchiveInputStream15.read(byteArray55, 2048, 8192);
         // The following exception was thrown during execution in test generation
         try {
@@ -13693,14 +13910,14 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
         org.junit.Assert.assertTrue("'" + int53 + "' != '" + (-1) + "'", int53 == (-1));
         org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[-31, -66, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[114, 67, 47, -104]");
         org.junit.Assert.assertTrue("'" + int58 + "' != '" + (-1) + "'", int58 == (-1));
     }
 
     @Test
-    public void test745() throws Throwable {
+    public void test751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test745");
+            System.out.format("%n%s%n", "RegressionTest1.test751");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13722,15 +13939,15 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test746() throws Throwable {
+    public void test752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test746");
+            System.out.format("%n%s%n", "RegressionTest1.test752");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
         tarArchiveInputStream4.close();
         tarArchiveInputStream4.close();
-        long long8 = tarArchiveInputStream4.skip(1711906331397L);
+        long long8 = tarArchiveInputStream4.skip(1711950208464L);
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream9 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
         java.io.InputStream inputStream10 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream11 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream10);
@@ -13767,9 +13984,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test747() throws Throwable {
+    public void test753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test747");
+            System.out.format("%n%s%n", "RegressionTest1.test753");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13793,9 +14010,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test748() throws Throwable {
+    public void test754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test748");
+            System.out.format("%n%s%n", "RegressionTest1.test754");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -13835,9 +14052,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test749() throws Throwable {
+    public void test755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test749");
+            System.out.format("%n%s%n", "RegressionTest1.test755");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13931,9 +14148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test750() throws Throwable {
+    public void test756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test750");
+            System.out.format("%n%s%n", "RegressionTest1.test756");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -13994,9 +14211,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test751() throws Throwable {
+    public void test757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test751");
+            System.out.format("%n%s%n", "RegressionTest1.test757");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14073,9 +14290,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test752() throws Throwable {
+    public void test758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test752");
+            System.out.format("%n%s%n", "RegressionTest1.test758");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -14150,9 +14367,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test753() throws Throwable {
+    public void test759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test753");
+            System.out.format("%n%s%n", "RegressionTest1.test759");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14222,9 +14439,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test754() throws Throwable {
+    public void test760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test754");
+            System.out.format("%n%s%n", "RegressionTest1.test760");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14271,9 +14488,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test755() throws Throwable {
+    public void test761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test755");
+            System.out.format("%n%s%n", "RegressionTest1.test761");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14321,9 +14538,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test756() throws Throwable {
+    public void test762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test756");
+            System.out.format("%n%s%n", "RegressionTest1.test762");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14370,9 +14587,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test757() throws Throwable {
+    public void test763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test757");
+            System.out.format("%n%s%n", "RegressionTest1.test763");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -14400,9 +14617,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test758() throws Throwable {
+    public void test764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test758");
+            System.out.format("%n%s%n", "RegressionTest1.test764");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14487,9 +14704,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test759() throws Throwable {
+    public void test765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test759");
+            System.out.format("%n%s%n", "RegressionTest1.test765");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -14540,9 +14757,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test760() throws Throwable {
+    public void test766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test760");
+            System.out.format("%n%s%n", "RegressionTest1.test766");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14621,9 +14838,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test761() throws Throwable {
+    public void test767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test761");
+            System.out.format("%n%s%n", "RegressionTest1.test767");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -14732,9 +14949,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test762() throws Throwable {
+    public void test768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test762");
+            System.out.format("%n%s%n", "RegressionTest1.test768");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14796,9 +15013,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test763() throws Throwable {
+    public void test769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test763");
+            System.out.format("%n%s%n", "RegressionTest1.test769");
         byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
         org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
         boolean boolean7 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray4, 1);
@@ -14815,9 +15032,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test764() throws Throwable {
+    public void test770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test764");
+            System.out.format("%n%s%n", "RegressionTest1.test770");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -14913,9 +15130,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test765() throws Throwable {
+    public void test771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test765");
+            System.out.format("%n%s%n", "RegressionTest1.test771");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -14966,9 +15183,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test766() throws Throwable {
+    public void test772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test766");
+            System.out.format("%n%s%n", "RegressionTest1.test772");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15010,9 +15227,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test767() throws Throwable {
+    public void test773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test767");
+            System.out.format("%n%s%n", "RegressionTest1.test773");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -15072,9 +15289,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test768() throws Throwable {
+    public void test774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test768");
+            System.out.format("%n%s%n", "RegressionTest1.test774");
         byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
         org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
         org.apache.commons.compress.archivers.zip.ZipLong zipLong6 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
@@ -15114,9 +15331,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test769() throws Throwable {
+    public void test775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test769");
+            System.out.format("%n%s%n", "RegressionTest1.test775");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -15153,7 +15370,7 @@ public class RegressionTest1 {
         boolean boolean48 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray44, (int) (byte) 100);
         long long49 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray44);
         int int52 = jarArchiveInputStream7.read(byteArray44, (int) (short) 100, (int) (short) 12);
-        long long54 = jarArchiveInputStream7.skip(1711906354771L);
+        long long54 = jarArchiveInputStream7.skip(1711950231273L);
         org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 0L + "'", long13 == 0L);
         org.junit.Assert.assertTrue("'" + long17 + "' != '" + 0L + "'", long17 == 0L);
@@ -15176,10 +15393,10 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test770() throws Throwable {
+    public void test776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test770");
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711906376419L);
+            System.out.format("%n%s%n", "RegressionTest1.test776");
+        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong(1711950253027L);
         long long2 = zipLong1.getValue();
         java.io.InputStream inputStream3 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream4 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream3);
@@ -15200,7 +15417,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream20 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream19);
         boolean boolean21 = zipLong1.equals((java.lang.Object) arArchiveInputStream19);
         int int22 = arArchiveInputStream19.read();
-        org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1711906376419L + "'", long2 == 1711906376419L);
+        org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1711950253027L + "'", long2 == 1711950253027L);
         org.junit.Assert.assertTrue("'" + long8 + "' != '" + 0L + "'", long8 == 0L);
         org.junit.Assert.assertTrue("'" + long12 + "' != '" + 0L + "'", long12 == 0L);
         org.junit.Assert.assertNull(zipArchiveEntry13);
@@ -15214,9 +15431,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test771() throws Throwable {
+    public void test777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test771");
+            System.out.format("%n%s%n", "RegressionTest1.test777");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -15308,9 +15525,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test772() throws Throwable {
+    public void test778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test772");
+            System.out.format("%n%s%n", "RegressionTest1.test778");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15375,9 +15592,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test773() throws Throwable {
+    public void test779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test773");
+            System.out.format("%n%s%n", "RegressionTest1.test779");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15399,9 +15616,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test774() throws Throwable {
+    public void test780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test774");
+            System.out.format("%n%s%n", "RegressionTest1.test780");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -15452,9 +15669,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test775() throws Throwable {
+    public void test781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test775");
+            System.out.format("%n%s%n", "RegressionTest1.test781");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15471,9 +15688,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test776() throws Throwable {
+    public void test782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test776");
+            System.out.format("%n%s%n", "RegressionTest1.test782");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream1 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream(inputStream0);
         java.io.InputStream inputStream2 = null;
@@ -15521,9 +15738,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test777() throws Throwable {
+    public void test783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test777");
+            System.out.format("%n%s%n", "RegressionTest1.test783");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -15541,7 +15758,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.zip.ZipLong zipLong22 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray16);
         byte[] byteArray23 = zipLong22.getBytes();
         int int26 = jarArchiveInputStream7.read(byteArray23, 24576, (int) (byte) 1);
-        long long28 = jarArchiveInputStream7.skip(1711906465096L);
+        long long28 = jarArchiveInputStream7.skip(1711950344483L);
         org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
         org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
         org.junit.Assert.assertNull(zipArchiveEntry10);
@@ -15557,9 +15774,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test778() throws Throwable {
+    public void test784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test778");
+            System.out.format("%n%s%n", "RegressionTest1.test784");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15583,7 +15800,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream29 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream25, 0, 100);
         int int30 = tarArchiveInputStream29.getRecordSize();
         int int31 = tarArchiveInputStream29.read();
-        byte[] byteArray33 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906332030L);
+        byte[] byteArray33 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950209033L);
         int int36 = tarArchiveInputStream29.read(byteArray33, (int) (short) -1, 24576);
         java.io.InputStream inputStream37 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream38 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream37);
@@ -15611,7 +15828,7 @@ public class RegressionTest1 {
         boolean boolean74 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray62, (int) (byte) 0);
         boolean boolean76 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray62, 4);
         int int79 = tarArchiveInputStream41.read(byteArray62, (int) (short) 100, (int) (byte) 1);
-        byte[] byteArray81 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906340577L);
+        byte[] byteArray81 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950218098L);
         int int84 = tarArchiveInputStream41.read(byteArray81, 2048, 8192);
         int int87 = tarArchiveInputStream29.read(byteArray81, (-1), (int) (short) 10);
         boolean boolean89 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray81, 1024);
@@ -15624,7 +15841,7 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int30 + "' != '" + 100 + "'", int30 == 100);
         org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
         org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[126, -99, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[9, 32, 47, -104]");
         org.junit.Assert.assertTrue("'" + int36 + "' != '" + (-1) + "'", int36 == (-1));
         org.junit.Assert.assertTrue("'" + long45 + "' != '" + 0L + "'", long45 == 0L);
         org.junit.Assert.assertTrue("'" + int46 + "' != '" + (-1) + "'", int46 == (-1));
@@ -15639,16 +15856,16 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
         org.junit.Assert.assertTrue("'" + int79 + "' != '" + (-1) + "'", int79 == (-1));
         org.junit.Assert.assertNotNull(byteArray81);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[-31, -66, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[114, 67, 47, -104]");
         org.junit.Assert.assertTrue("'" + int84 + "' != '" + (-1) + "'", int84 == (-1));
         org.junit.Assert.assertTrue("'" + int87 + "' != '" + (-1) + "'", int87 == (-1));
         org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
     }
 
     @Test
-    public void test779() throws Throwable {
+    public void test785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test779");
+            System.out.format("%n%s%n", "RegressionTest1.test785");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -15695,9 +15912,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test780() throws Throwable {
+    public void test786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test780");
+            System.out.format("%n%s%n", "RegressionTest1.test786");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15724,9 +15941,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test781() throws Throwable {
+    public void test787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test781");
+            System.out.format("%n%s%n", "RegressionTest1.test787");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15805,9 +16022,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test782() throws Throwable {
+    public void test788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test782");
+            System.out.format("%n%s%n", "RegressionTest1.test788");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15854,9 +16071,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test783() throws Throwable {
+    public void test789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test783");
+            System.out.format("%n%s%n", "RegressionTest1.test789");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -15920,9 +16137,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test784() throws Throwable {
+    public void test790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test784");
+            System.out.format("%n%s%n", "RegressionTest1.test790");
         org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -15997,9 +16214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test785() throws Throwable {
+    public void test791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test785");
+            System.out.format("%n%s%n", "RegressionTest1.test791");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -16012,7 +16229,7 @@ public class RegressionTest1 {
         cpioArchiveInputStream1.closeEntry();
         int int10 = cpioArchiveInputStream1.read();
         int int11 = cpioArchiveInputStream1.read();
-        long long13 = cpioArchiveInputStream1.skip(1711906335196L);
+        long long13 = cpioArchiveInputStream1.skip(1711950212256L);
         java.io.InputStream inputStream14 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream15 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream14);
         java.io.OutputStream outputStream16 = null;
@@ -16069,9 +16286,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test786() throws Throwable {
+    public void test792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test786");
+            System.out.format("%n%s%n", "RegressionTest1.test792");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16114,9 +16331,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test787() throws Throwable {
+    public void test793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test787");
+            System.out.format("%n%s%n", "RegressionTest1.test793");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         int int2 = cpioArchiveInputStream1.available();
@@ -16221,9 +16438,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test788() throws Throwable {
+    public void test794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test788");
+            System.out.format("%n%s%n", "RegressionTest1.test794");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16249,9 +16466,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test789() throws Throwable {
+    public void test795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test789");
+            System.out.format("%n%s%n", "RegressionTest1.test795");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16298,9 +16515,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test790() throws Throwable {
+    public void test796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test790");
+            System.out.format("%n%s%n", "RegressionTest1.test796");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -16357,9 +16574,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test791() throws Throwable {
+    public void test797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test791");
+            System.out.format("%n%s%n", "RegressionTest1.test797");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16421,9 +16638,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test792() throws Throwable {
+    public void test798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test792");
+            System.out.format("%n%s%n", "RegressionTest1.test798");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16514,9 +16731,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test793() throws Throwable {
+    public void test799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test793");
+            System.out.format("%n%s%n", "RegressionTest1.test799");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16542,9 +16759,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test794() throws Throwable {
+    public void test800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test794");
+            System.out.format("%n%s%n", "RegressionTest1.test800");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
@@ -16592,9 +16809,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test795() throws Throwable {
+    public void test801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test795");
+            System.out.format("%n%s%n", "RegressionTest1.test801");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16647,9 +16864,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test796() throws Throwable {
+    public void test802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test796");
+            System.out.format("%n%s%n", "RegressionTest1.test802");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -16683,9 +16900,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test797() throws Throwable {
+    public void test803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test797");
+            System.out.format("%n%s%n", "RegressionTest1.test803");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16777,9 +16994,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test798() throws Throwable {
+    public void test804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test798");
+            System.out.format("%n%s%n", "RegressionTest1.test804");
         org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong((long) ' ');
         java.io.InputStream inputStream2 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
@@ -16841,9 +17058,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test799() throws Throwable {
+    public void test805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test799");
+            System.out.format("%n%s%n", "RegressionTest1.test805");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16864,9 +17081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test800() throws Throwable {
+    public void test806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test800");
+            System.out.format("%n%s%n", "RegressionTest1.test806");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16877,9 +17094,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test801() throws Throwable {
+    public void test807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test801");
+            System.out.format("%n%s%n", "RegressionTest1.test807");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16930,9 +17147,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test802() throws Throwable {
+    public void test808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test802");
+            System.out.format("%n%s%n", "RegressionTest1.test808");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -16971,9 +17188,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test803() throws Throwable {
+    public void test809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test803");
+            System.out.format("%n%s%n", "RegressionTest1.test809");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 8);
         long long4 = tarArchiveInputStream2.skip((long) (short) -1);
@@ -17049,9 +17266,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test804() throws Throwable {
+    public void test810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test804");
+            System.out.format("%n%s%n", "RegressionTest1.test810");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17106,9 +17323,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test805() throws Throwable {
+    public void test811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test805");
+            System.out.format("%n%s%n", "RegressionTest1.test811");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17138,9 +17355,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test806() throws Throwable {
+    public void test812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test806");
+            System.out.format("%n%s%n", "RegressionTest1.test812");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -17211,9 +17428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test807() throws Throwable {
+    public void test813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test807");
+            System.out.format("%n%s%n", "RegressionTest1.test813");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         java.io.InputStream inputStream2 = null;
@@ -17244,9 +17461,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test808() throws Throwable {
+    public void test814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test808");
+            System.out.format("%n%s%n", "RegressionTest1.test814");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17256,7 +17473,7 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream11 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) zipArchiveInputStream10);
         int int12 = zipArchiveInputStream10.read();
         boolean boolean13 = zipArchiveInputStream10.markSupported();
-        byte[] byteArray15 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906338563L);
+        byte[] byteArray15 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950215756L);
         int int18 = zipArchiveInputStream10.read(byteArray15, 1024, 52);
         zipArchiveInputStream10.close();
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream20 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) zipArchiveInputStream10);
@@ -17270,7 +17487,7 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int12 + "' != '" + (-1) + "'", int12 == (-1));
         org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
         org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[3, -73, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[76, 58, 47, -104]");
         org.junit.Assert.assertTrue("'" + int18 + "' != '" + (-1) + "'", int18 == (-1));
         org.junit.Assert.assertNotNull(byteArray26);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[100, 10, 0, 10, 10]");
@@ -17281,9 +17498,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test809() throws Throwable {
+    public void test815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test809");
+            System.out.format("%n%s%n", "RegressionTest1.test815");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17309,9 +17526,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test810() throws Throwable {
+    public void test816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test810");
+            System.out.format("%n%s%n", "RegressionTest1.test816");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -17347,9 +17564,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test811() throws Throwable {
+    public void test817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test811");
+            System.out.format("%n%s%n", "RegressionTest1.test817");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17377,9 +17594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test812() throws Throwable {
+    public void test818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test812");
+            System.out.format("%n%s%n", "RegressionTest1.test818");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17460,9 +17677,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test813() throws Throwable {
+    public void test819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test813");
+            System.out.format("%n%s%n", "RegressionTest1.test819");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream2 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
@@ -17519,9 +17736,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test814() throws Throwable {
+    public void test820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test814");
+            System.out.format("%n%s%n", "RegressionTest1.test820");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17581,9 +17798,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test815() throws Throwable {
+    public void test821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test815");
+            System.out.format("%n%s%n", "RegressionTest1.test821");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -17609,9 +17826,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test816() throws Throwable {
+    public void test822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test816");
+            System.out.format("%n%s%n", "RegressionTest1.test822");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17677,9 +17894,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test817() throws Throwable {
+    public void test823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test817");
+            System.out.format("%n%s%n", "RegressionTest1.test823");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17783,9 +18000,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test818() throws Throwable {
+    public void test824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test818");
+            System.out.format("%n%s%n", "RegressionTest1.test824");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17796,8 +18013,8 @@ public class RegressionTest1 {
         org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream10 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
         boolean boolean11 = jarArchiveInputStream10.markSupported();
         int int12 = jarArchiveInputStream10.read();
-        long long14 = jarArchiveInputStream10.skip(1711906401060L);
-        long long16 = jarArchiveInputStream10.skip(1711906337575L);
+        long long14 = jarArchiveInputStream10.skip(1711950276996L);
+        long long16 = jarArchiveInputStream10.skip(1711950214803L);
         org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
         org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
         org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
@@ -17808,9 +18025,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test819() throws Throwable {
+    public void test825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test819");
+            System.out.format("%n%s%n", "RegressionTest1.test825");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -17844,9 +18061,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test820() throws Throwable {
+    public void test826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test820");
+            System.out.format("%n%s%n", "RegressionTest1.test826");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -17905,9 +18122,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test821() throws Throwable {
+    public void test827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test821");
+            System.out.format("%n%s%n", "RegressionTest1.test827");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -17987,9 +18204,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test822() throws Throwable {
+    public void test828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test822");
+            System.out.format("%n%s%n", "RegressionTest1.test828");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -18073,9 +18290,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test823() throws Throwable {
+    public void test829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test823");
+            System.out.format("%n%s%n", "RegressionTest1.test829");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -18089,7 +18306,7 @@ public class RegressionTest1 {
         tarArchiveInputStream4.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream13);
         org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream15 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
         arArchiveInputStream15.close();
-        byte[] byteArray18 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711906332030L);
+        byte[] byteArray18 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(1711950209033L);
         boolean boolean20 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray18, 512);
         int int21 = arArchiveInputStream15.read(byteArray18);
         arArchiveInputStream15.close();
@@ -18103,15 +18320,15 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
         org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
         org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[126, -99, -111, -107]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[9, 32, 47, -104]");
         org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
         org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
     }
 
     @Test
-    public void test824() throws Throwable {
+    public void test830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test824");
+            System.out.format("%n%s%n", "RegressionTest1.test830");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
@@ -18162,9 +18379,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test825() throws Throwable {
+    public void test831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test825");
+            System.out.format("%n%s%n", "RegressionTest1.test831");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
         java.io.OutputStream outputStream2 = null;
@@ -18258,1334 +18475,5 @@ public class RegressionTest1 {
         org.junit.Assert.assertTrue("'" + int91 + "' != '" + (-1) + "'", int91 == (-1));
         org.junit.Assert.assertTrue("'" + int94 + "' != '" + (-1) + "'", int94 == (-1));
     }
-
-    @Test
-    public void test826() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test826");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        byte[] byteArray16 = new byte[] { (byte) 10 };
-        int int19 = tarArchiveInputStream13.read(byteArray16, (-1), (int) (short) 1);
-        byte[] byteArray25 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long26 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray25);
-        int int29 = tarArchiveInputStream13.read(byteArray25, 8192, 40960);
-        int int30 = arArchiveInputStream8.read(byteArray25);
-        arArchiveInputStream8.close();
-        byte[] byteArray33 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(0L);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong34 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray33);
-        java.io.InputStream inputStream35 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream36 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream35);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream39 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream35, 0, 100);
-        int int40 = tarArchiveInputStream39.getRecordSize();
-        int int41 = tarArchiveInputStream39.read();
-        boolean boolean42 = zipLong34.equals((java.lang.Object) int41);
-        byte[] byteArray43 = zipLong34.getBytes();
-        int int44 = arArchiveInputStream8.read(byteArray43);
-        byte[] byteArray49 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong50 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray49);
-        boolean boolean52 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray49, 1);
-        long long54 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray49, (int) (short) 0);
-        int int57 = arArchiveInputStream8.read(byteArray49, (int) (byte) 10, 64);
-        java.io.InputStream inputStream58 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream59 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream58);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream62 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream58, 0, 100);
-        tarArchiveInputStream62.close();
-        byte[] byteArray65 = new byte[] { (byte) 10 };
-        int int68 = tarArchiveInputStream62.read(byteArray65, (-1), (int) (short) 1);
-        byte[] byteArray74 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long75 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray74);
-        int int78 = tarArchiveInputStream62.read(byteArray74, 8192, 40960);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong79 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray74);
-        boolean boolean81 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray74, 4);
-        int int84 = arArchiveInputStream8.read(byteArray74, (int) (byte) 1, 32);
-        int int85 = arArchiveInputStream8.read();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.compress.archivers.ArchiveEntry archiveEntry86 = arArchiveInputStream8.getNextEntry();
-            org.junit.Assert.fail("Expected exception of type java.io.IOException; message: failed to read header");
-        } catch (java.io.IOException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long26 + "' != '" + 167774820L + "'", long26 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 100 + "'", int40 == 100);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + (-1) + "'", int41 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int44 + "' != '" + (-1) + "'", int44 == (-1));
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertTrue("'" + long54 + "' != '" + 174325761L + "'", long54 == 174325761L);
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + (-1) + "'", int57 == (-1));
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[10]");
-        org.junit.Assert.assertTrue("'" + int68 + "' != '" + (-1) + "'", int68 == (-1));
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long75 + "' != '" + 167774820L + "'", long75 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + (-1) + "'", int78 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
-        org.junit.Assert.assertTrue("'" + int84 + "' != '" + (-1) + "'", int84 == (-1));
-        org.junit.Assert.assertTrue("'" + int85 + "' != '" + (-1) + "'", int85 == (-1));
-    }
-
-    @Test
-    public void test827() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test827");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        tarArchiveInputStream4.reset();
-        long long7 = tarArchiveInputStream4.skip((long) 2);
-        int int8 = tarArchiveInputStream4.read();
-        tarArchiveInputStream4.close();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream10 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream11 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream12 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream11);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream15 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream11, 0, 100);
-        tarArchiveInputStream15.close();
-        byte[] byteArray18 = new byte[] { (byte) 10 };
-        int int21 = tarArchiveInputStream15.read(byteArray18, (-1), (int) (short) 1);
-        byte[] byteArray27 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long28 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray27);
-        int int31 = tarArchiveInputStream15.read(byteArray27, 8192, 40960);
-        boolean boolean33 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray27, (-1));
-        int int34 = arArchiveInputStream10.read(byteArray27);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long28 + "' != '" + 167774820L + "'", long28 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + (-1) + "'", int34 == (-1));
-    }
-
-    @Test
-    public void test828() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test828");
-        byte[] byteArray0 = null;
-        boolean boolean2 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray0, 1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-    }
-
-    @Test
-    public void test829() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test829");
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong1 = new org.apache.commons.compress.archivers.zip.ZipLong((long) (byte) 1);
-        java.lang.Object obj2 = null;
-        boolean boolean3 = zipLong1.equals(obj2);
-        java.lang.Object obj4 = zipLong1.clone();
-        java.io.InputStream inputStream5 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream6 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream5);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream9 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream5, 0, 100);
-        int int10 = tarArchiveInputStream9.getRecordSize();
-        long long12 = tarArchiveInputStream9.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream13 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream9);
-        java.io.InputStream inputStream14 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream15 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream14);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream18 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream14, 0, 100);
-        tarArchiveInputStream18.close();
-        byte[] byteArray21 = new byte[] { (byte) 10 };
-        int int24 = tarArchiveInputStream18.read(byteArray21, (-1), (int) (short) 1);
-        byte[] byteArray30 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long31 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray30);
-        int int34 = tarArchiveInputStream18.read(byteArray30, 8192, 40960);
-        int int35 = arArchiveInputStream13.read(byteArray30);
-        arArchiveInputStream13.close();
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream38 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) arArchiveInputStream13, 1024);
-        int int39 = tarArchiveInputStream38.getRecordSize();
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream40 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream38);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream41 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream38);
-        int int42 = cpioArchiveInputStream41.read();
-        int int43 = cpioArchiveInputStream41.read();
-        boolean boolean44 = zipLong1.equals((java.lang.Object) cpioArchiveInputStream41);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(obj4);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 100 + "'", int10 == 100);
-        org.junit.Assert.assertTrue("'" + long12 + "' != '" + 0L + "'", long12 == 0L);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[10]");
-        org.junit.Assert.assertTrue("'" + int24 + "' != '" + (-1) + "'", int24 == (-1));
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long31 + "' != '" + 167774820L + "'", long31 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + (-1) + "'", int34 == (-1));
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + (-1) + "'", int35 == (-1));
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 512 + "'", int39 == 512);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + (-1) + "'", int42 == (-1));
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + (-1) + "'", int43 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-    }
-
-    @Test
-    public void test830() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test830");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) (short) 0);
-        tarArchiveInputStream4.mark((int) '4');
-        java.io.OutputStream outputStream10 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream11 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream10);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream12 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream11);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream12);
-        tarArchiveInputStream4.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream13);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream15 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream17 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream4, 0);
-        java.io.OutputStream outputStream18 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream19 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream18);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream20 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream19);
-        java.lang.String str21 = tarArchiveOutputStream20.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.jar.JarArchiveOutputStream jarArchiveOutputStream22 = new org.apache.commons.compress.archivers.jar.JarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream20);
-        boolean boolean23 = jarArchiveOutputStream22.isSeekable();
-        java.lang.String str24 = jarArchiveOutputStream22.getEncoding();
-        java.lang.String str25 = jarArchiveOutputStream22.getEncoding();
-        jarArchiveOutputStream22.setFallbackToUTF8(false);
-        jarArchiveOutputStream22.setMethod(2048);
-        long long31 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) tarArchiveInputStream4, (java.io.OutputStream) jarArchiveOutputStream22, 4);
-        tarArchiveInputStream4.setDebug(true);
-        tarArchiveInputStream4.close();
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "tar" + "'", str21, "tar");
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "UTF8" + "'", str24, "UTF8");
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "UTF8" + "'", str25, "UTF8");
-        org.junit.Assert.assertTrue("'" + long31 + "' != '" + 0L + "'", long31 == 0L);
-    }
-
-    @Test
-    public void test831() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test831");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream3 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream3);
-        long long5 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream1, (java.io.OutputStream) tarArchiveOutputStream3);
-        cpioArchiveInputStream1.closeEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream7 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream8 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream9 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry10 = jarArchiveInputStream9.getNextEntry();
-        byte[] byteArray15 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong16 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray15);
-        boolean boolean18 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray15, 1);
-        boolean boolean20 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray15, 1024);
-        boolean boolean22 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray15, 1024);
-        int int25 = jarArchiveInputStream9.read(byteArray15, (int) (short) 8, 32768);
-        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry26 = jarArchiveInputStream9.getNextZipEntry();
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream27 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) jarArchiveInputStream9);
-        int int28 = jarArchiveInputStream9.read();
-        org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
-        org.junit.Assert.assertNull(archiveEntry10);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + (-1) + "'", int25 == (-1));
-        org.junit.Assert.assertNull(zipArchiveEntry26);
-        org.junit.Assert.assertTrue("'" + int28 + "' != '" + (-1) + "'", int28 == (-1));
-    }
-
-    @Test
-    public void test832() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test832");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream3 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream3);
-        long long5 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream1, (java.io.OutputStream) tarArchiveOutputStream3);
-        cpioArchiveInputStream1.closeEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream7 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        long long9 = cpioArchiveInputStream1.skip(0L);
-        int int10 = cpioArchiveInputStream1.read();
-        cpioArchiveInputStream1.closeEntry();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream12 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        long long14 = cpioArchiveInputStream1.skip((long) 10);
-        byte[] byteArray19 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong20 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray19);
-        boolean boolean22 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray19, 1);
-        boolean boolean24 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray19, 1024);
-        boolean boolean26 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray19, 1024);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong27 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray19);
-        int int30 = cpioArchiveInputStream1.read(byteArray19, 0, 0);
-        // The following exception was thrown during execution in test generation
-        try {
-            cpioArchiveInputStream1.close();
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
-        org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
-        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 0L + "'", long14 == 0L);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
-    }
-
-    @Test
-    public void test833() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test833");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) (short) 0);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        int int9 = arArchiveInputStream8.read();
-        arArchiveInputStream8.close();
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream11 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
-        java.io.InputStream inputStream12 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream13 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream12);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream16 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream12, 0, 100);
-        int int17 = tarArchiveInputStream16.getRecordSize();
-        long long19 = tarArchiveInputStream16.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream20 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream16);
-        java.io.InputStream inputStream21 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream22 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream21);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream25 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream21, 0, 100);
-        tarArchiveInputStream25.close();
-        byte[] byteArray28 = new byte[] { (byte) 10 };
-        int int31 = tarArchiveInputStream25.read(byteArray28, (-1), (int) (short) 1);
-        byte[] byteArray37 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long38 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray37);
-        int int41 = tarArchiveInputStream25.read(byteArray37, 8192, 40960);
-        int int42 = arArchiveInputStream20.read(byteArray37);
-        arArchiveInputStream20.close();
-        byte[] byteArray45 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(0L);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong46 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray45);
-        java.io.InputStream inputStream47 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream48 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream47);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream51 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream47, 0, 100);
-        int int52 = tarArchiveInputStream51.getRecordSize();
-        int int53 = tarArchiveInputStream51.read();
-        boolean boolean54 = zipLong46.equals((java.lang.Object) int53);
-        byte[] byteArray55 = zipLong46.getBytes();
-        int int56 = arArchiveInputStream20.read(byteArray55);
-        int int59 = arArchiveInputStream8.read(byteArray55, (int) (byte) -1, 2048);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + (-1) + "'", int9 == (-1));
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 100 + "'", int17 == 100);
-        org.junit.Assert.assertTrue("'" + long19 + "' != '" + 0L + "'", long19 == 0L);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long38 + "' != '" + 167774820L + "'", long38 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + (-1) + "'", int41 == (-1));
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + (-1) + "'", int42 == (-1));
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 100 + "'", int52 == 100);
-        org.junit.Assert.assertTrue("'" + int53 + "' != '" + (-1) + "'", int53 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int56 + "' != '" + (-1) + "'", int56 == (-1));
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + (-1) + "'", int59 == (-1));
-    }
-
-    @Test
-    public void test834() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test834");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream3 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream3);
-        long long5 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream1, (java.io.OutputStream) tarArchiveOutputStream3);
-        java.lang.String str6 = tarArchiveOutputStream3.getDefaultFileExtension();
-        tarArchiveOutputStream3.setLongFileMode(128);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream16 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream13, 32);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream17 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream13);
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream18 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) cpioArchiveInputStream17);
-        java.io.OutputStream outputStream19 = null;
-        long long20 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream17, outputStream19);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream21 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) cpioArchiveInputStream17);
-        int int22 = arArchiveInputStream21.read();
-        java.io.InputStream inputStream23 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream24 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream23);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream27 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream23, 0, 100);
-        int int28 = tarArchiveInputStream27.getRecordSize();
-        long long30 = tarArchiveInputStream27.skip((long) (short) 0);
-        tarArchiveInputStream27.mark((int) '4');
-        java.io.OutputStream outputStream33 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream34 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream33);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream35 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream34);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream36 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream35);
-        tarArchiveInputStream27.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream36);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream38 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream27);
-        arArchiveInputStream38.close();
-        byte[] byteArray45 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long46 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray45);
-        int int49 = arArchiveInputStream38.read(byteArray45, (int) '4', 0);
-        byte[] byteArray55 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long56 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray55);
-        boolean boolean58 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray55, (int) (short) 1);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong59 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray55);
-        long long61 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray55, (int) (byte) 1);
-        int int64 = arArchiveInputStream38.read(byteArray55, 49152, 2048);
-        int int65 = arArchiveInputStream21.read(byteArray55);
-        tarArchiveOutputStream3.write(byteArray55, 0, (int) (byte) 0);
-        boolean boolean70 = org.apache.commons.compress.archivers.tar.TarArchiveInputStream.matches(byteArray55, 3);
-        org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "tar" + "'", str6, "tar");
-        org.junit.Assert.assertTrue("'" + long20 + "' != '" + 0L + "'", long20 == 0L);
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + (-1) + "'", int22 == (-1));
-        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 100 + "'", int28 == 100);
-        org.junit.Assert.assertTrue("'" + long30 + "' != '" + 0L + "'", long30 == 0L);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long46 + "' != '" + 167774820L + "'", long46 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int49 + "' != '" + (-1) + "'", int49 == (-1));
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long56 + "' != '" + 167774820L + "'", long56 == 167774820L);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertTrue("'" + long61 + "' != '" + 168427530L + "'", long61 == 168427530L);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + (-1) + "'", int64 == (-1));
-        org.junit.Assert.assertTrue("'" + int65 + "' != '" + (-1) + "'", int65 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-    }
-
-    @Test
-    public void test835() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test835");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        byte[] byteArray16 = new byte[] { (byte) 10 };
-        int int19 = tarArchiveInputStream13.read(byteArray16, (-1), (int) (short) 1);
-        byte[] byteArray25 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long26 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray25);
-        int int29 = tarArchiveInputStream13.read(byteArray25, 8192, 40960);
-        int int30 = arArchiveInputStream8.read(byteArray25);
-        arArchiveInputStream8.close();
-        int int32 = arArchiveInputStream8.read();
-        int int33 = arArchiveInputStream8.read();
-        byte[] byteArray38 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong39 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray38);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong40 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray38);
-        long long41 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray38);
-        int int42 = arArchiveInputStream8.read(byteArray38);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong44 = new org.apache.commons.compress.archivers.zip.ZipLong(100L);
-        java.lang.Object obj45 = zipLong44.clone();
-        long long46 = zipLong44.getValue();
-        byte[] byteArray47 = zipLong44.getBytes();
-        int int50 = arArchiveInputStream8.read(byteArray47, (int) (short) 10, 2);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream52 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) arArchiveInputStream8, (int) (short) 3);
-        arArchiveInputStream8.close();
-        java.io.OutputStream outputStream54 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream55 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream54);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream56 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream55);
-        java.lang.String str57 = tarArchiveOutputStream56.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.jar.JarArchiveOutputStream jarArchiveOutputStream58 = new org.apache.commons.compress.archivers.jar.JarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream56);
-        boolean boolean59 = jarArchiveOutputStream58.isSeekable();
-        java.lang.String str60 = jarArchiveOutputStream58.getEncoding();
-        jarArchiveOutputStream58.setFallbackToUTF8(false);
-        jarArchiveOutputStream58.setComment("TRAILER!!!");
-        jarArchiveOutputStream58.setEncoding("070701");
-        long long67 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) arArchiveInputStream8, (java.io.OutputStream) jarArchiveOutputStream58);
-        java.io.InputStream inputStream68 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream69 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream68);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream72 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream68, 0, 100);
-        tarArchiveInputStream72.close();
-        tarArchiveInputStream72.close();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream75 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream72);
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream76 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) arArchiveInputStream75);
-        byte[] byteArray77 = null;
-        int int80 = arArchiveInputStream75.read(byteArray77, 0, 0);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong82 = new org.apache.commons.compress.archivers.zip.ZipLong(100L);
-        java.lang.Object obj83 = zipLong82.clone();
-        long long84 = zipLong82.getValue();
-        byte[] byteArray85 = zipLong82.getBytes();
-        boolean boolean87 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray85, 2048);
-        boolean boolean89 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray85, 97);
-        int int90 = arArchiveInputStream75.read(byteArray85);
-        int int91 = arArchiveInputStream8.read(byteArray85);
-        int int92 = arArchiveInputStream8.read();
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long26 + "' != '" + 167774820L + "'", long26 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + long41 + "' != '" + 174325761L + "'", long41 == 174325761L);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + (-1) + "'", int42 == (-1));
-        org.junit.Assert.assertNotNull(obj45);
-        org.junit.Assert.assertTrue("'" + long46 + "' != '" + 100L + "'", long46 == 100L);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[100, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + (-1) + "'", int50 == (-1));
-        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "tar" + "'", str57, "tar");
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
-        org.junit.Assert.assertEquals("'" + str60 + "' != '" + "UTF8" + "'", str60, "UTF8");
-        org.junit.Assert.assertTrue("'" + long67 + "' != '" + 0L + "'", long67 == 0L);
-        org.junit.Assert.assertTrue("'" + int80 + "' != '" + (-1) + "'", int80 == (-1));
-        org.junit.Assert.assertNotNull(obj83);
-        org.junit.Assert.assertTrue("'" + long84 + "' != '" + 100L + "'", long84 == 100L);
-        org.junit.Assert.assertNotNull(byteArray85);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray85), "[100, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + boolean87 + "' != '" + false + "'", boolean87 == false);
-        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
-        org.junit.Assert.assertTrue("'" + int90 + "' != '" + (-1) + "'", int90 == (-1));
-        org.junit.Assert.assertTrue("'" + int91 + "' != '" + (-1) + "'", int91 == (-1));
-        org.junit.Assert.assertTrue("'" + int92 + "' != '" + (-1) + "'", int92 == (-1));
-    }
-
-    @Test
-    public void test836() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test836");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) (short) 0);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        int int9 = arArchiveInputStream8.read();
-        java.io.InputStream inputStream10 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream11 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream10);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream14 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream10, 0, 100);
-        int int15 = tarArchiveInputStream14.getRecordSize();
-        java.io.OutputStream outputStream16 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream17 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream16);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream18 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream17);
-        java.lang.String str19 = tarArchiveOutputStream18.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.jar.JarArchiveOutputStream jarArchiveOutputStream20 = new org.apache.commons.compress.archivers.jar.JarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream18);
-        boolean boolean21 = jarArchiveOutputStream20.isSeekable();
-        java.lang.String str22 = jarArchiveOutputStream20.getEncoding();
-        jarArchiveOutputStream20.setFallbackToUTF8(false);
-        jarArchiveOutputStream20.closeArchiveEntry();
-        jarArchiveOutputStream20.setFallbackToUTF8(false);
-        long long28 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) tarArchiveInputStream14, (java.io.OutputStream) jarArchiveOutputStream20);
-        int int29 = tarArchiveInputStream14.read();
-        java.io.InputStream inputStream30 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream31 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream30);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream34 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream30, 0, 100);
-        tarArchiveInputStream34.close();
-        byte[] byteArray37 = new byte[] { (byte) 10 };
-        int int40 = tarArchiveInputStream34.read(byteArray37, (-1), (int) (short) 1);
-        byte[] byteArray46 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long47 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray46);
-        int int50 = tarArchiveInputStream34.read(byteArray46, 8192, 40960);
-        boolean boolean52 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray46, (-1));
-        int int55 = tarArchiveInputStream14.read(byteArray46, 61440, 1024);
-        boolean boolean57 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray46, 61440);
-        int int58 = arArchiveInputStream8.read(byteArray46);
-        java.lang.Class<?> wildcardClass59 = byteArray46.getClass();
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + (-1) + "'", int9 == (-1));
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 100 + "'", int15 == 100);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "tar" + "'", str19, "tar");
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "UTF8" + "'", str22, "UTF8");
-        org.junit.Assert.assertTrue("'" + long28 + "' != '" + 0L + "'", long28 == 0L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + (-1) + "'", int40 == (-1));
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long47 + "' != '" + 167774820L + "'", long47 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + (-1) + "'", int50 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertTrue("'" + int55 + "' != '" + (-1) + "'", int55 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertTrue("'" + int58 + "' != '" + (-1) + "'", int58 == (-1));
-        org.junit.Assert.assertNotNull(wildcardClass59);
-    }
-
-    @Test
-    public void test837() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test837");
-        byte[] byteArray4 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong5 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong6 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray4);
-        byte[] byteArray7 = zipLong6.getBytes();
-        byte[] byteArray12 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong13 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray12);
-        boolean boolean15 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray12, 1);
-        boolean boolean17 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray12, 1024);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong18 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray12);
-        boolean boolean19 = zipLong6.equals((java.lang.Object) zipLong18);
-        java.io.InputStream inputStream20 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream21 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream20);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream24 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream20, 0, 100);
-        tarArchiveInputStream24.close();
-        tarArchiveInputStream24.close();
-        long long28 = tarArchiveInputStream24.skip((long) 29127);
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream29 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) tarArchiveInputStream24);
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry30 = jarArchiveInputStream29.getNextEntry();
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry31 = jarArchiveInputStream29.getNextEntry();
-        byte[] byteArray33 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) (byte) -1);
-        int int34 = jarArchiveInputStream29.read(byteArray33);
-        boolean boolean35 = zipLong18.equals((java.lang.Object) jarArchiveInputStream29);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[1, 0, 100, 10]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[1, 0, 100, 10]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + true + "'", boolean19 == true);
-        org.junit.Assert.assertTrue("'" + long28 + "' != '" + 0L + "'", long28 == 0L);
-        org.junit.Assert.assertNull(archiveEntry30);
-        org.junit.Assert.assertNull(archiveEntry31);
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[-1, -1, -1, -1]");
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + (-1) + "'", int34 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-    }
-
-    @Test
-    public void test838() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test838");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream3 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream3);
-        long long5 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream1, (java.io.OutputStream) tarArchiveOutputStream3);
-        cpioArchiveInputStream1.closeEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream7 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream1);
-        java.io.InputStream inputStream8 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream9 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream8);
-        java.io.OutputStream outputStream10 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream11 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream10);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream12 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream11);
-        long long13 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream9, (java.io.OutputStream) tarArchiveOutputStream11);
-        cpioArchiveInputStream9.closeEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream15 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream9);
-        long long17 = jarArchiveInputStream15.skip((long) (short) 0);
-        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry18 = jarArchiveInputStream15.getNextZipEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry19 = jarArchiveInputStream15.getNextJarEntry();
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry20 = jarArchiveInputStream15.getNextEntry();
-        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry21 = jarArchiveInputStream15.getNextZipEntry();
-        byte[] byteArray26 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong27 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray26);
-        boolean boolean29 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray26, 1);
-        int int30 = jarArchiveInputStream15.read(byteArray26);
-        int int33 = jarArchiveInputStream7.read(byteArray26, 8, 61440);
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream34 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) jarArchiveInputStream7);
-        int int35 = jarArchiveInputStream7.read();
-        org.junit.Assert.assertTrue("'" + long5 + "' != '" + 0L + "'", long5 == 0L);
-        org.junit.Assert.assertTrue("'" + long13 + "' != '" + 0L + "'", long13 == 0L);
-        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 0L + "'", long17 == 0L);
-        org.junit.Assert.assertNull(zipArchiveEntry18);
-        org.junit.Assert.assertNull(jarArchiveEntry19);
-        org.junit.Assert.assertNull(archiveEntry20);
-        org.junit.Assert.assertNull(zipArchiveEntry21);
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + (-1) + "'", int35 == (-1));
-    }
-
-    @Test
-    public void test839() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test839");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
-        java.lang.String str2 = tarArchiveOutputStream1.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream5 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1, (int) ' ', 2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream7 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream5, 4096);
-        tarArchiveOutputStream5.setBufferDebug(true);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream cpioArchiveOutputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream5);
-        java.io.InputStream inputStream11 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream12 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream11);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream15 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream11, 0, 100);
-        int int16 = tarArchiveInputStream15.getRecordSize();
-        long long18 = tarArchiveInputStream15.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream19 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream15);
-        int int20 = arArchiveInputStream19.available();
-        java.io.InputStream inputStream21 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream23 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream21, 8);
-        byte[] byteArray29 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long30 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray29);
-        boolean boolean32 = org.apache.commons.compress.archivers.jar.JarArchiveInputStream.matches(byteArray29, (int) (short) 1);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong33 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray29);
-        long long35 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray29, (int) (byte) 1);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong36 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray29);
-        int int39 = tarArchiveInputStream23.read(byteArray29, (int) (short) 100, (int) ' ');
-        int int40 = arArchiveInputStream19.read(byteArray29);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong41 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray29);
-        cpioArchiveOutputStream10.write(byteArray29, 0, 0);
-        org.apache.commons.compress.archivers.ar.ArArchiveEntry arArchiveEntry47 = new org.apache.commons.compress.archivers.ar.ArArchiveEntry("070707", (long) (byte) 10);
-        java.lang.String str48 = arArchiveEntry47.getName();
-        int int49 = arArchiveEntry47.getGroupId();
-        long long50 = arArchiveEntry47.getSize();
-        long long51 = arArchiveEntry47.getLastModified();
-        // The following exception was thrown during execution in test generation
-        try {
-            cpioArchiveOutputStream10.putArchiveEntry((org.apache.commons.compress.archivers.ArchiveEntry) arArchiveEntry47);
-            org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: org.apache.commons.compress.archivers.ar.ArArchiveEntry cannot be cast to org.apache.commons.compress.archivers.cpio.CpioArchiveEntry");
-        } catch (java.lang.ClassCastException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "tar" + "'", str2, "tar");
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 100 + "'", int16 == 100);
-        org.junit.Assert.assertTrue("'" + long18 + "' != '" + 0L + "'", long18 == 0L);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long30 + "' != '" + 167774820L + "'", long30 == 167774820L);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + long35 + "' != '" + 168427530L + "'", long35 == 168427530L);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + (-1) + "'", int39 == (-1));
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + (-1) + "'", int40 == (-1));
-        org.junit.Assert.assertEquals("'" + str48 + "' != '" + "070707" + "'", str48, "070707");
-        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
-        org.junit.Assert.assertTrue("'" + long50 + "' != '" + 10L + "'", long50 == 10L);
-// flaky:         org.junit.Assert.assertTrue("'" + long51 + "' != '" + 1711906564992L + "'", long51 == 1711906564992L);
-    }
-
-    @Test
-    public void test840() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test840");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        tarArchiveInputStream4.reset();
-        tarArchiveInputStream4.reset();
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream7 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream10 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream4, (int) '#', (int) 'a');
-        int int11 = tarArchiveInputStream10.available();
-        tarArchiveInputStream10.setDebug(true);
-        long long15 = tarArchiveInputStream10.skip(168427530L);
-        org.apache.commons.compress.archivers.tar.TarArchiveEntry tarArchiveEntry16 = tarArchiveInputStream10.getNextTarEntry();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream17 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream10);
-        tarArchiveInputStream10.close();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream21 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream10, 4096, 0);
-            org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: null");
-        } catch (java.lang.ArithmeticException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + long15 + "' != '" + 0L + "'", long15 == 0L);
-        org.junit.Assert.assertNull(tarArchiveEntry16);
-    }
-
-    @Test
-    public void test841() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test841");
-        org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
-        java.io.InputStream inputStream2 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream2, 0, 100);
-        int int7 = tarArchiveInputStream6.getRecordSize();
-        long long9 = tarArchiveInputStream6.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream10 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream6);
-        java.io.InputStream inputStream11 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream12 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream11);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream15 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream11, 0, 100);
-        tarArchiveInputStream15.close();
-        byte[] byteArray18 = new byte[] { (byte) 10 };
-        int int21 = tarArchiveInputStream15.read(byteArray18, (-1), (int) (short) 1);
-        byte[] byteArray27 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long28 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray27);
-        int int31 = tarArchiveInputStream15.read(byteArray27, 8192, 40960);
-        int int32 = arArchiveInputStream10.read(byteArray27);
-        arArchiveInputStream10.close();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream34 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream10);
-        org.apache.commons.compress.archivers.ArchiveInputStream archiveInputStream35 = archiveStreamFactory0.createArchiveInputStream("tar", (java.io.InputStream) arArchiveInputStream10);
-        java.io.InputStream inputStream37 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream38 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream37);
-        java.io.OutputStream outputStream39 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream40 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream39);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream41 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream40);
-        long long42 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) cpioArchiveInputStream38, (java.io.OutputStream) tarArchiveOutputStream40);
-        cpioArchiveInputStream38.closeEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream44 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) cpioArchiveInputStream38);
-        long long46 = jarArchiveInputStream44.skip((long) (short) 0);
-        org.apache.commons.compress.archivers.zip.ZipArchiveEntry zipArchiveEntry47 = jarArchiveInputStream44.getNextZipEntry();
-        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry48 = jarArchiveInputStream44.getNextJarEntry();
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry49 = jarArchiveInputStream44.getNextEntry();
-        long long51 = jarArchiveInputStream44.skip(8L);
-        java.io.OutputStream outputStream52 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream53 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream52);
-        java.lang.String str54 = tarArchiveOutputStream53.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream57 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream53, (int) ' ', 2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream59 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream57, 4096);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream cpioArchiveOutputStream60 = new org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream59);
-        tarArchiveOutputStream59.setLongFileMode(100);
-        long long63 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) jarArchiveInputStream44, (java.io.OutputStream) tarArchiveOutputStream59);
-        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry64 = jarArchiveInputStream44.getNextJarEntry();
-        org.apache.commons.compress.archivers.ArchiveEntry archiveEntry65 = jarArchiveInputStream44.getNextEntry();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.compress.archivers.ArchiveInputStream archiveInputStream66 = archiveStreamFactory0.createArchiveInputStream("org.apache.commons.compress.archivers.ArchiveException: org.apache.commons.compress.archivers.ArchiveException", (java.io.InputStream) jarArchiveInputStream44);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.compress.archivers.ArchiveException; message: Archiver: org.apache.commons.compress.archivers.ArchiveException: org.apache.commons.compress.archivers.ArchiveException not found.");
-        } catch (org.apache.commons.compress.archivers.ArchiveException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 100 + "'", int7 == 100);
-        org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long28 + "' != '" + 167774820L + "'", long28 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
-        org.junit.Assert.assertNotNull(archiveInputStream35);
-        org.junit.Assert.assertTrue("'" + long42 + "' != '" + 0L + "'", long42 == 0L);
-        org.junit.Assert.assertTrue("'" + long46 + "' != '" + 0L + "'", long46 == 0L);
-        org.junit.Assert.assertNull(zipArchiveEntry47);
-        org.junit.Assert.assertNull(jarArchiveEntry48);
-        org.junit.Assert.assertNull(archiveEntry49);
-        org.junit.Assert.assertTrue("'" + long51 + "' != '" + 0L + "'", long51 == 0L);
-        org.junit.Assert.assertEquals("'" + str54 + "' != '" + "tar" + "'", str54, "tar");
-        org.junit.Assert.assertTrue("'" + long63 + "' != '" + 0L + "'", long63 == 0L);
-        org.junit.Assert.assertNull(jarArchiveEntry64);
-        org.junit.Assert.assertNull(archiveEntry65);
-    }
-
-    @Test
-    public void test842() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test842");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        int int9 = arArchiveInputStream8.available();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream10 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream8);
-        boolean boolean11 = jarArchiveInputStream10.markSupported();
-        org.apache.commons.compress.archivers.jar.JarArchiveEntry jarArchiveEntry12 = jarArchiveInputStream10.getNextJarEntry();
-        jarArchiveInputStream10.close();
-        jarArchiveInputStream10.mark((int) 'a');
-        // The following exception was thrown during execution in test generation
-        try {
-            int int16 = jarArchiveInputStream10.read();
-            org.junit.Assert.fail("Expected exception of type java.io.IOException; message: The stream is closed");
-        } catch (java.io.IOException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(jarArchiveEntry12);
-    }
-
-    @Test
-    public void test843() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test843");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        byte[] byteArray16 = new byte[] { (byte) 10 };
-        int int19 = tarArchiveInputStream13.read(byteArray16, (-1), (int) (short) 1);
-        byte[] byteArray25 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long26 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray25);
-        int int29 = tarArchiveInputStream13.read(byteArray25, 8192, 40960);
-        int int30 = arArchiveInputStream8.read(byteArray25);
-        arArchiveInputStream8.close();
-        int int32 = arArchiveInputStream8.read();
-        int int33 = arArchiveInputStream8.read();
-        byte[] byteArray38 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong39 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray38);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong40 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray38);
-        long long41 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray38);
-        int int42 = arArchiveInputStream8.read(byteArray38);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong44 = new org.apache.commons.compress.archivers.zip.ZipLong(100L);
-        java.lang.Object obj45 = zipLong44.clone();
-        long long46 = zipLong44.getValue();
-        byte[] byteArray47 = zipLong44.getBytes();
-        int int50 = arArchiveInputStream8.read(byteArray47, (int) (short) 10, 2);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream52 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) arArchiveInputStream8, (int) (short) 3);
-        tarArchiveInputStream52.setDebug(true);
-        long long56 = tarArchiveInputStream52.skip((long) 4);
-        java.io.OutputStream outputStream57 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream58 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream57);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream59 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream58);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream60 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream59);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream61 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream60);
-        org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream zipArchiveOutputStream62 = new org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream60);
-        zipArchiveOutputStream62.closeEntry();
-        org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream zipArchiveOutputStream64 = new org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream((java.io.OutputStream) zipArchiveOutputStream62);
-        org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream zipArchiveOutputStream65 = new org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream((java.io.OutputStream) zipArchiveOutputStream64);
-        java.lang.String str66 = zipArchiveOutputStream64.getEncoding();
-        zipArchiveOutputStream64.setMethod(0);
-        org.apache.commons.compress.archivers.jar.JarArchiveOutputStream jarArchiveOutputStream69 = new org.apache.commons.compress.archivers.jar.JarArchiveOutputStream((java.io.OutputStream) zipArchiveOutputStream64);
-        tarArchiveInputStream52.copyEntryContents((java.io.OutputStream) jarArchiveOutputStream69);
-        // The following exception was thrown during execution in test generation
-        try {
-            jarArchiveOutputStream69.setEncoding("");
-            org.junit.Assert.fail("Expected exception of type java.nio.charset.IllegalCharsetNameException; message: ");
-        } catch (java.nio.charset.IllegalCharsetNameException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long26 + "' != '" + 167774820L + "'", long26 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + long41 + "' != '" + 174325761L + "'", long41 == 174325761L);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + (-1) + "'", int42 == (-1));
-        org.junit.Assert.assertNotNull(obj45);
-        org.junit.Assert.assertTrue("'" + long46 + "' != '" + 100L + "'", long46 == 100L);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[100, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + (-1) + "'", int50 == (-1));
-        org.junit.Assert.assertTrue("'" + long56 + "' != '" + 0L + "'", long56 == 0L);
-        org.junit.Assert.assertEquals("'" + str66 + "' != '" + "UTF8" + "'", str66, "UTF8");
-    }
-
-    @Test
-    public void test844() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test844");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        tarArchiveInputStream4.close();
-        tarArchiveInputStream4.close();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream7 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream8 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) arArchiveInputStream7);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong10 = new org.apache.commons.compress.archivers.zip.ZipLong(100L);
-        java.lang.Object obj11 = zipLong10.clone();
-        long long12 = zipLong10.getValue();
-        byte[] byteArray13 = zipLong10.getBytes();
-        boolean boolean15 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray13, 2048);
-        int int18 = zipArchiveInputStream8.read(byteArray13, (int) (short) 4, 10);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream19 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) zipArchiveInputStream8);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream20 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) zipArchiveInputStream8);
-        java.io.OutputStream outputStream21 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream21);
-        java.lang.String str23 = tarArchiveOutputStream22.getDefaultFileExtension();
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream26 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream22, (int) ' ', 2);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream28 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream26, 4096);
-        long long30 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) tarArchiveInputStream20, (java.io.OutputStream) tarArchiveOutputStream26, 97);
-        tarArchiveOutputStream26.closeArchiveEntry();
-        java.lang.String str32 = tarArchiveOutputStream26.getName();
-        org.junit.Assert.assertNotNull(obj11);
-        org.junit.Assert.assertTrue("'" + long12 + "' != '" + 100L + "'", long12 == 100L);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[100, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + (-1) + "'", int18 == (-1));
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "tar" + "'", str23, "tar");
-        org.junit.Assert.assertTrue("'" + long30 + "' != '" + 0L + "'", long30 == 0L);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "tar" + "'", str32, "tar");
-    }
-
-    @Test
-    public void test845() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test845");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        tarArchiveInputStream4.close();
-        byte[] byteArray7 = new byte[] { (byte) 10 };
-        int int10 = tarArchiveInputStream4.read(byteArray7, (-1), (int) (short) 1);
-        byte[] byteArray16 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long17 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray16);
-        int int20 = tarArchiveInputStream4.read(byteArray16, 8192, 40960);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream4, (int) (byte) 10);
-        tarArchiveInputStream22.close();
-        long long25 = tarArchiveInputStream22.skip((long) 2);
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream26 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) tarArchiveInputStream22);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream27 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) jarArchiveInputStream26);
-        java.io.InputStream inputStream28 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream29 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream28);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream32 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream28, 0, 100);
-        tarArchiveInputStream32.reset();
-        tarArchiveInputStream32.reset();
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream35 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream32);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream38 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream((java.io.InputStream) tarArchiveInputStream32, (int) '#', (int) 'a');
-        int int39 = tarArchiveInputStream38.available();
-        tarArchiveInputStream38.setDebug(true);
-        long long43 = tarArchiveInputStream38.skip(168427530L);
-        org.apache.commons.compress.archivers.tar.TarArchiveEntry tarArchiveEntry44 = tarArchiveInputStream38.getNextTarEntry();
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream45 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream38);
-        arArchiveInputStream45.close();
-        java.io.InputStream inputStream47 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream49 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream47, 8);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream50 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream((java.io.InputStream) tarArchiveInputStream49);
-        tarArchiveInputStream49.close();
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream52 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream((java.io.InputStream) tarArchiveInputStream49);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream53 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) zipArchiveInputStream52);
-        byte[] byteArray55 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) '#');
-        boolean boolean57 = org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream.matches(byteArray55, 512);
-        int int60 = zipArchiveInputStream52.read(byteArray55, 10, (int) (short) 1);
-        int int63 = arArchiveInputStream45.read(byteArray55, 33188, 64);
-        int int64 = arArchiveInputStream27.read(byteArray55);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.compress.archivers.ar.ArArchiveEntry arArchiveEntry65 = arArchiveInputStream27.getNextArEntry();
-            org.junit.Assert.fail("Expected exception of type java.io.IOException; message: failed to read header");
-        } catch (java.io.IOException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 167774820L + "'", long17 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
-        org.junit.Assert.assertTrue("'" + long25 + "' != '" + 0L + "'", long25 == 0L);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-        org.junit.Assert.assertTrue("'" + long43 + "' != '" + 0L + "'", long43 == 0L);
-        org.junit.Assert.assertNull(tarArchiveEntry44);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[35, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + (-1) + "'", int60 == (-1));
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + (-1) + "'", int63 == (-1));
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + (-1) + "'", int64 == (-1));
-    }
-
-    @Test
-    public void test846() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test846");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        byte[] byteArray16 = new byte[] { (byte) 10 };
-        int int19 = tarArchiveInputStream13.read(byteArray16, (-1), (int) (short) 1);
-        byte[] byteArray25 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long26 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray25);
-        int int29 = tarArchiveInputStream13.read(byteArray25, 8192, 40960);
-        int int30 = arArchiveInputStream8.read(byteArray25);
-        arArchiveInputStream8.close();
-        byte[] byteArray33 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes(0L);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong34 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray33);
-        java.io.InputStream inputStream35 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream36 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream35);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream39 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream35, 0, 100);
-        int int40 = tarArchiveInputStream39.getRecordSize();
-        int int41 = tarArchiveInputStream39.read();
-        boolean boolean42 = zipLong34.equals((java.lang.Object) int41);
-        byte[] byteArray43 = zipLong34.getBytes();
-        int int44 = arArchiveInputStream8.read(byteArray43);
-        byte[] byteArray49 = new byte[] { (byte) 1, (byte) 0, (byte) 100, (byte) 10 };
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong50 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray49);
-        boolean boolean52 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray49, 1);
-        long long54 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray49, (int) (short) 0);
-        int int57 = arArchiveInputStream8.read(byteArray49, (int) (byte) 10, 64);
-        java.io.InputStream inputStream58 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream59 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream58);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream62 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream58, 0, 100);
-        tarArchiveInputStream62.close();
-        byte[] byteArray65 = new byte[] { (byte) 10 };
-        int int68 = tarArchiveInputStream62.read(byteArray65, (-1), (int) (short) 1);
-        byte[] byteArray74 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long75 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray74);
-        int int78 = tarArchiveInputStream62.read(byteArray74, 8192, 40960);
-        org.apache.commons.compress.archivers.zip.ZipLong zipLong79 = new org.apache.commons.compress.archivers.zip.ZipLong(byteArray74);
-        boolean boolean81 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray74, 4);
-        int int84 = arArchiveInputStream8.read(byteArray74, (int) (byte) 1, 32);
-        java.lang.Class<?> wildcardClass85 = arArchiveInputStream8.getClass();
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long26 + "' != '" + 167774820L + "'", long26 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 100 + "'", int40 == 100);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + (-1) + "'", int41 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[0, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + int44 + "' != '" + (-1) + "'", int44 == (-1));
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[1, 0, 100, 10]");
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertTrue("'" + long54 + "' != '" + 174325761L + "'", long54 == 174325761L);
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + (-1) + "'", int57 == (-1));
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[10]");
-        org.junit.Assert.assertTrue("'" + int68 + "' != '" + (-1) + "'", int68 == (-1));
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long75 + "' != '" + 167774820L + "'", long75 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + (-1) + "'", int78 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
-        org.junit.Assert.assertTrue("'" + int84 + "' != '" + (-1) + "'", int84 == (-1));
-        org.junit.Assert.assertNotNull(wildcardClass85);
-    }
-
-    @Test
-    public void test847() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test847");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream1 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream0);
-        java.io.InputStream inputStream2 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream2, 0, 100);
-        tarArchiveInputStream6.close();
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        int int12 = tarArchiveInputStream6.read(byteArray9, (-1), (int) (short) 1);
-        tarArchiveOutputStream1.write(byteArray9, 0, (-1));
-        int int16 = tarArchiveOutputStream1.getRecordSize();
-        org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream cpioArchiveOutputStream17 = new org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream1);
-        java.io.InputStream inputStream18 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream19 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream18);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream22 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream18, 0, 100);
-        int int23 = tarArchiveInputStream22.getRecordSize();
-        long long25 = tarArchiveInputStream22.skip((long) (short) 0);
-        tarArchiveInputStream22.mark((int) '4');
-        java.io.OutputStream outputStream28 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream29 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream28);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream30 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream29);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream31 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream30);
-        tarArchiveInputStream22.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream31);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream33 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream22);
-        byte[] byteArray35 = org.apache.commons.compress.archivers.zip.ZipLong.getBytes((long) (short) 100);
-        boolean boolean37 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray35, 16384);
-        int int38 = arArchiveInputStream33.read(byteArray35);
-        // The following exception was thrown during execution in test generation
-        try {
-            cpioArchiveOutputStream17.write(byteArray35, (int) (byte) 10, (int) (short) 12);
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: null");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + (-1) + "'", int12 == (-1));
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 512 + "'", int16 == 512);
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 100 + "'", int23 == 100);
-        org.junit.Assert.assertTrue("'" + long25 + "' != '" + 0L + "'", long25 == 0L);
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[100, 0, 0, 0]");
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + (-1) + "'", int38 == (-1));
-    }
-
-    @Test
-    public void test848() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test848");
-        org.apache.commons.compress.archivers.ArchiveStreamFactory archiveStreamFactory0 = new org.apache.commons.compress.archivers.ArchiveStreamFactory();
-        java.io.InputStream inputStream2 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream3 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream2);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream6 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream2, 0, 100);
-        int int7 = tarArchiveInputStream6.getRecordSize();
-        long long9 = tarArchiveInputStream6.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream10 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream6);
-        java.io.InputStream inputStream11 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream12 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream11);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream15 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream11, 0, 100);
-        tarArchiveInputStream15.close();
-        byte[] byteArray18 = new byte[] { (byte) 10 };
-        int int21 = tarArchiveInputStream15.read(byteArray18, (-1), (int) (short) 1);
-        byte[] byteArray27 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long28 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray27);
-        int int31 = tarArchiveInputStream15.read(byteArray27, 8192, 40960);
-        int int32 = arArchiveInputStream10.read(byteArray27);
-        arArchiveInputStream10.close();
-        org.apache.commons.compress.archivers.jar.JarArchiveInputStream jarArchiveInputStream34 = new org.apache.commons.compress.archivers.jar.JarArchiveInputStream((java.io.InputStream) arArchiveInputStream10);
-        org.apache.commons.compress.archivers.ArchiveInputStream archiveInputStream35 = archiveStreamFactory0.createArchiveInputStream("tar", (java.io.InputStream) arArchiveInputStream10);
-        java.io.InputStream inputStream36 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream37 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream36);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream40 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream36, 0, 100);
-        tarArchiveInputStream40.close();
-        tarArchiveInputStream40.close();
-        long long44 = tarArchiveInputStream40.skip((long) 29127);
-        int int45 = tarArchiveInputStream40.read();
-        int int46 = tarArchiveInputStream40.read();
-        java.io.OutputStream outputStream47 = null;
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream48 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream(outputStream47);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream49 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream48);
-        org.apache.commons.compress.archivers.tar.TarArchiveOutputStream tarArchiveOutputStream50 = new org.apache.commons.compress.archivers.tar.TarArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream49);
-        tarArchiveOutputStream50.closeArchiveEntry();
-        tarArchiveInputStream40.copyEntryContents((java.io.OutputStream) tarArchiveOutputStream50);
-        org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream cpioArchiveOutputStream53 = new org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream((java.io.OutputStream) tarArchiveOutputStream50);
-        long long55 = org.apache.commons.compress.utils.IOUtils.copy((java.io.InputStream) archiveInputStream35, (java.io.OutputStream) tarArchiveOutputStream50, 36864);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 100 + "'", int7 == 100);
-        org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long28 + "' != '" + 167774820L + "'", long28 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
-        org.junit.Assert.assertNotNull(archiveInputStream35);
-        org.junit.Assert.assertTrue("'" + long44 + "' != '" + 0L + "'", long44 == 0L);
-        org.junit.Assert.assertTrue("'" + int45 + "' != '" + (-1) + "'", int45 == (-1));
-        org.junit.Assert.assertTrue("'" + int46 + "' != '" + (-1) + "'", int46 == (-1));
-        org.junit.Assert.assertTrue("'" + long55 + "' != '" + 0L + "'", long55 == 0L);
-    }
-
-    @Test
-    public void test849() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test849");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream1 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream0);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream4 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream0, 0, 100);
-        int int5 = tarArchiveInputStream4.getRecordSize();
-        long long7 = tarArchiveInputStream4.skip((long) 64);
-        org.apache.commons.compress.archivers.ar.ArArchiveInputStream arArchiveInputStream8 = new org.apache.commons.compress.archivers.ar.ArArchiveInputStream((java.io.InputStream) tarArchiveInputStream4);
-        java.io.InputStream inputStream9 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream10 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream9);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream13 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream9, 0, 100);
-        tarArchiveInputStream13.close();
-        byte[] byteArray16 = new byte[] { (byte) 10 };
-        int int19 = tarArchiveInputStream13.read(byteArray16, (-1), (int) (short) 1);
-        byte[] byteArray25 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long26 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray25);
-        int int29 = tarArchiveInputStream13.read(byteArray25, 8192, 40960);
-        int int30 = arArchiveInputStream8.read(byteArray25);
-        java.io.InputStream inputStream31 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream32 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream31);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream35 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream31, 0, 100);
-        tarArchiveInputStream35.reset();
-        tarArchiveInputStream35.reset();
-        java.io.InputStream inputStream38 = null;
-        org.apache.commons.compress.archivers.zip.ZipArchiveInputStream zipArchiveInputStream41 = new org.apache.commons.compress.archivers.zip.ZipArchiveInputStream(inputStream38, "org.apache.commons.compress.archivers.ArchiveException", true);
-        java.io.InputStream inputStream42 = null;
-        org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream cpioArchiveInputStream43 = new org.apache.commons.compress.archivers.cpio.CpioArchiveInputStream(inputStream42);
-        org.apache.commons.compress.archivers.tar.TarArchiveInputStream tarArchiveInputStream46 = new org.apache.commons.compress.archivers.tar.TarArchiveInputStream(inputStream42, 0, 100);
-        tarArchiveInputStream46.close();
-        byte[] byteArray49 = new byte[] { (byte) 10 };
-        int int52 = tarArchiveInputStream46.read(byteArray49, (-1), (int) (short) 1);
-        byte[] byteArray58 = new byte[] { (byte) 100, (byte) 10, (byte) 0, (byte) 10, (byte) 10 };
-        long long59 = org.apache.commons.compress.archivers.zip.ZipLong.getValue(byteArray58);
-        int int62 = tarArchiveInputStream46.read(byteArray58, 8192, 40960);
-        boolean boolean64 = org.apache.commons.compress.archivers.zip.ZipArchiveInputStream.matches(byteArray58, (int) (byte) 10);
-        int int67 = zipArchiveInputStream41.read(byteArray58, (int) (byte) 100, 49152);
-        int int70 = tarArchiveInputStream35.read(byteArray58, 24576, (int) (short) 10);
-        int int71 = arArchiveInputStream8.read(byteArray58);
-        boolean boolean73 = org.apache.commons.compress.archivers.ar.ArArchiveInputStream.matches(byteArray58, 8);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 100 + "'", int5 == 100);
-        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long26 + "' != '" + 167774820L + "'", long26 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + (-1) + "'", int29 == (-1));
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[10]");
-        org.junit.Assert.assertTrue("'" + int52 + "' != '" + (-1) + "'", int52 == (-1));
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[100, 10, 0, 10, 10]");
-        org.junit.Assert.assertTrue("'" + long59 + "' != '" + 167774820L + "'", long59 == 167774820L);
-        org.junit.Assert.assertTrue("'" + int62 + "' != '" + (-1) + "'", int62 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
-        org.junit.Assert.assertTrue("'" + int67 + "' != '" + (-1) + "'", int67 == (-1));
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
-        org.junit.Assert.assertTrue("'" + int71 + "' != '" + (-1) + "'", int71 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
-    }
 }
+

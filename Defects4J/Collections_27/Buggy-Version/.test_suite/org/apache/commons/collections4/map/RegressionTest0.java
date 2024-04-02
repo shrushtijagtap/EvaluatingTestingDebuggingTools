@@ -456,6 +456,26 @@ public class RegressionTest0 {
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        boolean boolean5 = exceptionMap1.containsKey((java.lang.Object) (byte) 1);
+        int int6 = exceptionMap1.size();
+        java.util.Collection<java.lang.Object> objCollection7 = exceptionMap1.values();
+        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap1.values();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertNotNull(objCollection7);
+        org.junit.Assert.assertNotNull(objCollection8);
+    }
+
+    @Test
+    public void test010() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test010");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
@@ -524,9 +544,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test010() throws Throwable {
+    public void test011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test010");
+            System.out.format("%n%s%n", "RegressionTest0.test011");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -661,9 +681,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test011() throws Throwable {
+    public void test012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test011");
+            System.out.format("%n%s%n", "RegressionTest0.test012");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -684,9 +704,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test012() throws Throwable {
+    public void test013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test012");
+            System.out.format("%n%s%n", "RegressionTest0.test013");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -712,9 +732,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test013() throws Throwable {
+    public void test014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test013");
+            System.out.format("%n%s%n", "RegressionTest0.test014");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -768,9 +788,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test014() throws Throwable {
+    public void test015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test014");
+            System.out.format("%n%s%n", "RegressionTest0.test015");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -781,9 +801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test015() throws Throwable {
+    public void test016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test015");
+            System.out.format("%n%s%n", "RegressionTest0.test016");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -815,9 +835,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test016() throws Throwable {
+    public void test017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test016");
+            System.out.format("%n%s%n", "RegressionTest0.test017");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -826,9 +846,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test017() throws Throwable {
+    public void test018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test017");
+            System.out.format("%n%s%n", "RegressionTest0.test018");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -859,9 +879,52 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test018() throws Throwable {
+    public void test019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test018");
+            System.out.format("%n%s%n", "RegressionTest0.test019");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        exceptionMap1.clear();
+        boolean boolean5 = exceptionMap1.isEmpty();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap7 = exceptionMap6.decorated();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean10 = exceptionMap8.containsValue((java.lang.Object) exceptionMap9);
+        boolean boolean11 = exceptionMap7.containsValue((java.lang.Object) exceptionMap9);
+        java.lang.Object obj12 = exceptionMap1.get((java.lang.Object) exceptionMap9);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean15 = exceptionMap13.containsValue((java.lang.Object) exceptionMap14);
+        int int16 = exceptionMap14.size();
+        java.util.Collection<java.lang.Object> objCollection17 = exceptionMap14.values();
+        exceptionMap14.clear();
+        java.lang.Throwable throwable20 = null;
+        org.apache.commons.collections4.FunctorException functorException21 = new org.apache.commons.collections4.FunctorException("", throwable20);
+        int int22 = exceptionMap14.size((java.lang.Object) functorException21);
+        java.lang.String str23 = exceptionMap14.toString();
+        boolean boolean24 = exceptionMap9.equals((java.lang.Object) str23);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
+        org.junit.Assert.assertNotNull(exceptionMap7);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNull(obj12);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
+        org.junit.Assert.assertNotNull(objCollection17);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "{}" + "'", str23, "{}");
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+    }
+
+    @Test
+    public void test020() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test020");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -880,9 +943,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test019() throws Throwable {
+    public void test021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test019");
+            System.out.format("%n%s%n", "RegressionTest0.test021");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1016,9 +1079,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test020() throws Throwable {
+    public void test022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test020");
+            System.out.format("%n%s%n", "RegressionTest0.test022");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Object obj3 = null;
@@ -1028,9 +1091,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test021() throws Throwable {
+    public void test023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test021");
+            System.out.format("%n%s%n", "RegressionTest0.test023");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1165,9 +1228,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test022() throws Throwable {
+    public void test024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test022");
+            System.out.format("%n%s%n", "RegressionTest0.test024");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1195,9 +1258,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test023() throws Throwable {
+    public void test025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test023");
+            System.out.format("%n%s%n", "RegressionTest0.test025");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1263,9 +1326,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test024() throws Throwable {
+    public void test026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test024");
+            System.out.format("%n%s%n", "RegressionTest0.test026");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1281,9 +1344,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test025() throws Throwable {
+    public void test027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test025");
+            System.out.format("%n%s%n", "RegressionTest0.test027");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1346,9 +1409,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test026() throws Throwable {
+    public void test028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test026");
+            System.out.format("%n%s%n", "RegressionTest0.test028");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean3 = exceptionMap1.containsValue((java.lang.Object) exceptionMap2);
@@ -1379,9 +1442,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test027() throws Throwable {
+    public void test029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test027");
+            System.out.format("%n%s%n", "RegressionTest0.test029");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean3 = exceptionMap1.containsValue((java.lang.Object) exceptionMap2);
@@ -1421,9 +1484,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test028() throws Throwable {
+    public void test030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test028");
+            System.out.format("%n%s%n", "RegressionTest0.test030");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor3 = exceptionMap0.mapIterator();
@@ -1439,9 +1502,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test029() throws Throwable {
+    public void test031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test029");
+            System.out.format("%n%s%n", "RegressionTest0.test031");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1480,9 +1543,94 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test030() throws Throwable {
+    public void test032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test030");
+            System.out.format("%n%s%n", "RegressionTest0.test032");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        boolean boolean4 = exceptionMap1.containsKey((java.lang.Object) (short) 10);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean7 = exceptionMap5.containsValue((java.lang.Object) exceptionMap6);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap10 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean11 = exceptionMap9.containsValue((java.lang.Object) exceptionMap10);
+        int int12 = exceptionMap10.size();
+        java.util.Collection<java.lang.Object> objCollection13 = exceptionMap10.values();
+        java.util.Collection<java.lang.Object> objCollection14 = exceptionMap10.values();
+        java.lang.Object obj15 = exceptionMap8.remove((java.lang.Object) objCollection14);
+        java.lang.Object obj16 = exceptionMap5.get((java.lang.Object) objCollection14);
+        boolean boolean17 = exceptionMap5.isEmpty();
+        boolean boolean19 = exceptionMap1.containsValue((java.lang.Object) exceptionMap5, (java.lang.Object) (byte) 10);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean22 = exceptionMap20.containsValue((java.lang.Object) exceptionMap21);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet23 = exceptionMap21.entrySet();
+        exceptionMap21.clear();
+        java.lang.Throwable throwable26 = null;
+        org.apache.commons.collections4.FunctorException functorException27 = new org.apache.commons.collections4.FunctorException(throwable26);
+        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException27);
+        java.lang.Throwable throwable29 = null;
+        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException(throwable29);
+        functorException28.addSuppressed((java.lang.Throwable) functorException30);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet39 = exceptionMap37.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap40 = exceptionMap37.map;
+        int int41 = exceptionMap40.size();
+        java.lang.Object obj42 = exceptionMap33.remove((java.lang.Object) int41);
+        java.lang.Exception exception43 = null;
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap44 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection45 = exceptionMap44.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet46 = exceptionMap44.entrySet();
+        java.lang.Object obj47 = exceptionMap33.put(exception43, (java.lang.Object) exceptionEntrySet46);
+        java.lang.Object obj48 = exceptionMap21.put((java.lang.Exception) functorException28, (java.lang.Object) exceptionEntrySet46);
+        int int49 = exceptionMap21.size();
+        exceptionMap5.map = exceptionMap21;
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(objCollection13);
+        org.junit.Assert.assertNotNull(objCollection14);
+        org.junit.Assert.assertNull(obj15);
+        org.junit.Assert.assertNull(obj16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet23);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet35);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet39);
+        org.junit.Assert.assertNotNull(exceptionMap40);
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertNull(obj42);
+        org.junit.Assert.assertNotNull(objCollection45);
+        org.junit.Assert.assertNotNull(exceptionEntrySet46);
+        org.junit.Assert.assertNotNull(obj47);
+        org.junit.Assert.assertEquals(obj47.toString(), "[]");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj47), "[]");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj47), "[]");
+        org.junit.Assert.assertNotNull(obj48);
+        org.junit.Assert.assertEquals(obj48.toString(), "[]");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj48), "[]");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj48), "[]");
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 1 + "'", int49 == 1);
+    }
+
+    @Test
+    public void test033() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test033");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1517,9 +1665,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test031() throws Throwable {
+    public void test034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test031");
+            System.out.format("%n%s%n", "RegressionTest0.test034");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1580,9 +1728,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test032() throws Throwable {
+    public void test035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test032");
+            System.out.format("%n%s%n", "RegressionTest0.test035");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -1651,9 +1799,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test033() throws Throwable {
+    public void test036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test033");
+            System.out.format("%n%s%n", "RegressionTest0.test036");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1665,9 +1813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test034() throws Throwable {
+    public void test037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test034");
+            System.out.format("%n%s%n", "RegressionTest0.test037");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1752,9 +1900,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test035() throws Throwable {
+    public void test038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test035");
+            System.out.format("%n%s%n", "RegressionTest0.test038");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1781,9 +1929,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test036() throws Throwable {
+    public void test039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test036");
+            System.out.format("%n%s%n", "RegressionTest0.test039");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor3 = exceptionMap0.mapIterator();
@@ -1796,9 +1944,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test037() throws Throwable {
+    public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test037");
+            System.out.format("%n%s%n", "RegressionTest0.test040");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1826,9 +1974,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test038() throws Throwable {
+    public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test038");
+            System.out.format("%n%s%n", "RegressionTest0.test041");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -1893,9 +2041,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test039() throws Throwable {
+    public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test039");
+            System.out.format("%n%s%n", "RegressionTest0.test042");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -1974,9 +2122,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test040() throws Throwable {
+    public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test040");
+            System.out.format("%n%s%n", "RegressionTest0.test043");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -1992,9 +2140,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test041() throws Throwable {
+    public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test041");
+            System.out.format("%n%s%n", "RegressionTest0.test044");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2011,9 +2159,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test042() throws Throwable {
+    public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test042");
+            System.out.format("%n%s%n", "RegressionTest0.test045");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2074,9 +2222,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test043() throws Throwable {
+    public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test043");
+            System.out.format("%n%s%n", "RegressionTest0.test046");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2111,9 +2259,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test044() throws Throwable {
+    public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test044");
+            System.out.format("%n%s%n", "RegressionTest0.test047");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2124,9 +2272,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test045() throws Throwable {
+    public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test045");
+            System.out.format("%n%s%n", "RegressionTest0.test048");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -2163,9 +2311,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test046() throws Throwable {
+    public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test046");
+            System.out.format("%n%s%n", "RegressionTest0.test049");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2247,9 +2395,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test047() throws Throwable {
+    public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test047");
+            System.out.format("%n%s%n", "RegressionTest0.test050");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2312,9 +2460,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test048() throws Throwable {
+    public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test048");
+            System.out.format("%n%s%n", "RegressionTest0.test051");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -2350,9 +2498,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test049() throws Throwable {
+    public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test049");
+            System.out.format("%n%s%n", "RegressionTest0.test052");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2375,9 +2523,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test050() throws Throwable {
+    public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test050");
+            System.out.format("%n%s%n", "RegressionTest0.test053");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2423,9 +2571,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test051() throws Throwable {
+    public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test051");
+            System.out.format("%n%s%n", "RegressionTest0.test054");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2453,9 +2601,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test052() throws Throwable {
+    public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test052");
+            System.out.format("%n%s%n", "RegressionTest0.test055");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2551,9 +2699,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test053() throws Throwable {
+    public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test053");
+            System.out.format("%n%s%n", "RegressionTest0.test056");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2570,9 +2718,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test054() throws Throwable {
+    public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test054");
+            System.out.format("%n%s%n", "RegressionTest0.test057");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2601,9 +2749,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test055() throws Throwable {
+    public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test055");
+            System.out.format("%n%s%n", "RegressionTest0.test058");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2664,9 +2812,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test056() throws Throwable {
+    public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test056");
+            System.out.format("%n%s%n", "RegressionTest0.test059");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -2779,9 +2927,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test057() throws Throwable {
+    public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test057");
+            System.out.format("%n%s%n", "RegressionTest0.test060");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -2898,9 +3046,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test058() throws Throwable {
+    public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test058");
+            System.out.format("%n%s%n", "RegressionTest0.test061");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -2948,9 +3096,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test059() throws Throwable {
+    public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test059");
+            System.out.format("%n%s%n", "RegressionTest0.test062");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3071,9 +3219,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test060() throws Throwable {
+    public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test060");
+            System.out.format("%n%s%n", "RegressionTest0.test063");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean3 = exceptionMap1.containsValue((java.lang.Object) exceptionMap2);
@@ -3167,9 +3315,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test061() throws Throwable {
+    public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test061");
+            System.out.format("%n%s%n", "RegressionTest0.test064");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -3196,9 +3344,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test062() throws Throwable {
+    public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test062");
+            System.out.format("%n%s%n", "RegressionTest0.test065");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3252,9 +3400,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test063() throws Throwable {
+    public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test063");
+            System.out.format("%n%s%n", "RegressionTest0.test066");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3298,9 +3446,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test064() throws Throwable {
+    public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test064");
+            System.out.format("%n%s%n", "RegressionTest0.test067");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3392,9 +3540,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test065() throws Throwable {
+    public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test065");
+            System.out.format("%n%s%n", "RegressionTest0.test068");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3406,9 +3554,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test066() throws Throwable {
+    public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test066");
+            System.out.format("%n%s%n", "RegressionTest0.test069");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3433,9 +3581,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test067() throws Throwable {
+    public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test067");
+            System.out.format("%n%s%n", "RegressionTest0.test070");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3497,9 +3645,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test068() throws Throwable {
+    public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test068");
+            System.out.format("%n%s%n", "RegressionTest0.test071");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -3612,9 +3760,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test069() throws Throwable {
+    public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test069");
+            System.out.format("%n%s%n", "RegressionTest0.test072");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -3632,9 +3780,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test070() throws Throwable {
+    public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test070");
+            System.out.format("%n%s%n", "RegressionTest0.test073");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -3652,9 +3800,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test071() throws Throwable {
+    public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test071");
+            System.out.format("%n%s%n", "RegressionTest0.test074");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3681,9 +3829,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test072() throws Throwable {
+    public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test072");
+            System.out.format("%n%s%n", "RegressionTest0.test075");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3768,9 +3916,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test073() throws Throwable {
+    public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test073");
+            System.out.format("%n%s%n", "RegressionTest0.test076");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -3879,9 +4027,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test074() throws Throwable {
+    public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test074");
+            System.out.format("%n%s%n", "RegressionTest0.test077");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4008,9 +4156,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test075() throws Throwable {
+    public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test075");
+            System.out.format("%n%s%n", "RegressionTest0.test078");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4039,9 +4187,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test076() throws Throwable {
+    public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test076");
+            System.out.format("%n%s%n", "RegressionTest0.test079");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4146,9 +4294,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test077() throws Throwable {
+    public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test077");
+            System.out.format("%n%s%n", "RegressionTest0.test080");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4219,9 +4367,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test078() throws Throwable {
+    public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test078");
+            System.out.format("%n%s%n", "RegressionTest0.test081");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4293,9 +4441,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test079() throws Throwable {
+    public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test079");
+            System.out.format("%n%s%n", "RegressionTest0.test082");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4311,9 +4459,73 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test080() throws Throwable {
+    public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test080");
+            System.out.format("%n%s%n", "RegressionTest0.test083");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
+        int int9 = exceptionMap8.size();
+        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
+        java.lang.Throwable throwable13 = null;
+        org.apache.commons.collections4.FunctorException functorException14 = new org.apache.commons.collections4.FunctorException("", throwable13);
+        org.apache.commons.collections4.FunctorException functorException15 = new org.apache.commons.collections4.FunctorException("", throwable13);
+        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("");
+        functorException15.addSuppressed((java.lang.Throwable) functorException17);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean21 = exceptionMap19.containsValue((java.lang.Object) exceptionMap20);
+        boolean boolean23 = exceptionMap20.containsKey((java.lang.Object) (short) 10);
+        java.util.Collection<java.io.Serializable> serializableCollection25 = exceptionMap20.createCollection(10);
+        boolean boolean26 = exceptionMap1.putAll((java.lang.Exception) functorException17, serializableCollection25);
+        java.lang.Throwable throwable29 = null;
+        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("", throwable29);
+        org.apache.commons.collections4.FunctorException functorException31 = new org.apache.commons.collections4.FunctorException("", throwable29);
+        org.apache.commons.collections4.FunctorException functorException33 = new org.apache.commons.collections4.FunctorException("");
+        functorException31.addSuppressed((java.lang.Throwable) functorException33);
+        java.lang.Throwable[] throwableArray35 = functorException33.getSuppressed();
+        org.apache.commons.collections4.FunctorException functorException36 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException33);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean40 = exceptionMap38.containsValue((java.lang.Object) exceptionMap39);
+        int int41 = exceptionMap39.size();
+        java.util.Collection<java.lang.Object> objCollection42 = exceptionMap39.values();
+        java.util.Collection<java.lang.Object> objCollection43 = exceptionMap39.values();
+        java.lang.Object obj44 = exceptionMap37.remove((java.lang.Object) objCollection43);
+        java.lang.Object obj45 = exceptionMap1.put((java.lang.Exception) functorException33, obj44);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet46 = exceptionMap1.entrySet();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet7);
+        org.junit.Assert.assertNotNull(exceptionMap8);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertNull(obj10);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(serializableCollection25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(throwableArray35);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertNotNull(objCollection42);
+        org.junit.Assert.assertNotNull(objCollection43);
+        org.junit.Assert.assertNull(obj44);
+        org.junit.Assert.assertNull(obj45);
+        org.junit.Assert.assertNotNull(exceptionEntrySet46);
+    }
+
+    @Test
+    public void test084() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test084");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -4328,9 +4540,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test081() throws Throwable {
+    public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test081");
+            System.out.format("%n%s%n", "RegressionTest0.test085");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4436,9 +4648,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
+    public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
+            System.out.format("%n%s%n", "RegressionTest0.test086");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4455,9 +4667,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test083() throws Throwable {
+    public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test083");
+            System.out.format("%n%s%n", "RegressionTest0.test087");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4500,9 +4712,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test084() throws Throwable {
+    public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test084");
+            System.out.format("%n%s%n", "RegressionTest0.test088");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4570,9 +4782,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test085() throws Throwable {
+    public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
+            System.out.format("%n%s%n", "RegressionTest0.test089");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -4587,9 +4799,38 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test086() throws Throwable {
+    public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test086");
+            System.out.format("%n%s%n", "RegressionTest0.test090");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        int int7 = exceptionMap5.size();
+        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap5.values();
+        java.util.Collection<java.lang.Object> objCollection9 = exceptionMap5.values();
+        java.lang.Object obj10 = exceptionMap3.remove((java.lang.Object) objCollection9);
+        java.lang.Object obj11 = exceptionMap0.get((java.lang.Object) objCollection9);
+        boolean boolean12 = exceptionMap0.isEmpty();
+        int int13 = exceptionMap0.size();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertNotNull(objCollection8);
+        org.junit.Assert.assertNotNull(objCollection9);
+        org.junit.Assert.assertNull(obj10);
+        org.junit.Assert.assertNull(obj11);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+    }
+
+    @Test
+    public void test091() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test091");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4652,9 +4893,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test087() throws Throwable {
+    public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test087");
+            System.out.format("%n%s%n", "RegressionTest0.test092");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4741,9 +4982,28 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test088() throws Throwable {
+    public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test088");
+            System.out.format("%n%s%n", "RegressionTest0.test093");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        exceptionMap1.clear();
+        boolean boolean5 = exceptionMap1.isEmpty();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap6 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap1);
+        java.util.Collection<java.lang.Object> objCollection7 = exceptionMap1.values();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
+        org.junit.Assert.assertNotNull(exceptionMap6);
+        org.junit.Assert.assertNotNull(objCollection7);
+    }
+
+    @Test
+    public void test094() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test094");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -4819,9 +5079,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test089() throws Throwable {
+    public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test089");
+            System.out.format("%n%s%n", "RegressionTest0.test095");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor3 = exceptionMap0.mapIterator();
@@ -4967,9 +5227,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test090() throws Throwable {
+    public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test090");
+            System.out.format("%n%s%n", "RegressionTest0.test096");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5025,9 +5285,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test091() throws Throwable {
+    public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test091");
+            System.out.format("%n%s%n", "RegressionTest0.test097");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5070,9 +5330,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test092() throws Throwable {
+    public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test092");
+            System.out.format("%n%s%n", "RegressionTest0.test098");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5103,9 +5363,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test093() throws Throwable {
+    public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test093");
+            System.out.format("%n%s%n", "RegressionTest0.test099");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5170,9 +5430,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test094() throws Throwable {
+    public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test094");
+            System.out.format("%n%s%n", "RegressionTest0.test100");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -5297,9 +5557,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test095() throws Throwable {
+    public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test095");
+            System.out.format("%n%s%n", "RegressionTest0.test101");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5324,9 +5584,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test096() throws Throwable {
+    public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test096");
+            System.out.format("%n%s%n", "RegressionTest0.test102");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5381,9 +5641,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test097() throws Throwable {
+    public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test097");
+            System.out.format("%n%s%n", "RegressionTest0.test103");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5436,9 +5696,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test098() throws Throwable {
+    public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test098");
+            System.out.format("%n%s%n", "RegressionTest0.test104");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5551,9 +5811,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test099() throws Throwable {
+    public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test099");
+            System.out.format("%n%s%n", "RegressionTest0.test105");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -5570,9 +5830,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test100() throws Throwable {
+    public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test100");
+            System.out.format("%n%s%n", "RegressionTest0.test106");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5614,9 +5874,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test101() throws Throwable {
+    public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test101");
+            System.out.format("%n%s%n", "RegressionTest0.test107");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -5692,9 +5952,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test102() throws Throwable {
+    public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test102");
+            System.out.format("%n%s%n", "RegressionTest0.test108");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5779,9 +6039,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test103() throws Throwable {
+    public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test103");
+            System.out.format("%n%s%n", "RegressionTest0.test109");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5814,9 +6074,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test104() throws Throwable {
+    public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test104");
+            System.out.format("%n%s%n", "RegressionTest0.test110");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5887,9 +6147,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test105() throws Throwable {
+    public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test105");
+            System.out.format("%n%s%n", "RegressionTest0.test111");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5927,9 +6187,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test106() throws Throwable {
+    public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test106");
+            System.out.format("%n%s%n", "RegressionTest0.test112");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -5965,9 +6225,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test107() throws Throwable {
+    public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test107");
+            System.out.format("%n%s%n", "RegressionTest0.test113");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6011,9 +6271,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test108() throws Throwable {
+    public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test108");
+            System.out.format("%n%s%n", "RegressionTest0.test114");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6043,9 +6303,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test109() throws Throwable {
+    public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test109");
+            System.out.format("%n%s%n", "RegressionTest0.test115");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -6150,9 +6410,75 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test110() throws Throwable {
+    public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test110");
+            System.out.format("%n%s%n", "RegressionTest0.test116");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
+        int int9 = exceptionMap8.size();
+        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
+        java.lang.Object obj11 = null;
+        boolean boolean12 = exceptionMap1.containsKey(obj11);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean15 = exceptionMap13.containsValue((java.lang.Object) exceptionMap14);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet16 = exceptionMap14.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean19 = exceptionMap17.containsValue((java.lang.Object) exceptionMap18);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet20 = exceptionMap18.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap18.map;
+        int int22 = exceptionMap21.size();
+        java.lang.Object obj23 = exceptionMap14.remove((java.lang.Object) int22);
+        java.lang.Throwable throwable26 = null;
+        org.apache.commons.collections4.FunctorException functorException27 = new org.apache.commons.collections4.FunctorException("", throwable26);
+        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("", throwable26);
+        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("");
+        functorException28.addSuppressed((java.lang.Throwable) functorException30);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
+        boolean boolean36 = exceptionMap33.containsKey((java.lang.Object) (short) 10);
+        java.util.Collection<java.io.Serializable> serializableCollection38 = exceptionMap33.createCollection(10);
+        boolean boolean39 = exceptionMap14.putAll((java.lang.Exception) functorException30, serializableCollection38);
+        boolean boolean40 = exceptionMap1.containsKey((java.lang.Object) serializableCollection38);
+        int int41 = exceptionMap1.size();
+        java.util.Set<java.lang.Exception> exceptionSet42 = exceptionMap1.keySet();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet7);
+        org.junit.Assert.assertNotNull(exceptionMap8);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertNull(obj10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet16);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet20);
+        org.junit.Assert.assertNotNull(exceptionMap21);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertNull(obj23);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertNotNull(serializableCollection38);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertNotNull(exceptionSet42);
+    }
+
+    @Test
+    public void test117() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test117");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor3 = exceptionMap0.mapIterator();
@@ -6261,9 +6587,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test111() throws Throwable {
+    public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test111");
+            System.out.format("%n%s%n", "RegressionTest0.test118");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6293,9 +6619,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test112() throws Throwable {
+    public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test112");
+            System.out.format("%n%s%n", "RegressionTest0.test119");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6384,9 +6710,60 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test113() throws Throwable {
+    public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test113");
+            System.out.format("%n%s%n", "RegressionTest0.test120");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        int int3 = exceptionMap1.size();
+        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
+        exceptionMap1.clear();
+        java.util.Collection<java.lang.Object> objCollection6 = exceptionMap1.values();
+        java.lang.Throwable throwable8 = null;
+        org.apache.commons.collections4.FunctorException functorException9 = new org.apache.commons.collections4.FunctorException(throwable8);
+        org.apache.commons.collections4.FunctorException functorException10 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException9);
+        java.lang.Throwable throwable11 = null;
+        org.apache.commons.collections4.FunctorException functorException12 = new org.apache.commons.collections4.FunctorException(throwable11);
+        functorException10.addSuppressed((java.lang.Throwable) functorException12);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean16 = exceptionMap14.containsValue((java.lang.Object) exceptionMap15);
+        int int17 = exceptionMap15.size();
+        java.util.Collection<java.lang.Object> objCollection18 = exceptionMap15.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean21 = exceptionMap19.containsValue((java.lang.Object) exceptionMap20);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet22 = exceptionMap20.entrySet();
+        exceptionMap15.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap20);
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap24 = exceptionMap20.decorated();
+        java.util.Set<java.lang.Exception> exceptionSet25 = exceptionMap20.keySet();
+        java.util.Collection<java.io.Serializable> serializableCollection27 = exceptionMap20.createCollection(0);
+        java.lang.Object obj28 = exceptionMap1.put((java.lang.Exception) functorException10, (java.lang.Object) exceptionMap20);
+        java.util.Iterator<java.util.Map.Entry<java.lang.Exception, java.io.Serializable>> exceptionEntryItor29 = exceptionMap1.iterator();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertNotNull(objCollection4);
+        org.junit.Assert.assertNotNull(objCollection6);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertNotNull(objCollection18);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet22);
+        org.junit.Assert.assertNotNull(exceptionMap24);
+        org.junit.Assert.assertNotNull(exceptionSet25);
+        org.junit.Assert.assertNotNull(serializableCollection27);
+        org.junit.Assert.assertNotNull(obj28);
+        org.junit.Assert.assertEquals(obj28.toString(), "{}");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj28), "{}");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj28), "{}");
+        org.junit.Assert.assertNotNull(exceptionEntryItor29);
+    }
+
+    @Test
+    public void test121() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test121");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6414,9 +6791,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test114() throws Throwable {
+    public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test114");
+            System.out.format("%n%s%n", "RegressionTest0.test122");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6531,9 +6908,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test115() throws Throwable {
+    public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test115");
+            System.out.format("%n%s%n", "RegressionTest0.test123");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -6593,9 +6970,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test116() throws Throwable {
+    public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test116");
+            System.out.format("%n%s%n", "RegressionTest0.test124");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -6722,9 +7099,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test117() throws Throwable {
+    public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test117");
+            System.out.format("%n%s%n", "RegressionTest0.test125");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -6811,9 +7188,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test118() throws Throwable {
+    public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test118");
+            System.out.format("%n%s%n", "RegressionTest0.test126");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -6895,9 +7272,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test119() throws Throwable {
+    public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test119");
+            System.out.format("%n%s%n", "RegressionTest0.test127");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6950,9 +7327,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test120() throws Throwable {
+    public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test120");
+            System.out.format("%n%s%n", "RegressionTest0.test128");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -6982,9 +7359,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test121() throws Throwable {
+    public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test121");
+            System.out.format("%n%s%n", "RegressionTest0.test129");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7084,9 +7461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test122() throws Throwable {
+    public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test122");
+            System.out.format("%n%s%n", "RegressionTest0.test130");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -7159,9 +7536,38 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test123() throws Throwable {
+    public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test123");
+            System.out.format("%n%s%n", "RegressionTest0.test131");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
+        int int9 = exceptionMap8.size();
+        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
+        java.lang.Object obj11 = null;
+        boolean boolean12 = exceptionMap1.containsKey(obj11);
+        boolean boolean13 = exceptionMap1.isEmpty();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet7);
+        org.junit.Assert.assertNotNull(exceptionMap8);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertNull(obj10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+    }
+
+    @Test
+    public void test132() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test132");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7188,9 +7594,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test124() throws Throwable {
+    public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test124");
+            System.out.format("%n%s%n", "RegressionTest0.test133");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -7251,9 +7657,44 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test125() throws Throwable {
+    public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test125");
+            System.out.format("%n%s%n", "RegressionTest0.test134");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
+        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap7.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet9 = exceptionMap7.entrySet();
+        java.lang.Object obj10 = null;
+        boolean boolean11 = exceptionMap4.containsValue((java.lang.Object) exceptionEntrySet9, obj10);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
+        exceptionMap13.clear();
+        boolean boolean17 = exceptionMap13.isEmpty();
+        exceptionMap4.map = exceptionMap13;
+        int int19 = exceptionMap4.size();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNotNull(objCollection8);
+        org.junit.Assert.assertNotNull(exceptionEntrySet9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet15);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+    }
+
+    @Test
+    public void test135() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test135");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7288,9 +7729,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test126() throws Throwable {
+    public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test126");
+            System.out.format("%n%s%n", "RegressionTest0.test136");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7329,9 +7770,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test127() throws Throwable {
+    public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test127");
+            System.out.format("%n%s%n", "RegressionTest0.test137");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -7358,9 +7799,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test128() throws Throwable {
+    public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test128");
+            System.out.format("%n%s%n", "RegressionTest0.test138");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7423,9 +7864,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test129() throws Throwable {
+    public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test129");
+            System.out.format("%n%s%n", "RegressionTest0.test139");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -7438,9 +7879,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test130() throws Throwable {
+    public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test130");
+            System.out.format("%n%s%n", "RegressionTest0.test140");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7515,9 +7956,73 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test131() throws Throwable {
+    public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test131");
+            System.out.format("%n%s%n", "RegressionTest0.test141");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        java.lang.Throwable throwable8 = null;
+        org.apache.commons.collections4.FunctorException functorException9 = new org.apache.commons.collections4.FunctorException("", throwable8);
+        java.lang.Throwable throwable16 = null;
+        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("", throwable16);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean20 = exceptionMap18.containsValue((java.lang.Object) exceptionMap19);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap23 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection24 = exceptionMap23.values();
+        int int25 = exceptionMap23.size();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection28 = exceptionMap27.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
+        int int39 = exceptionMap37.size();
+        java.lang.Throwable throwable48 = null;
+        org.apache.commons.collections4.FunctorException functorException49 = new org.apache.commons.collections4.FunctorException("", throwable48);
+        org.apache.commons.collections4.FunctorException functorException50 = new org.apache.commons.collections4.FunctorException("", throwable48);
+        java.io.Serializable[] serializableArray51 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable16, exceptionMap18, 0L, 0L, exceptionMap23, 0, exceptionMap27, exceptionMap29, (short) 1, ' ', "hi!", 100.0f, int39, false, 10.0f, '4', (-1), 1L, 1, throwable48 };
+        java.util.ArrayList<java.io.Serializable> serializableList52 = new java.util.ArrayList<java.io.Serializable>();
+        boolean boolean53 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList52, serializableArray51);
+        boolean boolean54 = exceptionMap4.putAll((java.lang.Exception) functorException9, (java.util.Collection<java.io.Serializable>) serializableList52);
+        boolean boolean56 = exceptionMap1.removeMapping((java.lang.Exception) functorException9, (java.io.Serializable) (-1.0f));
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap57 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap58 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean59 = exceptionMap57.containsValue((java.lang.Object) exceptionMap58);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet60 = exceptionMap58.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap61 = exceptionMap58.map;
+        boolean boolean62 = exceptionMap1.containsValue((java.lang.Object) exceptionMap58);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(objCollection24);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(objCollection28);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertNotNull(serializableArray51);
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + true + "'", boolean54 == true);
+        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
+        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet60);
+        org.junit.Assert.assertNotNull(exceptionMap61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+    }
+
+    @Test
+    public void test142() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test142");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7530,9 +8035,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test132() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test132");
+            System.out.format("%n%s%n", "RegressionTest0.test143");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7579,9 +8084,157 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test133() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test133");
+            System.out.format("%n%s%n", "RegressionTest0.test144");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap3.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet5 = exceptionMap3.entrySet();
+        boolean boolean7 = exceptionMap0.remove((java.lang.Object) exceptionEntrySet5, (java.lang.Object) (byte) -1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean10 = exceptionMap8.containsValue((java.lang.Object) exceptionMap9);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet11 = exceptionMap9.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap12 = exceptionMap9.map;
+        int int13 = exceptionMap12.size();
+        boolean boolean14 = exceptionMap0.containsKey((java.lang.Object) exceptionMap12);
+        boolean boolean16 = exceptionMap0.equals((java.lang.Object) 0.0d);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean19 = exceptionMap17.containsValue((java.lang.Object) exceptionMap18);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet20 = exceptionMap18.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap22 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean23 = exceptionMap21.containsValue((java.lang.Object) exceptionMap22);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet24 = exceptionMap22.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap25 = exceptionMap22.map;
+        int int26 = exceptionMap25.size();
+        java.lang.Object obj27 = exceptionMap18.remove((java.lang.Object) int26);
+        java.lang.Throwable throwable30 = null;
+        org.apache.commons.collections4.FunctorException functorException31 = new org.apache.commons.collections4.FunctorException("", throwable30);
+        org.apache.commons.collections4.FunctorException functorException32 = new org.apache.commons.collections4.FunctorException("", throwable30);
+        org.apache.commons.collections4.FunctorException functorException34 = new org.apache.commons.collections4.FunctorException("");
+        functorException32.addSuppressed((java.lang.Throwable) functorException34);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
+        boolean boolean40 = exceptionMap37.containsKey((java.lang.Object) (short) 10);
+        java.util.Collection<java.io.Serializable> serializableCollection42 = exceptionMap37.createCollection(10);
+        boolean boolean43 = exceptionMap18.putAll((java.lang.Exception) functorException34, serializableCollection42);
+        boolean boolean44 = exceptionMap0.containsValue((java.lang.Object) serializableCollection42);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap45 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap46 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean48 = exceptionMap46.containsValue((java.lang.Object) exceptionMap47);
+        int int49 = exceptionMap47.size();
+        java.util.Collection<java.lang.Object> objCollection50 = exceptionMap47.values();
+        java.util.Collection<java.lang.Object> objCollection51 = exceptionMap47.values();
+        java.lang.Object obj52 = exceptionMap45.remove((java.lang.Object) objCollection51);
+        org.apache.commons.collections4.map.MultiValueMap<org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>, java.lang.Throwable> exceptionMapMap53 = new org.apache.commons.collections4.map.MultiValueMap<org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>, java.lang.Throwable>();
+        java.lang.Object obj54 = exceptionMap45.remove((java.lang.Object) exceptionMapMap53);
+        boolean boolean55 = exceptionMap0.containsKey((java.lang.Object) exceptionMapMap53);
+        org.junit.Assert.assertNotNull(objCollection1);
+        org.junit.Assert.assertNotNull(exceptionEntrySet2);
+        org.junit.Assert.assertNotNull(objCollection4);
+        org.junit.Assert.assertNotNull(exceptionEntrySet5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet11);
+        org.junit.Assert.assertNotNull(exceptionMap12);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet20);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet24);
+        org.junit.Assert.assertNotNull(exceptionMap25);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertNull(obj27);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertNotNull(serializableCollection42);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertNotNull(objCollection50);
+        org.junit.Assert.assertNotNull(objCollection51);
+        org.junit.Assert.assertNull(obj52);
+        org.junit.Assert.assertNull(obj54);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
+    }
+
+    @Test
+    public void test145() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test145");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet6 = exceptionMap4.entrySet();
+        exceptionMap4.clear();
+        boolean boolean8 = exceptionMap4.isEmpty();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap9 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
+        boolean boolean10 = exceptionMap0.equals((java.lang.Object) exceptionMap4);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
+        int int14 = exceptionMap12.size();
+        java.util.Collection<java.lang.Object> objCollection15 = exceptionMap12.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
+        exceptionMap12.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap17);
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap17.decorated();
+        java.lang.Object obj22 = exceptionMap4.get((java.lang.Object) exceptionMap17);
+        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap4.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
+        int int27 = exceptionMap25.size();
+        java.util.Collection<java.lang.Object> objCollection28 = exceptionMap25.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet32 = exceptionMap30.entrySet();
+        exceptionMap25.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap30);
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap34 = exceptionMap25.decorated();
+        boolean boolean35 = exceptionMap4.containsKey((java.lang.Object) exceptionMap34);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(exceptionMap9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertNotNull(objCollection15);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet19);
+        org.junit.Assert.assertNotNull(exceptionMap21);
+        org.junit.Assert.assertNull(obj22);
+        org.junit.Assert.assertNotNull(objCollection23);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertNotNull(objCollection28);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet32);
+        org.junit.Assert.assertNotNull(exceptionMap34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+    }
+
+    @Test
+    public void test146() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test146");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7647,9 +8300,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test134() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test134");
+            System.out.format("%n%s%n", "RegressionTest0.test147");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap1 = exceptionMap0.decorated();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -7730,9 +8383,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test135() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test135");
+            System.out.format("%n%s%n", "RegressionTest0.test148");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7795,9 +8448,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test136() throws Throwable {
+    public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test136");
+            System.out.format("%n%s%n", "RegressionTest0.test149");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7899,9 +8552,45 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test137() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test137");
+            System.out.format("%n%s%n", "RegressionTest0.test150");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.lang.Object obj3 = exceptionMap1.get((java.lang.Object) (-1L));
+        java.lang.Throwable throwable5 = null;
+        org.apache.commons.collections4.FunctorException functorException6 = new org.apache.commons.collections4.FunctorException(throwable5);
+        org.apache.commons.collections4.FunctorException functorException7 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException6);
+        boolean boolean9 = exceptionMap1.removeMapping((java.lang.Exception) functorException6, (java.io.Serializable) '#');
+        java.util.Set<java.lang.Exception> exceptionSet10 = exceptionMap1.keySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet14 = exceptionMap12.entrySet();
+        boolean boolean16 = exceptionMap12.containsKey((java.lang.Object) (byte) 1);
+        int int17 = exceptionMap12.size();
+        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap12);
+        java.lang.Throwable throwable20 = null;
+        org.apache.commons.collections4.FunctorException functorException21 = new org.apache.commons.collections4.FunctorException(throwable20);
+        org.apache.commons.collections4.FunctorException functorException22 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException21);
+        java.lang.Throwable throwable23 = null;
+        org.apache.commons.collections4.FunctorException functorException24 = new org.apache.commons.collections4.FunctorException(throwable23);
+        functorException22.addSuppressed((java.lang.Throwable) functorException24);
+        java.lang.Object obj27 = exceptionMap12.replace((java.lang.Exception) functorException22, (java.lang.Object) "org.apache.commons.collections4.FunctorException");
+        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException22);
+        org.junit.Assert.assertNull(obj3);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(exceptionSet10);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet14);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertNull(obj27);
+    }
+
+    @Test
+    public void test151() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test151");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7955,9 +8644,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test138() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test138");
+            System.out.format("%n%s%n", "RegressionTest0.test152");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -7983,9 +8672,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test139() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test139");
+            System.out.format("%n%s%n", "RegressionTest0.test153");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
@@ -8005,9 +8694,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test140() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test140");
+            System.out.format("%n%s%n", "RegressionTest0.test154");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection2 = exceptionMap1.values();
         int int3 = exceptionMap1.size();
@@ -8062,9 +8751,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test141() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test141");
+            System.out.format("%n%s%n", "RegressionTest0.test155");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8081,9 +8770,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test142() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
+            System.out.format("%n%s%n", "RegressionTest0.test156");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8143,9 +8832,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RegressionTest0.test157");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8174,9 +8863,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RegressionTest0.test158");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8227,9 +8916,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RegressionTest0.test159");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -8302,9 +8991,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RegressionTest0.test160");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8339,9 +9028,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RegressionTest0.test161");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8418,9 +9107,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RegressionTest0.test162");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8439,9 +9128,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RegressionTest0.test163");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8513,9 +9202,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RegressionTest0.test164");
         org.apache.commons.collections4.FunctorException functorException0 = new org.apache.commons.collections4.FunctorException();
         org.apache.commons.collections4.FunctorException functorException1 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException0);
         java.lang.Class<?> wildcardClass2 = functorException1.getClass();
@@ -8523,9 +9212,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RegressionTest0.test165");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -8632,9 +9321,95 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RegressionTest0.test166");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        int int3 = exceptionMap1.size();
+        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
+        java.util.Set<java.lang.Exception> exceptionSet5 = exceptionMap1.keySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.lang.Object obj8 = exceptionMap6.get((java.lang.Object) (-1L));
+        java.lang.Throwable throwable10 = null;
+        org.apache.commons.collections4.FunctorException functorException11 = new org.apache.commons.collections4.FunctorException(throwable10);
+        org.apache.commons.collections4.FunctorException functorException12 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException11);
+        boolean boolean14 = exceptionMap6.removeMapping((java.lang.Exception) functorException11, (java.io.Serializable) '#');
+        java.util.Set<java.lang.Exception> exceptionSet15 = exceptionMap6.keySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
+        java.lang.Throwable throwable21 = null;
+        org.apache.commons.collections4.FunctorException functorException22 = new org.apache.commons.collections4.FunctorException("", throwable21);
+        org.apache.commons.collections4.FunctorException functorException23 = new org.apache.commons.collections4.FunctorException("", throwable21);
+        java.lang.Object obj25 = exceptionMap17.put((java.lang.Exception) functorException23, (java.lang.Object) (-1));
+        org.apache.commons.collections4.FunctorException functorException26 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException23);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean29 = exceptionMap27.containsValue((java.lang.Object) exceptionMap28);
+        int int30 = exceptionMap28.size();
+        java.util.Collection<java.lang.Object> objCollection31 = exceptionMap28.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
+        exceptionMap28.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap33);
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap37 = exceptionMap33.decorated();
+        java.util.Set<java.lang.Exception> exceptionSet38 = exceptionMap33.keySet();
+        java.lang.Object obj39 = exceptionMap6.put((java.lang.Exception) functorException26, (java.lang.Object) exceptionSet38);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap40 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap41 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean42 = exceptionMap40.containsValue((java.lang.Object) exceptionMap41);
+        int int43 = exceptionMap41.size();
+        java.util.Collection<java.lang.Object> objCollection44 = exceptionMap41.values();
+        exceptionMap41.clear();
+        java.lang.Throwable throwable47 = null;
+        org.apache.commons.collections4.FunctorException functorException48 = new org.apache.commons.collections4.FunctorException("", throwable47);
+        int int49 = exceptionMap41.size((java.lang.Object) functorException48);
+        java.lang.String str50 = exceptionMap41.toString();
+        boolean boolean52 = exceptionMap41.containsValue((java.lang.Object) (short) 0);
+        boolean boolean53 = exceptionMap1.containsValue(obj39, (java.lang.Object) (short) 0);
+        java.lang.Throwable throwable56 = null;
+        org.apache.commons.collections4.FunctorException functorException57 = new org.apache.commons.collections4.FunctorException("", throwable56);
+        org.apache.commons.collections4.FunctorException functorException58 = new org.apache.commons.collections4.FunctorException("", throwable56);
+        org.apache.commons.collections4.FunctorException functorException60 = new org.apache.commons.collections4.FunctorException("");
+        functorException58.addSuppressed((java.lang.Throwable) functorException60);
+        boolean boolean62 = exceptionMap1.containsValue((java.lang.Object) functorException58);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertNotNull(objCollection4);
+        org.junit.Assert.assertNotNull(exceptionSet5);
+        org.junit.Assert.assertNull(obj8);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(exceptionSet15);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertEquals("'" + obj25 + "' != '" + (-1) + "'", obj25, (-1));
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
+        org.junit.Assert.assertNotNull(objCollection31);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet35);
+        org.junit.Assert.assertNotNull(exceptionMap37);
+        org.junit.Assert.assertNotNull(exceptionSet38);
+        org.junit.Assert.assertNotNull(obj39);
+        org.junit.Assert.assertEquals(obj39.toString(), "[]");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj39), "[]");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj39), "[]");
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(objCollection44);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "{}" + "'", str50, "{}");
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+    }
+
+    @Test
+    public void test167() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test167");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8744,9 +9519,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8801,9 +9576,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -8934,9 +9709,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9020,9 +9795,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test156() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9101,9 +9876,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test157() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9172,9 +9947,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9239,9 +10014,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -9378,9 +10153,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9477,9 +10252,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test161() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9505,9 +10280,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9575,9 +10350,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9635,9 +10410,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9658,9 +10433,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -9739,9 +10514,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test166() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9841,9 +10616,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test167() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9896,9 +10671,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -9913,9 +10688,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -9950,9 +10725,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -10059,9 +10834,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10091,9 +10866,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10168,9 +10943,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10252,9 +11027,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10268,9 +11043,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10353,9 +11128,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10434,9 +11209,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -10448,9 +11223,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -10521,9 +11296,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10591,9 +11366,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10754,9 +11529,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10816,9 +11591,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10830,9 +11605,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -10900,9 +11675,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -10983,9 +11758,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -11067,9 +11842,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -11125,9 +11900,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11206,9 +11981,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -11223,9 +11998,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11325,9 +12100,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor3 = exceptionMap0.mapIterator();
@@ -11338,9 +12113,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11476,9 +12251,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11537,9 +12312,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11640,9 +12415,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11656,9 +12431,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -11763,9 +12538,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11828,9 +12603,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11874,9 +12649,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11962,9 +12737,63 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        int int3 = exceptionMap1.size();
+        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean8 = exceptionMap6.containsValue((java.lang.Object) exceptionMap7);
+        boolean boolean10 = exceptionMap7.containsKey((java.lang.Object) (short) 10);
+        java.util.Collection<java.io.Serializable> serializableCollection12 = exceptionMap7.createCollection(10);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.lang.Object obj15 = exceptionMap13.get((java.lang.Object) (-1L));
+        java.lang.Throwable throwable17 = null;
+        org.apache.commons.collections4.FunctorException functorException18 = new org.apache.commons.collections4.FunctorException(throwable17);
+        org.apache.commons.collections4.FunctorException functorException19 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException18);
+        boolean boolean21 = exceptionMap13.removeMapping((java.lang.Exception) functorException18, (java.io.Serializable) '#');
+        java.util.Set<java.lang.Exception> exceptionSet22 = exceptionMap13.keySet();
+        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap13.values();
+        boolean boolean24 = exceptionMap7.containsValue((java.lang.Object) exceptionMap13);
+        boolean boolean25 = exceptionMap1.remove((java.lang.Object) "", (java.lang.Object) exceptionMap7);
+        java.lang.String str26 = exceptionMap1.toString();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean29 = exceptionMap27.containsValue((java.lang.Object) exceptionMap28);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet30 = exceptionMap28.entrySet();
+        boolean boolean32 = exceptionMap28.containsKey((java.lang.Object) (byte) 1);
+        int int33 = exceptionMap28.size();
+        java.util.Collection<java.lang.Object> objCollection34 = exceptionMap28.values();
+        int int35 = exceptionMap1.size((java.lang.Object) exceptionMap28);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertNotNull(objCollection4);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(serializableCollection12);
+        org.junit.Assert.assertNull(obj15);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(exceptionSet22);
+        org.junit.Assert.assertNotNull(objCollection23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "{}" + "'", str26, "{}");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet30);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertNotNull(objCollection34);
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+    }
+
+    @Test
+    public void test215() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -11989,9 +12818,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12050,9 +12879,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12067,9 +12896,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12091,9 +12920,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12114,9 +12943,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12141,9 +12970,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12163,9 +12992,44 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
+        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap7.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet9 = exceptionMap7.entrySet();
+        java.lang.Object obj10 = null;
+        boolean boolean11 = exceptionMap4.containsValue((java.lang.Object) exceptionEntrySet9, obj10);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
+        exceptionMap13.clear();
+        boolean boolean17 = exceptionMap13.isEmpty();
+        exceptionMap4.map = exceptionMap13;
+        java.util.Collection<java.lang.Object> objCollection19 = exceptionMap4.values();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNotNull(objCollection8);
+        org.junit.Assert.assertNotNull(exceptionEntrySet9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet15);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertNotNull(objCollection19);
+    }
+
+    @Test
+    public void test223() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12202,9 +13066,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12312,9 +13176,65 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
+        java.lang.Throwable throwable8 = null;
+        org.apache.commons.collections4.FunctorException functorException9 = new org.apache.commons.collections4.FunctorException("", throwable8);
+        java.lang.Throwable throwable16 = null;
+        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("", throwable16);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean20 = exceptionMap18.containsValue((java.lang.Object) exceptionMap19);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap23 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection24 = exceptionMap23.values();
+        int int25 = exceptionMap23.size();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection28 = exceptionMap27.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
+        int int39 = exceptionMap37.size();
+        java.lang.Throwable throwable48 = null;
+        org.apache.commons.collections4.FunctorException functorException49 = new org.apache.commons.collections4.FunctorException("", throwable48);
+        org.apache.commons.collections4.FunctorException functorException50 = new org.apache.commons.collections4.FunctorException("", throwable48);
+        java.io.Serializable[] serializableArray51 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable16, exceptionMap18, 0L, 0L, exceptionMap23, 0, exceptionMap27, exceptionMap29, (short) 1, ' ', "hi!", 100.0f, int39, false, 10.0f, '4', (-1), 1L, 1, throwable48 };
+        java.util.ArrayList<java.io.Serializable> serializableList52 = new java.util.ArrayList<java.io.Serializable>();
+        boolean boolean53 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList52, serializableArray51);
+        boolean boolean54 = exceptionMap4.putAll((java.lang.Exception) functorException9, (java.util.Collection<java.io.Serializable>) serializableList52);
+        boolean boolean56 = exceptionMap1.removeMapping((java.lang.Exception) functorException9, (java.io.Serializable) (-1.0f));
+        int int57 = exceptionMap1.size();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(objCollection24);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(objCollection28);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertNotNull(serializableArray51);
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + true + "'", boolean54 == true);
+        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
+        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
+    }
+
+    @Test
+    public void test226() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12350,9 +13270,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12423,9 +13343,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12541,9 +13461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -12610,9 +13530,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12668,9 +13588,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12685,9 +13605,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12794,9 +13714,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12881,9 +13801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12948,9 +13868,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -12975,9 +13895,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         java.lang.Throwable throwable4 = null;
@@ -13004,9 +13924,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -13038,9 +13958,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
         boolean boolean3 = exceptionMap0.isEmpty();
@@ -13137,9 +14057,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -13238,9 +14158,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -13353,9 +14273,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -13459,9 +14379,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -13473,9 +14393,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -13519,9 +14439,87 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet6 = exceptionMap4.entrySet();
+        exceptionMap4.clear();
+        boolean boolean8 = exceptionMap4.isEmpty();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap9 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
+        boolean boolean10 = exceptionMap0.equals((java.lang.Object) exceptionMap4);
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
+        int int14 = exceptionMap12.size();
+        java.util.Collection<java.lang.Object> objCollection15 = exceptionMap12.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
+        exceptionMap12.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap17);
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap17.decorated();
+        java.lang.Object obj22 = exceptionMap4.get((java.lang.Object) exceptionMap17);
+        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap4.values();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet27 = exceptionMap25.entrySet();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        boolean boolean30 = exceptionMap28.containsValue((java.lang.Object) exceptionMap29);
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet31 = exceptionMap29.entrySet();
+        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap32 = exceptionMap29.map;
+        int int33 = exceptionMap32.size();
+        java.lang.Object obj34 = exceptionMap25.remove((java.lang.Object) int33);
+        java.lang.Exception exception35 = null;
+        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
+        java.util.Collection<java.lang.Object> objCollection37 = exceptionMap36.values();
+        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet38 = exceptionMap36.entrySet();
+        java.lang.Object obj39 = exceptionMap25.put(exception35, (java.lang.Object) exceptionEntrySet38);
+        boolean boolean40 = exceptionMap4.containsValue((java.lang.Object) exceptionMap25);
+        java.lang.Object obj41 = null;
+        boolean boolean42 = exceptionMap4.containsValue(obj41);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(exceptionMap9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertNotNull(objCollection15);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet19);
+        org.junit.Assert.assertNotNull(exceptionMap21);
+        org.junit.Assert.assertNull(obj22);
+        org.junit.Assert.assertNotNull(objCollection23);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet27);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(exceptionEntrySet31);
+        org.junit.Assert.assertNotNull(exceptionMap32);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertNull(obj34);
+        org.junit.Assert.assertNotNull(objCollection37);
+        org.junit.Assert.assertNotNull(exceptionEntrySet38);
+        org.junit.Assert.assertNotNull(obj39);
+        org.junit.Assert.assertEquals(obj39.toString(), "[]");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj39), "[]");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj39), "[]");
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
+    }
+
+    @Test
+    public void test245() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         int int2 = exceptionMap0.size();
@@ -13632,9 +14630,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
         java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
@@ -13710,9 +14708,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
         boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
@@ -13805,2302 +14803,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNull(obj55);
         org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
         org.junit.Assert.assertNull(obj57);
-    }
-
-    @Test
-    public void test229() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        int int7 = exceptionMap5.size();
-        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap5.values();
-        java.util.Collection<java.lang.Object> objCollection9 = exceptionMap5.values();
-        java.lang.Object obj10 = exceptionMap3.remove((java.lang.Object) objCollection9);
-        java.lang.Object obj11 = exceptionMap0.get((java.lang.Object) objCollection9);
-        boolean boolean12 = exceptionMap0.isEmpty();
-        int int13 = exceptionMap0.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean16 = exceptionMap14.containsValue((java.lang.Object) exceptionMap15);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet17 = exceptionMap15.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean20 = exceptionMap18.containsValue((java.lang.Object) exceptionMap19);
-        java.lang.Throwable throwable22 = null;
-        org.apache.commons.collections4.FunctorException functorException23 = new org.apache.commons.collections4.FunctorException("", throwable22);
-        java.lang.Throwable throwable30 = null;
-        org.apache.commons.collections4.FunctorException functorException31 = new org.apache.commons.collections4.FunctorException("", throwable30);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection38 = exceptionMap37.values();
-        int int39 = exceptionMap37.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap41 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection42 = exceptionMap41.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap43 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap44 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean45 = exceptionMap43.containsValue((java.lang.Object) exceptionMap44);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap50 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap51 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean52 = exceptionMap50.containsValue((java.lang.Object) exceptionMap51);
-        int int53 = exceptionMap51.size();
-        java.lang.Throwable throwable62 = null;
-        org.apache.commons.collections4.FunctorException functorException63 = new org.apache.commons.collections4.FunctorException("", throwable62);
-        org.apache.commons.collections4.FunctorException functorException64 = new org.apache.commons.collections4.FunctorException("", throwable62);
-        java.io.Serializable[] serializableArray65 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable30, exceptionMap32, 0L, 0L, exceptionMap37, 0, exceptionMap41, exceptionMap43, (short) 1, ' ', "hi!", 100.0f, int53, false, 10.0f, '4', (-1), 1L, 1, throwable62 };
-        java.util.ArrayList<java.io.Serializable> serializableList66 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean67 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList66, serializableArray65);
-        boolean boolean68 = exceptionMap18.putAll((java.lang.Exception) functorException23, (java.util.Collection<java.io.Serializable>) serializableList66);
-        boolean boolean70 = exceptionMap15.removeMapping((java.lang.Exception) functorException23, (java.io.Serializable) (-1.0f));
-        int int71 = exceptionMap15.size();
-        boolean boolean72 = exceptionMap0.containsValue((java.lang.Object) exceptionMap15);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertNotNull(objCollection8);
-        org.junit.Assert.assertNotNull(objCollection9);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertNull(obj11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet17);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(objCollection38);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-        org.junit.Assert.assertNotNull(objCollection42);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 0 + "'", int53 == 0);
-        org.junit.Assert.assertNotNull(serializableArray65);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + true + "'", boolean67 == true);
-        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + true + "'", boolean68 == true);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-        org.junit.Assert.assertTrue("'" + int71 + "' != '" + 0 + "'", int71 == 0);
-        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + false + "'", boolean72 == false);
-    }
-
-    @Test
-    public void test230() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
-        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean9 = exceptionMap7.containsValue((java.lang.Object) exceptionMap8);
-        java.lang.Throwable throwable12 = null;
-        org.apache.commons.collections4.FunctorException functorException13 = new org.apache.commons.collections4.FunctorException("", throwable12);
-        org.apache.commons.collections4.FunctorException functorException14 = new org.apache.commons.collections4.FunctorException("", throwable12);
-        java.lang.Object obj16 = exceptionMap8.put((java.lang.Exception) functorException14, (java.lang.Object) (-1));
-        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException14);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection19 = exceptionMap18.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet20 = exceptionMap18.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection22 = exceptionMap21.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet23 = exceptionMap21.entrySet();
-        boolean boolean25 = exceptionMap18.remove((java.lang.Object) exceptionEntrySet23, (java.lang.Object) (byte) -1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean28 = exceptionMap26.containsValue((java.lang.Object) exceptionMap27);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet29 = exceptionMap27.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap30 = exceptionMap27.map;
-        int int31 = exceptionMap30.size();
-        boolean boolean32 = exceptionMap18.containsKey((java.lang.Object) exceptionMap30);
-        boolean boolean34 = exceptionMap18.equals((java.lang.Object) 0.0d);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap35 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean37 = exceptionMap35.containsValue((java.lang.Object) exceptionMap36);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet38 = exceptionMap36.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap40 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean41 = exceptionMap39.containsValue((java.lang.Object) exceptionMap40);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet42 = exceptionMap40.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap43 = exceptionMap40.map;
-        int int44 = exceptionMap43.size();
-        java.lang.Object obj45 = exceptionMap36.remove((java.lang.Object) int44);
-        java.lang.Throwable throwable48 = null;
-        org.apache.commons.collections4.FunctorException functorException49 = new org.apache.commons.collections4.FunctorException("", throwable48);
-        org.apache.commons.collections4.FunctorException functorException50 = new org.apache.commons.collections4.FunctorException("", throwable48);
-        org.apache.commons.collections4.FunctorException functorException52 = new org.apache.commons.collections4.FunctorException("");
-        functorException50.addSuppressed((java.lang.Throwable) functorException52);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap54 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap55 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean56 = exceptionMap54.containsValue((java.lang.Object) exceptionMap55);
-        boolean boolean58 = exceptionMap55.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection60 = exceptionMap55.createCollection(10);
-        boolean boolean61 = exceptionMap36.putAll((java.lang.Exception) functorException52, serializableCollection60);
-        boolean boolean62 = exceptionMap18.containsValue((java.lang.Object) serializableCollection60);
-        org.apache.commons.collections4.FunctorException functorException64 = new org.apache.commons.collections4.FunctorException("");
-        org.apache.commons.collections4.FunctorException functorException65 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException64);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap66 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap67 = exceptionMap66.decorated();
-        java.util.Set<java.lang.Exception> exceptionSet68 = exceptionMap66.keySet();
-        boolean boolean70 = exceptionMap18.replace((java.lang.Exception) functorException64, (java.lang.Object) exceptionMap66, (java.lang.Object) "");
-        java.lang.Object obj71 = exceptionMap1.put((java.lang.Exception) functorException17, (java.lang.Object) "");
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + obj16 + "' != '" + (-1) + "'", obj16, (-1));
-        org.junit.Assert.assertNotNull(objCollection19);
-        org.junit.Assert.assertNotNull(exceptionEntrySet20);
-        org.junit.Assert.assertNotNull(objCollection22);
-        org.junit.Assert.assertNotNull(exceptionEntrySet23);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet29);
-        org.junit.Assert.assertNotNull(exceptionMap30);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet38);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet42);
-        org.junit.Assert.assertNotNull(exceptionMap43);
-        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
-        org.junit.Assert.assertNull(obj45);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(serializableCollection60);
-        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertNotNull(exceptionMap67);
-        org.junit.Assert.assertNotNull(exceptionSet68);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-        org.junit.Assert.assertEquals("'" + obj71 + "' != '" + "" + "'", obj71, "");
-    }
-
-    @Test
-    public void test231() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
-        java.lang.Object obj2 = null;
-        java.lang.Object obj3 = exceptionMap0.remove(obj2);
-        boolean boolean4 = exceptionMap0.isEmpty();
-        int int5 = exceptionMap0.totalSize();
-        org.junit.Assert.assertNotNull(objCollection1);
-        org.junit.Assert.assertNull(obj3);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-    }
-
-    @Test
-    public void test232() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        boolean boolean5 = exceptionMap1.containsKey((java.lang.Object) (byte) 1);
-        int int6 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection7 = exceptionMap1.values();
-        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap1.values();
-        org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor9 = exceptionMap1.mapIterator();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertNotNull(objCollection7);
-        org.junit.Assert.assertNotNull(objCollection8);
-        org.junit.Assert.assertNotNull(exceptionItor9);
-    }
-
-    @Test
-    public void test233() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
-        int int9 = exceptionMap8.size();
-        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
-        java.lang.Object obj11 = null;
-        boolean boolean12 = exceptionMap1.containsKey(obj11);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean15 = exceptionMap13.containsValue((java.lang.Object) exceptionMap14);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet16 = exceptionMap14.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean19 = exceptionMap17.containsValue((java.lang.Object) exceptionMap18);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet20 = exceptionMap18.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap18.map;
-        int int22 = exceptionMap21.size();
-        java.lang.Object obj23 = exceptionMap14.remove((java.lang.Object) int22);
-        java.lang.Throwable throwable26 = null;
-        org.apache.commons.collections4.FunctorException functorException27 = new org.apache.commons.collections4.FunctorException("", throwable26);
-        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("", throwable26);
-        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("");
-        functorException28.addSuppressed((java.lang.Throwable) functorException30);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        boolean boolean36 = exceptionMap33.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection38 = exceptionMap33.createCollection(10);
-        boolean boolean39 = exceptionMap14.putAll((java.lang.Exception) functorException30, serializableCollection38);
-        boolean boolean40 = exceptionMap1.containsKey((java.lang.Object) serializableCollection38);
-        java.lang.Exception exception41 = null;
-        java.lang.Throwable throwable43 = null;
-        org.apache.commons.collections4.FunctorException functorException44 = new org.apache.commons.collections4.FunctorException(throwable43);
-        org.apache.commons.collections4.FunctorException functorException45 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException44);
-        java.lang.Throwable throwable46 = null;
-        org.apache.commons.collections4.FunctorException functorException47 = new org.apache.commons.collections4.FunctorException(throwable46);
-        functorException45.addSuppressed((java.lang.Throwable) functorException47);
-        boolean boolean49 = exceptionMap1.removeMapping(exception41, (java.io.Serializable) functorException45);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet7);
-        org.junit.Assert.assertNotNull(exceptionMap8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet16);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet20);
-        org.junit.Assert.assertNotNull(exceptionMap21);
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertNull(obj23);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(serializableCollection38);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-    }
-
-    @Test
-    public void test234() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        exceptionMap1.clear();
-        java.util.Collection<java.lang.Object> objCollection5 = exceptionMap1.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj8 = exceptionMap6.get((java.lang.Object) (-1L));
-        org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor9 = exceptionMap6.mapIterator();
-        exceptionMap6.clear();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet11 = exceptionMap6.entrySet();
-        boolean boolean12 = exceptionMap1.containsKey((java.lang.Object) exceptionMap6);
-        int int13 = exceptionMap6.size();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertNotNull(objCollection5);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertNotNull(exceptionItor9);
-        org.junit.Assert.assertNotNull(exceptionEntrySet11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-    }
-
-    @Test
-    public void test235() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
-        int int9 = exceptionMap8.size();
-        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
-        java.lang.Object obj11 = null;
-        boolean boolean12 = exceptionMap1.containsKey(obj11);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean15 = exceptionMap13.containsValue((java.lang.Object) exceptionMap14);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet16 = exceptionMap14.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean19 = exceptionMap17.containsValue((java.lang.Object) exceptionMap18);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet20 = exceptionMap18.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap18.map;
-        int int22 = exceptionMap21.size();
-        java.lang.Object obj23 = exceptionMap14.remove((java.lang.Object) int22);
-        java.lang.Throwable throwable26 = null;
-        org.apache.commons.collections4.FunctorException functorException27 = new org.apache.commons.collections4.FunctorException("", throwable26);
-        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("", throwable26);
-        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("");
-        functorException28.addSuppressed((java.lang.Throwable) functorException30);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        boolean boolean36 = exceptionMap33.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection38 = exceptionMap33.createCollection(10);
-        boolean boolean39 = exceptionMap14.putAll((java.lang.Exception) functorException30, serializableCollection38);
-        boolean boolean40 = exceptionMap1.containsKey((java.lang.Object) serializableCollection38);
-        int int41 = exceptionMap1.size();
-        java.util.Set<java.lang.Exception> exceptionSet42 = exceptionMap1.keySet();
-        java.util.Set<java.lang.Exception> exceptionSet43 = exceptionMap1.keySet();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet7);
-        org.junit.Assert.assertNotNull(exceptionMap8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet16);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet20);
-        org.junit.Assert.assertNotNull(exceptionMap21);
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertNull(obj23);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(serializableCollection38);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-        org.junit.Assert.assertNotNull(exceptionSet42);
-        org.junit.Assert.assertNotNull(exceptionSet43);
-    }
-
-    @Test
-    public void test236() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet6 = exceptionMap4.entrySet();
-        exceptionMap4.clear();
-        boolean boolean8 = exceptionMap4.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap9 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
-        boolean boolean10 = exceptionMap0.equals((java.lang.Object) exceptionMap4);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
-        int int14 = exceptionMap12.size();
-        java.util.Collection<java.lang.Object> objCollection15 = exceptionMap12.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
-        exceptionMap12.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap17);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap17.decorated();
-        java.lang.Object obj22 = exceptionMap4.get((java.lang.Object) exceptionMap17);
-        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap4.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet27 = exceptionMap25.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean30 = exceptionMap28.containsValue((java.lang.Object) exceptionMap29);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet31 = exceptionMap29.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap32 = exceptionMap29.map;
-        int int33 = exceptionMap32.size();
-        java.lang.Object obj34 = exceptionMap25.remove((java.lang.Object) int33);
-        java.lang.Exception exception35 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection37 = exceptionMap36.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet38 = exceptionMap36.entrySet();
-        java.lang.Object obj39 = exceptionMap25.put(exception35, (java.lang.Object) exceptionEntrySet38);
-        boolean boolean40 = exceptionMap4.containsValue((java.lang.Object) exceptionMap25);
-        java.lang.Object obj41 = null;
-        boolean boolean42 = exceptionMap4.containsValue(obj41);
-        java.util.Collection<java.lang.Object> objCollection43 = exceptionMap4.values();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet6);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertNotNull(exceptionMap9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-        org.junit.Assert.assertNotNull(objCollection15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet19);
-        org.junit.Assert.assertNotNull(exceptionMap21);
-        org.junit.Assert.assertNull(obj22);
-        org.junit.Assert.assertNotNull(objCollection23);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet27);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet31);
-        org.junit.Assert.assertNotNull(exceptionMap32);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertNull(obj34);
-        org.junit.Assert.assertNotNull(objCollection37);
-        org.junit.Assert.assertNotNull(exceptionEntrySet38);
-        org.junit.Assert.assertNotNull(obj39);
-        org.junit.Assert.assertEquals(obj39.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj39), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj39), "[]");
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-        org.junit.Assert.assertNotNull(objCollection43);
-    }
-
-    @Test
-    public void test237() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet4 = exceptionMap1.entrySet();
-        java.lang.Object obj6 = exceptionMap1.get((java.lang.Object) true);
-        int int7 = exceptionMap1.size();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap1.map;
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(exceptionEntrySet4);
-        org.junit.Assert.assertNull(obj6);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertNotNull(exceptionMap8);
-    }
-
-    @Test
-    public void test238() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet4 = exceptionMap1.entrySet();
-        java.lang.Object obj6 = exceptionMap1.get((java.lang.Object) true);
-        int int7 = exceptionMap1.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean10 = exceptionMap8.containsValue((java.lang.Object) exceptionMap9);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet11 = exceptionMap9.entrySet();
-        exceptionMap9.clear();
-        java.lang.Throwable throwable14 = null;
-        org.apache.commons.collections4.FunctorException functorException15 = new org.apache.commons.collections4.FunctorException(throwable14);
-        org.apache.commons.collections4.FunctorException functorException16 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException15);
-        java.lang.Throwable throwable17 = null;
-        org.apache.commons.collections4.FunctorException functorException18 = new org.apache.commons.collections4.FunctorException(throwable17);
-        functorException16.addSuppressed((java.lang.Throwable) functorException18);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean22 = exceptionMap20.containsValue((java.lang.Object) exceptionMap21);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet23 = exceptionMap21.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet27 = exceptionMap25.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap28 = exceptionMap25.map;
-        int int29 = exceptionMap28.size();
-        java.lang.Object obj30 = exceptionMap21.remove((java.lang.Object) int29);
-        java.lang.Exception exception31 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection33 = exceptionMap32.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet34 = exceptionMap32.entrySet();
-        java.lang.Object obj35 = exceptionMap21.put(exception31, (java.lang.Object) exceptionEntrySet34);
-        java.lang.Object obj36 = exceptionMap9.put((java.lang.Exception) functorException16, (java.lang.Object) exceptionEntrySet34);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean39 = exceptionMap37.containsValue((java.lang.Object) exceptionMap38);
-        int int40 = exceptionMap38.size();
-        java.util.Collection<java.lang.Object> objCollection41 = exceptionMap38.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap42 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap43 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean44 = exceptionMap42.containsValue((java.lang.Object) exceptionMap43);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet45 = exceptionMap43.entrySet();
-        exceptionMap38.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap43);
-        java.util.Collection<java.io.Serializable> serializableCollection48 = exceptionMap43.createCollection(1);
-        boolean boolean49 = exceptionMap9.containsKey((java.lang.Object) exceptionMap43);
-        java.lang.Object obj50 = exceptionMap1.get((java.lang.Object) exceptionMap43);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object>> exceptionMap51 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(exceptionEntrySet4);
-        org.junit.Assert.assertNull(obj6);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet11);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet23);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet27);
-        org.junit.Assert.assertNotNull(exceptionMap28);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
-        org.junit.Assert.assertNull(obj30);
-        org.junit.Assert.assertNotNull(objCollection33);
-        org.junit.Assert.assertNotNull(exceptionEntrySet34);
-        org.junit.Assert.assertNotNull(obj35);
-        org.junit.Assert.assertEquals(obj35.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj35), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj35), "[]");
-        org.junit.Assert.assertNotNull(obj36);
-        org.junit.Assert.assertEquals(obj36.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj36), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj36), "[]");
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 0 + "'", int40 == 0);
-        org.junit.Assert.assertNotNull(objCollection41);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet45);
-        org.junit.Assert.assertNotNull(serializableCollection48);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-        org.junit.Assert.assertNull(obj50);
-        org.junit.Assert.assertNotNull(exceptionMap51);
-    }
-
-    @Test
-    public void test239() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        boolean boolean5 = exceptionMap1.containsKey((java.lang.Object) (byte) 1);
-        int int6 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection7 = exceptionMap1.values();
-        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap1.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap10 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean11 = exceptionMap9.containsValue((java.lang.Object) exceptionMap10);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet12 = exceptionMap10.entrySet();
-        exceptionMap10.clear();
-        java.lang.Throwable throwable15 = null;
-        org.apache.commons.collections4.FunctorException functorException16 = new org.apache.commons.collections4.FunctorException(throwable15);
-        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException16);
-        java.lang.Throwable throwable18 = null;
-        org.apache.commons.collections4.FunctorException functorException19 = new org.apache.commons.collections4.FunctorException(throwable18);
-        functorException17.addSuppressed((java.lang.Throwable) functorException19);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap22 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean23 = exceptionMap21.containsValue((java.lang.Object) exceptionMap22);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet24 = exceptionMap22.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean27 = exceptionMap25.containsValue((java.lang.Object) exceptionMap26);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet28 = exceptionMap26.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap29 = exceptionMap26.map;
-        int int30 = exceptionMap29.size();
-        java.lang.Object obj31 = exceptionMap22.remove((java.lang.Object) int30);
-        java.lang.Exception exception32 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection34 = exceptionMap33.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
-        java.lang.Object obj36 = exceptionMap22.put(exception32, (java.lang.Object) exceptionEntrySet35);
-        java.lang.Object obj37 = exceptionMap10.put((java.lang.Exception) functorException17, (java.lang.Object) exceptionEntrySet35);
-        boolean boolean38 = exceptionMap10.isEmpty();
-        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap10);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertNotNull(objCollection7);
-        org.junit.Assert.assertNotNull(objCollection8);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet12);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet24);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet28);
-        org.junit.Assert.assertNotNull(exceptionMap29);
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
-        org.junit.Assert.assertNull(obj31);
-        org.junit.Assert.assertNotNull(objCollection34);
-        org.junit.Assert.assertNotNull(exceptionEntrySet35);
-        org.junit.Assert.assertNotNull(obj36);
-        org.junit.Assert.assertEquals(obj36.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj36), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj36), "[]");
-        org.junit.Assert.assertNotNull(obj37);
-        org.junit.Assert.assertEquals(obj37.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj37), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj37), "[]");
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-    }
-
-    @Test
-    public void test240() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap2 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj4 = exceptionMap2.get((java.lang.Object) (-1L));
-        java.lang.Throwable throwable6 = null;
-        org.apache.commons.collections4.FunctorException functorException7 = new org.apache.commons.collections4.FunctorException(throwable6);
-        org.apache.commons.collections4.FunctorException functorException8 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException7);
-        boolean boolean10 = exceptionMap2.removeMapping((java.lang.Exception) functorException7, (java.io.Serializable) '#');
-        java.util.Set<java.lang.Exception> exceptionSet11 = exceptionMap2.keySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
-        boolean boolean17 = exceptionMap13.containsKey((java.lang.Object) (byte) 1);
-        int int18 = exceptionMap13.size();
-        exceptionMap2.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap13);
-        java.lang.Throwable throwable21 = null;
-        org.apache.commons.collections4.FunctorException functorException22 = new org.apache.commons.collections4.FunctorException(throwable21);
-        org.apache.commons.collections4.FunctorException functorException23 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException22);
-        java.lang.Throwable throwable24 = null;
-        org.apache.commons.collections4.FunctorException functorException25 = new org.apache.commons.collections4.FunctorException(throwable24);
-        functorException23.addSuppressed((java.lang.Throwable) functorException25);
-        java.lang.Object obj28 = exceptionMap13.replace((java.lang.Exception) functorException23, (java.lang.Object) "org.apache.commons.collections4.FunctorException");
-        org.apache.commons.collections4.FunctorException functorException29 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException23);
-        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("org.apache.commons.collections4.FunctorException: ", (java.lang.Throwable) functorException23);
-        org.junit.Assert.assertNull(obj4);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(exceptionSet11);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet15);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
-        org.junit.Assert.assertNull(obj28);
-    }
-
-    @Test
-    public void test241() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean8 = exceptionMap6.containsValue((java.lang.Object) exceptionMap7);
-        boolean boolean10 = exceptionMap7.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection12 = exceptionMap7.createCollection(10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj15 = exceptionMap13.get((java.lang.Object) (-1L));
-        java.lang.Throwable throwable17 = null;
-        org.apache.commons.collections4.FunctorException functorException18 = new org.apache.commons.collections4.FunctorException(throwable17);
-        org.apache.commons.collections4.FunctorException functorException19 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException18);
-        boolean boolean21 = exceptionMap13.removeMapping((java.lang.Exception) functorException18, (java.io.Serializable) '#');
-        java.util.Set<java.lang.Exception> exceptionSet22 = exceptionMap13.keySet();
-        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap13.values();
-        boolean boolean24 = exceptionMap7.containsValue((java.lang.Object) exceptionMap13);
-        boolean boolean25 = exceptionMap1.remove((java.lang.Object) "", (java.lang.Object) exceptionMap7);
-        java.lang.String str26 = exceptionMap1.toString();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean29 = exceptionMap27.containsValue((java.lang.Object) exceptionMap28);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet30 = exceptionMap28.entrySet();
-        boolean boolean32 = exceptionMap28.containsKey((java.lang.Object) (byte) 1);
-        int int33 = exceptionMap28.size();
-        java.util.Collection<java.lang.Object> objCollection34 = exceptionMap28.values();
-        int int35 = exceptionMap1.size((java.lang.Object) exceptionMap28);
-        java.lang.Object obj36 = null;
-        boolean boolean38 = exceptionMap1.removeMapping(obj36, (java.lang.Object) (byte) 1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(serializableCollection12);
-        org.junit.Assert.assertNull(obj15);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNotNull(exceptionSet22);
-        org.junit.Assert.assertNotNull(objCollection23);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "{}" + "'", str26, "{}");
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet30);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertNotNull(objCollection34);
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-    }
-
-    @Test
-    public void test242() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        exceptionMap1.clear();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap7 = exceptionMap6.decorated();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean10 = exceptionMap8.containsValue((java.lang.Object) exceptionMap9);
-        boolean boolean11 = exceptionMap7.containsValue((java.lang.Object) exceptionMap9);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection13 = exceptionMap12.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet14 = exceptionMap12.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection16 = exceptionMap15.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet17 = exceptionMap15.entrySet();
-        boolean boolean19 = exceptionMap12.remove((java.lang.Object) exceptionEntrySet17, (java.lang.Object) (byte) -1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean22 = exceptionMap20.containsValue((java.lang.Object) exceptionMap21);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet23 = exceptionMap21.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap24 = exceptionMap21.map;
-        int int25 = exceptionMap24.size();
-        boolean boolean26 = exceptionMap12.containsKey((java.lang.Object) exceptionMap24);
-        boolean boolean28 = exceptionMap12.equals((java.lang.Object) 0.0d);
-        java.util.Collection<java.lang.Object> objCollection29 = exceptionMap12.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap31 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean32 = exceptionMap30.containsValue((java.lang.Object) exceptionMap31);
-        int int33 = exceptionMap31.size();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet34 = exceptionMap31.entrySet();
-        java.lang.Object obj36 = exceptionMap31.get((java.lang.Object) true);
-        int int37 = exceptionMap31.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean40 = exceptionMap38.containsValue((java.lang.Object) exceptionMap39);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet41 = exceptionMap39.entrySet();
-        exceptionMap39.clear();
-        java.lang.Throwable throwable44 = null;
-        org.apache.commons.collections4.FunctorException functorException45 = new org.apache.commons.collections4.FunctorException(throwable44);
-        org.apache.commons.collections4.FunctorException functorException46 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException45);
-        java.lang.Throwable throwable47 = null;
-        org.apache.commons.collections4.FunctorException functorException48 = new org.apache.commons.collections4.FunctorException(throwable47);
-        functorException46.addSuppressed((java.lang.Throwable) functorException48);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap50 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap51 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean52 = exceptionMap50.containsValue((java.lang.Object) exceptionMap51);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet53 = exceptionMap51.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap54 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap55 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean56 = exceptionMap54.containsValue((java.lang.Object) exceptionMap55);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet57 = exceptionMap55.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap58 = exceptionMap55.map;
-        int int59 = exceptionMap58.size();
-        java.lang.Object obj60 = exceptionMap51.remove((java.lang.Object) int59);
-        java.lang.Exception exception61 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap62 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection63 = exceptionMap62.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet64 = exceptionMap62.entrySet();
-        java.lang.Object obj65 = exceptionMap51.put(exception61, (java.lang.Object) exceptionEntrySet64);
-        java.lang.Object obj66 = exceptionMap39.put((java.lang.Exception) functorException46, (java.lang.Object) exceptionEntrySet64);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap67 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap68 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean69 = exceptionMap67.containsValue((java.lang.Object) exceptionMap68);
-        int int70 = exceptionMap68.size();
-        java.util.Collection<java.lang.Object> objCollection71 = exceptionMap68.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap72 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap73 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean74 = exceptionMap72.containsValue((java.lang.Object) exceptionMap73);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet75 = exceptionMap73.entrySet();
-        exceptionMap68.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap73);
-        java.util.Collection<java.io.Serializable> serializableCollection78 = exceptionMap73.createCollection(1);
-        boolean boolean79 = exceptionMap39.containsKey((java.lang.Object) exceptionMap73);
-        java.lang.Object obj80 = exceptionMap31.get((java.lang.Object) exceptionMap73);
-        boolean boolean81 = exceptionMap7.remove((java.lang.Object) objCollection29, (java.lang.Object) exceptionMap31);
-        boolean boolean82 = exceptionMap1.equals((java.lang.Object) exceptionMap31);
-        boolean boolean83 = exceptionMap1.isEmpty();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertNotNull(exceptionMap7);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNotNull(objCollection13);
-        org.junit.Assert.assertNotNull(exceptionEntrySet14);
-        org.junit.Assert.assertNotNull(objCollection16);
-        org.junit.Assert.assertNotNull(exceptionEntrySet17);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet23);
-        org.junit.Assert.assertNotNull(exceptionMap24);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertNotNull(objCollection29);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertNotNull(exceptionEntrySet34);
-        org.junit.Assert.assertNull(obj36);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet41);
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet53);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet57);
-        org.junit.Assert.assertNotNull(exceptionMap58);
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
-        org.junit.Assert.assertNull(obj60);
-        org.junit.Assert.assertNotNull(objCollection63);
-        org.junit.Assert.assertNotNull(exceptionEntrySet64);
-        org.junit.Assert.assertNotNull(obj65);
-        org.junit.Assert.assertEquals(obj65.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj65), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj65), "[]");
-        org.junit.Assert.assertNotNull(obj66);
-        org.junit.Assert.assertEquals(obj66.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj66), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj66), "[]");
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
-        org.junit.Assert.assertNotNull(objCollection71);
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet75);
-        org.junit.Assert.assertNotNull(serializableCollection78);
-        org.junit.Assert.assertTrue("'" + boolean79 + "' != '" + false + "'", boolean79 == false);
-        org.junit.Assert.assertNull(obj80);
-        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
-        org.junit.Assert.assertTrue("'" + boolean82 + "' != '" + true + "'", boolean82 == true);
-        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + true + "'", boolean83 == true);
-    }
-
-    @Test
-    public void test243() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
-        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap7.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet9 = exceptionMap7.entrySet();
-        java.lang.Object obj10 = null;
-        boolean boolean11 = exceptionMap4.containsValue((java.lang.Object) exceptionEntrySet9, obj10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
-        exceptionMap13.clear();
-        boolean boolean17 = exceptionMap13.isEmpty();
-        exceptionMap4.map = exceptionMap13;
-        int int19 = exceptionMap4.size();
-        java.util.Collection<java.lang.Object> objCollection20 = exceptionMap4.values();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(objCollection8);
-        org.junit.Assert.assertNotNull(exceptionEntrySet9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet15);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertNotNull(objCollection20);
-    }
-
-    @Test
-    public void test244() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap7 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean8 = exceptionMap6.containsValue((java.lang.Object) exceptionMap7);
-        boolean boolean10 = exceptionMap7.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection12 = exceptionMap7.createCollection(10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj15 = exceptionMap13.get((java.lang.Object) (-1L));
-        java.lang.Throwable throwable17 = null;
-        org.apache.commons.collections4.FunctorException functorException18 = new org.apache.commons.collections4.FunctorException(throwable17);
-        org.apache.commons.collections4.FunctorException functorException19 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException18);
-        boolean boolean21 = exceptionMap13.removeMapping((java.lang.Exception) functorException18, (java.io.Serializable) '#');
-        java.util.Set<java.lang.Exception> exceptionSet22 = exceptionMap13.keySet();
-        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap13.values();
-        boolean boolean24 = exceptionMap7.containsValue((java.lang.Object) exceptionMap13);
-        boolean boolean25 = exceptionMap1.remove((java.lang.Object) "", (java.lang.Object) exceptionMap7);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection27 = exceptionMap26.values();
-        int int28 = exceptionMap26.size();
-        boolean boolean30 = exceptionMap26.containsValue((java.lang.Object) true);
-        java.lang.Throwable throwable32 = null;
-        org.apache.commons.collections4.FunctorException functorException33 = new org.apache.commons.collections4.FunctorException("", throwable32);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap34 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap35 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean36 = exceptionMap34.containsValue((java.lang.Object) exceptionMap35);
-        java.lang.Throwable throwable38 = null;
-        org.apache.commons.collections4.FunctorException functorException39 = new org.apache.commons.collections4.FunctorException("", throwable38);
-        java.lang.Throwable throwable46 = null;
-        org.apache.commons.collections4.FunctorException functorException47 = new org.apache.commons.collections4.FunctorException("", throwable46);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap48 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap49 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean50 = exceptionMap48.containsValue((java.lang.Object) exceptionMap49);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap53 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection54 = exceptionMap53.values();
-        int int55 = exceptionMap53.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap57 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection58 = exceptionMap57.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap59 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap60 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean61 = exceptionMap59.containsValue((java.lang.Object) exceptionMap60);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap66 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap67 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean68 = exceptionMap66.containsValue((java.lang.Object) exceptionMap67);
-        int int69 = exceptionMap67.size();
-        java.lang.Throwable throwable78 = null;
-        org.apache.commons.collections4.FunctorException functorException79 = new org.apache.commons.collections4.FunctorException("", throwable78);
-        org.apache.commons.collections4.FunctorException functorException80 = new org.apache.commons.collections4.FunctorException("", throwable78);
-        java.io.Serializable[] serializableArray81 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable46, exceptionMap48, 0L, 0L, exceptionMap53, 0, exceptionMap57, exceptionMap59, (short) 1, ' ', "hi!", 100.0f, int69, false, 10.0f, '4', (-1), 1L, 1, throwable78 };
-        java.util.ArrayList<java.io.Serializable> serializableList82 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean83 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList82, serializableArray81);
-        boolean boolean84 = exceptionMap34.putAll((java.lang.Exception) functorException39, (java.util.Collection<java.io.Serializable>) serializableList82);
-        functorException33.addSuppressed((java.lang.Throwable) functorException39);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap86 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap87 = exceptionMap86.decorated();
-        boolean boolean88 = exceptionMap26.removeMapping((java.lang.Exception) functorException33, (java.io.Serializable) exceptionMap86);
-        java.util.Collection<java.io.Serializable> serializableCollection89 = exceptionMap7.getCollection((java.lang.Object) exceptionMap86);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(serializableCollection12);
-        org.junit.Assert.assertNull(obj15);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNotNull(exceptionSet22);
-        org.junit.Assert.assertNotNull(objCollection23);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(objCollection27);
-        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-        org.junit.Assert.assertNotNull(objCollection54);
-        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
-        org.junit.Assert.assertNotNull(objCollection58);
-        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
-        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + false + "'", boolean68 == false);
-        org.junit.Assert.assertTrue("'" + int69 + "' != '" + 0 + "'", int69 == 0);
-        org.junit.Assert.assertNotNull(serializableArray81);
-        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + true + "'", boolean83 == true);
-        org.junit.Assert.assertTrue("'" + boolean84 + "' != '" + true + "'", boolean84 == true);
-        org.junit.Assert.assertNotNull(exceptionMap87);
-        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + false + "'", boolean88 == false);
-        org.junit.Assert.assertNull(serializableCollection89);
-    }
-
-    @Test
-    public void test245() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean5 = exceptionMap3.containsValue((java.lang.Object) exceptionMap4);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet6 = exceptionMap4.entrySet();
-        exceptionMap4.clear();
-        boolean boolean8 = exceptionMap4.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap9 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap4);
-        boolean boolean10 = exceptionMap0.equals((java.lang.Object) exceptionMap4);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
-        int int14 = exceptionMap12.size();
-        java.util.Collection<java.lang.Object> objCollection15 = exceptionMap12.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
-        exceptionMap12.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap17);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap21 = exceptionMap17.decorated();
-        java.lang.Object obj22 = exceptionMap4.get((java.lang.Object) exceptionMap17);
-        java.util.Collection<java.lang.Object> objCollection23 = exceptionMap4.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet27 = exceptionMap25.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean30 = exceptionMap28.containsValue((java.lang.Object) exceptionMap29);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet31 = exceptionMap29.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap32 = exceptionMap29.map;
-        int int33 = exceptionMap32.size();
-        java.lang.Object obj34 = exceptionMap25.remove((java.lang.Object) int33);
-        java.lang.Exception exception35 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection37 = exceptionMap36.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet38 = exceptionMap36.entrySet();
-        java.lang.Object obj39 = exceptionMap25.put(exception35, (java.lang.Object) exceptionEntrySet38);
-        boolean boolean40 = exceptionMap4.containsValue((java.lang.Object) exceptionMap25);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap41 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap42 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean43 = exceptionMap41.containsValue((java.lang.Object) exceptionMap42);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet44 = exceptionMap42.entrySet();
-        exceptionMap42.clear();
-        boolean boolean46 = exceptionMap42.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap48 = exceptionMap47.decorated();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap49 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap50 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean51 = exceptionMap49.containsValue((java.lang.Object) exceptionMap50);
-        boolean boolean52 = exceptionMap48.containsValue((java.lang.Object) exceptionMap50);
-        java.lang.Object obj53 = exceptionMap42.get((java.lang.Object) exceptionMap50);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap54 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap55 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean56 = exceptionMap54.containsValue((java.lang.Object) exceptionMap55);
-        int int57 = exceptionMap55.size();
-        java.util.Collection<java.lang.Object> objCollection58 = exceptionMap55.values();
-        exceptionMap55.clear();
-        java.lang.Throwable throwable61 = null;
-        org.apache.commons.collections4.FunctorException functorException62 = new org.apache.commons.collections4.FunctorException("", throwable61);
-        int int63 = exceptionMap55.size((java.lang.Object) functorException62);
-        java.lang.String str64 = exceptionMap55.toString();
-        boolean boolean65 = exceptionMap50.equals((java.lang.Object) str64);
-        boolean boolean66 = exceptionMap4.containsValue((java.lang.Object) exceptionMap50);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet6);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertNotNull(exceptionMap9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-        org.junit.Assert.assertNotNull(objCollection15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet19);
-        org.junit.Assert.assertNotNull(exceptionMap21);
-        org.junit.Assert.assertNull(obj22);
-        org.junit.Assert.assertNotNull(objCollection23);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet27);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet31);
-        org.junit.Assert.assertNotNull(exceptionMap32);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertNull(obj34);
-        org.junit.Assert.assertNotNull(objCollection37);
-        org.junit.Assert.assertNotNull(exceptionEntrySet38);
-        org.junit.Assert.assertNotNull(obj39);
-        org.junit.Assert.assertEquals(obj39.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj39), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj39), "[]");
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet44);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + true + "'", boolean46 == true);
-        org.junit.Assert.assertNotNull(exceptionMap48);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertNull(obj53);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
-        org.junit.Assert.assertNotNull(objCollection58);
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
-        org.junit.Assert.assertEquals("'" + str64 + "' != '" + "{}" + "'", str64, "{}");
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
-    }
-
-    @Test
-    public void test246() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        exceptionMap1.clear();
-        java.lang.Throwable throwable6 = null;
-        org.apache.commons.collections4.FunctorException functorException7 = new org.apache.commons.collections4.FunctorException(throwable6);
-        org.apache.commons.collections4.FunctorException functorException8 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException7);
-        java.lang.Throwable throwable9 = null;
-        org.apache.commons.collections4.FunctorException functorException10 = new org.apache.commons.collections4.FunctorException(throwable9);
-        functorException8.addSuppressed((java.lang.Throwable) functorException10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap20 = exceptionMap17.map;
-        int int21 = exceptionMap20.size();
-        java.lang.Object obj22 = exceptionMap13.remove((java.lang.Object) int21);
-        java.lang.Exception exception23 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection25 = exceptionMap24.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet26 = exceptionMap24.entrySet();
-        java.lang.Object obj27 = exceptionMap13.put(exception23, (java.lang.Object) exceptionEntrySet26);
-        java.lang.Object obj28 = exceptionMap1.put((java.lang.Exception) functorException8, (java.lang.Object) exceptionEntrySet26);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap29 = exceptionMap1.decorated();
-        boolean boolean30 = exceptionMap1.isEmpty();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet19);
-        org.junit.Assert.assertNotNull(exceptionMap20);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNull(obj22);
-        org.junit.Assert.assertNotNull(objCollection25);
-        org.junit.Assert.assertNotNull(exceptionEntrySet26);
-        org.junit.Assert.assertNotNull(obj27);
-        org.junit.Assert.assertEquals(obj27.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj27), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj27), "[]");
-        org.junit.Assert.assertNotNull(obj28);
-        org.junit.Assert.assertEquals(obj28.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj28), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj28), "[]");
-        org.junit.Assert.assertNotNull(exceptionMap29);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test247() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
-        int int9 = exceptionMap8.size();
-        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
-        java.lang.Object obj11 = null;
-        boolean boolean12 = exceptionMap1.containsKey(obj11);
-        boolean boolean13 = exceptionMap1.isEmpty();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet14 = exceptionMap1.entrySet();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet7);
-        org.junit.Assert.assertNotNull(exceptionMap8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNotNull(exceptionEntrySet14);
-    }
-
-    @Test
-    public void test248() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        java.lang.Throwable throwable8 = null;
-        org.apache.commons.collections4.FunctorException functorException9 = new org.apache.commons.collections4.FunctorException("", throwable8);
-        java.lang.Throwable throwable16 = null;
-        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("", throwable16);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap18 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean20 = exceptionMap18.containsValue((java.lang.Object) exceptionMap19);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap23 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection24 = exceptionMap23.values();
-        int int25 = exceptionMap23.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection28 = exceptionMap27.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
-        int int39 = exceptionMap37.size();
-        java.lang.Throwable throwable48 = null;
-        org.apache.commons.collections4.FunctorException functorException49 = new org.apache.commons.collections4.FunctorException("", throwable48);
-        org.apache.commons.collections4.FunctorException functorException50 = new org.apache.commons.collections4.FunctorException("", throwable48);
-        java.io.Serializable[] serializableArray51 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable16, exceptionMap18, 0L, 0L, exceptionMap23, 0, exceptionMap27, exceptionMap29, (short) 1, ' ', "hi!", 100.0f, int39, false, 10.0f, '4', (-1), 1L, 1, throwable48 };
-        java.util.ArrayList<java.io.Serializable> serializableList52 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean53 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList52, serializableArray51);
-        boolean boolean54 = exceptionMap4.putAll((java.lang.Exception) functorException9, (java.util.Collection<java.io.Serializable>) serializableList52);
-        boolean boolean56 = exceptionMap1.removeMapping((java.lang.Exception) functorException9, (java.io.Serializable) (-1.0f));
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap57 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap58 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean59 = exceptionMap57.containsValue((java.lang.Object) exceptionMap58);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet60 = exceptionMap58.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap61 = exceptionMap58.map;
-        boolean boolean62 = exceptionMap1.containsValue((java.lang.Object) exceptionMap58);
-        java.lang.String str63 = exceptionMap58.toString();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(objCollection24);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(objCollection28);
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-        org.junit.Assert.assertNotNull(serializableArray51);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + true + "'", boolean54 == true);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet60);
-        org.junit.Assert.assertNotNull(exceptionMap61);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertEquals("'" + str63 + "' != '" + "{}" + "'", str63, "{}");
-    }
-
-    @Test
-    public void test249() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj2 = exceptionMap0.get((java.lang.Object) (-1L));
-        java.lang.Throwable throwable4 = null;
-        org.apache.commons.collections4.FunctorException functorException5 = new org.apache.commons.collections4.FunctorException(throwable4);
-        org.apache.commons.collections4.FunctorException functorException6 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException5);
-        boolean boolean8 = exceptionMap0.removeMapping((java.lang.Exception) functorException5, (java.io.Serializable) '#');
-        java.util.Set<java.lang.Exception> exceptionSet9 = exceptionMap0.keySet();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet10 = exceptionMap0.entrySet();
-        org.junit.Assert.assertNull(obj2);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(exceptionSet9);
-        org.junit.Assert.assertNotNull(exceptionEntrySet10);
-    }
-
-    @Test
-    public void test250() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.lang.Throwable throwable4 = null;
-        org.apache.commons.collections4.FunctorException functorException5 = new org.apache.commons.collections4.FunctorException("", throwable4);
-        java.lang.Throwable throwable12 = null;
-        org.apache.commons.collections4.FunctorException functorException13 = new org.apache.commons.collections4.FunctorException("", throwable12);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean16 = exceptionMap14.containsValue((java.lang.Object) exceptionMap15);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection20 = exceptionMap19.values();
-        int int21 = exceptionMap19.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap23 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection24 = exceptionMap23.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean27 = exceptionMap25.containsValue((java.lang.Object) exceptionMap26);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        int int35 = exceptionMap33.size();
-        java.lang.Throwable throwable44 = null;
-        org.apache.commons.collections4.FunctorException functorException45 = new org.apache.commons.collections4.FunctorException("", throwable44);
-        org.apache.commons.collections4.FunctorException functorException46 = new org.apache.commons.collections4.FunctorException("", throwable44);
-        java.io.Serializable[] serializableArray47 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable12, exceptionMap14, 0L, 0L, exceptionMap19, 0, exceptionMap23, exceptionMap25, (short) 1, ' ', "hi!", 100.0f, int35, false, 10.0f, '4', (-1), 1L, 1, throwable44 };
-        java.util.ArrayList<java.io.Serializable> serializableList48 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean49 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList48, serializableArray47);
-        boolean boolean50 = exceptionMap0.putAll((java.lang.Exception) functorException5, (java.util.Collection<java.io.Serializable>) serializableList48);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet51 = exceptionMap0.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap52 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap53 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean54 = exceptionMap52.containsValue((java.lang.Object) exceptionMap53);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap55 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap56 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean57 = exceptionMap55.containsValue((java.lang.Object) exceptionMap56);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet58 = exceptionMap56.entrySet();
-        exceptionMap56.clear();
-        boolean boolean60 = exceptionMap56.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap61 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap56);
-        boolean boolean62 = exceptionMap52.equals((java.lang.Object) exceptionMap56);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap63 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap64 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean65 = exceptionMap63.containsValue((java.lang.Object) exceptionMap64);
-        int int66 = exceptionMap64.size();
-        java.util.Collection<java.lang.Object> objCollection67 = exceptionMap64.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap68 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap69 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean70 = exceptionMap68.containsValue((java.lang.Object) exceptionMap69);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet71 = exceptionMap69.entrySet();
-        exceptionMap64.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap69);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap73 = exceptionMap69.decorated();
-        java.lang.Object obj74 = exceptionMap56.get((java.lang.Object) exceptionMap69);
-        java.util.Collection<java.lang.Object> objCollection75 = exceptionMap56.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap76 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap77 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean78 = exceptionMap76.containsValue((java.lang.Object) exceptionMap77);
-        int int79 = exceptionMap77.size();
-        java.util.Collection<java.lang.Object> objCollection80 = exceptionMap77.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap81 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap82 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean83 = exceptionMap81.containsValue((java.lang.Object) exceptionMap82);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet84 = exceptionMap82.entrySet();
-        exceptionMap77.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap82);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap86 = exceptionMap77.decorated();
-        boolean boolean87 = exceptionMap56.containsKey((java.lang.Object) exceptionMap86);
-        boolean boolean88 = exceptionMap0.containsValue((java.lang.Object) boolean87);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(objCollection20);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNotNull(objCollection24);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertNotNull(serializableArray47);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
-        org.junit.Assert.assertNotNull(exceptionEntrySet51);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet58);
-        org.junit.Assert.assertTrue("'" + boolean60 + "' != '" + true + "'", boolean60 == true);
-        org.junit.Assert.assertNotNull(exceptionMap61);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + true + "'", boolean62 == true);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 0 + "'", int66 == 0);
-        org.junit.Assert.assertNotNull(objCollection67);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet71);
-        org.junit.Assert.assertNotNull(exceptionMap73);
-        org.junit.Assert.assertNull(obj74);
-        org.junit.Assert.assertNotNull(objCollection75);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
-        org.junit.Assert.assertTrue("'" + int79 + "' != '" + 0 + "'", int79 == 0);
-        org.junit.Assert.assertNotNull(objCollection80);
-        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + false + "'", boolean83 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet84);
-        org.junit.Assert.assertNotNull(exceptionMap86);
-        org.junit.Assert.assertTrue("'" + boolean87 + "' != '" + false + "'", boolean87 == false);
-        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + true + "'", boolean88 == true);
-    }
-
-    @Test
-    public void test251() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        exceptionMap1.clear();
-        java.lang.Throwable throwable7 = null;
-        org.apache.commons.collections4.FunctorException functorException8 = new org.apache.commons.collections4.FunctorException("", throwable7);
-        int int9 = exceptionMap1.size((java.lang.Object) functorException8);
-        java.lang.String str10 = exceptionMap1.toString();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet14 = exceptionMap12.entrySet();
-        exceptionMap12.clear();
-        boolean boolean16 = exceptionMap12.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.lang.Class<?>> exceptionMap17 = org.apache.commons.collections4.map.MultiValueMap.multiValueMap((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap12);
-        java.util.Collection<java.lang.Object> objCollection18 = exceptionMap12.values();
-        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap12);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "{}" + "'", str10, "{}");
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet14);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(exceptionMap17);
-        org.junit.Assert.assertNotNull(objCollection18);
-    }
-
-    @Test
-    public void test252() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        int int7 = exceptionMap5.size();
-        java.util.Collection<java.lang.Object> objCollection8 = exceptionMap5.values();
-        java.util.Collection<java.lang.Object> objCollection9 = exceptionMap5.values();
-        java.lang.Object obj10 = exceptionMap3.remove((java.lang.Object) objCollection9);
-        java.lang.Object obj11 = exceptionMap0.get((java.lang.Object) objCollection9);
-        java.lang.Object obj13 = exceptionMap0.remove((java.lang.Object) (short) 0);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean16 = exceptionMap14.containsValue((java.lang.Object) exceptionMap15);
-        int int17 = exceptionMap15.size();
-        java.util.Collection<java.lang.Object> objCollection18 = exceptionMap15.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean21 = exceptionMap19.containsValue((java.lang.Object) exceptionMap20);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet22 = exceptionMap20.entrySet();
-        exceptionMap15.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap20);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean26 = exceptionMap24.containsValue((java.lang.Object) exceptionMap25);
-        java.lang.Throwable throwable28 = null;
-        org.apache.commons.collections4.FunctorException functorException29 = new org.apache.commons.collections4.FunctorException("", throwable28);
-        java.lang.Throwable throwable36 = null;
-        org.apache.commons.collections4.FunctorException functorException37 = new org.apache.commons.collections4.FunctorException("", throwable36);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean40 = exceptionMap38.containsValue((java.lang.Object) exceptionMap39);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap43 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection44 = exceptionMap43.values();
-        int int45 = exceptionMap43.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection48 = exceptionMap47.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap49 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap50 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean51 = exceptionMap49.containsValue((java.lang.Object) exceptionMap50);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap56 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap57 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean58 = exceptionMap56.containsValue((java.lang.Object) exceptionMap57);
-        int int59 = exceptionMap57.size();
-        java.lang.Throwable throwable68 = null;
-        org.apache.commons.collections4.FunctorException functorException69 = new org.apache.commons.collections4.FunctorException("", throwable68);
-        org.apache.commons.collections4.FunctorException functorException70 = new org.apache.commons.collections4.FunctorException("", throwable68);
-        java.io.Serializable[] serializableArray71 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable36, exceptionMap38, 0L, 0L, exceptionMap43, 0, exceptionMap47, exceptionMap49, (short) 1, ' ', "hi!", 100.0f, int59, false, 10.0f, '4', (-1), 1L, 1, throwable68 };
-        java.util.ArrayList<java.io.Serializable> serializableList72 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean73 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList72, serializableArray71);
-        boolean boolean74 = exceptionMap24.putAll((java.lang.Exception) functorException29, (java.util.Collection<java.io.Serializable>) serializableList72);
-        java.lang.Object obj76 = exceptionMap20.put((java.lang.Exception) functorException29, (java.lang.Object) (-1.0f));
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap77 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap78 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean79 = exceptionMap77.containsValue((java.lang.Object) exceptionMap78);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet80 = exceptionMap78.entrySet();
-        java.lang.Object obj81 = exceptionMap0.put((java.lang.Exception) functorException29, (java.lang.Object) exceptionEntrySet80);
-        boolean boolean82 = exceptionMap0.isEmpty();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap83 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection84 = exceptionMap83.values();
-        int int85 = exceptionMap0.size((java.lang.Object) objCollection84);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap86 = exceptionMap0.decorated();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertNotNull(objCollection8);
-        org.junit.Assert.assertNotNull(objCollection9);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertNull(obj11);
-        org.junit.Assert.assertNull(obj13);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertNotNull(objCollection18);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet22);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(objCollection44);
-        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
-        org.junit.Assert.assertNotNull(objCollection48);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
-        org.junit.Assert.assertNotNull(serializableArray71);
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + true + "'", boolean73 == true);
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + true + "'", boolean74 == true);
-        org.junit.Assert.assertEquals("'" + obj76 + "' != '" + (-1.0f) + "'", obj76, (-1.0f));
-        org.junit.Assert.assertTrue("'" + boolean79 + "' != '" + false + "'", boolean79 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet80);
-        org.junit.Assert.assertNotNull(obj81);
-        org.junit.Assert.assertEquals(obj81.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj81), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj81), "[]");
-        org.junit.Assert.assertTrue("'" + boolean82 + "' != '" + false + "'", boolean82 == false);
-        org.junit.Assert.assertNotNull(objCollection84);
-        org.junit.Assert.assertTrue("'" + int85 + "' != '" + 0 + "'", int85 == 0);
-        org.junit.Assert.assertNotNull(exceptionMap86);
-    }
-
-    @Test
-    public void test253() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap4 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean6 = exceptionMap4.containsValue((java.lang.Object) exceptionMap5);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet7 = exceptionMap5.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap8 = exceptionMap5.map;
-        int int9 = exceptionMap8.size();
-        java.lang.Object obj10 = exceptionMap1.remove((java.lang.Object) int9);
-        java.lang.Throwable throwable13 = null;
-        org.apache.commons.collections4.FunctorException functorException14 = new org.apache.commons.collections4.FunctorException("", throwable13);
-        org.apache.commons.collections4.FunctorException functorException15 = new org.apache.commons.collections4.FunctorException("", throwable13);
-        org.apache.commons.collections4.FunctorException functorException17 = new org.apache.commons.collections4.FunctorException("");
-        functorException15.addSuppressed((java.lang.Throwable) functorException17);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean21 = exceptionMap19.containsValue((java.lang.Object) exceptionMap20);
-        boolean boolean23 = exceptionMap20.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection25 = exceptionMap20.createCollection(10);
-        boolean boolean26 = exceptionMap1.putAll((java.lang.Exception) functorException17, serializableCollection25);
-        java.lang.Throwable throwable29 = null;
-        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException("", throwable29);
-        org.apache.commons.collections4.FunctorException functorException31 = new org.apache.commons.collections4.FunctorException("", throwable29);
-        org.apache.commons.collections4.FunctorException functorException33 = new org.apache.commons.collections4.FunctorException("");
-        functorException31.addSuppressed((java.lang.Throwable) functorException33);
-        java.lang.Throwable[] throwableArray35 = functorException33.getSuppressed();
-        org.apache.commons.collections4.FunctorException functorException36 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException33);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean40 = exceptionMap38.containsValue((java.lang.Object) exceptionMap39);
-        int int41 = exceptionMap39.size();
-        java.util.Collection<java.lang.Object> objCollection42 = exceptionMap39.values();
-        java.util.Collection<java.lang.Object> objCollection43 = exceptionMap39.values();
-        java.lang.Object obj44 = exceptionMap37.remove((java.lang.Object) objCollection43);
-        java.lang.Object obj45 = exceptionMap1.put((java.lang.Exception) functorException33, obj44);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet46 = exceptionMap1.entrySet();
-        java.lang.Object obj47 = null;
-        java.lang.Object obj48 = exceptionMap1.get(obj47);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet7);
-        org.junit.Assert.assertNotNull(exceptionMap8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(serializableCollection25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(throwableArray35);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-        org.junit.Assert.assertNotNull(objCollection42);
-        org.junit.Assert.assertNotNull(objCollection43);
-        org.junit.Assert.assertNull(obj44);
-        org.junit.Assert.assertNull(obj45);
-        org.junit.Assert.assertNotNull(exceptionEntrySet46);
-        org.junit.Assert.assertNull(obj48);
-    }
-
-    @Test
-    public void test254() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean7 = exceptionMap5.containsValue((java.lang.Object) exceptionMap6);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet8 = exceptionMap6.entrySet();
-        exceptionMap1.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap6);
-        org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor10 = exceptionMap6.mapIterator();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap11 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean13 = exceptionMap11.containsValue((java.lang.Object) exceptionMap12);
-        int int14 = exceptionMap12.size();
-        java.util.Collection<java.lang.Object> objCollection15 = exceptionMap12.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
-        exceptionMap12.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap17);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap22 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean23 = exceptionMap21.containsValue((java.lang.Object) exceptionMap22);
-        java.lang.Throwable throwable25 = null;
-        org.apache.commons.collections4.FunctorException functorException26 = new org.apache.commons.collections4.FunctorException("", throwable25);
-        java.lang.Throwable throwable33 = null;
-        org.apache.commons.collections4.FunctorException functorException34 = new org.apache.commons.collections4.FunctorException("", throwable33);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap35 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean37 = exceptionMap35.containsValue((java.lang.Object) exceptionMap36);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap40 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection41 = exceptionMap40.values();
-        int int42 = exceptionMap40.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap44 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection45 = exceptionMap44.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap46 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean48 = exceptionMap46.containsValue((java.lang.Object) exceptionMap47);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap53 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap54 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean55 = exceptionMap53.containsValue((java.lang.Object) exceptionMap54);
-        int int56 = exceptionMap54.size();
-        java.lang.Throwable throwable65 = null;
-        org.apache.commons.collections4.FunctorException functorException66 = new org.apache.commons.collections4.FunctorException("", throwable65);
-        org.apache.commons.collections4.FunctorException functorException67 = new org.apache.commons.collections4.FunctorException("", throwable65);
-        java.io.Serializable[] serializableArray68 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable33, exceptionMap35, 0L, 0L, exceptionMap40, 0, exceptionMap44, exceptionMap46, (short) 1, ' ', "hi!", 100.0f, int56, false, 10.0f, '4', (-1), 1L, 1, throwable65 };
-        java.util.ArrayList<java.io.Serializable> serializableList69 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean70 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList69, serializableArray68);
-        boolean boolean71 = exceptionMap21.putAll((java.lang.Exception) functorException26, (java.util.Collection<java.io.Serializable>) serializableList69);
-        java.lang.Object obj73 = exceptionMap17.put((java.lang.Exception) functorException26, (java.lang.Object) (-1.0f));
-        java.util.Collection<java.lang.Object> objCollection74 = exceptionMap17.values();
-        java.lang.Object obj75 = exceptionMap6.get((java.lang.Object) objCollection74);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap76 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap77 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean78 = exceptionMap76.containsValue((java.lang.Object) exceptionMap77);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap79 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap80 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean81 = exceptionMap79.containsValue((java.lang.Object) exceptionMap80);
-        exceptionMap77.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap80);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap83 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection84 = exceptionMap83.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet85 = exceptionMap83.entrySet();
-        java.lang.Object obj86 = null;
-        boolean boolean87 = exceptionMap80.containsValue((java.lang.Object) exceptionEntrySet85, obj86);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap88 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap89 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean90 = exceptionMap88.containsValue((java.lang.Object) exceptionMap89);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet91 = exceptionMap89.entrySet();
-        exceptionMap89.clear();
-        boolean boolean93 = exceptionMap89.isEmpty();
-        exceptionMap80.map = exceptionMap89;
-        java.util.Collection<java.lang.Object> objCollection95 = exceptionMap80.values();
-        exceptionMap6.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap80);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet8);
-        org.junit.Assert.assertNotNull(exceptionItor10);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-        org.junit.Assert.assertNotNull(objCollection15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet19);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertNotNull(objCollection41);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
-        org.junit.Assert.assertNotNull(objCollection45);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
-        org.junit.Assert.assertTrue("'" + int56 + "' != '" + 0 + "'", int56 == 0);
-        org.junit.Assert.assertNotNull(serializableArray68);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + true + "'", boolean70 == true);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + true + "'", boolean71 == true);
-        org.junit.Assert.assertEquals("'" + obj73 + "' != '" + (-1.0f) + "'", obj73, (-1.0f));
-        org.junit.Assert.assertNotNull(objCollection74);
-        org.junit.Assert.assertNull(obj75);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
-        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
-        org.junit.Assert.assertNotNull(objCollection84);
-        org.junit.Assert.assertNotNull(exceptionEntrySet85);
-        org.junit.Assert.assertTrue("'" + boolean87 + "' != '" + false + "'", boolean87 == false);
-        org.junit.Assert.assertTrue("'" + boolean90 + "' != '" + false + "'", boolean90 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet91);
-        org.junit.Assert.assertTrue("'" + boolean93 + "' != '" + true + "'", boolean93 == true);
-        org.junit.Assert.assertNotNull(objCollection95);
-    }
-
-    @Test
-    public void test255() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        boolean boolean4 = exceptionMap1.containsKey((java.lang.Object) (short) 10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap5 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean7 = exceptionMap5.containsValue((java.lang.Object) exceptionMap6);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap10 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean11 = exceptionMap9.containsValue((java.lang.Object) exceptionMap10);
-        int int12 = exceptionMap10.size();
-        java.util.Collection<java.lang.Object> objCollection13 = exceptionMap10.values();
-        java.util.Collection<java.lang.Object> objCollection14 = exceptionMap10.values();
-        java.lang.Object obj15 = exceptionMap8.remove((java.lang.Object) objCollection14);
-        java.lang.Object obj16 = exceptionMap5.get((java.lang.Object) objCollection14);
-        boolean boolean17 = exceptionMap5.isEmpty();
-        boolean boolean19 = exceptionMap1.containsValue((java.lang.Object) exceptionMap5, (java.lang.Object) (byte) 10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean22 = exceptionMap20.containsValue((java.lang.Object) exceptionMap21);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet23 = exceptionMap21.entrySet();
-        exceptionMap21.clear();
-        java.lang.Throwable throwable26 = null;
-        org.apache.commons.collections4.FunctorException functorException27 = new org.apache.commons.collections4.FunctorException(throwable26);
-        org.apache.commons.collections4.FunctorException functorException28 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException27);
-        java.lang.Throwable throwable29 = null;
-        org.apache.commons.collections4.FunctorException functorException30 = new org.apache.commons.collections4.FunctorException(throwable29);
-        functorException28.addSuppressed((java.lang.Throwable) functorException30);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap36 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean38 = exceptionMap36.containsValue((java.lang.Object) exceptionMap37);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet39 = exceptionMap37.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap40 = exceptionMap37.map;
-        int int41 = exceptionMap40.size();
-        java.lang.Object obj42 = exceptionMap33.remove((java.lang.Object) int41);
-        java.lang.Exception exception43 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap44 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection45 = exceptionMap44.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet46 = exceptionMap44.entrySet();
-        java.lang.Object obj47 = exceptionMap33.put(exception43, (java.lang.Object) exceptionEntrySet46);
-        java.lang.Object obj48 = exceptionMap21.put((java.lang.Exception) functorException28, (java.lang.Object) exceptionEntrySet46);
-        int int49 = exceptionMap21.size();
-        exceptionMap5.map = exceptionMap21;
-        java.util.Iterator<java.util.Map.Entry<java.lang.Exception, java.io.Serializable>> exceptionEntryItor51 = exceptionMap5.iterator();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertNotNull(objCollection13);
-        org.junit.Assert.assertNotNull(objCollection14);
-        org.junit.Assert.assertNull(obj15);
-        org.junit.Assert.assertNull(obj16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet23);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet35);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet39);
-        org.junit.Assert.assertNotNull(exceptionMap40);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-        org.junit.Assert.assertNull(obj42);
-        org.junit.Assert.assertNotNull(objCollection45);
-        org.junit.Assert.assertNotNull(exceptionEntrySet46);
-        org.junit.Assert.assertNotNull(obj47);
-        org.junit.Assert.assertEquals(obj47.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj47), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj47), "[]");
-        org.junit.Assert.assertNotNull(obj48);
-        org.junit.Assert.assertEquals(obj48.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj48), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj48), "[]");
-        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 1 + "'", int49 == 1);
-        org.junit.Assert.assertNotNull(exceptionEntryItor51);
-    }
-
-    @Test
-    public void test256() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        exceptionMap1.clear();
-        java.lang.Throwable throwable7 = null;
-        org.apache.commons.collections4.FunctorException functorException8 = new org.apache.commons.collections4.FunctorException("", throwable7);
-        int int9 = exceptionMap1.size((java.lang.Object) functorException8);
-        java.lang.String str10 = exceptionMap1.toString();
-        java.util.Collection<java.io.Serializable> serializableCollection12 = exceptionMap1.createCollection((int) '#');
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean15 = exceptionMap13.containsValue((java.lang.Object) exceptionMap14);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet16 = exceptionMap14.entrySet();
-        exceptionMap14.clear();
-        java.lang.Throwable throwable19 = null;
-        org.apache.commons.collections4.FunctorException functorException20 = new org.apache.commons.collections4.FunctorException(throwable19);
-        org.apache.commons.collections4.FunctorException functorException21 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException20);
-        java.lang.Throwable throwable22 = null;
-        org.apache.commons.collections4.FunctorException functorException23 = new org.apache.commons.collections4.FunctorException(throwable22);
-        functorException21.addSuppressed((java.lang.Throwable) functorException23);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean27 = exceptionMap25.containsValue((java.lang.Object) exceptionMap26);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet28 = exceptionMap26.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet32 = exceptionMap30.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap33 = exceptionMap30.map;
-        int int34 = exceptionMap33.size();
-        java.lang.Object obj35 = exceptionMap26.remove((java.lang.Object) int34);
-        java.lang.Exception exception36 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap37 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection38 = exceptionMap37.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet39 = exceptionMap37.entrySet();
-        java.lang.Object obj40 = exceptionMap26.put(exception36, (java.lang.Object) exceptionEntrySet39);
-        java.lang.Object obj41 = exceptionMap14.put((java.lang.Exception) functorException21, (java.lang.Object) exceptionEntrySet39);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap42 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap43 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean44 = exceptionMap42.containsValue((java.lang.Object) exceptionMap43);
-        int int45 = exceptionMap43.size();
-        java.util.Collection<java.lang.Object> objCollection46 = exceptionMap43.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap48 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean49 = exceptionMap47.containsValue((java.lang.Object) exceptionMap48);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet50 = exceptionMap48.entrySet();
-        exceptionMap43.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap48);
-        java.util.Collection<java.io.Serializable> serializableCollection53 = exceptionMap48.createCollection(1);
-        boolean boolean54 = exceptionMap14.containsKey((java.lang.Object) exceptionMap48);
-        org.apache.commons.collections4.MapIterator<java.lang.Exception, java.lang.Object> exceptionItor55 = exceptionMap48.mapIterator();
-        boolean boolean56 = exceptionMap1.containsValue((java.lang.Object) exceptionItor55);
-        java.lang.Object obj57 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj58 = exceptionItor55.setValue(obj57);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: null");
-        } catch (java.lang.IllegalStateException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "{}" + "'", str10, "{}");
-        org.junit.Assert.assertNotNull(serializableCollection12);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet16);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet28);
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet32);
-        org.junit.Assert.assertNotNull(exceptionMap33);
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
-        org.junit.Assert.assertNull(obj35);
-        org.junit.Assert.assertNotNull(objCollection38);
-        org.junit.Assert.assertNotNull(exceptionEntrySet39);
-        org.junit.Assert.assertNotNull(obj40);
-        org.junit.Assert.assertEquals(obj40.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj40), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj40), "[]");
-        org.junit.Assert.assertNotNull(obj41);
-        org.junit.Assert.assertEquals(obj41.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj41), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj41), "[]");
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
-        org.junit.Assert.assertNotNull(objCollection46);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet50);
-        org.junit.Assert.assertNotNull(serializableCollection53);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertNotNull(exceptionItor55);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-    }
-
-    @Test
-    public void test257() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection1 = exceptionMap0.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet2 = exceptionMap0.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap3 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap3.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet5 = exceptionMap3.entrySet();
-        boolean boolean7 = exceptionMap0.remove((java.lang.Object) exceptionEntrySet5, (java.lang.Object) (byte) -1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap8 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap9 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean10 = exceptionMap8.containsValue((java.lang.Object) exceptionMap9);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet11 = exceptionMap9.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap12 = exceptionMap9.map;
-        int int13 = exceptionMap12.size();
-        boolean boolean14 = exceptionMap0.containsKey((java.lang.Object) exceptionMap12);
-        boolean boolean16 = exceptionMap0.equals((java.lang.Object) 0.0d);
-        int int17 = exceptionMap0.size();
-        exceptionMap0.clear();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap20 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap21 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean22 = exceptionMap20.containsValue((java.lang.Object) exceptionMap21);
-        boolean boolean24 = exceptionMap21.containsKey((java.lang.Object) (short) 10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean27 = exceptionMap25.containsValue((java.lang.Object) exceptionMap26);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap29 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean31 = exceptionMap29.containsValue((java.lang.Object) exceptionMap30);
-        int int32 = exceptionMap30.size();
-        java.util.Collection<java.lang.Object> objCollection33 = exceptionMap30.values();
-        java.util.Collection<java.lang.Object> objCollection34 = exceptionMap30.values();
-        java.lang.Object obj35 = exceptionMap28.remove((java.lang.Object) objCollection34);
-        java.lang.Object obj36 = exceptionMap25.get((java.lang.Object) objCollection34);
-        boolean boolean37 = exceptionMap25.isEmpty();
-        boolean boolean39 = exceptionMap21.containsValue((java.lang.Object) exceptionMap25, (java.lang.Object) (byte) 10);
-        java.lang.Object obj40 = exceptionMap0.getOrDefault((java.lang.Object) 100.0d, (java.lang.Object) exceptionMap21);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap41 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection42 = exceptionMap41.values();
-        int int43 = exceptionMap41.size();
-        exceptionMap21.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap41);
-        org.junit.Assert.assertNotNull(objCollection1);
-        org.junit.Assert.assertNotNull(exceptionEntrySet2);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertNotNull(exceptionEntrySet5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet11);
-        org.junit.Assert.assertNotNull(exceptionMap12);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
-        org.junit.Assert.assertNotNull(objCollection33);
-        org.junit.Assert.assertNotNull(objCollection34);
-        org.junit.Assert.assertNull(obj35);
-        org.junit.Assert.assertNull(obj36);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + true + "'", boolean37 == true);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(obj40);
-        org.junit.Assert.assertEquals(obj40.toString(), "{}");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj40), "{}");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj40), "{}");
-        org.junit.Assert.assertNotNull(objCollection42);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-    }
-
-    @Test
-    public void test258() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.lang.Throwable throwable4 = null;
-        org.apache.commons.collections4.FunctorException functorException5 = new org.apache.commons.collections4.FunctorException("", throwable4);
-        java.lang.Throwable throwable12 = null;
-        org.apache.commons.collections4.FunctorException functorException13 = new org.apache.commons.collections4.FunctorException("", throwable12);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap14 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap15 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean16 = exceptionMap14.containsValue((java.lang.Object) exceptionMap15);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap19 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection20 = exceptionMap19.values();
-        int int21 = exceptionMap19.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap23 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection24 = exceptionMap23.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap25 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap26 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean27 = exceptionMap25.containsValue((java.lang.Object) exceptionMap26);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        int int35 = exceptionMap33.size();
-        java.lang.Throwable throwable44 = null;
-        org.apache.commons.collections4.FunctorException functorException45 = new org.apache.commons.collections4.FunctorException("", throwable44);
-        org.apache.commons.collections4.FunctorException functorException46 = new org.apache.commons.collections4.FunctorException("", throwable44);
-        java.io.Serializable[] serializableArray47 = new java.io.Serializable[] { (short) -1, 10L, 10.0d, (short) 100, (-1), throwable12, exceptionMap14, 0L, 0L, exceptionMap19, 0, exceptionMap23, exceptionMap25, (short) 1, ' ', "hi!", 100.0f, int35, false, 10.0f, '4', (-1), 1L, 1, throwable44 };
-        java.util.ArrayList<java.io.Serializable> serializableList48 = new java.util.ArrayList<java.io.Serializable>();
-        boolean boolean49 = java.util.Collections.addAll((java.util.Collection<java.io.Serializable>) serializableList48, serializableArray47);
-        boolean boolean50 = exceptionMap0.putAll((java.lang.Exception) functorException5, (java.util.Collection<java.io.Serializable>) serializableList48);
-        boolean boolean51 = exceptionMap0.isEmpty();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(objCollection20);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNotNull(objCollection24);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertNotNull(serializableArray47);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-    }
-
-    @Test
-    public void test259() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet3 = exceptionMap1.entrySet();
-        exceptionMap1.clear();
-        java.lang.Throwable throwable6 = null;
-        org.apache.commons.collections4.FunctorException functorException7 = new org.apache.commons.collections4.FunctorException(throwable6);
-        org.apache.commons.collections4.FunctorException functorException8 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException7);
-        java.lang.Throwable throwable9 = null;
-        org.apache.commons.collections4.FunctorException functorException10 = new org.apache.commons.collections4.FunctorException(throwable9);
-        functorException8.addSuppressed((java.lang.Throwable) functorException10);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap12 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap13 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean14 = exceptionMap12.containsValue((java.lang.Object) exceptionMap13);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet15 = exceptionMap13.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet19 = exceptionMap17.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap20 = exceptionMap17.map;
-        int int21 = exceptionMap20.size();
-        java.lang.Object obj22 = exceptionMap13.remove((java.lang.Object) int21);
-        java.lang.Exception exception23 = null;
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap24 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection25 = exceptionMap24.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet26 = exceptionMap24.entrySet();
-        java.lang.Object obj27 = exceptionMap13.put(exception23, (java.lang.Object) exceptionEntrySet26);
-        java.lang.Object obj28 = exceptionMap1.put((java.lang.Exception) functorException8, (java.lang.Object) exceptionEntrySet26);
-        int int29 = exceptionMap1.size();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap30 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection31 = exceptionMap30.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet32 = exceptionMap30.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.util.Collection<java.lang.Object> objCollection34 = exceptionMap33.values();
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
-        boolean boolean37 = exceptionMap30.remove((java.lang.Object) exceptionEntrySet35, (java.lang.Object) (byte) -1);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap38 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap39 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean40 = exceptionMap38.containsValue((java.lang.Object) exceptionMap39);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet41 = exceptionMap39.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap42 = exceptionMap39.map;
-        int int43 = exceptionMap42.size();
-        boolean boolean44 = exceptionMap30.containsKey((java.lang.Object) exceptionMap42);
-        boolean boolean46 = exceptionMap30.equals((java.lang.Object) 0.0d);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap47 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap48 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean49 = exceptionMap47.containsValue((java.lang.Object) exceptionMap48);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet50 = exceptionMap48.entrySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap51 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap52 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean53 = exceptionMap51.containsValue((java.lang.Object) exceptionMap52);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet54 = exceptionMap52.entrySet();
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap55 = exceptionMap52.map;
-        int int56 = exceptionMap55.size();
-        java.lang.Object obj57 = exceptionMap48.remove((java.lang.Object) int56);
-        java.lang.Throwable throwable60 = null;
-        org.apache.commons.collections4.FunctorException functorException61 = new org.apache.commons.collections4.FunctorException("", throwable60);
-        org.apache.commons.collections4.FunctorException functorException62 = new org.apache.commons.collections4.FunctorException("", throwable60);
-        org.apache.commons.collections4.FunctorException functorException64 = new org.apache.commons.collections4.FunctorException("");
-        functorException62.addSuppressed((java.lang.Throwable) functorException64);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap66 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap67 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean68 = exceptionMap66.containsValue((java.lang.Object) exceptionMap67);
-        boolean boolean70 = exceptionMap67.containsKey((java.lang.Object) (short) 10);
-        java.util.Collection<java.io.Serializable> serializableCollection72 = exceptionMap67.createCollection(10);
-        boolean boolean73 = exceptionMap48.putAll((java.lang.Exception) functorException64, serializableCollection72);
-        boolean boolean74 = exceptionMap30.containsValue((java.lang.Object) serializableCollection72);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap75 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap76 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap77 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean78 = exceptionMap76.containsValue((java.lang.Object) exceptionMap77);
-        int int79 = exceptionMap77.size();
-        java.util.Collection<java.lang.Object> objCollection80 = exceptionMap77.values();
-        java.util.Collection<java.lang.Object> objCollection81 = exceptionMap77.values();
-        java.lang.Object obj82 = exceptionMap75.remove((java.lang.Object) objCollection81);
-        org.apache.commons.collections4.map.MultiValueMap<org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>, java.lang.Throwable> exceptionMapMap83 = new org.apache.commons.collections4.map.MultiValueMap<org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>, java.lang.Throwable>();
-        java.lang.Object obj84 = exceptionMap75.remove((java.lang.Object) exceptionMapMap83);
-        boolean boolean85 = exceptionMap30.containsKey((java.lang.Object) exceptionMapMap83);
-        exceptionMap1.map = exceptionMap30;
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet3);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet19);
-        org.junit.Assert.assertNotNull(exceptionMap20);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNull(obj22);
-        org.junit.Assert.assertNotNull(objCollection25);
-        org.junit.Assert.assertNotNull(exceptionEntrySet26);
-        org.junit.Assert.assertNotNull(obj27);
-        org.junit.Assert.assertEquals(obj27.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj27), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj27), "[]");
-        org.junit.Assert.assertNotNull(obj28);
-        org.junit.Assert.assertEquals(obj28.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj28), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj28), "[]");
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 1 + "'", int29 == 1);
-        org.junit.Assert.assertNotNull(objCollection31);
-        org.junit.Assert.assertNotNull(exceptionEntrySet32);
-        org.junit.Assert.assertNotNull(objCollection34);
-        org.junit.Assert.assertNotNull(exceptionEntrySet35);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet41);
-        org.junit.Assert.assertNotNull(exceptionMap42);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet50);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet54);
-        org.junit.Assert.assertNotNull(exceptionMap55);
-        org.junit.Assert.assertTrue("'" + int56 + "' != '" + 0 + "'", int56 == 0);
-        org.junit.Assert.assertNull(obj57);
-        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + false + "'", boolean68 == false);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-        org.junit.Assert.assertNotNull(serializableCollection72);
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
-        org.junit.Assert.assertTrue("'" + int79 + "' != '" + 0 + "'", int79 == 0);
-        org.junit.Assert.assertNotNull(objCollection80);
-        org.junit.Assert.assertNotNull(objCollection81);
-        org.junit.Assert.assertNull(obj82);
-        org.junit.Assert.assertNull(obj84);
-        org.junit.Assert.assertTrue("'" + boolean85 + "' != '" + false + "'", boolean85 == false);
-    }
-
-    @Test
-    public void test260() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap0 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap1 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean2 = exceptionMap0.containsValue((java.lang.Object) exceptionMap1);
-        int int3 = exceptionMap1.size();
-        java.util.Collection<java.lang.Object> objCollection4 = exceptionMap1.values();
-        java.util.Set<java.lang.Exception> exceptionSet5 = exceptionMap1.keySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap6 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        java.lang.Object obj8 = exceptionMap6.get((java.lang.Object) (-1L));
-        java.lang.Throwable throwable10 = null;
-        org.apache.commons.collections4.FunctorException functorException11 = new org.apache.commons.collections4.FunctorException(throwable10);
-        org.apache.commons.collections4.FunctorException functorException12 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException11);
-        boolean boolean14 = exceptionMap6.removeMapping((java.lang.Exception) functorException11, (java.io.Serializable) '#');
-        java.util.Set<java.lang.Exception> exceptionSet15 = exceptionMap6.keySet();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap16 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap17 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean18 = exceptionMap16.containsValue((java.lang.Object) exceptionMap17);
-        java.lang.Throwable throwable21 = null;
-        org.apache.commons.collections4.FunctorException functorException22 = new org.apache.commons.collections4.FunctorException("", throwable21);
-        org.apache.commons.collections4.FunctorException functorException23 = new org.apache.commons.collections4.FunctorException("", throwable21);
-        java.lang.Object obj25 = exceptionMap17.put((java.lang.Exception) functorException23, (java.lang.Object) (-1));
-        org.apache.commons.collections4.FunctorException functorException26 = new org.apache.commons.collections4.FunctorException((java.lang.Throwable) functorException23);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap27 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap28 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean29 = exceptionMap27.containsValue((java.lang.Object) exceptionMap28);
-        int int30 = exceptionMap28.size();
-        java.util.Collection<java.lang.Object> objCollection31 = exceptionMap28.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap32 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap33 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean34 = exceptionMap32.containsValue((java.lang.Object) exceptionMap33);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet35 = exceptionMap33.entrySet();
-        exceptionMap28.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap33);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap37 = exceptionMap33.decorated();
-        java.util.Set<java.lang.Exception> exceptionSet38 = exceptionMap33.keySet();
-        java.lang.Object obj39 = exceptionMap6.put((java.lang.Exception) functorException26, (java.lang.Object) exceptionSet38);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap40 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap41 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean42 = exceptionMap40.containsValue((java.lang.Object) exceptionMap41);
-        int int43 = exceptionMap41.size();
-        java.util.Collection<java.lang.Object> objCollection44 = exceptionMap41.values();
-        exceptionMap41.clear();
-        java.lang.Throwable throwable47 = null;
-        org.apache.commons.collections4.FunctorException functorException48 = new org.apache.commons.collections4.FunctorException("", throwable47);
-        int int49 = exceptionMap41.size((java.lang.Object) functorException48);
-        java.lang.String str50 = exceptionMap41.toString();
-        boolean boolean52 = exceptionMap41.containsValue((java.lang.Object) (short) 0);
-        boolean boolean53 = exceptionMap1.containsValue(obj39, (java.lang.Object) (short) 0);
-        java.lang.Throwable throwable56 = null;
-        org.apache.commons.collections4.FunctorException functorException57 = new org.apache.commons.collections4.FunctorException("", throwable56);
-        org.apache.commons.collections4.FunctorException functorException58 = new org.apache.commons.collections4.FunctorException("", throwable56);
-        org.apache.commons.collections4.FunctorException functorException60 = new org.apache.commons.collections4.FunctorException("");
-        functorException58.addSuppressed((java.lang.Throwable) functorException60);
-        boolean boolean62 = exceptionMap1.containsValue((java.lang.Object) functorException58);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap63 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap64 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean65 = exceptionMap63.containsValue((java.lang.Object) exceptionMap64);
-        int int66 = exceptionMap64.size();
-        java.util.Collection<java.lang.Object> objCollection67 = exceptionMap64.values();
-        exceptionMap64.clear();
-        java.util.Collection<java.lang.Object> objCollection69 = exceptionMap64.values();
-        java.lang.Throwable throwable71 = null;
-        org.apache.commons.collections4.FunctorException functorException72 = new org.apache.commons.collections4.FunctorException(throwable71);
-        org.apache.commons.collections4.FunctorException functorException73 = new org.apache.commons.collections4.FunctorException("hi!", (java.lang.Throwable) functorException72);
-        java.lang.Throwable throwable74 = null;
-        org.apache.commons.collections4.FunctorException functorException75 = new org.apache.commons.collections4.FunctorException(throwable74);
-        functorException73.addSuppressed((java.lang.Throwable) functorException75);
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap77 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap78 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean79 = exceptionMap77.containsValue((java.lang.Object) exceptionMap78);
-        int int80 = exceptionMap78.size();
-        java.util.Collection<java.lang.Object> objCollection81 = exceptionMap78.values();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap82 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable> exceptionMap83 = new org.apache.commons.collections4.map.MultiValueMap<java.lang.Exception, java.io.Serializable>();
-        boolean boolean84 = exceptionMap82.containsValue((java.lang.Object) exceptionMap83);
-        java.util.Set<java.util.Map.Entry<java.lang.Exception, java.lang.Object>> exceptionEntrySet85 = exceptionMap83.entrySet();
-        exceptionMap78.putAll((java.util.Map<java.lang.Exception, java.lang.Object>) exceptionMap83);
-        java.util.Map<java.lang.Exception, java.lang.Object> exceptionMap87 = exceptionMap83.decorated();
-        java.util.Set<java.lang.Exception> exceptionSet88 = exceptionMap83.keySet();
-        java.util.Collection<java.io.Serializable> serializableCollection90 = exceptionMap83.createCollection(0);
-        java.lang.Object obj91 = exceptionMap64.put((java.lang.Exception) functorException73, (java.lang.Object) exceptionMap83);
-        java.util.Iterator<java.util.Map.Entry<java.lang.Exception, java.io.Serializable>> exceptionEntryItor92 = exceptionMap64.iterator();
-        java.lang.Object obj93 = exceptionMap1.remove((java.lang.Object) exceptionMap64);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNotNull(objCollection4);
-        org.junit.Assert.assertNotNull(exceptionSet5);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(exceptionSet15);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + obj25 + "' != '" + (-1) + "'", obj25, (-1));
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
-        org.junit.Assert.assertNotNull(objCollection31);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet35);
-        org.junit.Assert.assertNotNull(exceptionMap37);
-        org.junit.Assert.assertNotNull(exceptionSet38);
-        org.junit.Assert.assertNotNull(obj39);
-        org.junit.Assert.assertEquals(obj39.toString(), "[]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj39), "[]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj39), "[]");
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(objCollection44);
-        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
-        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "{}" + "'", str50, "{}");
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 0 + "'", int66 == 0);
-        org.junit.Assert.assertNotNull(objCollection67);
-        org.junit.Assert.assertNotNull(objCollection69);
-        org.junit.Assert.assertTrue("'" + boolean79 + "' != '" + false + "'", boolean79 == false);
-        org.junit.Assert.assertTrue("'" + int80 + "' != '" + 0 + "'", int80 == 0);
-        org.junit.Assert.assertNotNull(objCollection81);
-        org.junit.Assert.assertTrue("'" + boolean84 + "' != '" + false + "'", boolean84 == false);
-        org.junit.Assert.assertNotNull(exceptionEntrySet85);
-        org.junit.Assert.assertNotNull(exceptionMap87);
-        org.junit.Assert.assertNotNull(exceptionSet88);
-        org.junit.Assert.assertNotNull(serializableCollection90);
-        org.junit.Assert.assertNotNull(obj91);
-        org.junit.Assert.assertEquals(obj91.toString(), "{}");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj91), "{}");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj91), "{}");
-        org.junit.Assert.assertNotNull(exceptionEntryItor92);
-        org.junit.Assert.assertNull(obj93);
     }
 }
 

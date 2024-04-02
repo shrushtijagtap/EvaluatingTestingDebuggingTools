@@ -421,6 +421,77 @@ public class RegressionTest0 {
         com.google.gson.stream.JsonWriter jsonWriter19 = jsonTreeWriter16.value(true);
         jsonWriter19.setSerializeNulls(false);
         gson0.toJson((com.google.gson.JsonElement) jsonObject7, jsonWriter19);
+        com.google.gson.JsonArray jsonArray24 = new com.google.gson.JsonArray();
+        jsonArray24.add("true");
+        java.util.Iterator<com.google.gson.JsonElement> jsonElementItor27 = jsonArray24.iterator();
+        java.lang.String str28 = jsonArray24.getAsString();
+        com.google.gson.internal.Excluder excluder29 = com.google.gson.internal.Excluder.DEFAULT;
+        com.google.gson.internal.Excluder excluder30 = excluder29.excludeFieldsWithoutExposeAnnotation();
+        com.google.gson.internal.Excluder excluder31 = excluder30.excludeFieldsWithoutExposeAnnotation();
+        boolean boolean32 = jsonArray24.equals((java.lang.Object) excluder31);
+        boolean boolean33 = jsonArray24.isJsonPrimitive();
+        java.lang.String str34 = jsonArray24.getAsString();
+        com.google.gson.internal.bind.SqlDateTypeAdapter sqlDateTypeAdapter35 = new com.google.gson.internal.bind.SqlDateTypeAdapter();
+        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter36 = com.google.gson.internal.bind.TypeAdapters.BOOLEAN;
+        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter37 = booleanTypeAdapter36.nullSafe();
+        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter38 = new com.google.gson.internal.bind.JsonTreeWriter();
+        com.google.gson.stream.JsonWriter jsonWriter40 = jsonTreeWriter38.value((double) 1.0f);
+        com.google.gson.stream.JsonWriter jsonWriter42 = jsonTreeWriter38.value((long) (short) 0);
+        jsonTreeWriter38.setSerializeNulls(true);
+        com.google.gson.stream.JsonWriter jsonWriter46 = jsonTreeWriter38.value("null");
+        com.google.gson.stream.JsonWriter jsonWriter48 = jsonWriter46.value((double) (byte) 1);
+        booleanTypeAdapter36.write(jsonWriter48, (java.lang.Boolean) false);
+        java.sql.Date date51 = null;
+        sqlDateTypeAdapter35.write(jsonWriter48, date51);
+        com.google.gson.TypeAdapter<java.sql.Date> dateTypeAdapter53 = sqlDateTypeAdapter35.nullSafe();
+        boolean boolean54 = jsonArray24.equals((java.lang.Object) sqlDateTypeAdapter35);
+        com.google.gson.JsonElement jsonElement56 = jsonArray24.remove(0);
+        jsonObject7.add("com.google.gson.JsonParseException: hi!", jsonElement56);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
+        org.junit.Assert.assertNotNull(jsonElement6);
+        org.junit.Assert.assertNull(jsonElement9);
+        org.junit.Assert.assertNull(jsonElement11);
+        org.junit.Assert.assertNotNull(jsonWriter17);
+        org.junit.Assert.assertNotNull(jsonWriter19);
+        org.junit.Assert.assertNotNull(jsonElementItor27);
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "true" + "'", str28, "true");
+        org.junit.Assert.assertNotNull(excluder29);
+        org.junit.Assert.assertNotNull(excluder30);
+        org.junit.Assert.assertNotNull(excluder31);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "true" + "'", str34, "true");
+        org.junit.Assert.assertNotNull(booleanTypeAdapter36);
+        org.junit.Assert.assertNotNull(booleanTypeAdapter37);
+        org.junit.Assert.assertNotNull(jsonWriter40);
+        org.junit.Assert.assertNotNull(jsonWriter42);
+        org.junit.Assert.assertNotNull(jsonWriter46);
+        org.junit.Assert.assertNotNull(jsonWriter48);
+        org.junit.Assert.assertNotNull(dateTypeAdapter53);
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
+        org.junit.Assert.assertNotNull(jsonElement56);
+    }
+
+    @Test
+    public void test13() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test13");
+        com.google.gson.Gson gson0 = new com.google.gson.Gson();
+        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
+        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
+        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
+        java.lang.Object obj5 = null;
+        com.google.gson.JsonElement jsonElement6 = gson0.toJsonTree(obj5);
+        com.google.gson.JsonObject jsonObject7 = new com.google.gson.JsonObject();
+        com.google.gson.JsonElement jsonElement9 = jsonObject7.get("null");
+        com.google.gson.JsonElement jsonElement11 = jsonObject7.get("");
+        com.google.gson.internal.LazilyParsedNumber lazilyParsedNumber14 = new com.google.gson.internal.LazilyParsedNumber("true");
+        jsonObject7.addProperty("false", (java.lang.Number) lazilyParsedNumber14);
+        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter16 = new com.google.gson.internal.bind.JsonTreeWriter();
+        com.google.gson.stream.JsonWriter jsonWriter17 = jsonTreeWriter16.beginArray();
+        com.google.gson.stream.JsonWriter jsonWriter19 = jsonTreeWriter16.value(true);
+        jsonWriter19.setSerializeNulls(false);
+        gson0.toJson((com.google.gson.JsonElement) jsonObject7, jsonWriter19);
         com.google.gson.JsonArray jsonArray23 = new com.google.gson.JsonArray();
         jsonArray23.add((java.lang.Number) 1);
         int int26 = jsonArray23.size();
@@ -458,9 +529,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test13() throws Throwable {
+    public void test14() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test13");
+            System.out.format("%n%s%n", "RegressionTest0.test14");
         com.google.gson.Gson gson0 = new com.google.gson.Gson();
         com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
         com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
@@ -494,9 +565,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test14() throws Throwable {
+    public void test15() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test14");
+            System.out.format("%n%s%n", "RegressionTest0.test15");
         com.google.gson.Gson gson0 = new com.google.gson.Gson();
         com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
         com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
@@ -506,223 +577,6 @@ public class RegressionTest0 {
         java.lang.String str7 = gson0.toString();
         org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
         org.junit.Assert.assertNotNull(jsonElement6);
-    }
-
-    @Test
-    public void test15() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test15");
-        com.google.gson.Gson gson0 = new com.google.gson.Gson();
-        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
-        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
-        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
-        com.google.gson.internal.bind.SqlDateTypeAdapter sqlDateTypeAdapter5 = new com.google.gson.internal.bind.SqlDateTypeAdapter();
-        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter6 = com.google.gson.internal.bind.TypeAdapters.BOOLEAN;
-        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter7 = booleanTypeAdapter6.nullSafe();
-        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter8 = new com.google.gson.internal.bind.JsonTreeWriter();
-        com.google.gson.stream.JsonWriter jsonWriter10 = jsonTreeWriter8.value((double) 1.0f);
-        com.google.gson.stream.JsonWriter jsonWriter12 = jsonTreeWriter8.value((long) (short) 0);
-        jsonTreeWriter8.setSerializeNulls(true);
-        com.google.gson.stream.JsonWriter jsonWriter16 = jsonTreeWriter8.value("null");
-        com.google.gson.stream.JsonWriter jsonWriter18 = jsonWriter16.value((double) (byte) 1);
-        booleanTypeAdapter6.write(jsonWriter18, (java.lang.Boolean) false);
-        java.sql.Date date21 = null;
-        sqlDateTypeAdapter5.write(jsonWriter18, date21);
-        com.google.gson.TypeAdapter<java.sql.Date> dateTypeAdapter23 = sqlDateTypeAdapter5.nullSafe();
-        com.google.gson.TypeAdapter<java.sql.Date> dateTypeAdapter24 = dateTypeAdapter23.nullSafe();
-        java.lang.Appendable appendable25 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            gson0.toJson((java.lang.Object) dateTypeAdapter24, appendable25);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
-        org.junit.Assert.assertNotNull(booleanTypeAdapter6);
-        org.junit.Assert.assertNotNull(booleanTypeAdapter7);
-        org.junit.Assert.assertNotNull(jsonWriter10);
-        org.junit.Assert.assertNotNull(jsonWriter12);
-        org.junit.Assert.assertNotNull(jsonWriter16);
-        org.junit.Assert.assertNotNull(jsonWriter18);
-        org.junit.Assert.assertNotNull(dateTypeAdapter23);
-        org.junit.Assert.assertNotNull(dateTypeAdapter24);
-    }
-
-    @Test
-    public void test16() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test16");
-        com.google.gson.Gson gson0 = new com.google.gson.Gson();
-        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
-        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
-        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
-        java.lang.Object obj5 = null;
-        com.google.gson.JsonElement jsonElement6 = gson0.toJsonTree(obj5);
-        com.google.gson.JsonPrimitive jsonPrimitive8 = new com.google.gson.JsonPrimitive((java.lang.Number) (short) 10);
-        boolean boolean9 = jsonPrimitive8.isNumber();
-        java.lang.String str10 = jsonPrimitive8.toString();
-        float float11 = jsonPrimitive8.getAsFloat();
-        boolean boolean12 = jsonPrimitive8.isString();
-        boolean boolean13 = jsonPrimitive8.getAsBoolean();
-        java.lang.Appendable appendable14 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            gson0.toJson((com.google.gson.JsonElement) jsonPrimitive8, appendable14);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
-        org.junit.Assert.assertNotNull(jsonElement6);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "10" + "'", str10, "10");
-        org.junit.Assert.assertTrue("'" + float11 + "' != '" + 10.0f + "'", float11 == 10.0f);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-    }
-
-    @Test
-    public void test17() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test17");
-        com.google.gson.Gson gson0 = new com.google.gson.Gson();
-        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
-        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
-        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
-        java.lang.Object obj5 = null;
-        com.google.gson.JsonElement jsonElement6 = gson0.toJsonTree(obj5);
-        com.google.gson.JsonObject jsonObject7 = new com.google.gson.JsonObject();
-        com.google.gson.JsonElement jsonElement9 = jsonObject7.get("null");
-        com.google.gson.JsonElement jsonElement11 = jsonObject7.get("");
-        com.google.gson.internal.LazilyParsedNumber lazilyParsedNumber14 = new com.google.gson.internal.LazilyParsedNumber("true");
-        jsonObject7.addProperty("false", (java.lang.Number) lazilyParsedNumber14);
-        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter16 = new com.google.gson.internal.bind.JsonTreeWriter();
-        com.google.gson.stream.JsonWriter jsonWriter17 = jsonTreeWriter16.beginArray();
-        com.google.gson.stream.JsonWriter jsonWriter19 = jsonTreeWriter16.value(true);
-        jsonWriter19.setSerializeNulls(false);
-        gson0.toJson((com.google.gson.JsonElement) jsonObject7, jsonWriter19);
-        com.google.gson.JsonArray jsonArray24 = new com.google.gson.JsonArray();
-        jsonArray24.add("true");
-        java.util.Iterator<com.google.gson.JsonElement> jsonElementItor27 = jsonArray24.iterator();
-        java.lang.String str28 = jsonArray24.getAsString();
-        com.google.gson.internal.Excluder excluder29 = com.google.gson.internal.Excluder.DEFAULT;
-        com.google.gson.internal.Excluder excluder30 = excluder29.excludeFieldsWithoutExposeAnnotation();
-        com.google.gson.internal.Excluder excluder31 = excluder30.excludeFieldsWithoutExposeAnnotation();
-        boolean boolean32 = jsonArray24.equals((java.lang.Object) excluder31);
-        boolean boolean33 = jsonArray24.isJsonPrimitive();
-        java.lang.String str34 = jsonArray24.getAsString();
-        com.google.gson.internal.bind.SqlDateTypeAdapter sqlDateTypeAdapter35 = new com.google.gson.internal.bind.SqlDateTypeAdapter();
-        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter36 = com.google.gson.internal.bind.TypeAdapters.BOOLEAN;
-        com.google.gson.TypeAdapter<java.lang.Boolean> booleanTypeAdapter37 = booleanTypeAdapter36.nullSafe();
-        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter38 = new com.google.gson.internal.bind.JsonTreeWriter();
-        com.google.gson.stream.JsonWriter jsonWriter40 = jsonTreeWriter38.value((double) 1.0f);
-        com.google.gson.stream.JsonWriter jsonWriter42 = jsonTreeWriter38.value((long) (short) 0);
-        jsonTreeWriter38.setSerializeNulls(true);
-        com.google.gson.stream.JsonWriter jsonWriter46 = jsonTreeWriter38.value("null");
-        com.google.gson.stream.JsonWriter jsonWriter48 = jsonWriter46.value((double) (byte) 1);
-        booleanTypeAdapter36.write(jsonWriter48, (java.lang.Boolean) false);
-        java.sql.Date date51 = null;
-        sqlDateTypeAdapter35.write(jsonWriter48, date51);
-        com.google.gson.TypeAdapter<java.sql.Date> dateTypeAdapter53 = sqlDateTypeAdapter35.nullSafe();
-        boolean boolean54 = jsonArray24.equals((java.lang.Object) sqlDateTypeAdapter35);
-        com.google.gson.JsonElement jsonElement56 = jsonArray24.remove(0);
-        jsonObject7.add("com.google.gson.JsonParseException: hi!", jsonElement56);
-        // The following exception was thrown during execution in test generation
-        try {
-            float float58 = jsonElement56.getAsFloat();
-            org.junit.Assert.fail("Expected exception of type java.lang.NumberFormatException; message: For input string: \"true\"");
-        } catch (java.lang.NumberFormatException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
-        org.junit.Assert.assertNotNull(jsonElement6);
-        org.junit.Assert.assertNull(jsonElement9);
-        org.junit.Assert.assertNull(jsonElement11);
-        org.junit.Assert.assertNotNull(jsonWriter17);
-        org.junit.Assert.assertNotNull(jsonWriter19);
-        org.junit.Assert.assertNotNull(jsonElementItor27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "true" + "'", str28, "true");
-        org.junit.Assert.assertNotNull(excluder29);
-        org.junit.Assert.assertNotNull(excluder30);
-        org.junit.Assert.assertNotNull(excluder31);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "true" + "'", str34, "true");
-        org.junit.Assert.assertNotNull(booleanTypeAdapter36);
-        org.junit.Assert.assertNotNull(booleanTypeAdapter37);
-        org.junit.Assert.assertNotNull(jsonWriter40);
-        org.junit.Assert.assertNotNull(jsonWriter42);
-        org.junit.Assert.assertNotNull(jsonWriter46);
-        org.junit.Assert.assertNotNull(jsonWriter48);
-        org.junit.Assert.assertNotNull(dateTypeAdapter53);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertNotNull(jsonElement56);
-    }
-
-    @Test
-    public void test18() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test18");
-        com.google.gson.Gson gson0 = new com.google.gson.Gson();
-        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
-        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
-        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
-        java.lang.Object obj5 = null;
-        com.google.gson.JsonElement jsonElement6 = gson0.toJsonTree(obj5);
-        com.google.gson.JsonObject jsonObject7 = new com.google.gson.JsonObject();
-        com.google.gson.JsonElement jsonElement9 = jsonObject7.get("null");
-        com.google.gson.JsonElement jsonElement11 = jsonObject7.get("");
-        com.google.gson.internal.LazilyParsedNumber lazilyParsedNumber14 = new com.google.gson.internal.LazilyParsedNumber("true");
-        jsonObject7.addProperty("false", (java.lang.Number) lazilyParsedNumber14);
-        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter16 = new com.google.gson.internal.bind.JsonTreeWriter();
-        com.google.gson.stream.JsonWriter jsonWriter17 = jsonTreeWriter16.beginArray();
-        com.google.gson.stream.JsonWriter jsonWriter19 = jsonTreeWriter16.value(true);
-        jsonWriter19.setSerializeNulls(false);
-        gson0.toJson((com.google.gson.JsonElement) jsonObject7, jsonWriter19);
-        com.google.gson.JsonObject jsonObject23 = jsonObject7.getAsJsonObject();
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
-        org.junit.Assert.assertNotNull(jsonElement6);
-        org.junit.Assert.assertNull(jsonElement9);
-        org.junit.Assert.assertNull(jsonElement11);
-        org.junit.Assert.assertNotNull(jsonWriter17);
-        org.junit.Assert.assertNotNull(jsonWriter19);
-        org.junit.Assert.assertNotNull(jsonObject23);
-    }
-
-    @Test
-    public void test19() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test19");
-        com.google.gson.Gson gson0 = new com.google.gson.Gson();
-        com.google.gson.internal.ConstructorConstructor constructorConstructor1 = null;
-        com.google.gson.internal.bind.MapTypeAdapterFactory mapTypeAdapterFactory3 = new com.google.gson.internal.bind.MapTypeAdapterFactory(constructorConstructor1, true);
-        java.lang.String str4 = gson0.toJson((java.lang.Object) constructorConstructor1);
-        java.lang.Object obj5 = null;
-        com.google.gson.JsonElement jsonElement6 = gson0.toJsonTree(obj5);
-        com.google.gson.JsonObject jsonObject7 = new com.google.gson.JsonObject();
-        com.google.gson.JsonElement jsonElement9 = jsonObject7.get("null");
-        com.google.gson.JsonElement jsonElement11 = jsonObject7.get("");
-        com.google.gson.internal.LazilyParsedNumber lazilyParsedNumber14 = new com.google.gson.internal.LazilyParsedNumber("true");
-        jsonObject7.addProperty("false", (java.lang.Number) lazilyParsedNumber14);
-        com.google.gson.internal.bind.JsonTreeWriter jsonTreeWriter16 = new com.google.gson.internal.bind.JsonTreeWriter();
-        com.google.gson.stream.JsonWriter jsonWriter17 = jsonTreeWriter16.beginArray();
-        com.google.gson.stream.JsonWriter jsonWriter19 = jsonTreeWriter16.value(true);
-        jsonWriter19.setSerializeNulls(false);
-        gson0.toJson((com.google.gson.JsonElement) jsonObject7, jsonWriter19);
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean23 = jsonObject7.getAsBoolean();
-            org.junit.Assert.fail("Expected exception of type java.lang.UnsupportedOperationException; message: JsonObject");
-        } catch (java.lang.UnsupportedOperationException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "null" + "'", str4, "null");
-        org.junit.Assert.assertNotNull(jsonElement6);
-        org.junit.Assert.assertNull(jsonElement9);
-        org.junit.Assert.assertNull(jsonElement11);
-        org.junit.Assert.assertNotNull(jsonWriter17);
-        org.junit.Assert.assertNotNull(jsonWriter19);
     }
 }
 

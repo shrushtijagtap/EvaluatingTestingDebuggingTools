@@ -3766,24 +3766,6 @@ public class RegressionTest0 {
     public void test071() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test071");
-        org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
-        org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
-        org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
-        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest5 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression3, expression4);
-        boolean boolean6 = nameAttributeTest5.computeContextDependent();
-        boolean boolean7 = nameAttributeTest5.computeContextDependent();
-        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray8 = nameAttributeTest5.getArguments();
-        org.apache.commons.jxpath.Function function9 = functionLibrary0.getFunction("\000\000\000\000", "UNKNOWN", (java.lang.Object[]) expressionArray8);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(expressionArray8);
-        org.junit.Assert.assertNull(function9);
-    }
-
-    @Test
-    public void test072() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test072");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -3877,9 +3859,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test073() throws Throwable {
+    public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test073");
+            System.out.format("%n%s%n", "RegressionTest0.test072");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -3937,9 +3919,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test074() throws Throwable {
+    public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test074");
+            System.out.format("%n%s%n", "RegressionTest0.test073");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -4031,9 +4013,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test075() throws Throwable {
+    public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test075");
+            System.out.format("%n%s%n", "RegressionTest0.test074");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -4140,9 +4122,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test076() throws Throwable {
+    public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test076");
+            System.out.format("%n%s%n", "RegressionTest0.test075");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object obj5 = treeCompiler0.nodeTypeTest(45);
@@ -4191,9 +4173,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test077() throws Throwable {
+    public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test077");
+            System.out.format("%n%s%n", "RegressionTest0.test076");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -4238,9 +4220,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test078() throws Throwable {
+    public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test078");
+            System.out.format("%n%s%n", "RegressionTest0.test077");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -4286,9 +4268,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test079() throws Throwable {
+    public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test079");
+            System.out.format("%n%s%n", "RegressionTest0.test078");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -4309,9 +4291,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test080() throws Throwable {
+    public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test080");
+            System.out.format("%n%s%n", "RegressionTest0.test079");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         token0.endColumn = 25;
         java.util.Locale locale3 = null;
@@ -4341,9 +4323,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test081() throws Throwable {
+    public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test081");
+            System.out.format("%n%s%n", "RegressionTest0.test080");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         java.lang.Object obj4 = treeCompiler0.nodeTypeTest(7);
@@ -4393,9 +4375,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
+    public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
+            System.out.format("%n%s%n", "RegressionTest0.test081");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -4448,9 +4430,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test083() throws Throwable {
+    public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test083");
+            System.out.format("%n%s%n", "RegressionTest0.test082");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -4526,9 +4508,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test084() throws Throwable {
+    public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test084");
+            System.out.format("%n%s%n", "RegressionTest0.test083");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -4600,9 +4582,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test085() throws Throwable {
+    public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
+            System.out.format("%n%s%n", "RegressionTest0.test084");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -4694,9 +4676,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test086() throws Throwable {
+    public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test086");
+            System.out.format("%n%s%n", "RegressionTest0.test085");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -4707,9 +4689,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test087() throws Throwable {
+    public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test087");
+            System.out.format("%n%s%n", "RegressionTest0.test086");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -4733,9 +4715,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test088() throws Throwable {
+    public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test088");
+            System.out.format("%n%s%n", "RegressionTest0.test087");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -4760,9 +4742,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test089() throws Throwable {
+    public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test089");
+            System.out.format("%n%s%n", "RegressionTest0.test088");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -4801,9 +4783,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test090() throws Throwable {
+    public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test090");
+            System.out.format("%n%s%n", "RegressionTest0.test089");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -4849,9 +4831,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test091() throws Throwable {
+    public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test091");
+            System.out.format("%n%s%n", "RegressionTest0.test090");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         java.lang.Object obj4 = treeCompiler0.nodeTypeTest(7);
@@ -4893,9 +4875,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test092() throws Throwable {
+    public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test092");
+            System.out.format("%n%s%n", "RegressionTest0.test091");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -4997,9 +4979,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test093() throws Throwable {
+    public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test093");
+            System.out.format("%n%s%n", "RegressionTest0.test092");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -5067,9 +5049,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test094() throws Throwable {
+    public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test094");
+            System.out.format("%n%s%n", "RegressionTest0.test093");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -5114,9 +5096,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test095() throws Throwable {
+    public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test095");
+            System.out.format("%n%s%n", "RegressionTest0.test094");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -5181,9 +5163,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test096() throws Throwable {
+    public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test096");
+            System.out.format("%n%s%n", "RegressionTest0.test095");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -5212,9 +5194,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test097() throws Throwable {
+    public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test097");
+            System.out.format("%n%s%n", "RegressionTest0.test096");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -5272,9 +5254,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test098() throws Throwable {
+    public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test098");
+            System.out.format("%n%s%n", "RegressionTest0.test097");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -5312,9 +5294,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test099() throws Throwable {
+    public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test099");
+            System.out.format("%n%s%n", "RegressionTest0.test098");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -5352,9 +5334,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test100() throws Throwable {
+    public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test100");
+            System.out.format("%n%s%n", "RegressionTest0.test099");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -5375,9 +5357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test101() throws Throwable {
+    public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test101");
+            System.out.format("%n%s%n", "RegressionTest0.test100");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
@@ -5401,9 +5383,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test102() throws Throwable {
+    public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test102");
+            System.out.format("%n%s%n", "RegressionTest0.test101");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -5424,9 +5406,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test103() throws Throwable {
+    public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test103");
+            System.out.format("%n%s%n", "RegressionTest0.test102");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -5484,9 +5466,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test104() throws Throwable {
+    public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test104");
+            System.out.format("%n%s%n", "RegressionTest0.test103");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -5561,9 +5543,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test105() throws Throwable {
+    public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test105");
+            System.out.format("%n%s%n", "RegressionTest0.test104");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -5580,9 +5562,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test106() throws Throwable {
+    public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test106");
+            System.out.format("%n%s%n", "RegressionTest0.test105");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -5628,9 +5610,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test107() throws Throwable {
+    public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test107");
+            System.out.format("%n%s%n", "RegressionTest0.test106");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -5718,9 +5700,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test108() throws Throwable {
+    public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test108");
+            System.out.format("%n%s%n", "RegressionTest0.test107");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -5819,9 +5801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test109() throws Throwable {
+    public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test109");
+            System.out.format("%n%s%n", "RegressionTest0.test108");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -5881,9 +5863,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test110() throws Throwable {
+    public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test110");
+            System.out.format("%n%s%n", "RegressionTest0.test109");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -5905,9 +5887,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test111() throws Throwable {
+    public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test111");
+            System.out.format("%n%s%n", "RegressionTest0.test110");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -5952,9 +5934,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test112() throws Throwable {
+    public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test112");
+            System.out.format("%n%s%n", "RegressionTest0.test111");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -6022,9 +6004,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test113() throws Throwable {
+    public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test113");
+            System.out.format("%n%s%n", "RegressionTest0.test112");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -6093,9 +6075,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test114() throws Throwable {
+    public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test114");
+            System.out.format("%n%s%n", "RegressionTest0.test113");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -6142,9 +6124,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test115() throws Throwable {
+    public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test115");
+            System.out.format("%n%s%n", "RegressionTest0.test114");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer1 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName0);
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer2 = variablePointer1.getParent();
@@ -6220,9 +6202,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test116() throws Throwable {
+    public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test116");
+            System.out.format("%n%s%n", "RegressionTest0.test115");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         java.lang.Object obj4 = treeCompiler0.nodeTypeTest(7);
@@ -6328,9 +6310,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test117() throws Throwable {
+    public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test117");
+            System.out.format("%n%s%n", "RegressionTest0.test116");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -6389,9 +6371,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test118() throws Throwable {
+    public void test117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test118");
+            System.out.format("%n%s%n", "RegressionTest0.test117");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -6467,9 +6449,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test119() throws Throwable {
+    public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test119");
+            System.out.format("%n%s%n", "RegressionTest0.test118");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl2 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer3 = null;
@@ -6490,9 +6472,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test120() throws Throwable {
+    public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test120");
+            System.out.format("%n%s%n", "RegressionTest0.test119");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -6573,9 +6555,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test121() throws Throwable {
+    public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test121");
+            System.out.format("%n%s%n", "RegressionTest0.test120");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object obj5 = treeCompiler0.nodeTypeTest(45);
@@ -6638,9 +6620,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test122() throws Throwable {
+    public void test121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test122");
+            System.out.format("%n%s%n", "RegressionTest0.test121");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -6710,9 +6692,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test123() throws Throwable {
+    public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test123");
+            System.out.format("%n%s%n", "RegressionTest0.test122");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -6745,9 +6727,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test124() throws Throwable {
+    public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test124");
+            System.out.format("%n%s%n", "RegressionTest0.test123");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -6805,9 +6787,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test125() throws Throwable {
+    public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test125");
+            System.out.format("%n%s%n", "RegressionTest0.test124");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -6841,9 +6823,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test126() throws Throwable {
+    public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test126");
+            System.out.format("%n%s%n", "RegressionTest0.test125");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -6919,9 +6901,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test127() throws Throwable {
+    public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test127");
+            System.out.format("%n%s%n", "RegressionTest0.test126");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -7043,9 +7025,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test128() throws Throwable {
+    public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test128");
+            System.out.format("%n%s%n", "RegressionTest0.test127");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -7172,9 +7154,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test129() throws Throwable {
+    public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test129");
+            System.out.format("%n%s%n", "RegressionTest0.test128");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -7260,9 +7242,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test130() throws Throwable {
+    public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test130");
+            System.out.format("%n%s%n", "RegressionTest0.test129");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer2 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName1);
@@ -7348,9 +7330,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test131() throws Throwable {
+    public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test131");
+            System.out.format("%n%s%n", "RegressionTest0.test130");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -7403,9 +7385,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test132() throws Throwable {
+    public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test132");
+            System.out.format("%n%s%n", "RegressionTest0.test131");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -7434,9 +7416,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test133() throws Throwable {
+    public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test133");
+            System.out.format("%n%s%n", "RegressionTest0.test132");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -7508,9 +7490,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test134() throws Throwable {
+    public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test134");
+            System.out.format("%n%s%n", "RegressionTest0.test133");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -7642,9 +7624,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test135() throws Throwable {
+    public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test135");
+            System.out.format("%n%s%n", "RegressionTest0.test134");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -7720,9 +7702,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test136() throws Throwable {
+    public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test136");
+            System.out.format("%n%s%n", "RegressionTest0.test135");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -7775,9 +7757,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test137() throws Throwable {
+    public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test137");
+            System.out.format("%n%s%n", "RegressionTest0.test136");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -7876,9 +7858,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test138() throws Throwable {
+    public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test138");
+            System.out.format("%n%s%n", "RegressionTest0.test137");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         java.lang.Object obj4 = treeCompiler0.nodeTypeTest(7);
@@ -7975,9 +7957,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test139() throws Throwable {
+    public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test139");
+            System.out.format("%n%s%n", "RegressionTest0.test138");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -8044,9 +8026,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test140() throws Throwable {
+    public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test140");
+            System.out.format("%n%s%n", "RegressionTest0.test139");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -8147,9 +8129,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test141() throws Throwable {
+    public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test141");
+            System.out.format("%n%s%n", "RegressionTest0.test140");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -8244,9 +8226,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test142() throws Throwable {
+    public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
+            System.out.format("%n%s%n", "RegressionTest0.test141");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -8319,9 +8301,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RegressionTest0.test142");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -8376,9 +8358,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RegressionTest0.test143");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -8389,9 +8371,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RegressionTest0.test144");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -8507,9 +8489,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RegressionTest0.test145");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler4 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
@@ -8625,9 +8607,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RegressionTest0.test146");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -8699,9 +8681,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RegressionTest0.test147");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -8779,9 +8761,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RegressionTest0.test148");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -8822,9 +8804,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RegressionTest0.test149");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -8916,9 +8898,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RegressionTest0.test150");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -9001,9 +8983,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RegressionTest0.test151");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -9065,9 +9047,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RegressionTest0.test152");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -9166,9 +9148,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RegressionTest0.test153");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         java.lang.Object obj4 = treeCompiler0.nodeTypeTest(7);
@@ -9188,9 +9170,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
+            System.out.format("%n%s%n", "RegressionTest0.test154");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -9248,9 +9230,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test156() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RegressionTest0.test155");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -9321,9 +9303,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test157() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RegressionTest0.test156");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         int int1 = dynamicPointerFactory0.getOrder();
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory2 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
@@ -9437,9 +9419,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RegressionTest0.test157");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -9518,9 +9500,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RegressionTest0.test158");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -9598,9 +9580,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RegressionTest0.test159");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -9707,9 +9689,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test161() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RegressionTest0.test160");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -9746,9 +9728,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RegressionTest0.test161");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl2 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer3 = null;
@@ -9830,9 +9812,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RegressionTest0.test162");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -9903,9 +9885,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RegressionTest0.test163");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
@@ -9933,35 +9915,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
-        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
-        java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
-        java.lang.Object[] objArray5 = new java.lang.Object[] {};
-        java.lang.Object obj6 = treeCompiler0.function((int) (short) 1, objArray5);
-        java.lang.Object obj8 = treeCompiler0.processingInstructionTest("/[25]");
-        org.junit.Assert.assertNotNull(obj3);
-        org.junit.Assert.assertEquals(obj3.toString(), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertNotNull(objArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray5), "[]");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray5), "[]");
-        org.junit.Assert.assertNotNull(obj6);
-        org.junit.Assert.assertEquals(obj6.toString(), "last()");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj6), "last()");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj6), "last()");
-        org.junit.Assert.assertNotNull(obj8);
-        org.junit.Assert.assertEquals(obj8.toString(), "processing-instruction('/[25]')");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj8), "processing-instruction('/[25]')");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj8), "processing-instruction('/[25]')");
-    }
-
-    @Test
-    public void test166() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RegressionTest0.test164");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -10022,9 +9978,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test167() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RegressionTest0.test165");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -10100,9 +10056,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test166");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -10172,9 +10128,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test167");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -10221,9 +10177,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -10308,9 +10264,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -10328,9 +10284,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -10410,9 +10366,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -10494,9 +10450,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -10602,9 +10558,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -10674,9 +10630,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -10758,9 +10714,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -10806,9 +10762,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         java.lang.reflect.Method method0 = null;
         org.apache.commons.jxpath.functions.MethodFunction methodFunction1 = new org.apache.commons.jxpath.functions.MethodFunction(method0);
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
@@ -10862,9 +10818,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -10989,9 +10945,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory0 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
         org.apache.commons.jxpath.Container container1 = null;
         java.util.Locale locale2 = null;
@@ -11107,9 +11063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -11158,9 +11114,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -11210,9 +11166,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -11340,9 +11296,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -11435,9 +11391,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory0 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
         org.apache.commons.jxpath.Container container1 = null;
         java.util.Locale locale2 = null;
@@ -11488,9 +11444,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
         java.util.Set set1 = functionLibrary0.getUsedNamespaces();
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler4 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
@@ -11572,9 +11528,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -11621,9 +11577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -11674,9 +11630,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory1 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
         org.apache.commons.jxpath.Container container2 = null;
@@ -11740,9 +11696,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -11836,9 +11792,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -11865,9 +11821,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("id('$null[11]')");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = null;
@@ -11886,9 +11842,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -11973,9 +11929,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -12058,9 +12014,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -12168,9 +12124,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -12259,9 +12215,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -12313,9 +12269,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -12408,9 +12364,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -12474,9 +12430,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler4 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
@@ -12627,9 +12583,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -12675,9 +12631,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
@@ -12729,9 +12685,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         int int1 = dynamicPointerFactory0.getOrder();
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory2 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
@@ -12845,9 +12801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         java.lang.reflect.Method method0 = null;
         org.apache.commons.jxpath.functions.MethodFunction methodFunction1 = new org.apache.commons.jxpath.functions.MethodFunction(method0);
         org.apache.commons.jxpath.ri.compiler.Constant constant3 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
@@ -12942,9 +12898,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -12994,9 +12950,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -13087,9 +13043,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -13186,9 +13142,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -13313,9 +13269,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -13391,9 +13347,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -13501,9 +13457,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -13562,9 +13518,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -13589,9 +13545,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -13667,9 +13623,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -13730,9 +13686,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory0 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
         org.apache.commons.jxpath.Container container1 = null;
         java.util.Locale locale2 = null;
@@ -13842,9 +13798,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("id('$null[11]')");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = null;
@@ -13866,9 +13822,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -13893,9 +13849,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -13979,9 +13935,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -14042,9 +13998,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -14057,9 +14013,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -14074,9 +14030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler2 = null;
         java.util.Locale locale3 = null;
@@ -14197,9 +14153,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler2 = null;
         java.util.Locale locale3 = null;
@@ -14260,84 +14216,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
-        org.apache.commons.jxpath.BasicVariables basicVariables0 = new org.apache.commons.jxpath.BasicVariables();
-        org.w3c.dom.Node node1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node1, locale2);
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer4 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer3);
-        int int5 = nullPropertyPointer4.getPropertyIndex();
-        java.lang.Object obj6 = nullPropertyPointer4.getBaseValue();
-        boolean boolean7 = nullPropertyPointer4.isCollection();
-        nullPropertyPointer4.setPropertyName("");
-        org.apache.commons.jxpath.ri.QName qName10 = nullPropertyPointer4.getName();
-        java.util.Locale locale11 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer12 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName10, locale11);
-        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer13 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName10);
-        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer14 = new org.apache.commons.jxpath.ri.model.VariablePointer((org.apache.commons.jxpath.Variables) basicVariables0, qName10);
-        java.lang.String str15 = basicVariables0.toString();
-        org.apache.commons.jxpath.ri.EvalContext evalContext17 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest19 = null;
-        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext20 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext17, false, nodeTest19);
-        org.apache.commons.jxpath.Pointer pointer21 = ancestorContext20.getContextNodePointer();
-        org.apache.commons.jxpath.ri.QName qName22 = null;
-        java.util.Locale locale23 = null;
-        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator24 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) ancestorContext20, qName22, locale23);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray25 = null;
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext26 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, evalContextArray25);
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest27 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext28 = new org.apache.commons.jxpath.ri.axes.SelfContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, nodeTest27);
-        org.apache.commons.jxpath.BasicNodeSet basicNodeSet29 = new org.apache.commons.jxpath.BasicNodeSet();
-        org.apache.commons.jxpath.ri.axes.NodeSetContext nodeSetContext30 = new org.apache.commons.jxpath.ri.axes.NodeSetContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.NodeSet) basicNodeSet29);
-        java.io.Reader reader31 = null;
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream35 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader31, 0, 100, (int) (short) 10);
-        java.lang.String str36 = simpleCharStream35.GetImage();
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer39 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) simpleCharStream35, locale37, "*");
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest40 = null;
-        org.w3c.dom.Node node42 = null;
-        java.util.Locale locale43 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer44 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node42, locale43);
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer45 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer44);
-        boolean boolean46 = nullPropertyPointer45.isCollection();
-        boolean boolean47 = nullPropertyPointer45.isLeaf();
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator48 = jDOMNodePointer39.childIterator(nodeTest40, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer45);
-        org.apache.commons.jxpath.ri.QName qName49 = nullPropertyPointer45.getName();
-        org.apache.commons.jxpath.ri.compiler.Step[] stepArray51 = new org.apache.commons.jxpath.ri.compiler.Step[] {};
-        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath52 = new org.apache.commons.jxpath.ri.compiler.LocationPath(true, stepArray51);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer53 = org.apache.commons.jxpath.ri.axes.SimplePathInterpreter.interpretSimpleLocationPath((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer45, stepArray51);
-        org.w3c.dom.Node node54 = null;
-        java.util.Locale locale55 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer56 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node54, locale55);
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer57 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer56);
-        boolean boolean58 = nullPropertyPointer57.isActual();
-        org.apache.commons.jxpath.ri.QName qName59 = nullPropertyPointer57.getName();
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest60 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName59);
-        org.apache.commons.jxpath.ri.axes.ChildContext childContext63 = new org.apache.commons.jxpath.ri.axes.ChildContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest60, false, false);
-        basicVariables0.declareVariable("xml:lang", (java.lang.Object) false);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + (-2147483648) + "'", int5 == (-2147483648));
-        org.junit.Assert.assertNull(obj6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(qName10);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "{}" + "'", str15, "{}");
-        org.junit.Assert.assertNull(pointer21);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", str36, "\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
-        org.junit.Assert.assertNotNull(nodeIterator48);
-        org.junit.Assert.assertNotNull(qName49);
-        org.junit.Assert.assertNotNull(stepArray51);
-        org.junit.Assert.assertNotNull(nodePointer53);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(qName59);
-    }
-
-    @Test
-    public void test225() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -14417,9 +14298,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -14549,9 +14430,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -14600,9 +14481,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -14650,9 +14531,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -14741,9 +14622,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant((java.lang.Number) 17);
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -14785,9 +14666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -14877,9 +14758,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -15002,9 +14883,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -15098,9 +14979,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler1.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError4 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -15149,9 +15030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -15250,9 +15131,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -15337,9 +15218,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler4 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
@@ -15445,9 +15326,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -15539,9 +15420,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -15609,9 +15490,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -15730,9 +15611,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -15750,9 +15631,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -15874,9 +15755,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -15931,9 +15812,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object[] objArray5 = new java.lang.Object[] {};
@@ -15983,9 +15864,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -16067,9 +15948,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -16199,9 +16080,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -16222,9 +16103,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         int int1 = dynamicPointerFactory0.getOrder();
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory2 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
@@ -16338,9 +16219,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -16432,9 +16313,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object[] objArray5 = new java.lang.Object[] {};
@@ -16513,9 +16394,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RegressionTest0.test248");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -16580,9 +16461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RegressionTest0.test249");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -16718,9 +16599,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
+            System.out.format("%n%s%n", "RegressionTest0.test250");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -16814,9 +16695,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RegressionTest0.test251");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -16893,9 +16774,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RegressionTest0.test252");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -16917,9 +16798,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RegressionTest0.test253");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -16991,9 +16872,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RegressionTest0.test254");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         java.lang.Object obj3 = constant1.computeValue(evalContext2);
@@ -17075,9 +16956,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RegressionTest0.test255");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -17189,9 +17070,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RegressionTest0.test256");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -17243,9 +17124,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RegressionTest0.test257");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -17362,9 +17243,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RegressionTest0.test258");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName0, locale1);
@@ -17452,73 +17333,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
-        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
-        java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
-        org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
-        org.apache.commons.jxpath.ri.compiler.Expression expression6 = null;
-        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest7 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression5, expression6);
-        boolean boolean8 = nameAttributeTest7.computeContextDependent();
-        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError11 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
-        org.apache.commons.jxpath.JXPathException jXPathException12 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError11);
-        boolean boolean13 = nameAttributeTest7.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError11);
-        boolean boolean14 = nameAttributeTest7.isSymmetric();
-        boolean boolean15 = nameAttributeTest7.isContextDependent();
-        org.apache.commons.jxpath.ri.compiler.Expression expression16 = nameAttributeTest7.getNameTestExpression();
-        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray17 = nameAttributeTest7.getArguments();
-        java.lang.Object obj18 = treeCompiler0.function(50, (java.lang.Object[]) expressionArray17);
-        org.apache.commons.jxpath.ri.compiler.Constant constant21 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl22 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer23 = null;
-        org.apache.commons.jxpath.ri.axes.RootContext rootContext24 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl22, nodePointer23);
-        java.lang.Object obj25 = rootContext24.getValue();
-        java.lang.Object obj27 = rootContext24.getRegisteredValue(21);
-        java.lang.Object obj28 = constant21.compute((org.apache.commons.jxpath.ri.EvalContext) rootContext24);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer29 = rootContext24.getCurrentNodePointer();
-        org.apache.commons.jxpath.ri.compiler.Expression expression30 = null;
-        org.apache.commons.jxpath.ri.compiler.Expression expression31 = null;
-        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest32 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression30, expression31);
-        boolean boolean33 = nameAttributeTest32.computeContextDependent();
-        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError36 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
-        org.apache.commons.jxpath.JXPathException jXPathException37 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError36);
-        boolean boolean38 = nameAttributeTest32.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError36);
-        boolean boolean39 = nameAttributeTest32.isSymmetric();
-        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray40 = nameAttributeTest32.args;
-        java.lang.Object obj41 = treeCompiler0.step(2, (java.lang.Object) nodePointer29, (java.lang.Object[]) expressionArray40);
-        org.junit.Assert.assertNotNull(obj3);
-        org.junit.Assert.assertEquals(obj3.toString(), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNull(expression16);
-        org.junit.Assert.assertNotNull(expressionArray17);
-        org.junit.Assert.assertNotNull(obj18);
-        org.junit.Assert.assertEquals(obj18.toString(), "unknownFunction50()(null, null)");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj18), "unknownFunction50()(null, null)");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj18), "unknownFunction50()(null, null)");
-        org.junit.Assert.assertNull(obj25);
-        org.junit.Assert.assertNotNull(obj27);
-        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", obj28, "\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNull(nodePointer29);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
-        org.junit.Assert.assertNotNull(expressionArray40);
-        org.junit.Assert.assertNotNull(obj41);
-        org.junit.Assert.assertEquals(obj41.toString(), "null[null][null]");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj41), "null[null][null]");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj41), "null[null][null]");
-    }
-
-    @Test
-    public void test263() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RegressionTest0.test259");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -17650,9 +17467,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RegressionTest0.test260");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -17680,9 +17497,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
+            System.out.format("%n%s%n", "RegressionTest0.test261");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -17730,9 +17547,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RegressionTest0.test262");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -17777,9 +17594,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
+            System.out.format("%n%s%n", "RegressionTest0.test263");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         org.apache.commons.jxpath.ri.parser.Token token1 = new org.apache.commons.jxpath.ri.parser.Token();
         token1.endColumn = 25;
@@ -17898,9 +17715,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RegressionTest0.test264");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -17971,9 +17788,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RegressionTest0.test265");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer1 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName0);
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer2 = variablePointer1.getParent();
@@ -18046,9 +17863,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RegressionTest0.test266");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -18115,9 +17932,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RegressionTest0.test267");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -18170,9 +17987,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RegressionTest0.test268");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -18304,9 +18121,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RegressionTest0.test269");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -18429,71 +18246,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
-        java.io.Reader reader0 = null;
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
-        java.lang.String str5 = simpleCharStream4.GetImage();
-        java.util.Locale locale6 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) simpleCharStream4, locale6, "*");
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest9 = null;
-        org.w3c.dom.Node node11 = null;
-        java.util.Locale locale12 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer13 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node11, locale12);
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer14 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer13);
-        boolean boolean15 = nullPropertyPointer14.isCollection();
-        boolean boolean16 = nullPropertyPointer14.isLeaf();
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator17 = jDOMNodePointer8.childIterator(nodeTest9, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer14);
-        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler18 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
-        java.lang.Object obj20 = treeCompiler18.literal("");
-        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError21 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
-        java.lang.Throwable[] throwableArray22 = jXPathContextFactoryConfigurationError21.getSuppressed();
-        java.lang.Object obj23 = treeCompiler18.and((java.lang.Object[]) throwableArray22);
-        java.lang.Object obj24 = null;
-        java.lang.Object obj25 = treeCompiler18.variableReference(obj24);
-        boolean boolean26 = jDOMNodePointer8.equals(obj24);
-        boolean boolean27 = jDOMNodePointer8.isCollection();
-        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver28 = null;
-        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver29 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver28);
-        org.w3c.dom.Node node30 = null;
-        java.util.Locale locale31 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer32 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node30, locale31);
-        org.apache.commons.jxpath.ri.model.beans.LangAttributePointer langAttributePointer33 = new org.apache.commons.jxpath.ri.model.beans.LangAttributePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer32);
-        java.lang.String str35 = dOMNodePointer32.getNamespaceURI("");
-        boolean boolean36 = dOMNodePointer32.isNode();
-        java.lang.Object obj37 = dOMNodePointer32.getNode();
-        namespaceResolver29.setNamespaceContextPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer32);
-        jDOMNodePointer8.setNamespaceResolver(namespaceResolver29);
-        namespaceResolver29.seal();
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", str5, "\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(nodeIterator17);
-        org.junit.Assert.assertNotNull(obj20);
-        org.junit.Assert.assertEquals(obj20.toString(), "''");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj20), "''");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj20), "''");
-        org.junit.Assert.assertNotNull(throwableArray22);
-        org.junit.Assert.assertNotNull(obj23);
-        org.junit.Assert.assertEquals(obj23.toString(), "");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj23), "");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj23), "");
-        org.junit.Assert.assertNotNull(obj25);
-        org.junit.Assert.assertEquals(obj25.toString(), "$null");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj25), "$null");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj25), "$null");
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNull(str35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
-        org.junit.Assert.assertNull(obj37);
-    }
-
-    @Test
-    public void test275() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RegressionTest0.test270");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -18504,9 +18259,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RegressionTest0.test271");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -18581,9 +18336,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RegressionTest0.test272");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -18680,9 +18435,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RegressionTest0.test273");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -18809,9 +18564,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RegressionTest0.test274");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler1.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError4 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -18857,9 +18612,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RegressionTest0.test275");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -18909,9 +18664,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RegressionTest0.test276");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -18959,7 +18714,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int56 = jDOMNodePointer8.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer28, (org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer55);
-            org.junit.Assert.fail("Expected exception of type java.lang.RuntimeException; message: JXPath internal error: compareChildNodes called for org.apache.commons.jxpath.ri.parser.SimpleCharStream@73085836");
+            org.junit.Assert.fail("Expected exception of type java.lang.RuntimeException; message: JXPath internal error: compareChildNodes called for org.apache.commons.jxpath.ri.parser.SimpleCharStream@1f8b5b7d");
         } catch (java.lang.RuntimeException e) {
         // Expected exception.
         }
@@ -18994,9 +18749,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RegressionTest0.test277");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -19033,18 +18788,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RegressionTest0.test278");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
         boolean boolean2 = constant1.computeContextDependent();
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RegressionTest0.test279");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -19150,9 +18905,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RegressionTest0.test280");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -19202,9 +18957,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RegressionTest0.test281");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -19276,9 +19031,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RegressionTest0.test282");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -19348,9 +19103,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RegressionTest0.test283");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -19441,9 +19196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RegressionTest0.test284");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -19521,9 +19276,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RegressionTest0.test285");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -19561,9 +19316,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
+            System.out.format("%n%s%n", "RegressionTest0.test286");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -19665,9 +19420,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RegressionTest0.test287");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         token0.endColumn = 25;
         java.util.Locale locale3 = null;
@@ -19759,9 +19514,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RegressionTest0.test288");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -19807,9 +19562,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RegressionTest0.test289");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -19907,9 +19662,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
+            System.out.format("%n%s%n", "RegressionTest0.test290");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -20024,9 +19779,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RegressionTest0.test291");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -20125,9 +19880,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RegressionTest0.test292");
         org.apache.commons.jxpath.JXPathException jXPathException2 = new org.apache.commons.jxpath.JXPathException("org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!");
         org.apache.commons.jxpath.JXPathInvalidAccessException jXPathInvalidAccessException3 = new org.apache.commons.jxpath.JXPathInvalidAccessException("hi!", (java.lang.Throwable) jXPathException2);
         java.lang.Class<?> wildcardClass4 = jXPathException2.getClass();
@@ -20212,9 +19967,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RegressionTest0.test293");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -20349,9 +20104,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RegressionTest0.test294");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -20449,9 +20204,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RegressionTest0.test295");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -20556,9 +20311,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RegressionTest0.test296");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl2 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer3 = null;
@@ -20579,9 +20334,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RegressionTest0.test297");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -20608,9 +20363,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RegressionTest0.test298");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -20663,9 +20418,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
+            System.out.format("%n%s%n", "RegressionTest0.test299");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -20737,9 +20492,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test305() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
+            System.out.format("%n%s%n", "RegressionTest0.test300");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         boolean boolean2 = constant1.isContextDependent();
         boolean boolean3 = constant1.computeContextDependent();
@@ -20748,9 +20503,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test306() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RegressionTest0.test301");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("id('$null[11]')");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = null;
@@ -20829,9 +20584,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RegressionTest0.test302");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -20889,9 +20644,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RegressionTest0.test303");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -20991,9 +20746,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RegressionTest0.test304");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -21046,9 +20801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RegressionTest0.test305");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -21157,9 +20912,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RegressionTest0.test306");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -21271,9 +21026,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RegressionTest0.test307");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -21312,9 +21067,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RegressionTest0.test308");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -21406,9 +21161,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RegressionTest0.test309");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory1 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
         org.apache.commons.jxpath.Container container2 = null;
@@ -21457,9 +21212,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RegressionTest0.test310");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName0, locale1);
@@ -21528,9 +21283,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
+            System.out.format("%n%s%n", "RegressionTest0.test311");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -21615,9 +21370,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test317() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RegressionTest0.test312");
         org.apache.commons.jxpath.JXPathException jXPathException2 = new org.apache.commons.jxpath.JXPathException("org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!");
         org.apache.commons.jxpath.JXPathInvalidAccessException jXPathInvalidAccessException3 = new org.apache.commons.jxpath.JXPathInvalidAccessException("hi!", (java.lang.Throwable) jXPathException2);
         java.lang.Class<?> wildcardClass4 = jXPathException2.getClass();
@@ -21691,9 +21446,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
+            System.out.format("%n%s%n", "RegressionTest0.test313");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -21789,9 +21544,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test319() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RegressionTest0.test314");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -21820,16 +21575,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RegressionTest0.test315");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant((java.lang.Number) 7);
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RegressionTest0.test316");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -21892,9 +21647,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RegressionTest0.test317");
         java.util.Iterator iterator0 = null;
         org.apache.commons.jxpath.Container container1 = null;
         java.util.Locale locale2 = null;
@@ -21981,9 +21736,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RegressionTest0.test318");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -22016,9 +21771,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RegressionTest0.test319");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -22076,9 +21831,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RegressionTest0.test320");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -22100,9 +21855,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
+            System.out.format("%n%s%n", "RegressionTest0.test321");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -22216,9 +21971,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test327() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
+            System.out.format("%n%s%n", "RegressionTest0.test322");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -22279,9 +22034,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test328() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RegressionTest0.test323");
         org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
         org.apache.commons.jxpath.FunctionLibrary functionLibrary1 = new org.apache.commons.jxpath.FunctionLibrary();
         functionLibrary0.addFunctions((org.apache.commons.jxpath.Functions) functionLibrary1);
@@ -22333,9 +22088,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RegressionTest0.test324");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -22404,9 +22159,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RegressionTest0.test325");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -22417,9 +22172,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
+            System.out.format("%n%s%n", "RegressionTest0.test326");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -22483,9 +22238,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test332() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RegressionTest0.test327");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
@@ -22508,9 +22263,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RegressionTest0.test328");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -22548,9 +22303,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
+            System.out.format("%n%s%n", "RegressionTest0.test329");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName0, locale1);
@@ -22638,9 +22393,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test335() throws Throwable {
+    public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RegressionTest0.test330");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -22742,9 +22497,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RegressionTest0.test331");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError3 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
@@ -22793,9 +22548,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RegressionTest0.test332");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer1 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName0);
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer2 = variablePointer1.getParent();
@@ -22856,9 +22611,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RegressionTest0.test333");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -22951,9 +22706,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
+            System.out.format("%n%s%n", "RegressionTest0.test334");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -23079,9 +22834,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test340() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RegressionTest0.test335");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -23156,9 +22911,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RegressionTest0.test336");
         org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
         java.util.Set set1 = functionLibrary0.getUsedNamespaces();
         java.util.Set set2 = functionLibrary0.getUsedNamespaces();
@@ -23237,9 +22992,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RegressionTest0.test337");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.Container container1 = null;
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
@@ -23347,9 +23102,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RegressionTest0.test338");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -23420,9 +23175,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RegressionTest0.test339");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -23467,9 +23222,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RegressionTest0.test340");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -23506,9 +23261,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RegressionTest0.test341");
         org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
         java.util.Set set1 = functionLibrary0.getUsedNamespaces();
         java.util.Set set2 = functionLibrary0.getUsedNamespaces();
@@ -23552,9 +23307,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RegressionTest0.test342");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -23566,9 +23321,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RegressionTest0.test343");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant((java.lang.Number) 17);
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -23611,9 +23366,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RegressionTest0.test344");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         token0.endColumn = 25;
         java.util.Locale locale3 = null;
@@ -23705,9 +23460,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RegressionTest0.test345");
         java.util.Locale locale0 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(locale0, "org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!");
         java.lang.Object obj3 = nullPointer2.getImmediateNode();
@@ -23810,9 +23565,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RegressionTest0.test346");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -23906,9 +23661,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RegressionTest0.test347");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler2 = null;
         java.util.Locale locale3 = null;
@@ -23978,9 +23733,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RegressionTest0.test348");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -24098,9 +23853,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RegressionTest0.test349");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -24181,9 +23936,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RegressionTest0.test350");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         token0.endColumn = 25;
         java.util.Locale locale3 = null;
@@ -24275,9 +24030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
+            System.out.format("%n%s%n", "RegressionTest0.test351");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -24352,9 +24107,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test357() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RegressionTest0.test352");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = null;
@@ -24387,9 +24142,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RegressionTest0.test353");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -24463,16 +24218,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
+            System.out.format("%n%s%n", "RegressionTest0.test354");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("org.apache.commons.jxpath.JXPathException: org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: ; ");
     }
 
     @Test
-    public void test360() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RegressionTest0.test355");
         org.apache.commons.jxpath.JXPathException jXPathException2 = new org.apache.commons.jxpath.JXPathException("org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!");
         org.apache.commons.jxpath.JXPathInvalidAccessException jXPathInvalidAccessException3 = new org.apache.commons.jxpath.JXPathInvalidAccessException("hi!", (java.lang.Throwable) jXPathException2);
         java.lang.Class<?> wildcardClass4 = jXPathException2.getClass();
@@ -24583,9 +24338,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RegressionTest0.test356");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant((java.lang.Number) 17);
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         java.lang.Object obj3 = constant1.computeValue(evalContext2);
@@ -24593,9 +24348,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RegressionTest0.test357");
         java.util.Locale locale0 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(locale0, "UNKNOWN");
         java.util.Iterator iterator3 = null;
@@ -24679,9 +24434,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RegressionTest0.test358");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -24748,9 +24503,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RegressionTest0.test359");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -24848,9 +24603,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
+            System.out.format("%n%s%n", "RegressionTest0.test360");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest2 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression0, expression1);
@@ -24867,9 +24622,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test366() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
+            System.out.format("%n%s%n", "RegressionTest0.test361");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         token0.endColumn = 25;
         java.util.Locale locale3 = null;
@@ -24961,9 +24716,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test367() throws Throwable {
+    public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RegressionTest0.test362");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -24991,9 +24746,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RegressionTest0.test363");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -25043,9 +24798,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RegressionTest0.test364");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object[] objArray5 = new java.lang.Object[] {};
@@ -25092,9 +24847,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RegressionTest0.test365");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -25186,9 +24941,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
+            System.out.format("%n%s%n", "RegressionTest0.test366");
         java.lang.reflect.Method method0 = null;
         org.apache.commons.jxpath.functions.MethodFunction methodFunction1 = new org.apache.commons.jxpath.functions.MethodFunction(method0);
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl2 = null;
@@ -25231,9 +24986,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test372() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
+            System.out.format("%n%s%n", "RegressionTest0.test367");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -25310,9 +25065,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test373() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RegressionTest0.test368");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -25338,9 +25093,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RegressionTest0.test369");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl1 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer2 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext3 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl1, nodePointer2);
@@ -25377,9 +25132,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RegressionTest0.test370");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         java.lang.Object obj5 = treeCompiler0.nodeTypeTest(45);
@@ -25415,9 +25170,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RegressionTest0.test371");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
         org.apache.commons.jxpath.ri.compiler.Expression expression5 = null;
@@ -25516,9 +25271,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
+            System.out.format("%n%s%n", "RegressionTest0.test372");
         org.apache.commons.jxpath.MapDynamicPropertyHandler mapDynamicPropertyHandler0 = new org.apache.commons.jxpath.MapDynamicPropertyHandler();
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -25655,9 +25410,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test378() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RegressionTest0.test373");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
@@ -25745,9 +25500,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RegressionTest0.test374");
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
@@ -25800,9 +25555,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RegressionTest0.test375");
         org.apache.commons.jxpath.ri.compiler.Expression expression0 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression1 = null;
         org.apache.commons.jxpath.ri.compiler.Expression expression2 = null;
@@ -25929,9 +25684,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RegressionTest0.test376");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -26034,9 +25789,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RegressionTest0.test377");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("id('$null[11]')");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl2 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = null;
@@ -26058,9 +25813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RegressionTest0.test378");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -26119,9 +25874,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RegressionTest0.test379");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -26242,9 +25997,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RegressionTest0.test380");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -26325,9 +26080,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
+            System.out.format("%n%s%n", "RegressionTest0.test381");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -26408,9 +26163,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test387() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RegressionTest0.test382");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -26518,9 +26273,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RegressionTest0.test383");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant((java.lang.Number) 17);
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -26602,9 +26357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RegressionTest0.test384");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
         java.lang.String str5 = simpleCharStream4.GetImage();
@@ -26652,9 +26407,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RegressionTest0.test385");
         org.apache.commons.jxpath.ri.compiler.Constant constant1 = new org.apache.commons.jxpath.ri.compiler.Constant("http://www.w3.org/XML/1998/namespace");
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
@@ -26713,9 +26468,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RegressionTest0.test386");
         org.apache.commons.jxpath.FunctionLibrary functionLibrary0 = new org.apache.commons.jxpath.FunctionLibrary();
         java.util.Set set1 = functionLibrary0.getUsedNamespaces();
         java.util.Set set2 = functionLibrary0.getUsedNamespaces();
@@ -26807,9 +26562,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RegressionTest0.test387");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -26887,9 +26642,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
+            System.out.format("%n%s%n", "RegressionTest0.test388");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
@@ -26964,9 +26719,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test394() throws Throwable {
+    public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RegressionTest0.test389");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext3 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext1, (java.lang.Object) (short) 0);
@@ -27042,6 +26797,516 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals("'" + obj62 + "' != '" + 17 + "'", obj62, 17);
         org.junit.Assert.assertEquals("'" + str63 + "' != '" + "17" + "'", str63, "17");
         org.junit.Assert.assertNotNull(iterator64);
+    }
+
+    @Test
+    public void test390() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test390");
+        org.w3c.dom.Node node0 = null;
+        java.util.Locale locale1 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer3 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer2);
+        org.w3c.dom.Node node4 = null;
+        java.util.Locale locale5 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer6 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node4, locale5);
+        org.apache.commons.jxpath.ri.model.beans.LangAttributePointer langAttributePointer7 = new org.apache.commons.jxpath.ri.model.beans.LangAttributePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer6);
+        org.apache.commons.jxpath.ri.QName qName8 = langAttributePointer7.getName();
+        org.apache.commons.beanutils.DynaBean dynaBean9 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer10 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer2, qName8, dynaBean9);
+        java.lang.Object obj11 = dynaBeanPointer10.getBaseValue();
+        org.apache.commons.jxpath.ri.QName qName12 = dynaBeanPointer10.getName();
+        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler13 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
+        java.lang.Object obj16 = treeCompiler13.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
+        org.apache.commons.jxpath.ri.compiler.Expression expression18 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression19 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest20 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression18, expression19);
+        boolean boolean21 = nameAttributeTest20.computeContextDependent();
+        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError24 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
+        org.apache.commons.jxpath.JXPathException jXPathException25 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError24);
+        boolean boolean26 = nameAttributeTest20.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError24);
+        boolean boolean27 = nameAttributeTest20.isSymmetric();
+        boolean boolean28 = nameAttributeTest20.isContextDependent();
+        org.apache.commons.jxpath.ri.compiler.Expression expression29 = nameAttributeTest20.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray30 = nameAttributeTest20.getArguments();
+        java.lang.Object obj31 = treeCompiler13.function(50, (java.lang.Object[]) expressionArray30);
+        org.apache.commons.jxpath.ri.compiler.Expression expression32 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression33 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest34 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression32, expression33);
+        boolean boolean35 = nameAttributeTest34.computeContextDependent();
+        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError38 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
+        org.apache.commons.jxpath.JXPathException jXPathException39 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError38);
+        boolean boolean40 = nameAttributeTest34.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError38);
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray41 = nameAttributeTest34.args;
+        java.lang.Object obj42 = treeCompiler13.sum((java.lang.Object[]) expressionArray41);
+        org.apache.commons.jxpath.ri.compiler.ExtensionFunction extensionFunction43 = new org.apache.commons.jxpath.ri.compiler.ExtensionFunction(qName12, expressionArray41);
+        boolean boolean44 = extensionFunction43.computeContextDependent();
+        org.apache.commons.jxpath.ri.EvalContext evalContext45 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest47 = null;
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext48 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext45, false, nodeTest47);
+        org.apache.commons.jxpath.Pointer pointer49 = ancestorContext48.getContextNodePointer();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj50 = extensionFunction43.compute((org.apache.commons.jxpath.ri.EvalContext) ancestorContext48);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(qName8);
+        org.junit.Assert.assertNull(obj11);
+        org.junit.Assert.assertNotNull(qName12);
+        org.junit.Assert.assertNotNull(obj16);
+        org.junit.Assert.assertEquals(obj16.toString(), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj16), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj16), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
+        org.junit.Assert.assertNull(expression29);
+        org.junit.Assert.assertNotNull(expressionArray30);
+        org.junit.Assert.assertNotNull(obj31);
+        org.junit.Assert.assertEquals(obj31.toString(), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj31), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj31), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertNotNull(expressionArray41);
+        org.junit.Assert.assertNotNull(obj42);
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + true + "'", boolean44 == true);
+        org.junit.Assert.assertNull(pointer49);
+    }
+
+    @Test
+    public void test391() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test391");
+        org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext3 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext0, false, nodeTest2);
+        org.apache.commons.jxpath.Pointer pointer4 = ancestorContext3.getContextNodePointer();
+        org.apache.commons.jxpath.ri.QName qName5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator7 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) ancestorContext3, qName5, locale6);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray8 = null;
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext9 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext3, evalContextArray8);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext3, nodeTest10);
+        org.apache.commons.jxpath.BasicNodeSet basicNodeSet12 = new org.apache.commons.jxpath.BasicNodeSet();
+        org.apache.commons.jxpath.ri.axes.NodeSetContext nodeSetContext13 = new org.apache.commons.jxpath.ri.axes.NodeSetContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext3, (org.apache.commons.jxpath.NodeSet) basicNodeSet12);
+        java.io.Reader reader14 = null;
+        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream18 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader14, 0, 100, (int) (short) 10);
+        java.lang.String str19 = simpleCharStream18.GetImage();
+        java.util.Locale locale20 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer22 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) simpleCharStream18, locale20, "*");
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest23 = null;
+        org.w3c.dom.Node node25 = null;
+        java.util.Locale locale26 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer27 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node25, locale26);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer28 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer27);
+        boolean boolean29 = nullPropertyPointer28.isCollection();
+        boolean boolean30 = nullPropertyPointer28.isLeaf();
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator31 = jDOMNodePointer22.childIterator(nodeTest23, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer28);
+        org.apache.commons.jxpath.ri.QName qName32 = nullPropertyPointer28.getName();
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray34 = new org.apache.commons.jxpath.ri.compiler.Step[] {};
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath35 = new org.apache.commons.jxpath.ri.compiler.LocationPath(true, stepArray34);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer36 = org.apache.commons.jxpath.ri.axes.SimplePathInterpreter.interpretSimpleLocationPath((org.apache.commons.jxpath.ri.EvalContext) ancestorContext3, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer28, stepArray34);
+        org.w3c.dom.Node node37 = null;
+        java.util.Locale locale38 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer39 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node37, locale38);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer40 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer39);
+        boolean boolean41 = nullPropertyPointer40.isActual();
+        org.apache.commons.jxpath.ri.QName qName42 = nullPropertyPointer40.getName();
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest43 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName42);
+        org.apache.commons.jxpath.ri.axes.ChildContext childContext46 = new org.apache.commons.jxpath.ri.axes.ChildContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext3, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest43, false, false);
+        org.w3c.dom.Node node48 = null;
+        java.util.Locale locale49 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer50 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node48, locale49);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer51 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer50);
+        org.w3c.dom.Node node52 = null;
+        java.util.Locale locale53 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer54 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node52, locale53);
+        org.apache.commons.jxpath.ri.model.beans.LangAttributePointer langAttributePointer55 = new org.apache.commons.jxpath.ri.model.beans.LangAttributePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer54);
+        org.apache.commons.jxpath.ri.QName qName56 = langAttributePointer55.getName();
+        org.apache.commons.beanutils.DynaBean dynaBean57 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer58 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer50, qName56, dynaBean57);
+        org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory59 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
+        java.util.Locale locale60 = null;
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer61 = org.apache.commons.jxpath.ri.model.NodePointer.newNodePointer(qName56, (java.lang.Object) beanPointerFactory59, locale60);
+        org.w3c.dom.Node node62 = null;
+        java.util.Locale locale63 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer64 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node62, locale63);
+        org.w3c.dom.Node node65 = null;
+        java.util.Locale locale66 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer67 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node65, locale66);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer68 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer67);
+        java.lang.Object obj69 = dOMNodePointer67.getImmediateNode();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer70 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer64, obj69);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer72 = dOMNodePointer64.namespacePointer("\000\000\000\000\000\000\000\000\000\000\000");
+        org.w3c.dom.Node node73 = null;
+        java.util.Locale locale74 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer75 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node73, locale74);
+        org.apache.commons.jxpath.ri.model.beans.LangAttributePointer langAttributePointer76 = new org.apache.commons.jxpath.ri.model.beans.LangAttributePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer75);
+        org.apache.commons.jxpath.ri.QName qName77 = langAttributePointer76.getName();
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer79 = beanPointerFactory59.createNodePointer(nodePointer72, qName77, (java.lang.Object) 100);
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest81 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName77, "\000\000\000\000");
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext82 = new org.apache.commons.jxpath.ri.axes.AncestorContext((org.apache.commons.jxpath.ri.EvalContext) childContext46, true, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest81);
+        childContext46.reset();
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.jxpath.Pointer pointer84 = childContext46.getSingleNodePointer();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(pointer4);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", str19, "\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertNotNull(nodeIterator31);
+        org.junit.Assert.assertNotNull(qName32);
+        org.junit.Assert.assertNotNull(stepArray34);
+        org.junit.Assert.assertNotNull(nodePointer36);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertNotNull(qName42);
+        org.junit.Assert.assertNotNull(qName56);
+        org.junit.Assert.assertNotNull(nodePointer61);
+        org.junit.Assert.assertNull(obj69);
+        org.junit.Assert.assertNotNull(nodePointer72);
+        org.junit.Assert.assertNotNull(qName77);
+        org.junit.Assert.assertNotNull(nodePointer79);
+    }
+
+    @Test
+    public void test392() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test392");
+        java.io.Reader reader0 = null;
+        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 100, (int) (short) 10);
+        java.lang.String str5 = simpleCharStream4.GetImage();
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) simpleCharStream4, locale6, "*");
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest9 = null;
+        org.w3c.dom.Node node11 = null;
+        java.util.Locale locale12 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer13 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node11, locale12);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer14 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer13);
+        boolean boolean15 = nullPropertyPointer14.isCollection();
+        boolean boolean16 = nullPropertyPointer14.isLeaf();
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator17 = jDOMNodePointer8.childIterator(nodeTest9, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer14);
+        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler18 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
+        java.lang.Object obj20 = treeCompiler18.literal("");
+        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError21 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError();
+        java.lang.Throwable[] throwableArray22 = jXPathContextFactoryConfigurationError21.getSuppressed();
+        java.lang.Object obj23 = treeCompiler18.and((java.lang.Object[]) throwableArray22);
+        java.lang.Object obj24 = null;
+        java.lang.Object obj25 = treeCompiler18.variableReference(obj24);
+        boolean boolean26 = jDOMNodePointer8.equals(obj24);
+        boolean boolean27 = jDOMNodePointer8.isCollection();
+        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver28 = null;
+        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver29 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver28);
+        org.w3c.dom.Node node30 = null;
+        java.util.Locale locale31 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer32 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node30, locale31);
+        org.apache.commons.jxpath.ri.model.beans.LangAttributePointer langAttributePointer33 = new org.apache.commons.jxpath.ri.model.beans.LangAttributePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer32);
+        java.lang.String str35 = dOMNodePointer32.getNamespaceURI("");
+        boolean boolean36 = dOMNodePointer32.isNode();
+        java.lang.Object obj37 = dOMNodePointer32.getNode();
+        namespaceResolver29.setNamespaceContextPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer32);
+        jDOMNodePointer8.setNamespaceResolver(namespaceResolver29);
+        namespaceResolver29.seal();
+        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver41 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver29);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", str5, "\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(nodeIterator17);
+        org.junit.Assert.assertNotNull(obj20);
+        org.junit.Assert.assertEquals(obj20.toString(), "''");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj20), "''");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj20), "''");
+        org.junit.Assert.assertNotNull(throwableArray22);
+        org.junit.Assert.assertNotNull(obj23);
+        org.junit.Assert.assertEquals(obj23.toString(), "");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj23), "");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj23), "");
+        org.junit.Assert.assertNotNull(obj25);
+        org.junit.Assert.assertEquals(obj25.toString(), "$null");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj25), "$null");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj25), "$null");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNull(str35);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
+        org.junit.Assert.assertNull(obj37);
+    }
+
+    @Test
+    public void test393() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test393");
+        org.apache.commons.jxpath.BasicVariables basicVariables0 = new org.apache.commons.jxpath.BasicVariables();
+        org.w3c.dom.Node node1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node1, locale2);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer4 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer3);
+        int int5 = nullPropertyPointer4.getPropertyIndex();
+        java.lang.Object obj6 = nullPropertyPointer4.getBaseValue();
+        boolean boolean7 = nullPropertyPointer4.isCollection();
+        nullPropertyPointer4.setPropertyName("");
+        org.apache.commons.jxpath.ri.QName qName10 = nullPropertyPointer4.getName();
+        java.util.Locale locale11 = null;
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer12 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName10, locale11);
+        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer13 = new org.apache.commons.jxpath.ri.model.VariablePointer(qName10);
+        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer14 = new org.apache.commons.jxpath.ri.model.VariablePointer((org.apache.commons.jxpath.Variables) basicVariables0, qName10);
+        java.lang.String str15 = basicVariables0.toString();
+        org.apache.commons.jxpath.ri.EvalContext evalContext17 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest19 = null;
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext20 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext17, false, nodeTest19);
+        org.apache.commons.jxpath.Pointer pointer21 = ancestorContext20.getContextNodePointer();
+        org.apache.commons.jxpath.ri.QName qName22 = null;
+        java.util.Locale locale23 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator24 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) ancestorContext20, qName22, locale23);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray25 = null;
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext26 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, evalContextArray25);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest27 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext28 = new org.apache.commons.jxpath.ri.axes.SelfContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, nodeTest27);
+        org.apache.commons.jxpath.BasicNodeSet basicNodeSet29 = new org.apache.commons.jxpath.BasicNodeSet();
+        org.apache.commons.jxpath.ri.axes.NodeSetContext nodeSetContext30 = new org.apache.commons.jxpath.ri.axes.NodeSetContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.NodeSet) basicNodeSet29);
+        java.io.Reader reader31 = null;
+        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream35 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader31, 0, 100, (int) (short) 10);
+        java.lang.String str36 = simpleCharStream35.GetImage();
+        java.util.Locale locale37 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer39 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) simpleCharStream35, locale37, "*");
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest40 = null;
+        org.w3c.dom.Node node42 = null;
+        java.util.Locale locale43 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer44 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node42, locale43);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer45 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer44);
+        boolean boolean46 = nullPropertyPointer45.isCollection();
+        boolean boolean47 = nullPropertyPointer45.isLeaf();
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator48 = jDOMNodePointer39.childIterator(nodeTest40, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer45);
+        org.apache.commons.jxpath.ri.QName qName49 = nullPropertyPointer45.getName();
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray51 = new org.apache.commons.jxpath.ri.compiler.Step[] {};
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath52 = new org.apache.commons.jxpath.ri.compiler.LocationPath(true, stepArray51);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer53 = org.apache.commons.jxpath.ri.axes.SimplePathInterpreter.interpretSimpleLocationPath((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer45, stepArray51);
+        org.w3c.dom.Node node54 = null;
+        java.util.Locale locale55 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer56 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node54, locale55);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer57 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer56);
+        boolean boolean58 = nullPropertyPointer57.isActual();
+        org.apache.commons.jxpath.ri.QName qName59 = nullPropertyPointer57.getName();
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest60 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName59);
+        org.apache.commons.jxpath.ri.axes.ChildContext childContext63 = new org.apache.commons.jxpath.ri.axes.ChildContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext20, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest60, false, false);
+        basicVariables0.declareVariable("xml:lang", (java.lang.Object) false);
+        basicVariables0.undeclareVariable("");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + (-2147483648) + "'", int5 == (-2147483648));
+        org.junit.Assert.assertNull(obj6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(qName10);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "{}" + "'", str15, "{}");
+        org.junit.Assert.assertNull(pointer21);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", str36, "\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
+        org.junit.Assert.assertNotNull(nodeIterator48);
+        org.junit.Assert.assertNotNull(qName49);
+        org.junit.Assert.assertNotNull(stepArray51);
+        org.junit.Assert.assertNotNull(nodePointer53);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNotNull(qName59);
+    }
+
+    @Test
+    public void test394() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test394");
+        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
+        java.lang.Object obj3 = treeCompiler0.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
+        java.lang.Object[] objArray5 = new java.lang.Object[] {};
+        java.lang.Object obj6 = treeCompiler0.function((int) (short) 1, objArray5);
+        java.lang.Object obj8 = treeCompiler0.processingInstructionTest("/[25]");
+        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler9 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
+        java.lang.Object obj12 = treeCompiler9.qname("\000\000\000\000\000\000\000\000\000\000\000", "=");
+        org.apache.commons.jxpath.ri.compiler.Expression expression14 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression15 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest16 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression14, expression15);
+        boolean boolean17 = nameAttributeTest16.computeContextDependent();
+        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError20 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
+        org.apache.commons.jxpath.JXPathException jXPathException21 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError20);
+        boolean boolean22 = nameAttributeTest16.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError20);
+        boolean boolean23 = nameAttributeTest16.isSymmetric();
+        boolean boolean24 = nameAttributeTest16.isContextDependent();
+        org.apache.commons.jxpath.ri.compiler.Expression expression25 = nameAttributeTest16.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray26 = nameAttributeTest16.getArguments();
+        java.lang.Object obj27 = treeCompiler9.function(50, (java.lang.Object[]) expressionArray26);
+        org.apache.commons.jxpath.ri.compiler.Constant constant30 = new org.apache.commons.jxpath.ri.compiler.Constant("\000\000\000\000\000\000\000\000\000\000");
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl31 = null;
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer32 = null;
+        org.apache.commons.jxpath.ri.axes.RootContext rootContext33 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl31, nodePointer32);
+        java.lang.Object obj34 = rootContext33.getValue();
+        java.lang.Object obj36 = rootContext33.getRegisteredValue(21);
+        java.lang.Object obj37 = constant30.compute((org.apache.commons.jxpath.ri.EvalContext) rootContext33);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer38 = rootContext33.getCurrentNodePointer();
+        org.apache.commons.jxpath.ri.compiler.Expression expression39 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression40 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest41 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression39, expression40);
+        boolean boolean42 = nameAttributeTest41.computeContextDependent();
+        org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError45 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("hi!");
+        org.apache.commons.jxpath.JXPathException jXPathException46 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) jXPathContextFactoryConfigurationError45);
+        boolean boolean47 = nameAttributeTest41.equal((java.lang.Object) 0L, (java.lang.Object) jXPathContextFactoryConfigurationError45);
+        boolean boolean48 = nameAttributeTest41.isSymmetric();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray49 = nameAttributeTest41.args;
+        java.lang.Object obj50 = treeCompiler9.step(2, (java.lang.Object) nodePointer38, (java.lang.Object[]) expressionArray49);
+        java.lang.Object obj51 = treeCompiler0.sum((java.lang.Object[]) expressionArray49);
+        org.junit.Assert.assertNotNull(obj3);
+        org.junit.Assert.assertEquals(obj3.toString(), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj3), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertNotNull(objArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray5), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray5), "[]");
+        org.junit.Assert.assertNotNull(obj6);
+        org.junit.Assert.assertEquals(obj6.toString(), "last()");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj6), "last()");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj6), "last()");
+        org.junit.Assert.assertNotNull(obj8);
+        org.junit.Assert.assertEquals(obj8.toString(), "processing-instruction('/[25]')");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj8), "processing-instruction('/[25]')");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj8), "processing-instruction('/[25]')");
+        org.junit.Assert.assertNotNull(obj12);
+        org.junit.Assert.assertEquals(obj12.toString(), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj12), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj12), "\000\000\000\000\000\000\000\000\000\000\000:=");
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
+        org.junit.Assert.assertNull(expression25);
+        org.junit.Assert.assertNotNull(expressionArray26);
+        org.junit.Assert.assertNotNull(obj27);
+        org.junit.Assert.assertEquals(obj27.toString(), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj27), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj27), "unknownFunction50()(null, null)");
+        org.junit.Assert.assertNull(obj34);
+        org.junit.Assert.assertNotNull(obj36);
+        org.junit.Assert.assertEquals("'" + obj37 + "' != '" + "\000\000\000\000\000\000\000\000\000\000" + "'", obj37, "\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertNull(nodePointer38);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + true + "'", boolean42 == true);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + true + "'", boolean48 == true);
+        org.junit.Assert.assertNotNull(expressionArray49);
+        org.junit.Assert.assertNotNull(obj50);
+        org.junit.Assert.assertEquals(obj50.toString(), "null[null][null]");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj50), "null[null][null]");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj50), "null[null][null]");
+        org.junit.Assert.assertNotNull(obj51);
+    }
+
+    @Test
+    public void test395() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test395");
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression3 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression4 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest5 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression3, expression4);
+        org.apache.commons.jxpath.ri.compiler.Expression expression6 = nameAttributeTest5.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray7 = new org.apache.commons.jxpath.ri.compiler.Expression[] { nameAttributeTest5 };
+        org.apache.commons.jxpath.ri.compiler.Step step8 = new org.apache.commons.jxpath.ri.compiler.Step(5, nodeTest2, expressionArray7);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression11 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression12 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest13 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression11, expression12);
+        org.apache.commons.jxpath.ri.compiler.Expression expression14 = nameAttributeTest13.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray15 = new org.apache.commons.jxpath.ri.compiler.Expression[] { nameAttributeTest13 };
+        org.apache.commons.jxpath.ri.compiler.Step step16 = new org.apache.commons.jxpath.ri.compiler.Step(5, nodeTest10, expressionArray15);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest18 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression19 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression20 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest21 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression19, expression20);
+        org.apache.commons.jxpath.ri.compiler.Expression expression22 = nameAttributeTest21.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray23 = new org.apache.commons.jxpath.ri.compiler.Expression[] { nameAttributeTest21 };
+        org.apache.commons.jxpath.ri.compiler.Step step24 = new org.apache.commons.jxpath.ri.compiler.Step(5, nodeTest18, expressionArray23);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest25 = step24.getNodeTest();
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest27 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression28 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression29 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest30 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression28, expression29);
+        org.apache.commons.jxpath.ri.compiler.Expression expression31 = nameAttributeTest30.getNameTestExpression();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray32 = new org.apache.commons.jxpath.ri.compiler.Expression[] { nameAttributeTest30 };
+        org.apache.commons.jxpath.ri.compiler.Step step33 = new org.apache.commons.jxpath.ri.compiler.Step(5, nodeTest27, expressionArray32);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest34 = step33.getNodeTest();
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray35 = new org.apache.commons.jxpath.ri.compiler.Step[] { step8, step16, step24, step33 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath36 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray35);
+        boolean boolean37 = locationPath36.isAbsolute();
+        boolean boolean38 = locationPath36.computeContextDependent();
+        org.apache.commons.jxpath.ri.EvalContext evalContext39 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest41 = null;
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext42 = new org.apache.commons.jxpath.ri.axes.AncestorContext(evalContext39, false, nodeTest41);
+        org.apache.commons.jxpath.Pointer pointer43 = ancestorContext42.getContextNodePointer();
+        org.apache.commons.jxpath.ri.QName qName44 = null;
+        java.util.Locale locale45 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator46 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) ancestorContext42, qName44, locale45);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray47 = null;
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext48 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) ancestorContext42, evalContextArray47);
+        org.apache.commons.jxpath.ri.EvalContext evalContext49 = locationPath36.evalSteps((org.apache.commons.jxpath.ri.EvalContext) unionContext48);
+        java.util.List list50 = evalContext49.getContextNodeList();
+        org.w3c.dom.Node node51 = null;
+        java.util.Locale locale52 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer53 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node51, locale52);
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer54 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer53);
+        boolean boolean55 = nullPropertyPointer54.isActual();
+        org.apache.commons.jxpath.ri.QName qName56 = nullPropertyPointer54.getName();
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest57 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName56);
+        org.apache.commons.jxpath.ri.axes.ParentContext parentContext58 = new org.apache.commons.jxpath.ri.axes.ParentContext(evalContext49, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest57);
+        org.junit.Assert.assertNull(expression6);
+        org.junit.Assert.assertNotNull(expressionArray7);
+        org.junit.Assert.assertNull(expression14);
+        org.junit.Assert.assertNotNull(expressionArray15);
+        org.junit.Assert.assertNull(expression22);
+        org.junit.Assert.assertNotNull(expressionArray23);
+        org.junit.Assert.assertNull(nodeTest25);
+        org.junit.Assert.assertNull(expression31);
+        org.junit.Assert.assertNotNull(expressionArray32);
+        org.junit.Assert.assertNull(nodeTest34);
+        org.junit.Assert.assertNotNull(stepArray35);
+        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + true + "'", boolean38 == true);
+        org.junit.Assert.assertNull(pointer43);
+        org.junit.Assert.assertNotNull(evalContext49);
+        org.junit.Assert.assertNotNull(list50);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
+        org.junit.Assert.assertNotNull(qName56);
+    }
+
+    @Test
+    public void test396() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test396");
+        java.util.Locale locale0 = null;
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(locale0, "org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!");
+        int int3 = nullPointer2.getLength();
+        org.apache.commons.jxpath.JXPathContext jXPathContext4 = null;
+        org.apache.commons.jxpath.FunctionLibrary functionLibrary5 = new org.apache.commons.jxpath.FunctionLibrary();
+        org.apache.commons.jxpath.ri.compiler.Expression expression8 = null;
+        org.apache.commons.jxpath.ri.compiler.Expression expression9 = null;
+        org.apache.commons.jxpath.ri.compiler.NameAttributeTest nameAttributeTest10 = new org.apache.commons.jxpath.ri.compiler.NameAttributeTest(expression8, expression9);
+        boolean boolean11 = nameAttributeTest10.computeContextDependent();
+        boolean boolean12 = nameAttributeTest10.computeContextDependent();
+        org.apache.commons.jxpath.ri.compiler.Expression[] expressionArray13 = nameAttributeTest10.getArguments();
+        org.apache.commons.jxpath.Function function14 = functionLibrary5.getFunction("\000\000\000\000", "UNKNOWN", (java.lang.Object[]) expressionArray13);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.jxpath.ri.model.NodePointer nodePointer15 = nullPointer2.createPath(jXPathContext4, (java.lang.Object) functionLibrary5);
+            org.junit.Assert.fail("Expected exception of type java.lang.UnsupportedOperationException; message: Cannot create the root object: id(org.apache.commons.jxpath.JXPathContextFactoryConfigurationError: hi!)");
+        } catch (java.lang.UnsupportedOperationException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(expressionArray13);
+        org.junit.Assert.assertNull(function14);
     }
 }
 

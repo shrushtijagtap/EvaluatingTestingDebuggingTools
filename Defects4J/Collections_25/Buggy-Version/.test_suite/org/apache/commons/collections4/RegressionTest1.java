@@ -13,6 +13,137 @@ public class RegressionTest1 {
     public void test0501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0501");
+        org.apache.commons.collections4.MapIterator<java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[], java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
+        org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
+    }
+
+    @Test
+    public void test0502() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0502");
+        org.apache.commons.collections4.ResettableListIterator<java.lang.Comparable<java.lang.String>> strComparableItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
+        org.junit.Assert.assertNotNull(strComparableItor0);
+    }
+
+    @Test
+    public void test0503() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0503");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int7 = strComparableComparator4.compare("hi!", "hi!");
+        java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator4);
+        java.util.Comparator<java.lang.String> strComparator9 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) strComparableComparator4);
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator10 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator11 = new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>();
+        boolean boolean12 = strComparableComparator10.equals((java.lang.Object) strComparableComparator11);
+        java.util.Comparator<java.lang.String> strComparator13 = strComparator9.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator11);
+        java.util.Comparator<java.lang.String> strComparator14 = strComparator13.reversed();
+        java.lang.String str15 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", strComparator13);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.collections4.ResettableListIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorListArrayItor18 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) "", (int) (short) 100, (int) (byte) 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Argument is not an array");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strComparableComparator4);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "hi!" + "'", str8, "hi!");
+        org.junit.Assert.assertNotNull(strComparator9);
+        org.junit.Assert.assertNotNull(strComparableComparator10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(strComparator13);
+        org.junit.Assert.assertNotNull(strComparator14);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "hi!" + "'", str15, "hi!");
+    }
+
+    @Test
+    public void test0504() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0504");
+        org.apache.commons.collections4.MapIterator<java.util.ListIterator<java.lang.String>, java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>[]> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.ResettableListIterator<java.lang.String>> strItorItor2 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) strItorItor0, (int) (byte) 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Argument is not an array");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strItorItor0);
+    }
+
+    @Test
+    public void test0505() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0505");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int8 = strComparableComparator5.compare("hi!", "hi!");
+        java.lang.String str9 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator5);
+        int int12 = strComparableComparator5.compare("hi!", "");
+        java.util.Comparator<java.lang.String> strComparator13 = org.apache.commons.collections4.ComparatorUtils.reversedComparator((java.util.Comparator<java.lang.String>) strComparableComparator5);
+        boolean boolean14 = strComparableComparator2.equals((java.lang.Object) strComparator13);
+        java.lang.String str15 = org.apache.commons.collections4.ComparatorUtils.max("", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor20 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray19);
+        boolean boolean21 = strComparableComparator2.equals((java.lang.Object) strArray19);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.collections4.ResettableListIterator<java.lang.Comparable<java.lang.String>> strComparableItor23 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Comparable<java.lang.String>[]) strArray19, 5);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: Start index must not be greater than the array length");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strComparableComparator2);
+        org.junit.Assert.assertNotNull(strComparableComparator5);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 3 + "'", int12 == 3);
+        org.junit.Assert.assertNotNull(strComparator13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+    }
+
+    @Test
+    public void test0506() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0506");
+        org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>, org.apache.commons.collections4.MapIterator> charSequenceItorReverseComparatorItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
+        org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>, java.lang.reflect.AnnotatedElement> charSequenceItorReverseComparatorItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
+        org.apache.commons.collections4.MapIterator mapIterator2 = org.apache.commons.collections4.iterators.EmptyMapIterator.INSTANCE;
+        org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>, java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>> typeItorItor3 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
+        org.apache.commons.collections4.OrderedMapIterator<java.io.Serializable, org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>> serializableItor4 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
+        org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor5 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
+        boolean boolean6 = iteratorItor5.hasPrevious();
+        boolean boolean7 = iteratorItor5.hasPrevious();
+        org.apache.commons.collections4.MapIterator[] mapIteratorArray8 = new org.apache.commons.collections4.MapIterator[] { charSequenceItorReverseComparatorItor0, charSequenceItorReverseComparatorItor1, mapIterator2, typeItorItor3, serializableItor4, iteratorItor5 };
+        org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator> mapIteratorItor10 = org.apache.commons.collections4.IteratorUtils.arrayIterator(mapIteratorArray8, 0);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator> mapIteratorItor13 = org.apache.commons.collections4.IteratorUtils.arrayIterator(mapIteratorArray8, (int) (byte) 1, (int) (short) 0);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: End index must not be less than start index");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceItorReverseComparatorItor0);
+        org.junit.Assert.assertNotNull(charSequenceItorReverseComparatorItor1);
+        org.junit.Assert.assertNotNull(mapIterator2);
+        org.junit.Assert.assertNotNull(typeItorItor3);
+        org.junit.Assert.assertNotNull(serializableItor4);
+        org.junit.Assert.assertNotNull(iteratorItor5);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(mapIteratorArray8);
+        org.junit.Assert.assertNotNull(mapIteratorItor10);
+    }
+
+    @Test
+    public void test0507() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0507");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -38,9 +169,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0502() throws Throwable {
+    public void test0508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0502");
+            System.out.format("%n%s%n", "RegressionTest1.test0508");
         java.lang.reflect.GenericDeclaration[] genericDeclarationArray0 = new java.lang.reflect.GenericDeclaration[] {};
         java.lang.reflect.GenericDeclaration[] genericDeclarationArray1 = new java.lang.reflect.GenericDeclaration[] {};
         java.lang.reflect.GenericDeclaration[] genericDeclarationArray2 = new java.lang.reflect.GenericDeclaration[] {};
@@ -65,17 +196,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0503() throws Throwable {
+    public void test0509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0503");
+            System.out.format("%n%s%n", "RegressionTest1.test0509");
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.MapIterator> mapIteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(mapIteratorItor0);
     }
 
     @Test
-    public void test0504() throws Throwable {
+    public void test0510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0504");
+            System.out.format("%n%s%n", "RegressionTest1.test0510");
         org.apache.commons.collections4.comparators.ReverseComparator<java.lang.CharSequence> charSequenceReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<java.lang.CharSequence>();
         // The following exception was thrown during execution in test generation
         try {
@@ -87,9 +218,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0505() throws Throwable {
+    public void test0511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0505");
+            System.out.format("%n%s%n", "RegressionTest1.test0511");
         java.util.ListIterator<java.lang.String> strItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator("hi!");
         int int2 = strItor1.nextIndex();
         int int3 = strItor1.previousIndex();
@@ -106,9 +237,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0506() throws Throwable {
+    public void test0512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0506");
+            System.out.format("%n%s%n", "RegressionTest1.test0512");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -136,9 +267,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0507() throws Throwable {
+    public void test0513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0507");
+            System.out.format("%n%s%n", "RegressionTest1.test0513");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -250,17 +381,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0508() throws Throwable {
+    public void test0514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0508");
+            System.out.format("%n%s%n", "RegressionTest1.test0514");
         org.apache.commons.collections4.ResettableIterator<java.lang.reflect.AnnotatedElement> annotatedElementItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(annotatedElementItor0);
     }
 
     @Test
-    public void test0509() throws Throwable {
+    public void test0515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0509");
+            System.out.format("%n%s%n", "RegressionTest1.test0515");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -279,9 +410,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0510() throws Throwable {
+    public void test0516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0510");
+            System.out.format("%n%s%n", "RegressionTest1.test0516");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -312,9 +443,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0511() throws Throwable {
+    public void test0517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0511");
+            System.out.format("%n%s%n", "RegressionTest1.test0517");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -338,9 +469,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0512() throws Throwable {
+    public void test0518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0512");
+            System.out.format("%n%s%n", "RegressionTest1.test0518");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -365,9 +496,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0513() throws Throwable {
+    public void test0519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0513");
+            System.out.format("%n%s%n", "RegressionTest1.test0519");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -390,17 +521,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0514() throws Throwable {
+    public void test0520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0514");
+            System.out.format("%n%s%n", "RegressionTest1.test0520");
         org.apache.commons.collections4.MapIterator<java.io.Serializable, java.lang.reflect.GenericDeclaration[][]> serializableItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(serializableItor0);
     }
 
     @Test
-    public void test0515() throws Throwable {
+    public void test0521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0515");
+            System.out.format("%n%s%n", "RegressionTest1.test0521");
         org.apache.commons.collections4.MapIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>, java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorCollectionItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         java.lang.Class<?> wildcardClass1 = wildcardItorCollectionItor0.getClass();
         org.junit.Assert.assertNotNull(wildcardItorCollectionItor0);
@@ -408,9 +539,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0516() throws Throwable {
+    public void test0522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0516");
+            System.out.format("%n%s%n", "RegressionTest1.test0522");
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -422,9 +553,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0517() throws Throwable {
+    public void test0523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0517");
+            System.out.format("%n%s%n", "RegressionTest1.test0523");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -436,9 +567,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0518() throws Throwable {
+    public void test0524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0518");
+            System.out.format("%n%s%n", "RegressionTest1.test0524");
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator0 = org.apache.commons.collections4.iterators.EmptyOrderedMapIterator.INSTANCE;
         org.apache.commons.collections4.OrderedMapIterator<java.lang.CharSequence[], java.util.Iterator[]> charSequenceArrayItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.MapIterator[] mapIteratorArray2 = new org.apache.commons.collections4.MapIterator[] { orderedMapIterator0, charSequenceArrayItor1 };
@@ -491,17 +622,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0519() throws Throwable {
+    public void test0525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0519");
+            System.out.format("%n%s%n", "RegressionTest1.test0525");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[], java.util.AbstractList<java.util.Iterator<? extends java.lang.reflect.Type>>> charSequenceArrayItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(charSequenceArrayItorArrayItor0);
     }
 
     @Test
-    public void test0520() throws Throwable {
+    public void test0526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0520");
+            System.out.format("%n%s%n", "RegressionTest1.test0526");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         boolean boolean1 = iteratorItor0.hasPrevious();
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor2 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
@@ -536,9 +667,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0521() throws Throwable {
+    public void test0527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0521");
+            System.out.format("%n%s%n", "RegressionTest1.test0527");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -560,9 +691,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0522() throws Throwable {
+    public void test0528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0522");
+            System.out.format("%n%s%n", "RegressionTest1.test0528");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor1 = null;
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor3 = org.apache.commons.collections4.IteratorUtils.singletonIterator((java.lang.CharSequence) "hi!");
@@ -577,18 +708,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0523() throws Throwable {
+    public void test0529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0523");
+            System.out.format("%n%s%n", "RegressionTest1.test0529");
         java.lang.Comparable<java.lang.String> strComparable0 = null;
         java.util.ListIterator<java.lang.Comparable<java.lang.String>> strComparableItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(strComparable0);
         org.junit.Assert.assertNotNull(strComparableItor1);
     }
 
     @Test
-    public void test0524() throws Throwable {
+    public void test0530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0524");
+            System.out.format("%n%s%n", "RegressionTest1.test0530");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -619,9 +750,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0525() throws Throwable {
+    public void test0531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0525");
+            System.out.format("%n%s%n", "RegressionTest1.test0531");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -643,9 +774,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0526() throws Throwable {
+    public void test0532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0526");
+            System.out.format("%n%s%n", "RegressionTest1.test0532");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -657,9 +788,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0527() throws Throwable {
+    public void test0533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0527");
+            System.out.format("%n%s%n", "RegressionTest1.test0533");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -679,9 +810,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0528() throws Throwable {
+    public void test0534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0528");
+            System.out.format("%n%s%n", "RegressionTest1.test0534");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -704,9 +835,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0529() throws Throwable {
+    public void test0535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0529");
+            System.out.format("%n%s%n", "RegressionTest1.test0535");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -737,9 +868,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0530() throws Throwable {
+    public void test0536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0530");
+            System.out.format("%n%s%n", "RegressionTest1.test0536");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>> iteratorItorItor3 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) (byte) 10, (int) (short) 0, (int) (short) -1);
@@ -750,9 +881,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0531() throws Throwable {
+    public void test0537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0531");
+            System.out.format("%n%s%n", "RegressionTest1.test0537");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         boolean boolean2 = strItor0.hasPrevious();
@@ -771,9 +902,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0532() throws Throwable {
+    public void test0538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0532");
+            System.out.format("%n%s%n", "RegressionTest1.test0538");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         boolean boolean2 = typeItor0.hasNext();
@@ -847,9 +978,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0533() throws Throwable {
+    public void test0539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0533");
+            System.out.format("%n%s%n", "RegressionTest1.test0539");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -891,9 +1022,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0534() throws Throwable {
+    public void test0540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0534");
+            System.out.format("%n%s%n", "RegressionTest1.test0540");
         java.lang.reflect.Type[] typeArray0 = new java.lang.reflect.Type[] {};
         java.lang.reflect.Type[] typeArray1 = new java.lang.reflect.Type[] {};
         java.lang.reflect.Type[] typeArray2 = new java.lang.reflect.Type[] {};
@@ -918,17 +1049,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0535() throws Throwable {
+    public void test0541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0535");
+            System.out.format("%n%s%n", "RegressionTest1.test0541");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.Iterable<java.util.Iterator<? extends java.lang.reflect.Type>>, java.util.Iterator> wildcardItorIterableItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorIterableItor0);
     }
 
     @Test
-    public void test0536() throws Throwable {
+    public void test0542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0536");
+            System.out.format("%n%s%n", "RegressionTest1.test0542");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -951,9 +1082,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0537() throws Throwable {
+    public void test0543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0537");
+            System.out.format("%n%s%n", "RegressionTest1.test0543");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[]> charSequenceArrayItorArrayItor3 = org.apache.commons.collections4.IteratorUtils.arrayIterator((java.lang.Object) (-1.0f), 6, 0);
@@ -964,25 +1095,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0538() throws Throwable {
+    public void test0544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0538");
+            System.out.format("%n%s%n", "RegressionTest1.test0544");
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence[]> charSequenceArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(charSequenceArrayItor0);
     }
 
     @Test
-    public void test0539() throws Throwable {
+    public void test0545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0539");
+            System.out.format("%n%s%n", "RegressionTest1.test0545");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.ResettableListIterator<java.lang.String>> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(strItorItor0);
     }
 
     @Test
-    public void test0540() throws Throwable {
+    public void test0546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0540");
+            System.out.format("%n%s%n", "RegressionTest1.test0546");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1001,9 +1132,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0541() throws Throwable {
+    public void test0547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0541");
+            System.out.format("%n%s%n", "RegressionTest1.test0547");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1032,9 +1163,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0542() throws Throwable {
+    public void test0548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0542");
+            System.out.format("%n%s%n", "RegressionTest1.test0548");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -1076,9 +1207,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0543() throws Throwable {
+    public void test0549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0543");
+            System.out.format("%n%s%n", "RegressionTest1.test0549");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1092,9 +1223,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0544() throws Throwable {
+    public void test0550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0544");
+            System.out.format("%n%s%n", "RegressionTest1.test0550");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -1143,9 +1274,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0545() throws Throwable {
+    public void test0551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0545");
+            System.out.format("%n%s%n", "RegressionTest1.test0551");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1173,9 +1304,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0546() throws Throwable {
+    public void test0552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0546");
+            System.out.format("%n%s%n", "RegressionTest1.test0552");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         boolean boolean2 = strItor0.hasPrevious();
@@ -1189,9 +1320,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0547() throws Throwable {
+    public void test0553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0547");
+            System.out.format("%n%s%n", "RegressionTest1.test0553");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1218,9 +1349,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0548() throws Throwable {
+    public void test0554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0548");
+            System.out.format("%n%s%n", "RegressionTest1.test0554");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.GenericDeclaration[][]> genericDeclarationArrayItor3 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) 10L, (int) (short) 0, (int) (byte) 0);
@@ -1231,9 +1362,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0549() throws Throwable {
+    public void test0555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0549");
+            System.out.format("%n%s%n", "RegressionTest1.test0555");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1251,9 +1382,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0550() throws Throwable {
+    public void test0556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0550");
+            System.out.format("%n%s%n", "RegressionTest1.test0556");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         boolean boolean1 = iteratorItor0.hasPrevious();
         java.util.ListIterator<org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>> iteratorItorItor2 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(iteratorItor0);
@@ -1270,9 +1401,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0551() throws Throwable {
+    public void test0557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0551");
+            System.out.format("%n%s%n", "RegressionTest1.test0557");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         charSequenceItor5.reset();
@@ -1304,9 +1435,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0552() throws Throwable {
+    public void test0558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0552");
+            System.out.format("%n%s%n", "RegressionTest1.test0558");
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator0 = org.apache.commons.collections4.iterators.EmptyOrderedMapIterator.INSTANCE;
         org.apache.commons.collections4.OrderedMapIterator<java.lang.CharSequence[], java.util.Iterator[]> charSequenceArrayItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.MapIterator[] mapIteratorArray2 = new org.apache.commons.collections4.MapIterator[] { orderedMapIterator0, charSequenceArrayItor1 };
@@ -1361,9 +1492,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0553() throws Throwable {
+    public void test0559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0553");
+            System.out.format("%n%s%n", "RegressionTest1.test0559");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -1381,9 +1512,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0554() throws Throwable {
+    public void test0560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0554");
+            System.out.format("%n%s%n", "RegressionTest1.test0560");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -1438,17 +1569,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0555() throws Throwable {
+    public void test0561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0555");
+            System.out.format("%n%s%n", "RegressionTest1.test0561");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.ResettableListIterator<java.lang.String>[]> strItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(strItorArrayItor0);
     }
 
     @Test
-    public void test0556() throws Throwable {
+    public void test0562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0556");
+            System.out.format("%n%s%n", "RegressionTest1.test0562");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1475,17 +1606,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0557() throws Throwable {
+    public void test0563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0557");
+            System.out.format("%n%s%n", "RegressionTest1.test0563");
         org.apache.commons.collections4.ResettableListIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0558() throws Throwable {
+    public void test0564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0558");
+            System.out.format("%n%s%n", "RegressionTest1.test0564");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray4);
@@ -1547,9 +1678,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0559() throws Throwable {
+    public void test0565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0559");
+            System.out.format("%n%s%n", "RegressionTest1.test0565");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1574,17 +1705,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0560() throws Throwable {
+    public void test0566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0560");
+            System.out.format("%n%s%n", "RegressionTest1.test0566");
         org.apache.commons.collections4.ResettableIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorCollectionArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(wildcardItorCollectionArrayItor0);
     }
 
     @Test
-    public void test0561() throws Throwable {
+    public void test0567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0561");
+            System.out.format("%n%s%n", "RegressionTest1.test0567");
         java.util.Comparator comparator0 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
         java.util.Comparator comparator1 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
         java.util.Comparator comparator4 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
@@ -1622,9 +1753,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0562() throws Throwable {
+    public void test0568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0562");
+            System.out.format("%n%s%n", "RegressionTest1.test0568");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1655,9 +1786,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0563() throws Throwable {
+    public void test0569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0563");
+            System.out.format("%n%s%n", "RegressionTest1.test0569");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1677,9 +1808,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0564() throws Throwable {
+    public void test0570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0564");
+            System.out.format("%n%s%n", "RegressionTest1.test0570");
         java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[] wildcardItorListArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -1691,9 +1822,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0565() throws Throwable {
+    public void test0571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0565");
+            System.out.format("%n%s%n", "RegressionTest1.test0571");
         java.util.ArrayList[] arrayListArray1 = new java.util.ArrayList[0];
         @SuppressWarnings("unchecked")
         java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[] wildcardItorListArray2 = (java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[]) arrayListArray1;
@@ -1721,25 +1852,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0566() throws Throwable {
+    public void test0572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0566");
+            System.out.format("%n%s%n", "RegressionTest1.test0572");
         org.apache.commons.collections4.ResettableIterator<java.util.ListIterator<java.lang.String>[][]> strItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(strItorArrayItor0);
     }
 
     @Test
-    public void test0567() throws Throwable {
+    public void test0573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0567");
+            System.out.format("%n%s%n", "RegressionTest1.test0573");
         org.apache.commons.collections4.ResettableIterator<java.lang.reflect.Type[][]> typeArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(typeArrayItor0);
     }
 
     @Test
-    public void test0568() throws Throwable {
+    public void test0574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0568");
+            System.out.format("%n%s%n", "RegressionTest1.test0574");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -1766,9 +1897,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0569() throws Throwable {
+    public void test0575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0569");
+            System.out.format("%n%s%n", "RegressionTest1.test0575");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1794,9 +1925,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0570() throws Throwable {
+    public void test0576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0570");
+            System.out.format("%n%s%n", "RegressionTest1.test0576");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -1808,9 +1939,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0571() throws Throwable {
+    public void test0577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0571");
+            System.out.format("%n%s%n", "RegressionTest1.test0577");
         org.apache.commons.collections4.ResettableIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -1823,17 +1954,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0572() throws Throwable {
+    public void test0578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0572");
+            System.out.format("%n%s%n", "RegressionTest1.test0578");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.MapIterator[][][]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0573() throws Throwable {
+    public void test0579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0573");
+            System.out.format("%n%s%n", "RegressionTest1.test0579");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1857,9 +1988,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0574() throws Throwable {
+    public void test0580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0574");
+            System.out.format("%n%s%n", "RegressionTest1.test0580");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1886,9 +2017,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0575() throws Throwable {
+    public void test0581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0575");
+            System.out.format("%n%s%n", "RegressionTest1.test0581");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -1907,9 +2038,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0576() throws Throwable {
+    public void test0582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0576");
+            System.out.format("%n%s%n", "RegressionTest1.test0582");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -1929,9 +2060,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0577() throws Throwable {
+    public void test0583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0577");
+            System.out.format("%n%s%n", "RegressionTest1.test0583");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -1954,9 +2085,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0578() throws Throwable {
+    public void test0584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0578");
+            System.out.format("%n%s%n", "RegressionTest1.test0584");
         org.apache.commons.collections4.MapIterator<java.lang.CharSequence, java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -1969,9 +2100,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0579() throws Throwable {
+    public void test0585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0579");
+            System.out.format("%n%s%n", "RegressionTest1.test0585");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -1992,9 +2123,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0580() throws Throwable {
+    public void test0586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0580");
+            System.out.format("%n%s%n", "RegressionTest1.test0586");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2015,9 +2146,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0581() throws Throwable {
+    public void test0587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0581");
+            System.out.format("%n%s%n", "RegressionTest1.test0587");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -2048,9 +2179,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0582() throws Throwable {
+    public void test0588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0582");
+            System.out.format("%n%s%n", "RegressionTest1.test0588");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -2062,17 +2193,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0583() throws Throwable {
+    public void test0589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0583");
+            System.out.format("%n%s%n", "RegressionTest1.test0589");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>[]> charSequenceItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(charSequenceItorArrayItor0);
     }
 
     @Test
-    public void test0584() throws Throwable {
+    public void test0590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0584");
+            System.out.format("%n%s%n", "RegressionTest1.test0590");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -2097,9 +2228,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0585() throws Throwable {
+    public void test0591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0585");
+            System.out.format("%n%s%n", "RegressionTest1.test0591");
         java.util.Comparator comparator2 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
         java.util.Comparator<java.lang.String> strComparator3 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator2);
         java.lang.String str4 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator2);
@@ -2113,9 +2244,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0586() throws Throwable {
+    public void test0592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0586");
+            System.out.format("%n%s%n", "RegressionTest1.test0592");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -2140,17 +2271,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0587() throws Throwable {
+    public void test0593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0587");
+            System.out.format("%n%s%n", "RegressionTest1.test0593");
         org.apache.commons.collections4.OrderedIterator<java.lang.Class<?>> wildcardClassItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(wildcardClassItor0);
     }
 
     @Test
-    public void test0588() throws Throwable {
+    public void test0594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0588");
+            System.out.format("%n%s%n", "RegressionTest1.test0594");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -2167,9 +2298,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0589() throws Throwable {
+    public void test0595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0589");
+            System.out.format("%n%s%n", "RegressionTest1.test0595");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -2279,9 +2410,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0590() throws Throwable {
+    public void test0596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0590");
+            System.out.format("%n%s%n", "RegressionTest1.test0596");
         org.apache.commons.collections4.ResettableIterator resettableIterator0 = org.apache.commons.collections4.iterators.EmptyIterator.RESETTABLE_INSTANCE;
         resettableIterator0.reset();
         resettableIterator0.reset();
@@ -2298,9 +2429,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0591() throws Throwable {
+    public void test0597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0591");
+            System.out.format("%n%s%n", "RegressionTest1.test0597");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -2338,9 +2469,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0592() throws Throwable {
+    public void test0598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0592");
+            System.out.format("%n%s%n", "RegressionTest1.test0598");
         java.util.Comparator<java.lang.String> strComparator0 = null;
         java.util.Comparator<java.lang.String> strComparator1 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator(strComparator0);
         java.util.Comparator<java.lang.String> strComparator2 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator(strComparator0);
@@ -2394,9 +2525,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0593() throws Throwable {
+    public void test0599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0593");
+            System.out.format("%n%s%n", "RegressionTest1.test0599");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -2421,9 +2552,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0594() throws Throwable {
+    public void test0600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0594");
+            System.out.format("%n%s%n", "RegressionTest1.test0600");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2454,9 +2585,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0595() throws Throwable {
+    public void test0601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0595");
+            System.out.format("%n%s%n", "RegressionTest1.test0601");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2485,17 +2616,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0596() throws Throwable {
+    public void test0602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0596");
+            System.out.format("%n%s%n", "RegressionTest1.test0602");
         org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.GenericDeclaration[]> genericDeclarationArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(genericDeclarationArrayItor0);
     }
 
     @Test
-    public void test0597() throws Throwable {
+    public void test0603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0597");
+            System.out.format("%n%s%n", "RegressionTest1.test0603");
         org.apache.commons.collections4.comparators.ReverseComparator<java.lang.Comparable<java.lang.String>> strComparableReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<java.lang.Comparable<java.lang.String>>();
         // The following exception was thrown during execution in test generation
         try {
@@ -2507,9 +2638,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0598() throws Throwable {
+    public void test0604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0598");
+            System.out.format("%n%s%n", "RegressionTest1.test0604");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2616,9 +2747,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0599() throws Throwable {
+    public void test0605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0599");
+            System.out.format("%n%s%n", "RegressionTest1.test0605");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -2647,9 +2778,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0600() throws Throwable {
+    public void test0606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0600");
+            System.out.format("%n%s%n", "RegressionTest1.test0606");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2669,17 +2800,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0601() throws Throwable {
+    public void test0607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0601");
+            System.out.format("%n%s%n", "RegressionTest1.test0607");
         org.apache.commons.collections4.MapIterator<java.util.RandomAccess, java.lang.CharSequence[]> randomAccessItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(randomAccessItor0);
     }
 
     @Test
-    public void test0602() throws Throwable {
+    public void test0608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0602");
+            System.out.format("%n%s%n", "RegressionTest1.test0608");
         java.util.Comparator<java.lang.String> strComparator0 = org.apache.commons.collections4.ComparatorUtils.naturalComparator();
         java.util.Comparator<java.lang.String> strComparator1 = org.apache.commons.collections4.ComparatorUtils.reversedComparator(strComparator0);
         java.util.Comparator<java.lang.String> strComparator2 = org.apache.commons.collections4.ComparatorUtils.reversedComparator(strComparator0);
@@ -2696,9 +2827,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0603() throws Throwable {
+    public void test0609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0603");
+            System.out.format("%n%s%n", "RegressionTest1.test0609");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         boolean boolean2 = typeItor0.hasNext();
@@ -2750,9 +2881,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0604() throws Throwable {
+    public void test0610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0604");
+            System.out.format("%n%s%n", "RegressionTest1.test0610");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -2788,9 +2919,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0605() throws Throwable {
+    public void test0611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0605");
+            System.out.format("%n%s%n", "RegressionTest1.test0611");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -2819,9 +2950,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0606() throws Throwable {
+    public void test0612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0606");
+            System.out.format("%n%s%n", "RegressionTest1.test0612");
         java.lang.Class[][] classArray1 = new java.lang.Class[0][];
         @SuppressWarnings("unchecked")
         java.lang.Class<?>[][] wildcardClassArray2 = (java.lang.Class<?>[][]) classArray1;
@@ -2839,9 +2970,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0607() throws Throwable {
+    public void test0613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0607");
+            System.out.format("%n%s%n", "RegressionTest1.test0613");
         org.apache.commons.collections4.MapIterator<java.lang.CharSequence, java.util.Iterator[]> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.apache.commons.collections4.OrderedMapIterator<java.io.Serializable, org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>> serializableItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>[], org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> strComparableComparatorArrayItor2 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
@@ -2864,18 +2995,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0608() throws Throwable {
+    public void test0614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0608");
+            System.out.format("%n%s%n", "RegressionTest1.test0614");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor0 = null;
         java.util.ListIterator<org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>> iteratorItorItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(iteratorItor0);
         org.junit.Assert.assertNotNull(iteratorItorItor1);
     }
 
     @Test
-    public void test0609() throws Throwable {
+    public void test0615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0609");
+            System.out.format("%n%s%n", "RegressionTest1.test0615");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -2968,9 +3099,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0610() throws Throwable {
+    public void test0616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0610");
+            System.out.format("%n%s%n", "RegressionTest1.test0616");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -2991,9 +3122,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0611() throws Throwable {
+    public void test0617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0611");
+            System.out.format("%n%s%n", "RegressionTest1.test0617");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -3017,9 +3148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0612() throws Throwable {
+    public void test0618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0612");
+            System.out.format("%n%s%n", "RegressionTest1.test0618");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -3045,9 +3176,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0613() throws Throwable {
+    public void test0619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0613");
+            System.out.format("%n%s%n", "RegressionTest1.test0619");
         java.util.ListIterator<java.lang.String> strItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator("hi!");
         int int2 = strItor1.nextIndex();
         int int3 = strItor1.previousIndex();
@@ -3064,9 +3195,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0614() throws Throwable {
+    public void test0620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0614");
+            System.out.format("%n%s%n", "RegressionTest1.test0620");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -3083,9 +3214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0615() throws Throwable {
+    public void test0621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0615");
+            System.out.format("%n%s%n", "RegressionTest1.test0621");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3116,9 +3247,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0616() throws Throwable {
+    public void test0622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0616");
+            System.out.format("%n%s%n", "RegressionTest1.test0622");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -3173,9 +3304,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0617() throws Throwable {
+    public void test0623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0617");
+            System.out.format("%n%s%n", "RegressionTest1.test0623");
         org.apache.commons.collections4.iterators.CollatingIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[]> charSequenceArrayItorArrayItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[]>();
         // The following exception was thrown during execution in test generation
         try {
@@ -3187,9 +3318,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0618() throws Throwable {
+    public void test0624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0618");
+            System.out.format("%n%s%n", "RegressionTest1.test0624");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -3221,26 +3352,26 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0619() throws Throwable {
+    public void test0625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0619");
+            System.out.format("%n%s%n", "RegressionTest1.test0625");
         org.apache.commons.collections4.MapIterator mapIterator0 = null;
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator> mapIteratorItor1 = org.apache.commons.collections4.IteratorUtils.singletonIterator(mapIterator0);
         org.junit.Assert.assertNotNull(mapIteratorItor1);
     }
 
     @Test
-    public void test0620() throws Throwable {
+    public void test0626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0620");
+            System.out.format("%n%s%n", "RegressionTest1.test0626");
         org.apache.commons.collections4.ResettableListIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>> wildcardItorCollectionItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(wildcardItorCollectionItor0);
     }
 
     @Test
-    public void test0621() throws Throwable {
+    public void test0627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0621");
+            System.out.format("%n%s%n", "RegressionTest1.test0627");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -3252,17 +3383,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0622() throws Throwable {
+    public void test0628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0622");
+            System.out.format("%n%s%n", "RegressionTest1.test0628");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>[]> strComparableComparatorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(strComparableComparatorArrayItor0);
     }
 
     @Test
-    public void test0623() throws Throwable {
+    public void test0629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0623");
+            System.out.format("%n%s%n", "RegressionTest1.test0629");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -3276,17 +3407,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0624() throws Throwable {
+    public void test0630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0624");
+            System.out.format("%n%s%n", "RegressionTest1.test0630");
         org.apache.commons.collections4.ResettableIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0625() throws Throwable {
+    public void test0631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0625");
+            System.out.format("%n%s%n", "RegressionTest1.test0631");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3312,9 +3443,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0626() throws Throwable {
+    public void test0632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0626");
+            System.out.format("%n%s%n", "RegressionTest1.test0632");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         boolean boolean2 = typeItor0.hasNext();
@@ -3335,9 +3466,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0627() throws Throwable {
+    public void test0633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0627");
+            System.out.format("%n%s%n", "RegressionTest1.test0633");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -3356,9 +3487,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0628() throws Throwable {
+    public void test0634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0628");
+            System.out.format("%n%s%n", "RegressionTest1.test0634");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -3382,9 +3513,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0629() throws Throwable {
+    public void test0635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0629");
+            System.out.format("%n%s%n", "RegressionTest1.test0635");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -3413,9 +3544,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0630() throws Throwable {
+    public void test0636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0630");
+            System.out.format("%n%s%n", "RegressionTest1.test0636");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3448,25 +3579,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0631() throws Throwable {
+    public void test0637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0631");
+            System.out.format("%n%s%n", "RegressionTest1.test0637");
         org.apache.commons.collections4.ResettableIterator<java.util.AbstractCollection<java.util.Iterator<? extends java.lang.reflect.Type>>> wildcardItorCollectionItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(wildcardItorCollectionItor0);
     }
 
     @Test
-    public void test0632() throws Throwable {
+    public void test0638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0632");
+            System.out.format("%n%s%n", "RegressionTest1.test0638");
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.OrderedIterator<java.lang.String>[]> strItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(strItorArrayItor0);
     }
 
     @Test
-    public void test0633() throws Throwable {
+    public void test0639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0633");
+            System.out.format("%n%s%n", "RegressionTest1.test0639");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -3491,9 +3622,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0634() throws Throwable {
+    public void test0640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0634");
+            System.out.format("%n%s%n", "RegressionTest1.test0640");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3524,9 +3655,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0635() throws Throwable {
+    public void test0641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0635");
+            System.out.format("%n%s%n", "RegressionTest1.test0641");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -3545,9 +3676,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0636() throws Throwable {
+    public void test0642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0636");
+            System.out.format("%n%s%n", "RegressionTest1.test0642");
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator0 = org.apache.commons.collections4.iterators.EmptyOrderedMapIterator.INSTANCE;
         org.apache.commons.collections4.OrderedMapIterator<java.lang.CharSequence[], java.util.Iterator[]> charSequenceArrayItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.MapIterator[] mapIteratorArray2 = new org.apache.commons.collections4.MapIterator[] { orderedMapIterator0, charSequenceArrayItor1 };
@@ -3593,9 +3724,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0637() throws Throwable {
+    public void test0643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0637");
+            System.out.format("%n%s%n", "RegressionTest1.test0643");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3620,9 +3751,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0638() throws Throwable {
+    public void test0644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0638");
+            System.out.format("%n%s%n", "RegressionTest1.test0644");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3645,17 +3776,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0639() throws Throwable {
+    public void test0645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0639");
+            System.out.format("%n%s%n", "RegressionTest1.test0645");
         org.apache.commons.collections4.ResettableListIterator<java.lang.Iterable[][]> iterableArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(iterableArrayItor0);
     }
 
     @Test
-    public void test0640() throws Throwable {
+    public void test0646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0640");
+            System.out.format("%n%s%n", "RegressionTest1.test0646");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -3699,9 +3830,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0641() throws Throwable {
+    public void test0647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0641");
+            System.out.format("%n%s%n", "RegressionTest1.test0647");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -3725,9 +3856,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0642() throws Throwable {
+    public void test0648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0642");
+            System.out.format("%n%s%n", "RegressionTest1.test0648");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -3756,9 +3887,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0643() throws Throwable {
+    public void test0649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0643");
+            System.out.format("%n%s%n", "RegressionTest1.test0649");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -3777,9 +3908,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0644() throws Throwable {
+    public void test0650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0644");
+            System.out.format("%n%s%n", "RegressionTest1.test0650");
         java.util.List[][][] listArray1 = new java.util.List[0][][];
         @SuppressWarnings("unchecked")
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][] wildcardItorListArray2 = (java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]) listArray1;
@@ -3797,17 +3928,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0645() throws Throwable {
+    public void test0651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0645");
+            System.out.format("%n%s%n", "RegressionTest1.test0651");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>[]> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(strItor0);
     }
 
     @Test
-    public void test0646() throws Throwable {
+    public void test0652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0646");
+            System.out.format("%n%s%n", "RegressionTest1.test0652");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.MapIterator[]> mapIteratorArrayItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) charSequenceArray4);
@@ -3819,9 +3950,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0647() throws Throwable {
+    public void test0653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0647");
+            System.out.format("%n%s%n", "RegressionTest1.test0653");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.Object obj3 = null;
@@ -3846,9 +3977,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0648() throws Throwable {
+    public void test0654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0648");
+            System.out.format("%n%s%n", "RegressionTest1.test0654");
         java.lang.String[] strArray6 = new java.lang.String[] { "hi!", "", "", "", "", "hi!" };
         java.lang.String[] strArray13 = new java.lang.String[] { "hi!", "", "", "", "", "hi!" };
         java.lang.String[][] strArray14 = new java.lang.String[][] { strArray6, strArray13 };
@@ -3865,9 +3996,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0649() throws Throwable {
+    public void test0655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0649");
+            System.out.format("%n%s%n", "RegressionTest1.test0655");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -3930,17 +4061,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0650() throws Throwable {
+    public void test0656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0650");
+            System.out.format("%n%s%n", "RegressionTest1.test0656");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.MapIterator[][]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0651() throws Throwable {
+    public void test0657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0651");
+            System.out.format("%n%s%n", "RegressionTest1.test0657");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -3969,9 +4100,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0652() throws Throwable {
+    public void test0658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0652");
+            System.out.format("%n%s%n", "RegressionTest1.test0658");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -4017,9 +4148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0653() throws Throwable {
+    public void test0659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0653");
+            System.out.format("%n%s%n", "RegressionTest1.test0659");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -4092,9 +4223,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0654() throws Throwable {
+    public void test0660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0654");
+            System.out.format("%n%s%n", "RegressionTest1.test0660");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String[]> strArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -4107,9 +4238,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0655() throws Throwable {
+    public void test0661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0655");
+            System.out.format("%n%s%n", "RegressionTest1.test0661");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         boolean boolean2 = strItor0.hasPrevious();
@@ -4130,9 +4261,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0656() throws Throwable {
+    public void test0662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0656");
+            System.out.format("%n%s%n", "RegressionTest1.test0662");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -4175,9 +4306,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0657() throws Throwable {
+    public void test0663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0657");
+            System.out.format("%n%s%n", "RegressionTest1.test0663");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -4202,9 +4333,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0658() throws Throwable {
+    public void test0664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0658");
+            System.out.format("%n%s%n", "RegressionTest1.test0664");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator6 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -4276,9 +4407,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0659() throws Throwable {
+    public void test0665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0659");
+            System.out.format("%n%s%n", "RegressionTest1.test0665");
         java.util.ListIterator<java.lang.String> strItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator("hi!");
         boolean boolean2 = strItor1.hasPrevious();
         int int3 = strItor1.nextIndex();
@@ -4297,9 +4428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0660() throws Throwable {
+    public void test0666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0660");
+            System.out.format("%n%s%n", "RegressionTest1.test0666");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -4324,9 +4455,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0661() throws Throwable {
+    public void test0667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0661");
+            System.out.format("%n%s%n", "RegressionTest1.test0667");
         java.util.Iterator<? extends org.apache.commons.collections4.MapIterator[]>[] wildcardItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4338,9 +4469,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0662() throws Throwable {
+    public void test0668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0662");
+            System.out.format("%n%s%n", "RegressionTest1.test0668");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         boolean boolean1 = iteratorItor0.hasPrevious();
         boolean boolean2 = iteratorItor0.hasPrevious();
@@ -4352,9 +4483,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0663() throws Throwable {
+    public void test0669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0663");
+            System.out.format("%n%s%n", "RegressionTest1.test0669");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -4410,9 +4541,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0664() throws Throwable {
+    public void test0670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0664");
+            System.out.format("%n%s%n", "RegressionTest1.test0670");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator6 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -4494,9 +4625,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0665() throws Throwable {
+    public void test0671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0665");
+            System.out.format("%n%s%n", "RegressionTest1.test0671");
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray0 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray1 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray2 = new java.lang.reflect.GenericDeclaration[][] {};
@@ -4523,9 +4654,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0666() throws Throwable {
+    public void test0672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0666");
+            System.out.format("%n%s%n", "RegressionTest1.test0672");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -4554,9 +4685,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0667() throws Throwable {
+    public void test0673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0667");
+            System.out.format("%n%s%n", "RegressionTest1.test0673");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>> iteratorItorItor1 = org.apache.commons.collections4.IteratorUtils.singletonIterator(iteratorItor0);
         boolean boolean2 = iteratorItor0.hasPrevious();
@@ -4573,9 +4704,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0668() throws Throwable {
+    public void test0674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0668");
+            System.out.format("%n%s%n", "RegressionTest1.test0674");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -4657,9 +4788,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0669() throws Throwable {
+    public void test0675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0669");
+            System.out.format("%n%s%n", "RegressionTest1.test0675");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -4673,17 +4804,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0670() throws Throwable {
+    public void test0676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0670");
+            System.out.format("%n%s%n", "RegressionTest1.test0676");
         org.apache.commons.collections4.MapIterator<java.lang.reflect.Type, java.lang.Comparable<java.lang.String>> typeItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(typeItor0);
     }
 
     @Test
-    public void test0671() throws Throwable {
+    public void test0677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0671");
+            System.out.format("%n%s%n", "RegressionTest1.test0677");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         charSequenceItor5.reset();
@@ -4715,9 +4846,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0672() throws Throwable {
+    public void test0678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0672");
+            System.out.format("%n%s%n", "RegressionTest1.test0678");
         java.util.ListIterator<java.lang.String>[][][] strItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4729,9 +4860,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0673() throws Throwable {
+    public void test0679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0673");
+            System.out.format("%n%s%n", "RegressionTest1.test0679");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -4780,9 +4911,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0674() throws Throwable {
+    public void test0680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0674");
+            System.out.format("%n%s%n", "RegressionTest1.test0680");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray4);
@@ -4844,9 +4975,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0675() throws Throwable {
+    public void test0681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0675");
+            System.out.format("%n%s%n", "RegressionTest1.test0681");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -4863,9 +4994,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0676() throws Throwable {
+    public void test0682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0676");
+            System.out.format("%n%s%n", "RegressionTest1.test0682");
         java.util.Iterator<? extends java.lang.reflect.GenericDeclaration[][]>[] wildcardItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4877,9 +5008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0677() throws Throwable {
+    public void test0683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0677");
+            System.out.format("%n%s%n", "RegressionTest1.test0683");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -4897,9 +5028,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0678() throws Throwable {
+    public void test0684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0678");
+            System.out.format("%n%s%n", "RegressionTest1.test0684");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -4927,9 +5058,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0679() throws Throwable {
+    public void test0685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0679");
+            System.out.format("%n%s%n", "RegressionTest1.test0685");
         java.lang.CharSequence[] charSequenceArray2 = new java.lang.CharSequence[] { "", "" };
         java.lang.CharSequence[] charSequenceArray5 = new java.lang.CharSequence[] { "", "" };
         java.lang.CharSequence[] charSequenceArray8 = new java.lang.CharSequence[] { "", "" };
@@ -4949,9 +5080,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0680() throws Throwable {
+    public void test0686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0680");
+            System.out.format("%n%s%n", "RegressionTest1.test0686");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -4972,9 +5103,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0681() throws Throwable {
+    public void test0687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0681");
+            System.out.format("%n%s%n", "RegressionTest1.test0687");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -5017,9 +5148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0682() throws Throwable {
+    public void test0688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0682");
+            System.out.format("%n%s%n", "RegressionTest1.test0688");
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[] wildcardItorListArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -5031,9 +5162,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0683() throws Throwable {
+    public void test0689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0683");
+            System.out.format("%n%s%n", "RegressionTest1.test0689");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5061,9 +5192,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0684() throws Throwable {
+    public void test0690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0684");
+            System.out.format("%n%s%n", "RegressionTest1.test0690");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -5081,9 +5212,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0685() throws Throwable {
+    public void test0691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0685");
+            System.out.format("%n%s%n", "RegressionTest1.test0691");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5111,9 +5242,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0686() throws Throwable {
+    public void test0692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0686");
+            System.out.format("%n%s%n", "RegressionTest1.test0692");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -5182,9 +5313,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0687() throws Throwable {
+    public void test0693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0687");
+            System.out.format("%n%s%n", "RegressionTest1.test0693");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -5211,9 +5342,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0688() throws Throwable {
+    public void test0694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0688");
+            System.out.format("%n%s%n", "RegressionTest1.test0694");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         org.apache.commons.collections4.ResettableListIterator<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorItor2 = org.apache.commons.collections4.IteratorUtils.loopingListIterator(wildcardItorList1);
@@ -5231,9 +5362,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0689() throws Throwable {
+    public void test0695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0689");
+            System.out.format("%n%s%n", "RegressionTest1.test0695");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -5262,9 +5393,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0690() throws Throwable {
+    public void test0696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0690");
+            System.out.format("%n%s%n", "RegressionTest1.test0696");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -5291,9 +5422,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0691() throws Throwable {
+    public void test0697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0691");
+            System.out.format("%n%s%n", "RegressionTest1.test0697");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5322,9 +5453,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0692() throws Throwable {
+    public void test0698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0692");
+            System.out.format("%n%s%n", "RegressionTest1.test0698");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5359,9 +5490,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0693() throws Throwable {
+    public void test0699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0693");
+            System.out.format("%n%s%n", "RegressionTest1.test0699");
         org.apache.commons.collections4.OrderedIterator[] orderedIteratorArray1 = new org.apache.commons.collections4.OrderedIterator[0];
         @SuppressWarnings("unchecked")
         org.apache.commons.collections4.OrderedIterator<java.lang.String>[] strItorArray2 = (org.apache.commons.collections4.OrderedIterator<java.lang.String>[]) orderedIteratorArray1;
@@ -5377,17 +5508,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0694() throws Throwable {
+    public void test0700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0694");
+            System.out.format("%n%s%n", "RegressionTest1.test0700");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.reflect.Type[], org.apache.commons.collections4.MapIterator> typeArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(typeArrayItor0);
     }
 
     @Test
-    public void test0695() throws Throwable {
+    public void test0701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0695");
+            System.out.format("%n%s%n", "RegressionTest1.test0701");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -5409,9 +5540,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0696() throws Throwable {
+    public void test0702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0696");
+            System.out.format("%n%s%n", "RegressionTest1.test0702");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Comparable<java.lang.String>> strComparableItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Comparable<java.lang.String>[]) strArray3);
@@ -5428,9 +5559,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0697() throws Throwable {
+    public void test0703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0697");
+            System.out.format("%n%s%n", "RegressionTest1.test0703");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5455,9 +5586,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0698() throws Throwable {
+    public void test0704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0698");
+            System.out.format("%n%s%n", "RegressionTest1.test0704");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.collections4.ResettableIterator<java.lang.reflect.GenericDeclaration[][][]> genericDeclarationArrayItor3 = org.apache.commons.collections4.IteratorUtils.arrayIterator((java.lang.Object) (byte) 10, 0, (int) (short) 0);
@@ -5468,25 +5599,33 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0699() throws Throwable {
+    public void test0705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0699");
+            System.out.format("%n%s%n", "RegressionTest1.test0705");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.Class<?>[], java.lang.Class<?>[]> wildcardClassArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
+        org.junit.Assert.assertNotNull(wildcardClassArrayItor0);
+    }
+
+    @Test
+    public void test0706() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0706");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.Iterable<java.util.Iterator<? extends java.lang.reflect.Type>>, java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorIterableItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorIterableItor0);
     }
 
     @Test
-    public void test0700() throws Throwable {
+    public void test0707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0700");
+            System.out.format("%n%s%n", "RegressionTest1.test0707");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.Class<?>, java.util.RandomAccess[]> wildcardClassItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardClassItor0);
     }
 
     @Test
-    public void test0701() throws Throwable {
+    public void test0708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0701");
+            System.out.format("%n%s%n", "RegressionTest1.test0708");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5513,9 +5652,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0702() throws Throwable {
+    public void test0709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0702");
+            System.out.format("%n%s%n", "RegressionTest1.test0709");
         java.util.Iterator<? extends org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>>[] wildcardItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -5527,17 +5666,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0703() throws Throwable {
+    public void test0710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0703");
+            System.out.format("%n%s%n", "RegressionTest1.test0710");
         org.apache.commons.collections4.ResettableIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>> wildcardItorCollectionItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(wildcardItorCollectionItor0);
     }
 
     @Test
-    public void test0704() throws Throwable {
+    public void test0711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0704");
+            System.out.format("%n%s%n", "RegressionTest1.test0711");
         java.util.List[][][] listArray1 = new java.util.List[0][][];
         @SuppressWarnings("unchecked")
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][] wildcardItorListArray2 = (java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]) listArray1;
@@ -5553,9 +5692,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0705() throws Throwable {
+    public void test0712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0705");
+            System.out.format("%n%s%n", "RegressionTest1.test0712");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         boolean boolean2 = strItor0.hasPrevious();
@@ -5613,9 +5752,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0706() throws Throwable {
+    public void test0713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0706");
+            System.out.format("%n%s%n", "RegressionTest1.test0713");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -5647,9 +5786,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0707() throws Throwable {
+    public void test0714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0707");
+            System.out.format("%n%s%n", "RegressionTest1.test0714");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -5682,17 +5821,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0708() throws Throwable {
+    public void test0715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0708");
+            System.out.format("%n%s%n", "RegressionTest1.test0715");
         org.apache.commons.collections4.OrderedMapIterator<java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[], java.lang.reflect.Type[]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0709() throws Throwable {
+    public void test0716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0709");
+            System.out.format("%n%s%n", "RegressionTest1.test0716");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -5707,17 +5846,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0710() throws Throwable {
+    public void test0717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0710");
+            System.out.format("%n%s%n", "RegressionTest1.test0717");
         org.apache.commons.collections4.MapIterator<java.lang.CharSequence, org.apache.commons.collections4.ResettableListIterator<java.lang.String>> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(charSequenceItor0);
     }
 
     @Test
-    public void test0711() throws Throwable {
+    public void test0718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0711");
+            System.out.format("%n%s%n", "RegressionTest1.test0718");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -5737,25 +5876,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0712() throws Throwable {
+    public void test0719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0712");
+            System.out.format("%n%s%n", "RegressionTest1.test0719");
         org.apache.commons.collections4.MapIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][], java.lang.reflect.AnnotatedElement> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0713() throws Throwable {
+    public void test0720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0713");
+            System.out.format("%n%s%n", "RegressionTest1.test0720");
         org.apache.commons.collections4.ResettableIterator<java.lang.Object> objItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(objItor0);
     }
 
     @Test
-    public void test0714() throws Throwable {
+    public void test0721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0714");
+            System.out.format("%n%s%n", "RegressionTest1.test0721");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -5782,9 +5921,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0715() throws Throwable {
+    public void test0722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0715");
+            System.out.format("%n%s%n", "RegressionTest1.test0722");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -5813,9 +5952,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0716() throws Throwable {
+    public void test0723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0716");
+            System.out.format("%n%s%n", "RegressionTest1.test0723");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5838,9 +5977,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0717() throws Throwable {
+    public void test0724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0717");
+            System.out.format("%n%s%n", "RegressionTest1.test0724");
         java.util.ListIterator[] listIteratorArray1 = new java.util.ListIterator[0];
         @SuppressWarnings("unchecked")
         java.util.ListIterator<java.lang.String>[] strItorArray2 = (java.util.ListIterator<java.lang.String>[]) listIteratorArray1;
@@ -5916,17 +6055,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0718() throws Throwable {
+    public void test0725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0718");
+            System.out.format("%n%s%n", "RegressionTest1.test0725");
         org.apache.commons.collections4.MapIterator<java.lang.reflect.GenericDeclaration[][][], org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>> genericDeclarationArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(genericDeclarationArrayItor0);
     }
 
     @Test
-    public void test0719() throws Throwable {
+    public void test0726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0719");
+            System.out.format("%n%s%n", "RegressionTest1.test0726");
         java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[][] wildcardItorListArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -5938,9 +6077,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0720() throws Throwable {
+    public void test0727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0720");
+            System.out.format("%n%s%n", "RegressionTest1.test0727");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -5973,9 +6112,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0721() throws Throwable {
+    public void test0728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0721");
+            System.out.format("%n%s%n", "RegressionTest1.test0728");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         java.lang.CharSequence[][] charSequenceArray1 = new java.lang.CharSequence[][] {};
         java.lang.CharSequence[][] charSequenceArray2 = new java.lang.CharSequence[][] {};
@@ -5994,9 +6133,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0722() throws Throwable {
+    public void test0729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0722");
+            System.out.format("%n%s%n", "RegressionTest1.test0729");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -6021,17 +6160,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0723() throws Throwable {
+    public void test0730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0723");
+            System.out.format("%n%s%n", "RegressionTest1.test0730");
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[][][], org.apache.commons.collections4.MapIterator[]> charSequenceArrayItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(charSequenceArrayItorArrayItor0);
     }
 
     @Test
-    public void test0724() throws Throwable {
+    public void test0731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0724");
+            System.out.format("%n%s%n", "RegressionTest1.test0731");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -6113,9 +6252,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0725() throws Throwable {
+    public void test0732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0725");
+            System.out.format("%n%s%n", "RegressionTest1.test0732");
         java.lang.reflect.Type[][] typeArray0 = new java.lang.reflect.Type[][] {};
         java.lang.reflect.Type[][][] typeArray1 = new java.lang.reflect.Type[][][] { typeArray0 };
         java.util.ListIterator<java.lang.reflect.Type[][][]> typeArrayItor2 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(typeArray1);
@@ -6125,9 +6264,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0726() throws Throwable {
+    public void test0733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0726");
+            System.out.format("%n%s%n", "RegressionTest1.test0733");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6150,9 +6289,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0727() throws Throwable {
+    public void test0734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0727");
+            System.out.format("%n%s%n", "RegressionTest1.test0734");
         java.util.List[][][][] listArray1 = new java.util.List[0][][][];
         @SuppressWarnings("unchecked")
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][][] wildcardItorListArray2 = (java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][][]) listArray1;
@@ -6168,9 +6307,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0728() throws Throwable {
+    public void test0735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0728");
+            System.out.format("%n%s%n", "RegressionTest1.test0735");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -6207,17 +6346,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0729() throws Throwable {
+    public void test0736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0729");
+            System.out.format("%n%s%n", "RegressionTest1.test0736");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[]> charSequenceArrayItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(charSequenceArrayItorArrayItor0);
     }
 
     @Test
-    public void test0730() throws Throwable {
+    public void test0737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0730");
+            System.out.format("%n%s%n", "RegressionTest1.test0737");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6252,9 +6391,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0731() throws Throwable {
+    public void test0738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0731");
+            System.out.format("%n%s%n", "RegressionTest1.test0738");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -6275,9 +6414,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0732() throws Throwable {
+    public void test0739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0732");
+            System.out.format("%n%s%n", "RegressionTest1.test0739");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -6297,9 +6436,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0733() throws Throwable {
+    public void test0740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0733");
+            System.out.format("%n%s%n", "RegressionTest1.test0740");
         java.util.Iterator<? extends java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>>[] wildcardItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6311,9 +6450,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0734() throws Throwable {
+    public void test0741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0734");
+            System.out.format("%n%s%n", "RegressionTest1.test0741");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -6357,9 +6496,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0735() throws Throwable {
+    public void test0742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0735");
+            System.out.format("%n%s%n", "RegressionTest1.test0742");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6389,18 +6528,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0736() throws Throwable {
+    public void test0743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0736");
+            System.out.format("%n%s%n", "RegressionTest1.test0743");
         java.util.AbstractList<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList0 = null;
         org.apache.commons.collections4.ResettableIterator<java.util.AbstractList<java.util.Iterator<? extends java.lang.reflect.Type>>> wildcardItorListItor1 = org.apache.commons.collections4.IteratorUtils.singletonIterator(wildcardItorList0);
         org.junit.Assert.assertNotNull(wildcardItorListItor1);
     }
 
     @Test
-    public void test0737() throws Throwable {
+    public void test0744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0737");
+            System.out.format("%n%s%n", "RegressionTest1.test0744");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6438,9 +6577,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0738() throws Throwable {
+    public void test0745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0738");
+            System.out.format("%n%s%n", "RegressionTest1.test0745");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6452,9 +6591,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0739() throws Throwable {
+    public void test0746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0739");
+            System.out.format("%n%s%n", "RegressionTest1.test0746");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6479,9 +6618,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0740() throws Throwable {
+    public void test0747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0740");
+            System.out.format("%n%s%n", "RegressionTest1.test0747");
         org.apache.commons.collections4.ResettableListIterator resettableListIterator0 = org.apache.commons.collections4.IteratorUtils.EMPTY_LIST_ITERATOR;
         java.lang.String[] strArray4 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray4);
@@ -6533,9 +6672,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0741() throws Throwable {
+    public void test0748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0741");
+            System.out.format("%n%s%n", "RegressionTest1.test0748");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -6601,9 +6740,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0742() throws Throwable {
+    public void test0749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0742");
+            System.out.format("%n%s%n", "RegressionTest1.test0749");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -6630,9 +6769,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0743() throws Throwable {
+    public void test0750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0743");
+            System.out.format("%n%s%n", "RegressionTest1.test0750");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -6651,9 +6790,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0744() throws Throwable {
+    public void test0751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0744");
+            System.out.format("%n%s%n", "RegressionTest1.test0751");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -6677,9 +6816,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0745() throws Throwable {
+    public void test0752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0745");
+            System.out.format("%n%s%n", "RegressionTest1.test0752");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -6700,9 +6839,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0746() throws Throwable {
+    public void test0753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0746");
+            System.out.format("%n%s%n", "RegressionTest1.test0753");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -6731,9 +6870,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0747() throws Throwable {
+    public void test0754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0747");
+            System.out.format("%n%s%n", "RegressionTest1.test0754");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -6758,17 +6897,40 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0748() throws Throwable {
+    public void test0755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0748");
+            System.out.format("%n%s%n", "RegressionTest1.test0755");
         org.apache.commons.collections4.ResettableListIterator<java.lang.Iterable<java.util.Iterator<? extends java.lang.reflect.Type>>> wildcardItorIterableItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(wildcardItorIterableItor0);
     }
 
     @Test
-    public void test0749() throws Throwable {
+    public void test0756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0749");
+            System.out.format("%n%s%n", "RegressionTest1.test0756");
+        org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
+        java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
+        boolean boolean2 = typeItor0.hasNext();
+        java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList3 = typeItor0.getIterators();
+        java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList4 = typeItor0.getIterators();
+        org.apache.commons.collections4.ResettableListIterator<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorItor5 = org.apache.commons.collections4.IteratorUtils.loopingListIterator(wildcardItorList4);
+        java.util.Iterator<?> wildcardItor6 = org.apache.commons.collections4.IteratorUtils.getIterator((java.lang.Object) wildcardItorList4);
+        org.apache.commons.collections4.ResettableIterator<java.lang.Object> objItor7 = org.apache.commons.collections4.IteratorUtils.loopingIterator((java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>) wildcardItorList4);
+        org.apache.commons.collections4.ResettableListIterator<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorItor8 = org.apache.commons.collections4.IteratorUtils.loopingListIterator(wildcardItorList4);
+        org.junit.Assert.assertNotNull(wildcardItorList1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(wildcardItorList3);
+        org.junit.Assert.assertNotNull(wildcardItorList4);
+        org.junit.Assert.assertNotNull(wildcardItorItor5);
+        org.junit.Assert.assertNotNull(wildcardItor6);
+        org.junit.Assert.assertNotNull(objItor7);
+        org.junit.Assert.assertNotNull(wildcardItorItor8);
+    }
+
+    @Test
+    public void test0757() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0757");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -6814,9 +6976,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0750() throws Throwable {
+    public void test0758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0750");
+            System.out.format("%n%s%n", "RegressionTest1.test0758");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6842,17 +7004,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0751() throws Throwable {
+    public void test0759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0751");
+            System.out.format("%n%s%n", "RegressionTest1.test0759");
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.MapIterator[][][], java.lang.CharSequence[][]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0752() throws Throwable {
+    public void test0760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0752");
+            System.out.format("%n%s%n", "RegressionTest1.test0760");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -6881,9 +7043,42 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0753() throws Throwable {
+    public void test0761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0753");
+            System.out.format("%n%s%n", "RegressionTest1.test0761");
+        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
+        boolean boolean5 = strItor4.hasPrevious();
+        boolean boolean6 = strItor4.hasNext();
+        int int7 = strItor4.previousIndex();
+        java.lang.String str8 = strItor4.next();
+        java.lang.String str9 = strItor4.previous();
+        int int10 = strItor4.previousIndex();
+        java.lang.String str11 = strItor4.next();
+        boolean boolean12 = strItor4.hasPrevious();
+        java.util.ListIterator<java.lang.String> strItor13 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
+        strItor4.set("");
+        boolean boolean16 = strItor4.hasPrevious();
+        int int17 = strItor4.nextIndex();
+        org.junit.Assert.assertNotNull(strArray3);
+        org.junit.Assert.assertNotNull(strItor4);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(strItor13);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 1 + "'", int17 == 1);
+    }
+
+    @Test
+    public void test0762() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0762");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -6898,9 +7093,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0754() throws Throwable {
+    public void test0763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0754");
+            System.out.format("%n%s%n", "RegressionTest1.test0763");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -6919,17 +7114,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0755() throws Throwable {
+    public void test0764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0755");
+            System.out.format("%n%s%n", "RegressionTest1.test0764");
         org.apache.commons.collections4.OrderedIterator<java.lang.reflect.Type[]> typeArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(typeArrayItor0);
     }
 
     @Test
-    public void test0756() throws Throwable {
+    public void test0765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0756");
+            System.out.format("%n%s%n", "RegressionTest1.test0765");
         org.apache.commons.collections4.MapIterator[][][] mapIteratorArray0 = new org.apache.commons.collections4.MapIterator[][][] {};
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator[][]> mapIteratorArrayItor1 = org.apache.commons.collections4.IteratorUtils.arrayIterator(mapIteratorArray0);
         java.util.ListIterator<org.apache.commons.collections4.MapIterator[][][]> mapIteratorArrayItor2 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(mapIteratorArray0);
@@ -6939,17 +7134,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0757() throws Throwable {
+    public void test0766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0757");
+            System.out.format("%n%s%n", "RegressionTest1.test0766");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>, java.util.RandomAccess[]> wildcardItorCollectionItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorCollectionItor0);
     }
 
     @Test
-    public void test0758() throws Throwable {
+    public void test0767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0758");
+            System.out.format("%n%s%n", "RegressionTest1.test0767");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -6980,9 +7175,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0759() throws Throwable {
+    public void test0768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0759");
+            System.out.format("%n%s%n", "RegressionTest1.test0768");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7005,9 +7200,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0760() throws Throwable {
+    public void test0769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0760");
+            System.out.format("%n%s%n", "RegressionTest1.test0769");
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray0 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray1 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray2 = new java.lang.reflect.GenericDeclaration[][] {};
@@ -7027,9 +7222,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0761() throws Throwable {
+    public void test0770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0761");
+            System.out.format("%n%s%n", "RegressionTest1.test0770");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7048,9 +7243,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0762() throws Throwable {
+    public void test0771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0762");
+            System.out.format("%n%s%n", "RegressionTest1.test0771");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -7093,9 +7288,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0763() throws Throwable {
+    public void test0772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0763");
+            System.out.format("%n%s%n", "RegressionTest1.test0772");
         org.apache.commons.collections4.ResettableListIterator resettableListIterator0 = org.apache.commons.collections4.IteratorUtils.EMPTY_LIST_ITERATOR;
         java.lang.String[] strArray4 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray4);
@@ -7147,9 +7342,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0764() throws Throwable {
+    public void test0773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0764");
+            System.out.format("%n%s%n", "RegressionTest1.test0773");
         java.util.ListIterator<java.lang.String> strItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator("hi!");
         boolean boolean2 = strItor1.hasPrevious();
         int int3 = strItor1.previousIndex();
@@ -7165,9 +7360,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0765() throws Throwable {
+    public void test0774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0765");
+            System.out.format("%n%s%n", "RegressionTest1.test0774");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7189,9 +7384,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0766() throws Throwable {
+    public void test0775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0766");
+            System.out.format("%n%s%n", "RegressionTest1.test0775");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7214,9 +7409,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0767() throws Throwable {
+    public void test0776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0767");
+            System.out.format("%n%s%n", "RegressionTest1.test0776");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -7239,9 +7434,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0768() throws Throwable {
+    public void test0777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0768");
+            System.out.format("%n%s%n", "RegressionTest1.test0777");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -7275,9 +7470,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0769() throws Throwable {
+    public void test0778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0769");
+            System.out.format("%n%s%n", "RegressionTest1.test0778");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -7304,9 +7499,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0770() throws Throwable {
+    public void test0779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0770");
+            System.out.format("%n%s%n", "RegressionTest1.test0779");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         boolean boolean4 = charSequenceItorReverseComparator0.equals((java.lang.Object) 2);
@@ -7348,9 +7543,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0771() throws Throwable {
+    public void test0780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0771");
+            System.out.format("%n%s%n", "RegressionTest1.test0780");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -7372,9 +7567,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0772() throws Throwable {
+    public void test0781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0772");
+            System.out.format("%n%s%n", "RegressionTest1.test0781");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -7401,9 +7596,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0773() throws Throwable {
+    public void test0782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0773");
+            System.out.format("%n%s%n", "RegressionTest1.test0782");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -7465,9 +7660,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0774() throws Throwable {
+    public void test0783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0774");
+            System.out.format("%n%s%n", "RegressionTest1.test0783");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -7515,9 +7710,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0775() throws Throwable {
+    public void test0784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0775");
+            System.out.format("%n%s%n", "RegressionTest1.test0784");
         org.apache.commons.collections4.OrderedIterator<java.lang.CharSequence> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -7530,9 +7725,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0776() throws Throwable {
+    public void test0785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0776");
+            System.out.format("%n%s%n", "RegressionTest1.test0785");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -7556,9 +7751,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0777() throws Throwable {
+    public void test0786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0777");
+            System.out.format("%n%s%n", "RegressionTest1.test0786");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -7578,9 +7773,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0778() throws Throwable {
+    public void test0787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0778");
+            System.out.format("%n%s%n", "RegressionTest1.test0787");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7603,17 +7798,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0779() throws Throwable {
+    public void test0788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0779");
+            System.out.format("%n%s%n", "RegressionTest1.test0788");
         org.apache.commons.collections4.OrderedIterator<java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0780() throws Throwable {
+    public void test0789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0780");
+            System.out.format("%n%s%n", "RegressionTest1.test0789");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7639,9 +7834,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0781() throws Throwable {
+    public void test0790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0781");
+            System.out.format("%n%s%n", "RegressionTest1.test0790");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -7670,9 +7865,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0782() throws Throwable {
+    public void test0791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0782");
+            System.out.format("%n%s%n", "RegressionTest1.test0791");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -7693,9 +7888,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0783() throws Throwable {
+    public void test0792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0783");
+            System.out.format("%n%s%n", "RegressionTest1.test0792");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -7795,9 +7990,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0784() throws Throwable {
+    public void test0793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0784");
+            System.out.format("%n%s%n", "RegressionTest1.test0793");
         org.apache.commons.collections4.MapIterator[][][] mapIteratorArray0 = new org.apache.commons.collections4.MapIterator[][][] {};
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator[][]> mapIteratorArrayItor1 = org.apache.commons.collections4.IteratorUtils.arrayIterator(mapIteratorArray0);
         // The following exception was thrown during execution in test generation
@@ -7812,9 +8007,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0785() throws Throwable {
+    public void test0794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0785");
+            System.out.format("%n%s%n", "RegressionTest1.test0794");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -7843,9 +8038,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0786() throws Throwable {
+    public void test0795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0786");
+            System.out.format("%n%s%n", "RegressionTest1.test0795");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -7866,17 +8061,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0787() throws Throwable {
+    public void test0796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0787");
+            System.out.format("%n%s%n", "RegressionTest1.test0796");
         org.apache.commons.collections4.MapIterator<java.lang.reflect.AnnotatedElement, org.apache.commons.collections4.MapIterator[][]> annotatedElementItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(annotatedElementItor0);
     }
 
     @Test
-    public void test0788() throws Throwable {
+    public void test0797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0788");
+            System.out.format("%n%s%n", "RegressionTest1.test0797");
         org.apache.commons.collections4.iterators.ZippingIterator[][][] zippingIteratorArray1 = new org.apache.commons.collections4.iterators.ZippingIterator[0][][];
         @SuppressWarnings("unchecked")
         org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[][][] charSequenceArrayItorArray2 = (org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[][][]) zippingIteratorArray1;
@@ -7891,9 +8086,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0789() throws Throwable {
+    public void test0798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0789");
+            System.out.format("%n%s%n", "RegressionTest1.test0798");
         java.util.RandomAccess[] randomAccessArray0 = new java.util.RandomAccess[] {};
         java.util.RandomAccess[][] randomAccessArray1 = new java.util.RandomAccess[][] { randomAccessArray0 };
         // The following exception was thrown during execution in test generation
@@ -7908,9 +8103,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0790() throws Throwable {
+    public void test0799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0790");
+            System.out.format("%n%s%n", "RegressionTest1.test0799");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -7967,9 +8162,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0791() throws Throwable {
+    public void test0800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0791");
+            System.out.format("%n%s%n", "RegressionTest1.test0800");
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator0 = org.apache.commons.collections4.iterators.EmptyOrderedMapIterator.INSTANCE;
         boolean boolean1 = orderedMapIterator0.hasPrevious();
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration> iteratorItor2 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
@@ -8014,9 +8209,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0792() throws Throwable {
+    public void test0801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0792");
+            System.out.format("%n%s%n", "RegressionTest1.test0801");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int10 = strComparableComparator7.compare("hi!", "hi!");
@@ -8120,9 +8315,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0793() throws Throwable {
+    public void test0802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0793");
+            System.out.format("%n%s%n", "RegressionTest1.test0802");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -8152,9 +8347,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0794() throws Throwable {
+    public void test0803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0794");
+            System.out.format("%n%s%n", "RegressionTest1.test0803");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -8183,9 +8378,40 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0795() throws Throwable {
+    public void test0804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0795");
+            System.out.format("%n%s%n", "RegressionTest1.test0804");
+        org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
+        boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
+        java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor7 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray6);
+        boolean boolean8 = strItor7.hasPrevious();
+        boolean boolean9 = strItor7.hasNext();
+        int int10 = strItor7.previousIndex();
+        java.lang.String str11 = strItor7.next();
+        boolean boolean12 = charSequenceItorReverseComparator0.equals((java.lang.Object) strItor7);
+        java.lang.String str13 = strItor7.next();
+        java.lang.String str14 = strItor7.previous();
+        int int15 = strItor7.nextIndex();
+        int int16 = strItor7.previousIndex();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(strArray6);
+        org.junit.Assert.assertNotNull(strItor7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 1 + "'", int15 == 1);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
+    }
+
+    @Test
+    public void test0805() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0805");
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray0 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray1 = new java.lang.reflect.GenericDeclaration[][] {};
         java.lang.reflect.GenericDeclaration[][] genericDeclarationArray2 = new java.lang.reflect.GenericDeclaration[][] {};
@@ -8214,9 +8440,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0796() throws Throwable {
+    public void test0806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0796");
+            System.out.format("%n%s%n", "RegressionTest1.test0806");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -8241,9 +8467,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0797() throws Throwable {
+    public void test0807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0797");
+            System.out.format("%n%s%n", "RegressionTest1.test0807");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -8356,9 +8582,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0798() throws Throwable {
+    public void test0808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0798");
+            System.out.format("%n%s%n", "RegressionTest1.test0808");
         java.lang.reflect.Type[] typeArray0 = new java.lang.reflect.Type[] {};
         java.lang.reflect.Type[] typeArray1 = new java.lang.reflect.Type[] {};
         java.lang.reflect.Type[] typeArray2 = new java.lang.reflect.Type[] {};
@@ -8380,9 +8606,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0799() throws Throwable {
+    public void test0809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0799");
+            System.out.format("%n%s%n", "RegressionTest1.test0809");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>, org.apache.commons.collections4.ResettableListIterator<java.lang.String>> charSequenceItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         java.lang.Class<?> wildcardClass1 = charSequenceItorItor0.getClass();
         // The following exception was thrown during execution in test generation
@@ -8397,9 +8623,31 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0800() throws Throwable {
+    public void test0810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0800");
+            System.out.format("%n%s%n", "RegressionTest1.test0810");
+        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
+        boolean boolean5 = strItor4.hasPrevious();
+        boolean boolean6 = strItor4.hasNext();
+        int int7 = strItor4.previousIndex();
+        java.lang.String str8 = strItor4.next();
+        java.util.ListIterator<java.lang.String> strItor9 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
+        boolean boolean10 = strItor4.hasNext();
+        org.junit.Assert.assertNotNull(strArray3);
+        org.junit.Assert.assertNotNull(strItor4);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(strItor9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+    }
+
+    @Test
+    public void test0811() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0811");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -8431,9 +8679,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0801() throws Throwable {
+    public void test0812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0801");
+            System.out.format("%n%s%n", "RegressionTest1.test0812");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -8475,9 +8723,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0802() throws Throwable {
+    public void test0813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0802");
+            System.out.format("%n%s%n", "RegressionTest1.test0813");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -8502,9 +8750,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0803() throws Throwable {
+    public void test0814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0803");
+            System.out.format("%n%s%n", "RegressionTest1.test0814");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -8523,9 +8771,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0804() throws Throwable {
+    public void test0815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0804");
+            System.out.format("%n%s%n", "RegressionTest1.test0815");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int10 = strComparableComparator7.compare("hi!", "hi!");
@@ -8629,9 +8877,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0805() throws Throwable {
+    public void test0816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0805");
+            System.out.format("%n%s%n", "RegressionTest1.test0816");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Comparable<java.lang.String>> strComparableItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Comparable<java.lang.String>[]) strArray3);
@@ -8652,9 +8900,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0806() throws Throwable {
+    public void test0817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0806");
+            System.out.format("%n%s%n", "RegressionTest1.test0817");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -8674,9 +8922,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0807() throws Throwable {
+    public void test0818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0807");
+            System.out.format("%n%s%n", "RegressionTest1.test0818");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -8714,9 +8962,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0808() throws Throwable {
+    public void test0819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0808");
+            System.out.format("%n%s%n", "RegressionTest1.test0819");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -8736,9 +8984,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0809() throws Throwable {
+    public void test0820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0809");
+            System.out.format("%n%s%n", "RegressionTest1.test0820");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -8784,9 +9032,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0810() throws Throwable {
+    public void test0821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0810");
+            System.out.format("%n%s%n", "RegressionTest1.test0821");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -8809,9 +9057,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0811() throws Throwable {
+    public void test0822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0811");
+            System.out.format("%n%s%n", "RegressionTest1.test0822");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -8836,9 +9084,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0812() throws Throwable {
+    public void test0823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0812");
+            System.out.format("%n%s%n", "RegressionTest1.test0823");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -8881,25 +9129,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0813() throws Throwable {
+    public void test0824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0813");
+            System.out.format("%n%s%n", "RegressionTest1.test0824");
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator[][]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0814() throws Throwable {
+    public void test0825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0814");
+            System.out.format("%n%s%n", "RegressionTest1.test0825");
         org.apache.commons.collections4.OrderedIterator<java.util.RandomAccess> randomAccessItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(randomAccessItor0);
     }
 
     @Test
-    public void test0815() throws Throwable {
+    public void test0826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0815");
+            System.out.format("%n%s%n", "RegressionTest1.test0826");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -8924,17 +9172,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0816() throws Throwable {
+    public void test0827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0816");
+            System.out.format("%n%s%n", "RegressionTest1.test0827");
         org.apache.commons.collections4.OrderedMapIterator<java.lang.reflect.GenericDeclaration[], java.lang.reflect.GenericDeclaration[][][]> genericDeclarationArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(genericDeclarationArrayItor0);
     }
 
     @Test
-    public void test0817() throws Throwable {
+    public void test0828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0817");
+            System.out.format("%n%s%n", "RegressionTest1.test0828");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -9034,9 +9282,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0818() throws Throwable {
+    public void test0829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0818");
+            System.out.format("%n%s%n", "RegressionTest1.test0829");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         boolean boolean2 = typeItor0.hasNext();
@@ -9178,9 +9426,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0819() throws Throwable {
+    public void test0830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0819");
+            System.out.format("%n%s%n", "RegressionTest1.test0830");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -9199,17 +9447,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0820() throws Throwable {
+    public void test0831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0820");
+            System.out.format("%n%s%n", "RegressionTest1.test0831");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>[], java.lang.reflect.GenericDeclaration[][][]> strComparableComparatorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(strComparableComparatorArrayItor0);
     }
 
     @Test
-    public void test0821() throws Throwable {
+    public void test0832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0821");
+            System.out.format("%n%s%n", "RegressionTest1.test0832");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor1 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean2 = typeItor1.hasNext();
@@ -9241,9 +9489,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0822() throws Throwable {
+    public void test0833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0822");
+            System.out.format("%n%s%n", "RegressionTest1.test0833");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -9266,9 +9514,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0823() throws Throwable {
+    public void test0834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0823");
+            System.out.format("%n%s%n", "RegressionTest1.test0834");
         java.util.Comparator<java.lang.String> strComparator2 = null;
         java.util.Comparator<java.lang.String> strComparator3 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator(strComparator2);
         java.util.Comparator<java.lang.String> strComparator4 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator(strComparator2);
@@ -9285,9 +9533,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0824() throws Throwable {
+    public void test0835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0824");
+            System.out.format("%n%s%n", "RegressionTest1.test0835");
         org.apache.commons.collections4.OrderedIterator<java.util.Iterator> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         java.util.Iterator<?> wildcardItor1 = org.apache.commons.collections4.IteratorUtils.getIterator((java.lang.Object) iteratorItor0);
         java.util.Iterator<?> wildcardItor2 = org.apache.commons.collections4.IteratorUtils.getIterator((java.lang.Object) wildcardItor1);
@@ -9299,9 +9547,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0825() throws Throwable {
+    public void test0836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0825");
+            System.out.format("%n%s%n", "RegressionTest1.test0836");
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -9313,9 +9561,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0826() throws Throwable {
+    public void test0837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0826");
+            System.out.format("%n%s%n", "RegressionTest1.test0837");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -9337,9 +9585,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0827() throws Throwable {
+    public void test0838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0827");
+            System.out.format("%n%s%n", "RegressionTest1.test0838");
         org.apache.commons.collections4.OrderedMapIterator[][] orderedMapIteratorArray1 = new org.apache.commons.collections4.OrderedMapIterator[0][];
         @SuppressWarnings("unchecked")
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>[][] iteratorItorArray2 = (org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>[][]) orderedMapIteratorArray1;
@@ -9355,9 +9603,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0828() throws Throwable {
+    public void test0839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0828");
+            System.out.format("%n%s%n", "RegressionTest1.test0839");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -9386,9 +9634,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0829() throws Throwable {
+    public void test0840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0829");
+            System.out.format("%n%s%n", "RegressionTest1.test0840");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray4);
@@ -9452,9 +9700,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0830() throws Throwable {
+    public void test0841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0830");
+            System.out.format("%n%s%n", "RegressionTest1.test0841");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -9475,25 +9723,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0831() throws Throwable {
+    public void test0842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0831");
+            System.out.format("%n%s%n", "RegressionTest1.test0842");
         org.apache.commons.collections4.ResettableIterator<java.lang.Iterable[][]> iterableArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(iterableArrayItor0);
     }
 
     @Test
-    public void test0832() throws Throwable {
+    public void test0843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0832");
+            System.out.format("%n%s%n", "RegressionTest1.test0843");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.MapIterator[]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0833() throws Throwable {
+    public void test0844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0833");
+            System.out.format("%n%s%n", "RegressionTest1.test0844");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -9561,9 +9809,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0834() throws Throwable {
+    public void test0845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0834");
+            System.out.format("%n%s%n", "RegressionTest1.test0845");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -9592,9 +9840,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0835() throws Throwable {
+    public void test0846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0835");
+            System.out.format("%n%s%n", "RegressionTest1.test0846");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -9611,17 +9859,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0836() throws Throwable {
+    public void test0847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0836");
+            System.out.format("%n%s%n", "RegressionTest1.test0847");
         org.apache.commons.collections4.OrderedMapIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][], org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0837() throws Throwable {
+    public void test0848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0837");
+            System.out.format("%n%s%n", "RegressionTest1.test0848");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         int int2 = listIterator0.previousIndex();
@@ -9644,9 +9892,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0838() throws Throwable {
+    public void test0849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0838");
+            System.out.format("%n%s%n", "RegressionTest1.test0849");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator3 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int6 = strComparableComparator3.compare("hi!", "hi!");
@@ -9679,9 +9927,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0839() throws Throwable {
+    public void test0850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0839");
+            System.out.format("%n%s%n", "RegressionTest1.test0850");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         int int2 = listIterator0.previousIndex();
@@ -9708,9 +9956,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0840() throws Throwable {
+    public void test0851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0840");
+            System.out.format("%n%s%n", "RegressionTest1.test0851");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -9773,9 +10021,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0841() throws Throwable {
+    public void test0852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0841");
+            System.out.format("%n%s%n", "RegressionTest1.test0852");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.Object obj3 = null;
@@ -9801,9 +10049,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0842() throws Throwable {
+    public void test0853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0842");
+            System.out.format("%n%s%n", "RegressionTest1.test0853");
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         java.lang.Class<?> wildcardClass1 = charSequenceItorItor0.getClass();
         org.junit.Assert.assertNotNull(charSequenceItorItor0);
@@ -9811,9 +10059,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0843() throws Throwable {
+    public void test0854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0843");
+            System.out.format("%n%s%n", "RegressionTest1.test0854");
         java.util.RandomAccess[][] randomAccessArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -9825,17 +10073,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0844() throws Throwable {
+    public void test0855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0844");
+            System.out.format("%n%s%n", "RegressionTest1.test0855");
         org.apache.commons.collections4.OrderedIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[]> typeItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(typeItorArrayItor0);
     }
 
     @Test
-    public void test0845() throws Throwable {
+    public void test0856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0845");
+            System.out.format("%n%s%n", "RegressionTest1.test0856");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -9855,9 +10103,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0846() throws Throwable {
+    public void test0857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0846");
+            System.out.format("%n%s%n", "RegressionTest1.test0857");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -9959,9 +10207,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0847() throws Throwable {
+    public void test0858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0847");
+            System.out.format("%n%s%n", "RegressionTest1.test0858");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         org.apache.commons.collections4.ResettableIterator resettableIterator3 = org.apache.commons.collections4.IteratorUtils.EMPTY_ITERATOR;
@@ -9980,9 +10228,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0848() throws Throwable {
+    public void test0859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0848");
+            System.out.format("%n%s%n", "RegressionTest1.test0859");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -10015,9 +10263,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0849() throws Throwable {
+    public void test0860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0849");
+            System.out.format("%n%s%n", "RegressionTest1.test0860");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -10088,9 +10336,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0850() throws Throwable {
+    public void test0861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0850");
+            System.out.format("%n%s%n", "RegressionTest1.test0861");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -10132,17 +10380,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0851() throws Throwable {
+    public void test0862() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0851");
+            System.out.format("%n%s%n", "RegressionTest1.test0862");
         org.apache.commons.collections4.MapIterator<java.lang.reflect.Type[][], java.lang.reflect.Type> typeArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(typeArrayItor0);
     }
 
     @Test
-    public void test0852() throws Throwable {
+    public void test0863() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0852");
+            System.out.format("%n%s%n", "RegressionTest1.test0863");
         java.util.Comparator comparator2 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
         java.lang.String str3 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) comparator2);
         java.util.Comparator<java.lang.String> strComparator4 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator2);
@@ -10159,9 +10407,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0853() throws Throwable {
+    public void test0864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0853");
+            System.out.format("%n%s%n", "RegressionTest1.test0864");
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.MapIterator[]> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -10174,9 +10422,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0854() throws Throwable {
+    public void test0865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0854");
+            System.out.format("%n%s%n", "RegressionTest1.test0865");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -10225,9 +10473,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0855() throws Throwable {
+    public void test0866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0855");
+            System.out.format("%n%s%n", "RegressionTest1.test0866");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -10258,9 +10506,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0856() throws Throwable {
+    public void test0867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0856");
+            System.out.format("%n%s%n", "RegressionTest1.test0867");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -10295,9 +10543,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0857() throws Throwable {
+    public void test0868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0857");
+            System.out.format("%n%s%n", "RegressionTest1.test0868");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         org.apache.commons.collections4.ResettableListIterator<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorItor2 = org.apache.commons.collections4.IteratorUtils.loopingListIterator(wildcardItorList1);
@@ -10312,9 +10560,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0858() throws Throwable {
+    public void test0869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0858");
+            System.out.format("%n%s%n", "RegressionTest1.test0869");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -10406,9 +10654,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0859() throws Throwable {
+    public void test0870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0859");
+            System.out.format("%n%s%n", "RegressionTest1.test0870");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -10436,9 +10684,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0860() throws Throwable {
+    public void test0871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0860");
+            System.out.format("%n%s%n", "RegressionTest1.test0871");
         java.lang.Class[][] classArray1 = new java.lang.Class[0][];
         @SuppressWarnings("unchecked")
         java.lang.Class<?>[][] wildcardClassArray2 = (java.lang.Class<?>[][]) classArray1;
@@ -10456,17 +10704,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0861() throws Throwable {
+    public void test0872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0861");
+            System.out.format("%n%s%n", "RegressionTest1.test0872");
         org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.Type[]> typeArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(typeArrayItor0);
     }
 
     @Test
-    public void test0862() throws Throwable {
+    public void test0873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0862");
+            System.out.format("%n%s%n", "RegressionTest1.test0873");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -10512,9 +10760,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0863() throws Throwable {
+    public void test0874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0863");
+            System.out.format("%n%s%n", "RegressionTest1.test0874");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.previousIndex();
@@ -10539,9 +10787,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0864() throws Throwable {
+    public void test0875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0864");
+            System.out.format("%n%s%n", "RegressionTest1.test0875");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -10553,9 +10801,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0865() throws Throwable {
+    public void test0876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0865");
+            System.out.format("%n%s%n", "RegressionTest1.test0876");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -10573,9 +10821,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0866() throws Throwable {
+    public void test0877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0866");
+            System.out.format("%n%s%n", "RegressionTest1.test0877");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -10633,9 +10881,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0867() throws Throwable {
+    public void test0878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0867");
+            System.out.format("%n%s%n", "RegressionTest1.test0878");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -10662,9 +10910,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0868() throws Throwable {
+    public void test0879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0868");
+            System.out.format("%n%s%n", "RegressionTest1.test0879");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -10685,9 +10933,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0869() throws Throwable {
+    public void test0880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0869");
+            System.out.format("%n%s%n", "RegressionTest1.test0880");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -10729,9 +10977,63 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0870() throws Throwable {
+    public void test0881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0870");
+            System.out.format("%n%s%n", "RegressionTest1.test0881");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int5 = strComparableComparator2.compare("hi!", "hi!");
+        java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
+        int int9 = strComparableComparator2.compare("hi!", "");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator10 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        java.util.Comparator<java.lang.String> strComparator11 = strComparableComparator2.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator10);
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator12 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator15 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int18 = strComparableComparator15.compare("hi!", "hi!");
+        java.lang.String str19 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator15);
+        int int22 = strComparableComparator15.compare("hi!", "");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator23 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        java.util.Comparator<java.lang.String> strComparator24 = strComparableComparator15.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator23);
+        java.util.Comparator<java.lang.String> strComparator25 = strComparableComparator12.thenComparing(strComparator24);
+        java.util.Comparator<java.lang.String> strComparator26 = strComparableComparator10.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator12);
+        java.lang.Class<?> wildcardClass27 = strComparator26.getClass();
+        java.lang.Class[] classArray29 = new java.lang.Class[1];
+        @SuppressWarnings("unchecked")
+        java.lang.Class<?>[] wildcardClassArray30 = (java.lang.Class<?>[]) classArray29;
+        wildcardClassArray30[0] = wildcardClass27;
+        java.lang.Class[][] classArray34 = new java.lang.Class[1][];
+        @SuppressWarnings("unchecked")
+        java.lang.Class<?>[][] wildcardClassArray35 = (java.lang.Class<?>[][]) classArray34;
+        wildcardClassArray35[0] = wildcardClassArray30;
+        org.apache.commons.collections4.ResettableListIterator<java.lang.Class<?>[]> wildcardClassArrayItor38 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(wildcardClassArray35);
+        org.apache.commons.collections4.ResettableIterator<java.lang.Class<?>[][]> wildcardClassArrayItor39 = org.apache.commons.collections4.IteratorUtils.singletonIterator(wildcardClassArray35);
+        org.junit.Assert.assertNotNull(strComparableComparator2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 3 + "'", int9 == 3);
+        org.junit.Assert.assertNotNull(strComparableComparator10);
+        org.junit.Assert.assertNotNull(strComparator11);
+        org.junit.Assert.assertNotNull(strComparableComparator12);
+        org.junit.Assert.assertNotNull(strComparableComparator15);
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "hi!" + "'", str19, "hi!");
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 3 + "'", int22 == 3);
+        org.junit.Assert.assertNotNull(strComparableComparator23);
+        org.junit.Assert.assertNotNull(strComparator24);
+        org.junit.Assert.assertNotNull(strComparator25);
+        org.junit.Assert.assertNotNull(strComparator26);
+        org.junit.Assert.assertNotNull(wildcardClass27);
+        org.junit.Assert.assertNotNull(classArray29);
+        org.junit.Assert.assertNotNull(wildcardClassArray30);
+        org.junit.Assert.assertNotNull(classArray34);
+        org.junit.Assert.assertNotNull(wildcardClassArray35);
+        org.junit.Assert.assertNotNull(wildcardClassArrayItor38);
+        org.junit.Assert.assertNotNull(wildcardClassArrayItor39);
+    }
+
+    @Test
+    public void test0882() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0882");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         int int1 = strItor0.previousIndex();
         java.lang.Class<?> wildcardClass2 = strItor0.getClass();
@@ -10741,9 +11043,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0871() throws Throwable {
+    public void test0883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0871");
+            System.out.format("%n%s%n", "RegressionTest1.test0883");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -10765,9 +11067,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0872() throws Throwable {
+    public void test0884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0872");
+            System.out.format("%n%s%n", "RegressionTest1.test0884");
         java.util.Iterator<? extends java.util.RandomAccess[]>[] wildcardItorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -10779,9 +11081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0873() throws Throwable {
+    public void test0885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0873");
+            System.out.format("%n%s%n", "RegressionTest1.test0885");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -10810,9 +11112,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0874() throws Throwable {
+    public void test0886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0874");
+            System.out.format("%n%s%n", "RegressionTest1.test0886");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -10938,9 +11240,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0875() throws Throwable {
+    public void test0887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0875");
+            System.out.format("%n%s%n", "RegressionTest1.test0887");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -10961,17 +11263,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0876() throws Throwable {
+    public void test0888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0876");
+            System.out.format("%n%s%n", "RegressionTest1.test0888");
         org.apache.commons.collections4.OrderedIterator<java.util.RandomAccess[]> randomAccessArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(randomAccessArrayItor0);
     }
 
     @Test
-    public void test0877() throws Throwable {
+    public void test0889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0877");
+            System.out.format("%n%s%n", "RegressionTest1.test0889");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11000,9 +11302,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0878() throws Throwable {
+    public void test0890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0878");
+            System.out.format("%n%s%n", "RegressionTest1.test0890");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11021,9 +11323,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0879() throws Throwable {
+    public void test0891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0879");
+            System.out.format("%n%s%n", "RegressionTest1.test0891");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -11040,9 +11342,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0880() throws Throwable {
+    public void test0892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0880");
+            System.out.format("%n%s%n", "RegressionTest1.test0892");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11075,9 +11377,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0881() throws Throwable {
+    public void test0893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0881");
+            System.out.format("%n%s%n", "RegressionTest1.test0893");
         java.util.ListIterator listIterator0 = org.apache.commons.collections4.iterators.EmptyListIterator.INSTANCE;
         int int1 = listIterator0.nextIndex();
         boolean boolean2 = listIterator0.hasPrevious();
@@ -11104,9 +11406,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0882() throws Throwable {
+    public void test0894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0882");
+            System.out.format("%n%s%n", "RegressionTest1.test0894");
         org.apache.commons.collections4.OrderedIterator orderedIterator0 = org.apache.commons.collections4.IteratorUtils.EMPTY_ORDERED_ITERATOR;
         // The following exception was thrown during execution in test generation
         try {
@@ -11119,17 +11421,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0883() throws Throwable {
+    public void test0895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0883");
+            System.out.format("%n%s%n", "RegressionTest1.test0895");
         org.apache.commons.collections4.OrderedIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][]> wildcardItorListArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         org.junit.Assert.assertNotNull(wildcardItorListArrayItor0);
     }
 
     @Test
-    public void test0884() throws Throwable {
+    public void test0896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0884");
+            System.out.format("%n%s%n", "RegressionTest1.test0896");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11160,9 +11462,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0885() throws Throwable {
+    public void test0897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0885");
+            System.out.format("%n%s%n", "RegressionTest1.test0897");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11181,9 +11483,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0886() throws Throwable {
+    public void test0898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0886");
+            System.out.format("%n%s%n", "RegressionTest1.test0898");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList2 = typeItor0.getIterators();
@@ -11205,9 +11507,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0887() throws Throwable {
+    public void test0899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0887");
+            System.out.format("%n%s%n", "RegressionTest1.test0899");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -11234,9 +11536,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0888() throws Throwable {
+    public void test0900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0888");
+            System.out.format("%n%s%n", "RegressionTest1.test0900");
         org.apache.commons.collections4.OrderedIterator<java.lang.reflect.GenericDeclaration> genericDeclarationItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedIterator();
         // The following exception was thrown during execution in test generation
         try {
@@ -11249,9 +11551,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0889() throws Throwable {
+    public void test0901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0889");
+            System.out.format("%n%s%n", "RegressionTest1.test0901");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         boolean boolean2 = typeItor0.hasNext();
@@ -11285,9 +11587,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0890() throws Throwable {
+    public void test0902() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0890");
+            System.out.format("%n%s%n", "RegressionTest1.test0902");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         boolean boolean2 = strItor0.hasPrevious();
@@ -11306,17 +11608,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0891() throws Throwable {
+    public void test0903() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0891");
+            System.out.format("%n%s%n", "RegressionTest1.test0903");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.MapIterator[], java.lang.String> mapIteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(mapIteratorArrayItor0);
     }
 
     @Test
-    public void test0892() throws Throwable {
+    public void test0904() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0892");
+            System.out.format("%n%s%n", "RegressionTest1.test0904");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11346,17 +11648,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0893() throws Throwable {
+    public void test0905() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0893");
+            System.out.format("%n%s%n", "RegressionTest1.test0905");
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.OrderedIterator<java.lang.String>[]> strItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(strItorArrayItor0);
     }
 
     @Test
-    public void test0894() throws Throwable {
+    public void test0906() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0894");
+            System.out.format("%n%s%n", "RegressionTest1.test0906");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.collections4.ResettableListIterator<java.io.Serializable> serializableItor3 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) '#', 100, (int) (byte) 100);
@@ -11367,9 +11669,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0895() throws Throwable {
+    public void test0907() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0895");
+            System.out.format("%n%s%n", "RegressionTest1.test0907");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -11418,9 +11720,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0896() throws Throwable {
+    public void test0908() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0896");
+            System.out.format("%n%s%n", "RegressionTest1.test0908");
         java.util.Comparator<java.lang.String>[] strComparatorArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -11432,9 +11734,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0897() throws Throwable {
+    public void test0909() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0897");
+            System.out.format("%n%s%n", "RegressionTest1.test0909");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11460,9 +11762,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0898() throws Throwable {
+    public void test0910() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0898");
+            System.out.format("%n%s%n", "RegressionTest1.test0910");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11480,9 +11782,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0899() throws Throwable {
+    public void test0911() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0899");
+            System.out.format("%n%s%n", "RegressionTest1.test0911");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -11507,17 +11809,41 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0900() throws Throwable {
+    public void test0912() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0900");
+            System.out.format("%n%s%n", "RegressionTest1.test0912");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int5 = strComparableComparator2.compare("hi!", "hi!");
+        java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
+        org.apache.commons.collections4.comparators.ComparableComparator[] comparableComparatorArray8 = new org.apache.commons.collections4.comparators.ComparableComparator[1];
+        @SuppressWarnings("unchecked")
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>[] strComparableComparatorArray9 = (org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>[]) comparableComparatorArray8;
+        strComparableComparatorArray9[0] = strComparableComparator2;
+        org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>> strComparableComparatorItor12 = org.apache.commons.collections4.IteratorUtils.arrayIterator(strComparableComparatorArray9);
+        org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>> strComparableComparatorItor13 = org.apache.commons.collections4.IteratorUtils.arrayIterator(strComparableComparatorArray9);
+        org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>> strComparableComparatorItor14 = org.apache.commons.collections4.IteratorUtils.arrayIterator(strComparableComparatorArray9);
+        org.junit.Assert.assertNotNull(strComparableComparator2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
+        org.junit.Assert.assertNotNull(comparableComparatorArray8);
+        org.junit.Assert.assertNotNull(strComparableComparatorArray9);
+        org.junit.Assert.assertNotNull(strComparableComparatorItor12);
+        org.junit.Assert.assertNotNull(strComparableComparatorItor13);
+        org.junit.Assert.assertNotNull(strComparableComparatorItor14);
+    }
+
+    @Test
+    public void test0913() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0913");
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.lang.reflect.GenericDeclaration>, java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][]> iteratorItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(iteratorItorItor0);
     }
 
     @Test
-    public void test0901() throws Throwable {
+    public void test0914() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0901");
+            System.out.format("%n%s%n", "RegressionTest1.test0914");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11533,9 +11859,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0902() throws Throwable {
+    public void test0915() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0902");
+            System.out.format("%n%s%n", "RegressionTest1.test0915");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -11582,9 +11908,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0903() throws Throwable {
+    public void test0916() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0903");
+            System.out.format("%n%s%n", "RegressionTest1.test0916");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11613,9 +11939,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0904() throws Throwable {
+    public void test0917() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0904");
+            System.out.format("%n%s%n", "RegressionTest1.test0917");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -11632,9 +11958,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0905() throws Throwable {
+    public void test0918() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0905");
+            System.out.format("%n%s%n", "RegressionTest1.test0918");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -11716,9 +12042,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0906() throws Throwable {
+    public void test0919() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0906");
+            System.out.format("%n%s%n", "RegressionTest1.test0919");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11749,9 +12075,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0907() throws Throwable {
+    public void test0920() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0907");
+            System.out.format("%n%s%n", "RegressionTest1.test0920");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.Object obj3 = null;
@@ -11812,9 +12138,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0908() throws Throwable {
+    public void test0921() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0908");
+            System.out.format("%n%s%n", "RegressionTest1.test0921");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -11876,9 +12202,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0909() throws Throwable {
+    public void test0922() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0909");
+            System.out.format("%n%s%n", "RegressionTest1.test0922");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -11915,9 +12241,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0910() throws Throwable {
+    public void test0923() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0910");
+            System.out.format("%n%s%n", "RegressionTest1.test0923");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11957,9 +12283,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0911() throws Throwable {
+    public void test0924() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0911");
+            System.out.format("%n%s%n", "RegressionTest1.test0924");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -11984,9 +12310,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0912() throws Throwable {
+    public void test0925() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0912");
+            System.out.format("%n%s%n", "RegressionTest1.test0925");
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator0 = org.apache.commons.collections4.IteratorUtils.EMPTY_ORDERED_MAP_ITERATOR;
         boolean boolean1 = orderedMapIterator0.hasPrevious();
         boolean boolean2 = orderedMapIterator0.hasPrevious();
@@ -12006,9 +12332,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0913() throws Throwable {
+    public void test0926() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0913");
+            System.out.format("%n%s%n", "RegressionTest1.test0926");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12035,9 +12361,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0914() throws Throwable {
+    public void test0927() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0914");
+            System.out.format("%n%s%n", "RegressionTest1.test0927");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int3 = strComparableComparator0.compare("hi!", "hi!");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -12083,9 +12409,43 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0915() throws Throwable {
+    public void test0928() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0915");
+            System.out.format("%n%s%n", "RegressionTest1.test0928");
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
+        int int8 = strComparableComparator5.compare("hi!", "hi!");
+        java.lang.String str9 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator5);
+        int int12 = strComparableComparator5.compare("hi!", "");
+        java.util.Comparator<java.lang.String> strComparator13 = org.apache.commons.collections4.ComparatorUtils.reversedComparator((java.util.Comparator<java.lang.String>) strComparableComparator5);
+        boolean boolean14 = strComparableComparator2.equals((java.lang.Object) strComparator13);
+        java.lang.String str15 = org.apache.commons.collections4.ComparatorUtils.max("", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor20 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray19);
+        boolean boolean21 = strComparableComparator2.equals((java.lang.Object) strArray19);
+        int int24 = strComparableComparator2.compare("", "");
+        java.util.Comparator<java.lang.String> strComparator25 = strComparableComparator2.reversed();
+        java.util.Comparator<java.lang.String> strComparator26 = org.apache.commons.collections4.ComparatorUtils.reversedComparator((java.util.Comparator<java.lang.String>) strComparableComparator2);
+        org.junit.Assert.assertNotNull(strComparableComparator2);
+        org.junit.Assert.assertNotNull(strComparableComparator5);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 3 + "'", int12 == 3);
+        org.junit.Assert.assertNotNull(strComparator13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 0 + "'", int24 == 0);
+        org.junit.Assert.assertNotNull(strComparator25);
+        org.junit.Assert.assertNotNull(strComparator26);
+    }
+
+    @Test
+    public void test0929() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0929");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -12097,25 +12457,25 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0916() throws Throwable {
+    public void test0930() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0916");
+            System.out.format("%n%s%n", "RegressionTest1.test0930");
         org.apache.commons.collections4.OrderedMapIterator<java.util.AbstractList<java.util.Iterator<? extends java.lang.reflect.Type>>, org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[]> wildcardItorListItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorListItor0);
     }
 
     @Test
-    public void test0917() throws Throwable {
+    public void test0931() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0917");
+            System.out.format("%n%s%n", "RegressionTest1.test0931");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>, java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>> strComparableComparatorItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(strComparableComparatorItor0);
     }
 
     @Test
-    public void test0918() throws Throwable {
+    public void test0932() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0918");
+            System.out.format("%n%s%n", "RegressionTest1.test0932");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12135,9 +12495,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0919() throws Throwable {
+    public void test0933() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0919");
+            System.out.format("%n%s%n", "RegressionTest1.test0933");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -12161,9 +12521,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0920() throws Throwable {
+    public void test0934() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0920");
+            System.out.format("%n%s%n", "RegressionTest1.test0934");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -12194,9 +12554,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0921() throws Throwable {
+    public void test0935() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0921");
+            System.out.format("%n%s%n", "RegressionTest1.test0935");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -12215,17 +12575,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0922() throws Throwable {
+    public void test0936() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0922");
+            System.out.format("%n%s%n", "RegressionTest1.test0936");
         org.apache.commons.collections4.MapIterator<java.util.AbstractList<java.util.Iterator<? extends java.lang.reflect.Type>>, org.apache.commons.collections4.MapIterator[][]> wildcardItorListItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(wildcardItorListItor0);
     }
 
     @Test
-    public void test0923() throws Throwable {
+    public void test0937() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0923");
+            System.out.format("%n%s%n", "RegressionTest1.test0937");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         boolean boolean1 = typeItor0.hasNext();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator2 = typeItor0.getComparator();
@@ -12251,9 +12611,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0924() throws Throwable {
+    public void test0938() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0924");
+            System.out.format("%n%s%n", "RegressionTest1.test0938");
         java.lang.String[][] strArray0 = new java.lang.String[][] {};
         java.lang.String[][][] strArray1 = new java.lang.String[][][] { strArray0 };
         // The following exception was thrown during execution in test generation
@@ -12268,9 +12628,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0925() throws Throwable {
+    public void test0939() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0925");
+            System.out.format("%n%s%n", "RegressionTest1.test0939");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -12287,9 +12647,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0926() throws Throwable {
+    public void test0940() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0926");
+            System.out.format("%n%s%n", "RegressionTest1.test0940");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int3 = strComparableComparator0.compare("hi!", "hi!");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -12376,9 +12736,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0927() throws Throwable {
+    public void test0941() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0927");
+            System.out.format("%n%s%n", "RegressionTest1.test0941");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12401,9 +12761,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0928() throws Throwable {
+    public void test0942() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0928");
+            System.out.format("%n%s%n", "RegressionTest1.test0942");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12432,17 +12792,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0929() throws Throwable {
+    public void test0943() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0929");
+            System.out.format("%n%s%n", "RegressionTest1.test0943");
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[]> typeItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         org.junit.Assert.assertNotNull(typeItorArrayItor0);
     }
 
     @Test
-    public void test0930() throws Throwable {
+    public void test0944() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0930");
+            System.out.format("%n%s%n", "RegressionTest1.test0944");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12475,9 +12835,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0931() throws Throwable {
+    public void test0945() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0931");
+            System.out.format("%n%s%n", "RegressionTest1.test0945");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12507,9 +12867,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0932() throws Throwable {
+    public void test0946() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0932");
+            System.out.format("%n%s%n", "RegressionTest1.test0946");
         java.util.ListIterator<java.lang.String> strItor1 = org.apache.commons.collections4.IteratorUtils.singletonListIterator("hi!");
         boolean boolean2 = strItor1.hasPrevious();
         boolean boolean3 = strItor1.hasPrevious();
@@ -12521,9 +12881,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0933() throws Throwable {
+    public void test0947() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0933");
+            System.out.format("%n%s%n", "RegressionTest1.test0947");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -12573,9 +12933,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0934() throws Throwable {
+    public void test0948() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0934");
+            System.out.format("%n%s%n", "RegressionTest1.test0948");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -12604,9 +12964,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0935() throws Throwable {
+    public void test0949() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0935");
+            System.out.format("%n%s%n", "RegressionTest1.test0949");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12634,9 +12994,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0936() throws Throwable {
+    public void test0950() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0936");
+            System.out.format("%n%s%n", "RegressionTest1.test0950");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int8 = strComparableComparator5.compare("hi!", "hi!");
@@ -12683,9 +13043,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0937() throws Throwable {
+    public void test0951() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0937");
+            System.out.format("%n%s%n", "RegressionTest1.test0951");
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         java.lang.Class<?> wildcardClass1 = charSequenceItor0.getClass();
         org.apache.commons.collections4.ResettableIterator<java.lang.Class<?>> wildcardClassItor2 = org.apache.commons.collections4.IteratorUtils.singletonIterator(wildcardClass1);
@@ -12704,9 +13064,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0938() throws Throwable {
+    public void test0952() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0938");
+            System.out.format("%n%s%n", "RegressionTest1.test0952");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12734,9 +13094,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0939() throws Throwable {
+    public void test0953() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0939");
+            System.out.format("%n%s%n", "RegressionTest1.test0953");
         org.apache.commons.collections4.MapIterator<java.lang.CharSequence, org.apache.commons.collections4.ResettableListIterator<java.lang.String>> charSequenceItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.apache.commons.collections4.MapIterator<java.io.Serializable, org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>[]> serializableItor1 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>, java.util.ArrayList<java.util.Iterator<? extends java.lang.reflect.Type>>> strComparableComparatorItor2 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
@@ -12756,9 +13116,39 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0940() throws Throwable {
+    public void test0954() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0940");
+            System.out.format("%n%s%n", "RegressionTest1.test0954");
+        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
+        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
+        boolean boolean5 = strItor4.hasPrevious();
+        boolean boolean6 = strItor4.hasNext();
+        int int7 = strItor4.previousIndex();
+        java.lang.String str8 = strItor4.next();
+        strItor4.set("hi!");
+        strItor4.set("");
+        java.lang.String str13 = strItor4.previous();
+        boolean boolean14 = strItor4.hasPrevious();
+        int int15 = strItor4.nextIndex();
+        boolean boolean16 = strItor4.hasPrevious();
+        boolean boolean17 = strItor4.hasPrevious();
+        org.junit.Assert.assertNotNull(strArray3);
+        org.junit.Assert.assertNotNull(strItor4);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+    }
+
+    @Test
+    public void test0955() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0955");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -12770,17 +13160,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0941() throws Throwable {
+    public void test0956() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0941");
+            System.out.format("%n%s%n", "RegressionTest1.test0956");
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.ResettableListIterator<java.lang.String>[], java.lang.Cloneable> strItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(strItorArrayItor0);
     }
 
     @Test
-    public void test0942() throws Throwable {
+    public void test0957() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0942");
+            System.out.format("%n%s%n", "RegressionTest1.test0957");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12805,17 +13195,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0943() throws Throwable {
+    public void test0958() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0943");
+            System.out.format("%n%s%n", "RegressionTest1.test0958");
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>[]> charSequenceItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(charSequenceItorArrayItor0);
     }
 
     @Test
-    public void test0944() throws Throwable {
+    public void test0959() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0944");
+            System.out.format("%n%s%n", "RegressionTest1.test0959");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -12882,9 +13272,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0945() throws Throwable {
+    public void test0960() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0945");
+            System.out.format("%n%s%n", "RegressionTest1.test0960");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -12896,9 +13286,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0946() throws Throwable {
+    public void test0961() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0946");
+            System.out.format("%n%s%n", "RegressionTest1.test0961");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -12925,17 +13315,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0947() throws Throwable {
+    public void test0962() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0947");
+            System.out.format("%n%s%n", "RegressionTest1.test0962");
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[][], java.lang.String[][]> typeItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(typeItorArrayItor0);
     }
 
     @Test
-    public void test0948() throws Throwable {
+    public void test0963() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0948");
+            System.out.format("%n%s%n", "RegressionTest1.test0963");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -12965,9 +13355,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0949() throws Throwable {
+    public void test0964() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0949");
+            System.out.format("%n%s%n", "RegressionTest1.test0964");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -13000,9 +13390,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0950() throws Throwable {
+    public void test0965() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0950");
+            System.out.format("%n%s%n", "RegressionTest1.test0965");
         java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
         @SuppressWarnings("unchecked")
         java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
@@ -13019,9 +13409,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0951() throws Throwable {
+    public void test0966() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0951");
+            System.out.format("%n%s%n", "RegressionTest1.test0966");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -13078,9 +13468,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0952() throws Throwable {
+    public void test0967() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0952");
+            System.out.format("%n%s%n", "RegressionTest1.test0967");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
         org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray4);
@@ -13105,9 +13495,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0953() throws Throwable {
+    public void test0968() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0953");
+            System.out.format("%n%s%n", "RegressionTest1.test0968");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -13127,9 +13517,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0954() throws Throwable {
+    public void test0969() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0954");
+            System.out.format("%n%s%n", "RegressionTest1.test0969");
         org.apache.commons.collections4.ResettableListIterator resettableListIterator0 = org.apache.commons.collections4.IteratorUtils.EMPTY_LIST_ITERATOR;
         java.lang.String[] strArray4 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray4);
@@ -13183,9 +13573,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0955() throws Throwable {
+    public void test0970() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0955");
+            System.out.format("%n%s%n", "RegressionTest1.test0970");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator1 = typeItor0.getComparator();
         java.util.ListIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>> typeItorItor2 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(typeItor0);
@@ -13201,9 +13591,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0956() throws Throwable {
+    public void test0971() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0956");
+            System.out.format("%n%s%n", "RegressionTest1.test0971");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -13228,9 +13618,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0957() throws Throwable {
+    public void test0972() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0957");
+            System.out.format("%n%s%n", "RegressionTest1.test0972");
         java.util.Comparator comparator0 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
         java.util.Comparator<java.lang.String> strComparator1 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator0);
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator6 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
@@ -13316,9 +13706,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0958() throws Throwable {
+    public void test0973() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0958");
+            System.out.format("%n%s%n", "RegressionTest1.test0973");
         org.apache.commons.collections4.ResettableListIterator<java.util.ListIterator<java.lang.String>> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         java.util.Iterator<?> wildcardItor1 = org.apache.commons.collections4.IteratorUtils.getIterator((java.lang.Object) strItorItor0);
         org.junit.Assert.assertNotNull(strItorItor0);
@@ -13326,9 +13716,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0959() throws Throwable {
+    public void test0974() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0959");
+            System.out.format("%n%s%n", "RegressionTest1.test0974");
         org.apache.commons.collections4.iterators.CollatingIterator[][] collatingIteratorArray1 = new org.apache.commons.collections4.iterators.CollatingIterator[0][];
         @SuppressWarnings("unchecked")
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[][] typeItorArray2 = (org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>[][]) collatingIteratorArray1;
@@ -13339,9 +13729,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0960() throws Throwable {
+    public void test0975() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0960");
+            System.out.format("%n%s%n", "RegressionTest1.test0975");
         java.lang.String[][] strArray0 = new java.lang.String[][] {};
         org.apache.commons.collections4.ResettableListIterator<java.lang.String[]> strArrayItor1 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray0);
         org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence[][]> charSequenceArrayItor2 = org.apache.commons.collections4.IteratorUtils.singletonIterator((java.lang.CharSequence[][]) strArray0);
@@ -13358,9 +13748,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0961() throws Throwable {
+    public void test0976() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0961");
+            System.out.format("%n%s%n", "RegressionTest1.test0976");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -13391,9 +13781,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0962() throws Throwable {
+    public void test0977() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0962");
+            System.out.format("%n%s%n", "RegressionTest1.test0977");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -13483,9 +13873,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0963() throws Throwable {
+    public void test0978() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0963");
+            System.out.format("%n%s%n", "RegressionTest1.test0978");
         org.apache.commons.collections4.comparators.ComparableComparator comparableComparator0 = org.apache.commons.collections4.comparators.ComparableComparator.INSTANCE;
         // The following exception was thrown during execution in test generation
         try {
@@ -13498,9 +13888,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0964() throws Throwable {
+    public void test0979() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0964");
+            System.out.format("%n%s%n", "RegressionTest1.test0979");
         java.util.Comparator[] comparatorArray1 = new java.util.Comparator[0];
         @SuppressWarnings("unchecked")
         java.util.Comparator<java.util.Comparator<java.lang.String>>[] strComparatorComparatorArray2 = (java.util.Comparator<java.util.Comparator<java.lang.String>>[]) comparatorArray1;
@@ -13513,9 +13903,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0965() throws Throwable {
+    public void test0980() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0965");
+            System.out.format("%n%s%n", "RegressionTest1.test0980");
         org.apache.commons.collections4.MapIterator<org.apache.commons.collections4.iterators.ZippingIterator<java.lang.CharSequence[]>[][], java.util.RandomAccess[]> charSequenceArrayItorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         java.util.Iterator<?> wildcardItor1 = org.apache.commons.collections4.IteratorUtils.getIterator((java.lang.Object) charSequenceArrayItorArrayItor0);
         org.junit.Assert.assertNotNull(charSequenceArrayItorArrayItor0);
@@ -13523,9 +13913,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0966() throws Throwable {
+    public void test0981() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0966");
+            System.out.format("%n%s%n", "RegressionTest1.test0981");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int7 = strComparableComparator4.compare("hi!", "hi!");
         java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator4);
@@ -13567,9 +13957,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0967() throws Throwable {
+    public void test0982() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0967");
+            System.out.format("%n%s%n", "RegressionTest1.test0982");
         org.apache.commons.collections4.MapIterator<java.util.Iterator, java.lang.reflect.AnnotatedElement> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.apache.commons.collections4.OrderedMapIterator<org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>, java.lang.reflect.AnnotatedElement> charSequenceItorReverseComparatorItor1 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.apache.commons.collections4.OrderedMapIterator orderedMapIterator2 = org.apache.commons.collections4.IteratorUtils.EMPTY_ORDERED_MAP_ITERATOR;
@@ -13594,17 +13984,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0968() throws Throwable {
+    public void test0983() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0968");
+            System.out.format("%n%s%n", "RegressionTest1.test0983");
         org.apache.commons.collections4.ResettableIterator<java.util.ListIterator<java.lang.String>> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyIterator();
         org.junit.Assert.assertNotNull(strItorItor0);
     }
 
     @Test
-    public void test0969() throws Throwable {
+    public void test0984() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0969");
+            System.out.format("%n%s%n", "RegressionTest1.test0984");
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         boolean boolean1 = strItor0.hasNext();
         int int2 = strItor0.nextIndex();
@@ -13620,9 +14010,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0970() throws Throwable {
+    public void test0985() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0970");
+            System.out.format("%n%s%n", "RegressionTest1.test0985");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         java.lang.String str5 = strItor4.next();
@@ -13638,17 +14028,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0971() throws Throwable {
+    public void test0986() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0971");
+            System.out.format("%n%s%n", "RegressionTest1.test0986");
         org.apache.commons.collections4.OrderedMapIterator<java.util.Iterator, java.util.ListIterator<java.lang.String>> iteratorItor0 = org.apache.commons.collections4.IteratorUtils.emptyOrderedMapIterator();
         org.junit.Assert.assertNotNull(iteratorItor0);
     }
 
     @Test
-    public void test0972() throws Throwable {
+    public void test0987() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0972");
+            System.out.format("%n%s%n", "RegressionTest1.test0987");
         java.lang.Iterable[][] iterableArray0 = new java.lang.Iterable[][] {};
         org.apache.commons.collections4.ResettableIterator<java.lang.Iterable[]> iterableArrayItor1 = org.apache.commons.collections4.IteratorUtils.arrayIterator(iterableArray0);
         // The following exception was thrown during execution in test generation
@@ -13663,9 +14053,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0973() throws Throwable {
+    public void test0988() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0973");
+            System.out.format("%n%s%n", "RegressionTest1.test0988");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -13691,9 +14081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0974() throws Throwable {
+    public void test0989() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0974");
+            System.out.format("%n%s%n", "RegressionTest1.test0989");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -13712,9 +14102,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0975() throws Throwable {
+    public void test0990() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0975");
+            System.out.format("%n%s%n", "RegressionTest1.test0990");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.String[] strArray6 = new java.lang.String[] { "", "", "" };
@@ -13743,17 +14133,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0976() throws Throwable {
+    public void test0991() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0976");
+            System.out.format("%n%s%n", "RegressionTest1.test0991");
         org.apache.commons.collections4.MapIterator<java.util.Iterator[], org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> iteratorArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyMapIterator();
         org.junit.Assert.assertNotNull(iteratorArrayItor0);
     }
 
     @Test
-    public void test0977() throws Throwable {
+    public void test0992() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0977");
+            System.out.format("%n%s%n", "RegressionTest1.test0992");
         org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor0 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
         java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList1 = typeItor0.getIterators();
         boolean boolean2 = typeItor0.hasNext();
@@ -13782,9 +14172,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0978() throws Throwable {
+    public void test0993() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0978");
+            System.out.format("%n%s%n", "RegressionTest1.test0993");
         java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
         org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
         boolean boolean5 = strItor4.hasPrevious();
@@ -13809,9 +14199,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0979() throws Throwable {
+    public void test0994() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0979");
+            System.out.format("%n%s%n", "RegressionTest1.test0994");
         java.util.ListIterator[] listIteratorArray1 = new java.util.ListIterator[0];
         @SuppressWarnings("unchecked")
         java.util.ListIterator<java.lang.String>[] strItorArray2 = (java.util.ListIterator<java.lang.String>[]) listIteratorArray1;
@@ -13829,9 +14219,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0980() throws Throwable {
+    public void test0995() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0980");
+            System.out.format("%n%s%n", "RegressionTest1.test0995");
         java.lang.Object[] objArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -13843,18 +14233,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0981() throws Throwable {
+    public void test0996() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0981");
+            System.out.format("%n%s%n", "RegressionTest1.test0996");
         org.apache.commons.collections4.OrderedIterator<java.lang.String> strItor0 = null;
         org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.OrderedIterator<java.lang.String>> strItorItor1 = org.apache.commons.collections4.IteratorUtils.singletonIterator(strItor0);
         org.junit.Assert.assertNotNull(strItorItor1);
     }
 
     @Test
-    public void test0982() throws Throwable {
+    public void test0997() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0982");
+            System.out.format("%n%s%n", "RegressionTest1.test0997");
         org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
         int int5 = strComparableComparator2.compare("hi!", "hi!");
         java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator2);
@@ -13874,9 +14264,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0983() throws Throwable {
+    public void test0998() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0983");
+            System.out.format("%n%s%n", "RegressionTest1.test0998");
         org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.OrderedIterator<java.lang.String>> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
         java.lang.Class<?> wildcardClass1 = strItorItor0.getClass();
         org.junit.Assert.assertNotNull(strItorItor0);
@@ -13884,9 +14274,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0984() throws Throwable {
+    public void test0999() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0984");
+            System.out.format("%n%s%n", "RegressionTest1.test0999");
         org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
         boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) (short) 100);
         java.lang.Object obj3 = null;
@@ -13960,9 +14350,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0985() throws Throwable {
+    public void test1000() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0985");
+            System.out.format("%n%s%n", "RegressionTest1.test1000");
         java.lang.Object obj0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -13971,570 +14361,6 @@ public class RegressionTest1 {
         } catch (java.lang.NullPointerException e) {
         // Expected exception.
         }
-    }
-
-    @Test
-    public void test0986() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0986");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int5 = strComparableComparator2.compare("hi!", "hi!");
-        java.lang.String str6 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator2);
-        int int9 = strComparableComparator2.compare("hi!", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator10 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        java.util.Comparator<java.lang.String> strComparator11 = strComparableComparator2.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator10);
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator12 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator15 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int18 = strComparableComparator15.compare("hi!", "hi!");
-        java.lang.String str19 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator15);
-        int int22 = strComparableComparator15.compare("hi!", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator23 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        java.util.Comparator<java.lang.String> strComparator24 = strComparableComparator15.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator23);
-        java.util.Comparator<java.lang.String> strComparator25 = strComparableComparator12.thenComparing(strComparator24);
-        java.util.Comparator<java.lang.String> strComparator26 = strComparableComparator10.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator12);
-        java.util.Comparator<java.lang.String> strComparator27 = org.apache.commons.collections4.ComparatorUtils.nullHighComparator((java.util.Comparator<java.lang.String>) strComparableComparator10);
-        java.util.ListIterator<java.io.Serializable> serializableItor28 = org.apache.commons.collections4.IteratorUtils.singletonListIterator((java.io.Serializable) strComparableComparator10);
-        int int31 = strComparableComparator10.compare("", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator32 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator33 = new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String>();
-        boolean boolean34 = strComparableComparator32.equals((java.lang.Object) strComparableComparator33);
-        java.util.Comparator<java.lang.String> strComparator35 = org.apache.commons.collections4.ComparatorUtils.reversedComparator((java.util.Comparator<java.lang.String>) strComparableComparator32);
-        java.util.Comparator<java.lang.String> strComparator36 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator(strComparator35);
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator41 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator44 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int47 = strComparableComparator44.compare("hi!", "hi!");
-        java.lang.String str48 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator44);
-        int int51 = strComparableComparator44.compare("hi!", "");
-        java.util.Comparator<java.lang.String> strComparator52 = org.apache.commons.collections4.ComparatorUtils.reversedComparator((java.util.Comparator<java.lang.String>) strComparableComparator44);
-        boolean boolean53 = strComparableComparator41.equals((java.lang.Object) strComparator52);
-        java.lang.String str54 = org.apache.commons.collections4.ComparatorUtils.max("", "", (java.util.Comparator<java.lang.String>) strComparableComparator41);
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator57 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int60 = strComparableComparator57.compare("hi!", "hi!");
-        java.lang.String str61 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator57);
-        int int64 = strComparableComparator57.compare("hi!", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator65 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        java.util.Comparator<java.lang.String> strComparator66 = strComparableComparator57.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator65);
-        java.util.Comparator<java.lang.String> strComparator67 = strComparableComparator41.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator65);
-        java.util.Comparator comparator68 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator69 = strComparableComparator65.thenComparing((java.util.Comparator<java.lang.String>) comparator68);
-        java.lang.String str70 = org.apache.commons.collections4.ComparatorUtils.min("", "", (java.util.Comparator<java.lang.String>) comparator68);
-        java.util.Comparator<java.lang.String> strComparator71 = strComparator35.thenComparing((java.util.Comparator<java.lang.String>) comparator68);
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator74 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int77 = strComparableComparator74.compare("hi!", "hi!");
-        java.lang.String str78 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator74);
-        int int81 = strComparableComparator74.compare("hi!", "");
-        java.util.Comparator<java.lang.String> strComparator82 = comparator68.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator74);
-        boolean boolean83 = strComparableComparator10.equals((java.lang.Object) strComparator82);
-        org.junit.Assert.assertNotNull(strComparableComparator2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 3 + "'", int9 == 3);
-        org.junit.Assert.assertNotNull(strComparableComparator10);
-        org.junit.Assert.assertNotNull(strComparator11);
-        org.junit.Assert.assertNotNull(strComparableComparator12);
-        org.junit.Assert.assertNotNull(strComparableComparator15);
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "hi!" + "'", str19, "hi!");
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 3 + "'", int22 == 3);
-        org.junit.Assert.assertNotNull(strComparableComparator23);
-        org.junit.Assert.assertNotNull(strComparator24);
-        org.junit.Assert.assertNotNull(strComparator25);
-        org.junit.Assert.assertNotNull(strComparator26);
-        org.junit.Assert.assertNotNull(strComparator27);
-        org.junit.Assert.assertNotNull(serializableItor28);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertNotNull(strComparableComparator32);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
-        org.junit.Assert.assertNotNull(strComparator35);
-        org.junit.Assert.assertNotNull(strComparator36);
-        org.junit.Assert.assertNotNull(strComparableComparator41);
-        org.junit.Assert.assertNotNull(strComparableComparator44);
-        org.junit.Assert.assertTrue("'" + int47 + "' != '" + 0 + "'", int47 == 0);
-        org.junit.Assert.assertEquals("'" + str48 + "' != '" + "hi!" + "'", str48, "hi!");
-        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 3 + "'", int51 == 3);
-        org.junit.Assert.assertNotNull(strComparator52);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertEquals("'" + str54 + "' != '" + "" + "'", str54, "");
-        org.junit.Assert.assertNotNull(strComparableComparator57);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
-        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "hi!" + "'", str61, "hi!");
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 3 + "'", int64 == 3);
-        org.junit.Assert.assertNotNull(strComparableComparator65);
-        org.junit.Assert.assertNotNull(strComparator66);
-        org.junit.Assert.assertNotNull(strComparator67);
-        org.junit.Assert.assertNotNull(comparator68);
-        org.junit.Assert.assertNotNull(strComparator69);
-        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "" + "'", str70, "");
-        org.junit.Assert.assertNotNull(strComparator71);
-        org.junit.Assert.assertNotNull(strComparableComparator74);
-        org.junit.Assert.assertTrue("'" + int77 + "' != '" + 0 + "'", int77 == 0);
-        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "hi!" + "'", str78, "hi!");
-        org.junit.Assert.assertTrue("'" + int81 + "' != '" + 3 + "'", int81 == 3);
-        org.junit.Assert.assertNotNull(strComparator82);
-        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + false + "'", boolean83 == false);
-    }
-
-    @Test
-    public void test0987() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0987");
-        org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>> charSequenceItorReverseComparator0 = new org.apache.commons.collections4.comparators.ReverseComparator<org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence>>();
-        boolean boolean2 = charSequenceItorReverseComparator0.equals((java.lang.Object) 100.0f);
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator7 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int10 = strComparableComparator7.compare("hi!", "hi!");
-        java.lang.String str11 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator7);
-        int int14 = strComparableComparator7.compare("hi!", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator15 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        java.util.Comparator<java.lang.String> strComparator16 = strComparableComparator7.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator15);
-        java.lang.String str17 = org.apache.commons.collections4.ComparatorUtils.min("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator15);
-        boolean boolean18 = charSequenceItorReverseComparator0.equals((java.lang.Object) "");
-        java.lang.CharSequence[] charSequenceArray23 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
-        org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor24 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray23);
-        org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor25 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray23);
-        java.lang.Class<?> wildcardClass26 = objItor25.getClass();
-        java.lang.reflect.GenericDeclaration[] genericDeclarationArray27 = new java.lang.reflect.GenericDeclaration[] { wildcardClass26 };
-        org.apache.commons.collections4.ResettableIterator<java.lang.reflect.GenericDeclaration> genericDeclarationItor28 = org.apache.commons.collections4.IteratorUtils.arrayIterator(genericDeclarationArray27);
-        org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.GenericDeclaration> genericDeclarationItor31 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(genericDeclarationArray27, (int) (byte) 0, 1);
-        org.apache.commons.collections4.ResettableIterator<java.lang.Object> objItor32 = org.apache.commons.collections4.IteratorUtils.arrayIterator((java.lang.Object[]) genericDeclarationArray27);
-        boolean boolean33 = charSequenceItorReverseComparator0.equals((java.lang.Object) genericDeclarationArray27);
-        org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type> typeItor34 = new org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>();
-        boolean boolean35 = typeItor34.hasNext();
-        java.util.Comparator<? super java.lang.reflect.Type> wildcardComparator36 = typeItor34.getComparator();
-        java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList37 = typeItor34.getIterators();
-        boolean boolean38 = charSequenceItorReverseComparator0.equals((java.lang.Object) typeItor34);
-        java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>> wildcardItorList39 = typeItor34.getIterators();
-        // The following exception was thrown during execution in test generation
-        try {
-            typeItor34.remove();
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: No value can be removed at present");
-        } catch (java.lang.IllegalStateException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(strComparableComparator7);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 3 + "'", int14 == 3);
-        org.junit.Assert.assertNotNull(strComparableComparator15);
-        org.junit.Assert.assertNotNull(strComparator16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(charSequenceArray23);
-        org.junit.Assert.assertNotNull(charSequenceItor24);
-        org.junit.Assert.assertNotNull(objItor25);
-        org.junit.Assert.assertNotNull(wildcardClass26);
-        org.junit.Assert.assertNotNull(genericDeclarationArray27);
-        org.junit.Assert.assertNotNull(genericDeclarationItor28);
-        org.junit.Assert.assertNotNull(genericDeclarationItor31);
-        org.junit.Assert.assertNotNull(objItor32);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertNull(wildcardComparator36);
-        org.junit.Assert.assertNotNull(wildcardItorList37);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertNotNull(wildcardItorList39);
-    }
-
-    @Test
-    public void test0988() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0988");
-        java.util.Iterator[] iteratorArray1 = new java.util.Iterator[0];
-        @SuppressWarnings("unchecked")
-        java.util.Iterator<? extends java.lang.String[]>[] wildcardItorArray2 = (java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1;
-        java.util.Iterator<java.lang.String[]> strArrayItor3 = org.apache.commons.collections4.IteratorUtils.chainedIterator((java.util.Iterator<? extends java.lang.String[]>[]) iteratorArray1);
-        java.util.Iterator<java.lang.Comparable<java.lang.String>> strComparableItor4 = org.apache.commons.collections4.IteratorUtils.chainedIterator((java.util.Iterator<? extends java.lang.Comparable<java.lang.String>>[]) iteratorArray1);
-        org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.AnnotatedElement> annotatedElementItor5 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) iteratorArray1);
-        java.util.Iterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]> wildcardItorListArrayItor6 = org.apache.commons.collections4.IteratorUtils.chainedIterator((java.util.Iterator<? extends java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[][][]>[]) iteratorArray1);
-        org.junit.Assert.assertNotNull(iteratorArray1);
-        org.junit.Assert.assertNotNull(wildcardItorArray2);
-        org.junit.Assert.assertNotNull(strArrayItor3);
-        org.junit.Assert.assertNotNull(strComparableItor4);
-        org.junit.Assert.assertNotNull(annotatedElementItor5);
-        org.junit.Assert.assertNotNull(wildcardItorListArrayItor6);
-    }
-
-    @Test
-    public void test0989() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0989");
-        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
-        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
-        boolean boolean5 = strItor4.hasPrevious();
-        boolean boolean6 = strItor4.hasNext();
-        int int7 = strItor4.previousIndex();
-        java.lang.String str8 = strItor4.next();
-        strItor4.set("hi!");
-        strItor4.set("");
-        java.lang.String str13 = strItor4.previous();
-        boolean boolean14 = strItor4.hasPrevious();
-        int int15 = strItor4.nextIndex();
-        boolean boolean16 = strItor4.hasPrevious();
-        int int17 = strItor4.nextIndex();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.String str18 = strItor4.previous();
-            org.junit.Assert.fail("Expected exception of type java.util.NoSuchElementException; message: null");
-        } catch (java.util.NoSuchElementException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strArray3);
-        org.junit.Assert.assertNotNull(strItor4);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-    }
-
-    @Test
-    public void test0990() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0990");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator2 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator5 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int8 = strComparableComparator5.compare("hi!", "hi!");
-        java.lang.String str9 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator5);
-        int int12 = strComparableComparator5.compare("hi!", "");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator13 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        java.util.Comparator<java.lang.String> strComparator14 = strComparableComparator5.thenComparing((java.util.Comparator<java.lang.String>) strComparableComparator13);
-        org.apache.commons.collections4.ResettableIterator<java.lang.Object> objItor15 = org.apache.commons.collections4.IteratorUtils.singletonIterator((java.lang.Object) strComparableComparator5);
-        int int18 = strComparableComparator5.compare("", "hi!");
-        boolean boolean19 = strComparableComparator2.equals((java.lang.Object) strComparableComparator5);
-        java.lang.String str20 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) strComparableComparator5);
-        int int23 = strComparableComparator5.compare("", "hi!");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableIterator<java.util.List<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorListArrayItor25 = org.apache.commons.collections4.IteratorUtils.arrayIterator((java.lang.Object) int23, (int) (byte) 0);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Argument is not an array");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strComparableComparator2);
-        org.junit.Assert.assertNotNull(strComparableComparator5);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 3 + "'", int12 == 3);
-        org.junit.Assert.assertNotNull(strComparableComparator13);
-        org.junit.Assert.assertNotNull(strComparator14);
-        org.junit.Assert.assertNotNull(objItor15);
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + (-3) + "'", int18 == (-3));
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + true + "'", boolean19 == true);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "hi!" + "'", str20, "hi!");
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + (-3) + "'", int23 == (-3));
-    }
-
-    @Test
-    public void test0991() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0991");
-        org.apache.commons.collections4.comparators.ComparableComparator<java.lang.String> strComparableComparator4 = org.apache.commons.collections4.comparators.ComparableComparator.comparableComparator();
-        int int7 = strComparableComparator4.compare("hi!", "hi!");
-        java.lang.String str8 = org.apache.commons.collections4.ComparatorUtils.max("", "hi!", (java.util.Comparator<java.lang.String>) strComparableComparator4);
-        java.util.Comparator<java.lang.String> strComparator9 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) strComparableComparator4);
-        org.apache.commons.collections4.comparators.ReverseComparator<java.lang.String> strReverseComparator10 = new org.apache.commons.collections4.comparators.ReverseComparator<java.lang.String>(strComparator9);
-        java.util.Comparator<java.lang.String> strComparator11 = null;
-        java.util.Comparator<java.lang.String> strComparator12 = org.apache.commons.collections4.ComparatorUtils.reversedComparator(strComparator11);
-        java.util.Comparator<java.lang.String> strComparator13 = org.apache.commons.collections4.ComparatorUtils.nullHighComparator(strComparator12);
-        java.util.Comparator<java.lang.String> strComparator14 = strReverseComparator10.thenComparing(strComparator13);
-        java.lang.String str15 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", strComparator13);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.iterators.CollatingIterator<java.lang.reflect.Type>> typeItorItor17 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) str15, 2);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Argument is not an array");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strComparableComparator4);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "hi!" + "'", str8, "hi!");
-        org.junit.Assert.assertNotNull(strComparator9);
-        org.junit.Assert.assertNotNull(strComparator12);
-        org.junit.Assert.assertNotNull(strComparator13);
-        org.junit.Assert.assertNotNull(strComparator14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-    }
-
-    @Test
-    public void test0992() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0992");
-        java.util.Comparator comparator2 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator3 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator2);
-        java.lang.String str4 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator2);
-        java.util.Comparator<java.lang.String> strComparator5 = comparator2.reversed();
-        java.util.Comparator[] comparatorArray7 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray8 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray7;
-        mapIteratorComparatorArray8[0] = comparator2;
-        java.util.Comparator comparator13 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator14 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator13);
-        java.lang.String str15 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator13);
-        java.util.Comparator<java.lang.String> strComparator16 = comparator13.reversed();
-        java.util.Comparator[] comparatorArray18 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray19 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray18;
-        mapIteratorComparatorArray19[0] = comparator13;
-        java.util.Comparator comparator24 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator25 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator24);
-        java.lang.String str26 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator24);
-        java.util.Comparator<java.lang.String> strComparator27 = comparator24.reversed();
-        java.util.Comparator[] comparatorArray29 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray30 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray29;
-        mapIteratorComparatorArray30[0] = comparator24;
-        java.util.Comparator comparator35 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator36 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator35);
-        java.lang.String str37 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator35);
-        java.util.Comparator<java.lang.String> strComparator38 = comparator35.reversed();
-        java.util.Comparator[] comparatorArray40 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray41 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray40;
-        mapIteratorComparatorArray41[0] = comparator35;
-        java.util.Comparator comparator46 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator47 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator46);
-        java.lang.String str48 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator46);
-        java.util.Comparator<java.lang.String> strComparator49 = comparator46.reversed();
-        java.util.Comparator[] comparatorArray51 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray52 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray51;
-        mapIteratorComparatorArray52[0] = comparator46;
-        java.util.Comparator comparator57 = org.apache.commons.collections4.ComparatorUtils.NATURAL_COMPARATOR;
-        java.util.Comparator<java.lang.String> strComparator58 = org.apache.commons.collections4.ComparatorUtils.nullLowComparator((java.util.Comparator<java.lang.String>) comparator57);
-        java.lang.String str59 = org.apache.commons.collections4.ComparatorUtils.max("hi!", "", (java.util.Comparator<java.lang.String>) comparator57);
-        java.util.Comparator<java.lang.String> strComparator60 = comparator57.reversed();
-        java.util.Comparator[] comparatorArray62 = new java.util.Comparator[1];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[] mapIteratorComparatorArray63 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[]) comparatorArray62;
-        mapIteratorComparatorArray63[0] = comparator57;
-        java.util.Comparator[][] comparatorArray67 = new java.util.Comparator[6][];
-        @SuppressWarnings("unchecked")
-        java.util.Comparator<org.apache.commons.collections4.MapIterator>[][] mapIteratorComparatorArray68 = (java.util.Comparator<org.apache.commons.collections4.MapIterator>[][]) comparatorArray67;
-        mapIteratorComparatorArray68[0] = mapIteratorComparatorArray8;
-        mapIteratorComparatorArray68[1] = mapIteratorComparatorArray19;
-        mapIteratorComparatorArray68[2] = mapIteratorComparatorArray30;
-        mapIteratorComparatorArray68[3] = mapIteratorComparatorArray41;
-        mapIteratorComparatorArray68[4] = mapIteratorComparatorArray52;
-        mapIteratorComparatorArray68[5] = mapIteratorComparatorArray63;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableListIterator<java.util.Comparator<org.apache.commons.collections4.MapIterator>[]> mapIteratorComparatorArrayItor83 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(mapIteratorComparatorArray68, (int) (byte) 100, (int) ' ');
-            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: End index must not be greater than the array length");
-        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(comparator2);
-        org.junit.Assert.assertNotNull(strComparator3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "hi!" + "'", str4, "hi!");
-        org.junit.Assert.assertNotNull(strComparator5);
-        org.junit.Assert.assertNotNull(comparatorArray7);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray8);
-        org.junit.Assert.assertNotNull(comparator13);
-        org.junit.Assert.assertNotNull(strComparator14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "hi!" + "'", str15, "hi!");
-        org.junit.Assert.assertNotNull(strComparator16);
-        org.junit.Assert.assertNotNull(comparatorArray18);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray19);
-        org.junit.Assert.assertNotNull(comparator24);
-        org.junit.Assert.assertNotNull(strComparator25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "hi!" + "'", str26, "hi!");
-        org.junit.Assert.assertNotNull(strComparator27);
-        org.junit.Assert.assertNotNull(comparatorArray29);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray30);
-        org.junit.Assert.assertNotNull(comparator35);
-        org.junit.Assert.assertNotNull(strComparator36);
-        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "hi!" + "'", str37, "hi!");
-        org.junit.Assert.assertNotNull(strComparator38);
-        org.junit.Assert.assertNotNull(comparatorArray40);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray41);
-        org.junit.Assert.assertNotNull(comparator46);
-        org.junit.Assert.assertNotNull(strComparator47);
-        org.junit.Assert.assertEquals("'" + str48 + "' != '" + "hi!" + "'", str48, "hi!");
-        org.junit.Assert.assertNotNull(strComparator49);
-        org.junit.Assert.assertNotNull(comparatorArray51);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray52);
-        org.junit.Assert.assertNotNull(comparator57);
-        org.junit.Assert.assertNotNull(strComparator58);
-        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "hi!" + "'", str59, "hi!");
-        org.junit.Assert.assertNotNull(strComparator60);
-        org.junit.Assert.assertNotNull(comparatorArray62);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray63);
-        org.junit.Assert.assertNotNull(comparatorArray67);
-        org.junit.Assert.assertNotNull(mapIteratorComparatorArray68);
-    }
-
-    @Test
-    public void test0993() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0993");
-        org.apache.commons.collections4.ResettableListIterator<org.apache.commons.collections4.ResettableListIterator<java.lang.String>> strItorItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableListIterator<java.util.Collection<java.util.Iterator<? extends java.lang.reflect.Type>>[]> wildcardItorCollectionArrayItor1 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object) strItorItor0);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Argument is not an array");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItorItor0);
-    }
-
-    @Test
-    public void test0994() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0994");
-        java.lang.Object obj0 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableIterator<org.apache.commons.collections4.MapIterator[]> mapIteratorArrayItor3 = org.apache.commons.collections4.IteratorUtils.arrayIterator(obj0, (int) ' ', (int) (short) -1);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-    }
-
-    @Test
-    public void test0995() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0995");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "", "hi!", "hi!" };
-        org.apache.commons.collections4.ResettableIterator<java.lang.CharSequence> charSequenceItor5 = org.apache.commons.collections4.IteratorUtils.arrayIterator(charSequenceArray4);
-        org.apache.commons.collections4.ResettableListIterator<java.lang.Object> objItor6 = org.apache.commons.collections4.IteratorUtils.arrayListIterator((java.lang.Object[]) charSequenceArray4);
-        java.util.ListIterator<java.lang.CharSequence[]> charSequenceArrayItor7 = org.apache.commons.collections4.IteratorUtils.singletonListIterator(charSequenceArray4);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.collections4.ResettableListIterator<java.lang.CharSequence> charSequenceItor10 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(charSequenceArray4, (int) 'a', (int) (byte) 1);
-            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: Start index must not be greater than the array length");
-        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceItor5);
-        org.junit.Assert.assertNotNull(objItor6);
-        org.junit.Assert.assertNotNull(charSequenceArrayItor7);
-    }
-
-    @Test
-    public void test0996() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0996");
-        org.apache.commons.collections4.ResettableListIterator<java.lang.reflect.GenericDeclaration[][][]> genericDeclarationArrayItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
-        org.junit.Assert.assertNotNull(genericDeclarationArrayItor0);
-    }
-
-    @Test
-    public void test0997() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0997");
-        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
-        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
-        boolean boolean5 = strItor4.hasPrevious();
-        boolean boolean6 = strItor4.hasNext();
-        int int7 = strItor4.previousIndex();
-        java.lang.String str8 = strItor4.next();
-        java.lang.String str9 = strItor4.previous();
-        int int10 = strItor4.previousIndex();
-        java.util.ListIterator<java.lang.String> strItor11 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
-        int int12 = strItor11.nextIndex();
-        java.util.ListIterator<java.lang.String> strItor13 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator(strItor11);
-        java.util.ListIterator<java.lang.String> strItor14 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator(strItor13);
-        boolean boolean15 = strItor14.hasPrevious();
-        boolean boolean16 = strItor14.hasPrevious();
-        org.junit.Assert.assertNotNull(strArray3);
-        org.junit.Assert.assertNotNull(strItor4);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + (-1) + "'", int10 == (-1));
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertNotNull(strItor13);
-        org.junit.Assert.assertNotNull(strItor14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-    }
-
-    @Test
-    public void test0998() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0998");
-        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor0 = org.apache.commons.collections4.IteratorUtils.emptyListIterator();
-        boolean boolean1 = strItor0.hasNext();
-        int int2 = strItor0.nextIndex();
-        java.util.ListIterator<java.lang.String> strItor3 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor0);
-        int int4 = strItor0.previousIndex();
-        boolean boolean5 = strItor0.hasPrevious();
-        java.util.ListIterator<java.lang.String> strItor6 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor0);
-        // The following exception was thrown during execution in test generation
-        try {
-            strItor0.remove();
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: Iterator contains no elements");
-        } catch (java.lang.IllegalStateException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor0);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertTrue("'" + int4 + "' != '" + (-1) + "'", int4 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-    }
-
-    @Test
-    public void test0999() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0999");
-        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
-        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
-        boolean boolean5 = strItor4.hasPrevious();
-        boolean boolean6 = strItor4.hasPrevious();
-        boolean boolean7 = strItor4.hasNext();
-        boolean boolean8 = strItor4.hasPrevious();
-        java.lang.String str9 = strItor4.next();
-        java.lang.String str10 = strItor4.previous();
-        strItor4.set("");
-        java.util.ListIterator<java.lang.String> strItor13 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
-        boolean boolean14 = strItor4.hasNext();
-        org.junit.Assert.assertNotNull(strArray3);
-        org.junit.Assert.assertNotNull(strItor4);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertNotNull(strItor13);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-    }
-
-    @Test
-    public void test1000() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test1000");
-        java.lang.String[] strArray3 = new java.lang.String[] { "", "", "" };
-        org.apache.commons.collections4.ResettableListIterator<java.lang.String> strItor4 = org.apache.commons.collections4.IteratorUtils.arrayListIterator(strArray3);
-        boolean boolean5 = strItor4.hasPrevious();
-        boolean boolean6 = strItor4.hasNext();
-        int int7 = strItor4.previousIndex();
-        java.lang.String str8 = strItor4.next();
-        java.util.ListIterator<java.lang.String> strItor9 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
-        java.util.ListIterator<java.lang.String> strItor10 = org.apache.commons.collections4.IteratorUtils.unmodifiableListIterator((java.util.ListIterator<java.lang.String>) strItor4);
-        java.lang.String str11 = strItor4.previous();
-        org.junit.Assert.assertNotNull(strArray3);
-        org.junit.Assert.assertNotNull(strItor4);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + (-1) + "'", int7 == (-1));
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
     }
 }
 

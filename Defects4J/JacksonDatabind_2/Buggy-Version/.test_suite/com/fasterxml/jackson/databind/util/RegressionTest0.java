@@ -397,50 +397,5 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(segment25);
         org.junit.Assert.assertNull(segment26);
     }
-
-    @Test
-    public void test12() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test12");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
-        boolean boolean5 = tokenBuffer4._closed;
-        tokenBuffer4.writeNumber((short) -1);
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment8 = new com.fasterxml.jackson.databind.util.TokenBuffer.Segment();
-        long long9 = segment8._tokenTypes;
-        tokenBuffer4._last = segment8;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper12 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory11);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = objectMapper12.getJsonFactory();
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter14 = objectMapper12.writerWithDefaultPrettyPrinter();
-        com.fasterxml.jackson.core.FormatSchema formatSchema15 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter16 = objectMapper12.writer(formatSchema15);
-        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping17 = com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper19 = objectMapper12.enableDefaultTypingAsProperty(defaultTyping17, "hi!");
-        com.fasterxml.jackson.databind.PropertyNamingStrategy propertyNamingStrategy20 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper21 = objectMapper19.setPropertyNamingStrategy(propertyNamingStrategy20);
-        tokenBuffer4._objectId = objectMapper21;
-        com.fasterxml.jackson.databind.Module module23 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.databind.ObjectMapper objectMapper24 = objectMapper21.registerModule(module23);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertNotNull(jsonFactory3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + long9 + "' != '" + 0L + "'", long9 == 0L);
-        org.junit.Assert.assertNotNull(jsonFactory13);
-        org.junit.Assert.assertNotNull(objectWriter14);
-        org.junit.Assert.assertNotNull(objectWriter16);
-        org.junit.Assert.assertTrue("'" + defaultTyping17 + "' != '" + com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS + "'", defaultTyping17.equals(com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS));
-        org.junit.Assert.assertNotNull(objectMapper19);
-        org.junit.Assert.assertNotNull(objectMapper21);
-    }
 }
 

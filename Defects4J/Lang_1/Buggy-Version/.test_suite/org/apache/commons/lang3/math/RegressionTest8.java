@@ -10,17 +10,17 @@ public class RegressionTest8 {
     public static boolean debug = false;
 
     @Test
-    public void test4001() throws Throwable {
+    public void test04001() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4001");
+            System.out.format("%n%s%n", "RegressionTest8.test04001");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("0#1#10.0a#a#a#a#a#a#a#a4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444-1.0a52.0");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4002() throws Throwable {
+    public void test04002() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4002");
+            System.out.format("%n%s%n", "RegressionTest8.test04002");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("-10410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa110410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.10410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 10410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatrue10410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-10410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa110410497141004-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ");
@@ -31,9 +31,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4003() throws Throwable {
+    public void test04003() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4003");
+            System.out.format("%n%s%n", "RegressionTest8.test04003");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -52,17 +52,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4004() throws Throwable {
+    public void test04004() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4004");
+            System.out.format("%n%s%n", "RegressionTest8.test04004");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(9L, 65L, (long) (short) 1);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 1L + "'", long3 == 1L);
     }
 
     @Test
-    public void test4005() throws Throwable {
+    public void test04005() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4005");
+            System.out.format("%n%s%n", "RegressionTest8.test04005");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -83,33 +83,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4006() throws Throwable {
+    public void test04006() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4006");
+            System.out.format("%n%s%n", "RegressionTest8.test04006");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min(7.0d, (double) 61.0f, (double) 1098504L);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 7.0d + "'", double3 == 7.0d);
     }
 
     @Test
-    public void test4007() throws Throwable {
+    public void test04007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4007");
+            System.out.format("%n%s%n", "RegressionTest8.test04007");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 100, (byte) -1, (byte) 10);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 100 + "'", byte3 == (byte) 100);
     }
 
     @Test
-    public void test4008() throws Throwable {
+    public void test04008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4008");
+            System.out.format("%n%s%n", "RegressionTest8.test04008");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("... #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #...", (byte) -1);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) -1 + "'", byte2 == (byte) -1);
     }
 
     @Test
-    public void test4009() throws Throwable {
+    public void test04009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4009");
+            System.out.format("%n%s%n", "RegressionTest8.test04009");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         int int6 = org.apache.commons.lang3.math.NumberUtils.max(intArray3);
@@ -132,25 +132,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4010() throws Throwable {
+    public void test04010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4010");
+            System.out.format("%n%s%n", "RegressionTest8.test04010");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) -1, (short) 0, (short) (byte) 100);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4011() throws Throwable {
+    public void test04011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4011");
+            System.out.format("%n%s%n", "RegressionTest8.test04011");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1 -1 100 10 -1.0 true-1 -1 100 0#1#1#10               aaaaaaaaaa", 0.0d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
-    public void test4012() throws Throwable {
+    public void test04012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4012");
+            System.out.format("%n%s%n", "RegressionTest8.test04012");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger(" a #a #a #a #a #a #a #a #a #a # aa#aa#aa#aa#aa#aa#aa#aa#aa#");
@@ -161,25 +161,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4013() throws Throwable {
+    public void test04013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4013");
+            System.out.format("%n%s%n", "RegressionTest8.test04013");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("0.25A0.1-", (byte) 10);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 10 + "'", byte2 == (byte) 10);
     }
 
     @Test
-    public void test4014() throws Throwable {
+    public void test04014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4014");
+            System.out.format("%n%s%n", "RegressionTest8.test04014");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 107L, (double) 101L, 0.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 107.0d + "'", double3 == 107.0d);
     }
 
     @Test
-    public void test4015() throws Throwable {
+    public void test04015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4015");
+            System.out.format("%n%s%n", "RegressionTest8.test04015");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -207,25 +207,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4016() throws Throwable {
+    public void test04016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4016");
+            System.out.format("%n%s%n", "RegressionTest8.test04016");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 100, (byte) 0, (byte) 1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 100 + "'", byte3 == (byte) 100);
     }
 
     @Test
-    public void test4017() throws Throwable {
+    public void test04017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4017");
+            System.out.format("%n%s%n", "RegressionTest8.test04017");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("", 7);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 7 + "'", int2 == 7);
     }
 
     @Test
-    public void test4018() throws Throwable {
+    public void test04018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4018");
+            System.out.format("%n%s%n", "RegressionTest8.test04018");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.max(longArray6);
@@ -244,17 +244,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4019() throws Throwable {
+    public void test04019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4019");
+            System.out.format("%n%s%n", "RegressionTest8.test04019");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((double) 31.0f, (double) 1098504, (double) 102);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 31.0d + "'", double3 == 31.0d);
     }
 
     @Test
-    public void test4020() throws Throwable {
+    public void test04020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4020");
+            System.out.format("%n%s%n", "RegressionTest8.test04020");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray1);
@@ -271,17 +271,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4021() throws Throwable {
+    public void test04021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4021");
+            System.out.format("%n%s%n", "RegressionTest8.test04021");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 0, (short) (byte) 100, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4022() throws Throwable {
+    public void test04022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4022");
+            System.out.format("%n%s%n", "RegressionTest8.test04022");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray4, 'a');
@@ -304,17 +304,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4023() throws Throwable {
+    public void test04023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4023");
+            System.out.format("%n%s%n", "RegressionTest8.test04023");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("aaaaa aaaa -aaa141004-1");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4024() throws Throwable {
+    public void test04024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4024");
+            System.out.format("%n%s%n", "RegressionTest8.test04024");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -331,9 +331,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4025() throws Throwable {
+    public void test04025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4025");
+            System.out.format("%n%s%n", "RegressionTest8.test04025");
         double[] doubleArray4 = new double[] { 35L, 23, 'a', 52.0d };
         double double5 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray4, 'a');
@@ -346,9 +346,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4026() throws Throwable {
+    public void test04026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4026");
+            System.out.format("%n%s%n", "RegressionTest8.test04026");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -369,25 +369,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4027() throws Throwable {
+    public void test04027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4027");
+            System.out.format("%n%s%n", "RegressionTest8.test04027");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 0, (short) 1, (short) 10);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 10 + "'", short3 == (short) 10);
     }
 
     @Test
-    public void test4028() throws Throwable {
+    public void test04028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4028");
+            System.out.format("%n%s%n", "RegressionTest8.test04028");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 0, (short) 10, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 0 + "'", short3 == (short) 0);
     }
 
     @Test
-    public void test4029() throws Throwable {
+    public void test04029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4029");
+            System.out.format("%n%s%n", "RegressionTest8.test04029");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("                                             ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.0 ....0a52.0 .0a52.0 .0a52.04444444444444 ");
@@ -398,9 +398,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4030() throws Throwable {
+    public void test04030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4030");
+            System.out.format("%n%s%n", "RegressionTest8.test04030");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a# a");
@@ -411,17 +411,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4031() throws Throwable {
+    public void test04031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4031");
+            System.out.format("%n%s%n", "RegressionTest8.test04031");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min((long) 61, 0L, 0L);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 0L + "'", long3 == 0L);
     }
 
     @Test
-    public void test4032() throws Throwable {
+    public void test04032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4032");
+            System.out.format("%n%s%n", "RegressionTest8.test04032");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -452,9 +452,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4033() throws Throwable {
+    public void test04033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4033");
+            System.out.format("%n%s%n", "RegressionTest8.test04033");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray6, '4');
@@ -478,17 +478,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4034() throws Throwable {
+    public void test04034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4034");
+            System.out.format("%n%s%n", "RegressionTest8.test04034");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(871L, (long) 1458, (long) ' ');
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 32L + "'", long3 == 32L);
     }
 
     @Test
-    public void test4035() throws Throwable {
+    public void test04035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4035");
+            System.out.format("%n%s%n", "RegressionTest8.test04035");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("0a5210a5297");
@@ -499,57 +499,57 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4036() throws Throwable {
+    public void test04036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4036");
+            System.out.format("%n%s%n", "RegressionTest8.test04036");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("-1.010a10a0a0a10a10a10a0a0a10a10a10a0a0a10a10a10a0a0a10a10a1", 6L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 6L + "'", long2 == 6L);
     }
 
     @Test
-    public void test4037() throws Throwable {
+    public void test04037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4037");
+            System.out.format("%n%s%n", "RegressionTest8.test04037");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 0, (short) (byte) 100, (short) (byte) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4038() throws Throwable {
+    public void test04038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4038");
+            System.out.format("%n%s%n", "RegressionTest8.test04038");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 49, (double) 23L, (double) 169L);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 169.0d + "'", double3 == 169.0d);
     }
 
     @Test
-    public void test4039() throws Throwable {
+    public void test04039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4039");
+            System.out.format("%n%s%n", "RegressionTest8.test04039");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) -1, (byte) 0, (byte) -1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 0 + "'", byte3 == (byte) 0);
     }
 
     @Test
-    public void test4040() throws Throwable {
+    public void test04040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4040");
+            System.out.format("%n%s%n", "RegressionTest8.test04040");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("-1 -1 100 10 -1.0 true-1 -1 100 4                                                                                             -14");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4041() throws Throwable {
+    public void test04041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4041");
+            System.out.format("%n%s%n", "RegressionTest8.test04041");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 1...");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4042() throws Throwable {
+    public void test04042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4042");
+            System.out.format("%n%s%n", "RegressionTest8.test04042");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.max(longArray6);
@@ -577,9 +577,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4043() throws Throwable {
+    public void test04043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4043");
+            System.out.format("%n%s%n", "RegressionTest8.test04043");
         long[] longArray5 = new long[] { (short) 100, 100L, 100, 10L, (short) 1 };
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray5, '4', 10, (-1));
         java.lang.String str11 = org.apache.commons.lang3.StringUtils.join(longArray5, 'a');
@@ -598,33 +598,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4044() throws Throwable {
+    public void test04044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4044");
+            System.out.format("%n%s%n", "RegressionTest8.test04044");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("                                                                    ");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4045() throws Throwable {
+    public void test04045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4045");
+            System.out.format("%n%s%n", "RegressionTest8.test04045");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("  ###-##-eurt# ##-# ####################################");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4046() throws Throwable {
+    public void test04046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4046");
+            System.out.format("%n%s%n", "RegressionTest8.test04046");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("0#1#10.0a#a#a#a#a#a#a#a");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4047() throws Throwable {
+    public void test04047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4047");
+            System.out.format("%n%s%n", "RegressionTest8.test04047");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, '4');
@@ -645,17 +645,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4048() throws Throwable {
+    public void test04048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4048");
+            System.out.format("%n%s%n", "RegressionTest8.test04048");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("     44444444  44444444  44444444  44444444 0#1#1#0#1#1#");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4049() throws Throwable {
+    public void test04049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4049");
+            System.out.format("%n%s%n", "RegressionTest8.test04049");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.max(longArray6);
@@ -678,25 +678,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4050() throws Throwable {
+    public void test04050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4050");
+            System.out.format("%n%s%n", "RegressionTest8.test04050");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(88, 5, 1297);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 1297 + "'", int3 == 1297);
     }
 
     @Test
-    public void test4051() throws Throwable {
+    public void test04051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4051");
+            System.out.format("%n%s%n", "RegressionTest8.test04051");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("                                          # 001 1- 1-eurt", 0);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
 
     @Test
-    public void test4052() throws Throwable {
+    public void test04052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4052");
+            System.out.format("%n%s%n", "RegressionTest8.test04052");
         int[] intArray3 = new int[] { '#', (-141), 821 };
         int int4 = org.apache.commons.lang3.math.NumberUtils.max(intArray3);
         int int5 = org.apache.commons.lang3.math.NumberUtils.max(intArray3);
@@ -707,17 +707,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4053() throws Throwable {
+    public void test04053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4053");
+            System.out.format("%n%s%n", "RegressionTest8.test04053");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("                                                     -1aa1-a1-a1-a1-a1-a1-a1-a1-a1-a1-                                                      ");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4054() throws Throwable {
+    public void test04054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4054");
+            System.out.format("%n%s%n", "RegressionTest8.test04054");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -739,9 +739,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4055() throws Throwable {
+    public void test04055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4055");
+            System.out.format("%n%s%n", "RegressionTest8.test04055");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("44444444  ");
@@ -752,9 +752,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4056() throws Throwable {
+    public void test04056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4056");
+            System.out.format("%n%s%n", "RegressionTest8.test04056");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("-1 -1 100 10 -1.0 true-1 -1 100 4                                                                                             -14");
@@ -765,17 +765,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4057() throws Throwable {
+    public void test04057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4057");
+            System.out.format("%n%s%n", "RegressionTest8.test04057");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) -1, (byte) 10, (byte) -1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 10 + "'", byte3 == (byte) 10);
     }
 
     @Test
-    public void test4058() throws Throwable {
+    public void test04058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4058");
+            System.out.format("%n%s%n", "RegressionTest8.test04058");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) -1, (byte) -1, (byte) 100, (byte) 0 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
@@ -788,33 +788,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4059() throws Throwable {
+    public void test04059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4059");
+            System.out.format("%n%s%n", "RegressionTest8.test04059");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) -141, (short) 10, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -141 + "'", short3 == (short) -141);
     }
 
     @Test
-    public void test4060() throws Throwable {
+    public void test04060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4060");
+            System.out.format("%n%s%n", "RegressionTest8.test04060");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) -141, (short) (byte) 100, (short) (byte) 10);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -141 + "'", short3 == (short) -141);
     }
 
     @Test
-    public void test4061() throws Throwable {
+    public void test04061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4061");
+            System.out.format("%n%s%n", "RegressionTest8.test04061");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("001 1- 1-EURT 0.1- 01 ");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4062() throws Throwable {
+    public void test04062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4062");
+            System.out.format("%n%s%n", "RegressionTest8.test04062");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -845,9 +845,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4063() throws Throwable {
+    public void test04063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4063");
+            System.out.format("%n%s%n", "RegressionTest8.test04063");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -868,9 +868,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4064() throws Throwable {
+    public void test04064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4064");
+            System.out.format("%n%s%n", "RegressionTest8.test04064");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("# A# A# A# A# A# A# A# A# AA# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A# A100.0 10.0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -881,41 +881,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4065() throws Throwable {
+    public void test04065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4065");
+            System.out.format("%n%s%n", "RegressionTest8.test04065");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt(".0a52.0-1a...");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4066() throws Throwable {
+    public void test04066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4066");
+            System.out.format("%n%s%n", "RegressionTest8.test04066");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("444444444444444444444444444444440#1#1#0#1#14444                                                                                                                               ");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4067() throws Throwable {
+    public void test04067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4067");
+            System.out.format("%n%s%n", "RegressionTest8.test04067");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) (byte) 10, (short) 100, (short) (byte) 10);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 10 + "'", short3 == (short) 10);
     }
 
     @Test
-    public void test4068() throws Throwable {
+    public void test04068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4068");
+            System.out.format("%n%s%n", "RegressionTest8.test04068");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(98, 33, 867);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 33 + "'", int3 == 33);
     }
 
     @Test
-    public void test4069() throws Throwable {
+    public void test04069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4069");
+            System.out.format("%n%s%n", "RegressionTest8.test04069");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -936,9 +936,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4070() throws Throwable {
+    public void test04070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4070");
+            System.out.format("%n%s%n", "RegressionTest8.test04070");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -963,17 +963,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4071() throws Throwable {
+    public void test04071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4071");
+            System.out.format("%n%s%n", "RegressionTest8.test04071");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("a4#4aaaaaaaaaaaAAAAAAAAAAAAAAAAA...");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4072() throws Throwable {
+    public void test04072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4072");
+            System.out.format("%n%s%n", "RegressionTest8.test04072");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -998,9 +998,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4073() throws Throwable {
+    public void test04073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4073");
+            System.out.format("%n%s%n", "RegressionTest8.test04073");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -1019,17 +1019,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4074() throws Throwable {
+    public void test04074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4074");
+            System.out.format("%n%s%n", "RegressionTest8.test04074");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 1, (short) 0, (short) (byte) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -1 + "'", short3 == (short) -1);
     }
 
     @Test
-    public void test4075() throws Throwable {
+    public void test04075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4075");
+            System.out.format("%n%s%n", "RegressionTest8.test04075");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -1056,33 +1056,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4076() throws Throwable {
+    public void test04076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4076");
+            System.out.format("%n%s%n", "RegressionTest8.test04076");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("                                                                                             -1A1AAAAAAAAAAAAAAAAAAAAAAAA                                                    AAAAAAAAAAAAAAAAAAAAAAAA");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4077() throws Throwable {
+    public void test04077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4077");
+            System.out.format("%n%s%n", "RegressionTest8.test04077");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1.0          ...", 72.0d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 72.0d + "'", double2 == 72.0d);
     }
 
     @Test
-    public void test4078() throws Throwable {
+    public void test04078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4078");
+            System.out.format("%n%s%n", "RegressionTest8.test04078");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) -141, (short) (byte) 100, (short) (byte) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -141 + "'", short3 == (short) -141);
     }
 
     @Test
-    public void test4079() throws Throwable {
+    public void test04079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4079");
+            System.out.format("%n%s%n", "RegressionTest8.test04079");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("                                                            A #                                         44444444444444444444444444444444");
@@ -1093,9 +1093,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4080() throws Throwable {
+    public void test04080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4080");
+            System.out.format("%n%s%n", "RegressionTest8.test04080");
         float[] floatArray3 = new float[] { 101, 10041, 30 };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(floatArray3, '#');
         float float6 = org.apache.commons.lang3.math.NumberUtils.max(floatArray3);
@@ -1106,9 +1106,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4081() throws Throwable {
+    public void test04081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4081");
+            System.out.format("%n%s%n", "RegressionTest8.test04081");
         double[] doubleArray4 = new double[] { 35L, 23, 'a', 52.0d };
         double double5 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray4, 'a');
@@ -1129,17 +1129,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4082() throws Throwable {
+    public void test04082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4082");
+            System.out.format("%n%s%n", "RegressionTest8.test04082");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4083() throws Throwable {
+    public void test04083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4083");
+            System.out.format("%n%s%n", "RegressionTest8.test04083");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -1162,9 +1162,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4084() throws Throwable {
+    public void test04084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4084");
+            System.out.format("%n%s%n", "RegressionTest8.test04084");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -1183,9 +1183,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4085() throws Throwable {
+    public void test04085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4085");
+            System.out.format("%n%s%n", "RegressionTest8.test04085");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -1204,9 +1204,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4086() throws Throwable {
+    public void test04086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4086");
+            System.out.format("%n%s%n", "RegressionTest8.test04086");
         double[] doubleArray4 = new double[] { 35L, 23, 'a', 52.0d };
         double double5 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
         double double6 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
@@ -1226,17 +1226,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4087() throws Throwable {
+    public void test04087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4087");
+            System.out.format("%n%s%n", "RegressionTest8.test04087");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 263L, 11.0f, (float) 47);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 263.0f + "'", float3 == 263.0f);
     }
 
     @Test
-    public void test4088() throws Throwable {
+    public void test04088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4088");
+            System.out.format("%n%s%n", "RegressionTest8.test04088");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -1262,9 +1262,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4089() throws Throwable {
+    public void test04089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4089");
+            System.out.format("%n%s%n", "RegressionTest8.test04089");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("                    01110-1a1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa                    ");
@@ -1275,17 +1275,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4090() throws Throwable {
+    public void test04090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4090");
+            System.out.format("%n%s%n", "RegressionTest8.test04090");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("aaaaaaaaaaaaa               ", (long) 26);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 26L + "'", long2 == 26L);
     }
 
     @Test
-    public void test4091() throws Throwable {
+    public void test04091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4091");
+            System.out.format("%n%s%n", "RegressionTest8.test04091");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray4, '4');
@@ -1306,9 +1306,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4092() throws Throwable {
+    public void test04092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4092");
+            System.out.format("%n%s%n", "RegressionTest8.test04092");
         float[] floatArray3 = new float[] { '#', (-141), (byte) 0 };
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray3);
         float float5 = org.apache.commons.lang3.math.NumberUtils.max(floatArray3);
@@ -1321,9 +1321,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4093() throws Throwable {
+    public void test04093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4093");
+            System.out.format("%n%s%n", "RegressionTest8.test04093");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -1349,9 +1349,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4094() throws Throwable {
+    public void test04094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4094");
+            System.out.format("%n%s%n", "RegressionTest8.test04094");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("                                                                                                                                                                                                                                                                                                                                                                                                                                                                       true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 ");
@@ -1362,9 +1362,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4095() throws Throwable {
+    public void test04095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4095");
+            System.out.format("%n%s%n", "RegressionTest8.test04095");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -1387,25 +1387,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4096() throws Throwable {
+    public void test04096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4096");
+            System.out.format("%n%s%n", "RegressionTest8.test04096");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("    -1.0A52");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4097() throws Throwable {
+    public void test04097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4097");
+            System.out.format("%n%s%n", "RegressionTest8.test04097");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("               aaaaaaaaaa# A# A# A# A# A# A# A# A# A# A");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4098() throws Throwable {
+    public void test04098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4098");
+            System.out.format("%n%s%n", "RegressionTest8.test04098");
         int[] intArray2 = new int[] { 48, 9 };
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(intArray2);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a', 67, 13);
@@ -1416,9 +1416,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4099() throws Throwable {
+    public void test04099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4099");
+            System.out.format("%n%s%n", "RegressionTest8.test04099");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray1);
@@ -1437,9 +1437,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4100() throws Throwable {
+    public void test04100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4100");
+            System.out.format("%n%s%n", "RegressionTest8.test04100");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Double double1 = org.apache.commons.lang3.math.NumberUtils.createDouble("######################################################.#a52");
@@ -1450,17 +1450,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4101() throws Throwable {
+    public void test04101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4101");
+            System.out.format("%n%s%n", "RegressionTest8.test04101");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("#10#1#100#0#10hi!-1 -1 100 10 -1.0 true-1 -1 100a", (byte) 0);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 0 + "'", byte2 == (byte) 0);
     }
 
     @Test
-    public void test4102() throws Throwable {
+    public void test04102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4102");
+            System.out.format("%n%s%n", "RegressionTest8.test04102");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("a#");
@@ -1471,17 +1471,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4103() throws Throwable {
+    public void test04103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4103");
+            System.out.format("%n%s%n", "RegressionTest8.test04103");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((double) (short) 1, (double) 54, (double) 864L);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 1.0d + "'", double3 == 1.0d);
     }
 
     @Test
-    public void test4104() throws Throwable {
+    public void test04104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4104");
+            System.out.format("%n%s%n", "RegressionTest8.test04104");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("                                                                                                                                     ");
@@ -1492,73 +1492,73 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4105() throws Throwable {
+    public void test04105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4105");
+            System.out.format("%n%s%n", "RegressionTest8.test04105");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) 97, (short) 0, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 97 + "'", short3 == (short) 97);
     }
 
     @Test
-    public void test4106() throws Throwable {
+    public void test04106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4106");
+            System.out.format("%n%s%n", "RegressionTest8.test04106");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("a  A 001 1- 1-EURT 0.1- 01 001 1- 1-", (float) '#');
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 35.0f + "'", float2 == 35.0f);
     }
 
     @Test
-    public void test4107() throws Throwable {
+    public void test04107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4107");
+            System.out.format("%n%s%n", "RegressionTest8.test04107");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("         10a-1         ");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4108() throws Throwable {
+    public void test04108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4108");
+            System.out.format("%n%s%n", "RegressionTest8.test04108");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) (byte) 10, (float) 871L, (float) 169L);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 871.0f + "'", float3 == 871.0f);
     }
 
     @Test
-    public void test4109() throws Throwable {
+    public void test04109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4109");
+            System.out.format("%n%s%n", "RegressionTest8.test04109");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("aaaaaaaaaaaaaaaaaaaa                                                    a-a1a.a0aaa52a.a0aaaaaaaaaaaaaaaaaaaaa                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1.0A52.                                                                                             -1A1#1#1", 45);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 45 + "'", int2 == 45);
     }
 
     @Test
-    public void test4110() throws Throwable {
+    public void test04110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4110");
+            System.out.format("%n%s%n", "RegressionTest8.test04110");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(2.0f, (float) 90, 41.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 90.0f + "'", float3 == 90.0f);
     }
 
     @Test
-    public void test4111() throws Throwable {
+    public void test04111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4111");
+            System.out.format("%n%s%n", "RegressionTest8.test04111");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("-1 -1 100 10 -1.0 TRUE-1 -1 100 HI!-1 -1 100 10 -1.0 TRUE-1 -1 100");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4112() throws Throwable {
+    public void test04112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4112");
+            System.out.format("%n%s%n", "RegressionTest8.test04112");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 1, (short) 52, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 52 + "'", short3 == (short) 52);
     }
 
     @Test
-    public void test4113() throws Throwable {
+    public void test04113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4113");
+            System.out.format("%n%s%n", "RegressionTest8.test04113");
         short[] shortArray4 = new short[] { (byte) -1, (byte) -1, (short) 0, (short) 10 };
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray4, '4', (int) (byte) 100, (int) (byte) -1);
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '4');
@@ -1575,9 +1575,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4114() throws Throwable {
+    public void test04114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4114");
+            System.out.format("%n%s%n", "RegressionTest8.test04114");
         int[] intArray2 = new int[] { 48, 9 };
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(intArray2);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray2, ' ', 41, 0);
@@ -1592,9 +1592,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4115() throws Throwable {
+    public void test04115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4115");
+            System.out.format("%n%s%n", "RegressionTest8.test04115");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -1615,33 +1615,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4116() throws Throwable {
+    public void test04116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4116");
+            System.out.format("%n%s%n", "RegressionTest8.test04116");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("...a52.0-1a4#0 1 0 1--1.0a##########################");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4117() throws Throwable {
+    public void test04117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4117");
+            System.out.format("%n%s%n", "RegressionTest8.test04117");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("                        2");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4118() throws Throwable {
+    public void test04118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4118");
+            System.out.format("%n%s%n", "RegressionTest8.test04118");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(1432, 0, 1452);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test4119() throws Throwable {
+    public void test04119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4119");
+            System.out.format("%n%s%n", "RegressionTest8.test04119");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -1660,9 +1660,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4120() throws Throwable {
+    public void test04120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4120");
+            System.out.format("%n%s%n", "RegressionTest8.test04120");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -1688,49 +1688,49 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4121() throws Throwable {
+    public void test04121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4121");
+            System.out.format("%n%s%n", "RegressionTest8.test04121");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("a##a#a####a##a#a####a##a#a###.aa52.");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4122() throws Throwable {
+    public void test04122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4122");
+            System.out.format("%n%s%n", "RegressionTest8.test04122");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("TRUE-1 -1 100 0.0##########################################-1.0A52.0", 3224);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 3224 + "'", int2 == 3224);
     }
 
     @Test
-    public void test4123() throws Throwable {
+    public void test04123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4123");
+            System.out.format("%n%s%n", "RegressionTest8.test04123");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min((float) 96, (float) 33L, (float) 75L);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 33.0f + "'", float3 == 33.0f);
     }
 
     @Test
-    public void test4124() throws Throwable {
+    public void test04124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4124");
+            System.out.format("%n%s%n", "RegressionTest8.test04124");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(201, 183, 87);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 87 + "'", int3 == 87);
     }
 
     @Test
-    public void test4125() throws Throwable {
+    public void test04125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4125");
+            System.out.format("%n%s%n", "RegressionTest8.test04125");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("", 63);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 63 + "'", int2 == 63);
     }
 
     @Test
-    public void test4126() throws Throwable {
+    public void test04126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4126");
+            System.out.format("%n%s%n", "RegressionTest8.test04126");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -1749,9 +1749,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4127() throws Throwable {
+    public void test04127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4127");
+            System.out.format("%n%s%n", "RegressionTest8.test04127");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("A#A#A#A\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100#1\r100");
@@ -1762,9 +1762,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4128() throws Throwable {
+    public void test04128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4128");
+            System.out.format("%n%s%n", "RegressionTest8.test04128");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("true-1 -1 100 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -1775,17 +1775,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4129() throws Throwable {
+    public void test04129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4129");
+            System.out.format("%n%s%n", "RegressionTest8.test04129");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(455, 17, 101);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 17 + "'", int3 == 17);
     }
 
     @Test
-    public void test4130() throws Throwable {
+    public void test04130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4130");
+            System.out.format("%n%s%n", "RegressionTest8.test04130");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         short short7 = org.apache.commons.lang3.math.NumberUtils.min(shortArray4);
@@ -1802,57 +1802,57 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4131() throws Throwable {
+    public void test04131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4131");
+            System.out.format("%n%s%n", "RegressionTest8.test04131");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort(" #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String;");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4132() throws Throwable {
+    public void test04132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4132");
+            System.out.format("%n%s%n", "RegressionTest8.test04132");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("44444444444444444444444444444444444444444444", (long) 45);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 45L + "'", long2 == 45L);
     }
 
     @Test
-    public void test4133() throws Throwable {
+    public void test04133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4133");
+            System.out.format("%n%s%n", "RegressionTest8.test04133");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("1041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410104141004041010414100404101041410040410", (short) 52);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 52 + "'", short2 == (short) 52);
     }
 
     @Test
-    public void test4134() throws Throwable {
+    public void test04134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4134");
+            System.out.format("%n%s%n", "RegressionTest8.test04134");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((-1404140.0d), (double) 95L, 48.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + (-1404140.0d) + "'", double3 == (-1404140.0d));
     }
 
     @Test
-    public void test4135() throws Throwable {
+    public void test04135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4135");
+            System.out.format("%n%s%n", "RegressionTest8.test04135");
         long long3 = org.apache.commons.lang3.math.NumberUtils.max((long) 83, (long) 179, (long) 136);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 179L + "'", long3 == 179L);
     }
 
     @Test
-    public void test4136() throws Throwable {
+    public void test04136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4136");
+            System.out.format("%n%s%n", "RegressionTest8.test04136");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(51.0f, (float) 55L, 15.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 55.0f + "'", float3 == 55.0f);
     }
 
     @Test
-    public void test4137() throws Throwable {
+    public void test04137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4137");
+            System.out.format("%n%s%n", "RegressionTest8.test04137");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("a ###        ##        ##        #");
@@ -1863,9 +1863,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4138() throws Throwable {
+    public void test04138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4138");
+            System.out.format("%n%s%n", "RegressionTest8.test04138");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.max(shortArray2);
@@ -1883,17 +1883,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4139() throws Throwable {
+    public void test04139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4139");
+            System.out.format("%n%s%n", "RegressionTest8.test04139");
         long long3 = org.apache.commons.lang3.math.NumberUtils.max(2881L, 162L, (long) 101097);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 101097L + "'", long3 == 101097L);
     }
 
     @Test
-    public void test4140() throws Throwable {
+    public void test04140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4140");
+            System.out.format("%n%s%n", "RegressionTest8.test04140");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, '#');
@@ -1916,17 +1916,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4141() throws Throwable {
+    public void test04141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4141");
+            System.out.format("%n%s%n", "RegressionTest8.test04141");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("A A A A", (short) 0);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 0 + "'", short2 == (short) 0);
     }
 
     @Test
-    public void test4142() throws Throwable {
+    public void test04142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4142");
+            System.out.format("%n%s%n", "RegressionTest8.test04142");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -1956,9 +1956,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4143() throws Throwable {
+    public void test04143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4143");
+            System.out.format("%n%s%n", "RegressionTest8.test04143");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("   44444444  44444444  44444444  44444444 0#1#1#0#1#1100.0 1");
@@ -1969,9 +1969,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4144() throws Throwable {
+    public void test04144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4144");
+            System.out.format("%n%s%n", "RegressionTest8.test04144");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -2021,9 +2021,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4145() throws Throwable {
+    public void test04145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4145");
+            System.out.format("%n%s%n", "RegressionTest8.test04145");
         long[] longArray4 = new long[] { (-1L), (short) 0, 1L, (byte) 0 };
         long long5 = org.apache.commons.lang3.math.NumberUtils.min(longArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(longArray4, 'a');
@@ -2051,17 +2051,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4146() throws Throwable {
+    public void test04146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4146");
+            System.out.format("%n%s%n", "RegressionTest8.test04146");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
     @Test
-    public void test4147() throws Throwable {
+    public void test04147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4147");
+            System.out.format("%n%s%n", "RegressionTest8.test04147");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("-1hI!-1");
@@ -2072,41 +2072,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4148() throws Throwable {
+    public void test04148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4148");
+            System.out.format("%n%s%n", "RegressionTest8.test04148");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 0, (byte) -1, (byte) 100);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 100 + "'", byte3 == (byte) 100);
     }
 
     @Test
-    public void test4149() throws Throwable {
+    public void test04149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4149");
+            System.out.format("%n%s%n", "RegressionTest8.test04149");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("100#0#10hi!-1 -1 100 10 -1.0 tr", (float) '4');
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 52.0f + "'", float2 == 52.0f);
     }
 
     @Test
-    public void test4150() throws Throwable {
+    public void test04150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4150");
+            System.out.format("%n%s%n", "RegressionTest8.test04150");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("0#52.0-1 -1 100 10 -1.0 true-1 -1 100 0.0##########################################-1.0a52.0-1.0#52.0-1.0#52.0-1.0#52.0-...", (float) 110L);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 110.0f + "'", float2 == 110.0f);
     }
 
     @Test
-    public void test4151() throws Throwable {
+    public void test04151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4151");
+            System.out.format("%n%s%n", "RegressionTest8.test04151");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.min((byte) 0, (byte) 100, (byte) 10);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 0 + "'", byte3 == (byte) 0);
     }
 
     @Test
-    public void test4152() throws Throwable {
+    public void test04152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4152");
+            System.out.format("%n%s%n", "RegressionTest8.test04152");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger(".0-1.0a52.0-1");
@@ -2117,9 +2117,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4153() throws Throwable {
+    public void test04153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4153");
+            System.out.format("%n%s%n", "RegressionTest8.test04153");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("-1a1a10a1a100a0a10-1 -1 100 10 -1.0 true-1 -1 100 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1 -1 100 10 -1.0 true-1 -1 100 aaaaaaaa");
@@ -2130,17 +2130,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4154() throws Throwable {
+    public void test04154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4154");
+            System.out.format("%n%s%n", "RegressionTest8.test04154");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min(0.0d, (double) 2, (double) 16L);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 0.0d + "'", double3 == 0.0d);
     }
 
     @Test
-    public void test4155() throws Throwable {
+    public void test04155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4155");
+            System.out.format("%n%s%n", "RegressionTest8.test04155");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -2167,9 +2167,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4156() throws Throwable {
+    public void test04156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4156");
+            System.out.format("%n%s%n", "RegressionTest8.test04156");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.max(longArray6);
@@ -2188,9 +2188,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4157() throws Throwable {
+    public void test04157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4157");
+            System.out.format("%n%s%n", "RegressionTest8.test04157");
         long[] longArray5 = new long[] { (short) 100, 100L, 100, 10L, (short) 1 };
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray5, '4', 10, (-1));
         java.lang.String str11 = org.apache.commons.lang3.StringUtils.join(longArray5, '4');
@@ -2212,9 +2212,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4158() throws Throwable {
+    public void test04158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4158");
+            System.out.format("%n%s%n", "RegressionTest8.test04158");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("#A 001 1- 1-EURT 0.1- 01 001 1- 1-#");
@@ -2225,17 +2225,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4159() throws Throwable {
+    public void test04159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4159");
+            System.out.format("%n%s%n", "RegressionTest8.test04159");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1a0a1a0-1.0a5         10a-", (double) 169);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 169.0d + "'", double2 == 169.0d);
     }
 
     @Test
-    public void test4160() throws Throwable {
+    public void test04160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4160");
+            System.out.format("%n%s%n", "RegressionTest8.test04160");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("0.040.0");
@@ -2246,65 +2246,65 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4161() throws Throwable {
+    public void test04161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4161");
+            System.out.format("%n%s%n", "RegressionTest8.test04161");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(3, 2, 27);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 27 + "'", int3 == 27);
     }
 
     @Test
-    public void test4162() throws Throwable {
+    public void test04162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4162");
+            System.out.format("%n%s%n", "RegressionTest8.test04162");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 10, (short) 52, (short) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 52 + "'", short3 == (short) 52);
     }
 
     @Test
-    public void test4163() throws Throwable {
+    public void test04163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4163");
+            System.out.format("%n%s%n", "RegressionTest8.test04163");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #4444444444444 #");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4164() throws Throwable {
+    public void test04164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4164");
+            System.out.format("%n%s%n", "RegressionTest8.test04164");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(22, 4141410, 57);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 22 + "'", int3 == 22);
     }
 
     @Test
-    public void test4165() throws Throwable {
+    public void test04165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4165");
+            System.out.format("%n%s%n", "RegressionTest8.test04165");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(0.0d, 41.0d, (double) 3.0f);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 41.0d + "'", double3 == 41.0d);
     }
 
     @Test
-    public void test4166() throws Throwable {
+    public void test04166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4166");
+            System.out.format("%n%s%n", "RegressionTest8.test04166");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("141-");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4167() throws Throwable {
+    public void test04167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4167");
+            System.out.format("%n%s%n", "RegressionTest8.test04167");
         long long3 = org.apache.commons.lang3.math.NumberUtils.max((long) 10, (long) 1151, (long) 859);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 1151L + "'", long3 == 1151L);
     }
 
     @Test
-    public void test4168() throws Throwable {
+    public void test04168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4168");
+            System.out.format("%n%s%n", "RegressionTest8.test04168");
         float[] floatArray5 = new float[] { 1098504L, Float.POSITIVE_INFINITY, 5, 35, 2560 };
         float float6 = org.apache.commons.lang3.math.NumberUtils.max(floatArray5);
         float float7 = org.apache.commons.lang3.math.NumberUtils.min(floatArray5);
@@ -2315,17 +2315,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4169() throws Throwable {
+    public void test04169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4169");
+            System.out.format("%n%s%n", "RegressionTest8.test04169");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min(52.0d, (double) 47, 23.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 23.0d + "'", double3 == 23.0d);
     }
 
     @Test
-    public void test4170() throws Throwable {
+    public void test04170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4170");
+            System.out.format("%n%s%n", "RegressionTest8.test04170");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("01a0a0a01a001a79# a# a# a# a# a# a# a# a# a# a0.0");
@@ -2336,17 +2336,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4171() throws Throwable {
+    public void test04171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4171");
+            System.out.format("%n%s%n", "RegressionTest8.test04171");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("44444444444444444444444444444444444444444444");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
     @Test
-    public void test4172() throws Throwable {
+    public void test04172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4172");
+            System.out.format("%n%s%n", "RegressionTest8.test04172");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("a # #A 001 1- 1-EURT 0.1- 01 001 1- 1-");
@@ -2357,9 +2357,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4173() throws Throwable {
+    public void test04173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4173");
+            System.out.format("%n%s%n", "RegressionTest8.test04173");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("################################################################################");
@@ -2370,25 +2370,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4174() throws Throwable {
+    public void test04174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4174");
+            System.out.format("%n%s%n", "RegressionTest8.test04174");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("-1 -1 100 10 -1.0 TRUE-1 -1 100 A                                                                                             -1A1", (float) 51);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 51.0f + "'", float2 == 51.0f);
     }
 
     @Test
-    public void test4175() throws Throwable {
+    public void test04175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4175");
+            System.out.format("%n%s%n", "RegressionTest8.test04175");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("35.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.0", 188);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 188 + "'", int2 == 188);
     }
 
     @Test
-    public void test4176() throws Throwable {
+    public void test04176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4176");
+            System.out.format("%n%s%n", "RegressionTest8.test04176");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #a #");
@@ -2399,17 +2399,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4177() throws Throwable {
+    public void test04177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4177");
+            System.out.format("%n%s%n", "RegressionTest8.test04177");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt(".0a52.0 .0a52.0 .0a52.0 .0a52.0 .0a52.0 0#1#1");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4178() throws Throwable {
+    public void test04178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4178");
+            System.out.format("%n%s%n", "RegressionTest8.test04178");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -2442,9 +2442,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4179() throws Throwable {
+    public void test04179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4179");
+            System.out.format("%n%s%n", "RegressionTest8.test04179");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -2469,25 +2469,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4180() throws Throwable {
+    public void test04180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4180");
+            System.out.format("%n%s%n", "RegressionTest8.test04180");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 10, (byte) -1, (byte) 10);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 10 + "'", byte3 == (byte) 10);
     }
 
     @Test
-    public void test4181() throws Throwable {
+    public void test04181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4181");
+            System.out.format("%n%s%n", "RegressionTest8.test04181");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 true-1 -1 100 -1 -1 100 10 -1.0 tr...", 40);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 40 + "'", int2 == 40);
     }
 
     @Test
-    public void test4182() throws Throwable {
+    public void test04182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4182");
+            System.out.format("%n%s%n", "RegressionTest8.test04182");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -2506,9 +2506,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4183() throws Throwable {
+    public void test04183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4183");
+            System.out.format("%n%s%n", "RegressionTest8.test04183");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("class [Ljava.lang.String;class [Ljava.lang.String;class java.math.BigIntegerclass [Ljava.lang.String;");
@@ -2519,25 +2519,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4184() throws Throwable {
+    public void test04184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4184");
+            System.out.format("%n%s%n", "RegressionTest8.test04184");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("#-1 -1 100 10 -1.0 TRUE-1 -1 100 A#                                                                   ");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4185() throws Throwable {
+    public void test04185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4185");
+            System.out.format("%n%s%n", "RegressionTest8.test04185");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("# ## ## ## ## ## ## ## ## ## #97##00##0#0#0##02-1.052.0", (byte) 100);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 100 + "'", byte2 == (byte) 100);
     }
 
     @Test
-    public void test4186() throws Throwable {
+    public void test04186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4186");
+            System.out.format("%n%s%n", "RegressionTest8.test04186");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -2559,9 +2559,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4187() throws Throwable {
+    public void test04187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4187");
+            System.out.format("%n%s%n", "RegressionTest8.test04187");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("...  ...");
@@ -2572,25 +2572,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4188() throws Throwable {
+    public void test04188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4188");
+            System.out.format("%n%s%n", "RegressionTest8.test04188");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("#a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a 100 10 -1.0 true-1 -1 100 a# #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #class [Ljava.lang.String;class [Ljava.lang.String;class [Ljava.lang.String; #a #a #a #a #a #a #a #a #a # #a #a #a #a #a");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4189() throws Throwable {
+    public void test04189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4189");
+            System.out.format("%n%s%n", "RegressionTest8.test04189");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("# a# a# a# a# a# a# a# a# a# aa", (byte) 10);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 10 + "'", byte2 == (byte) 10);
     }
 
     @Test
-    public void test4190() throws Throwable {
+    public void test04190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4190");
+            System.out.format("%n%s%n", "RegressionTest8.test04190");
         int[] intArray2 = new int[] { 48, 9 };
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(intArray2);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray2, ' ', 41, 0);
@@ -2605,9 +2605,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4191() throws Throwable {
+    public void test04191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4191");
+            System.out.format("%n%s%n", "RegressionTest8.test04191");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -2637,9 +2637,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4192() throws Throwable {
+    public void test04192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4192");
+            System.out.format("%n%s%n", "RegressionTest8.test04192");
         int[] intArray1 = new int[] { 2 };
         int int2 = org.apache.commons.lang3.math.NumberUtils.max(intArray1);
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(intArray1);
@@ -2656,17 +2656,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4193() throws Throwable {
+    public void test04193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4193");
+            System.out.format("%n%s%n", "RegressionTest8.test04193");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(0, 86, 91);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test4194() throws Throwable {
+    public void test04194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4194");
+            System.out.format("%n%s%n", "RegressionTest8.test04194");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("true-1 1");
@@ -2677,9 +2677,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4195() throws Throwable {
+    public void test04195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4195");
+            System.out.format("%n%s%n", "RegressionTest8.test04195");
         java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("4444444444444444444444444444444444444444444444444444");
         java.math.BigInteger bigInteger3 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("4444444444444444");
         java.math.BigInteger bigInteger5 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("48494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849484948494849");
@@ -2736,25 +2736,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4196() throws Throwable {
+    public void test04196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4196");
+            System.out.format("%n%s%n", "RegressionTest8.test04196");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min((long) 3224, (long) 126, (long) 14);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 14L + "'", long3 == 14L);
     }
 
     @Test
-    public void test4197() throws Throwable {
+    public void test04197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4197");
+            System.out.format("%n%s%n", "RegressionTest8.test04197");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1.0a52.0aaaaaaaaaaaaaaaaaaaa", (double) 156L);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 156.0d + "'", double2 == 156.0d);
     }
 
     @Test
-    public void test4198() throws Throwable {
+    public void test04198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4198");
+            System.out.format("%n%s%n", "RegressionTest8.test04198");
         long[] longArray4 = new long[] { (-1L), (short) 0, 1L, (byte) 0 };
         long long5 = org.apache.commons.lang3.math.NumberUtils.min(longArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(longArray4, 'a');
@@ -2780,41 +2780,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4199() throws Throwable {
+    public void test04199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4199");
+            System.out.format("%n%s%n", "RegressionTest8.test04199");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("-1.0          ...", (byte) 100);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 100 + "'", byte2 == (byte) 100);
     }
 
     @Test
-    public void test4200() throws Throwable {
+    public void test04200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4200");
+            System.out.format("%n%s%n", "RegressionTest8.test04200");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("0.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # #                                                                                              -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010-1.0A52.00.0 # # # # # # # # # #97100100010");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4201() throws Throwable {
+    public void test04201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4201");
+            System.out.format("%n%s%n", "RegressionTest8.test04201");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", (byte) 1);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 1 + "'", byte2 == (byte) 1);
     }
 
     @Test
-    public void test4202() throws Throwable {
+    public void test04202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4202");
+            System.out.format("%n%s%n", "RegressionTest8.test04202");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) 0, (short) -141, (short) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 0 + "'", short3 == (short) 0);
     }
 
     @Test
-    public void test4203() throws Throwable {
+    public void test04203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4203");
+            System.out.format("%n%s%n", "RegressionTest8.test04203");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -2833,17 +2833,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4204() throws Throwable {
+    public void test04204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4204");
+            System.out.format("%n%s%n", "RegressionTest8.test04204");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(10.0d, (double) 18L, (double) 104.0f);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 104.0d + "'", double3 == 104.0d);
     }
 
     @Test
-    public void test4205() throws Throwable {
+    public void test04205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4205");
+            System.out.format("%n%s%n", "RegressionTest8.test04205");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("aaaa52a52a52a52a52a52a52a52a52a52");
@@ -2854,25 +2854,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4206() throws Throwable {
+    public void test04206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4206");
+            System.out.format("%n%s%n", "RegressionTest8.test04206");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("-1 100 10 -1.0 true-1 -1 100 hi!-1 -1 100 10 -1.0 true-1 -1 100HI");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4207() throws Throwable {
+    public void test04207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4207");
+            System.out.format("%n%s%n", "RegressionTest8.test04207");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("aaaaaaaaaaaaaaaa 001 1- 1-eurt 0.1- 01 001 1- 1-01a0a001a1a01-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0                                   97111111");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4208() throws Throwable {
+    public void test04208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4208");
+            System.out.format("%n%s%n", "RegressionTest8.test04208");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -2906,17 +2906,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4209() throws Throwable {
+    public void test04209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4209");
+            System.out.format("%n%s%n", "RegressionTest8.test04209");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("10a52.0-1.0a52.0-1.0a52.0-1.0a52.0-10a52.0-1.0a52.0-1.0a52.0-1.0a52.0-10a52.0-1.0a52.0-1.0a52.0-1.0a0");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4210() throws Throwable {
+    public void test04210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4210");
+            System.out.format("%n%s%n", "RegressionTest8.test04210");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("hi!-1 -1 100 10 -100.0a10.0a-1.0");
@@ -2927,17 +2927,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4211() throws Throwable {
+    public void test04211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4211");
+            System.out.format("%n%s%n", "RegressionTest8.test04211");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("...0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A ...");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4212() throws Throwable {
+    public void test04212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4212");
+            System.out.format("%n%s%n", "RegressionTest8.test04212");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -2958,33 +2958,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4213() throws Throwable {
+    public void test04213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4213");
+            System.out.format("%n%s%n", "RegressionTest8.test04213");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("aa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#aaa a#");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4214() throws Throwable {
+    public void test04214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4214");
+            System.out.format("%n%s%n", "RegressionTest8.test04214");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("    -1.0A52", (float) 51);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 51.0f + "'", float2 == 51.0f);
     }
 
     @Test
-    public void test4215() throws Throwable {
+    public void test04215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4215");
+            System.out.format("%n%s%n", "RegressionTest8.test04215");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("                                                                               44a4aaaaaaaaaaaaaaaaaaaaaaa", (short) -1);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) -1 + "'", short2 == (short) -1);
     }
 
     @Test
-    public void test4216() throws Throwable {
+    public void test04216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4216");
+            System.out.format("%n%s%n", "RegressionTest8.test04216");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -3005,9 +3005,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4217() throws Throwable {
+    public void test04217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4217");
+            System.out.format("%n%s%n", "RegressionTest8.test04217");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("...                                             ...100.0 10.0 -1.0100.0 10.0 -1.010aaaaaaaaaA4#4A");
@@ -3018,17 +3018,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4218() throws Throwable {
+    public void test04218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4218");
+            System.out.format("%n%s%n", "RegressionTest8.test04218");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("", (long) 43);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 43L + "'", long2 == 43L);
     }
 
     @Test
-    public void test4219() throws Throwable {
+    public void test04219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4219");
+            System.out.format("%n%s%n", "RegressionTest8.test04219");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray3, 'a');
@@ -3049,33 +3049,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4220() throws Throwable {
+    public void test04220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4220");
+            System.out.format("%n%s%n", "RegressionTest8.test04220");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("100.0 10.0 -1.0100.0 10.0 -1.010#-1 -1 100 10 -1.0 TRUE-1 -1 100 A#                                                                   ");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4221() throws Throwable {
+    public void test04221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4221");
+            System.out.format("%n%s%n", "RegressionTest8.test04221");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 98, (double) 1432, 41.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 1432.0d + "'", double3 == 1432.0d);
     }
 
     @Test
-    public void test4222() throws Throwable {
+    public void test04222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4222");
+            System.out.format("%n%s%n", "RegressionTest8.test04222");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("100.0410.04-1.0");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4223() throws Throwable {
+    public void test04223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4223");
+            System.out.format("%n%s%n", "RegressionTest8.test04223");
         int[] intArray1 = new int[] { 2 };
         int int2 = org.apache.commons.lang3.math.NumberUtils.max(intArray1);
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(intArray1);
@@ -3097,33 +3097,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4224() throws Throwable {
+    public void test04224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4224");
+            System.out.format("%n%s%n", "RegressionTest8.test04224");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong(" 10 -1.0 true-1 -1 100aaaaaaaaaaaaaaaaaaa                                                    -1.0a52.0aaaaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4225() throws Throwable {
+    public void test04225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4225");
+            System.out.format("%n%s%n", "RegressionTest8.test04225");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.min((byte) -1, (byte) 100, (byte) 10);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) -1 + "'", byte3 == (byte) -1);
     }
 
     @Test
-    public void test4226() throws Throwable {
+    public void test04226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4226");
+            System.out.format("%n%s%n", "RegressionTest8.test04226");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min((float) 31L, 4141410.0f, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
     }
 
     @Test
-    public void test4227() throws Throwable {
+    public void test04227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4227");
+            System.out.format("%n%s%n", "RegressionTest8.test04227");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("# A# A# A# A# A# A# A# A# A# A.0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0A          .0a52.0# ");
@@ -3134,41 +3134,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4228() throws Throwable {
+    public void test04228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4228");
+            System.out.format("%n%s%n", "RegressionTest8.test04228");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((double) 1297L, 0.0d, 4.4444444444444445E51d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 0.0d + "'", double3 == 0.0d);
     }
 
     @Test
-    public void test4229() throws Throwable {
+    public void test04229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4229");
+            System.out.format("%n%s%n", "RegressionTest8.test04229");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("35.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.035.0 23.0 97.0 52.0");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4230() throws Throwable {
+    public void test04230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4230");
+            System.out.format("%n%s%n", "RegressionTest8.test04230");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(60L, (long) 140, (long) 87);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 60L + "'", long3 == 60L);
     }
 
     @Test
-    public void test4231() throws Throwable {
+    public void test04231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4231");
+            System.out.format("%n%s%n", "RegressionTest8.test04231");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 100, (byte) 1, (byte) -1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 100 + "'", byte3 == (byte) 100);
     }
 
     @Test
-    public void test4232() throws Throwable {
+    public void test04232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4232");
+            System.out.format("%n%s%n", "RegressionTest8.test04232");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -3204,9 +3204,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4233() throws Throwable {
+    public void test04233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4233");
+            System.out.format("%n%s%n", "RegressionTest8.test04233");
         int[] intArray2 = new int[] { 859, 1432 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, '4', 0, 0);
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(intArray2, '#', 23, 0);
@@ -3219,9 +3219,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4234() throws Throwable {
+    public void test04234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4234");
+            System.out.format("%n%s%n", "RegressionTest8.test04234");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -3242,9 +3242,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4235() throws Throwable {
+    public void test04235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4235");
+            System.out.format("%n%s%n", "RegressionTest8.test04235");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -3263,9 +3263,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4236() throws Throwable {
+    public void test04236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4236");
+            System.out.format("%n%s%n", "RegressionTest8.test04236");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("0 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100 1 1 100#1#1#0#1#1");
@@ -3276,9 +3276,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4237() throws Throwable {
+    public void test04237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4237");
+            System.out.format("%n%s%n", "RegressionTest8.test04237");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("#############################################################################");
@@ -3289,9 +3289,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4238() throws Throwable {
+    public void test04238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4238");
+            System.out.format("%n%s%n", "RegressionTest8.test04238");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -3312,33 +3312,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4239() throws Throwable {
+    public void test04239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4239");
+            System.out.format("%n%s%n", "RegressionTest8.test04239");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) 52, (short) (byte) 100, (short) -141);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4240() throws Throwable {
+    public void test04240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4240");
+            System.out.format("%n%s%n", "RegressionTest8.test04240");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(197, (int) (byte) 100, 144);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 100 + "'", int3 == 100);
     }
 
     @Test
-    public void test4241() throws Throwable {
+    public void test04241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4241");
+            System.out.format("%n%s%n", "RegressionTest8.test04241");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(52, 8, 0);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 52 + "'", int3 == 52);
     }
 
     @Test
-    public void test4242() throws Throwable {
+    public void test04242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4242");
+            System.out.format("%n%s%n", "RegressionTest8.test04242");
         int[] intArray5 = new int[] { 97, '#', (short) 0, 12, (byte) -1 };
         int int6 = org.apache.commons.lang3.math.NumberUtils.max(intArray5);
         int int7 = org.apache.commons.lang3.math.NumberUtils.max(intArray5);
@@ -3351,9 +3351,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4243() throws Throwable {
+    public void test04243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4243");
+            System.out.format("%n%s%n", "RegressionTest8.test04243");
         long[] longArray4 = new long[] { (-1L), (short) 0, 1L, (byte) 0 };
         long long5 = org.apache.commons.lang3.math.NumberUtils.min(longArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(longArray4, 'a');
@@ -3372,9 +3372,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4244() throws Throwable {
+    public void test04244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4244");
+            System.out.format("%n%s%n", "RegressionTest8.test04244");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -3395,9 +3395,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4245() throws Throwable {
+    public void test04245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4245");
+            System.out.format("%n%s%n", "RegressionTest8.test04245");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -3424,17 +3424,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4246() throws Throwable {
+    public void test04246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4246");
+            System.out.format("%n%s%n", "RegressionTest8.test04246");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("4##4##4##4##4##4##4##4##4##4#97##00##0#0#0##0");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4247() throws Throwable {
+    public void test04247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4247");
+            System.out.format("%n%s%n", "RegressionTest8.test04247");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -3462,9 +3462,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4248() throws Throwable {
+    public void test04248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4248");
+            System.out.format("%n%s%n", "RegressionTest8.test04248");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -3493,9 +3493,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4249() throws Throwable {
+    public void test04249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4249");
+            System.out.format("%n%s%n", "RegressionTest8.test04249");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("#a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #");
@@ -3506,25 +3506,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4250() throws Throwable {
+    public void test04250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4250");
+            System.out.format("%n%s%n", "RegressionTest8.test04250");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("aaaaaaaaaaaaaaaaaaaaaaaa                                                    aaaaaaaaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4251() throws Throwable {
+    public void test04251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4251");
+            System.out.format("%n%s%n", "RegressionTest8.test04251");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("10a10a97                          ");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4252() throws Throwable {
+    public void test04252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4252");
+            System.out.format("%n%s%n", "RegressionTest8.test04252");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(floatArray2, '#', (int) (short) 100, (int) (byte) -1);
@@ -3541,9 +3541,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4253() throws Throwable {
+    public void test04253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4253");
+            System.out.format("%n%s%n", "RegressionTest8.test04253");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1.0a52.-1a1#-1-110010-1.0true-1-1100a-1a1           a4#4a            ");
@@ -3554,9 +3554,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4254() throws Throwable {
+    public void test04254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4254");
+            System.out.format("%n%s%n", "RegressionTest8.test04254");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("# ## ## ## ## ## ## ## ## ## #97##00##0#0#0##0aaaaaaaaaaaaaaa");
@@ -3567,49 +3567,49 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4255() throws Throwable {
+    public void test04255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4255");
+            System.out.format("%n%s%n", "RegressionTest8.test04255");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(3866.0d, 0.0d, (double) 971111);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 971111.0d + "'", double3 == 971111.0d);
     }
 
     @Test
-    public void test4256() throws Throwable {
+    public void test04256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4256");
+            System.out.format("%n%s%n", "RegressionTest8.test04256");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble(" 10 -1.0 true-1 -1 100 10 -1.0 true-1 -1 100 10 -1...", (double) 68);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 68.0d + "'", double2 == 68.0d);
     }
 
     @Test
-    public void test4257() throws Throwable {
+    public void test04257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4257");
+            System.out.format("%n%s%n", "RegressionTest8.test04257");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(20, 67, 0);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test4258() throws Throwable {
+    public void test04258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4258");
+            System.out.format("%n%s%n", "RegressionTest8.test04258");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min((long) 8, 55L, (long) 11);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 8L + "'", long3 == 8L);
     }
 
     @Test
-    public void test4259() throws Throwable {
+    public void test04259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4259");
+            System.out.format("%n%s%n", "RegressionTest8.test04259");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("52.0a                                                    -1", (short) (byte) 0);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 0 + "'", short2 == (short) 0);
     }
 
     @Test
-    public void test4260() throws Throwable {
+    public void test04260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4260");
+            System.out.format("%n%s%n", "RegressionTest8.test04260");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray3, 'a');
@@ -3633,17 +3633,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4261() throws Throwable {
+    public void test04261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4261");
+            System.out.format("%n%s%n", "RegressionTest8.test04261");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("-1 1-1 1-1 1-1 1-1 1-10.0a0.0-1 1-1 1-1 1-1 1-1 1-1", 31L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 31L + "'", long2 == 31L);
     }
 
     @Test
-    public void test4262() throws Throwable {
+    public void test04262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4262");
+            System.out.format("%n%s%n", "RegressionTest8.test04262");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4', 102, (-1));
@@ -3674,17 +3674,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4263() throws Throwable {
+    public void test04263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4263");
+            System.out.format("%n%s%n", "RegressionTest8.test04263");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min(8.0f, 14.0f, 8.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 8.0f + "'", float3 == 8.0f);
     }
 
     @Test
-    public void test4264() throws Throwable {
+    public void test04264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4264");
+            System.out.format("%n%s%n", "RegressionTest8.test04264");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -3710,9 +3710,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4265() throws Throwable {
+    public void test04265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4265");
+            System.out.format("%n%s%n", "RegressionTest8.test04265");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4', 102, (-1));
@@ -3741,25 +3741,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4266() throws Throwable {
+    public void test04266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4266");
+            System.out.format("%n%s%n", "RegressionTest8.test04266");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1 1-1 1-1 1-1 1-1 1-10.00.0-1 1-1 1-1 1-1 1-1 1-1   ");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4267() throws Throwable {
+    public void test04267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4267");
+            System.out.format("%n%s%n", "RegressionTest8.test04267");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("100.0 10.0 -1.0100.0 10.0 -1.010");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4268() throws Throwable {
+    public void test04268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4268");
+            System.out.format("%n%s%n", "RegressionTest8.test04268");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -3782,17 +3782,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4269() throws Throwable {
+    public void test04269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4269");
+            System.out.format("%n%s%n", "RegressionTest8.test04269");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("                                      ");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4270() throws Throwable {
+    public void test04270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4270");
+            System.out.format("%n%s%n", "RegressionTest8.test04270");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("...                  ...");
@@ -3803,25 +3803,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4271() throws Throwable {
+    public void test04271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4271");
+            System.out.format("%n%s%n", "RegressionTest8.test04271");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          #-1 -1 100 10 -1.0 TRUE-1 -1 100 A#                                                                   # #", (short) 100);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 100 + "'", short2 == (short) 100);
     }
 
     @Test
-    public void test4272() throws Throwable {
+    public void test04272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4272");
+            System.out.format("%n%s%n", "RegressionTest8.test04272");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(0.0f, (float) 262, 45.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 262.0f + "'", float3 == 262.0f);
     }
 
     @Test
-    public void test4273() throws Throwable {
+    public void test04273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4273");
+            System.out.format("%n%s%n", "RegressionTest8.test04273");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -3848,17 +3848,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4274() throws Throwable {
+    public void test04274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4274");
+            System.out.format("%n%s%n", "RegressionTest8.test04274");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(63, 113, 52);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 52 + "'", int3 == 52);
     }
 
     @Test
-    public void test4275() throws Throwable {
+    public void test04275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4275");
+            System.out.format("%n%s%n", "RegressionTest8.test04275");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -3883,73 +3883,73 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4276() throws Throwable {
+    public void test04276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4276");
+            System.out.format("%n%s%n", "RegressionTest8.test04276");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(1432, 2572, 72);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 2572 + "'", int3 == 2572);
     }
 
     @Test
-    public void test4277() throws Throwable {
+    public void test04277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4277");
+            System.out.format("%n%s%n", "RegressionTest8.test04277");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("##########", 111);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 111 + "'", int2 == 111);
     }
 
     @Test
-    public void test4278() throws Throwable {
+    public void test04278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4278");
+            System.out.format("%n%s%n", "RegressionTest8.test04278");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("                     -14-140410");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4279() throws Throwable {
+    public void test04279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4279");
+            System.out.format("%n%s%n", "RegressionTest8.test04279");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(96, 72, 0);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 96 + "'", int3 == 96);
     }
 
     @Test
-    public void test4280() throws Throwable {
+    public void test04280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4280");
+            System.out.format("%n%s%n", "RegressionTest8.test04280");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 3, (float) 16, (float) 880L);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 880.0f + "'", float3 == 880.0f);
     }
 
     @Test
-    public void test4281() throws Throwable {
+    public void test04281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4281");
+            System.out.format("%n%s%n", "RegressionTest8.test04281");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.min((byte) 10, (byte) 10, (byte) 10);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 10 + "'", byte3 == (byte) 10);
     }
 
     @Test
-    public void test4282() throws Throwable {
+    public void test04282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4282");
+            System.out.format("%n%s%n", "RegressionTest8.test04282");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("hi!-1-110010-100.0a10.0a-1.0", (short) (byte) 0);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 0 + "'", short2 == (short) 0);
     }
 
     @Test
-    public void test4283() throws Throwable {
+    public void test04283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4283");
+            System.out.format("%n%s%n", "RegressionTest8.test04283");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("444444444444444444444444444444444444444444...     ...44444444444444444444444444444444444444444");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4284() throws Throwable {
+    public void test04284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4284");
+            System.out.format("%n%s%n", "RegressionTest8.test04284");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         int int6 = org.apache.commons.lang3.math.NumberUtils.max(intArray3);
@@ -3970,17 +3970,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4285() throws Throwable {
+    public void test04285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4285");
+            System.out.format("%n%s%n", "RegressionTest8.test04285");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(1297L, (long) 13, (long) 864);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 13L + "'", long3 == 13L);
     }
 
     @Test
-    public void test4286() throws Throwable {
+    public void test04286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4286");
+            System.out.format("%n%s%n", "RegressionTest8.test04286");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray3, 'a');
@@ -4004,25 +4004,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4287() throws Throwable {
+    public void test04287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4287");
+            System.out.format("%n%s%n", "RegressionTest8.test04287");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("  44444444  44444444  44444444  44444444 0#1#1#0#1#1", (byte) 1);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 1 + "'", byte2 == (byte) 1);
     }
 
     @Test
-    public void test4288() throws Throwable {
+    public void test04288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4288");
+            System.out.format("%n%s%n", "RegressionTest8.test04288");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1a1aaaaaaaaaaaaaaaaaaaaaaaa                                                    aaaaaaaaaaaaaaaaaaaaaaaa################################## 10 -1.0 true-1 -1 100", (double) 57L);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 57.0d + "'", double2 == 57.0d);
     }
 
     @Test
-    public void test4289() throws Throwable {
+    public void test04289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4289");
+            System.out.format("%n%s%n", "RegressionTest8.test04289");
         long[] longArray4 = new long[] { (-1L), (short) 0, 1L, (byte) 0 };
         long long5 = org.apache.commons.lang3.math.NumberUtils.min(longArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(longArray4, 'a');
@@ -4045,17 +4045,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4290() throws Throwable {
+    public void test04290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4290");
+            System.out.format("%n%s%n", "RegressionTest8.test04290");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.min((byte) 0, (byte) 0, (byte) -1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) -1 + "'", byte3 == (byte) -1);
     }
 
     @Test
-    public void test4291() throws Throwable {
+    public void test04291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4291");
+            System.out.format("%n%s%n", "RegressionTest8.test04291");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -4076,9 +4076,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4292() throws Throwable {
+    public void test04292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4292");
+            System.out.format("%n%s%n", "RegressionTest8.test04292");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -4109,9 +4109,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4293() throws Throwable {
+    public void test04293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4293");
+            System.out.format("%n%s%n", "RegressionTest8.test04293");
         long[] longArray5 = new long[] { (short) 100, 100L, 100, 10L, (short) 1 };
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray5, '4', 10, (-1));
         java.lang.String str11 = org.apache.commons.lang3.StringUtils.join(longArray5, 'a');
@@ -4135,9 +4135,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4294() throws Throwable {
+    public void test04294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4294");
+            System.out.format("%n%s%n", "RegressionTest8.test04294");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -4166,17 +4166,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4295() throws Throwable {
+    public void test04295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4295");
+            System.out.format("%n%s%n", "RegressionTest8.test04295");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 1, (short) (byte) 1, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 0 + "'", short3 == (short) 0);
     }
 
     @Test
-    public void test4296() throws Throwable {
+    public void test04296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4296");
+            System.out.format("%n%s%n", "RegressionTest8.test04296");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -4209,9 +4209,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4297() throws Throwable {
+    public void test04297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4297");
+            System.out.format("%n%s%n", "RegressionTest8.test04297");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
@@ -4236,49 +4236,49 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4298() throws Throwable {
+    public void test04298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4298");
+            System.out.format("%n%s%n", "RegressionTest8.test04298");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("                                                                   #A 001 1- 1-EURT 0.1- 01 001 1- 1-#", (float) 101097);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 101097.0f + "'", float2 == 101097.0f);
     }
 
     @Test
-    public void test4299() throws Throwable {
+    public void test04299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4299");
+            System.out.format("%n%s%n", "RegressionTest8.test04299");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("100.0410.04-1.0                                         -1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4300() throws Throwable {
+    public void test04300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4300");
+            System.out.format("%n%s%n", "RegressionTest8.test04300");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(3, 49, 169);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 3 + "'", int3 == 3);
     }
 
     @Test
-    public void test4301() throws Throwable {
+    public void test04301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4301");
+            System.out.format("%n%s%n", "RegressionTest8.test04301");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min(100, 0, 185);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test4302() throws Throwable {
+    public void test04302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4302");
+            System.out.format("%n%s%n", "RegressionTest8.test04302");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("           ##a#a#a###.#a52.###.#a52.###.#a52.###.#a52.###.#a52.###.#a52.###.#a52.###.#a52.###.#a52.###.#a5          .0a52.0          .0a52.0          .0a52.0          .0a52.0          .0a52.0       0#1#1.           ", (float) 5L);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 5.0f + "'", float2 == 5.0f);
     }
 
     @Test
-    public void test4303() throws Throwable {
+    public void test04303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4303");
+            System.out.format("%n%s%n", "RegressionTest8.test04303");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -4297,17 +4297,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4304() throws Throwable {
+    public void test04304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4304");
+            System.out.format("%n%s%n", "RegressionTest8.test04304");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1 -1 100 10 -1.0 true-1 -1 100 hi!-1 -1 100 10 -1.0 true-1 -1 100100.0410.04-1.0ru1ru1u--1u-1ru-1trueru1ru1u--1hi!ru1ru1u--1u-1ru-1trueru1ru1u--ru1ru1u--1u-1ru", (double) 101);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 101.0d + "'", double2 == 101.0d);
     }
 
     @Test
-    public void test4305() throws Throwable {
+    public void test04305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4305");
+            System.out.format("%n%s%n", "RegressionTest8.test04305");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("10#1#10...");
@@ -4318,9 +4318,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4306() throws Throwable {
+    public void test04306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4306");
+            System.out.format("%n%s%n", "RegressionTest8.test04306");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -4339,9 +4339,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4307() throws Throwable {
+    public void test04307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4307");
+            System.out.format("%n%s%n", "RegressionTest8.test04307");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("aaaaaaaaaaaaaaaaaaaa0.25a0.1-aaaaaaaaaaaaaaaaaaa0011-1-eurt0.1-01");
@@ -4352,17 +4352,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4308() throws Throwable {
+    public void test04308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4308");
+            System.out.format("%n%s%n", "RegressionTest8.test04308");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("AAAAA AAAA -AAA141004-1AAAAA AAAA -AAA141004-110A5210A5297AAAAA AAAA -AAA141004-1AAAAA AAAA -AAA141004-1");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4309() throws Throwable {
+    public void test04309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4309");
+            System.out.format("%n%s%n", "RegressionTest8.test04309");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -4385,25 +4385,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4310() throws Throwable {
+    public void test04310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4310");
+            System.out.format("%n%s%n", "RegressionTest8.test04310");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(169L, 5L, (long) 88);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 5L + "'", long3 == 5L);
     }
 
     @Test
-    public void test4311() throws Throwable {
+    public void test04311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4311");
+            System.out.format("%n%s%n", "RegressionTest8.test04311");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber(" 10 -1.0 true-1 -1 100 -1 ");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4312() throws Throwable {
+    public void test04312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4312");
+            System.out.format("%n%s%n", "RegressionTest8.test04312");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray3, 'a');
@@ -4426,9 +4426,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4313() throws Throwable {
+    public void test04313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4313");
+            System.out.format("%n%s%n", "RegressionTest8.test04313");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Double double1 = org.apache.commons.lang3.math.NumberUtils.createDouble(" aaaaaaaaaaaaa");
@@ -4439,17 +4439,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4314() throws Throwable {
+    public void test04314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4314");
+            System.out.format("%n%s%n", "RegressionTest8.test04314");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("10.0a10.0a102.0", (long) 47);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 47L + "'", long2 == 47L);
     }
 
     @Test
-    public void test4315() throws Throwable {
+    public void test04315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4315");
+            System.out.format("%n%s%n", "RegressionTest8.test04315");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -4470,17 +4470,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4316() throws Throwable {
+    public void test04316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4316");
+            System.out.format("%n%s%n", "RegressionTest8.test04316");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("-14-141004104-1.04true-14-141004a444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444-1a1", 0.0f);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
     }
 
     @Test
-    public void test4317() throws Throwable {
+    public void test04317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4317");
+            System.out.format("%n%s%n", "RegressionTest8.test04317");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("52.0-1A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A0#-1 -1 1-1 -1 100 10 -1.0 TRUE-1 -1 100-1 -1 100 10 -1.0 TRUE-1 -1 100 1-1 -1 100 10 -1.0 TRUE-1 -1 100 -1.-1 -1 100 10 -1.0 TRUE-1 -1 100 true-1 -1 1-1 -1 100 10 -1.0 TRUE-1 -1 100-1 -1 100 10 -1.0 TRUE-1 -1 100                                                                                              -1152.0-1A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A52.0-10A52.0-1.0A52.0-1.0A52.0-1.0A0");
@@ -4491,17 +4491,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4318() throws Throwable {
+    public void test04318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4318");
+            System.out.format("%n%s%n", "RegressionTest8.test04318");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("-1.0#52.0", (byte) 100);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 100 + "'", byte2 == (byte) 100);
     }
 
     @Test
-    public void test4319() throws Throwable {
+    public void test04319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4319");
+            System.out.format("%n%s%n", "RegressionTest8.test04319");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -4524,9 +4524,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4320() throws Throwable {
+    public void test04320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4320");
+            System.out.format("%n%s%n", "RegressionTest8.test04320");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -4554,25 +4554,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4321() throws Throwable {
+    public void test04321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4321");
+            System.out.format("%n%s%n", "RegressionTest8.test04321");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", (byte) 10);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 10 + "'", byte2 == (byte) 10);
     }
 
     @Test
-    public void test4322() throws Throwable {
+    public void test04322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4322");
+            System.out.format("%n%s%n", "RegressionTest8.test04322");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("##1#1-                                                                                             # 001 1- 1-eurt ");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4323() throws Throwable {
+    public void test04323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4323");
+            System.out.format("%n%s%n", "RegressionTest8.test04323");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -4599,9 +4599,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4324() throws Throwable {
+    public void test04324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4324");
+            System.out.format("%n%s%n", "RegressionTest8.test04324");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("  -1.0 100.0 1.0 -1.0 10 -1.0 true-1 -1 100 10 -1.0 true-1 -1 100 10 -1...   ");
@@ -4612,25 +4612,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4325() throws Throwable {
+    public void test04325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4325");
+            System.out.format("%n%s%n", "RegressionTest8.test04325");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("#-1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1 100 A#                                                                   ");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4326() throws Throwable {
+    public void test04326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4326");
+            System.out.format("%n%s%n", "RegressionTest8.test04326");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 859.0f, 1151.0d, (double) 102.0f);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 1151.0d + "'", double3 == 1151.0d);
     }
 
     @Test
-    public void test4327() throws Throwable {
+    public void test04327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4327");
+            System.out.format("%n%s%n", "RegressionTest8.test04327");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -4662,17 +4662,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4328() throws Throwable {
+    public void test04328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4328");
+            System.out.format("%n%s%n", "RegressionTest8.test04328");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min((float) 2881L, 40.0f, (float) 103);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 40.0f + "'", float3 == 40.0f);
     }
 
     @Test
-    public void test4329() throws Throwable {
+    public void test04329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4329");
+            System.out.format("%n%s%n", "RegressionTest8.test04329");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("#######################################################################################################-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1");
@@ -4683,9 +4683,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4330() throws Throwable {
+    public void test04330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4330");
+            System.out.format("%n%s%n", "RegressionTest8.test04330");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(shortArray4, '4');
@@ -4715,17 +4715,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4331() throws Throwable {
+    public void test04331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4331");
+            System.out.format("%n%s%n", "RegressionTest8.test04331");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 0, (short) 97, (short) 97);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 0 + "'", short3 == (short) 0);
     }
 
     @Test
-    public void test4332() throws Throwable {
+    public void test04332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4332");
+            System.out.format("%n%s%n", "RegressionTest8.test04332");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray6, '4');
@@ -4750,25 +4750,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4333() throws Throwable {
+    public void test04333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4333");
+            System.out.format("%n%s%n", "RegressionTest8.test04333");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("-#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###  -#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###  -#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4334() throws Throwable {
+    public void test04334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4334");
+            System.out.format("%n%s%n", "RegressionTest8.test04334");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 10, (short) (byte) 10, (short) (byte) 1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 10 + "'", short3 == (short) 10);
     }
 
     @Test
-    public void test4335() throws Throwable {
+    public void test04335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4335");
+            System.out.format("%n%s%n", "RegressionTest8.test04335");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Double double1 = org.apache.commons.lang3.math.NumberUtils.createDouble("-#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###  -#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###  -#A#AAAAAAAAAAAAAAAAAAAAAAAA####################################################AAAAAAAAAAAAAAAAAAAAAAAA#################################### #-## #TRUE-##-###");
@@ -4779,25 +4779,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4336() throws Throwable {
+    public void test04336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4336");
+            System.out.format("%n%s%n", "RegressionTest8.test04336");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("           -1aa1-a1-a1-a1-a1-a1-a1-a1-a1-a1-0");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4337() throws Throwable {
+    public void test04337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4337");
+            System.out.format("%n%s%n", "RegressionTest8.test04337");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(67, 12, (int) (short) 52);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 67 + "'", int3 == 67);
     }
 
     @Test
-    public void test4338() throws Throwable {
+    public void test04338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4338");
+            System.out.format("%n%s%n", "RegressionTest8.test04338");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -4822,9 +4822,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4339() throws Throwable {
+    public void test04339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4339");
+            System.out.format("%n%s%n", "RegressionTest8.test04339");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.max(shortArray2);
@@ -4839,17 +4839,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4340() throws Throwable {
+    public void test04340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4340");
+            System.out.format("%n%s%n", "RegressionTest8.test04340");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max((byte) 0, (byte) 0, (byte) 0);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 0 + "'", byte3 == (byte) 0);
     }
 
     @Test
-    public void test4341() throws Throwable {
+    public void test04341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4341");
+            System.out.format("%n%s%n", "RegressionTest8.test04341");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -4872,17 +4872,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4342() throws Throwable {
+    public void test04342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4342");
+            System.out.format("%n%s%n", "RegressionTest8.test04342");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("a4#4a100.0 10.0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4343() throws Throwable {
+    public void test04343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4343");
+            System.out.format("%n%s%n", "RegressionTest8.test04343");
         double[] doubleArray4 = new double[] { 35L, 23, 'a', 52.0d };
         double double5 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
         double double6 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray4);
@@ -4899,25 +4899,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4344() throws Throwable {
+    public void test04344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4344");
+            System.out.format("%n%s%n", "RegressionTest8.test04344");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("-1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4345() throws Throwable {
+    public void test04345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4345");
+            System.out.format("%n%s%n", "RegressionTest8.test04345");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat(" ", (float) 75);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 75.0f + "'", float2 == 75.0f);
     }
 
     @Test
-    public void test4346() throws Throwable {
+    public void test04346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4346");
+            System.out.format("%n%s%n", "RegressionTest8.test04346");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("-1#-1#0#10");
@@ -4928,9 +4928,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4347() throws Throwable {
+    public void test04347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4347");
+            System.out.format("%n%s%n", "RegressionTest8.test04347");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -4958,9 +4958,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4348() throws Throwable {
+    public void test04348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4348");
+            System.out.format("%n%s%n", "RegressionTest8.test04348");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.max(shortArray2);
@@ -4979,17 +4979,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4349() throws Throwable {
+    public void test04349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4349");
+            System.out.format("%n%s%n", "RegressionTest8.test04349");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong(" #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a #");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4350() throws Throwable {
+    public void test04350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4350");
+            System.out.format("%n%s%n", "RegressionTest8.test04350");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger("0 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 100 . 00 1 1 10");
@@ -5000,41 +5000,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4351() throws Throwable {
+    public void test04351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4351");
+            System.out.format("%n%s%n", "RegressionTest8.test04351");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("TRUE-1 -1 100 0.0##########################################-1.0A52.0");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4352() throws Throwable {
+    public void test04352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4352");
+            System.out.format("%n%s%n", "RegressionTest8.test04352");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             -1a1.0a52.                                                                                             ");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4353() throws Throwable {
+    public void test04353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4353");
+            System.out.format("%n%s%n", "RegressionTest8.test04353");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 32L, 53.0f, (float) 15);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 53.0f + "'", float3 == 53.0f);
     }
 
     @Test
-    public void test4354() throws Throwable {
+    public void test04354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4354");
+            System.out.format("%n%s%n", "RegressionTest8.test04354");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min(0.0f, (float) 489, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
     }
 
     @Test
-    public void test4355() throws Throwable {
+    public void test04355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4355");
+            System.out.format("%n%s%n", "RegressionTest8.test04355");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -5066,17 +5066,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4356() throws Throwable {
+    public void test04356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4356");
+            System.out.format("%n%s%n", "RegressionTest8.test04356");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("aaaaaaaaaaaaaaaaaaa", (short) 100);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 100 + "'", short2 == (short) 100);
     }
 
     @Test
-    public void test4357() throws Throwable {
+    public void test04357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4357");
+            System.out.format("%n%s%n", "RegressionTest8.test04357");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         int int6 = org.apache.commons.lang3.math.NumberUtils.max(intArray3);
@@ -5095,33 +5095,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4358() throws Throwable {
+    public void test04358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4358");
+            System.out.format("%n%s%n", "RegressionTest8.test04358");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         #-1 -1 100 10 -1.0 true-1 -1 100 a                                                                                             -1a1                         ", (byte) 10);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 10 + "'", byte2 == (byte) 10);
     }
 
     @Test
-    public void test4359() throws Throwable {
+    public void test04359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4359");
+            System.out.format("%n%s%n", "RegressionTest8.test04359");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(26, 0, 0);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 26 + "'", int3 == 26);
     }
 
     @Test
-    public void test4360() throws Throwable {
+    public void test04360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4360");
+            System.out.format("%n%s%n", "RegressionTest8.test04360");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) (byte) -1, (short) 52, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -1 + "'", short3 == (short) -1);
     }
 
     @Test
-    public void test4361() throws Throwable {
+    public void test04361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4361");
+            System.out.format("%n%s%n", "RegressionTest8.test04361");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(floatArray2, '#', (int) (short) 100, (int) (byte) -1);
@@ -5138,9 +5138,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4362() throws Throwable {
+    public void test04362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4362");
+            System.out.format("%n%s%n", "RegressionTest8.test04362");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("                                                                                            a-a1aaa1aa");
@@ -5151,17 +5151,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4363() throws Throwable {
+    public void test04363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4363");
+            System.out.format("%n%s%n", "RegressionTest8.test04363");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(4141410L, (long) 80, (long) 35);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 35L + "'", long3 == 35L);
     }
 
     @Test
-    public void test4364() throws Throwable {
+    public void test04364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4364");
+            System.out.format("%n%s%n", "RegressionTest8.test04364");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -5188,9 +5188,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4365() throws Throwable {
+    public void test04365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4365");
+            System.out.format("%n%s%n", "RegressionTest8.test04365");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         java.lang.String str9 = org.apache.commons.lang3.StringUtils.join(longArray6, '4');
@@ -5209,17 +5209,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4366() throws Throwable {
+    public void test04366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4366");
+            System.out.format("%n%s%n", "RegressionTest8.test04366");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("0.25a0.1-A   44444444444444444444444444444444##########A    ", (double) 5L);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 5.0d + "'", double2 == 5.0d);
     }
 
     @Test
-    public void test4367() throws Throwable {
+    public void test04367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4367");
+            System.out.format("%n%s%n", "RegressionTest8.test04367");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray3, 'a');
@@ -5240,9 +5240,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4368() throws Throwable {
+    public void test04368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4368");
+            System.out.format("%n%s%n", "RegressionTest8.test04368");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Double double1 = org.apache.commons.lang3.math.NumberUtils.createDouble("100.0410.04Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10041aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -1 -1 100 10 -1.0 TRUE-1 -1 100 A                                                                                             -1A");
@@ -5253,9 +5253,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4369() throws Throwable {
+    public void test04369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4369");
+            System.out.format("%n%s%n", "RegressionTest8.test04369");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -5276,17 +5276,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4370() throws Throwable {
+    public void test04370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4370");
+            System.out.format("%n%s%n", "RegressionTest8.test04370");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("####################97##00##0#0#0##02");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4371() throws Throwable {
+    public void test04371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4371");
+            System.out.format("%n%s%n", "RegressionTest8.test04371");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(floatArray2, '#');
@@ -5301,25 +5301,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4372() throws Throwable {
+    public void test04372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4372");
+            System.out.format("%n%s%n", "RegressionTest8.test04372");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 10, (short) (byte) 1, (short) 100);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4373() throws Throwable {
+    public void test04373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4373");
+            System.out.format("%n%s%n", "RegressionTest8.test04373");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min(1098504.0f, 97.0f, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
     }
 
     @Test
-    public void test4374() throws Throwable {
+    public void test04374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4374");
+            System.out.format("%n%s%n", "RegressionTest8.test04374");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.max(longArray6);
@@ -5338,9 +5338,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4375() throws Throwable {
+    public void test04375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4375");
+            System.out.format("%n%s%n", "RegressionTest8.test04375");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("a4#4a100.010.0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -5351,9 +5351,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4376() throws Throwable {
+    public void test04376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4376");
+            System.out.format("%n%s%n", "RegressionTest8.test04376");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -5374,9 +5374,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4377() throws Throwable {
+    public void test04377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4377");
+            System.out.format("%n%s%n", "RegressionTest8.test04377");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -5402,9 +5402,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4378() throws Throwable {
+    public void test04378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4378");
+            System.out.format("%n%s%n", "RegressionTest8.test04378");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -5431,33 +5431,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4379() throws Throwable {
+    public void test04379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4379");
+            System.out.format("%n%s%n", "RegressionTest8.test04379");
         int int2 = org.apache.commons.lang3.math.NumberUtils.toInt("##", 211);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 211 + "'", int2 == 211);
     }
 
     @Test
-    public void test4380() throws Throwable {
+    public void test04380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4380");
+            System.out.format("%n%s%n", "RegressionTest8.test04380");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("10a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a97#########################################-1.0a52-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1....");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4381() throws Throwable {
+    public void test04381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4381");
+            System.out.format("%n%s%n", "RegressionTest8.test04381");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4382() throws Throwable {
+    public void test04382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4382");
+            System.out.format("%n%s%n", "RegressionTest8.test04382");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -5476,9 +5476,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4383() throws Throwable {
+    public void test04383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4383");
+            System.out.format("%n%s%n", "RegressionTest8.test04383");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -5502,9 +5502,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4384() throws Throwable {
+    public void test04384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4384");
+            System.out.format("%n%s%n", "RegressionTest8.test04384");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -5534,25 +5534,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4385() throws Throwable {
+    public void test04385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4385");
+            System.out.format("%n%s%n", "RegressionTest8.test04385");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat("aa#aa#aa#aa#aa#aa#aa#aa#aa#", (float) 859);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 859.0f + "'", float2 == 859.0f);
     }
 
     @Test
-    public void test4386() throws Throwable {
+    public void test04386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4386");
+            System.out.format("%n%s%n", "RegressionTest8.test04386");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 001 1- 1-EURT 0.1- 01 ", (byte) 1);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 1 + "'", byte2 == (byte) 1);
     }
 
     @Test
-    public void test4387() throws Throwable {
+    public void test04387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4387");
+            System.out.format("%n%s%n", "RegressionTest8.test04387");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -5575,9 +5575,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4388() throws Throwable {
+    public void test04388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4388");
+            System.out.format("%n%s%n", "RegressionTest8.test04388");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -5605,9 +5605,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4389() throws Throwable {
+    public void test04389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4389");
+            System.out.format("%n%s%n", "RegressionTest8.test04389");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("# aa #a #a #a #a #a #a #a #a #a #");
@@ -5618,9 +5618,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4390() throws Throwable {
+    public void test04390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4390");
+            System.out.format("%n%s%n", "RegressionTest8.test04390");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -5643,9 +5643,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4391() throws Throwable {
+    public void test04391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4391");
+            System.out.format("%n%s%n", "RegressionTest8.test04391");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("-rr-rrruurrur-r.urTRUE-rr-rrruu52.0                                                     -1.");
@@ -5656,9 +5656,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4392() throws Throwable {
+    public void test04392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4392");
+            System.out.format("%n%s%n", "RegressionTest8.test04392");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -5683,17 +5683,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4393() throws Throwable {
+    public void test04393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4393");
+            System.out.format("%n%s%n", "RegressionTest8.test04393");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min(24.0d, 101097.0d, (double) 1458);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 24.0d + "'", double3 == 24.0d);
     }
 
     @Test
-    public void test4394() throws Throwable {
+    public void test04394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4394");
+            System.out.format("%n%s%n", "RegressionTest8.test04394");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -5718,33 +5718,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4395() throws Throwable {
+    public void test04395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4395");
+            System.out.format("%n%s%n", "RegressionTest8.test04395");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000-10-101000100-1100true-10-101000");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4396() throws Throwable {
+    public void test04396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4396");
+            System.out.format("%n%s%n", "RegressionTest8.test04396");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("-1#-1-1#-1AAAAAAAAAAAAAAAAAAAAAAAA");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4397() throws Throwable {
+    public void test04397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4397");
+            System.out.format("%n%s%n", "RegressionTest8.test04397");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 185.0f, 95.0d, 9.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 185.0d + "'", double3 == 185.0d);
     }
 
     @Test
-    public void test4398() throws Throwable {
+    public void test04398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4398");
+            System.out.format("%n%s%n", "RegressionTest8.test04398");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.max(intArray2);
@@ -5765,33 +5765,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4399() throws Throwable {
+    public void test04399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4399");
+            System.out.format("%n%s%n", "RegressionTest8.test04399");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("-1.0#52.0-1.0#52.0-1.0#52.0-...###############");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4400() throws Throwable {
+    public void test04400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4400");
+            System.out.format("%n%s%n", "RegressionTest8.test04400");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("35.0 23.0 97.0 52.0", (long) 126);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 126L + "'", long2 == 126L);
     }
 
     @Test
-    public void test4401() throws Throwable {
+    public void test04401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4401");
+            System.out.format("%n%s%n", "RegressionTest8.test04401");
         short short3 = org.apache.commons.lang3.math.NumberUtils.max((short) (byte) 10, (short) (byte) 100, (short) -1);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 100 + "'", short3 == (short) 100);
     }
 
     @Test
-    public void test4402() throws Throwable {
+    public void test04402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4402");
+            System.out.format("%n%s%n", "RegressionTest8.test04402");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -5819,9 +5819,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4403() throws Throwable {
+    public void test04403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4403");
+            System.out.format("%n%s%n", "RegressionTest8.test04403");
         long[] longArray4 = new long[] { (-1L), (short) 0, 1L, (byte) 0 };
         long long5 = org.apache.commons.lang3.math.NumberUtils.min(longArray4);
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(longArray4, 'a');
@@ -5844,17 +5844,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4404() throws Throwable {
+    public void test04404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4404");
+            System.out.format("%n%s%n", "RegressionTest8.test04404");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min(68.0f, (float) 0, (float) 50L);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
     }
 
     @Test
-    public void test4405() throws Throwable {
+    public void test04405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4405");
+            System.out.format("%n%s%n", "RegressionTest8.test04405");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("a#a#a#a#a-1a0a1a0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0-1a0a1a0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0-1a0a1a0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0-1a0a1a0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0a510a-1.0-1.0#a#a#a#a#a#a#a#a#a#a#a#a#aa#a#a#a#a#a#a#a#a#");
@@ -5865,33 +5865,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4406() throws Throwable {
+    public void test04406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4406");
+            System.out.format("%n%s%n", "RegressionTest8.test04406");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("aaaaaaaa 001 1- 1-eurt 0.1- 01 001 1- 1-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa14001aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 001 1- 1-eurt 0.1- 01 001 1- 1-01a0a001a1a01-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4407() throws Throwable {
+    public void test04407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4407");
+            System.out.format("%n%s%n", "RegressionTest8.test04407");
         int int3 = org.apache.commons.lang3.math.NumberUtils.min((int) (short) 100, 3, 0);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test4408() throws Throwable {
+    public void test04408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4408");
+            System.out.format("%n%s%n", "RegressionTest8.test04408");
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.min((byte) -1, (byte) 100, (byte) -1);
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) -1 + "'", byte3 == (byte) -1);
     }
 
     @Test
-    public void test4409() throws Throwable {
+    public void test04409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4409");
+            System.out.format("%n%s%n", "RegressionTest8.test04409");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("       00  0   .0 true       00 0.0##########...");
@@ -5902,9 +5902,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4410() throws Throwable {
+    public void test04410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4410");
+            System.out.format("%n%s%n", "RegressionTest8.test04410");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("25a0.          0.25a0.          0.25a0.          0.25a0.          0.25a0.          ");
@@ -5915,9 +5915,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4411() throws Throwable {
+    public void test04411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4411");
+            System.out.format("%n%s%n", "RegressionTest8.test04411");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("hi...-1a0a1a0-1.");
@@ -5928,17 +5928,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4412() throws Throwable {
+    public void test04412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4412");
+            System.out.format("%n%s%n", "RegressionTest8.test04412");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("########################");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4413() throws Throwable {
+    public void test04413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4413");
+            System.out.format("%n%s%n", "RegressionTest8.test04413");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -5961,41 +5961,41 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4414() throws Throwable {
+    public void test04414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4414");
+            System.out.format("%n%s%n", "RegressionTest8.test04414");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((double) 2881, (double) 132.0f, 1.0410497104104971E123d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 132.0d + "'", double3 == 132.0d);
     }
 
     @Test
-    public void test4415() throws Throwable {
+    public void test04415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4415");
+            System.out.format("%n%s%n", "RegressionTest8.test04415");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(263, 15, 1);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 263 + "'", int3 == 263);
     }
 
     @Test
-    public void test4416() throws Throwable {
+    public void test04416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4416");
+            System.out.format("%n%s%n", "RegressionTest8.test04416");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("-1404140#-1#-1#100#10#-1.0#true-1#-1#100#a  44444444  44444444  44444444  44444444 0#1#1#0#1#1");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4417() throws Throwable {
+    public void test04417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4417");
+            System.out.format("%n%s%n", "RegressionTest8.test04417");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(29.0d, (double) 971111, 2.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 971111.0d + "'", double3 == 971111.0d);
     }
 
     @Test
-    public void test4418() throws Throwable {
+    public void test04418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4418");
+            System.out.format("%n%s%n", "RegressionTest8.test04418");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Integer int1 = org.apache.commons.lang3.math.NumberUtils.createInteger(".0A52.0   -1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52.0-1.0#52....-1.0#52.0-1...0          .0A52.0          .0A52");
@@ -6006,25 +6006,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4419() throws Throwable {
+    public void test04419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4419");
+            System.out.format("%n%s%n", "RegressionTest8.test04419");
         java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("4444444444444444");
         org.junit.Assert.assertNotNull(bigDecimal1);
     }
 
     @Test
-    public void test4420() throws Throwable {
+    public void test04420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4420");
+            System.out.format("%n%s%n", "RegressionTest8.test04420");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("class[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA aclass[Ljava.lang.String;class[Ljava.lang.String;class[Ljava.lang.String;.0#52.0-1.0#A aA aA aA aA aA aA aA aA aA a");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4421() throws Throwable {
+    public void test04421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4421");
+            System.out.format("%n%s%n", "RegressionTest8.test04421");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         int int5 = org.apache.commons.lang3.math.NumberUtils.min(intArray2);
@@ -6043,9 +6043,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4422() throws Throwable {
+    public void test04422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4422");
+            System.out.format("%n%s%n", "RegressionTest8.test04422");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Long long1 = org.apache.commons.lang3.math.NumberUtils.createLong("aaaaaaaaaaaaaaaa 001 1- 1-eurt 0.1- 01 001 1- 1-01a0a001a1a01-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0                                   97111111");
@@ -6056,9 +6056,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4423() throws Throwable {
+    public void test04423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4423");
+            System.out.format("%n%s%n", "RegressionTest8.test04423");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Double double1 = org.apache.commons.lang3.math.NumberUtils.createDouble("141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l141-class [Ljava.laa4#4ava.l");
@@ -6069,17 +6069,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4424() throws Throwable {
+    public void test04424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4424");
+            System.out.format("%n%s%n", "RegressionTest8.test04424");
         long long2 = org.apache.commons.lang3.math.NumberUtils.toLong("...A52.0-1A...", 0L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 0L + "'", long2 == 0L);
     }
 
     @Test
-    public void test4425() throws Throwable {
+    public void test04425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4425");
+            System.out.format("%n%s%n", "RegressionTest8.test04425");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -6098,9 +6098,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4426() throws Throwable {
+    public void test04426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4426");
+            System.out.format("%n%s%n", "RegressionTest8.test04426");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -6121,17 +6121,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4427() throws Throwable {
+    public void test04427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4427");
+            System.out.format("%n%s%n", "RegressionTest8.test04427");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("...                                             ...100.0 10.0 -1.0100.0 10.0 -1.010aaaaaaaaaA4#4A");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4428() throws Throwable {
+    public void test04428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4428");
+            System.out.format("%n%s%n", "RegressionTest8.test04428");
         int[] intArray2 = new int[] { (-1), (byte) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(intArray2, 'a');
@@ -6150,9 +6150,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4429() throws Throwable {
+    public void test04429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4429");
+            System.out.format("%n%s%n", "RegressionTest8.test04429");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -6181,33 +6181,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4430() throws Throwable {
+    public void test04430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4430");
+            System.out.format("%n%s%n", "RegressionTest8.test04430");
         byte byte2 = org.apache.commons.lang3.math.NumberUtils.toByte("10410497141004-1", (byte) 10);
         org.junit.Assert.assertTrue("'" + byte2 + "' != '" + (byte) 10 + "'", byte2 == (byte) 10);
     }
 
     @Test
-    public void test4431() throws Throwable {
+    public void test04431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4431");
+            System.out.format("%n%s%n", "RegressionTest8.test04431");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("               35.0a23.0a97.0a52", (double) 1);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 1.0d + "'", double2 == 1.0d);
     }
 
     @Test
-    public void test4432() throws Throwable {
+    public void test04432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4432");
+            System.out.format("%n%s%n", "RegressionTest8.test04432");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("###.0-1.0A52.0-1");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4433() throws Throwable {
+    public void test04433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4433");
+            System.out.format("%n%s%n", "RegressionTest8.test04433");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
@@ -6228,25 +6228,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4434() throws Throwable {
+    public void test04434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4434");
+            System.out.format("%n%s%n", "RegressionTest8.test04434");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("a4#a4#a4#a4#a4-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0-1a0a1a0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0a52.0-1.0#a4#a4#a4#a4#a4#a4#a4#a4#a4#a4#a4#a4#aa4#a4#a4#a4#a4#a4#a4#a4#a4#10a10a97");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4435() throws Throwable {
+    public void test04435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4435");
+            System.out.format("%n%s%n", "RegressionTest8.test04435");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("-1.0A52");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4436() throws Throwable {
+    public void test04436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4436");
+            System.out.format("%n%s%n", "RegressionTest8.test04436");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger1 = org.apache.commons.lang3.math.NumberUtils.createBigInteger("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -6257,9 +6257,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4437() throws Throwable {
+    public void test04437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4437");
+            System.out.format("%n%s%n", "RegressionTest8.test04437");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("#a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #a #a #a #a #a #a #a #a #a # #");
@@ -6270,33 +6270,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4438() throws Throwable {
+    public void test04438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4438");
+            System.out.format("%n%s%n", "RegressionTest8.test04438");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1 1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4439() throws Throwable {
+    public void test04439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4439");
+            System.out.format("%n%s%n", "RegressionTest8.test04439");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(0.0d, (double) 386, (double) 66);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 386.0d + "'", double3 == 386.0d);
     }
 
     @Test
-    public void test4440() throws Throwable {
+    public void test04440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4440");
+            System.out.format("%n%s%n", "RegressionTest8.test04440");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("-14-140410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004100410041004");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4441() throws Throwable {
+    public void test04441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4441");
+            System.out.format("%n%s%n", "RegressionTest8.test04441");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -6319,17 +6319,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4442() throws Throwable {
+    public void test04442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4442");
+            System.out.format("%n%s%n", "RegressionTest8.test04442");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("##        ", (short) 1);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 1 + "'", short2 == (short) 1);
     }
 
     @Test
-    public void test4443() throws Throwable {
+    public void test04443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4443");
+            System.out.format("%n%s%n", "RegressionTest8.test04443");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("#-1 -1 100 10 -1.0 TRUE-1 -1 100 A# # a                                          44a4aaaaaaaaaaaaaaaaaaaaaaaa                                                    aaaaaaaaaaaaaaaaaaaaaaaa");
@@ -6340,9 +6340,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4444() throws Throwable {
+    public void test04444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4444");
+            System.out.format("%n%s%n", "RegressionTest8.test04444");
         double[] doubleArray4 = new double[] { 35L, 23, 'a', 52.0d };
         double double5 = org.apache.commons.lang3.math.NumberUtils.min(doubleArray4);
         double double6 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray4);
@@ -6359,17 +6359,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4445() throws Throwable {
+    public void test04445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4445");
+            System.out.format("%n%s%n", "RegressionTest8.test04445");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("A aA aA aA aA aA aA aA aA aA");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4446() throws Throwable {
+    public void test04446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4446");
+            System.out.format("%n%s%n", "RegressionTest8.test04446");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Float float1 = org.apache.commons.lang3.math.NumberUtils.createFloat("a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0A.0a52.0");
@@ -6380,65 +6380,65 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4447() throws Throwable {
+    public void test04447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4447");
+            System.out.format("%n%s%n", "RegressionTest8.test04447");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble("0-", (double) 68);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 68.0d + "'", double2 == 68.0d);
     }
 
     @Test
-    public void test4448() throws Throwable {
+    public void test04448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4448");
+            System.out.format("%n%s%n", "RegressionTest8.test04448");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 52, (short) 100, (short) 0);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) 0 + "'", short3 == (short) 0);
     }
 
     @Test
-    public void test4449() throws Throwable {
+    public void test04449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4449");
+            System.out.format("%n%s%n", "RegressionTest8.test04449");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("#############hi!###############################");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4450() throws Throwable {
+    public void test04450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4450");
+            System.out.format("%n%s%n", "RegressionTest8.test04450");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("aaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4451() throws Throwable {
+    public void test04451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4451");
+            System.out.format("%n%s%n", "RegressionTest8.test04451");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa10a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a9710a10a97#########################################-1.0a52aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4452() throws Throwable {
+    public void test04452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4452");
+            System.out.format("%n%s%n", "RegressionTest8.test04452");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("AAAAAAAAA-AAA141004-1AAAAAAAAA-AAA141004-110a5210a5297AAAAAAAAA-AAA141004-1AAAAAAAAA-AAA141004-1");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4453() throws Throwable {
+    public void test04453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4453");
+            System.out.format("%n%s%n", "RegressionTest8.test04453");
         float float3 = org.apache.commons.lang3.math.NumberUtils.min(0.0f, (float) 48L, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
     }
 
     @Test
-    public void test4454() throws Throwable {
+    public void test04454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4454");
+            System.out.format("%n%s%n", "RegressionTest8.test04454");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         java.lang.String str8 = org.apache.commons.lang3.StringUtils.join(byteArray5, '#');
@@ -6455,33 +6455,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4455() throws Throwable {
+    public void test04455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4455");
+            System.out.format("%n%s%n", "RegressionTest8.test04455");
         double double3 = org.apache.commons.lang3.math.NumberUtils.max((double) 31, (double) 13L, (double) '#');
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 35.0d + "'", double3 == 35.0d);
     }
 
     @Test
-    public void test4456() throws Throwable {
+    public void test04456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4456");
+            System.out.format("%n%s%n", "RegressionTest8.test04456");
         double double2 = org.apache.commons.lang3.math.NumberUtils.toDouble(" 10 -1.0 TRUE-1 -1 100 A#                                                                   # #", 0.0d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
-    public void test4457() throws Throwable {
+    public void test04457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4457");
+            System.out.format("%n%s%n", "RegressionTest8.test04457");
         long long3 = org.apache.commons.lang3.math.NumberUtils.min(0L, (long) (short) 0, (long) 89);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 0L + "'", long3 == 0L);
     }
 
     @Test
-    public void test4458() throws Throwable {
+    public void test04458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4458");
+            System.out.format("%n%s%n", "RegressionTest8.test04458");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(doubleArray3, 'a');
@@ -6511,33 +6511,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4459() throws Throwable {
+    public void test04459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4459");
+            System.out.format("%n%s%n", "RegressionTest8.test04459");
         short short3 = org.apache.commons.lang3.math.NumberUtils.min((short) 97, (short) -1, (short) 97);
         org.junit.Assert.assertTrue("'" + short3 + "' != '" + (short) -1 + "'", short3 == (short) -1);
     }
 
     @Test
-    public void test4460() throws Throwable {
+    public void test04460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4460");
+            System.out.format("%n%s%n", "RegressionTest8.test04460");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isNumber("197101097101097101097101097101097101097101097101097101097101097");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
     @Test
-    public void test4461() throws Throwable {
+    public void test04461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4461");
+            System.out.format("%n%s%n", "RegressionTest8.test04461");
         double double1 = org.apache.commons.lang3.math.NumberUtils.toDouble("-1404140#-1 -1 100 10 -1.0 true-1 -1 100 a");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
     @Test
-    public void test4462() throws Throwable {
+    public void test04462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4462");
+            System.out.format("%n%s%n", "RegressionTest8.test04462");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -6562,9 +6562,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4463() throws Throwable {
+    public void test04463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4463");
+            System.out.format("%n%s%n", "RegressionTest8.test04463");
         float[] floatArray2 = new float[] { 0L, 0 };
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
         float float4 = org.apache.commons.lang3.math.NumberUtils.max(floatArray2);
@@ -6585,9 +6585,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4464() throws Throwable {
+    public void test04464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4464");
+            System.out.format("%n%s%n", "RegressionTest8.test04464");
         short[] shortArray2 = new short[] { (byte) 100, (short) 1 };
         java.lang.String str4 = org.apache.commons.lang3.StringUtils.join(shortArray2, '4');
         short short5 = org.apache.commons.lang3.math.NumberUtils.min(shortArray2);
@@ -6604,9 +6604,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4465() throws Throwable {
+    public void test04465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4465");
+            System.out.format("%n%s%n", "RegressionTest8.test04465");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray3, 'a');
@@ -6623,17 +6623,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4466() throws Throwable {
+    public void test04466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4466");
+            System.out.format("%n%s%n", "RegressionTest8.test04466");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("##041414");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4467() throws Throwable {
+    public void test04467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4467");
+            System.out.format("%n%s%n", "RegressionTest8.test04467");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = org.apache.commons.lang3.math.NumberUtils.createBigDecimal("AAAAAAAAAAAAAAAAAA                         AAAAAAAAAAAAAAAAAAAAA-1 -1 100 10 ");
@@ -6644,25 +6644,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4468() throws Throwable {
+    public void test04468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4468");
+            System.out.format("%n%s%n", "RegressionTest8.test04468");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min(0.0d, (double) 23L, 107.0d);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 0.0d + "'", double3 == 0.0d);
     }
 
     @Test
-    public void test4469() throws Throwable {
+    public void test04469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4469");
+            System.out.format("%n%s%n", "RegressionTest8.test04469");
         long long3 = org.apache.commons.lang3.math.NumberUtils.max((long) 41, (long) 201, 0L);
         org.junit.Assert.assertTrue("'" + long3 + "' != '" + 201L + "'", long3 == 201L);
     }
 
     @Test
-    public void test4470() throws Throwable {
+    public void test04470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4470");
+            System.out.format("%n%s%n", "RegressionTest8.test04470");
         long[] longArray6 = new long[] { 97L, 100L, (byte) 10, 0, (short) 0, 102 };
         long long7 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
         long long8 = org.apache.commons.lang3.math.NumberUtils.min(longArray6);
@@ -6683,25 +6683,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4471() throws Throwable {
+    public void test04471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4471");
+            System.out.format("%n%s%n", "RegressionTest8.test04471");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 1297L, 871.0f, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 1297.0f + "'", float3 == 1297.0f);
     }
 
     @Test
-    public void test4472() throws Throwable {
+    public void test04472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4472");
+            System.out.format("%n%s%n", "RegressionTest8.test04472");
         boolean boolean1 = org.apache.commons.lang3.math.NumberUtils.isDigits("                                                                                                                                                                                                                                                                                                                                                                                                                                                     4444444444444444444444444            -1.0a52.0-1a...");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test4473() throws Throwable {
+    public void test04473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4473");
+            System.out.format("%n%s%n", "RegressionTest8.test04473");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -6726,17 +6726,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4474() throws Throwable {
+    public void test04474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4474");
+            System.out.format("%n%s%n", "RegressionTest8.test04474");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("#########", (short) (byte) 0);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 0 + "'", short2 == (short) 0);
     }
 
     @Test
-    public void test4475() throws Throwable {
+    public void test04475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4475");
+            System.out.format("%n%s%n", "RegressionTest8.test04475");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -6765,9 +6765,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4476() throws Throwable {
+    public void test04476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4476");
+            System.out.format("%n%s%n", "RegressionTest8.test04476");
         float[] floatArray1 = new float[] { (byte) 0 };
         java.lang.String str3 = org.apache.commons.lang3.StringUtils.join(floatArray1, ' ');
         float float4 = org.apache.commons.lang3.math.NumberUtils.min(floatArray1);
@@ -6801,33 +6801,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4477() throws Throwable {
+    public void test04477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4477");
+            System.out.format("%n%s%n", "RegressionTest8.test04477");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max(0.0f, (float) 1143L, 0.0f);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 1143.0f + "'", float3 == 1143.0f);
     }
 
     @Test
-    public void test4478() throws Throwable {
+    public void test04478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4478");
+            System.out.format("%n%s%n", "RegressionTest8.test04478");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("10#1#100#0#10");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4479() throws Throwable {
+    public void test04479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4479");
+            System.out.format("%n%s%n", "RegressionTest8.test04479");
         long long1 = org.apache.commons.lang3.math.NumberUtils.toLong("100.0a10.0a-1.10 -1.0 true-1 -1 100");
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
     }
 
     @Test
-    public void test4480() throws Throwable {
+    public void test04480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4480");
+            System.out.format("%n%s%n", "RegressionTest8.test04480");
         double[] doubleArray3 = new double[] { 100L, 10.0f, (-1.0f) };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray3, '4');
         double double6 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray3);
@@ -6842,9 +6842,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4481() throws Throwable {
+    public void test04481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4481");
+            System.out.format("%n%s%n", "RegressionTest8.test04481");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -6867,9 +6867,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4482() throws Throwable {
+    public void test04482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4482");
+            System.out.format("%n%s%n", "RegressionTest8.test04482");
         byte[] byteArray2 = new byte[] { (byte) 10, (byte) -1 };
         byte byte3 = org.apache.commons.lang3.math.NumberUtils.max(byteArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(byteArray2, 'a');
@@ -6882,49 +6882,49 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4483() throws Throwable {
+    public void test04483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4483");
+            System.out.format("%n%s%n", "RegressionTest8.test04483");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max((int) '4', (-1), 2560);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 2560 + "'", int3 == 2560);
     }
 
     @Test
-    public void test4484() throws Throwable {
+    public void test04484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4484");
+            System.out.format("%n%s%n", "RegressionTest8.test04484");
         int int1 = org.apache.commons.lang3.math.NumberUtils.toInt("-11-11-11-11-11-10.0a0.0-11-11-11-11-11-1100.0 10.0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa                                            ...");
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
     @Test
-    public void test4485() throws Throwable {
+    public void test04485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4485");
+            System.out.format("%n%s%n", "RegressionTest8.test04485");
         short short2 = org.apache.commons.lang3.math.NumberUtils.toShort("a52.0-1.0a52.0-1.0a52.0-1.0a52.0-10a52.0-1.0a52.0-1.0a52.0-1.0a52.0-10a52.0-1.0a52.0-1.0a52.0-1.0a0", (short) (byte) 1);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 1 + "'", short2 == (short) 1);
     }
 
     @Test
-    public void test4486() throws Throwable {
+    public void test04486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4486");
+            System.out.format("%n%s%n", "RegressionTest8.test04486");
         float float1 = org.apache.commons.lang3.math.NumberUtils.toFloat("                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ");
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test4487() throws Throwable {
+    public void test04487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4487");
+            System.out.format("%n%s%n", "RegressionTest8.test04487");
         double double3 = org.apache.commons.lang3.math.NumberUtils.min((double) 97.0f, (double) 408.0f, (double) 32);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 32.0d + "'", double3 == 32.0d);
     }
 
     @Test
-    public void test4488() throws Throwable {
+    public void test04488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4488");
+            System.out.format("%n%s%n", "RegressionTest8.test04488");
         int[] intArray3 = new int[] { (byte) 10, (byte) 10, 'a' };
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(intArray3, '4');
         java.lang.String str7 = org.apache.commons.lang3.StringUtils.join(intArray3, 'a');
@@ -6943,33 +6943,33 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4489() throws Throwable {
+    public void test04489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4489");
+            System.out.format("%n%s%n", "RegressionTest8.test04489");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 1, (float) 1089, (float) 110);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 1089.0f + "'", float3 == 1089.0f);
     }
 
     @Test
-    public void test4490() throws Throwable {
+    public void test04490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4490");
+            System.out.format("%n%s%n", "RegressionTest8.test04490");
         byte byte1 = org.apache.commons.lang3.math.NumberUtils.toByte("-1#0#1#0");
         org.junit.Assert.assertTrue("'" + byte1 + "' != '" + (byte) 0 + "'", byte1 == (byte) 0);
     }
 
     @Test
-    public void test4491() throws Throwable {
+    public void test04491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4491");
+            System.out.format("%n%s%n", "RegressionTest8.test04491");
         short short1 = org.apache.commons.lang3.math.NumberUtils.toShort("    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52    -1.0A52");
         org.junit.Assert.assertTrue("'" + short1 + "' != '" + (short) 0 + "'", short1 == (short) 0);
     }
 
     @Test
-    public void test4492() throws Throwable {
+    public void test04492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4492");
+            System.out.format("%n%s%n", "RegressionTest8.test04492");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);
@@ -6986,25 +6986,25 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4493() throws Throwable {
+    public void test04493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4493");
+            System.out.format("%n%s%n", "RegressionTest8.test04493");
         float float3 = org.apache.commons.lang3.math.NumberUtils.max((float) 166, (float) 871, (float) 132);
         org.junit.Assert.assertTrue("'" + float3 + "' != '" + 871.0f + "'", float3 == 871.0f);
     }
 
     @Test
-    public void test4494() throws Throwable {
+    public void test04494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4494");
+            System.out.format("%n%s%n", "RegressionTest8.test04494");
         float float2 = org.apache.commons.lang3.math.NumberUtils.toFloat(" true-1 -1 100 a                                                                                             -1a1##-1 -1-1 -1AAAAAAAAAAAAAAAAAAAAAAAA###############################################################", (float) 262);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 262.0f + "'", float2 == 262.0f);
     }
 
     @Test
-    public void test4495() throws Throwable {
+    public void test04495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4495");
+            System.out.format("%n%s%n", "RegressionTest8.test04495");
         double[] doubleArray2 = new double[] { (-1), '4' };
         double double3 = org.apache.commons.lang3.math.NumberUtils.max(doubleArray2);
         java.lang.String str5 = org.apache.commons.lang3.StringUtils.join(doubleArray2, 'a');
@@ -7027,9 +7027,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4496() throws Throwable {
+    public void test04496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4496");
+            System.out.format("%n%s%n", "RegressionTest8.test04496");
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number1 = org.apache.commons.lang3.math.NumberUtils.createNumber("                  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa                  ");
@@ -7040,9 +7040,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4497() throws Throwable {
+    public void test04497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4497");
+            System.out.format("%n%s%n", "RegressionTest8.test04497");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -7069,9 +7069,9 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4498() throws Throwable {
+    public void test04498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4498");
+            System.out.format("%n%s%n", "RegressionTest8.test04498");
         short[] shortArray4 = new short[] { (short) 0, (byte) 1, (short) 1, (short) 10 };
         java.lang.String str6 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#');
         java.lang.String str10 = org.apache.commons.lang3.StringUtils.join(shortArray4, '#', 0, 3);
@@ -7103,17 +7103,17 @@ public class RegressionTest8 {
     }
 
     @Test
-    public void test4499() throws Throwable {
+    public void test04499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4499");
+            System.out.format("%n%s%n", "RegressionTest8.test04499");
         int int3 = org.apache.commons.lang3.math.NumberUtils.max(864, (int) '4', 32);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 864 + "'", int3 == 864);
     }
 
     @Test
-    public void test4500() throws Throwable {
+    public void test04500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest8.test4500");
+            System.out.format("%n%s%n", "RegressionTest8.test04500");
         byte[] byteArray5 = new byte[] { (byte) 10, (byte) 1, (byte) 100, (byte) 0, (byte) 10 };
         byte byte6 = org.apache.commons.lang3.math.NumberUtils.max(byteArray5);
         byte byte7 = org.apache.commons.lang3.math.NumberUtils.min(byteArray5);

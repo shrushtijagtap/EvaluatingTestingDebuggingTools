@@ -60,7 +60,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int5 = jsonParser3.readBinaryValue(outputStream4);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [B@302da330; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [B@56cd5d76; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -145,7 +145,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int9 = jsonParser3.nextIntValue((int) (short) 1);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@4e29ac60; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@774900ac; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -190,7 +190,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Boolean boolean6 = jsonParser3.nextBooleanValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@3abb0a0f; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@6a46e297; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -215,7 +215,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number12 = jsonParser11.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@5d856513; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@73afff3d; line: 1, column: 0]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -244,7 +244,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int15 = uTF8StreamJsonParser12.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -271,7 +271,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken17 = uTF8StreamJsonParser12._handleUnexpectedValue((int) (byte) 1);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 1)): expected a valid value (number, String, array, object, 'true', 'false' or 'null')? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 1)): expected a valid value (number, String, array, object, 'true', 'false' or 'null')? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -322,7 +322,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken9 = jsonParser3.nextValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@18dc4602; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@3972c7ec; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -393,7 +393,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float7 = jsonParser3.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@39fa970a; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@76db0984; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -420,7 +420,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name16 = uTF8StreamJsonParser12._handleOddName(79);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -447,7 +447,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name17 = uTF8StreamJsonParser12._handleOddName(56319);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('?' (code 56319 / 0xdbff)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('?' (code 56319 / 0xdbff)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -475,7 +475,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidInitial((int) '4');
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x34? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x34? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -499,7 +499,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray8 = jsonParser7.getBinaryValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: java.io.StringReader@607a5571; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: java.io.StringReader@35554c19; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -554,7 +554,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -753,7 +753,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int18 = uTF8StreamJsonParser12.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -782,7 +782,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int16 = uTF8StreamJsonParser12._decodeCharForError((int) (byte) -1);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0xff? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0xff? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -807,7 +807,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             long long10 = jsonParser3.nextLongValue(1L);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@6f1cfdc3; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@2b0ec1d1; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -843,7 +843,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int24 = uTF8StreamJsonParser12._readBinary(base64Variant18, outputStream19, byteArray22);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -917,7 +917,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken30 = jsonParser29.nextValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid numeric value: Leading zeroes not allowed? at [Source: [B@12418bf; line: 1, column: 2]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid numeric value: Leading zeroes not allowed? at [Source: [B@256a4746; line: 1, column: 2]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -964,7 +964,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float18 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -996,7 +996,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name18 = uTF8StreamJsonParser12._parseAposName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing ''' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing ''' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1027,7 +1027,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name18 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1055,7 +1055,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number15 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1097,7 +1097,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken4 = jsonParser3.nextValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@4b2e492a; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@3eaca7af; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1141,7 +1141,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name17 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1172,7 +1172,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name18 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1205,7 +1205,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray19 = uTF8StreamJsonParser12.getBinaryValue(base64Variant18);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1234,7 +1234,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray16 = uTF8StreamJsonParser12.getBinaryValue(base64Variant15);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1261,7 +1261,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             long long18 = uTF8StreamJsonParser12.getLongValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1286,7 +1286,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken6 = jsonParser3.nextToken();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@5754a551; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@7cdf43f7; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1312,7 +1312,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int11 = jsonParser9.nextIntValue((int) (byte) -65);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi': was expecting ? at [Source: java.io.StringReader@11c8127e; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi': was expecting ? at [Source: java.io.StringReader@2cbf199f; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1439,7 +1439,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name19 = uTF8StreamJsonParser12._parseName(79);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1781,7 +1781,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray17 = uTF8StreamJsonParser12.getBinaryValue(base64Variant16);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2122,7 +2122,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             double double14 = uTF8StreamJsonParser12.getDoubleValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2151,7 +2151,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("N/A", "");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'N/A': was expecting ? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'N/A': was expecting ? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2180,7 +2180,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidInitial((int) (byte) 0);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x0? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x0? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2305,7 +2305,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger10 = jsonParser3.getBigIntegerValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@63275307; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@548731f2; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2337,7 +2337,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidOther(79);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x4f? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x4f? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2366,7 +2366,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidInitial((int) (short) 0);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x0? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0x0? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2397,7 +2397,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal20 = uTF8StreamJsonParser12.getDecimalValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2429,7 +2429,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonParser.NumberType numberType16 = uTF8StreamJsonParser12.getNumberType();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2559,7 +2559,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float18 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2587,7 +2587,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             long long10 = jsonParser9.getLongValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@2099ca68; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@e6dc7e; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2844,7 +2844,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidOther(0);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x0? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x0? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2874,7 +2874,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number12 = jsonParser7.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: java.io.StringReader@53abdd9d; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: java.io.StringReader@21d66598; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3178,7 +3178,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name15 = uTF8StreamJsonParser12.parseLongName(0);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Illegal unquoted character ((CTRL-CHAR, code 0)): has to be escaped using backslash to be included in name? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Illegal unquoted character ((CTRL-CHAR, code 0)): has to be escaped using backslash to be included in name? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3216,7 +3216,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3295,7 +3295,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12.parseLongName((int) 'a');
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3619,7 +3619,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             long long31 = jsonParser29.nextLongValue((long) 56319);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid numeric value: Leading zeroes not allowed? at [Source: [B@12418bf; line: 1, column: 2]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid numeric value: Leading zeroes not allowed? at [Source: [B@256a4746; line: 1, column: 2]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3669,7 +3669,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray22 = uTF8StreamJsonParser12._decodeBase64(base64Variant21);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4412,7 +4412,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             double double33 = uTF8StreamJsonParser12.getDoubleValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4607,7 +4607,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4640,7 +4640,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("hi!");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi!': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi!': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4718,7 +4718,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int17 = uTF8StreamJsonParser12.readBinaryValue(base64Variant15, outputStream16);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4748,7 +4748,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12._parseName(79);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('O' (code 79)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4943,7 +4943,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken19 = uTF8StreamJsonParser12._handleUnexpectedValue((int) (short) 100);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -5426,7 +5426,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int22 = uTF8StreamJsonParser12.readBinaryValue(base64Variant20, outputStream21);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -5509,7 +5509,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._finishString();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -5843,7 +5843,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("", "N/A");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting N/A? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting N/A? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6147,7 +6147,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int20 = uTF8StreamJsonParser12.readBinaryValue(outputStream19);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6180,7 +6180,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger20 = uTF8StreamJsonParser12.getBigIntegerValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6248,7 +6248,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._finishString();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6291,6 +6291,54 @@ public class RegressionTest0 {
     public void test167() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test167");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray6 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
+        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray18 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
+        java.io.OutputStream outputStream24 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
+        jsonGenerator25.flush();
+        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator29 = jsonGenerator25.setFeatureMask(35);
+        boolean boolean30 = jsonGenerator25.canOmitFields();
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser7);
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser19);
+        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(jsonFactory22);
+        org.junit.Assert.assertNotNull(bufferRecycler23);
+        org.junit.Assert.assertNotNull(jsonGenerator25);
+        org.junit.Assert.assertNotNull(jsonGenerator29);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+    }
+
+    @Test
+    public void test168() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -6351,9 +6399,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6370,9 +6418,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6389,9 +6437,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6418,9 +6466,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -6445,9 +6493,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -6504,9 +6552,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -6533,9 +6581,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6576,7 +6624,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken76 = uTF8StreamJsonParser74._parseNumber((-1));
@@ -6597,7 +6645,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770120080) + "'", int51 == (-1770120080));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728439173) + "'", int51 == (-1728439173));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -6605,9 +6653,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6647,9 +6695,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -6716,9 +6764,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator2 = null;
@@ -6776,9 +6824,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -6874,9 +6922,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -6932,9 +6980,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6949,7 +6997,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray18 = uTF8StreamJsonParser12.getBinaryValue(base64Variant17);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6960,9 +7008,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -7082,9 +7130,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7116,9 +7164,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -7167,9 +7215,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7185,7 +7233,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             double double18 = uTF8StreamJsonParser12.getDoubleValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -7199,9 +7247,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7281,9 +7329,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -7299,9 +7347,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         com.fasterxml.jackson.core.sym.Name name0 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.getEmptyName();
         boolean boolean3 = name0.equals((int) ' ', 56319);
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = null;
@@ -7322,9 +7370,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7366,7 +7414,7 @@ public class RegressionTest0 {
         com.fasterxml.jackson.core.JsonParser jsonParser61 = jsonFactory37.createParser(byteArray57);
         // The following exception was thrown during execution in test generation
         try {
-            int int64 = mergedStream30.read(byteArray57, (int) (short) -1, (-1770006982));
+            int int64 = mergedStream30.read(byteArray57, (int) (short) -1, (-1728422374));
             org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
         // Expected exception.
@@ -7406,9 +7454,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -7469,9 +7517,39 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
+        com.fasterxml.jackson.core.JsonToken jsonToken16 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str17 = uTF8StreamJsonParser12._getText2(jsonToken16);
+        com.fasterxml.jackson.core.JsonToken jsonToken18 = uTF8StreamJsonParser12.getLastClearedToken();
+        java.io.Writer writer19 = null;
+        int int20 = uTF8StreamJsonParser12.releaseBuffered(writer19);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + jsonToken16 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken16.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str17);
+        org.junit.Assert.assertNull(jsonToken18);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
+    }
+
+    @Test
+    public void test192() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -7498,9 +7576,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7538,9 +7616,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7567,9 +7645,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7599,9 +7677,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7616,7 +7694,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number18 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -7629,9 +7707,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -7707,9 +7785,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -7721,7 +7799,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal9 = jsonParser3.getDecimalValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@10def8c1; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@7bf4f0c; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -7735,9 +7813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -7793,9 +7871,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7821,9 +7899,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -7848,9 +7926,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -7914,9 +7992,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -7986,9 +8064,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -8043,9 +8121,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -8066,9 +8144,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8168,9 +8246,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8190,7 +8268,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number23 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8208,9 +8286,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -8279,9 +8357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8297,7 +8375,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number18 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8311,9 +8389,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8333,7 +8411,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float23 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8351,9 +8429,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8383,9 +8461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8412,9 +8490,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8429,7 +8507,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray19 = uTF8StreamJsonParser12.getBinaryValue(base64Variant18);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8440,9 +8518,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8472,9 +8550,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
@@ -8504,9 +8582,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -8622,9 +8700,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8641,7 +8719,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._finishString();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8656,9 +8734,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8695,9 +8773,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8727,7 +8805,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int39 = uTF8StreamJsonParser12.readBinaryValue(base64Variant21, (java.io.OutputStream) byteArrayBuilder38);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8748,9 +8826,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -8795,9 +8873,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8811,7 +8889,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("N/A", "");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'N/A': was expecting ? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'N/A': was expecting ? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -8823,9 +8901,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -8894,9 +8972,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -8919,9 +8997,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9016,9 +9094,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9038,9 +9116,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9081,7 +9159,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         // The following exception was thrown during execution in test generation
         try {
             long long76 = mergedStream46.skip((long) 35);
@@ -9102,7 +9180,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770105334) + "'", int51 == (-1770105334));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728393688) + "'", int51 == (-1728393688));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -9110,9 +9188,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -9223,9 +9301,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -9327,9 +9405,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9356,9 +9434,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -9440,9 +9518,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9467,9 +9545,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -9522,9 +9600,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9541,7 +9619,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidChar((int) (byte) -1);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Illegal character ('?' (code 65535 / 0xffff)): only regular white space (\\r, \\n, \\t) is allowed between tokens? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Illegal character ('?' (code 65535 / 0xffff)): only regular white space (\\r, \\n, \\t) is allowed between tokens? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -9556,9 +9634,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9594,9 +9672,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -9682,9 +9760,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -9753,9 +9831,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9773,9 +9851,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -9800,8 +9878,8 @@ public class RegressionTest0 {
         defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
         // The following exception was thrown during execution in test generation
         try {
-            jsonGenerator25.writeRawValue("false", (-1770006982), (int) '4');
-            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1770006982");
+            jsonGenerator25.writeRawValue("false", (-1728422374), (int) '4');
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1728422374");
         } catch (java.lang.StringIndexOutOfBoundsException e) {
         // Expected exception.
         }
@@ -9824,9 +9902,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -9902,9 +9980,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -9998,9 +10076,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -10023,7 +10101,7 @@ public class RegressionTest0 {
         byte[] byteArray25 = null;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader29 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext23, inputStream24, byteArray25, (-1), (int) 'a', false);
         com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory22.createParser((java.io.Reader) uTF32Reader29);
-        long long32 = jsonParser30.getValueAsLong((long) (-1770116376));
+        long long32 = jsonParser30.getValueAsLong((long) (-1728434474));
         org.junit.Assert.assertNotNull(byteArray2);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
         org.junit.Assert.assertNotNull(jsonParser3);
@@ -10041,13 +10119,13 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals("'" + str20 + "' != '" + " " + "'", str20, " ");
         org.junit.Assert.assertNotNull(jsonFactory22);
         org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertTrue("'" + long32 + "' != '" + (-1770116376L) + "'", long32 == (-1770116376L));
+        org.junit.Assert.assertTrue("'" + long32 + "' != '" + (-1728434474L) + "'", long32 == (-1728434474L));
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -10120,9 +10198,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -10162,9 +10240,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -10214,9 +10292,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -10256,9 +10334,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -10308,9 +10386,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -10368,9 +10446,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RegressionTest0.test248");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         java.io.InputStream inputStream1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext2 = null;
@@ -10387,9 +10465,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RegressionTest0.test249");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -10413,9 +10491,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
+            System.out.format("%n%s%n", "RegressionTest0.test250");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -10440,9 +10518,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RegressionTest0.test251");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -10521,9 +10599,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RegressionTest0.test252");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -10570,9 +10648,32 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RegressionTest0.test253");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream6 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec7 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer8 = null;
+        byte[] byteArray9 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser13 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext4, 0, inputStream6, objectCodec7, bytesToNameCanonicalizer8, byteArray9, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken14 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str15 = uTF8StreamJsonParser13._getText2(jsonToken14);
+        com.fasterxml.jackson.core.JsonLocation jsonLocation19 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) uTF8StreamJsonParser13, (long) 33, (int) (byte) -1, (int) (short) 1);
+        int int20 = jsonLocation19.getLineNr();
+        com.fasterxml.jackson.core.JsonParseException jsonParseException21 = new com.fasterxml.jackson.core.JsonParseException("/", jsonLocation19);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken14 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken14.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str15);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
+    }
+
+    @Test
+    public void test254() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test254");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -10690,9 +10791,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RegressionTest0.test255");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -10777,9 +10878,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
+            System.out.format("%n%s%n", "RegressionTest0.test256");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -10791,7 +10892,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int10 = jsonParser7.nextIntValue(16);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@51db824c; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@17b1bb03; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -10805,9 +10906,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RegressionTest0.test257");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -10862,9 +10963,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RegressionTest0.test258");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -10919,9 +11020,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RegressionTest0.test259");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -10948,9 +11049,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RegressionTest0.test260");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11019,9 +11120,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RegressionTest0.test261");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -11064,9 +11165,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RegressionTest0.test262");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11089,9 +11190,39 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RegressionTest0.test263");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
+        java.lang.String str16 = uTF8StreamJsonParser12.getText();
+        long long17 = uTF8StreamJsonParser12.getTokenCharacterOffset();
+        boolean boolean18 = uTF8StreamJsonParser12.canReadObjectId();
+        byte[] byteArray19 = uTF8StreamJsonParser12._inputBuffer;
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNull(str16);
+        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 0L + "'", long17 == 0L);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+    }
+
+    @Test
+    public void test264() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test264");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11200,9 +11331,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RegressionTest0.test265");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -11308,9 +11439,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
+            System.out.format("%n%s%n", "RegressionTest0.test266");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11352,9 +11483,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RegressionTest0.test267");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11423,9 +11554,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RegressionTest0.test268");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11492,9 +11623,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
+            System.out.format("%n%s%n", "RegressionTest0.test269");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11521,9 +11652,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RegressionTest0.test270");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
@@ -11575,9 +11706,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
+            System.out.format("%n%s%n", "RegressionTest0.test271");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11593,7 +11724,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float18 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11607,9 +11738,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RegressionTest0.test272");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11623,7 +11754,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             double double18 = uTF8StreamJsonParser12.getDoubleValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11634,9 +11765,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RegressionTest0.test273");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11657,7 +11788,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("/", " ");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '/': was expecting  ? at [Source: 4; line: 1, column: 100]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '/': was expecting  ? at [Source: 4; line: 1, column: 133]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11676,9 +11807,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RegressionTest0.test274");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11695,7 +11826,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int20 = uTF8StreamJsonParser12.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11710,9 +11841,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RegressionTest0.test275");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -11807,9 +11938,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RegressionTest0.test276");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11826,7 +11957,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11841,9 +11972,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RegressionTest0.test277");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11860,7 +11991,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray20 = uTF8StreamJsonParser12.getBinaryValue(base64Variant19);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11873,9 +12004,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
+            System.out.format("%n%s%n", "RegressionTest0.test278");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -11888,7 +12019,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Boolean boolean11 = jsonParser10.nextBooleanValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi': was expecting ? at [Source: java.io.StringReader@1ced7df5; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'hi': was expecting ? at [Source: java.io.StringReader@5b517e96; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -11903,9 +12034,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RegressionTest0.test279");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11938,9 +12069,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RegressionTest0.test280");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -11964,7 +12095,7 @@ public class RegressionTest0 {
         com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer35 = bytesToNameCanonicalizer32.makeChild(false, false);
         byte[] byteArray36 = new byte[] {};
         com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser40 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, (int) 'a', inputStream30, objectCodec31, bytesToNameCanonicalizer35, byteArray36, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader44 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext3, inputStream15, byteArray36, 1777981781, (-1770036746), false);
+        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader44 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext3, inputStream15, byteArray36, 1736418256, (-1728450794), false);
         org.junit.Assert.assertNotNull(byteArray8);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray24);
@@ -11976,9 +12107,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RegressionTest0.test281");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator2 = null;
@@ -12054,9 +12185,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RegressionTest0.test282");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12073,7 +12204,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidOther(3);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x3? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x3? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -12088,9 +12219,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RegressionTest0.test283");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
         java.io.InputStream inputStream6 = null;
@@ -12134,9 +12265,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RegressionTest0.test284");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12192,9 +12323,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RegressionTest0.test285");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12223,9 +12354,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RegressionTest0.test286");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12255,9 +12386,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RegressionTest0.test287");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12298,7 +12429,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         int int75 = bytesToNameCanonicalizer49.size();
         int int76 = bytesToNameCanonicalizer49.collisionCount();
         org.junit.Assert.assertNotNull(byteArray8);
@@ -12314,7 +12445,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770093606) + "'", int51 == (-1770093606));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728401336) + "'", int51 == (-1728401336));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -12324,9 +12455,70 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RegressionTest0.test288");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
+        byte[] byteArray6 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory5.createJsonParser(byteArray6);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler8 = jsonFactory5._getBufferRecycler();
+        com.fasterxml.jackson.core.io.IOContext iOContext11 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler8, (java.lang.Object) (-1728400563), true);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertNotNull(byteArray6);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser7);
+        org.junit.Assert.assertNotNull(bufferRecycler8);
+    }
+
+    @Test
+    public void test289() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test289");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
+        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray14 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec16 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.setCodec(objectCodec16);
+        byte[] byteArray20 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory17.createParser(byteArray20, (-1), 0);
+        com.fasterxml.jackson.core.JsonParser jsonParser24 = jsonFactory5.createParser(byteArray20);
+        com.fasterxml.jackson.core.FormatSchema formatSchema25 = jsonParser24.getSchema();
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser11);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser23);
+        org.junit.Assert.assertNotNull(jsonParser24);
+        org.junit.Assert.assertNull(formatSchema25);
+    }
+
+    @Test
+    public void test290() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test290");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -12335,7 +12527,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             short short6 = jsonParser3.getShortValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@72c6150a; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@4b1857ac; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -12346,9 +12538,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RegressionTest0.test291");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -12361,7 +12553,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             short short10 = jsonParser3.getShortValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@69f5a877; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: [B@5cc3a3e4; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -12376,9 +12568,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RegressionTest0.test292");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -12432,9 +12624,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RegressionTest0.test293");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12491,7 +12683,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int79 = uTF8StreamJsonParser12.readBinaryValue(base64Variant20, (java.io.OutputStream) byteArrayBuilder77);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -12541,9 +12733,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RegressionTest0.test294");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter2 = lf2SpacesIndenter0.withLinefeed("");
         boolean boolean3 = lf2SpacesIndenter2.isInline();
@@ -12604,9 +12796,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RegressionTest0.test295");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -12644,9 +12836,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RegressionTest0.test296");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -12751,9 +12943,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
+            System.out.format("%n%s%n", "RegressionTest0.test297");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -12870,9 +13062,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RegressionTest0.test298");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -12897,9 +13089,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RegressionTest0.test299");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -13001,9 +13193,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RegressionTest0.test300");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -13019,7 +13211,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             double double18 = uTF8StreamJsonParser12.getDoubleValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -13033,9 +13225,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
+            System.out.format("%n%s%n", "RegressionTest0.test301");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -13084,9 +13276,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RegressionTest0.test302");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -13183,9 +13375,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RegressionTest0.test303");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -13305,9 +13497,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RegressionTest0.test304");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -13397,9 +13589,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RegressionTest0.test305");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter fixedSpaceIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter.instance;
         com.fasterxml.jackson.core.JsonLocation jsonLocation5 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) fixedSpaceIndenter0, (long) ' ', (long) (byte) -69, 56320, (int) (byte) 100);
         boolean boolean6 = fixedSpaceIndenter0.isInline();
@@ -13498,9 +13690,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RegressionTest0.test306");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -13634,9 +13826,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RegressionTest0.test307");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -13707,9 +13899,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RegressionTest0.test308");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -13729,9 +13921,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RegressionTest0.test309");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -13835,9 +14027,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
+            System.out.format("%n%s%n", "RegressionTest0.test310");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator2 = null;
@@ -13899,9 +14091,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test305() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
+            System.out.format("%n%s%n", "RegressionTest0.test311");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -13938,9 +14130,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test306() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RegressionTest0.test312");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -13954,8 +14146,8 @@ public class RegressionTest0 {
         com.fasterxml.jackson.core.JsonToken jsonToken16 = uTF8StreamJsonParser12.getCurrentToken();
         // The following exception was thrown during execution in test generation
         try {
-            com.fasterxml.jackson.core.sym.Name name18 = uTF8StreamJsonParser12._handleOddName(1777908685);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('???' (code 1777908685 / 0x69f8bbcd)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
+            com.fasterxml.jackson.core.sym.Name name18 = uTF8StreamJsonParser12._handleOddName(1735961852);
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('??' (code 1735961852 / 0x6778acfc)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -13968,9 +14160,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RegressionTest0.test313");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -13991,9 +14183,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RegressionTest0.test314");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter2 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
@@ -14093,9 +14285,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RegressionTest0.test315");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14160,9 +14352,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RegressionTest0.test316");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14190,9 +14382,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RegressionTest0.test317");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -14326,9 +14518,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RegressionTest0.test318");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
@@ -14374,9 +14566,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RegressionTest0.test319");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14394,7 +14586,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 100]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token '': was expecting 'null', 'true', 'false' or NaN? at [Source: 4; line: 1, column: 133]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -14409,9 +14601,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RegressionTest0.test320");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14429,7 +14621,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             boolean boolean21 = uTF8StreamJsonParser12.getBooleanValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not of boolean type? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not of boolean type? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -14444,9 +14636,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RegressionTest0.test321");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -14467,9 +14659,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
+            System.out.format("%n%s%n", "RegressionTest0.test322");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14486,7 +14678,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name19 = uTF8StreamJsonParser12.slowParseName();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 100]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input: was expecting closing '\"' for name? at [Source: 4; line: 1, column: 133]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -14501,9 +14693,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test317() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RegressionTest0.test323");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -14641,9 +14833,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
+            System.out.format("%n%s%n", "RegressionTest0.test324");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
@@ -14682,7 +14874,7 @@ public class RegressionTest0 {
         mergedStream62.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken65 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray66 = jsonToken65.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream69 = new com.fasterxml.jackson.core.io.MergedStream(iOContext4, (java.io.InputStream) mergedStream62, byteArray66, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream69 = new com.fasterxml.jackson.core.io.MergedStream(iOContext4, (java.io.InputStream) mergedStream62, byteArray66, (int) (byte) 100, 1736418256);
         int int70 = mergedStream62.available();
         com.fasterxml.jackson.core.JsonFactory jsonFactory71 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray73 = new byte[] { (byte) 100 };
@@ -14691,7 +14883,7 @@ public class RegressionTest0 {
         com.fasterxml.jackson.core.JsonFactory jsonFactory76 = jsonFactory71.setCodec(objectCodec75);
         byte[] byteArray79 = new byte[] { (byte) 100, (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser82 = jsonFactory76.createParser(byteArray79, (-1), 0);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader86 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext0, (java.io.InputStream) mergedStream62, byteArray79, (-1770100711), (-1770100711), true);
+        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader86 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext0, (java.io.InputStream) mergedStream62, byteArray79, (-1728387439), (-1728387439), true);
         boolean boolean87 = uTF32Reader86.markSupported();
         org.junit.Assert.assertNotNull(byteArray9);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
@@ -14726,9 +14918,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test319() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RegressionTest0.test325");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -14842,9 +15034,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RegressionTest0.test326");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -14889,9 +15081,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RegressionTest0.test327");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14920,9 +15112,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RegressionTest0.test328");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -14945,9 +15137,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RegressionTest0.test329");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15001,9 +15193,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RegressionTest0.test330");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -15066,9 +15258,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RegressionTest0.test331");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -15132,9 +15324,117 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
+            System.out.format("%n%s%n", "RegressionTest0.test332");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
+        com.fasterxml.jackson.core.SerializableString serializableString5 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString5);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray9 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
+        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray21 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
+        java.io.OutputStream outputStream27 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
+        defaultPrettyPrinter6.writeObjectEntrySeparator(jsonGenerator28);
+        com.fasterxml.jackson.core.SerializableString serializableString30 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString30);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter32 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter31);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        defaultPrettyPrinter31.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
+        defaultPrettyPrinter6.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter36 = defaultPrettyPrinter6.createInstance();
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter37 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        com.fasterxml.jackson.core.SerializableString serializableString38 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter39 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString38);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter40 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter39);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray43 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser44 = jsonFactory41.createParser(byteArray43);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.setCodec(objectCodec45);
+        byte[] byteArray49 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory46.createParser(byteArray49, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray55 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory46.enable(feature57);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler60 = jsonFactory59._getBufferRecycler();
+        java.io.OutputStream outputStream61 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator62 = jsonFactory59.createJsonGenerator(outputStream61);
+        jsonGenerator62.flush();
+        defaultPrettyPrinter40.beforeObjectEntries(jsonGenerator62);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec65 = jsonGenerator62.getCodec();
+        com.fasterxml.jackson.core.Version version66 = jsonGenerator62.version();
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator68 = jsonGenerator62.setHighestNonEscapedChar((int) (short) 0);
+        lf2SpacesIndenter37.writeIndentation(jsonGenerator62, 79);
+        jsonGenerator62.writeNumberField(" ", (long) (byte) 10);
+        defaultPrettyPrinter6.beforeArrayValues(jsonGenerator62);
+        com.fasterxml.jackson.core.FormatSchema formatSchema75 = null;
+        boolean boolean76 = jsonGenerator62.canUseSchema(formatSchema75);
+        defaultPrettyPrinter2.writeRootValueSeparator(jsonGenerator62);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator62.setFeatureMask((int) (byte) -1);
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser10);
+        org.junit.Assert.assertNotNull(jsonFactory12);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser18);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser22);
+        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertNotNull(bufferRecycler26);
+        org.junit.Assert.assertNotNull(jsonGenerator28);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter33);
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter36);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter37);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser44);
+        org.junit.Assert.assertNotNull(jsonFactory46);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser52);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser56);
+        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory58);
+        org.junit.Assert.assertNotNull(jsonFactory59);
+        org.junit.Assert.assertNotNull(bufferRecycler60);
+        org.junit.Assert.assertNotNull(jsonGenerator62);
+        org.junit.Assert.assertNull(objectCodec65);
+        org.junit.Assert.assertNotNull(version66);
+        org.junit.Assert.assertNotNull(jsonGenerator68);
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
+        org.junit.Assert.assertNotNull(jsonGenerator79);
+    }
+
+    @Test
+    public void test333() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test333");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15166,9 +15466,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test327() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
+            System.out.format("%n%s%n", "RegressionTest0.test334");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15182,7 +15482,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             char char16 = uTF8StreamJsonParser12._decodeEscaped();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in character escape sequence? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in character escape sequence? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -15194,9 +15494,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test328() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RegressionTest0.test335");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -15217,9 +15517,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RegressionTest0.test336");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15242,9 +15542,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RegressionTest0.test337");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -15346,9 +15646,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
+            System.out.format("%n%s%n", "RegressionTest0.test338");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15366,9 +15666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test332() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RegressionTest0.test339");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15383,7 +15683,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal20 = uTF8StreamJsonParser12.getDecimalValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -15395,9 +15695,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RegressionTest0.test340");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter("ROOT");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter fixedSpaceIndenter2 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter.instance;
         com.fasterxml.jackson.core.JsonLocation jsonLocation7 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) fixedSpaceIndenter2, (long) ' ', (long) (byte) -69, 56320, (int) (byte) 100);
@@ -15496,9 +15796,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
+            System.out.format("%n%s%n", "RegressionTest0.test341");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -15570,9 +15870,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test335() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RegressionTest0.test342");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext5 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler2, (java.lang.Object) '4', true);
         java.io.InputStream inputStream7 = null;
@@ -15612,13 +15912,13 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals("'" + obj23 + "' != '" + "N/A" + "'", obj23, "N/A");
         org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
         org.junit.Assert.assertEquals("'" + str34 + "' != '" + "JSON" + "'", str34, "JSON");
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 34]" + "'", str40, "com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 34]");
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 67]" + "'", str40, "com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 67]");
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RegressionTest0.test343");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -15720,9 +16020,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RegressionTest0.test344");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
@@ -15851,9 +16151,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RegressionTest0.test345");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -15880,7 +16180,7 @@ public class RegressionTest0 {
         com.fasterxml.jackson.core.ObjectCodec objectCodec29 = null;
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator30 = jsonGenerator24.setCodec(objectCodec29);
         jsonGenerator24.writeNumberField("JSON", 0.0f);
-        jsonGenerator24.writeRaw("", 3, (-1770003424));
+        jsonGenerator24.writeRaw("", 3, (-1728419864));
         com.fasterxml.jackson.core.JsonFactory jsonFactory38 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray40 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser41 = jsonFactory38.createParser(byteArray40);
@@ -15925,9 +16225,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
+            System.out.format("%n%s%n", "RegressionTest0.test346");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -15949,7 +16249,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigInteger bigInteger25 = uTF8StreamJsonParser12.getBigIntegerValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -15969,9 +16269,127 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test340() throws Throwable {
+    public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RegressionTest0.test347");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray4 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
+        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray16 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
+        java.io.OutputStream outputStream22 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
+        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray27 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser28 = jsonFactory25.createParser(byteArray27);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec29 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory25.setCodec(objectCodec29);
+        byte[] byteArray33 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser36 = jsonFactory30.createParser(byteArray33, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray39 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory37.createParser(byteArray39);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature41 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory37.enable(feature41);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory43 = jsonFactory30.enable(feature41);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler44 = jsonFactory43._getBufferRecycler();
+        java.io.OutputStream outputStream45 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator46 = jsonFactory43.createJsonGenerator(outputStream45);
+        jsonGenerator46.flush();
+        defaultPrettyPrinter1.writeObjectFieldValueSeparator(jsonGenerator46);
+        jsonGenerator46.writeRaw("ROOT");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray53 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser54 = jsonFactory51.createParser(byteArray53);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec55 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory56 = jsonFactory51.setCodec(objectCodec55);
+        byte[] byteArray59 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory56.createParser(byteArray59, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory63 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray65 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser66 = jsonFactory63.createParser(byteArray65);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature67 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory68 = jsonFactory63.enable(feature67);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory69 = jsonFactory56.enable(feature67);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler70 = jsonFactory69._getBufferRecycler();
+        java.lang.String str71 = jsonFactory69.getRootValueSeparator();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory72 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray74 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser75 = jsonFactory72.createParser(byteArray74);
+        com.fasterxml.jackson.core.JsonParser jsonParser76 = jsonFactory69.createParser(byteArray74);
+        com.fasterxml.jackson.core.JsonGenerator.Feature feature77 = com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory78 = jsonFactory69.disable(feature77);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator46.enable(feature77);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser5);
+        org.junit.Assert.assertNotNull(jsonFactory7);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser13);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser17);
+        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(jsonFactory20);
+        org.junit.Assert.assertNotNull(bufferRecycler21);
+        org.junit.Assert.assertNotNull(jsonGenerator23);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser28);
+        org.junit.Assert.assertNotNull(jsonFactory30);
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser36);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser40);
+        org.junit.Assert.assertTrue("'" + feature41 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature41.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory42);
+        org.junit.Assert.assertNotNull(jsonFactory43);
+        org.junit.Assert.assertNotNull(bufferRecycler44);
+        org.junit.Assert.assertNotNull(jsonGenerator46);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser54);
+        org.junit.Assert.assertNotNull(jsonFactory56);
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser62);
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser66);
+        org.junit.Assert.assertTrue("'" + feature67 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature67.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory68);
+        org.junit.Assert.assertNotNull(jsonFactory69);
+        org.junit.Assert.assertNotNull(bufferRecycler70);
+        org.junit.Assert.assertEquals("'" + str71 + "' != '" + " " + "'", str71, " ");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser75);
+        org.junit.Assert.assertNotNull(jsonParser76);
+        org.junit.Assert.assertTrue("'" + feature77 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET + "'", feature77.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET));
+        org.junit.Assert.assertNotNull(jsonFactory78);
+        org.junit.Assert.assertNotNull(jsonGenerator79);
+    }
+
+    @Test
+    public void test348() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test348");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -16056,9 +16474,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RegressionTest0.test349");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -16122,9 +16540,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RegressionTest0.test350");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -16149,9 +16567,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RegressionTest0.test351");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -16203,9 +16621,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RegressionTest0.test352");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -16263,9 +16681,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RegressionTest0.test353");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -16400,9 +16818,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RegressionTest0.test354");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -16418,7 +16836,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number18 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -16432,9 +16850,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RegressionTest0.test355");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
@@ -16466,9 +16884,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RegressionTest0.test356");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -16495,9 +16913,44 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RegressionTest0.test357");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        java.io.InputStream inputStream14 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec15 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer16 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = bytesToNameCanonicalizer16.makeChild(false, false);
+        byte[] byteArray20 = new byte[] {};
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (int) 'a', inputStream14, objectCodec15, bytesToNameCanonicalizer19, byteArray20, (int) (byte) 10, 33, false);
+        int int25 = bytesToNameCanonicalizer19.maxCollisionLength();
+        int[] intArray26 = com.fasterxml.jackson.core.io.CharTypes.getInputCodeComment();
+        int[] intArray28 = com.fasterxml.jackson.core.json.UTF8StreamJsonParser.growArrayBy(intArray26, 100);
+        com.fasterxml.jackson.core.sym.Name name30 = bytesToNameCanonicalizer19.findName(intArray28, (-1728385093));
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer16);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer19);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(intArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(intArray26), "[-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 10, -1, -1, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1]");
+        org.junit.Assert.assertNotNull(intArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(intArray28), "[-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 10, -1, -1, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]");
+        org.junit.Assert.assertNull(name30);
+    }
+
+    @Test
+    public void test358() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test358");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -16610,9 +17063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RegressionTest0.test359");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -16704,9 +17157,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RegressionTest0.test360");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -16777,9 +17230,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RegressionTest0.test361");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -16815,15 +17268,15 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RegressionTest0.test362");
         com.fasterxml.jackson.core.sym.Name name0 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.getEmptyName();
         boolean boolean2 = name0.equals((java.lang.Object) 10L);
         int[] intArray3 = com.fasterxml.jackson.core.io.CharTypes.getInputCodeComment();
         int[] intArray5 = com.fasterxml.jackson.core.json.UTF8StreamJsonParser.growArrayBy(intArray3, 100);
         boolean boolean7 = name0.equals(intArray3, (int) (byte) 10);
-        boolean boolean9 = name0.equals((-1770091375));
+        boolean boolean9 = name0.equals((-1728400563));
         org.junit.Assert.assertNotNull(name0);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
         org.junit.Assert.assertNotNull(intArray3);
@@ -16835,9 +17288,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RegressionTest0.test363");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -16866,9 +17319,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RegressionTest0.test364");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -16909,7 +17362,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         mergedStream46.reset();
         // The following exception was thrown during execution in test generation
         try {
@@ -16931,7 +17384,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770169201) + "'", int51 == (-1770169201));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728323136) + "'", int51 == (-1728323136));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -16939,9 +17392,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
+            System.out.format("%n%s%n", "RegressionTest0.test365");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -17039,9 +17492,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test357() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RegressionTest0.test366");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -17136,9 +17589,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RegressionTest0.test367");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17155,9 +17608,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
+            System.out.format("%n%s%n", "RegressionTest0.test368");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -17242,9 +17695,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test360() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RegressionTest0.test369");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -17291,9 +17744,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RegressionTest0.test370");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17321,9 +17774,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RegressionTest0.test371");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17453,9 +17906,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RegressionTest0.test372");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17466,7 +17919,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken15 = uTF8StreamJsonParser12._handleInvalidNumberStart(2, true);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 2)) in numeric value: expected digit (0-9) to follow minus sign, for valid numeric value? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 2)) in numeric value: expected digit (0-9) to follow minus sign, for valid numeric value? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -17475,9 +17928,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RegressionTest0.test373");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17504,9 +17957,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
+            System.out.format("%n%s%n", "RegressionTest0.test374");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17533,9 +17986,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test366() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
+            System.out.format("%n%s%n", "RegressionTest0.test375");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17561,7 +18014,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float34 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -17583,9 +18036,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test367() throws Throwable {
+    public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RegressionTest0.test376");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17605,9 +18058,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RegressionTest0.test377");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17689,9 +18142,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RegressionTest0.test378");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17737,9 +18190,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RegressionTest0.test379");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17768,9 +18221,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
+            System.out.format("%n%s%n", "RegressionTest0.test380");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17786,7 +18239,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12._handleOddName(0);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 0)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ((CTRL-CHAR, code 0)): was expecting double-quote to start field name? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -17800,9 +18253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test372() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
+            System.out.format("%n%s%n", "RegressionTest0.test381");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17839,9 +18292,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test373() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RegressionTest0.test382");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17855,9 +18308,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RegressionTest0.test383");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -17884,9 +18337,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RegressionTest0.test384");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -17904,9 +18357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RegressionTest0.test385");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -17975,9 +18428,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
+            System.out.format("%n%s%n", "RegressionTest0.test386");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18004,9 +18457,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test378() throws Throwable {
+    public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RegressionTest0.test387");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18031,9 +18484,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RegressionTest0.test388");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -18102,9 +18555,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RegressionTest0.test389");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18136,9 +18589,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RegressionTest0.test390");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
@@ -18186,7 +18639,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream74 = null;
         byte[] byteArray75 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader79 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext64, inputStream74, byteArray75, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser83 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext12, (-1770028298), (java.io.InputStream) mergedStream55, objectCodec57, bytesToNameCanonicalizer58, byteArray75, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser83 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext12, (-1728476878), (java.io.InputStream) mergedStream55, objectCodec57, bytesToNameCanonicalizer58, byteArray75, 3, 0, false);
         mergedStream55.reset();
         // The following exception was thrown during execution in test generation
         try {
@@ -18214,7 +18667,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer58);
-// flaky:         org.junit.Assert.assertTrue("'" + int60 + "' != '" + (-1770165917) + "'", int60 == (-1770165917));
+// flaky:         org.junit.Assert.assertTrue("'" + int60 + "' != '" + (-1728332594) + "'", int60 == (-1728332594));
         org.junit.Assert.assertNotNull(byteArray69);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray75);
@@ -18222,9 +18675,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RegressionTest0.test391");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18256,9 +18709,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RegressionTest0.test392");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18277,7 +18730,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray21 = uTF8StreamJsonParser12.getBinaryValue(base64Variant20);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -18293,9 +18746,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RegressionTest0.test393");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -18386,9 +18839,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RegressionTest0.test394");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -18489,9 +18942,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
+            System.out.format("%n%s%n", "RegressionTest0.test395");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18512,7 +18965,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonParser.NumberType numberType24 = uTF8StreamJsonParser12.getNumberType();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -18531,9 +18984,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test387() throws Throwable {
+    public void test396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RegressionTest0.test396");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18576,9 +19029,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RegressionTest0.test397");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -18599,9 +19052,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RegressionTest0.test398");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18633,9 +19086,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RegressionTest0.test399");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18664,9 +19117,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RegressionTest0.test400");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -18727,9 +19180,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RegressionTest0.test401");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -18801,9 +19254,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
+            System.out.format("%n%s%n", "RegressionTest0.test402");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
@@ -18837,9 +19290,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test394() throws Throwable {
+    public void test403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RegressionTest0.test403");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -18872,9 +19325,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test395() throws Throwable {
+    public void test404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test395");
+            System.out.format("%n%s%n", "RegressionTest0.test404");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -18910,7 +19363,7 @@ public class RegressionTest0 {
         long long45 = uTF32Reader42.skip((long) ' ');
         char[] charArray46 = new char[] {};
         int int49 = uTF32Reader42.read(charArray46, (int) (byte) -1, 0);
-        jsonGenerator32.writeString(charArray46, 0, (-1770028298));
+        jsonGenerator32.writeString(charArray46, 0, (-1728476878));
         boolean boolean53 = jsonGenerator32.canWriteTypeId();
         org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
         org.junit.Assert.assertNotNull(byteArray6);
@@ -18945,9 +19398,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test396() throws Throwable {
+    public void test405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test396");
+            System.out.format("%n%s%n", "RegressionTest0.test405");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -18960,7 +19413,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken12 = jsonParser3.nextValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@2c629790; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'd': was expecting ('true', 'false' or 'null')? at [Source: [B@46d56b8f; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -18975,9 +19428,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test397() throws Throwable {
+    public void test406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test397");
+            System.out.format("%n%s%n", "RegressionTest0.test406");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.io.SerializedString serializedString2 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
@@ -19051,9 +19504,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test398() throws Throwable {
+    public void test407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test398");
+            System.out.format("%n%s%n", "RegressionTest0.test407");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19117,9 +19570,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test399() throws Throwable {
+    public void test408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test399");
+            System.out.format("%n%s%n", "RegressionTest0.test408");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19140,9 +19593,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test400() throws Throwable {
+    public void test409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test400");
+            System.out.format("%n%s%n", "RegressionTest0.test409");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19167,9 +19620,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test401() throws Throwable {
+    public void test410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test401");
+            System.out.format("%n%s%n", "RegressionTest0.test410");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19286,9 +19739,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test402() throws Throwable {
+    public void test411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test402");
+            System.out.format("%n%s%n", "RegressionTest0.test411");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -19377,9 +19830,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test403() throws Throwable {
+    public void test412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test403");
+            System.out.format("%n%s%n", "RegressionTest0.test412");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19417,7 +19870,7 @@ public class RegressionTest0 {
         mergedStream61.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray65 = jsonToken64.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1736418256);
         int int69 = mergedStream61.available();
         mergedStream61.mark((int) (short) -1);
         boolean boolean72 = mergedStream61.markSupported();
@@ -19447,9 +19900,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test404() throws Throwable {
+    public void test413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test404");
+            System.out.format("%n%s%n", "RegressionTest0.test413");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19577,9 +20030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test405() throws Throwable {
+    public void test414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test405");
+            System.out.format("%n%s%n", "RegressionTest0.test414");
         com.fasterxml.jackson.core.json.DupDetector dupDetector2 = null;
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext3 = com.fasterxml.jackson.core.json.JsonReadContext.createRootContext((int) ' ', (int) (short) 1, dupDetector2);
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext6 = jsonReadContext3.createChildObjectContext((int) (byte) 10, (int) (short) 10);
@@ -19672,9 +20125,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test406() throws Throwable {
+    public void test415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test406");
+            System.out.format("%n%s%n", "RegressionTest0.test415");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19702,9 +20155,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test407() throws Throwable {
+    public void test416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test407");
+            System.out.format("%n%s%n", "RegressionTest0.test416");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19742,9 +20195,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test408() throws Throwable {
+    public void test417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test408");
+            System.out.format("%n%s%n", "RegressionTest0.test417");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19762,8 +20215,8 @@ public class RegressionTest0 {
         int int21 = uTF8StreamJsonParser12.getTextOffset();
         // The following exception was thrown during execution in test generation
         try {
-            uTF8StreamJsonParser12._matchToken("OBJECT", (-1770100711));
-            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1770100711");
+            uTF8StreamJsonParser12._matchToken("OBJECT", (-1728387439));
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1728387439");
         } catch (java.lang.StringIndexOutOfBoundsException e) {
         // Expected exception.
         }
@@ -19780,9 +20233,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test409() throws Throwable {
+    public void test418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test409");
+            System.out.format("%n%s%n", "RegressionTest0.test418");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -19851,7 +20304,7 @@ public class RegressionTest0 {
         int int88 = serializedString49.appendQuotedUTF8(byteArray85, (int) (byte) 0);
         char[] charArray89 = serializedString49.asQuotedChars();
         int int91 = serializedString48.appendUnquoted(charArray89, (int) (byte) 10);
-        int int93 = serializedString46.appendQuoted(charArray89, 1788831779);
+        int int93 = serializedString46.appendQuoted(charArray89, 1746478275);
         org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
         org.junit.Assert.assertNotNull(lf2SpacesIndenter6);
         org.junit.Assert.assertNotNull(byteArray12);
@@ -19913,9 +20366,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test410() throws Throwable {
+    public void test419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test410");
+            System.out.format("%n%s%n", "RegressionTest0.test419");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19939,7 +20392,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             float float32 = uTF8StreamJsonParser12.getFloatValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -19959,9 +20412,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test411() throws Throwable {
+    public void test420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test411");
+            System.out.format("%n%s%n", "RegressionTest0.test420");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -19986,9 +20439,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test412() throws Throwable {
+    public void test421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test412");
+            System.out.format("%n%s%n", "RegressionTest0.test421");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -19999,7 +20452,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray9 = jsonParser3.getBinaryValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [B@68b988a2; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [B@4680dc2a; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -20012,9 +20465,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test413() throws Throwable {
+    public void test422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test413");
+            System.out.format("%n%s%n", "RegressionTest0.test422");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -20040,9 +20493,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test414() throws Throwable {
+    public void test423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test414");
+            System.out.format("%n%s%n", "RegressionTest0.test423");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -20095,9 +20548,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test415() throws Throwable {
+    public void test424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test415");
+            System.out.format("%n%s%n", "RegressionTest0.test424");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -20125,9 +20578,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test416() throws Throwable {
+    public void test425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test416");
+            System.out.format("%n%s%n", "RegressionTest0.test425");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -20165,9 +20618,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test417() throws Throwable {
+    public void test426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test417");
+            System.out.format("%n%s%n", "RegressionTest0.test426");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -20222,7 +20675,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream86 = null;
         byte[] byteArray87 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader91 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext76, inputStream86, byteArray87, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser95 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext24, (-1770028298), (java.io.InputStream) mergedStream67, objectCodec69, bytesToNameCanonicalizer70, byteArray87, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser95 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext24, (-1728476878), (java.io.InputStream) mergedStream67, objectCodec69, bytesToNameCanonicalizer70, byteArray87, 3, 0, false);
         mergedStream67.reset();
         mergedStream67.reset();
         mergedStream67.reset();
@@ -20250,7 +20703,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + false + "'", boolean68 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer70);
-// flaky:         org.junit.Assert.assertTrue("'" + int72 + "' != '" + (-1770150482) + "'", int72 == (-1770150482));
+// flaky:         org.junit.Assert.assertTrue("'" + int72 + "' != '" + (-1728811305) + "'", int72 == (-1728811305));
         org.junit.Assert.assertNotNull(byteArray81);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray87);
@@ -20258,9 +20711,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test418() throws Throwable {
+    public void test427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test418");
+            System.out.format("%n%s%n", "RegressionTest0.test427");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -20332,9 +20785,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test419() throws Throwable {
+    public void test428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test419");
+            System.out.format("%n%s%n", "RegressionTest0.test428");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -20383,9 +20836,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test420() throws Throwable {
+    public void test429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test420");
+            System.out.format("%n%s%n", "RegressionTest0.test429");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -20403,9 +20856,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test421() throws Throwable {
+    public void test430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test421");
+            System.out.format("%n%s%n", "RegressionTest0.test430");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -20450,9 +20903,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test422() throws Throwable {
+    public void test431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test422");
+            System.out.format("%n%s%n", "RegressionTest0.test431");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -20532,9 +20985,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test423() throws Throwable {
+    public void test432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test423");
+            System.out.format("%n%s%n", "RegressionTest0.test432");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -20570,7 +21023,7 @@ public class RegressionTest0 {
         long long45 = uTF32Reader42.skip((long) ' ');
         char[] charArray46 = new char[] {};
         int int49 = uTF32Reader42.read(charArray46, (int) (byte) -1, 0);
-        jsonGenerator32.writeString(charArray46, 0, (-1770028298));
+        jsonGenerator32.writeString(charArray46, 0, (-1728476878));
         jsonGenerator32.writeStartArray();
         com.fasterxml.jackson.core.JsonFactory jsonFactory55 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray57 = new byte[] { (byte) 100 };
@@ -20664,9 +21117,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test424() throws Throwable {
+    public void test433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test424");
+            System.out.format("%n%s%n", "RegressionTest0.test433");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -20762,9 +21215,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test425() throws Throwable {
+    public void test434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test425");
+            System.out.format("%n%s%n", "RegressionTest0.test434");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -20879,9 +21332,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test426() throws Throwable {
+    public void test435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test426");
+            System.out.format("%n%s%n", "RegressionTest0.test435");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter fixedSpaceIndenter0 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter.FixedSpaceIndenter();
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter3 = lf2SpacesIndenter1.withLinefeed("");
@@ -20911,7 +21364,7 @@ public class RegressionTest0 {
         java.io.Writer writer37 = null;
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator38 = jsonFactory36.createJsonGenerator(writer37);
         lf2SpacesIndenter3.writeIndentation(jsonGenerator38, (int) (short) -1);
-        fixedSpaceIndenter0.writeIndentation(jsonGenerator38, (-1770097854));
+        fixedSpaceIndenter0.writeIndentation(jsonGenerator38, (-1728385093));
         org.junit.Assert.assertNotNull(lf2SpacesIndenter1);
         org.junit.Assert.assertNotNull(lf2SpacesIndenter3);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
@@ -20942,9 +21395,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test427() throws Throwable {
+    public void test436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test427");
+            System.out.format("%n%s%n", "RegressionTest0.test436");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -20981,9 +21434,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test428() throws Throwable {
+    public void test437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test428");
+            System.out.format("%n%s%n", "RegressionTest0.test437");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -21115,9 +21568,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test429() throws Throwable {
+    public void test438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test429");
+            System.out.format("%n%s%n", "RegressionTest0.test438");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21130,7 +21583,7 @@ public class RegressionTest0 {
         int int16 = uTF8StreamJsonParser12.releaseBuffered(outputStream15);
         // The following exception was thrown during execution in test generation
         try {
-            int int18 = uTF8StreamJsonParser12.nextIntValue((-1770100711));
+            int int18 = uTF8StreamJsonParser12.nextIntValue((-1728387439));
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
         } catch (java.lang.NullPointerException e) {
         // Expected exception.
@@ -21142,9 +21595,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test430() throws Throwable {
+    public void test439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test430");
+            System.out.format("%n%s%n", "RegressionTest0.test439");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21187,7 +21640,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             int int63 = jsonParser31.readBinaryValue(base64Variant38, (java.io.OutputStream) byteArrayBuilder61);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -21218,9 +21671,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test431() throws Throwable {
+    public void test440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test431");
+            System.out.format("%n%s%n", "RegressionTest0.test440");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext5 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler2, (java.lang.Object) '4', true);
         java.io.InputStream inputStream7 = null;
@@ -21264,9 +21717,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test432() throws Throwable {
+    public void test441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test432");
+            System.out.format("%n%s%n", "RegressionTest0.test441");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -21312,9 +21765,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test433() throws Throwable {
+    public void test442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test433");
+            System.out.format("%n%s%n", "RegressionTest0.test442");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21337,9 +21790,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test434() throws Throwable {
+    public void test443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test434");
+            System.out.format("%n%s%n", "RegressionTest0.test443");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21377,9 +21830,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test435() throws Throwable {
+    public void test444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test435");
+            System.out.format("%n%s%n", "RegressionTest0.test444");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -21519,9 +21972,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test436() throws Throwable {
+    public void test445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test436");
+            System.out.format("%n%s%n", "RegressionTest0.test445");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -21575,9 +22028,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test437() throws Throwable {
+    public void test446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test437");
+            System.out.format("%n%s%n", "RegressionTest0.test446");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -21667,9 +22120,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test438() throws Throwable {
+    public void test447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test438");
+            System.out.format("%n%s%n", "RegressionTest0.test447");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -21722,9 +22175,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test439() throws Throwable {
+    public void test448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test439");
+            System.out.format("%n%s%n", "RegressionTest0.test448");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21765,7 +22218,7 @@ public class RegressionTest0 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         mergedStream46.reset();
         int int76 = mergedStream46.available();
         org.junit.Assert.assertNotNull(byteArray8);
@@ -21781,7 +22234,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770127585) + "'", int51 == (-1770127585));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728838204) + "'", int51 == (-1728838204));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -21790,9 +22243,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test440() throws Throwable {
+    public void test449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test440");
+            System.out.format("%n%s%n", "RegressionTest0.test449");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -21907,9 +22360,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test441() throws Throwable {
+    public void test450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test441");
+            System.out.format("%n%s%n", "RegressionTest0.test450");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -21927,9 +22380,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test442() throws Throwable {
+    public void test451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test442");
+            System.out.format("%n%s%n", "RegressionTest0.test451");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -21941,9 +22394,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test443() throws Throwable {
+    public void test452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test443");
+            System.out.format("%n%s%n", "RegressionTest0.test452");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -21985,9 +22438,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test444() throws Throwable {
+    public void test453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test444");
+            System.out.format("%n%s%n", "RegressionTest0.test453");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22012,9 +22465,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test445() throws Throwable {
+    public void test454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test445");
+            System.out.format("%n%s%n", "RegressionTest0.test454");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22031,8 +22484,8 @@ public class RegressionTest0 {
         int[] intArray20 = com.fasterxml.jackson.core.io.CharTypes.getInputCodeUtf8();
         // The following exception was thrown during execution in test generation
         try {
-            com.fasterxml.jackson.core.sym.Name name25 = uTF8StreamJsonParser12.parseEscapedName(intArray20, (-1770093606), (-1770036746), (int) 'a', (-1770100711));
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 34]");
+            com.fasterxml.jackson.core.sym.Name name25 = uTF8StreamJsonParser12.parseEscapedName(intArray20, (-1728401336), (-1728450794), (int) 'a', (-1728387439));
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -22049,9 +22502,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test446() throws Throwable {
+    public void test455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test446");
+            System.out.format("%n%s%n", "RegressionTest0.test455");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22082,9 +22535,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test447() throws Throwable {
+    public void test456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test447");
+            System.out.format("%n%s%n", "RegressionTest0.test456");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22117,9 +22570,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test448() throws Throwable {
+    public void test457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test448");
+            System.out.format("%n%s%n", "RegressionTest0.test457");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22140,9 +22593,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test449() throws Throwable {
+    public void test458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test449");
+            System.out.format("%n%s%n", "RegressionTest0.test458");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -22193,9 +22646,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test450() throws Throwable {
+    public void test459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test450");
+            System.out.format("%n%s%n", "RegressionTest0.test459");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator2 = null;
@@ -22254,9 +22707,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test451() throws Throwable {
+    public void test460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test451");
+            System.out.format("%n%s%n", "RegressionTest0.test460");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -22281,9 +22734,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test452() throws Throwable {
+    public void test461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test452");
+            System.out.format("%n%s%n", "RegressionTest0.test461");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22302,9 +22755,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test453() throws Throwable {
+    public void test462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test453");
+            System.out.format("%n%s%n", "RegressionTest0.test462");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -22355,9 +22808,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test454() throws Throwable {
+    public void test463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test454");
+            System.out.format("%n%s%n", "RegressionTest0.test463");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = defaultPrettyPrinter1.createInstance();
         com.fasterxml.jackson.core.SerializableString serializableString3 = null;
@@ -22404,9 +22857,45 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test455() throws Throwable {
+    public void test464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test455");
+            System.out.format("%n%s%n", "RegressionTest0.test464");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
+        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray14 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
+        java.io.Writer writer19 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory18.createJsonGenerator(writer19);
+        jsonGenerator20.writeNumberField("UTF-32LE", (double) 1L);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser11);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertNotNull(jsonFactory18);
+        org.junit.Assert.assertNotNull(jsonGenerator20);
+    }
+
+    @Test
+    public void test465() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test465");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22424,9 +22913,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test456() throws Throwable {
+    public void test466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test456");
+            System.out.format("%n%s%n", "RegressionTest0.test466");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -22505,9 +22994,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test457() throws Throwable {
+    public void test467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test457");
+            System.out.format("%n%s%n", "RegressionTest0.test467");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         java.lang.String str2 = jsonFactory0.getFormatName();
@@ -22594,9 +23083,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test458() throws Throwable {
+    public void test468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test458");
+            System.out.format("%n%s%n", "RegressionTest0.test468");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22609,20 +23098,20 @@ public class RegressionTest0 {
         java.lang.String str16 = uTF8StreamJsonParser12.getCurrentName();
         com.fasterxml.jackson.core.Version version17 = uTF8StreamJsonParser12.version();
         int int18 = uTF8StreamJsonParser12.getFeatureMask();
-        double double20 = uTF8StreamJsonParser12.getValueAsDouble((double) (-1770028298));
+        double double20 = uTF8StreamJsonParser12.getValueAsDouble((double) (-1728476878));
         org.junit.Assert.assertNotNull(byteArray8);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
         org.junit.Assert.assertNull(str16);
         org.junit.Assert.assertNotNull(version17);
         org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
-        org.junit.Assert.assertTrue("'" + double20 + "' != '" + (-1.770028298E9d) + "'", double20 == (-1.770028298E9d));
+        org.junit.Assert.assertTrue("'" + double20 + "' != '" + (-1.728476878E9d) + "'", double20 == (-1.728476878E9d));
     }
 
     @Test
-    public void test459() throws Throwable {
+    public void test469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test459");
+            System.out.format("%n%s%n", "RegressionTest0.test469");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -22663,9 +23152,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test460() throws Throwable {
+    public void test470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test460");
+            System.out.format("%n%s%n", "RegressionTest0.test470");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -22785,9 +23274,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test461() throws Throwable {
+    public void test471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test461");
+            System.out.format("%n%s%n", "RegressionTest0.test471");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -22811,9 +23300,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test462() throws Throwable {
+    public void test472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test462");
+            System.out.format("%n%s%n", "RegressionTest0.test472");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -22910,9 +23399,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test463() throws Throwable {
+    public void test473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test463");
+            System.out.format("%n%s%n", "RegressionTest0.test473");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -22989,9 +23478,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test464() throws Throwable {
+    public void test474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test464");
+            System.out.format("%n%s%n", "RegressionTest0.test474");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
@@ -23123,9 +23612,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test465() throws Throwable {
+    public void test475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test465");
+            System.out.format("%n%s%n", "RegressionTest0.test475");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23145,7 +23634,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray23 = uTF8StreamJsonParser12._decodeBase64(base64Variant22);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -23163,9 +23652,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test466() throws Throwable {
+    public void test476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test466");
+            System.out.format("%n%s%n", "RegressionTest0.test476");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23189,9 +23678,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test467() throws Throwable {
+    public void test477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test467");
+            System.out.format("%n%s%n", "RegressionTest0.test477");
         com.fasterxml.jackson.core.json.DupDetector dupDetector0 = null;
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext1 = com.fasterxml.jackson.core.json.JsonReadContext.createRootContext(dupDetector0);
         boolean boolean2 = jsonReadContext1.inArray();
@@ -23298,9 +23787,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test468() throws Throwable {
+    public void test478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test468");
+            System.out.format("%n%s%n", "RegressionTest0.test478");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         java.lang.String str1 = serializedString0.getValue();
         byte[] byteArray2 = serializedString0.asQuotedUTF8();
@@ -23329,9 +23818,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test469() throws Throwable {
+    public void test479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test469");
+            System.out.format("%n%s%n", "RegressionTest0.test479");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23353,9 +23842,66 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test470() throws Throwable {
+    public void test480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test470");
+            System.out.format("%n%s%n", "RegressionTest0.test480");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.SerializableString serializableString4 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter5 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString4);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray8 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory6.createParser(byteArray8);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory6.setCodec(objectCodec10);
+        byte[] byteArray14 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory11.createParser(byteArray14, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray20 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser21 = jsonFactory18.createParser(byteArray20);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature22 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory18.enable(feature22);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory11.enable(feature22);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = jsonFactory24._getBufferRecycler();
+        java.io.OutputStream outputStream26 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator27 = jsonFactory24.createJsonGenerator(outputStream26);
+        defaultPrettyPrinter5.writeObjectEntrySeparator(jsonGenerator27);
+        char[] charArray33 = new char[] { 'a', ' ', '#', ' ' };
+        jsonGenerator27.writeRaw(charArray33, 1, (int) (short) 0);
+        int int37 = jsonGenerator27.getHighestEscapedChar();
+        java.math.BigDecimal bigDecimal38 = null;
+        jsonGenerator27.writeNumber(bigDecimal38);
+        jsonGenerator27.writeRaw("/");
+        defaultPrettyPrinter2.writeEndObject(jsonGenerator27, 79);
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser9);
+        org.junit.Assert.assertNotNull(jsonFactory11);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser17);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser21);
+        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature22.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory23);
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertNotNull(bufferRecycler25);
+        org.junit.Assert.assertNotNull(jsonGenerator27);
+        org.junit.Assert.assertNotNull(charArray33);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray33), "a # ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray33), "a # ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray33), "[a,  , #,  ]");
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+    }
+
+    @Test
+    public void test481() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test481");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         java.io.InputStream inputStream1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -23380,9 +23926,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test471() throws Throwable {
+    public void test482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test471");
+            System.out.format("%n%s%n", "RegressionTest0.test482");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -23484,9 +24030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test472() throws Throwable {
+    public void test483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test472");
+            System.out.format("%n%s%n", "RegressionTest0.test483");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23513,9 +24059,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test473() throws Throwable {
+    public void test484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test473");
+            System.out.format("%n%s%n", "RegressionTest0.test484");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -23575,9 +24121,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test474() throws Throwable {
+    public void test485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test474");
+            System.out.format("%n%s%n", "RegressionTest0.test485");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23598,9 +24144,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test475() throws Throwable {
+    public void test486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test475");
+            System.out.format("%n%s%n", "RegressionTest0.test486");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23627,9 +24173,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test476() throws Throwable {
+    public void test487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test476");
+            System.out.format("%n%s%n", "RegressionTest0.test487");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -23685,9 +24231,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test477() throws Throwable {
+    public void test488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test477");
+            System.out.format("%n%s%n", "RegressionTest0.test488");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -23794,9 +24340,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test478() throws Throwable {
+    public void test489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test478");
+            System.out.format("%n%s%n", "RegressionTest0.test489");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -23908,9 +24454,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test479() throws Throwable {
+    public void test490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test479");
+            System.out.format("%n%s%n", "RegressionTest0.test490");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -23932,9 +24478,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test480() throws Throwable {
+    public void test491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test480");
+            System.out.format("%n%s%n", "RegressionTest0.test491");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -23987,9 +24533,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test481() throws Throwable {
+    public void test492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test481");
+            System.out.format("%n%s%n", "RegressionTest0.test492");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -24014,9 +24560,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test482() throws Throwable {
+    public void test493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test482");
+            System.out.format("%n%s%n", "RegressionTest0.test493");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -24106,9 +24652,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test483() throws Throwable {
+    public void test494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test483");
+            System.out.format("%n%s%n", "RegressionTest0.test494");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -24128,9 +24674,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test484() throws Throwable {
+    public void test495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test484");
+            System.out.format("%n%s%n", "RegressionTest0.test495");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -24168,7 +24714,7 @@ public class RegressionTest0 {
         mergedStream61.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray65 = jsonToken64.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1736418256);
         com.fasterxml.jackson.core.JsonEncoding jsonEncoding69 = iOContext3.getEncoding();
         com.fasterxml.jackson.core.io.IOContext iOContext70 = null;
         byte[] byteArray71 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
@@ -24207,9 +24753,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test485() throws Throwable {
+    public void test496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test485");
+            System.out.format("%n%s%n", "RegressionTest0.test496");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -24264,9 +24810,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test486() throws Throwable {
+    public void test497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test486");
+            System.out.format("%n%s%n", "RegressionTest0.test497");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -24313,9 +24859,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test487() throws Throwable {
+    public void test498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test487");
+            System.out.format("%n%s%n", "RegressionTest0.test498");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         java.io.InputStream inputStream1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext2 = null;
@@ -24339,9 +24885,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test488() throws Throwable {
+    public void test499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test488");
+            System.out.format("%n%s%n", "RegressionTest0.test499");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -24358,7 +24904,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._finishString();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -24373,9 +24919,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test489() throws Throwable {
+    public void test500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test489");
+            System.out.format("%n%s%n", "RegressionTest0.test500");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -24407,808 +24953,5 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long18 + "' != '" + 0L + "'", long18 == 0L);
         org.junit.Assert.assertNotNull(intArray19);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(intArray19), "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]");
-    }
-
-    @Test
-    public void test490() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test490");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.SerializableString serializableString3 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString3);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter5 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter4);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = defaultPrettyPrinter5.createInstance();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray9 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
-        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
-        java.io.OutputStream outputStream27 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
-        jsonGenerator28.flush();
-        defaultPrettyPrinter5.beforeObjectEntries(jsonGenerator28);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator32 = jsonGenerator28.setFeatureMask(35);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature33 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator35 = jsonGenerator28.configure(feature33, false);
-        com.fasterxml.jackson.core.io.SerializedString serializedString36 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray39 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory37.createParser(byteArray39);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec41 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory37.setCodec(objectCodec41);
-        byte[] byteArray45 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory42.createParser(byteArray45, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory49 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray51 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory49.createParser(byteArray51);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature53 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory54 = jsonFactory49.enable(feature53);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory55 = jsonFactory42.enable(feature53);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory56 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray58 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser59 = jsonFactory56.createParser(byteArray58);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature60 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory61 = jsonFactory56.enable(feature60);
-        byte[] byteArray62 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser65 = jsonFactory61.createJsonParser(byteArray62, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser66 = jsonFactory42.createParser(byteArray62);
-        int int68 = serializedString36.appendUnquotedUTF8(byteArray62, 56319);
-        byte[] byteArray69 = serializedString36.asUnquotedUTF8();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory70 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray72 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser73 = jsonFactory70.createParser(byteArray72);
-        int int75 = serializedString36.appendQuotedUTF8(byteArray72, (int) (byte) 0);
-        java.lang.String str76 = serializedString36.getValue();
-        java.lang.String str77 = serializedString36.getValue();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator78 = jsonGenerator28.setRootValueSeparator((com.fasterxml.jackson.core.SerializableString) serializedString36);
-        defaultPrettyPrinter1.writeEndObject(jsonGenerator28, (int) '4');
-        boolean boolean81 = jsonGenerator28.canWriteBinaryNatively();
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter6);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser18);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(bufferRecycler26);
-        org.junit.Assert.assertNotNull(jsonGenerator28);
-        org.junit.Assert.assertNotNull(jsonGenerator32);
-        org.junit.Assert.assertTrue("'" + feature33 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature33.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertNotNull(jsonGenerator35);
-        org.junit.Assert.assertNotNull(serializedString36);
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser40);
-        org.junit.Assert.assertNotNull(jsonFactory42);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser48);
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser52);
-        org.junit.Assert.assertTrue("'" + feature53 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature53.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory54);
-        org.junit.Assert.assertNotNull(jsonFactory55);
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser59);
-        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature60.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory61);
-        org.junit.Assert.assertNotNull(byteArray62);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser65);
-        org.junit.Assert.assertNotNull(jsonParser66);
-        org.junit.Assert.assertTrue("'" + int68 + "' != '" + (-1) + "'", int68 == (-1));
-        org.junit.Assert.assertNotNull(byteArray69);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[32]");
-        org.junit.Assert.assertNotNull(byteArray72);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[32]");
-        org.junit.Assert.assertNotNull(jsonParser73);
-        org.junit.Assert.assertTrue("'" + int75 + "' != '" + 1 + "'", int75 == 1);
-        org.junit.Assert.assertEquals("'" + str76 + "' != '" + " " + "'", str76, " ");
-        org.junit.Assert.assertEquals("'" + str77 + "' != '" + " " + "'", str77, " ");
-        org.junit.Assert.assertNotNull(jsonGenerator78);
-        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
-    }
-
-    @Test
-    public void test491() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test491");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        int int16 = uTF8StreamJsonParser12._decodeCharForError((int) '#');
-        com.fasterxml.jackson.core.JsonToken jsonToken17 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray18 = jsonToken17.asByteArray();
-        java.lang.String str19 = uTF8StreamJsonParser12._getText2(jsonToken17);
-        com.fasterxml.jackson.core.Version version20 = uTF8StreamJsonParser12.version();
-        // The following exception was thrown during execution in test generation
-        try {
-            int int21 = uTF8StreamJsonParser12.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 35 + "'", int16 == 35);
-        org.junit.Assert.assertTrue("'" + jsonToken17 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken17.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "false" + "'", str19, "false");
-        org.junit.Assert.assertNotNull(version20);
-    }
-
-    @Test
-    public void test492() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test492");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding13 = null;
-        iOContext3.setEncoding(jsonEncoding13);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler16 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext19 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler16, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream21 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = null;
-        byte[] byteArray24 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser28 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, 0, inputStream21, objectCodec22, bytesToNameCanonicalizer23, byteArray24, 33, 33, false);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer35 = bytesToNameCanonicalizer32.makeChild(false, false);
-        byte[] byteArray36 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser40 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, (int) 'a', inputStream30, objectCodec31, bytesToNameCanonicalizer35, byteArray36, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream41 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken42 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray43 = jsonToken42.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream46 = new com.fasterxml.jackson.core.io.MergedStream(iOContext19, inputStream41, byteArray43, 56319, (int) (short) 100);
-        boolean boolean47 = mergedStream46.markSupported();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec48 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer49 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        int int51 = bytesToNameCanonicalizer49.calcHash((int) (short) 1);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler52 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext55 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler52, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream57 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec58 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer59 = null;
-        byte[] byteArray60 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser64 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext55, 0, inputStream57, objectCodec58, bytesToNameCanonicalizer59, byteArray60, 33, 33, false);
-        java.io.InputStream inputStream65 = null;
-        byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
-        // The following exception was thrown during execution in test generation
-        try {
-            java.math.BigDecimal bigDecimal75 = uTF8StreamJsonParser74.getDecimalValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer32);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer35);
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken42 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken42.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770255397) + "'", int51 == (-1770255397));
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray66);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-    }
-
-    @Test
-    public void test493() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test493");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
-        com.fasterxml.jackson.core.SerializableString serializableString5 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString5);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray9 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
-        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
-        java.io.OutputStream outputStream27 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
-        defaultPrettyPrinter6.writeObjectEntrySeparator(jsonGenerator28);
-        com.fasterxml.jackson.core.SerializableString serializableString30 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString30);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter32 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter31);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        defaultPrettyPrinter31.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
-        defaultPrettyPrinter6.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter36 = defaultPrettyPrinter6.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter37 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        com.fasterxml.jackson.core.SerializableString serializableString38 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter39 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString38);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter40 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter39);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray43 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser44 = jsonFactory41.createParser(byteArray43);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.setCodec(objectCodec45);
-        byte[] byteArray49 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory46.createParser(byteArray49, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray55 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory46.enable(feature57);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler60 = jsonFactory59._getBufferRecycler();
-        java.io.OutputStream outputStream61 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator62 = jsonFactory59.createJsonGenerator(outputStream61);
-        jsonGenerator62.flush();
-        defaultPrettyPrinter40.beforeObjectEntries(jsonGenerator62);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec65 = jsonGenerator62.getCodec();
-        com.fasterxml.jackson.core.Version version66 = jsonGenerator62.version();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator68 = jsonGenerator62.setHighestNonEscapedChar((int) (short) 0);
-        lf2SpacesIndenter37.writeIndentation(jsonGenerator62, 79);
-        jsonGenerator62.writeNumberField(" ", (long) (byte) 10);
-        defaultPrettyPrinter6.beforeArrayValues(jsonGenerator62);
-        com.fasterxml.jackson.core.FormatSchema formatSchema75 = null;
-        boolean boolean76 = jsonGenerator62.canUseSchema(formatSchema75);
-        defaultPrettyPrinter2.writeRootValueSeparator(jsonGenerator62);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator62.setHighestNonEscapedChar((-1770006982));
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser18);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(bufferRecycler26);
-        org.junit.Assert.assertNotNull(jsonGenerator28);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter33);
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter36);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter37);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser44);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser52);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser56);
-        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory58);
-        org.junit.Assert.assertNotNull(jsonFactory59);
-        org.junit.Assert.assertNotNull(bufferRecycler60);
-        org.junit.Assert.assertNotNull(jsonGenerator62);
-        org.junit.Assert.assertNull(objectCodec65);
-        org.junit.Assert.assertNotNull(version66);
-        org.junit.Assert.assertNotNull(jsonGenerator68);
-        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator79);
-    }
-
-    @Test
-    public void test494() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test494");
-        com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray3 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory1.createParser(byteArray3);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec5 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory1.setCodec(objectCodec5);
-        byte[] byteArray9 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser12 = jsonFactory6.createParser(byteArray9, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray15 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory13.createParser(byteArray15);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature17 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory13.enable(feature17);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory6.enable(feature17);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray22 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory20.createParser(byteArray22);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature24 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory20.enable(feature24);
-        byte[] byteArray26 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory25.createJsonParser(byteArray26, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory6.createParser(byteArray26);
-        int int32 = serializedString0.appendUnquotedUTF8(byteArray26, 56319);
-        byte[] byteArray33 = serializedString0.asUnquotedUTF8();
-        com.fasterxml.jackson.core.io.SerializedString serializedString34 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray37 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory35.createParser(byteArray37);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec39 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory35.setCodec(objectCodec39);
-        byte[] byteArray43 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser46 = jsonFactory40.createParser(byteArray43, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray49 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory47.createParser(byteArray49);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature51 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory47.enable(feature51);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory40.enable(feature51);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory54 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray56 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser57 = jsonFactory54.createParser(byteArray56);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature58 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory54.enable(feature58);
-        byte[] byteArray60 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser63 = jsonFactory59.createJsonParser(byteArray60, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser64 = jsonFactory40.createParser(byteArray60);
-        int int66 = serializedString34.appendUnquotedUTF8(byteArray60, 56319);
-        byte[] byteArray67 = serializedString34.asUnquotedUTF8();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory68 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray70 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser71 = jsonFactory68.createParser(byteArray70);
-        int int73 = serializedString34.appendQuotedUTF8(byteArray70, (int) (byte) 0);
-        char[] charArray74 = serializedString34.asQuotedChars();
-        int int76 = serializedString0.appendUnquoted(charArray74, 56320);
-        java.lang.String str77 = serializedString0.getValue();
-        org.junit.Assert.assertNotNull(serializedString0);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser4);
-        org.junit.Assert.assertNotNull(jsonFactory6);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser12);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature17.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser23);
-        org.junit.Assert.assertTrue("'" + feature24 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature24.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(byteArray26);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[32]");
-        org.junit.Assert.assertNotNull(serializedString34);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNotNull(jsonFactory40);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser46);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertTrue("'" + feature51 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature51.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory52);
-        org.junit.Assert.assertNotNull(jsonFactory53);
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser57);
-        org.junit.Assert.assertTrue("'" + feature58 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature58.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory59);
-        org.junit.Assert.assertNotNull(byteArray60);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser63);
-        org.junit.Assert.assertNotNull(jsonParser64);
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + (-1) + "'", int66 == (-1));
-        org.junit.Assert.assertNotNull(byteArray67);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[32]");
-        org.junit.Assert.assertNotNull(byteArray70);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[32]");
-        org.junit.Assert.assertNotNull(jsonParser71);
-        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 1 + "'", int73 == 1);
-        org.junit.Assert.assertNotNull(charArray74);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray74), " ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray74), " ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray74), "[ ]");
-        org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-1) + "'", int76 == (-1));
-        org.junit.Assert.assertEquals("'" + str77 + "' != '" + " " + "'", str77, " ");
-    }
-
-    @Test
-    public void test495() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test495");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray4 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
-        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray16 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
-        java.io.OutputStream outputStream22 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
-        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
-        com.fasterxml.jackson.core.SerializableString serializableString25 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter26 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString25);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter27 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter26);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter28 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        defaultPrettyPrinter26.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter28);
-        defaultPrettyPrinter1.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter28);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = defaultPrettyPrinter1.createInstance();
-        com.fasterxml.jackson.core.SerializableString serializableString32 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter33 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString32);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter34 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter33);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray37 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory35.createParser(byteArray37);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec39 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory35.setCodec(objectCodec39);
-        byte[] byteArray43 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser46 = jsonFactory40.createParser(byteArray43, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray49 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory47.createParser(byteArray49);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature51 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory47.enable(feature51);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory40.enable(feature51);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler54 = jsonFactory53._getBufferRecycler();
-        java.io.OutputStream outputStream55 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator56 = jsonFactory53.createJsonGenerator(outputStream55);
-        jsonGenerator56.flush();
-        defaultPrettyPrinter34.beforeObjectEntries(jsonGenerator56);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec59 = jsonGenerator56.getCodec();
-        com.fasterxml.jackson.core.Version version60 = jsonGenerator56.version();
-        int int61 = jsonGenerator56.getHighestEscapedChar();
-        defaultPrettyPrinter1.writeStartArray(jsonGenerator56);
-        jsonGenerator56.writeNumber("ROOT");
-        boolean boolean65 = jsonGenerator56.canWriteBinaryNatively();
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(bufferRecycler21);
-        org.junit.Assert.assertNotNull(jsonGenerator23);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter28);
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter31);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNotNull(jsonFactory40);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser46);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertTrue("'" + feature51 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature51.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory52);
-        org.junit.Assert.assertNotNull(jsonFactory53);
-        org.junit.Assert.assertNotNull(bufferRecycler54);
-        org.junit.Assert.assertNotNull(jsonGenerator56);
-        org.junit.Assert.assertNull(objectCodec59);
-        org.junit.Assert.assertNotNull(version60);
-        org.junit.Assert.assertTrue("'" + int61 + "' != '" + 0 + "'", int61 == 0);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-    }
-
-    @Test
-    public void test496() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test496");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
-        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray18 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
-        java.io.OutputStream outputStream24 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
-        jsonGenerator25.flush();
-        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator29 = jsonGenerator25.setFeatureMask(35);
-        boolean boolean30 = jsonGenerator29.canWriteObjectId();
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(bufferRecycler23);
-        org.junit.Assert.assertNotNull(jsonGenerator25);
-        org.junit.Assert.assertNotNull(jsonGenerator29);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test497() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test497");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        java.lang.String str16 = uTF8StreamJsonParser12.getText();
-        // The following exception was thrown during execution in test generation
-        try {
-            byte[] byteArray17 = uTF8StreamJsonParser12.getBinaryValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(str16);
-    }
-
-    @Test
-    public void test498() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test498");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray5 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory3.createParser(byteArray5);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec7 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = jsonFactory3.setCodec(objectCodec7);
-        byte[] byteArray11 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory8.createParser(byteArray11, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray17 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory15.createParser(byteArray17);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature19 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory15.enable(feature19);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory8.enable(feature19);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler22 = jsonFactory21._getBufferRecycler();
-        java.io.OutputStream outputStream23 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator24 = jsonFactory21.createJsonGenerator(outputStream23);
-        jsonGenerator24.flush();
-        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator24);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec27 = jsonGenerator24.getCodec();
-        com.fasterxml.jackson.core.Version version28 = jsonGenerator24.version();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec29 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator30 = jsonGenerator24.setCodec(objectCodec29);
-        jsonGenerator30.writeStartObject();
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNotNull(jsonFactory8);
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser18);
-        org.junit.Assert.assertTrue("'" + feature19 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature19.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(bufferRecycler22);
-        org.junit.Assert.assertNotNull(jsonGenerator24);
-        org.junit.Assert.assertNull(objectCodec27);
-        org.junit.Assert.assertNotNull(version28);
-        org.junit.Assert.assertNotNull(jsonGenerator30);
-    }
-
-    @Test
-    public void test499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test499");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
-        java.lang.String str2 = jsonFactory0.getFormatName();
-        java.lang.String str3 = jsonFactory0.getFormatName();
-        java.io.Writer writer4 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator5 = jsonFactory0.createJsonGenerator(writer4);
-        com.fasterxml.jackson.core.io.IOContext iOContext6 = null;
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext10 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler7, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream12 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec13 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer14 = null;
-        byte[] byteArray15 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser19 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext10, 0, inputStream12, objectCodec13, bytesToNameCanonicalizer14, byteArray15, 33, 33, false);
-        java.io.InputStream inputStream21 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer26 = bytesToNameCanonicalizer23.makeChild(false, false);
-        byte[] byteArray27 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser31 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext10, (int) 'a', inputStream21, objectCodec22, bytesToNameCanonicalizer26, byteArray27, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream32 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken33 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray34 = jsonToken33.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream37 = new com.fasterxml.jackson.core.io.MergedStream(iOContext10, inputStream32, byteArray34, 56319, (int) (short) 100);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler38 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext41 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler38, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream43 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec44 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer45 = null;
-        byte[] byteArray46 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser50 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext41, 0, inputStream43, objectCodec44, bytesToNameCanonicalizer45, byteArray46, 33, 33, false);
-        java.io.InputStream inputStream52 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec53 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer54 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer57 = bytesToNameCanonicalizer54.makeChild(false, false);
-        byte[] byteArray58 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser62 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext41, (int) 'a', inputStream52, objectCodec53, bytesToNameCanonicalizer57, byteArray58, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream63 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray65 = jsonToken64.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext41, inputStream63, byteArray65, 56319, (int) (short) 100);
-        mergedStream68.mark(32);
-        com.fasterxml.jackson.core.JsonToken jsonToken71 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray72 = jsonToken71.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream75 = new com.fasterxml.jackson.core.io.MergedStream(iOContext10, (java.io.InputStream) mergedStream68, byteArray72, (int) (byte) 100, 1777981781);
-        int int76 = mergedStream68.available();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory77 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray79 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser80 = jsonFactory77.createParser(byteArray79);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec81 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory82 = jsonFactory77.setCodec(objectCodec81);
-        byte[] byteArray85 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser88 = jsonFactory82.createParser(byteArray85, (-1), 0);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader92 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext6, (java.io.InputStream) mergedStream68, byteArray85, (-1770100711), (-1770100711), true);
-        jsonGenerator5.writeBinary(byteArray85, (int) '4', 0);
-        org.junit.Assert.assertNotNull(version1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "JSON" + "'", str2, "JSON");
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "JSON" + "'", str3, "JSON");
-        org.junit.Assert.assertNotNull(jsonGenerator5);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer23);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer26);
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken33 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken33.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer54);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer57);
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken64 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken64.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + jsonToken71 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken71.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray72);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-56219) + "'", int76 == (-56219));
-        org.junit.Assert.assertNotNull(byteArray79);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser80);
-        org.junit.Assert.assertNotNull(jsonFactory82);
-        org.junit.Assert.assertNotNull(byteArray85);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray85), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser88);
-    }
-
-    @Test
-    public void test500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test500");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        java.lang.String str16 = uTF8StreamJsonParser12.getText();
-        java.lang.String str17 = uTF8StreamJsonParser12.getCurrentName();
-        uTF8StreamJsonParser12.overrideCurrentName("");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(str16);
-        org.junit.Assert.assertNull(str17);
     }
 }

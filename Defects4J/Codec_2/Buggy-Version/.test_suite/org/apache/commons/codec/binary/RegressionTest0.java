@@ -1077,43 +1077,14 @@ public class RegressionTest0 {
     public void test038() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test038");
-        byte[] byteArray2 = new byte[] { (byte) 10 };
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
-        boolean boolean6 = base64_5.hasData();
-        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
-        byte[] byteArray10 = new byte[] { (byte) 10 };
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray10);
-        java.lang.Object obj12 = base64_8.decode((java.lang.Object) byteArray10);
-        java.lang.Object obj13 = base64_5.encode((java.lang.Object) byteArray10);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[10]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(obj12);
-        org.junit.Assert.assertNotNull(obj13);
+        boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) 0);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
     public void test039() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test039");
-        boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) 0);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-    }
-
-    @Test
-    public void test040() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test040");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1160,9 +1131,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test041() throws Throwable {
+    public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test041");
+            System.out.format("%n%s%n", "RegressionTest0.test040");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1196,9 +1167,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test042() throws Throwable {
+    public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test042");
+            System.out.format("%n%s%n", "RegressionTest0.test041");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -1251,17 +1222,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test043() throws Throwable {
+    public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test043");
+            System.out.format("%n%s%n", "RegressionTest0.test042");
         boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) -1);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test044() throws Throwable {
+    public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test044");
+            System.out.format("%n%s%n", "RegressionTest0.test043");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1293,9 +1264,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test045() throws Throwable {
+    public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test045");
+            System.out.format("%n%s%n", "RegressionTest0.test044");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -1346,9 +1317,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test046() throws Throwable {
+    public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test046");
+            System.out.format("%n%s%n", "RegressionTest0.test045");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -1400,9 +1371,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test047() throws Throwable {
+    public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test047");
+            System.out.format("%n%s%n", "RegressionTest0.test046");
         byte[] byteArray1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -1414,9 +1385,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test048() throws Throwable {
+    public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test048");
+            System.out.format("%n%s%n", "RegressionTest0.test047");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1449,9 +1420,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test049() throws Throwable {
+    public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test049");
+            System.out.format("%n%s%n", "RegressionTest0.test048");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1499,9 +1470,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test050() throws Throwable {
+    public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test050");
+            System.out.format("%n%s%n", "RegressionTest0.test049");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1535,9 +1506,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test051() throws Throwable {
+    public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test051");
+            System.out.format("%n%s%n", "RegressionTest0.test050");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1601,9 +1572,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test052() throws Throwable {
+    public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test052");
+            System.out.format("%n%s%n", "RegressionTest0.test051");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1635,9 +1606,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test053() throws Throwable {
+    public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test053");
+            System.out.format("%n%s%n", "RegressionTest0.test052");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(100);
         org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -1701,9 +1672,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test054() throws Throwable {
+    public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test054");
+            System.out.format("%n%s%n", "RegressionTest0.test053");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1751,9 +1722,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test055() throws Throwable {
+    public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test055");
+            System.out.format("%n%s%n", "RegressionTest0.test054");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         int int2 = base64_0.avail();
@@ -1764,9 +1735,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test056() throws Throwable {
+    public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test056");
+            System.out.format("%n%s%n", "RegressionTest0.test055");
         java.math.BigInteger bigInteger0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -1778,9 +1749,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test057() throws Throwable {
+    public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test057");
+            System.out.format("%n%s%n", "RegressionTest0.test056");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
@@ -1837,9 +1808,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test058() throws Throwable {
+    public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test058");
+            System.out.format("%n%s%n", "RegressionTest0.test057");
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
@@ -1898,9 +1869,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test059() throws Throwable {
+    public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test059");
+            System.out.format("%n%s%n", "RegressionTest0.test058");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -1954,9 +1925,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test060() throws Throwable {
+    public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test060");
+            System.out.format("%n%s%n", "RegressionTest0.test059");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -1986,9 +1957,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test061() throws Throwable {
+    public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test061");
+            System.out.format("%n%s%n", "RegressionTest0.test060");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2019,9 +1990,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test062() throws Throwable {
+    public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test062");
+            System.out.format("%n%s%n", "RegressionTest0.test061");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2042,9 +2013,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test063() throws Throwable {
+    public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test063");
+            System.out.format("%n%s%n", "RegressionTest0.test062");
         byte[] byteArray0 = new byte[] {};
         byte[] byteArray1 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray0);
         boolean boolean2 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray0);
@@ -2056,17 +2027,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test064() throws Throwable {
+    public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test064");
+            System.out.format("%n%s%n", "RegressionTest0.test063");
         boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) 100);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
     @Test
-    public void test065() throws Throwable {
+    public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test065");
+            System.out.format("%n%s%n", "RegressionTest0.test064");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64();
         int int4 = base64_3.avail();
@@ -2183,9 +2154,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test066() throws Throwable {
+    public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test066");
+            System.out.format("%n%s%n", "RegressionTest0.test065");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2271,9 +2242,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test067() throws Throwable {
+    public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test067");
+            System.out.format("%n%s%n", "RegressionTest0.test066");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         int int2 = base64_0.avail();
@@ -2289,9 +2260,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test068() throws Throwable {
+    public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test068");
+            System.out.format("%n%s%n", "RegressionTest0.test067");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2354,9 +2325,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test069() throws Throwable {
+    public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test069");
+            System.out.format("%n%s%n", "RegressionTest0.test068");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(100);
         org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64();
@@ -2455,9 +2426,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test070() throws Throwable {
+    public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test070");
+            System.out.format("%n%s%n", "RegressionTest0.test069");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2505,16 +2476,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test071() throws Throwable {
+    public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test071");
+            System.out.format("%n%s%n", "RegressionTest0.test070");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 0);
     }
 
     @Test
-    public void test072() throws Throwable {
+    public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test072");
+            System.out.format("%n%s%n", "RegressionTest0.test071");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         java.math.BigInteger bigInteger4 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray3);
@@ -2539,9 +2510,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test073() throws Throwable {
+    public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test073");
+            System.out.format("%n%s%n", "RegressionTest0.test072");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2604,9 +2575,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test074() throws Throwable {
+    public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test074");
+            System.out.format("%n%s%n", "RegressionTest0.test073");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -2642,9 +2613,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test075() throws Throwable {
+    public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test075");
+            System.out.format("%n%s%n", "RegressionTest0.test074");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
@@ -2676,9 +2647,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test076() throws Throwable {
+    public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test076");
+            System.out.format("%n%s%n", "RegressionTest0.test075");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -2693,9 +2664,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test077() throws Throwable {
+    public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test077");
+            System.out.format("%n%s%n", "RegressionTest0.test076");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -2853,9 +2824,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test078() throws Throwable {
+    public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test078");
+            System.out.format("%n%s%n", "RegressionTest0.test077");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -2890,9 +2861,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test079() throws Throwable {
+    public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test079");
+            System.out.format("%n%s%n", "RegressionTest0.test078");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -2923,9 +2894,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test080() throws Throwable {
+    public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test080");
+            System.out.format("%n%s%n", "RegressionTest0.test079");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -3025,9 +2996,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test081() throws Throwable {
+    public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test081");
+            System.out.format("%n%s%n", "RegressionTest0.test080");
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
@@ -3095,9 +3066,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
+    public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
+            System.out.format("%n%s%n", "RegressionTest0.test081");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -3129,9 +3100,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test083() throws Throwable {
+    public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test083");
+            System.out.format("%n%s%n", "RegressionTest0.test082");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -3163,9 +3134,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test084() throws Throwable {
+    public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test084");
+            System.out.format("%n%s%n", "RegressionTest0.test083");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         java.io.InputStream inputStream2 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream(inputStream2, false);
@@ -3214,9 +3185,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test085() throws Throwable {
+    public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
+            System.out.format("%n%s%n", "RegressionTest0.test084");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -3281,9 +3252,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test086() throws Throwable {
+    public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test086");
+            System.out.format("%n%s%n", "RegressionTest0.test085");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -3366,9 +3337,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test087() throws Throwable {
+    public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test087");
+            System.out.format("%n%s%n", "RegressionTest0.test086");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -3455,9 +3426,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test088() throws Throwable {
+    public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test088");
+            System.out.format("%n%s%n", "RegressionTest0.test087");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -3512,9 +3483,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test089() throws Throwable {
+    public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test089");
+            System.out.format("%n%s%n", "RegressionTest0.test088");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -3711,9 +3682,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test090() throws Throwable {
+    public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test090");
+            System.out.format("%n%s%n", "RegressionTest0.test089");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -3763,9 +3734,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test091() throws Throwable {
+    public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test091");
+            System.out.format("%n%s%n", "RegressionTest0.test090");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -3912,9 +3883,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test092() throws Throwable {
+    public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test092");
+            System.out.format("%n%s%n", "RegressionTest0.test091");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -3940,9 +3911,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test093() throws Throwable {
+    public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test093");
+            System.out.format("%n%s%n", "RegressionTest0.test092");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4005,9 +3976,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test094() throws Throwable {
+    public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test094");
+            System.out.format("%n%s%n", "RegressionTest0.test093");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -4157,9 +4128,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test095() throws Throwable {
+    public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test095");
+            System.out.format("%n%s%n", "RegressionTest0.test094");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -4197,9 +4168,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test096() throws Throwable {
+    public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test096");
+            System.out.format("%n%s%n", "RegressionTest0.test095");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         java.io.InputStream inputStream2 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream(inputStream2, false);
@@ -4234,9 +4205,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test097() throws Throwable {
+    public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test097");
+            System.out.format("%n%s%n", "RegressionTest0.test096");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -4288,9 +4259,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test098() throws Throwable {
+    public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test098");
+            System.out.format("%n%s%n", "RegressionTest0.test097");
         java.io.OutputStream outputStream0 = null;
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
@@ -4311,9 +4282,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test099() throws Throwable {
+    public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test099");
+            System.out.format("%n%s%n", "RegressionTest0.test098");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4367,9 +4338,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test100() throws Throwable {
+    public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test100");
+            System.out.format("%n%s%n", "RegressionTest0.test099");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4390,9 +4361,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test101() throws Throwable {
+    public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test101");
+            System.out.format("%n%s%n", "RegressionTest0.test100");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         boolean boolean4 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray2);
@@ -4414,9 +4385,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test102() throws Throwable {
+    public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test102");
+            System.out.format("%n%s%n", "RegressionTest0.test101");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
@@ -4450,9 +4421,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test103() throws Throwable {
+    public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test103");
+            System.out.format("%n%s%n", "RegressionTest0.test102");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4484,9 +4455,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test104() throws Throwable {
+    public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test104");
+            System.out.format("%n%s%n", "RegressionTest0.test103");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4519,9 +4490,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test105() throws Throwable {
+    public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test105");
+            System.out.format("%n%s%n", "RegressionTest0.test104");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4632,9 +4603,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test106() throws Throwable {
+    public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test106");
+            System.out.format("%n%s%n", "RegressionTest0.test105");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -4778,9 +4749,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test107() throws Throwable {
+    public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test107");
+            System.out.format("%n%s%n", "RegressionTest0.test106");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -4831,9 +4802,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test108() throws Throwable {
+    public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test108");
+            System.out.format("%n%s%n", "RegressionTest0.test107");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -4865,9 +4836,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test109() throws Throwable {
+    public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test109");
+            System.out.format("%n%s%n", "RegressionTest0.test108");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -5059,9 +5030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test110() throws Throwable {
+    public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test110");
+            System.out.format("%n%s%n", "RegressionTest0.test109");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) '4');
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
@@ -5074,9 +5045,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test111() throws Throwable {
+    public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test111");
+            System.out.format("%n%s%n", "RegressionTest0.test110");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -5153,9 +5124,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test112() throws Throwable {
+    public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test112");
+            System.out.format("%n%s%n", "RegressionTest0.test111");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -5285,9 +5256,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test113() throws Throwable {
+    public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test113");
+            System.out.format("%n%s%n", "RegressionTest0.test112");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -5318,9 +5289,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test114() throws Throwable {
+    public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test114");
+            System.out.format("%n%s%n", "RegressionTest0.test113");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -5431,9 +5402,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test115() throws Throwable {
+    public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test115");
+            System.out.format("%n%s%n", "RegressionTest0.test114");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
@@ -5457,9 +5428,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test116() throws Throwable {
+    public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test116");
+            System.out.format("%n%s%n", "RegressionTest0.test115");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -5495,9 +5466,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test117() throws Throwable {
+    public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test117");
+            System.out.format("%n%s%n", "RegressionTest0.test116");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -5609,94 +5580,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test118() throws Throwable {
+    public void test117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test118");
-        byte[] byteArray4 = new byte[] { (byte) 10 };
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
-        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
-        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean9 = base64_8.isUrlSafe();
-        byte[] byteArray10 = new byte[] {};
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
-        int int14 = base64_8.readResults(byteArray11, (int) (short) 10, (int) (short) 100);
-        boolean boolean15 = base64_8.isUrlSafe();
-        byte[] byteArray19 = new byte[] { (byte) 10 };
-        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19);
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray19);
-        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64(0, byteArray19);
-        byte[] byteArray23 = new byte[] {};
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray23);
-        byte[] byteArray25 = base64_22.decode(byteArray24);
-        boolean boolean26 = base64_22.hasData();
-        byte[] byteArray29 = new byte[] { (byte) 10 };
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
-        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
-        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
-        byte[] byteArray33 = new byte[] {};
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
-        byte[] byteArray35 = base64_32.decode(byteArray34);
-        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
-        byte[] byteArray37 = base64_22.encode(byteArray36);
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray36);
-        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray36, false);
-        base64_8.encode(byteArray36, (int) (byte) 0, 0);
-        byte[] byteArray44 = base64_7.encode(byteArray36);
-        org.apache.commons.codec.binary.Base64 base64_46 = new org.apache.commons.codec.binary.Base64((int) (byte) 1, byteArray44, true);
-        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) '#', byteArray44, true);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[10]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
-    }
-
-    @Test
-    public void test119() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test119");
+            System.out.format("%n%s%n", "RegressionTest0.test117");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -5728,9 +5614,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test120() throws Throwable {
+    public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test120");
+            System.out.format("%n%s%n", "RegressionTest0.test118");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -5816,9 +5702,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test121() throws Throwable {
+    public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test121");
+            System.out.format("%n%s%n", "RegressionTest0.test119");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -5876,9 +5762,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test122() throws Throwable {
+    public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test122");
+            System.out.format("%n%s%n", "RegressionTest0.test120");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
@@ -5893,9 +5779,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test123() throws Throwable {
+    public void test121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test123");
+            System.out.format("%n%s%n", "RegressionTest0.test121");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -5925,9 +5811,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test124() throws Throwable {
+    public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test124");
+            System.out.format("%n%s%n", "RegressionTest0.test122");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -6123,9 +6009,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test125() throws Throwable {
+    public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test125");
+            System.out.format("%n%s%n", "RegressionTest0.test123");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6168,9 +6054,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test126() throws Throwable {
+    public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test126");
+            System.out.format("%n%s%n", "RegressionTest0.test124");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6218,9 +6104,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test127() throws Throwable {
+    public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test127");
+            System.out.format("%n%s%n", "RegressionTest0.test125");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = new byte[] {};
@@ -6274,9 +6160,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test128() throws Throwable {
+    public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test128");
+            System.out.format("%n%s%n", "RegressionTest0.test126");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6402,9 +6288,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test129() throws Throwable {
+    public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test129");
+            System.out.format("%n%s%n", "RegressionTest0.test127");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -6460,9 +6346,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test130() throws Throwable {
+    public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test130");
+            System.out.format("%n%s%n", "RegressionTest0.test128");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -6517,9 +6403,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test131() throws Throwable {
+    public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test131");
+            System.out.format("%n%s%n", "RegressionTest0.test129");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -6611,9 +6497,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test132() throws Throwable {
+    public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test132");
+            System.out.format("%n%s%n", "RegressionTest0.test130");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6666,9 +6552,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test133() throws Throwable {
+    public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test133");
+            System.out.format("%n%s%n", "RegressionTest0.test131");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -6711,9 +6597,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test134() throws Throwable {
+    public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test134");
+            System.out.format("%n%s%n", "RegressionTest0.test132");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6734,54 +6620,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test135() throws Throwable {
+    public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test135");
+            System.out.format("%n%s%n", "RegressionTest0.test133");
         byte[] byteArray0 = null;
         byte[] byteArray1 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray0);
         org.junit.Assert.assertNull(byteArray1);
     }
 
     @Test
-    public void test136() throws Throwable {
+    public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test136");
-        byte[] byteArray2 = new byte[] { (byte) 10 };
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
-        byte[] byteArray6 = new byte[] {};
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
-        byte[] byteArray8 = base64_5.decode(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray7);
-        java.math.BigInteger bigInteger10 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray7);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(bigInteger10);
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-    }
-
-    @Test
-    public void test137() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test137");
+            System.out.format("%n%s%n", "RegressionTest0.test134");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6813,9 +6663,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test138() throws Throwable {
+    public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test138");
+            System.out.format("%n%s%n", "RegressionTest0.test135");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6849,9 +6699,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test139() throws Throwable {
+    public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test139");
+            System.out.format("%n%s%n", "RegressionTest0.test136");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, true);
         // The following exception was thrown during execution in test generation
@@ -6864,9 +6714,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test140() throws Throwable {
+    public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test140");
+            System.out.format("%n%s%n", "RegressionTest0.test137");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -6901,9 +6751,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test141() throws Throwable {
+    public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test141");
+            System.out.format("%n%s%n", "RegressionTest0.test138");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -6973,9 +6823,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test142() throws Throwable {
+    public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
+            System.out.format("%n%s%n", "RegressionTest0.test139");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7110,9 +6960,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RegressionTest0.test140");
         java.math.BigInteger bigInteger0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -7124,9 +6974,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RegressionTest0.test141");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7229,9 +7079,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RegressionTest0.test142");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -7291,9 +7141,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RegressionTest0.test143");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7325,9 +7175,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RegressionTest0.test144");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1, false);
@@ -7341,9 +7191,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RegressionTest0.test145");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -7405,9 +7255,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RegressionTest0.test146");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7455,9 +7305,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RegressionTest0.test147");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7490,9 +7340,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RegressionTest0.test148");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7540,9 +7390,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RegressionTest0.test149");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7575,9 +7425,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RegressionTest0.test150");
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
@@ -7699,9 +7549,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RegressionTest0.test151");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7727,79 +7577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
-        java.io.InputStream inputStream6 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
-        byte[] byteArray9 = new byte[] {};
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
-        int int11 = base64InputStream8.read(byteArray10);
-        byte[] byteArray15 = new byte[] { (byte) 10 };
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
-        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
-        byte[] byteArray19 = base64_5.encode(byteArray15);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
-        base64OutputStream20.write((-1));
-        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64();
-        java.io.OutputStream outputStream25 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream27 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream25, false);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream28 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream25);
-        byte[] byteArray31 = new byte[] { (byte) 10 };
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray31);
-        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray31);
-        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64(0, byteArray31);
-        boolean boolean35 = base64_34.hasData();
-        byte[] byteArray38 = new byte[] { (byte) 10 };
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
-        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray38);
-        org.apache.commons.codec.binary.Base64 base64_41 = new org.apache.commons.codec.binary.Base64(0, byteArray38);
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray38);
-        byte[] byteArray43 = base64_34.encode(byteArray42);
-        base64OutputStream28.write(byteArray43);
-        base64_24.setInitialBuffer(byteArray43, (int) (short) 0, 76);
-        base64OutputStream20.write(byteArray43);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[10]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray40);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-    }
-
-    @Test
-    public void test156() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RegressionTest0.test152");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -7832,9 +7612,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test157() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RegressionTest0.test153");
         byte[] byteArray0 = new byte[] {};
         byte[] byteArray1 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray0);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray0, true, false);
@@ -7847,9 +7627,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RegressionTest0.test154");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -7936,9 +7716,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RegressionTest0.test155");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8114,9 +7894,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RegressionTest0.test156");
         byte[] byteArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -8128,9 +7908,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test161() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RegressionTest0.test157");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8164,9 +7944,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RegressionTest0.test158");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -8266,9 +8046,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RegressionTest0.test159");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8300,9 +8080,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RegressionTest0.test160");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         boolean boolean3 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray1);
@@ -8320,18 +8100,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
+            System.out.format("%n%s%n", "RegressionTest0.test161");
         byte[] byteArray0 = null;
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray0, true, true);
         org.junit.Assert.assertNull(byteArray3);
     }
 
     @Test
-    public void test166() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RegressionTest0.test162");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = new byte[] {};
@@ -8404,9 +8184,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test167() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RegressionTest0.test163");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8438,9 +8218,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test164");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
@@ -8461,9 +8241,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test165");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8495,9 +8275,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test166");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -8565,9 +8345,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test167");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -8599,9 +8379,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -8632,9 +8412,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -8826,18 +8606,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) '4');
         int int2 = base64_1.avail();
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -8958,18 +8738,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -9003,9 +8783,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -9182,9 +8962,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -9268,9 +9048,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -9416,9 +9196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
@@ -9476,24 +9256,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
-        byte[] byteArray0 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
-        byte[] byteArray1 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray0);
-        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray1);
-        org.junit.Assert.assertNotNull(byteArray0);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray0), "[13, 10]");
-        org.junit.Assert.assertNotNull(byteArray1);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[]");
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
-    }
-
-    @Test
-    public void test183() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -9526,44 +9291,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64();
-        java.io.InputStream inputStream4 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream6 = new org.apache.commons.codec.binary.Base64InputStream(inputStream4, false);
-        byte[] byteArray7 = new byte[] {};
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray7);
-        int int9 = base64InputStream6.read(byteArray8);
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream16 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream6, false, 10, byteArray13);
-        byte[] byteArray17 = base64_3.encode(byteArray13);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream18 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, 10, byteArray13);
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13, false, true);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103]");
-    }
-
-    @Test
-    public void test185() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
@@ -9626,9 +9356,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -9746,9 +9476,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         boolean boolean2 = base64_1.isUrlSafe();
         byte[] byteArray3 = new byte[] {};
@@ -9890,9 +9620,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         int int2 = base64_1.avail();
         byte[] byteArray5 = new byte[] { (byte) 10 };
@@ -10031,18 +9761,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
         boolean boolean2 = base64_1.isUrlSafe();
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10075,9 +9805,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10110,9 +9840,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10146,141 +9876,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
-        byte[] byteArray2 = new byte[] { (byte) 10 };
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean7 = base64_6.isUrlSafe();
-        byte[] byteArray8 = new byte[] {};
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
-        int int12 = base64_6.readResults(byteArray9, (int) (short) 10, (int) (short) 100);
-        boolean boolean13 = base64_6.isUrlSafe();
-        byte[] byteArray17 = new byte[] { (byte) 10 };
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray17);
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray17);
-        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64(0, byteArray17);
-        byte[] byteArray21 = new byte[] {};
-        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray21);
-        byte[] byteArray23 = base64_20.decode(byteArray22);
-        boolean boolean24 = base64_20.hasData();
-        byte[] byteArray27 = new byte[] { (byte) 10 };
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
-        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
-        byte[] byteArray31 = new byte[] {};
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
-        byte[] byteArray33 = base64_30.decode(byteArray32);
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray32);
-        byte[] byteArray35 = base64_20.encode(byteArray34);
-        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray34);
-        org.apache.commons.codec.binary.Base64 base64_38 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray34, false);
-        base64_6.encode(byteArray34, (int) (byte) 0, 0);
-        byte[] byteArray42 = base64_5.encode(byteArray34);
-        byte[] byteArray44 = new byte[] { (byte) 10 };
-        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray44);
-        java.math.BigInteger bigInteger46 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray45);
-        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger46);
-        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger46);
-        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
-        boolean boolean50 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray49);
-        byte[] byteArray51 = base64_5.decode(byteArray49);
-        java.io.InputStream inputStream52 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream54 = new org.apache.commons.codec.binary.Base64InputStream(inputStream52, false);
-        byte[] byteArray55 = new byte[] {};
-        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
-        int int57 = base64InputStream54.read(byteArray56);
-        byte[] byteArray61 = new byte[] { (byte) 10 };
-        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray61);
-        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray61);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream64 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream54, false, 10, byteArray61);
-        boolean boolean65 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray61);
-        byte[] byteArray66 = base64_5.decode(byteArray61);
-        java.math.BigInteger bigInteger67 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray61);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[10]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[10]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(bigInteger46);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[81, 50, 99, 57, 80, 81, 61, 61]");
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
-        org.junit.Assert.assertNotNull(byteArray61);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[10]");
-        org.junit.Assert.assertNotNull(byteArray62);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[]");
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
-        org.junit.Assert.assertNotNull(bigInteger67);
-    }
-
-    @Test
-    public void test194() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -10317,9 +9915,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -10452,9 +10050,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10627,9 +10225,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -10688,9 +10286,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -10746,9 +10344,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10782,9 +10380,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10816,9 +10414,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10919,9 +10517,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -10952,9 +10550,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1);
@@ -10968,18 +10566,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         int int2 = base64_1.avail();
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -11000,9 +10598,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -11035,9 +10633,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -11218,9 +10816,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         int int2 = base64_1.avail();
         byte[] byteArray5 = new byte[] { (byte) 10 };
@@ -11357,9 +10955,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
         byte[] byteArray8 = new byte[] { (byte) 10 };
@@ -11460,114 +11058,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean2 = base64_1.isUrlSafe();
-        byte[] byteArray3 = new byte[] {};
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
-        int int7 = base64_1.readResults(byteArray4, (int) (short) 10, (int) (short) 100);
-        boolean boolean8 = base64_1.isUrlSafe();
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        byte[] byteArray19 = base64_16.decode(byteArray18);
-        boolean boolean20 = base64_16.hasData();
-        byte[] byteArray23 = new byte[] { (byte) 10 };
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
-        byte[] byteArray27 = new byte[] {};
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
-        byte[] byteArray29 = base64_26.decode(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
-        byte[] byteArray31 = base64_16.encode(byteArray30);
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
-        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray30, false);
-        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray30);
-        byte[] byteArray36 = base64_1.encode(byteArray30);
-        org.apache.commons.codec.binary.Base64 base64_38 = new org.apache.commons.codec.binary.Base64((int) (byte) 10, byteArray30, false);
-        byte[] byteArray41 = new byte[] { (byte) 10 };
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
-        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
-        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
-        boolean boolean45 = base64_44.hasData();
-        byte[] byteArray48 = new byte[] { (byte) 10 };
-        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
-        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray48);
-        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64(0, byteArray48);
-        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray48);
-        byte[] byteArray53 = base64_44.encode(byteArray52);
-        byte[] byteArray54 = base64_38.encode(byteArray53);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[10]");
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray50);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
-        org.junit.Assert.assertNotNull(byteArray52);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
-        org.junit.Assert.assertNotNull(byteArray53);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
-        org.junit.Assert.assertNotNull(byteArray54);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
-    }
-
-    @Test
-    public void test211() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         java.io.InputStream inputStream2 = null;
@@ -11599,9 +11092,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -11612,63 +11105,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        byte[] byteArray7 = new byte[] { (byte) 10 };
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
-        byte[] byteArray11 = new byte[] {};
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
-        byte[] byteArray13 = base64_10.decode(byteArray12);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
-        java.io.InputStream inputStream15 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream17 = new org.apache.commons.codec.binary.Base64InputStream(inputStream15, false);
-        byte[] byteArray18 = new byte[] {};
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
-        int int20 = base64InputStream17.read(byteArray19);
-        byte[] byteArray24 = new byte[] { (byte) 10 };
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray24);
-        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream27 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream17, false, 10, byteArray24);
-        boolean boolean28 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray24);
-        base64OutputStream14.write(byteArray24);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[10]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-    }
-
-    @Test
-    public void test214() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -11766,9 +11205,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -11850,17 +11289,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) 1);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -11897,18 +11336,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -11940,9 +11379,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1, false);
@@ -12037,9 +11476,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
@@ -12144,17 +11583,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         boolean boolean1 = org.apache.commons.codec.binary.Base64.isBase64((byte) 10);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -12217,67 +11656,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
-        byte[] byteArray2 = new byte[] { (byte) 10 };
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
-        byte[] byteArray6 = new byte[] {};
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
-        byte[] byteArray8 = base64_5.decode(byteArray7);
-        boolean boolean9 = base64_5.hasData();
-        byte[] byteArray12 = new byte[] { (byte) 10 };
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray12);
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray12);
-        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64(0, byteArray12);
-        byte[] byteArray16 = new byte[] {};
-        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray16);
-        byte[] byteArray18 = base64_15.decode(byteArray17);
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray17);
-        byte[] byteArray20 = base64_5.encode(byteArray19);
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray19);
-        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19, false);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[10]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-    }
-
-    @Test
-    public void test225() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -12321,9 +11702,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -12385,9 +11766,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -12420,9 +11801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -12442,9 +11823,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -12497,9 +11878,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = new byte[] {};
@@ -12644,9 +12025,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -12661,9 +12042,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -12745,9 +12126,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -12853,9 +12234,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -12888,9 +12269,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -12931,9 +12312,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -12987,9 +12368,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -13030,9 +12411,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -13111,150 +12492,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
-        byte[] byteArray6 = new byte[] { (byte) 10 };
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray6);
-        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64(0, byteArray6);
-        boolean boolean10 = base64_9.hasData();
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
-        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray13);
-        byte[] byteArray18 = base64_9.encode(byteArray17);
-        base64OutputStream3.write(byteArray18);
-        byte[] byteArray24 = new byte[] { (byte) 10 };
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray24);
-        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
-        org.apache.commons.codec.binary.Base64 base64_27 = new org.apache.commons.codec.binary.Base64(0, byteArray24);
-        byte[] byteArray28 = new byte[] {};
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray28);
-        byte[] byteArray30 = base64_27.decode(byteArray29);
-        byte[] byteArray31 = null;
-        base64_27.encode(byteArray31, (int) (byte) 100, (int) (byte) 0);
-        java.io.InputStream inputStream35 = null;
-        java.io.InputStream inputStream38 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream40 = new org.apache.commons.codec.binary.Base64InputStream(inputStream38, false);
-        byte[] byteArray41 = new byte[] {};
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
-        int int43 = base64InputStream40.read(byteArray42);
-        byte[] byteArray47 = new byte[] { (byte) 10 };
-        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
-        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray47);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream50 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream40, false, 10, byteArray47);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream51 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream50);
-        byte[] byteArray54 = new byte[] { (byte) 10 };
-        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray54);
-        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray54);
-        org.apache.commons.codec.binary.Base64 base64_57 = new org.apache.commons.codec.binary.Base64(0, byteArray54);
-        byte[] byteArray58 = new byte[] {};
-        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray58);
-        byte[] byteArray60 = base64_57.decode(byteArray59);
-        byte[] byteArray61 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray59);
-        java.math.BigInteger bigInteger62 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray59);
-        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger62);
-        java.math.BigInteger bigInteger64 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray63);
-        int int65 = base64InputStream51.read(byteArray63);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream66 = new org.apache.commons.codec.binary.Base64InputStream(inputStream35, false, (int) ' ', byteArray63);
-        byte[] byteArray67 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray63);
-        base64_27.setInitialBuffer(byteArray67, (int) (short) 10, (int) (short) 100);
-        java.io.InputStream inputStream71 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream73 = new org.apache.commons.codec.binary.Base64InputStream(inputStream71, false);
-        byte[] byteArray74 = new byte[] {};
-        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray74);
-        int int76 = base64InputStream73.read(byteArray75);
-        byte[] byteArray80 = new byte[] { (byte) 10 };
-        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray80);
-        byte[] byteArray82 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray80);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream83 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream73, false, 10, byteArray80);
-        byte[] byteArray84 = base64_27.decode(byteArray80);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream85 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream3, false, (int) ' ', byteArray84);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[10]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[10]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
-        org.junit.Assert.assertNotNull(byteArray54);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[10]");
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
-        org.junit.Assert.assertNotNull(byteArray59);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
-        org.junit.Assert.assertNotNull(byteArray61);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
-        org.junit.Assert.assertNotNull(bigInteger62);
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[]");
-        org.junit.Assert.assertNotNull(bigInteger64);
-        org.junit.Assert.assertTrue("'" + int65 + "' != '" + 0 + "'", int65 == 0);
-        org.junit.Assert.assertNotNull(byteArray67);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
-        org.junit.Assert.assertNotNull(byteArray75);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
-        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
-        org.junit.Assert.assertNotNull(byteArray80);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[10]");
-        org.junit.Assert.assertNotNull(byteArray81);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray82);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
-        org.junit.Assert.assertNotNull(byteArray84);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray84), "[]");
-    }
-
-    @Test
-    public void test240() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -13337,70 +12577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream2, false);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64 base64_12 = new org.apache.commons.codec.binary.Base64(0, byteArray9);
-        byte[] byteArray13 = new byte[] {};
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray13);
-        byte[] byteArray15 = base64_12.decode(byteArray14);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream4, true, (int) (byte) 0, byteArray15);
-        java.io.InputStream inputStream17 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream19 = new org.apache.commons.codec.binary.Base64InputStream(inputStream17, false);
-        byte[] byteArray20 = new byte[] {};
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
-        int int22 = base64InputStream19.read(byteArray21);
-        byte[] byteArray26 = new byte[] { (byte) 10 };
-        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray26);
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray26);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream29 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream19, false, 10, byteArray26);
-        boolean boolean30 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray26);
-        base64OutputStream16.write(byteArray26);
-        byte[] byteArray32 = base64_1.encode(byteArray26);
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32, true);
-        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray34);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[10]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[67, 103, 61, 61]");
-    }
-
-    @Test
-    public void test242() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -13450,9 +12629,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -13563,9 +12742,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         byte[] byteArray1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -13577,9 +12756,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -13693,9 +12872,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -13819,9 +12998,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -13887,163 +13066,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
-        byte[] byteArray3 = new byte[] {};
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
-        int int5 = base64InputStream2.read(byteArray4);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
-        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean16 = base64_15.isUrlSafe();
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
-        boolean boolean22 = base64_15.isUrlSafe();
-        byte[] byteArray27 = new byte[] { (byte) 10 };
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
-        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
-        byte[] byteArray31 = new byte[] {};
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
-        byte[] byteArray33 = base64_30.decode(byteArray32);
-        boolean boolean34 = base64_30.hasData();
-        byte[] byteArray37 = new byte[] { (byte) 10 };
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
-        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
-        byte[] byteArray41 = new byte[] {};
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
-        byte[] byteArray43 = base64_40.decode(byteArray42);
-        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
-        byte[] byteArray45 = base64_30.encode(byteArray44);
-        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
-        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
-        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
-        byte[] byteArray50 = base64_15.encode(byteArray44);
-        int int51 = base64InputStream14.read(byteArray44);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream53 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream53, true);
-        org.apache.commons.codec.binary.Base64 base64_60 = new org.apache.commons.codec.binary.Base64(false);
-        byte[] byteArray64 = new byte[] { (byte) 10 };
-        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray64);
-        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray64);
-        org.apache.commons.codec.binary.Base64 base64_67 = new org.apache.commons.codec.binary.Base64(0, byteArray64);
-        byte[] byteArray68 = new byte[] {};
-        byte[] byteArray69 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray68);
-        byte[] byteArray70 = base64_67.decode(byteArray69);
-        boolean boolean71 = base64_67.hasData();
-        byte[] byteArray74 = new byte[] { (byte) 10 };
-        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray74);
-        byte[] byteArray76 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray74);
-        org.apache.commons.codec.binary.Base64 base64_77 = new org.apache.commons.codec.binary.Base64(0, byteArray74);
-        byte[] byteArray78 = new byte[] {};
-        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray78);
-        byte[] byteArray80 = base64_77.decode(byteArray79);
-        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray79);
-        byte[] byteArray82 = base64_67.encode(byteArray81);
-        byte[] byteArray83 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray81);
-        org.apache.commons.codec.binary.Base64 base64_85 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray81, false);
-        base64_60.decode(byteArray81, (int) 'a', (int) (short) -1);
-        boolean boolean89 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray81);
-        org.apache.commons.codec.binary.Base64 base64_91 = new org.apache.commons.codec.binary.Base64((int) (short) 100, byteArray81, false);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream92 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream55, false, 10, byteArray81);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
-        org.junit.Assert.assertNotNull(byteArray50);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
-        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
-        org.junit.Assert.assertNotNull(byteArray64);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[10]");
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
-        org.junit.Assert.assertNotNull(byteArray68);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
-        org.junit.Assert.assertNotNull(byteArray69);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
-        org.junit.Assert.assertNotNull(byteArray70);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[10]");
-        org.junit.Assert.assertNotNull(byteArray75);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray76);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
-        org.junit.Assert.assertNotNull(byteArray78);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
-        org.junit.Assert.assertNotNull(byteArray79);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
-        org.junit.Assert.assertNotNull(byteArray80);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
-        org.junit.Assert.assertNotNull(byteArray81);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
-        org.junit.Assert.assertNotNull(byteArray82);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
-        org.junit.Assert.assertNotNull(byteArray83);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray83), "[]");
-        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + true + "'", boolean89 == true);
-    }
-
-    @Test
-    public void test249() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -14080,9 +13105,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1);
@@ -14139,9 +13164,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -14223,9 +13248,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -14267,111 +13292,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        byte[] byteArray7 = new byte[] { (byte) 10 };
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
-        byte[] byteArray11 = new byte[] {};
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
-        byte[] byteArray13 = base64_10.decode(byteArray12);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream17 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
-        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean21 = base64_20.isUrlSafe();
-        byte[] byteArray22 = new byte[] {};
-        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
-        int int26 = base64_20.readResults(byteArray23, (int) (short) 10, (int) (short) 100);
-        boolean boolean27 = base64_20.isUrlSafe();
-        byte[] byteArray31 = new byte[] { (byte) 10 };
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray31);
-        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray31);
-        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64(0, byteArray31);
-        byte[] byteArray35 = new byte[] {};
-        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray35);
-        byte[] byteArray37 = base64_34.decode(byteArray36);
-        boolean boolean38 = base64_34.hasData();
-        byte[] byteArray41 = new byte[] { (byte) 10 };
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
-        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
-        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
-        byte[] byteArray45 = new byte[] {};
-        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray45);
-        byte[] byteArray47 = base64_44.decode(byteArray46);
-        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray46);
-        byte[] byteArray49 = base64_34.encode(byteArray48);
-        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray48);
-        org.apache.commons.codec.binary.Base64 base64_52 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray48, false);
-        base64_20.encode(byteArray48, (int) (byte) 0, 0);
-        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
-        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray56);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream58 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15, true, (int) ' ', byteArray56);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[10]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
-        org.junit.Assert.assertNotNull(byteArray50);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
-        org.junit.Assert.assertNotNull(byteArray57);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
-    }
-
-    @Test
-    public void test254() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -14555,9 +13478,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -14605,9 +13528,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         java.io.InputStream inputStream1 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream(inputStream1, false);
@@ -14637,9 +13560,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -14658,9 +13581,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -14749,9 +13672,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -14785,9 +13708,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -14873,9 +13796,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         int int2 = base64_0.avail();
@@ -15064,9 +13987,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
+            System.out.format("%n%s%n", "RegressionTest0.test248");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         java.math.BigInteger bigInteger3 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray2);
@@ -15087,9 +14010,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RegressionTest0.test249");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -15166,9 +14089,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RegressionTest0.test250");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -15202,42 +14125,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        byte[] byteArray7 = new byte[] { (byte) 10 };
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
-        byte[] byteArray11 = new byte[] {};
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
-        byte[] byteArray13 = base64_10.decode(byteArray12);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
-        base64OutputStream15.write(100);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15, true);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-    }
-
-    @Test
-    public void test266() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RegressionTest0.test251");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
@@ -15278,37 +14168,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
-        byte[] byteArray8 = new byte[] { (byte) 10 };
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray8);
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray8);
-        org.apache.commons.codec.binary.Base64 base64_11 = new org.apache.commons.codec.binary.Base64(0, byteArray8);
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray8);
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray8);
-        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64(0, byteArray13, false);
-        base64OutputStream4.write(byteArray13);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[10]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-    }
-
-    @Test
-    public void test268() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RegressionTest0.test252");
         java.io.InputStream inputStream0 = null;
         java.io.InputStream inputStream3 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream5 = new org.apache.commons.codec.binary.Base64InputStream(inputStream3, false);
@@ -15375,9 +14237,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RegressionTest0.test253");
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
@@ -15463,9 +14325,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RegressionTest0.test254");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         boolean boolean2 = base64_1.isUrlSafe();
         byte[] byteArray3 = new byte[] {};
@@ -15481,9 +14343,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RegressionTest0.test255");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = new byte[] {};
@@ -15558,9 +14420,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RegressionTest0.test256");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -15715,9 +14577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RegressionTest0.test257");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -15822,9 +14684,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
+            System.out.format("%n%s%n", "RegressionTest0.test258");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         int int2 = base64_1.avail();
         byte[] byteArray5 = new byte[] { (byte) 10 };
@@ -15989,9 +14851,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RegressionTest0.test259");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -16034,9 +14896,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RegressionTest0.test260");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -16122,9 +14984,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RegressionTest0.test261");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -16174,9 +15036,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RegressionTest0.test262");
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
@@ -16235,9 +15097,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RegressionTest0.test263");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -16264,9 +15126,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RegressionTest0.test264");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -16382,9 +15244,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RegressionTest0.test265");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1);
@@ -16398,9 +15260,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RegressionTest0.test266");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -16434,9 +15296,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RegressionTest0.test267");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -16489,9 +15351,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RegressionTest0.test268");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -16568,9 +15430,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RegressionTest0.test269");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -16637,9 +15499,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RegressionTest0.test270");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray2 = null;
         byte[] byteArray3 = base64_1.encode(byteArray2);
@@ -16697,9 +15559,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RegressionTest0.test271");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -16755,9 +15617,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RegressionTest0.test272");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -16859,9 +15721,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RegressionTest0.test273");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -16899,41 +15761,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RegressionTest0.test274");
         byte[] byteArray0 = null;
         byte[] byteArray1 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray0);
         org.junit.Assert.assertNull(byteArray1);
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
-        byte[] byteArray1 = new byte[] { (byte) 10 };
-        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
-        java.math.BigInteger bigInteger3 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger3);
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger3);
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger3);
-        org.junit.Assert.assertNotNull(byteArray1);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[10]");
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(bigInteger3);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
-    }
-
-    @Test
-    public void test292() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RegressionTest0.test275");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 1);
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
@@ -16990,9 +15829,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RegressionTest0.test276");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -17040,9 +15879,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RegressionTest0.test277");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
@@ -17078,89 +15917,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
-        byte[] byteArray3 = new byte[] {};
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
-        int int5 = base64InputStream2.read(byteArray4);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
-        byte[] byteArray18 = new byte[] { (byte) 10 };
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
-        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
-        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
-        byte[] byteArray22 = new byte[] {};
-        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
-        byte[] byteArray24 = base64_21.decode(byteArray23);
-        int int25 = base64InputStream12.read(byteArray24);
-        java.io.OutputStream outputStream28 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream30 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, false);
-        org.apache.commons.codec.binary.Base64 base64_33 = new org.apache.commons.codec.binary.Base64();
-        java.io.InputStream inputStream34 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream36 = new org.apache.commons.codec.binary.Base64InputStream(inputStream34, false);
-        byte[] byteArray37 = new byte[] {};
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray37);
-        int int39 = base64InputStream36.read(byteArray38);
-        byte[] byteArray43 = new byte[] { (byte) 10 };
-        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43);
-        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray43);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream46 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream36, false, 10, byteArray43);
-        byte[] byteArray47 = base64_33.encode(byteArray43);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream48 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, true, (-1), byteArray43);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream49 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (byte) -1, byteArray43);
-        boolean boolean50 = base64InputStream12.markSupported();
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream52 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[10]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-    }
-
-    @Test
-    public void test296() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RegressionTest0.test278");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         boolean boolean3 = base64_1.hasData();
@@ -17169,9 +15928,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RegressionTest0.test279");
         byte[] byteArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -17183,9 +15942,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RegressionTest0.test280");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -17251,9 +16010,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RegressionTest0.test281");
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
         byte[] byteArray8 = new byte[] { (byte) 10 };
@@ -17375,9 +16134,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RegressionTest0.test282");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -17475,9 +16234,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RegressionTest0.test283");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         // The following exception was thrown during execution in test generation
@@ -17490,9 +16249,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RegressionTest0.test284");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -17526,9 +16285,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RegressionTest0.test285");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray1);
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray1);
@@ -17541,205 +16300,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
-        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
-        int int1 = base64_0.avail();
-        byte[] byteArray4 = new byte[] { (byte) 10 };
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
-        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
-        byte[] byteArray8 = new byte[] {};
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
-        byte[] byteArray10 = base64_7.decode(byteArray9);
-        boolean boolean11 = base64_7.hasData();
-        byte[] byteArray14 = new byte[] { (byte) 10 };
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
-        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
-        byte[] byteArray18 = new byte[] {};
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
-        byte[] byteArray20 = base64_17.decode(byteArray19);
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
-        byte[] byteArray22 = base64_7.encode(byteArray21);
-        int int25 = base64_0.readResults(byteArray21, (int) '#', 76);
-        byte[] byteArray28 = new byte[] { (byte) 10 };
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
-        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
-        byte[] byteArray32 = new byte[] {};
-        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
-        byte[] byteArray34 = base64_31.decode(byteArray33);
-        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
-        java.math.BigInteger bigInteger36 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray33);
-        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger36);
-        java.math.BigInteger bigInteger38 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray37);
-        int int41 = base64_0.readResults(byteArray37, (int) (short) 10, 10);
-        boolean boolean42 = base64_0.isUrlSafe();
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-        org.junit.Assert.assertNotNull(bigInteger36);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
-        org.junit.Assert.assertNotNull(bigInteger38);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-    }
-
-    @Test
-    public void test305() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
-        byte[] byteArray3 = new byte[] {};
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
-        int int5 = base64InputStream2.read(byteArray4);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
-        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean16 = base64_15.isUrlSafe();
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
-        boolean boolean22 = base64_15.isUrlSafe();
-        byte[] byteArray27 = new byte[] { (byte) 10 };
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
-        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
-        byte[] byteArray31 = new byte[] {};
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
-        byte[] byteArray33 = base64_30.decode(byteArray32);
-        boolean boolean34 = base64_30.hasData();
-        byte[] byteArray37 = new byte[] { (byte) 10 };
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
-        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
-        byte[] byteArray41 = new byte[] {};
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
-        byte[] byteArray43 = base64_40.decode(byteArray42);
-        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
-        byte[] byteArray45 = base64_30.encode(byteArray44);
-        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
-        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
-        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
-        byte[] byteArray50 = base64_15.encode(byteArray44);
-        int int51 = base64InputStream14.read(byteArray44);
-        byte[] byteArray55 = new byte[] { (byte) 10 };
-        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray55);
-        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray55);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream58 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false, 0, byteArray57);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
-        org.junit.Assert.assertNotNull(byteArray50);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
-        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[10]");
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray57);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
-    }
-
-    @Test
-    public void test306() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RegressionTest0.test286");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = new byte[] {};
@@ -17809,9 +16372,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RegressionTest0.test287");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -17844,9 +16407,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RegressionTest0.test288");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
@@ -17906,9 +16469,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RegressionTest0.test289");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -17939,9 +16502,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RegressionTest0.test290");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -18075,9 +16638,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RegressionTest0.test291");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -18111,9 +16674,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RegressionTest0.test292");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -18130,9 +16693,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RegressionTest0.test293");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -18189,9 +16752,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RegressionTest0.test294");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -18217,9 +16780,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RegressionTest0.test295");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         boolean boolean2 = base64_0.hasData();
@@ -18343,88 +16906,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
-        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean1 = base64_0.isUrlSafe();
-        byte[] byteArray2 = new byte[] {};
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
-        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
-        boolean boolean7 = base64_0.isUrlSafe();
-        byte[] byteArray11 = new byte[] { (byte) 10 };
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray11);
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray11);
-        org.apache.commons.codec.binary.Base64 base64_14 = new org.apache.commons.codec.binary.Base64(0, byteArray11);
-        byte[] byteArray15 = new byte[] {};
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray15);
-        byte[] byteArray17 = base64_14.decode(byteArray16);
-        boolean boolean18 = base64_14.hasData();
-        byte[] byteArray21 = new byte[] { (byte) 10 };
-        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray21);
-        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray21);
-        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64(0, byteArray21);
-        byte[] byteArray25 = new byte[] {};
-        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray25);
-        byte[] byteArray27 = base64_24.decode(byteArray26);
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray26);
-        byte[] byteArray29 = base64_14.encode(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
-        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray28, false);
-        base64_0.encode(byteArray28, (int) (byte) 0, 0);
-        byte[] byteArray37 = new byte[] { (byte) 10 };
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
-        byte[] byteArray39 = base64_0.decode(byteArray38);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[10]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[10]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
-    }
-
-    @Test
-    public void test317() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RegressionTest0.test296");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         boolean boolean1 = base64_0.isUrlSafe();
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
@@ -18440,114 +16924,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
-        java.io.OutputStream outputStream0 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
-        byte[] byteArray7 = new byte[] { (byte) 10 };
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
-        byte[] byteArray11 = new byte[] {};
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
-        byte[] byteArray13 = base64_10.decode(byteArray12);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean18 = base64_17.isUrlSafe();
-        byte[] byteArray19 = new byte[] {};
-        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
-        int int23 = base64_17.readResults(byteArray20, (int) (short) 10, (int) (short) 100);
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream25 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14, true, 76, byteArray20);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream26 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
-        java.io.InputStream inputStream27 = null;
-        java.io.InputStream inputStream30 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream32 = new org.apache.commons.codec.binary.Base64InputStream(inputStream30, false);
-        byte[] byteArray33 = new byte[] {};
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
-        int int35 = base64InputStream32.read(byteArray34);
-        byte[] byteArray39 = new byte[] { (byte) 10 };
-        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray39);
-        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray39);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream42 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream32, false, 10, byteArray39);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream43 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream42);
-        byte[] byteArray46 = new byte[] { (byte) 10 };
-        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray46);
-        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray46);
-        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64(0, byteArray46);
-        byte[] byteArray50 = new byte[] {};
-        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray50);
-        byte[] byteArray52 = base64_49.decode(byteArray51);
-        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray51);
-        java.math.BigInteger bigInteger54 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray51);
-        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger54);
-        java.math.BigInteger bigInteger56 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray55);
-        int int57 = base64InputStream43.read(byteArray55);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream58 = new org.apache.commons.codec.binary.Base64InputStream(inputStream27, false, (int) ' ', byteArray55);
-        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray55);
-        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray59);
-        base64OutputStream26.write(byteArray60);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
-        org.junit.Assert.assertNotNull(byteArray40);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[10]");
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
-        org.junit.Assert.assertNotNull(byteArray50);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
-        org.junit.Assert.assertNotNull(byteArray52);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
-        org.junit.Assert.assertNotNull(byteArray53);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
-        org.junit.Assert.assertNotNull(bigInteger54);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
-        org.junit.Assert.assertNotNull(bigInteger56);
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
-        org.junit.Assert.assertNotNull(byteArray59);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
-    }
-
-    @Test
-    public void test319() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RegressionTest0.test297");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -18684,9 +17063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RegressionTest0.test298");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -18728,9 +17107,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RegressionTest0.test299");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         java.math.BigInteger bigInteger3 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray2);
@@ -18751,9 +17130,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RegressionTest0.test300");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -18822,9 +17201,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RegressionTest0.test301");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         java.math.BigInteger bigInteger3 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray2);
@@ -18848,9 +17227,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RegressionTest0.test302");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
@@ -18903,9 +17282,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RegressionTest0.test303");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -19017,82 +17396,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
-        byte[] byteArray2 = new byte[] { (byte) 10 };
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
-        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
-        byte[] byteArray6 = new byte[] {};
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
-        byte[] byteArray8 = base64_5.decode(byteArray7);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray7);
-        java.math.BigInteger bigInteger10 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray7);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger10);
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(bigInteger10);
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-    }
-
-    @Test
-    public void test327() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 100);
-        byte[] byteArray4 = new byte[] { (byte) 10 };
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
-        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
-        byte[] byteArray8 = new byte[] {};
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
-        byte[] byteArray10 = base64_7.decode(byteArray9);
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9, true);
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray12);
-        java.lang.Object obj14 = base64_1.encode((java.lang.Object) byteArray13);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertNotNull(obj14);
-    }
-
-    @Test
-    public void test328() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RegressionTest0.test304");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -19175,9 +17481,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RegressionTest0.test305");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
@@ -19214,9 +17520,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RegressionTest0.test306");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -19329,38 +17635,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
-        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean1 = base64_0.isUrlSafe();
-        byte[] byteArray2 = new byte[] {};
-        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
-        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray3);
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3, false);
-        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3, false, false);
-        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray3);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-    }
-
-    @Test
-    public void test332() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RegressionTest0.test307");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -19422,9 +17699,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RegressionTest0.test308");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -19485,9 +17762,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
+            System.out.format("%n%s%n", "RegressionTest0.test309");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -19580,9 +17857,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test335() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RegressionTest0.test310");
         java.io.InputStream inputStream2 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream(inputStream2, false);
         byte[] byteArray5 = new byte[] {};
@@ -19680,9 +17957,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RegressionTest0.test311");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
         java.io.OutputStream outputStream2 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream2, false);
@@ -19737,9 +18014,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RegressionTest0.test312");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream1 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
         // The following exception was thrown during execution in test generation
@@ -19752,9 +18029,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RegressionTest0.test313");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -19808,187 +18085,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
-        byte[] byteArray1 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
-        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray1);
-        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(76, byteArray2);
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray4);
-        int int8 = base64_3.readResults(byteArray4, (int) (short) 10, (int) '4');
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64((int) (short) 1);
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        byte[] byteArray19 = base64_16.decode(byteArray18);
-        boolean boolean20 = base64_16.hasData();
-        byte[] byteArray23 = new byte[] { (byte) 10 };
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
-        byte[] byteArray27 = new byte[] {};
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
-        byte[] byteArray29 = base64_26.decode(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
-        byte[] byteArray31 = base64_16.encode(byteArray30);
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
-        base64_10.decode(byteArray32, (int) (short) -1, (int) (short) 0);
-        byte[] byteArray38 = new byte[] { (byte) 10 };
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
-        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray38);
-        org.apache.commons.codec.binary.Base64 base64_41 = new org.apache.commons.codec.binary.Base64(0, byteArray38);
-        byte[] byteArray42 = new byte[] {};
-        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray42);
-        byte[] byteArray44 = base64_41.decode(byteArray43);
-        byte[] byteArray47 = new byte[] { (byte) 10 };
-        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
-        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray47);
-        org.apache.commons.codec.binary.Base64 base64_50 = new org.apache.commons.codec.binary.Base64(0, byteArray47);
-        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean52 = base64_51.isUrlSafe();
-        byte[] byteArray53 = new byte[] {};
-        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray53);
-        int int57 = base64_51.readResults(byteArray54, (int) (short) 10, (int) (short) 100);
-        boolean boolean58 = base64_51.isUrlSafe();
-        byte[] byteArray62 = new byte[] { (byte) 10 };
-        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62);
-        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray62);
-        org.apache.commons.codec.binary.Base64 base64_65 = new org.apache.commons.codec.binary.Base64(0, byteArray62);
-        byte[] byteArray66 = new byte[] {};
-        byte[] byteArray67 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray66);
-        byte[] byteArray68 = base64_65.decode(byteArray67);
-        boolean boolean69 = base64_65.hasData();
-        byte[] byteArray72 = new byte[] { (byte) 10 };
-        byte[] byteArray73 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray72);
-        byte[] byteArray74 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray72);
-        org.apache.commons.codec.binary.Base64 base64_75 = new org.apache.commons.codec.binary.Base64(0, byteArray72);
-        byte[] byteArray76 = new byte[] {};
-        byte[] byteArray77 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray76);
-        byte[] byteArray78 = base64_75.decode(byteArray77);
-        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray77);
-        byte[] byteArray80 = base64_65.encode(byteArray79);
-        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray79);
-        org.apache.commons.codec.binary.Base64 base64_83 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray79, false);
-        base64_51.encode(byteArray79, (int) (byte) 0, 0);
-        byte[] byteArray87 = base64_50.encode(byteArray79);
-        byte[] byteArray88 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray79);
-        base64_41.decode(byteArray79, (int) (byte) 1, 0);
-        byte[] byteArray92 = base64_10.encode(byteArray79);
-        byte[] byteArray93 = base64_3.decode(byteArray92);
-        org.junit.Assert.assertNotNull(byteArray1);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[13, 10]");
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[13, 10]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray40);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertNotNull(byteArray53);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
-        org.junit.Assert.assertNotNull(byteArray54);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(byteArray62);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[10]");
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray64);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[]");
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
-        org.junit.Assert.assertNotNull(byteArray67);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
-        org.junit.Assert.assertNotNull(byteArray68);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertNotNull(byteArray72);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[10]");
-        org.junit.Assert.assertNotNull(byteArray73);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray73), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
-        org.junit.Assert.assertNotNull(byteArray76);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
-        org.junit.Assert.assertNotNull(byteArray77);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray77), "[]");
-        org.junit.Assert.assertNotNull(byteArray78);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
-        org.junit.Assert.assertNotNull(byteArray79);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
-        org.junit.Assert.assertNotNull(byteArray80);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
-        org.junit.Assert.assertNotNull(byteArray81);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
-        org.junit.Assert.assertNotNull(byteArray87);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray87), "[]");
-        org.junit.Assert.assertNotNull(byteArray88);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[]");
-        org.junit.Assert.assertNotNull(byteArray92);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray92), "[]");
-        org.junit.Assert.assertNotNull(byteArray93);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray93), "[]");
-    }
-
-    @Test
-    public void test340() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RegressionTest0.test314");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -20072,9 +18171,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RegressionTest0.test315");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 100);
         boolean boolean2 = base64_1.isUrlSafe();
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
@@ -20098,9 +18197,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RegressionTest0.test316");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -20133,9 +18232,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RegressionTest0.test317");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray2 = null;
         byte[] byteArray3 = base64_1.encode(byteArray2);
@@ -20275,9 +18374,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RegressionTest0.test318");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         java.io.InputStream inputStream2 = null;
@@ -20398,9 +18497,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RegressionTest0.test319");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -20416,9 +18515,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RegressionTest0.test320");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -20484,9 +18583,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RegressionTest0.test321");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -20537,9 +18636,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RegressionTest0.test322");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -20588,9 +18687,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RegressionTest0.test323");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -20624,9 +18723,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RegressionTest0.test324");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -20770,9 +18869,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RegressionTest0.test325");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -20809,9 +18908,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RegressionTest0.test326");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -20876,9 +18975,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RegressionTest0.test327");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         boolean boolean2 = base64_0.hasData();
@@ -21024,9 +19123,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RegressionTest0.test328");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1, false);
@@ -21068,9 +19167,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RegressionTest0.test329");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         int int2 = base64_1.avail();
         byte[] byteArray5 = new byte[] { (byte) 10 };
@@ -21184,101 +19283,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
-        byte[] byteArray4 = new byte[] { (byte) 10 };
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
-        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
-        byte[] byteArray8 = new byte[] {};
-        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
-        byte[] byteArray10 = base64_7.decode(byteArray9);
-        boolean boolean11 = base64_7.hasData();
-        byte[] byteArray14 = new byte[] { (byte) 10 };
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
-        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
-        byte[] byteArray18 = new byte[] {};
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
-        byte[] byteArray20 = base64_17.decode(byteArray19);
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
-        byte[] byteArray22 = base64_7.encode(byteArray21);
-        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray21);
-        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray21, false);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray21);
-        byte[] byteArray29 = new byte[] { (byte) 10 };
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
-        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
-        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
-        byte[] byteArray33 = new byte[] {};
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
-        byte[] byteArray35 = base64_32.decode(byteArray34);
-        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
-        java.math.BigInteger bigInteger37 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray34);
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray34);
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
-        byte[] byteArray40 = base64_26.encode(byteArray39);
-        int int41 = base64_26.avail();
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertNotNull(bigInteger37);
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
-        org.junit.Assert.assertNotNull(byteArray40);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-    }
-
-    @Test
-    public void test357() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RegressionTest0.test330");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -21336,9 +19343,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RegressionTest0.test331");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -21398,74 +19405,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
-        byte[] byteArray3 = new byte[] { (byte) 10 };
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
-        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray3);
-        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray3);
-        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray8, false);
-        int int11 = base64_10.avail();
-        byte[] byteArray14 = new byte[] { (byte) 10 };
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
-        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
-        byte[] byteArray18 = new byte[] {};
-        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
-        byte[] byteArray20 = base64_17.decode(byteArray19);
-        byte[] byteArray21 = null;
-        base64_17.encode(byteArray21, (int) (byte) 100, (int) (byte) 0);
-        byte[] byteArray27 = new byte[] { (byte) 10 };
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
-        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
-        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
-        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray27);
-        byte[] byteArray32 = base64_17.encode(byteArray27);
-        byte[] byteArray33 = base64_10.encode(byteArray27);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
-    }
-
-    @Test
-    public void test360() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RegressionTest0.test332");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -21605,9 +19547,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RegressionTest0.test333");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -21640,9 +19582,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RegressionTest0.test334");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         java.math.BigInteger bigInteger4 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray3);
@@ -21667,9 +19609,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RegressionTest0.test335");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -21732,9 +19674,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RegressionTest0.test336");
         java.io.InputStream inputStream0 = null;
         java.io.InputStream inputStream3 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream5 = new org.apache.commons.codec.binary.Base64InputStream(inputStream3, false);
@@ -21801,189 +19743,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
-        java.io.OutputStream outputStream2 = null;
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream2, false);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64 base64_12 = new org.apache.commons.codec.binary.Base64(0, byteArray9);
-        byte[] byteArray13 = new byte[] {};
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray13);
-        byte[] byteArray15 = base64_12.decode(byteArray14);
-        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream4, true, (int) (byte) 0, byteArray15);
-        java.io.InputStream inputStream17 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream19 = new org.apache.commons.codec.binary.Base64InputStream(inputStream17, false);
-        byte[] byteArray20 = new byte[] {};
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
-        int int22 = base64InputStream19.read(byteArray21);
-        byte[] byteArray26 = new byte[] { (byte) 10 };
-        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray26);
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray26);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream29 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream19, false, 10, byteArray26);
-        boolean boolean30 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray26);
-        base64OutputStream16.write(byteArray26);
-        byte[] byteArray32 = base64_1.encode(byteArray26);
-        boolean boolean33 = base64_1.hasData();
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertNotNull(byteArray26);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[10]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-    }
-
-    @Test
-    public void test366() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
-        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean1 = base64_0.isUrlSafe();
-        byte[] byteArray3 = new byte[] { (byte) 10 };
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
-        java.lang.Object obj6 = base64_0.encode((java.lang.Object) byteArray3);
-        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(true);
-        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64();
-        int int10 = base64_9.avail();
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        byte[] byteArray19 = base64_16.decode(byteArray18);
-        boolean boolean20 = base64_16.hasData();
-        byte[] byteArray23 = new byte[] { (byte) 10 };
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
-        byte[] byteArray27 = new byte[] {};
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
-        byte[] byteArray29 = base64_26.decode(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
-        byte[] byteArray31 = base64_16.encode(byteArray30);
-        int int34 = base64_9.readResults(byteArray30, (int) '#', 76);
-        byte[] byteArray37 = new byte[] { (byte) 10 };
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
-        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
-        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
-        byte[] byteArray41 = new byte[] {};
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
-        byte[] byteArray43 = base64_40.decode(byteArray42);
-        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
-        java.math.BigInteger bigInteger45 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray42);
-        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger45);
-        java.math.BigInteger bigInteger47 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray46);
-        int int50 = base64_9.readResults(byteArray46, (int) (short) 10, 10);
-        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray46);
-        base64_8.setInitialBuffer(byteArray51, (int) (byte) 0, (int) (short) 100);
-        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray51);
-        base64_0.decode(byteArray51, (int) '#', (int) (byte) -1);
-        byte[] byteArray60 = new byte[] { (byte) 10 };
-        byte[] byteArray61 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray60);
-        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray61);
-        byte[] byteArray63 = base64_0.encode(byteArray62);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
-        org.junit.Assert.assertNotNull(obj6);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray44);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
-        org.junit.Assert.assertNotNull(bigInteger45);
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
-        org.junit.Assert.assertNotNull(bigInteger47);
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[10]");
-        org.junit.Assert.assertNotNull(byteArray61);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray62);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 61, 61]");
-    }
-
-    @Test
-    public void test367() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RegressionTest0.test337");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -22031,9 +19793,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RegressionTest0.test338");
         java.io.OutputStream outputStream0 = null;
         byte[] byteArray5 = new byte[] { (byte) 10 };
         byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
@@ -22067,9 +19829,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RegressionTest0.test339");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -22208,9 +19970,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RegressionTest0.test340");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -22242,91 +20004,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((-1));
-        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean3 = base64_2.isUrlSafe();
-        byte[] byteArray4 = new byte[] {};
-        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray4);
-        int int8 = base64_2.readResults(byteArray5, (int) (short) 10, (int) (short) 100);
-        boolean boolean9 = base64_2.isUrlSafe();
-        byte[] byteArray13 = new byte[] { (byte) 10 };
-        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
-        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
-        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
-        byte[] byteArray17 = new byte[] {};
-        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
-        byte[] byteArray19 = base64_16.decode(byteArray18);
-        boolean boolean20 = base64_16.hasData();
-        byte[] byteArray23 = new byte[] { (byte) 10 };
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
-        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
-        byte[] byteArray27 = new byte[] {};
-        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
-        byte[] byteArray29 = base64_26.decode(byteArray28);
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
-        byte[] byteArray31 = base64_16.encode(byteArray30);
-        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
-        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray30, false);
-        base64_2.encode(byteArray30, (int) (byte) 0, 0);
-        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray30);
-        base64_1.setInitialBuffer(byteArray30, (int) (byte) 1, (int) '#');
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray38);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
-    }
-
-    @Test
-    public void test372() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 10);
-    }
-
-    @Test
-    public void test373() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RegressionTest0.test341");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -22406,9 +20086,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RegressionTest0.test342");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
         byte[] byteArray4 = new byte[] { (byte) 10 };
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
@@ -22455,9 +20135,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RegressionTest0.test343");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -22530,9 +20210,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RegressionTest0.test344");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
         byte[] byteArray6 = new byte[] { (byte) 10 };
@@ -22722,9 +20402,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
+            System.out.format("%n%s%n", "RegressionTest0.test345");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -22899,9 +20579,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test378() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RegressionTest0.test346");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -22938,9 +20618,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RegressionTest0.test347");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -23025,9 +20705,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RegressionTest0.test348");
         byte[] byteArray3 = new byte[] { (byte) 10 };
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
         byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
@@ -23089,9 +20769,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RegressionTest0.test349");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -23123,9 +20803,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RegressionTest0.test350");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -23264,9 +20944,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RegressionTest0.test351");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -23410,9 +21090,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RegressionTest0.test352");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         byte[] byteArray4 = new byte[] { (byte) 10 };
@@ -23525,9 +21205,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RegressionTest0.test353");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -23594,137 +21274,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
-        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
-        byte[] byteArray5 = new byte[] { (byte) 10 };
-        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
-        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
-        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(0, byteArray5);
-        byte[] byteArray9 = new byte[] {};
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
-        byte[] byteArray11 = base64_8.decode(byteArray10);
-        boolean boolean12 = base64_8.hasData();
-        byte[] byteArray15 = new byte[] { (byte) 10 };
-        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
-        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
-        org.apache.commons.codec.binary.Base64 base64_18 = new org.apache.commons.codec.binary.Base64(0, byteArray15);
-        byte[] byteArray19 = new byte[] {};
-        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
-        byte[] byteArray21 = base64_18.decode(byteArray20);
-        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
-        byte[] byteArray23 = base64_8.encode(byteArray22);
-        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray22);
-        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray22, false);
-        base64_1.decode(byteArray22, (int) 'a', (int) (short) -1);
-        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean31 = base64_30.isUrlSafe();
-        byte[] byteArray32 = new byte[] {};
-        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
-        int int36 = base64_30.readResults(byteArray33, (int) (short) 10, (int) (short) 100);
-        boolean boolean37 = base64_30.isUrlSafe();
-        byte[] byteArray41 = new byte[] { (byte) 10 };
-        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
-        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
-        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
-        byte[] byteArray45 = new byte[] {};
-        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray45);
-        byte[] byteArray47 = base64_44.decode(byteArray46);
-        boolean boolean48 = base64_44.hasData();
-        byte[] byteArray51 = new byte[] { (byte) 10 };
-        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray51);
-        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray51);
-        org.apache.commons.codec.binary.Base64 base64_54 = new org.apache.commons.codec.binary.Base64(0, byteArray51);
-        byte[] byteArray55 = new byte[] {};
-        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
-        byte[] byteArray57 = base64_54.decode(byteArray56);
-        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray56);
-        byte[] byteArray59 = base64_44.encode(byteArray58);
-        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray58);
-        org.apache.commons.codec.binary.Base64 base64_62 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray58, false);
-        base64_30.encode(byteArray58, (int) (byte) 0, 0);
-        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray58);
-        byte[] byteArray67 = base64_1.decode(byteArray66);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(byteArray46);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[10]");
-        org.junit.Assert.assertNotNull(byteArray52);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray53);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
-        org.junit.Assert.assertNotNull(byteArray56);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
-        org.junit.Assert.assertNotNull(byteArray57);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
-        org.junit.Assert.assertNotNull(byteArray59);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
-        org.junit.Assert.assertNotNull(byteArray67);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
-    }
-
-    @Test
-    public void test387() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RegressionTest0.test354");
         org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
         int int1 = base64_0.avail();
         int int2 = base64_0.avail();
@@ -23843,9 +21395,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RegressionTest0.test355");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         boolean boolean3 = base64_2.isUrlSafe();
@@ -23900,9 +21452,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RegressionTest0.test356");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -23944,9 +21496,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RegressionTest0.test357");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -24080,9 +21632,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RegressionTest0.test358");
         byte[] byteArray1 = new byte[] { (byte) 10 };
         byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
         boolean boolean3 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray1);
@@ -24100,9 +21652,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RegressionTest0.test359");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -24135,71 +21687,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
-        java.io.InputStream inputStream0 = null;
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
-        byte[] byteArray3 = new byte[] {};
-        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
-        int int5 = base64InputStream2.read(byteArray4);
-        byte[] byteArray9 = new byte[] { (byte) 10 };
-        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
-        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
-        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
-        boolean boolean18 = base64_17.isUrlSafe();
-        byte[] byteArray20 = new byte[] { (byte) 10 };
-        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
-        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
-        java.lang.Object obj23 = base64_17.encode((java.lang.Object) byteArray20);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream24 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, false, (int) '#', byteArray20);
-        byte[] byteArray29 = new byte[] { (byte) 10 };
-        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
-        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
-        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
-        byte[] byteArray33 = new byte[] {};
-        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
-        byte[] byteArray35 = base64_32.decode(byteArray34);
-        org.apache.commons.codec.binary.Base64InputStream base64InputStream36 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (short) -1, byteArray35);
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
-        org.junit.Assert.assertNotNull(obj23);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
-        org.junit.Assert.assertNotNull(byteArray34);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
-    }
-
-    @Test
-    public void test394() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RegressionTest0.test360");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -24238,9 +21728,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test395() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test395");
+            System.out.format("%n%s%n", "RegressionTest0.test361");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
         int int3 = base64_2.avail();
@@ -24358,9 +21848,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test396() throws Throwable {
+    public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test396");
+            System.out.format("%n%s%n", "RegressionTest0.test362");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -24462,9 +21952,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test397() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test397");
+            System.out.format("%n%s%n", "RegressionTest0.test363");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -24497,9 +21987,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test398() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test398");
+            System.out.format("%n%s%n", "RegressionTest0.test364");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -24539,9 +22029,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test399() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test399");
+            System.out.format("%n%s%n", "RegressionTest0.test365");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -24660,9 +22150,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test400() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test400");
+            System.out.format("%n%s%n", "RegressionTest0.test366");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -24709,9 +22199,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test401() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test401");
+            System.out.format("%n%s%n", "RegressionTest0.test367");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         org.apache.commons.codec.binary.Base64InputStream base64InputStream3 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1, false);
@@ -24727,9 +22217,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test402() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test402");
+            System.out.format("%n%s%n", "RegressionTest0.test368");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
@@ -24762,9 +22252,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test403() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test403");
+            System.out.format("%n%s%n", "RegressionTest0.test369");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -24894,9 +22384,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test404() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test404");
+            System.out.format("%n%s%n", "RegressionTest0.test370");
         org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(false);
         byte[] byteArray6 = new byte[] { (byte) 10 };
         byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
@@ -25050,9 +22540,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test405() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test405");
+            System.out.format("%n%s%n", "RegressionTest0.test371");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -25211,9 +22701,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test406() throws Throwable {
+    public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test406");
+            System.out.format("%n%s%n", "RegressionTest0.test372");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -25256,9 +22746,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test407() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test407");
+            System.out.format("%n%s%n", "RegressionTest0.test373");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
         boolean boolean2 = base64InputStream1.markSupported();
@@ -25275,9 +22765,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test408() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test408");
+            System.out.format("%n%s%n", "RegressionTest0.test374");
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
         byte[] byteArray8 = new byte[] { (byte) 10 };
@@ -25373,9 +22863,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test409() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test409");
+            System.out.format("%n%s%n", "RegressionTest0.test375");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -25532,9 +23022,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test410() throws Throwable {
+    public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test410");
+            System.out.format("%n%s%n", "RegressionTest0.test376");
         byte[] byteArray2 = new byte[] { (byte) 10 };
         byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
         byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
@@ -25664,9 +23154,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test411() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test411");
+            System.out.format("%n%s%n", "RegressionTest0.test377");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         byte[] byteArray7 = new byte[] { (byte) 10 };
@@ -25695,9 +23185,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test412() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test412");
+            System.out.format("%n%s%n", "RegressionTest0.test378");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
         boolean boolean2 = base64_1.isUrlSafe();
         byte[] byteArray3 = new byte[] {};
@@ -25716,9 +23206,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test413() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test413");
+            System.out.format("%n%s%n", "RegressionTest0.test379");
         java.io.OutputStream outputStream0 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
         org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
@@ -25862,9 +23352,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test414() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test414");
+            System.out.format("%n%s%n", "RegressionTest0.test380");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -25963,9 +23453,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test415() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test415");
+            System.out.format("%n%s%n", "RegressionTest0.test381");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -26045,9 +23535,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test416() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test416");
+            System.out.format("%n%s%n", "RegressionTest0.test382");
         java.io.InputStream inputStream0 = null;
         org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
         byte[] byteArray3 = new byte[] {};
@@ -26075,9 +23565,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test417() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test417");
+            System.out.format("%n%s%n", "RegressionTest0.test383");
         java.io.OutputStream outputStream1 = null;
         org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
         byte[] byteArray8 = new byte[] { (byte) 10 };
@@ -26192,9 +23682,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test418() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test418");
+            System.out.format("%n%s%n", "RegressionTest0.test384");
         org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(true);
         org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64();
@@ -26312,6 +23802,7353 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
         org.junit.Assert.assertNotNull(byteArray61);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+    }
+
+    @Test
+    public void test385() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test385");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean2 = base64_1.isUrlSafe();
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int7 = base64_1.readResults(byteArray4, (int) (short) 10, (int) (short) 100);
+        boolean boolean8 = base64_1.isUrlSafe();
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        byte[] byteArray19 = base64_16.decode(byteArray18);
+        boolean boolean20 = base64_16.hasData();
+        byte[] byteArray23 = new byte[] { (byte) 10 };
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
+        byte[] byteArray27 = new byte[] {};
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
+        byte[] byteArray29 = base64_26.decode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
+        byte[] byteArray31 = base64_16.encode(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
+        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray30, false);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray30);
+        byte[] byteArray36 = base64_1.encode(byteArray30);
+        org.apache.commons.codec.binary.Base64 base64_38 = new org.apache.commons.codec.binary.Base64((int) (byte) 10, byteArray30, false);
+        byte[] byteArray41 = new byte[] { (byte) 10 };
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
+        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
+        boolean boolean45 = base64_44.hasData();
+        byte[] byteArray48 = new byte[] { (byte) 10 };
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray48);
+        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64(0, byteArray48);
+        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray48);
+        byte[] byteArray53 = base64_44.encode(byteArray52);
+        byte[] byteArray54 = base64_38.encode(byteArray53);
+        byte[] byteArray57 = new byte[] { (byte) 10 };
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray57);
+        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray57);
+        org.apache.commons.codec.binary.Base64 base64_60 = new org.apache.commons.codec.binary.Base64(0, byteArray57);
+        byte[] byteArray61 = new byte[] {};
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray61);
+        byte[] byteArray63 = base64_60.decode(byteArray62);
+        boolean boolean64 = base64_60.hasData();
+        byte[] byteArray67 = new byte[] { (byte) 10 };
+        byte[] byteArray68 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray67);
+        byte[] byteArray69 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray67);
+        org.apache.commons.codec.binary.Base64 base64_70 = new org.apache.commons.codec.binary.Base64(0, byteArray67);
+        byte[] byteArray71 = new byte[] {};
+        byte[] byteArray72 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray71);
+        byte[] byteArray73 = base64_70.decode(byteArray72);
+        byte[] byteArray74 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray72);
+        byte[] byteArray75 = base64_60.encode(byteArray74);
+        byte[] byteArray76 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray74);
+        byte[] byteArray77 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray76);
+        java.lang.Object obj78 = base64_38.encode((java.lang.Object) byteArray76);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[10]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[10]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[]");
+        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[10]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray71);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[]");
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[]");
+        org.junit.Assert.assertNotNull(byteArray73);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray73), "[]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray77);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray77), "[]");
+        org.junit.Assert.assertNotNull(obj78);
+    }
+
+    @Test
+    public void test386() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test386");
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray3);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray8, false);
+        int int11 = base64_10.avail();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        byte[] byteArray21 = null;
+        base64_17.encode(byteArray21, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray27);
+        byte[] byteArray32 = base64_17.encode(byteArray27);
+        byte[] byteArray33 = base64_10.encode(byteArray27);
+        byte[] byteArray36 = new byte[] { (byte) 10 };
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray36);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64(0, byteArray36);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean41 = base64_40.isUrlSafe();
+        byte[] byteArray42 = new byte[] {};
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray42);
+        int int46 = base64_40.readResults(byteArray43, (int) (short) 10, (int) (short) 100);
+        boolean boolean47 = base64_40.isUrlSafe();
+        byte[] byteArray51 = new byte[] { (byte) 10 };
+        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray51);
+        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray51);
+        org.apache.commons.codec.binary.Base64 base64_54 = new org.apache.commons.codec.binary.Base64(0, byteArray51);
+        byte[] byteArray55 = new byte[] {};
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
+        byte[] byteArray57 = base64_54.decode(byteArray56);
+        boolean boolean58 = base64_54.hasData();
+        byte[] byteArray61 = new byte[] { (byte) 10 };
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray61);
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray61);
+        org.apache.commons.codec.binary.Base64 base64_64 = new org.apache.commons.codec.binary.Base64(0, byteArray61);
+        byte[] byteArray65 = new byte[] {};
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray65);
+        byte[] byteArray67 = base64_64.decode(byteArray66);
+        byte[] byteArray68 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray66);
+        byte[] byteArray69 = base64_54.encode(byteArray68);
+        byte[] byteArray70 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray68);
+        org.apache.commons.codec.binary.Base64 base64_72 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray68, false);
+        base64_40.encode(byteArray68, (int) (byte) 0, 0);
+        byte[] byteArray76 = base64_39.encode(byteArray68);
+        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray76, false, true);
+        byte[] byteArray80 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray79);
+        int int83 = base64_10.readResults(byteArray79, (int) '#', (int) (short) 10);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[10]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertTrue("'" + int46 + "' != '" + 0 + "'", int46 == 0);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[10]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[10]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
+        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
+    }
+
+    @Test
+    public void test387() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test387");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream53 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream53, true);
+        byte[] byteArray56 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int59 = base64InputStream53.read(byteArray56, (int) (short) -1, 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+    }
+
+    @Test
+    public void test388() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test388");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false);
+        // The following exception was thrown during execution in test generation
+        try {
+            int int15 = base64InputStream2.available();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+    }
+
+    @Test
+    public void test389() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test389");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean7 = base64_6.isUrlSafe();
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        java.lang.Object obj12 = base64_6.encode((java.lang.Object) byteArray9);
+        base64_5.decode(byteArray9, 10, (-1));
+        boolean boolean16 = base64_5.isUrlSafe();
+        byte[] byteArray17 = null;
+        byte[] byteArray18 = base64_5.decode(byteArray17);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(obj12);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNull(byteArray18);
+    }
+
+    @Test
+    public void test390() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test390");
+        byte[] byteArray1 = new byte[] { (byte) 10 };
+        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray1);
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray2);
+        org.junit.Assert.assertNotNull(byteArray1);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[10]");
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
+    }
+
+    @Test
+    public void test391() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test391");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        java.lang.Object obj23 = base64_17.encode((java.lang.Object) byteArray20);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream24 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, false, (int) '#', byteArray20);
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream36 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (short) -1, byteArray35);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream12.reset();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(obj23);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+    }
+
+    @Test
+    public void test392() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test392");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        byte[] byteArray55 = new byte[] { (byte) 10 };
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray55);
+        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray55);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream58 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false, 0, byteArray57);
+        org.apache.commons.codec.binary.Base64 base64_62 = new org.apache.commons.codec.binary.Base64(false);
+        java.io.OutputStream outputStream63 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream65 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream63, false);
+        byte[] byteArray70 = new byte[] { (byte) 10 };
+        byte[] byteArray71 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray70);
+        byte[] byteArray72 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray70);
+        org.apache.commons.codec.binary.Base64 base64_73 = new org.apache.commons.codec.binary.Base64(0, byteArray70);
+        byte[] byteArray74 = new byte[] {};
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray74);
+        byte[] byteArray76 = base64_73.decode(byteArray75);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream77 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream65, true, (int) (byte) 0, byteArray76);
+        java.io.InputStream inputStream78 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream80 = new org.apache.commons.codec.binary.Base64InputStream(inputStream78, false);
+        byte[] byteArray81 = new byte[] {};
+        byte[] byteArray82 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray81);
+        int int83 = base64InputStream80.read(byteArray82);
+        byte[] byteArray87 = new byte[] { (byte) 10 };
+        byte[] byteArray88 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray87);
+        byte[] byteArray89 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray87);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream90 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream80, false, 10, byteArray87);
+        boolean boolean91 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray87);
+        base64OutputStream77.write(byteArray87);
+        byte[] byteArray93 = base64_62.encode(byteArray87);
+        byte[] byteArray95 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray93, true);
+        byte[] byteArray96 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray95);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.codec.binary.Base64InputStream base64InputStream97 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream58, true, (int) '4', byteArray96);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: lineSeperator must not contain base64 characters: [Cg==]");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[10]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[10]");
+        org.junit.Assert.assertNotNull(byteArray71);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
+        org.junit.Assert.assertNotNull(byteArray87);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray87), "[10]");
+        org.junit.Assert.assertNotNull(byteArray88);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray89);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray89), "[]");
+        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + true + "'", boolean91 == true);
+        org.junit.Assert.assertNotNull(byteArray93);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray93), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray95);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray95), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
+        org.junit.Assert.assertNotNull(byteArray96);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray96), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test393() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test393");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream6 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int11 = base64InputStream8.read(byteArray10);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
+        byte[] byteArray19 = base64_5.encode(byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
+        java.io.InputStream inputStream21 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream23 = new org.apache.commons.codec.binary.Base64InputStream(inputStream21, false);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        int int26 = base64InputStream23.read(byteArray25);
+        byte[] byteArray30 = new byte[] { (byte) 10 };
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray30);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream33 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream23, false, 10, byteArray30);
+        boolean boolean34 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray30);
+        base64OutputStream20.write(byteArray30);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream36 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        byte[] byteArray38 = new byte[] { (byte) 10 };
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        boolean boolean40 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray38);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray38);
+        base64OutputStream36.write(byteArray38, 0, 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[10]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[67, 103, 61, 61, 13, 10]");
+    }
+
+    @Test
+    public void test394() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test394");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream16 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, true);
+        boolean boolean17 = base64InputStream14.markSupported();
+        byte[] byteArray22 = new byte[] { (byte) 10 };
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64(0, byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean27 = base64_26.isUrlSafe();
+        byte[] byteArray28 = new byte[] {};
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray28);
+        int int32 = base64_26.readResults(byteArray29, (int) (short) 10, (int) (short) 100);
+        boolean boolean33 = base64_26.isUrlSafe();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        boolean boolean44 = base64_40.hasData();
+        byte[] byteArray47 = new byte[] { (byte) 10 };
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray47);
+        org.apache.commons.codec.binary.Base64 base64_50 = new org.apache.commons.codec.binary.Base64(0, byteArray47);
+        byte[] byteArray51 = new byte[] {};
+        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray51);
+        byte[] byteArray53 = base64_50.decode(byteArray52);
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray52);
+        byte[] byteArray55 = base64_40.encode(byteArray54);
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray54);
+        org.apache.commons.codec.binary.Base64 base64_58 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray54, false);
+        base64_26.encode(byteArray54, (int) (byte) 0, 0);
+        byte[] byteArray62 = base64_25.encode(byteArray54);
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62, false, true);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray65);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream67 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false, (int) (byte) 1, byteArray65);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream67.close();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[10]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+    }
+
+    @Test
+    public void test395() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test395");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream13 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray16 = new byte[] { (byte) 10 };
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray16);
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray16);
+        org.apache.commons.codec.binary.Base64 base64_19 = new org.apache.commons.codec.binary.Base64(0, byteArray16);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        byte[] byteArray22 = base64_19.decode(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray21);
+        java.math.BigInteger bigInteger24 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray21);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger24);
+        java.math.BigInteger bigInteger26 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray25);
+        int int27 = base64InputStream13.read(byteArray25);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream13.reset();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(bigInteger24);
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(bigInteger26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+    }
+
+    @Test
+    public void test396() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test396");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        int int25 = base64InputStream12.read(byteArray24);
+        // The following exception was thrown during execution in test generation
+        try {
+            int int26 = base64InputStream12.available();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+    }
+
+    @Test
+    public void test397() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test397");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        byte[] byteArray19 = new byte[] { (byte) 10 };
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray19);
+        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64(0, byteArray19);
+        byte[] byteArray23 = new byte[] {};
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray23);
+        byte[] byteArray25 = base64_22.decode(byteArray24);
+        boolean boolean26 = base64_22.hasData();
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
+        byte[] byteArray37 = base64_22.encode(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray36);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray38);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream40 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, (int) (short) 100, byteArray38);
+        // The following exception was thrown during execution in test generation
+        try {
+            long long42 = base64InputStream40.skip((long) 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[10]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+    }
+
+    @Test
+    public void test398() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test398");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream17 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean21 = base64_20.isUrlSafe();
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        int int26 = base64_20.readResults(byteArray23, (int) (short) 10, (int) (short) 100);
+        boolean boolean27 = base64_20.isUrlSafe();
+        byte[] byteArray31 = new byte[] { (byte) 10 };
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray31);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray31);
+        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64(0, byteArray31);
+        byte[] byteArray35 = new byte[] {};
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray35);
+        byte[] byteArray37 = base64_34.decode(byteArray36);
+        boolean boolean38 = base64_34.hasData();
+        byte[] byteArray41 = new byte[] { (byte) 10 };
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
+        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
+        byte[] byteArray45 = new byte[] {};
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray45);
+        byte[] byteArray47 = base64_44.decode(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray46);
+        byte[] byteArray49 = base64_34.encode(byteArray48);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray48);
+        org.apache.commons.codec.binary.Base64 base64_52 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray48, false);
+        base64_20.encode(byteArray48, (int) (byte) 0, 0);
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
+        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray56);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream58 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15, true, (int) ' ', byteArray56);
+        java.lang.Class<?> wildcardClass59 = base64OutputStream58.getClass();
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[10]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(wildcardClass59);
+    }
+
+    @Test
+    public void test399() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test399");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
+        byte[] byteArray2 = null;
+        byte[] byteArray3 = base64_1.encode(byteArray2);
+        byte[] byteArray6 = new byte[] { (byte) 10 };
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray6);
+        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64(0, byteArray6);
+        byte[] byteArray10 = new byte[] {};
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
+        byte[] byteArray12 = base64_9.decode(byteArray11);
+        boolean boolean13 = base64_9.hasData();
+        byte[] byteArray16 = new byte[] { (byte) 10 };
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray16);
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray16);
+        org.apache.commons.codec.binary.Base64 base64_19 = new org.apache.commons.codec.binary.Base64(0, byteArray16);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        byte[] byteArray22 = base64_19.decode(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray21);
+        byte[] byteArray24 = base64_9.encode(byteArray23);
+        base64_1.setInitialBuffer(byteArray24, (int) (short) 10, (-1));
+        org.apache.commons.codec.binary.Base64 base64_28 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean29 = base64_28.isUrlSafe();
+        byte[] byteArray31 = new byte[] { (byte) 10 };
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray31);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray31);
+        java.lang.Object obj34 = base64_28.encode((java.lang.Object) byteArray31);
+        org.apache.commons.codec.binary.Base64 base64_36 = new org.apache.commons.codec.binary.Base64(true);
+        org.apache.commons.codec.binary.Base64 base64_37 = new org.apache.commons.codec.binary.Base64();
+        int int38 = base64_37.avail();
+        byte[] byteArray41 = new byte[] { (byte) 10 };
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
+        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
+        byte[] byteArray45 = new byte[] {};
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray45);
+        byte[] byteArray47 = base64_44.decode(byteArray46);
+        boolean boolean48 = base64_44.hasData();
+        byte[] byteArray51 = new byte[] { (byte) 10 };
+        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray51);
+        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray51);
+        org.apache.commons.codec.binary.Base64 base64_54 = new org.apache.commons.codec.binary.Base64(0, byteArray51);
+        byte[] byteArray55 = new byte[] {};
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
+        byte[] byteArray57 = base64_54.decode(byteArray56);
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray56);
+        byte[] byteArray59 = base64_44.encode(byteArray58);
+        int int62 = base64_37.readResults(byteArray58, (int) '#', 76);
+        byte[] byteArray65 = new byte[] { (byte) 10 };
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray65);
+        byte[] byteArray67 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray65);
+        org.apache.commons.codec.binary.Base64 base64_68 = new org.apache.commons.codec.binary.Base64(0, byteArray65);
+        byte[] byteArray69 = new byte[] {};
+        byte[] byteArray70 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray69);
+        byte[] byteArray71 = base64_68.decode(byteArray70);
+        byte[] byteArray72 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray70);
+        java.math.BigInteger bigInteger73 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray70);
+        byte[] byteArray74 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger73);
+        java.math.BigInteger bigInteger75 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray74);
+        int int78 = base64_37.readResults(byteArray74, (int) (short) 10, 10);
+        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray74);
+        base64_36.setInitialBuffer(byteArray79, (int) (byte) 0, (int) (short) 100);
+        byte[] byteArray83 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray79);
+        base64_28.decode(byteArray79, (int) '#', (int) (byte) -1);
+        byte[] byteArray88 = new byte[] { (byte) 10 };
+        byte[] byteArray89 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray88);
+        byte[] byteArray90 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray89);
+        byte[] byteArray91 = base64_28.encode(byteArray90);
+        byte[] byteArray92 = base64_1.encode(byteArray90);
+        org.junit.Assert.assertNull(byteArray3);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[10]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[10]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(obj34);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[10]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[10]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+        org.junit.Assert.assertNotNull(byteArray71);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[]");
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[]");
+        org.junit.Assert.assertNotNull(bigInteger73);
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(bigInteger75);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray83);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray83), "[]");
+        org.junit.Assert.assertNotNull(byteArray88);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[10]");
+        org.junit.Assert.assertNotNull(byteArray89);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray89), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray90);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray90), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
+        org.junit.Assert.assertNotNull(byteArray91);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray91), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray92);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray92), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test400() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test400");
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        byte[] byteArray10 = base64_7.decode(byteArray9);
+        boolean boolean11 = base64_7.hasData();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
+        byte[] byteArray22 = base64_7.encode(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray21);
+        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray21, false);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray21);
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
+        java.math.BigInteger bigInteger37 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray34);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray34);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        byte[] byteArray40 = base64_26.encode(byteArray39);
+        org.apache.commons.codec.binary.Base64 base64_42 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj43 = base64_26.decode((java.lang.Object) base64_42);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.DecoderException; message: Parameter supplied to Base64 decode is not a byte[]");
+        } catch (org.apache.commons.codec.DecoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(bigInteger37);
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+    }
+
+    @Test
+    public void test401() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test401");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream53 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream53, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream57 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream55, true);
+        boolean boolean58 = base64InputStream55.markSupported();
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+    }
+
+    @Test
+    public void test402() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test402");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream6 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int11 = base64InputStream8.read(byteArray10);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
+        byte[] byteArray19 = base64_5.encode(byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        base64OutputStream20.write((-1));
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream34 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20, false, (int) '4', byteArray28);
+        base64OutputStream34.write(0);
+        byte[] byteArray38 = new byte[] { (byte) 10 };
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        java.math.BigInteger bigInteger40 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger40);
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger40);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger40);
+        base64OutputStream34.write(byteArray43);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61, 13, 10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger40);
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[10]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test403() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test403");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
+        java.io.OutputStream outputStream2 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream2, false);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64 base64_12 = new org.apache.commons.codec.binary.Base64(0, byteArray9);
+        byte[] byteArray13 = new byte[] {};
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray13);
+        byte[] byteArray15 = base64_12.decode(byteArray14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream4, true, (int) (byte) 0, byteArray15);
+        java.io.InputStream inputStream17 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream19 = new org.apache.commons.codec.binary.Base64InputStream(inputStream17, false);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        int int22 = base64InputStream19.read(byteArray21);
+        byte[] byteArray26 = new byte[] { (byte) 10 };
+        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray26);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray26);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream29 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream19, false, 10, byteArray26);
+        boolean boolean30 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray26);
+        base64OutputStream16.write(byteArray26);
+        byte[] byteArray32 = base64_1.encode(byteArray26);
+        boolean boolean33 = base64_1.hasData();
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64((int) (short) 100);
+        byte[] byteArray38 = new byte[] { (byte) 10 };
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray38);
+        org.apache.commons.codec.binary.Base64 base64_41 = new org.apache.commons.codec.binary.Base64(0, byteArray38);
+        byte[] byteArray42 = new byte[] {};
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray42);
+        byte[] byteArray44 = base64_41.decode(byteArray43);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43, true);
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray46);
+        java.lang.Object obj48 = base64_35.encode((java.lang.Object) byteArray47);
+        byte[] byteArray49 = base64_1.encode(byteArray47);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[10]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(obj48);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+    }
+
+    @Test
+    public void test404() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test404");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        int int25 = base64InputStream12.read(byteArray24);
+        java.io.OutputStream outputStream28 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream30 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, false);
+        org.apache.commons.codec.binary.Base64 base64_33 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream34 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream36 = new org.apache.commons.codec.binary.Base64InputStream(inputStream34, false);
+        byte[] byteArray37 = new byte[] {};
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray37);
+        int int39 = base64InputStream36.read(byteArray38);
+        byte[] byteArray43 = new byte[] { (byte) 10 };
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43);
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray43);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream46 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream36, false, 10, byteArray43);
+        byte[] byteArray47 = base64_33.encode(byteArray43);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream48 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, true, (-1), byteArray43);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream49 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (byte) -1, byteArray43);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream49.reset();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[10]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test405() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test405");
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean8 = base64_7.isUrlSafe();
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int13 = base64_7.readResults(byteArray10, (int) (short) 10, (int) (short) 100);
+        boolean boolean14 = base64_7.isUrlSafe();
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        boolean boolean25 = base64_21.hasData();
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        byte[] byteArray34 = base64_31.decode(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
+        byte[] byteArray36 = base64_21.encode(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray35, false);
+        base64_7.encode(byteArray35, (int) (byte) 0, 0);
+        byte[] byteArray43 = base64_6.encode(byteArray35);
+        byte[] byteArray45 = new byte[] { (byte) 10 };
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray45);
+        java.math.BigInteger bigInteger47 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger47);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray49);
+        boolean boolean51 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray50);
+        byte[] byteArray52 = base64_6.decode(byteArray50);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.codec.binary.Base64 base64_53 = new org.apache.commons.codec.binary.Base64(100, byteArray50);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: lineSeperator must not contain base64 characters: [Q2c9PQ==]");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[10]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger47);
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[81, 50, 99, 57, 80, 81, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + true + "'", boolean51 == true);
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test406() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test406");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        java.lang.Object obj6 = base64_0.encode((java.lang.Object) byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(true);
+        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64();
+        int int10 = base64_9.avail();
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        byte[] byteArray19 = base64_16.decode(byteArray18);
+        boolean boolean20 = base64_16.hasData();
+        byte[] byteArray23 = new byte[] { (byte) 10 };
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
+        byte[] byteArray27 = new byte[] {};
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
+        byte[] byteArray29 = base64_26.decode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
+        byte[] byteArray31 = base64_16.encode(byteArray30);
+        int int34 = base64_9.readResults(byteArray30, (int) '#', 76);
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        java.math.BigInteger bigInteger45 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray42);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger45);
+        java.math.BigInteger bigInteger47 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray46);
+        int int50 = base64_9.readResults(byteArray46, (int) (short) 10, 10);
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray46);
+        base64_8.setInitialBuffer(byteArray51, (int) (byte) 0, (int) (short) 100);
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray51);
+        base64_0.decode(byteArray51, (int) '#', (int) (byte) -1);
+        byte[] byteArray60 = new byte[] { (byte) 10 };
+        byte[] byteArray61 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray60);
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray61);
+        byte[] byteArray63 = base64_0.encode(byteArray62);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62, true, true);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertNotNull(obj6);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(bigInteger45);
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(bigInteger47);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[10]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 13, 10]");
+    }
+
+    @Test
+    public void test407() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test407");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((-1));
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean3 = base64_2.isUrlSafe();
+        byte[] byteArray4 = new byte[] {};
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray4);
+        int int8 = base64_2.readResults(byteArray5, (int) (short) 10, (int) (short) 100);
+        boolean boolean9 = base64_2.isUrlSafe();
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        byte[] byteArray19 = base64_16.decode(byteArray18);
+        boolean boolean20 = base64_16.hasData();
+        byte[] byteArray23 = new byte[] { (byte) 10 };
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
+        byte[] byteArray27 = new byte[] {};
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
+        byte[] byteArray29 = base64_26.decode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
+        byte[] byteArray31 = base64_16.encode(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
+        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray30, false);
+        base64_2.encode(byteArray30, (int) (byte) 0, 0);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray30);
+        base64_1.setInitialBuffer(byteArray30, (int) (byte) 1, (int) '#');
+        int int42 = base64_1.avail();
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+    }
+
+    @Test
+    public void test408() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test408");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        base64OutputStream2.write((int) (short) 10);
+    }
+
+    @Test
+    public void test409() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test409");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean3 = base64_2.isUrlSafe();
+        byte[] byteArray5 = new byte[] { (byte) 10 };
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
+        java.lang.Object obj8 = base64_2.encode((java.lang.Object) byteArray5);
+        byte[] byteArray9 = base64_1.encode(byteArray5);
+        byte[] byteArray12 = new byte[] { (byte) 10 };
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray12);
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray12);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64(0, byteArray12);
+        byte[] byteArray16 = new byte[] {};
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray16);
+        byte[] byteArray18 = base64_15.decode(byteArray17);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray17);
+        java.math.BigInteger bigInteger20 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray17);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger20);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger20);
+        byte[] byteArray24 = base64_1.decode(byteArray23);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(obj8);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[10]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(bigInteger20);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+    }
+
+    @Test
+    public void test410() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test410");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        java.lang.Object obj23 = base64_17.encode((java.lang.Object) byteArray20);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream24 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, false, (int) '#', byteArray20);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream26 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream24, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream27 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream24);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(obj23);
+    }
+
+    @Test
+    public void test411() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test411");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        int int23 = base64_17.readResults(byteArray20, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream25 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14, true, 76, byteArray20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream26 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream28 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream26, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream30 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream28, false);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+    }
+
+    @Test
+    public void test412() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test412");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        base64OutputStream15.write(100);
+        base64OutputStream15.write((int) (short) 10);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+    }
+
+    @Test
+    public void test413() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test413");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        int int1 = base64_0.avail();
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        byte[] byteArray10 = base64_7.decode(byteArray9);
+        boolean boolean11 = base64_7.hasData();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
+        byte[] byteArray22 = base64_7.encode(byteArray21);
+        int int25 = base64_0.readResults(byteArray21, (int) '#', 76);
+        java.io.InputStream inputStream26 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream28 = new org.apache.commons.codec.binary.Base64InputStream(inputStream26, false);
+        byte[] byteArray29 = new byte[] {};
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray29);
+        int int31 = base64InputStream28.read(byteArray30);
+        byte[] byteArray35 = new byte[] { (byte) 10 };
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray35);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream38 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream28, false, 10, byteArray35);
+        boolean boolean39 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray35);
+        java.lang.Object obj40 = base64_0.encode((java.lang.Object) byteArray35);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[10]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
+        org.junit.Assert.assertNotNull(obj40);
+    }
+
+    @Test
+    public void test414() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test414");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        byte[] byteArray55 = new byte[] { (byte) 10 };
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray55);
+        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray55);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream58 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false, 0, byteArray57);
+        byte[] byteArray62 = new byte[] { (byte) 10 };
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62);
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray63);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.codec.binary.Base64InputStream base64InputStream65 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream58, true, (int) (byte) 0, byteArray63);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: lineSeperator must not contain base64 characters: [Cg==]");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[10]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[10]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[10]");
+    }
+
+    @Test
+    public void test415() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test415");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream13 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream13.mark((int) (byte) 1);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+    }
+
+    @Test
+    public void test416() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test416");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream6 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int11 = base64InputStream8.read(byteArray10);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
+        byte[] byteArray19 = base64_5.encode(byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
+        java.io.InputStream inputStream21 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream23 = new org.apache.commons.codec.binary.Base64InputStream(inputStream21, false);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        int int26 = base64InputStream23.read(byteArray25);
+        byte[] byteArray30 = new byte[] { (byte) 10 };
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray30);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream33 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream23, false, 10, byteArray30);
+        boolean boolean34 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray30);
+        base64OutputStream20.write(byteArray30);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream36 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream38 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20, true);
+        byte[] byteArray43 = new byte[] { (byte) 10 };
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43);
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray43);
+        org.apache.commons.codec.binary.Base64 base64_46 = new org.apache.commons.codec.binary.Base64(0, byteArray43);
+        byte[] byteArray47 = new byte[] {};
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray47);
+        byte[] byteArray49 = base64_46.decode(byteArray48);
+        boolean boolean50 = base64_46.hasData();
+        byte[] byteArray53 = new byte[] { (byte) 10 };
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray53);
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray53);
+        org.apache.commons.codec.binary.Base64 base64_56 = new org.apache.commons.codec.binary.Base64(0, byteArray53);
+        byte[] byteArray57 = new byte[] {};
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray57);
+        byte[] byteArray59 = base64_56.decode(byteArray58);
+        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray58);
+        byte[] byteArray61 = base64_46.encode(byteArray60);
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray60);
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray60, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream65 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20, true, (int) (short) 0, byteArray60);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[10]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[10]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[10]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[]");
+    }
+
+    @Test
+    public void test417() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test417");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean7 = base64_6.isUrlSafe();
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        int int12 = base64_6.readResults(byteArray9, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64 base64_18 = new org.apache.commons.codec.binary.Base64(0, byteArray15);
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        byte[] byteArray21 = base64_18.decode(byteArray20);
+        byte[] byteArray22 = null;
+        base64_18.encode(byteArray22, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
+        byte[] byteArray33 = base64_18.encode(byteArray28);
+        byte[] byteArray34 = base64_6.decode(byteArray28);
+        int int35 = base64InputStream2.read(byteArray34);
+        boolean boolean36 = base64InputStream2.markSupported();
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+    }
+
+    @Test
+    public void test418() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test418");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray2);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[81, 50, 99, 61]");
+    }
+
+    @Test
+    public void test419() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test419");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
+        byte[] byteArray5 = new byte[] { (byte) 10 };
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(0, byteArray5);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        byte[] byteArray11 = base64_8.decode(byteArray10);
+        boolean boolean12 = base64_8.hasData();
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64 base64_18 = new org.apache.commons.codec.binary.Base64(0, byteArray15);
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        byte[] byteArray21 = base64_18.decode(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
+        byte[] byteArray23 = base64_8.encode(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray22, false);
+        base64_1.decode(byteArray22, (int) 'a', (int) (short) -1);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean31 = base64_30.isUrlSafe();
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        int int36 = base64_30.readResults(byteArray33, (int) (short) 10, (int) (short) 100);
+        boolean boolean37 = base64_30.isUrlSafe();
+        byte[] byteArray41 = new byte[] { (byte) 10 };
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray41);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray41);
+        org.apache.commons.codec.binary.Base64 base64_44 = new org.apache.commons.codec.binary.Base64(0, byteArray41);
+        byte[] byteArray45 = new byte[] {};
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray45);
+        byte[] byteArray47 = base64_44.decode(byteArray46);
+        boolean boolean48 = base64_44.hasData();
+        byte[] byteArray51 = new byte[] { (byte) 10 };
+        byte[] byteArray52 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray51);
+        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray51);
+        org.apache.commons.codec.binary.Base64 base64_54 = new org.apache.commons.codec.binary.Base64(0, byteArray51);
+        byte[] byteArray55 = new byte[] {};
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
+        byte[] byteArray57 = base64_54.decode(byteArray56);
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray56);
+        byte[] byteArray59 = base64_44.encode(byteArray58);
+        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray58);
+        org.apache.commons.codec.binary.Base64 base64_62 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray58, false);
+        base64_30.encode(byteArray58, (int) (byte) 0, 0);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray58);
+        byte[] byteArray67 = base64_1.decode(byteArray66);
+        byte[] byteArray68 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray66);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[10]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[10]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+    }
+
+    @Test
+    public void test420() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test420");
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
+        byte[] byteArray5 = new byte[] { (byte) 10 };
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(0, byteArray5);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        byte[] byteArray11 = base64_8.decode(byteArray10);
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray10);
+        base64_2.setInitialBuffer(byteArray12, 0, 0);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64((int) (byte) -1, byteArray12);
+        java.lang.Class<?> wildcardClass17 = base64_16.getClass();
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(wildcardClass17);
+    }
+
+    @Test
+    public void test421() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test421");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        java.lang.Object obj23 = base64_17.encode((java.lang.Object) byteArray20);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream24 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, false, (int) '#', byteArray20);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream26 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream24, false);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream24.reset();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(obj23);
+    }
+
+    @Test
+    public void test422() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test422");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray2 = new byte[] {};
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
+        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
+        boolean boolean7 = base64_0.isUrlSafe();
+        byte[] byteArray11 = new byte[] { (byte) 10 };
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray11);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray11);
+        org.apache.commons.codec.binary.Base64 base64_14 = new org.apache.commons.codec.binary.Base64(0, byteArray11);
+        byte[] byteArray15 = new byte[] {};
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray15);
+        byte[] byteArray17 = base64_14.decode(byteArray16);
+        boolean boolean18 = base64_14.hasData();
+        byte[] byteArray21 = new byte[] { (byte) 10 };
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray21);
+        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64(0, byteArray21);
+        byte[] byteArray25 = new byte[] {};
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray25);
+        byte[] byteArray27 = base64_24.decode(byteArray26);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray26);
+        byte[] byteArray29 = base64_14.encode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray28, false);
+        base64_0.encode(byteArray28, (int) (byte) 0, 0);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[10]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[10]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+    }
+
+    @Test
+    public void test423() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test423");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream13 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream2.mark((int) '4');
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+    }
+
+    @Test
+    public void test424() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test424");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
+        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        boolean boolean14 = base64_10.hasData();
+        byte[] byteArray17 = new byte[] { (byte) 10 };
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray17);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray17);
+        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64(0, byteArray17);
+        byte[] byteArray21 = new byte[] {};
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray21);
+        byte[] byteArray23 = base64_20.decode(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray22);
+        byte[] byteArray25 = base64_10.encode(byteArray24);
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray24);
+        org.apache.commons.codec.binary.Base64 base64_28 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray24, false);
+        base64_3.decode(byteArray24, (int) 'a', (int) (short) -1);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean33 = base64_32.isUrlSafe();
+        byte[] byteArray34 = new byte[] {};
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray34);
+        int int38 = base64_32.readResults(byteArray35, (int) (short) 10, (int) (short) 100);
+        boolean boolean39 = base64_32.isUrlSafe();
+        byte[] byteArray43 = new byte[] { (byte) 10 };
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43);
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray43);
+        org.apache.commons.codec.binary.Base64 base64_46 = new org.apache.commons.codec.binary.Base64(0, byteArray43);
+        byte[] byteArray47 = new byte[] {};
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray47);
+        byte[] byteArray49 = base64_46.decode(byteArray48);
+        boolean boolean50 = base64_46.hasData();
+        byte[] byteArray53 = new byte[] { (byte) 10 };
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray53);
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray53);
+        org.apache.commons.codec.binary.Base64 base64_56 = new org.apache.commons.codec.binary.Base64(0, byteArray53);
+        byte[] byteArray57 = new byte[] {};
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray57);
+        byte[] byteArray59 = base64_56.decode(byteArray58);
+        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray58);
+        byte[] byteArray61 = base64_46.encode(byteArray60);
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray60);
+        org.apache.commons.codec.binary.Base64 base64_64 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray60, false);
+        base64_32.encode(byteArray60, (int) (byte) 0, 0);
+        byte[] byteArray68 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray60);
+        byte[] byteArray69 = base64_3.decode(byteArray68);
+        byte[] byteArray70 = base64_1.decode(byteArray68);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[10]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[10]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[10]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+    }
+
+    @Test
+    public void test425() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test425");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        int int1 = base64_0.avail();
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean9 = base64_8.isUrlSafe();
+        byte[] byteArray10 = new byte[] {};
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
+        int int14 = base64_8.readResults(byteArray11, (int) (short) 10, (int) (short) 100);
+        boolean boolean15 = base64_8.isUrlSafe();
+        byte[] byteArray19 = new byte[] { (byte) 10 };
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray19);
+        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64(0, byteArray19);
+        byte[] byteArray23 = new byte[] {};
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray23);
+        byte[] byteArray25 = base64_22.decode(byteArray24);
+        boolean boolean26 = base64_22.hasData();
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
+        byte[] byteArray37 = base64_22.encode(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray36);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray36, false);
+        base64_8.encode(byteArray36, (int) (byte) 0, 0);
+        byte[] byteArray44 = base64_7.encode(byteArray36);
+        byte[] byteArray46 = new byte[] { (byte) 10 };
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray46);
+        java.math.BigInteger bigInteger48 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger48);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger48);
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray50);
+        boolean boolean52 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray51);
+        byte[] byteArray53 = base64_7.decode(byteArray51);
+        java.io.InputStream inputStream54 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream56 = new org.apache.commons.codec.binary.Base64InputStream(inputStream54, false);
+        byte[] byteArray57 = new byte[] {};
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray57);
+        int int59 = base64InputStream56.read(byteArray58);
+        byte[] byteArray63 = new byte[] { (byte) 10 };
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray63);
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray63);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream66 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream56, false, 10, byteArray63);
+        boolean boolean67 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray63);
+        byte[] byteArray68 = base64_7.decode(byteArray63);
+        java.math.BigInteger bigInteger69 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray63);
+        int int72 = base64_0.readResults(byteArray63, (int) ' ', 1);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[10]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[10]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger48);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[81, 50, 99, 57, 80, 81, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + true + "'", boolean52 == true);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[10]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[]");
+        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + true + "'", boolean67 == true);
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(bigInteger69);
+        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 0 + "'", int72 == 0);
+    }
+
+    @Test
+    public void test426() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test426");
+        byte[] byteArray1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(0, byteArray1, false);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test427() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test427");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        org.apache.commons.codec.binary.Base64 base64_23 = new org.apache.commons.codec.binary.Base64(0, byteArray20);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        byte[] byteArray26 = base64_23.decode(byteArray25);
+        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray25);
+        java.math.BigInteger bigInteger28 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray25);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger28);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream31 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14, true, 76, byteArray30);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64();
+        java.io.OutputStream outputStream33 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream35 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream33, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream36 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream33);
+        byte[] byteArray39 = new byte[] { (byte) 10 };
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray39);
+        org.apache.commons.codec.binary.Base64 base64_42 = new org.apache.commons.codec.binary.Base64(0, byteArray39);
+        boolean boolean43 = base64_42.hasData();
+        byte[] byteArray46 = new byte[] { (byte) 10 };
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray46);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64(0, byteArray46);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray46);
+        byte[] byteArray51 = base64_42.encode(byteArray50);
+        base64OutputStream36.write(byteArray51);
+        base64_32.setInitialBuffer(byteArray51, (int) (short) 0, 76);
+        base64OutputStream14.write(byteArray51);
+        java.math.BigInteger bigInteger57 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray51);
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger57);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(bigInteger28);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[10]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertNotNull(bigInteger57);
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+    }
+
+    @Test
+    public void test428() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test428");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        boolean boolean6 = base64_5.hasData();
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64((int) (short) 10);
+        byte[] byteArray10 = new byte[] { (byte) 10 };
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray10);
+        java.lang.Object obj12 = base64_8.decode((java.lang.Object) byteArray10);
+        java.lang.Object obj13 = base64_5.encode((java.lang.Object) byteArray10);
+        java.lang.Object obj14 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj15 = base64_5.decode(obj14);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.DecoderException; message: Parameter supplied to Base64 decode is not a byte[]");
+        } catch (org.apache.commons.codec.DecoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[10]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(obj12);
+        org.junit.Assert.assertNotNull(obj13);
+    }
+
+    @Test
+    public void test429() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test429");
+        java.io.InputStream inputStream2 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream(inputStream2, false);
+        byte[] byteArray5 = new byte[] {};
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray5);
+        int int7 = base64InputStream4.read(byteArray6);
+        byte[] byteArray11 = new byte[] { (byte) 10 };
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray11);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray11);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream4, false, 10, byteArray11);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream16 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream4, true);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        int int23 = base64_17.readResults(byteArray20, (int) (short) 10, (int) (short) 100);
+        boolean boolean24 = base64_17.isUrlSafe();
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        boolean boolean36 = base64_32.hasData();
+        byte[] byteArray39 = new byte[] { (byte) 10 };
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray39);
+        org.apache.commons.codec.binary.Base64 base64_42 = new org.apache.commons.codec.binary.Base64(0, byteArray39);
+        byte[] byteArray43 = new byte[] {};
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray43);
+        byte[] byteArray45 = base64_42.decode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray44);
+        byte[] byteArray47 = base64_32.encode(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray46);
+        org.apache.commons.codec.binary.Base64 base64_50 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray46, false);
+        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray46);
+        byte[] byteArray52 = base64_17.encode(byteArray46);
+        int int53 = base64InputStream16.read(byteArray46);
+        org.apache.commons.codec.binary.Base64 base64_55 = new org.apache.commons.codec.binary.Base64(76, byteArray46, true);
+        org.apache.commons.codec.binary.Base64 base64_57 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray46, false);
+        byte[] byteArray59 = new byte[] { (byte) 10 };
+        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray59);
+        java.math.BigInteger bigInteger61 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray60);
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger61);
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger61);
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger61);
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger61);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger61);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj67 = base64_57.decode((java.lang.Object) bigInteger61);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.DecoderException; message: Parameter supplied to Base64 decode is not a byte[]");
+        } catch (org.apache.commons.codec.DecoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[10]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
+        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 0 + "'", int53 == 0);
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[10]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger61);
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[10]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[10]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[10]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[10]");
+    }
+
+    @Test
+    public void test430() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test430");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream6 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int11 = base64InputStream8.read(byteArray10);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
+        byte[] byteArray19 = base64_5.encode(byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64OutputStream21.close();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test431() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test431");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray2 = new byte[] {};
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
+        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
+        boolean boolean7 = base64_0.isUrlSafe();
+        byte[] byteArray11 = new byte[] { (byte) 10 };
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray11);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray11);
+        org.apache.commons.codec.binary.Base64 base64_14 = new org.apache.commons.codec.binary.Base64(0, byteArray11);
+        byte[] byteArray15 = new byte[] {};
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray15);
+        byte[] byteArray17 = base64_14.decode(byteArray16);
+        boolean boolean18 = base64_14.hasData();
+        byte[] byteArray21 = new byte[] { (byte) 10 };
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray21);
+        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64(0, byteArray21);
+        byte[] byteArray25 = new byte[] {};
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray25);
+        byte[] byteArray27 = base64_24.decode(byteArray26);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray26);
+        byte[] byteArray29 = base64_14.encode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray28, false);
+        base64_0.encode(byteArray28, (int) (byte) 0, 0);
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = base64_0.decode(byteArray38);
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray39);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[10]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[10]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+    }
+
+    @Test
+    public void test432() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test432");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(100);
+        byte[] byteArray5 = new byte[] { (byte) 10 };
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(0, byteArray5);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray5);
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray5);
+        org.apache.commons.codec.binary.Base64 base64_12 = new org.apache.commons.codec.binary.Base64(0, byteArray10, false);
+        int int13 = base64_12.avail();
+        byte[] byteArray16 = new byte[] { (byte) 10 };
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray16);
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray16);
+        org.apache.commons.codec.binary.Base64 base64_19 = new org.apache.commons.codec.binary.Base64(0, byteArray16);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        byte[] byteArray22 = base64_19.decode(byteArray21);
+        byte[] byteArray23 = null;
+        base64_19.encode(byteArray23, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray29);
+        byte[] byteArray34 = base64_19.encode(byteArray29);
+        byte[] byteArray35 = base64_12.encode(byteArray29);
+        base64_1.encode(byteArray29, (int) (byte) 100, 0);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test433() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test433");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        java.io.InputStream inputStream15 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream17 = new org.apache.commons.codec.binary.Base64InputStream(inputStream15, false);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        int int20 = base64InputStream17.read(byteArray19);
+        byte[] byteArray24 = new byte[] { (byte) 10 };
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray24);
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream27 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream17, false, 10, byteArray24);
+        boolean boolean28 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray24);
+        base64OutputStream14.write(byteArray24);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
+        boolean boolean31 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray24);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[10]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + true + "'", boolean31 == true);
+    }
+
+    @Test
+    public void test434() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test434");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream53 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream53, true);
+        // The following exception was thrown during execution in test generation
+        try {
+            long long57 = base64InputStream53.skip((long) (short) 1);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+    }
+
+    @Test
+    public void test435() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test435");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        byte[] byteArray6 = new byte[] {};
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
+        byte[] byteArray8 = base64_5.decode(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray7);
+        java.math.BigInteger bigInteger10 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray7);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger10);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(bigInteger10);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+    }
+
+    @Test
+    public void test436() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test436");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        int int25 = base64InputStream12.read(byteArray24);
+        java.io.OutputStream outputStream28 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream30 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, false);
+        org.apache.commons.codec.binary.Base64 base64_33 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream34 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream36 = new org.apache.commons.codec.binary.Base64InputStream(inputStream34, false);
+        byte[] byteArray37 = new byte[] {};
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray37);
+        int int39 = base64InputStream36.read(byteArray38);
+        byte[] byteArray43 = new byte[] { (byte) 10 };
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray43);
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray43);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream46 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream36, false, 10, byteArray43);
+        byte[] byteArray47 = base64_33.encode(byteArray43);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream48 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream28, true, (-1), byteArray43);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream49 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (byte) -1, byteArray43);
+        boolean boolean50 = base64InputStream12.markSupported();
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream52 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        byte[] byteArray56 = new byte[] { (byte) 10 };
+        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray56);
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray57);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.codec.binary.Base64InputStream base64InputStream59 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream52, true, (int) '4', byteArray57);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: lineSeperator must not contain base64 characters: [Cg==]");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[10]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[10]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[10]");
+    }
+
+    @Test
+    public void test437() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test437");
+        java.io.OutputStream outputStream1 = null;
+        org.apache.commons.codec.binary.Base64 base64_4 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream5 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream7 = new org.apache.commons.codec.binary.Base64InputStream(inputStream5, false);
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        int int10 = base64InputStream7.read(byteArray9);
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream17 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream7, false, 10, byteArray14);
+        byte[] byteArray18 = base64_4.encode(byteArray14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream19 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, true, 10, byteArray14);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14, false, true);
+        org.apache.commons.codec.binary.Base64 base64_23 = new org.apache.commons.codec.binary.Base64(100, byteArray14);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103]");
+    }
+
+    @Test
+    public void test438() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test438");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
+        byte[] byteArray6 = new byte[] { (byte) 10 };
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray6);
+        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64(0, byteArray6);
+        boolean boolean10 = base64_9.hasData();
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray13);
+        byte[] byteArray18 = base64_9.encode(byteArray17);
+        base64OutputStream3.write(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean23 = base64_22.isUrlSafe();
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        int int28 = base64_22.readResults(byteArray25, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray25);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray25, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream32 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream3, false, (int) (short) 1, byteArray25);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64OutputStream32.close();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[10]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+    }
+
+    @Test
+    public void test439() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test439");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, true);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream2.close();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test440() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test440");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream1 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0);
+        boolean boolean2 = base64InputStream1.markSupported();
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream4 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream1, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream5 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream4);
+        byte[] byteArray10 = new byte[] { (byte) 10 };
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray10);
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray10);
+        org.apache.commons.codec.binary.Base64 base64_13 = new org.apache.commons.codec.binary.Base64(0, byteArray10);
+        byte[] byteArray14 = new byte[] {};
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray14);
+        byte[] byteArray16 = base64_13.decode(byteArray15);
+        boolean boolean17 = base64_13.hasData();
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        org.apache.commons.codec.binary.Base64 base64_23 = new org.apache.commons.codec.binary.Base64(0, byteArray20);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        byte[] byteArray26 = base64_23.decode(byteArray25);
+        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray25);
+        byte[] byteArray28 = base64_13.decode(byteArray27);
+        java.io.OutputStream outputStream29 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream31 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream29, false);
+        byte[] byteArray36 = new byte[] { (byte) 10 };
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray36);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64(0, byteArray36);
+        byte[] byteArray40 = new byte[] {};
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray40);
+        byte[] byteArray42 = base64_39.decode(byteArray41);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream43 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream31, true, (int) (byte) 0, byteArray42);
+        java.io.InputStream inputStream44 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream46 = new org.apache.commons.codec.binary.Base64InputStream(inputStream44, false);
+        byte[] byteArray47 = new byte[] {};
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray47);
+        int int49 = base64InputStream46.read(byteArray48);
+        byte[] byteArray53 = new byte[] { (byte) 10 };
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray53);
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray53);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream56 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream46, false, 10, byteArray53);
+        boolean boolean57 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray53);
+        base64OutputStream43.write(byteArray53);
+        base64_13.decode(byteArray53, (int) (byte) 100, (-1));
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream62 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream4, true, (int) (byte) 100, byteArray53);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[10]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[10]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[10]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
+    }
+
+    @Test
+    public void test441() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test441");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean7 = base64_6.isUrlSafe();
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        java.lang.Object obj12 = base64_6.encode((java.lang.Object) byteArray9);
+        base64_5.decode(byteArray9, 10, (-1));
+        boolean boolean16 = base64_5.hasData();
+        byte[] byteArray19 = new byte[] { (byte) 10 };
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray19);
+        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64(0, byteArray19);
+        byte[] byteArray23 = new byte[] {};
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray23);
+        byte[] byteArray25 = base64_22.decode(byteArray24);
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray24);
+        java.math.BigInteger bigInteger27 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray24);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray24);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        base64_5.decode(byteArray28, (int) (short) 100, (int) ' ');
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(obj12);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[10]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(bigInteger27);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+    }
+
+    @Test
+    public void test442() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test442");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean9 = base64_8.isUrlSafe();
+        byte[] byteArray10 = new byte[] {};
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
+        int int14 = base64_8.readResults(byteArray11, (int) (short) 10, (int) (short) 100);
+        boolean boolean15 = base64_8.isUrlSafe();
+        byte[] byteArray19 = new byte[] { (byte) 10 };
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray19);
+        org.apache.commons.codec.binary.Base64 base64_22 = new org.apache.commons.codec.binary.Base64(0, byteArray19);
+        byte[] byteArray23 = new byte[] {};
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray23);
+        byte[] byteArray25 = base64_22.decode(byteArray24);
+        boolean boolean26 = base64_22.hasData();
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
+        byte[] byteArray37 = base64_22.encode(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray36);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray36, false);
+        base64_8.encode(byteArray36, (int) (byte) 0, 0);
+        byte[] byteArray44 = base64_7.encode(byteArray36);
+        byte[] byteArray46 = new byte[] { (byte) 10 };
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray46);
+        java.math.BigInteger bigInteger48 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger48);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger48);
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray50);
+        boolean boolean52 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray51);
+        byte[] byteArray53 = base64_7.decode(byteArray51);
+        java.io.InputStream inputStream54 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream56 = new org.apache.commons.codec.binary.Base64InputStream(inputStream54, false);
+        byte[] byteArray57 = new byte[] {};
+        byte[] byteArray58 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray57);
+        int int59 = base64InputStream56.read(byteArray58);
+        byte[] byteArray63 = new byte[] { (byte) 10 };
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray63);
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray63);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream66 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream56, false, 10, byteArray63);
+        boolean boolean67 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray63);
+        byte[] byteArray68 = base64_7.decode(byteArray63);
+        byte[] byteArray69 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray63);
+        byte[] byteArray70 = base64_0.decode(byteArray63);
+        byte[] byteArray71 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray70);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[10]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[10]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger48);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[81, 50, 99, 57, 80, 81, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + true + "'", boolean52 == true);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[10]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[]");
+        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + true + "'", boolean67 == true);
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+        org.junit.Assert.assertNotNull(byteArray71);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[]");
+    }
+
+    @Test
+    public void test443() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test443");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream6 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream8 = new org.apache.commons.codec.binary.Base64InputStream(inputStream6, false);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int11 = base64InputStream8.read(byteArray10);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream18 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream8, false, 10, byteArray15);
+        byte[] byteArray19 = base64_5.encode(byteArray15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, (-1), byteArray15);
+        java.io.InputStream inputStream21 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream23 = new org.apache.commons.codec.binary.Base64InputStream(inputStream21, false);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        int int26 = base64InputStream23.read(byteArray25);
+        byte[] byteArray30 = new byte[] { (byte) 10 };
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray30);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream33 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream23, false, 10, byteArray30);
+        boolean boolean34 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray30);
+        base64OutputStream20.write(byteArray30);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream36 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        java.io.InputStream inputStream39 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream41 = new org.apache.commons.codec.binary.Base64InputStream(inputStream39, false);
+        byte[] byteArray42 = new byte[] {};
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray42);
+        int int44 = base64InputStream41.read(byteArray43);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream45 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20, false, 0, byteArray43);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64OutputStream20.flush();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[10]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+    }
+
+    @Test
+    public void test444() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test444");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray2 = new byte[] {};
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
+        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
+        boolean boolean7 = base64_0.isUrlSafe();
+        byte[] byteArray11 = new byte[] { (byte) 10 };
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray11);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray11);
+        org.apache.commons.codec.binary.Base64 base64_14 = new org.apache.commons.codec.binary.Base64(0, byteArray11);
+        byte[] byteArray15 = new byte[] {};
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray15);
+        byte[] byteArray17 = base64_14.decode(byteArray16);
+        boolean boolean18 = base64_14.hasData();
+        byte[] byteArray21 = new byte[] { (byte) 10 };
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray21);
+        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64(0, byteArray21);
+        byte[] byteArray25 = new byte[] {};
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray25);
+        byte[] byteArray27 = base64_24.decode(byteArray26);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray26);
+        byte[] byteArray29 = base64_14.encode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray28, false);
+        base64_0.encode(byteArray28, (int) (byte) 0, 0);
+        java.io.InputStream inputStream36 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream38 = new org.apache.commons.codec.binary.Base64InputStream(inputStream36, false);
+        byte[] byteArray39 = new byte[] {};
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray39);
+        int int41 = base64InputStream38.read(byteArray40);
+        byte[] byteArray45 = new byte[] { (byte) 10 };
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray45);
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray45);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream48 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream38, false, 10, byteArray45);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream50 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream38, true);
+        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean52 = base64_51.isUrlSafe();
+        byte[] byteArray53 = new byte[] {};
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray53);
+        int int57 = base64_51.readResults(byteArray54, (int) (short) 10, (int) (short) 100);
+        boolean boolean58 = base64_51.isUrlSafe();
+        byte[] byteArray63 = new byte[] { (byte) 10 };
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray63);
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray63);
+        org.apache.commons.codec.binary.Base64 base64_66 = new org.apache.commons.codec.binary.Base64(0, byteArray63);
+        byte[] byteArray67 = new byte[] {};
+        byte[] byteArray68 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray67);
+        byte[] byteArray69 = base64_66.decode(byteArray68);
+        boolean boolean70 = base64_66.hasData();
+        byte[] byteArray73 = new byte[] { (byte) 10 };
+        byte[] byteArray74 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray73);
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray73);
+        org.apache.commons.codec.binary.Base64 base64_76 = new org.apache.commons.codec.binary.Base64(0, byteArray73);
+        byte[] byteArray77 = new byte[] {};
+        byte[] byteArray78 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray77);
+        byte[] byteArray79 = base64_76.decode(byteArray78);
+        byte[] byteArray80 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray78);
+        byte[] byteArray81 = base64_66.encode(byteArray80);
+        byte[] byteArray82 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray80);
+        org.apache.commons.codec.binary.Base64 base64_84 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray80, false);
+        org.apache.commons.codec.binary.Base64 base64_85 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray80);
+        byte[] byteArray86 = base64_51.encode(byteArray80);
+        int int87 = base64InputStream50.read(byteArray80);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream89 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream50, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream91 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream89, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream93 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream91, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream95 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream93, false);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj96 = base64_0.encode((java.lang.Object) false);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Base64 encode is not a byte[]");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[10]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[10]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[10]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
+        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[10]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[]");
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
+        org.junit.Assert.assertNotNull(byteArray73);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray73), "[10]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
+        org.junit.Assert.assertNotNull(byteArray77);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray77), "[]");
+        org.junit.Assert.assertNotNull(byteArray78);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertNotNull(byteArray86);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray86), "[]");
+        org.junit.Assert.assertTrue("'" + int87 + "' != '" + 0 + "'", int87 == 0);
+    }
+
+    @Test
+    public void test445() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test445");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
+        byte[] byteArray6 = new byte[] { (byte) 10 };
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray6);
+        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64(0, byteArray6);
+        boolean boolean10 = base64_9.hasData();
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray13);
+        byte[] byteArray18 = base64_9.encode(byteArray17);
+        base64OutputStream3.write(byteArray18);
+        byte[] byteArray24 = new byte[] { (byte) 10 };
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray24);
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
+        org.apache.commons.codec.binary.Base64 base64_27 = new org.apache.commons.codec.binary.Base64(0, byteArray24);
+        byte[] byteArray28 = new byte[] {};
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray28);
+        byte[] byteArray30 = base64_27.decode(byteArray29);
+        byte[] byteArray31 = null;
+        base64_27.encode(byteArray31, (int) (byte) 100, (int) (byte) 0);
+        java.io.InputStream inputStream35 = null;
+        java.io.InputStream inputStream38 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream40 = new org.apache.commons.codec.binary.Base64InputStream(inputStream38, false);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        int int43 = base64InputStream40.read(byteArray42);
+        byte[] byteArray47 = new byte[] { (byte) 10 };
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray47);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream50 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream40, false, 10, byteArray47);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream51 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream50);
+        byte[] byteArray54 = new byte[] { (byte) 10 };
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray54);
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray54);
+        org.apache.commons.codec.binary.Base64 base64_57 = new org.apache.commons.codec.binary.Base64(0, byteArray54);
+        byte[] byteArray58 = new byte[] {};
+        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray58);
+        byte[] byteArray60 = base64_57.decode(byteArray59);
+        byte[] byteArray61 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray59);
+        java.math.BigInteger bigInteger62 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray59);
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger62);
+        java.math.BigInteger bigInteger64 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray63);
+        int int65 = base64InputStream51.read(byteArray63);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream66 = new org.apache.commons.codec.binary.Base64InputStream(inputStream35, false, (int) ' ', byteArray63);
+        byte[] byteArray67 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray63);
+        base64_27.setInitialBuffer(byteArray67, (int) (short) 10, (int) (short) 100);
+        java.io.InputStream inputStream71 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream73 = new org.apache.commons.codec.binary.Base64InputStream(inputStream71, false);
+        byte[] byteArray74 = new byte[] {};
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray74);
+        int int76 = base64InputStream73.read(byteArray75);
+        byte[] byteArray80 = new byte[] { (byte) 10 };
+        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray80);
+        byte[] byteArray82 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray80);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream83 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream73, false, 10, byteArray80);
+        byte[] byteArray84 = base64_27.decode(byteArray80);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream85 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream3, false, (int) ' ', byteArray84);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream87 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream3, false);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[10]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[10]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[10]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+        org.junit.Assert.assertNotNull(bigInteger62);
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[]");
+        org.junit.Assert.assertNotNull(bigInteger64);
+        org.junit.Assert.assertTrue("'" + int65 + "' != '" + 0 + "'", int65 == 0);
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[10]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertNotNull(byteArray84);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray84), "[]");
+    }
+
+    @Test
+    public void test446() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test446");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        byte[] byteArray6 = new byte[] {};
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
+        byte[] byteArray8 = base64_5.decode(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray7);
+        java.math.BigInteger bigInteger10 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray7);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger10);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger10);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(bigInteger10);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+    }
+
+    @Test
+    public void test447() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test447");
+        byte[] byteArray5 = new byte[] { (byte) 10 };
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray5);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray5);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64(0, byteArray5);
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        byte[] byteArray11 = base64_8.decode(byteArray10);
+        boolean boolean12 = base64_8.hasData();
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64 base64_18 = new org.apache.commons.codec.binary.Base64(0, byteArray15);
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        byte[] byteArray21 = base64_18.decode(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
+        byte[] byteArray23 = base64_8.encode(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray22, false);
+        org.apache.commons.codec.binary.Base64 base64_27 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_29 = new org.apache.commons.codec.binary.Base64((int) ' ', byteArray22, false);
+        byte[] byteArray32 = new byte[] { (byte) 10 };
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray32);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64(0, byteArray32);
+        byte[] byteArray36 = new byte[] {};
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray36);
+        byte[] byteArray38 = base64_35.decode(byteArray37);
+        byte[] byteArray39 = null;
+        base64_35.encode(byteArray39, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray45 = new byte[] { (byte) 10 };
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray45);
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray45);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64(0, byteArray45);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray45);
+        byte[] byteArray50 = base64_35.encode(byteArray45);
+        byte[] byteArray51 = base64_29.decode(byteArray50);
+        org.apache.commons.codec.DecoderException decoderException53 = new org.apache.commons.codec.DecoderException("org.apache.commons.codec.DecoderException: hi!");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj54 = base64_29.encode((java.lang.Object) decoderException53);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Base64 encode is not a byte[]");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[10]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[10]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[10]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[10]");
+    }
+
+    @Test
+    public void test448() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test448");
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64(true);
+        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64();
+        int int4 = base64_3.avail();
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        boolean boolean14 = base64_10.hasData();
+        byte[] byteArray17 = new byte[] { (byte) 10 };
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray17);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray17);
+        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64(0, byteArray17);
+        byte[] byteArray21 = new byte[] {};
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray21);
+        byte[] byteArray23 = base64_20.decode(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray22);
+        byte[] byteArray25 = base64_10.encode(byteArray24);
+        int int28 = base64_3.readResults(byteArray24, (int) '#', 76);
+        byte[] byteArray31 = new byte[] { (byte) 10 };
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray31);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray31);
+        org.apache.commons.codec.binary.Base64 base64_34 = new org.apache.commons.codec.binary.Base64(0, byteArray31);
+        byte[] byteArray35 = new byte[] {};
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray35);
+        byte[] byteArray37 = base64_34.decode(byteArray36);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray36);
+        java.math.BigInteger bigInteger39 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray36);
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger39);
+        java.math.BigInteger bigInteger41 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray40);
+        int int44 = base64_3.readResults(byteArray40, (int) (short) 10, 10);
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray40);
+        base64_2.setInitialBuffer(byteArray45, (int) (byte) 0, (int) (short) 100);
+        org.apache.commons.codec.binary.Base64 base64_50 = new org.apache.commons.codec.binary.Base64(0, byteArray45, false);
+        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[10]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[10]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(bigInteger39);
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertNotNull(bigInteger41);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+    }
+
+    @Test
+    public void test449() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test449");
+        java.io.OutputStream outputStream1 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, false);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream7 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream9 = new org.apache.commons.codec.binary.Base64InputStream(inputStream7, false);
+        byte[] byteArray10 = new byte[] {};
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
+        int int12 = base64InputStream9.read(byteArray11);
+        byte[] byteArray16 = new byte[] { (byte) 10 };
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray16);
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray16);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream19 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream9, false, 10, byteArray16);
+        byte[] byteArray20 = base64_6.encode(byteArray16);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream1, true, (-1), byteArray16);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream22 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream21);
+        base64OutputStream21.write((-1));
+        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64();
+        java.io.OutputStream outputStream26 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream28 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream26, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream29 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream26);
+        byte[] byteArray32 = new byte[] { (byte) 10 };
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray32);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64(0, byteArray32);
+        boolean boolean36 = base64_35.hasData();
+        byte[] byteArray39 = new byte[] { (byte) 10 };
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray39);
+        org.apache.commons.codec.binary.Base64 base64_42 = new org.apache.commons.codec.binary.Base64(0, byteArray39);
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray39);
+        byte[] byteArray44 = base64_35.encode(byteArray43);
+        base64OutputStream29.write(byteArray44);
+        base64_25.setInitialBuffer(byteArray44, (int) (short) 0, 76);
+        base64OutputStream21.write(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64((int) (short) 0, byteArray44, false);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[10]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+    }
+
+    @Test
+    public void test450() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test450");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean1 = base64_0.isUrlSafe();
+        byte[] byteArray2 = new byte[] {};
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray2);
+        int int6 = base64_0.readResults(byteArray3, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray3);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3, false);
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3, false, false);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray3);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3, true, false);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+    }
+
+    @Test
+    public void test451() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test451");
+        byte[] byteArray0 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
+        byte[] byteArray1 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray0);
+        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray1);
+        boolean boolean3 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray1);
+        org.junit.Assert.assertNotNull(byteArray0);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray0), "[13, 10]");
+        org.junit.Assert.assertNotNull(byteArray1);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[]");
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
+    }
+
+    @Test
+    public void test452() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test452");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        org.apache.commons.codec.binary.Base64 base64_23 = new org.apache.commons.codec.binary.Base64(0, byteArray20);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        byte[] byteArray26 = base64_23.decode(byteArray25);
+        byte[] byteArray27 = null;
+        base64_23.encode(byteArray27, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray33 = new byte[] { (byte) 10 };
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray33);
+        org.apache.commons.codec.binary.Base64 base64_36 = new org.apache.commons.codec.binary.Base64(0, byteArray33);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray33);
+        byte[] byteArray38 = base64_23.encode(byteArray33);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream39 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (byte) 10, byteArray33);
+        // The following exception was thrown during execution in test generation
+        try {
+            int int40 = base64InputStream12.read();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[10]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test453() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test453");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean7 = base64_6.isUrlSafe();
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        int int12 = base64_6.readResults(byteArray9, (int) (short) 10, (int) (short) 100);
+        boolean boolean13 = base64_6.isUrlSafe();
+        byte[] byteArray17 = new byte[] { (byte) 10 };
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray17);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray17);
+        org.apache.commons.codec.binary.Base64 base64_20 = new org.apache.commons.codec.binary.Base64(0, byteArray17);
+        byte[] byteArray21 = new byte[] {};
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray21);
+        byte[] byteArray23 = base64_20.decode(byteArray22);
+        boolean boolean24 = base64_20.hasData();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray32);
+        byte[] byteArray35 = base64_20.encode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray34);
+        org.apache.commons.codec.binary.Base64 base64_38 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray34, false);
+        base64_6.encode(byteArray34, (int) (byte) 0, 0);
+        byte[] byteArray42 = base64_5.encode(byteArray34);
+        byte[] byteArray44 = new byte[] { (byte) 10 };
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray44);
+        java.math.BigInteger bigInteger46 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray45);
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger46);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray48);
+        boolean boolean50 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray49);
+        byte[] byteArray51 = base64_5.decode(byteArray49);
+        int int52 = base64_5.avail();
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[10]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[10]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger46);
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[81, 50, 99, 57, 80, 81, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[67, 103, 61, 61]");
+        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 0 + "'", int52 == 0);
+    }
+
+    @Test
+    public void test454() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test454");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean18 = base64_17.isUrlSafe();
+        byte[] byteArray19 = new byte[] {};
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray19);
+        int int23 = base64_17.readResults(byteArray20, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream25 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14, true, 76, byteArray20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream26 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        java.io.InputStream inputStream27 = null;
+        java.io.InputStream inputStream30 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream32 = new org.apache.commons.codec.binary.Base64InputStream(inputStream30, false);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        int int35 = base64InputStream32.read(byteArray34);
+        byte[] byteArray39 = new byte[] { (byte) 10 };
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray39);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream42 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream32, false, 10, byteArray39);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream43 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream42);
+        byte[] byteArray46 = new byte[] { (byte) 10 };
+        byte[] byteArray47 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray46);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64(0, byteArray46);
+        byte[] byteArray50 = new byte[] {};
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray50);
+        byte[] byteArray52 = base64_49.decode(byteArray51);
+        byte[] byteArray53 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray51);
+        java.math.BigInteger bigInteger54 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray51);
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger54);
+        java.math.BigInteger bigInteger56 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray55);
+        int int57 = base64InputStream43.read(byteArray55);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream58 = new org.apache.commons.codec.binary.Base64InputStream(inputStream27, false, (int) ' ', byteArray55);
+        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray55);
+        byte[] byteArray60 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray59);
+        base64OutputStream26.write(byteArray60);
+        byte[] byteArray62 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray60);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[10]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[10]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[]");
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(bigInteger54);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(bigInteger56);
+        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+    }
+
+    @Test
+    public void test455() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test455");
+        java.io.OutputStream outputStream0 = null;
+        java.io.OutputStream outputStream3 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream5 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream3, false);
+        org.apache.commons.codec.binary.Base64 base64_8 = new org.apache.commons.codec.binary.Base64();
+        java.io.InputStream inputStream9 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream11 = new org.apache.commons.codec.binary.Base64InputStream(inputStream9, false);
+        byte[] byteArray12 = new byte[] {};
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray12);
+        int int14 = base64InputStream11.read(byteArray13);
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream21 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream11, false, 10, byteArray18);
+        byte[] byteArray22 = base64_8.encode(byteArray18);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream23 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream3, true, (-1), byteArray18);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream24 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, true, 10, byteArray18);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray18);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61, 13, 10]");
+    }
+
+    @Test
+    public void test456() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test456");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream15 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12);
+        byte[] byteArray20 = new byte[] { (byte) 10 };
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        byte[] byteArray22 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray20);
+        org.apache.commons.codec.binary.Base64 base64_23 = new org.apache.commons.codec.binary.Base64(0, byteArray20);
+        byte[] byteArray24 = new byte[] {};
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray24);
+        byte[] byteArray26 = base64_23.decode(byteArray25);
+        byte[] byteArray27 = null;
+        base64_23.encode(byteArray27, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray33 = new byte[] { (byte) 10 };
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray33);
+        org.apache.commons.codec.binary.Base64 base64_36 = new org.apache.commons.codec.binary.Base64(0, byteArray33);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray33);
+        byte[] byteArray38 = base64_23.encode(byteArray33);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream39 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream12, true, (int) (byte) 10, byteArray33);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64InputStream39.mark(76);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[10]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[10]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test457() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test457");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream3 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0);
+        byte[] byteArray8 = new byte[] { (byte) 10 };
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray8);
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray8);
+        org.apache.commons.codec.binary.Base64 base64_11 = new org.apache.commons.codec.binary.Base64(0, byteArray8);
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray8);
+        byte[] byteArray13 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray8);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64(0, byteArray13, false);
+        base64OutputStream4.write(byteArray13);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13, true, false);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[10]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+    }
+
+    @Test
+    public void test458() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test458");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream17 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream18 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream17);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+    }
+
+    @Test
+    public void test459() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test459");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64((int) (byte) 10);
+        byte[] byteArray2 = null;
+        byte[] byteArray3 = base64_1.encode(byteArray2);
+        org.junit.Assert.assertNull(byteArray3);
+    }
+
+    @Test
+    public void test460() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test460");
+        java.io.InputStream inputStream0 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream2 = new org.apache.commons.codec.binary.Base64InputStream(inputStream0, false);
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int5 = base64InputStream2.read(byteArray4);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream12 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, false, 10, byteArray9);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream14 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream2, true);
+        org.apache.commons.codec.binary.Base64 base64_15 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean16 = base64_15.isUrlSafe();
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        int int21 = base64_15.readResults(byteArray18, (int) (short) 10, (int) (short) 100);
+        boolean boolean22 = base64_15.isUrlSafe();
+        byte[] byteArray27 = new byte[] { (byte) 10 };
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray27);
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray27);
+        org.apache.commons.codec.binary.Base64 base64_30 = new org.apache.commons.codec.binary.Base64(0, byteArray27);
+        byte[] byteArray31 = new byte[] {};
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        byte[] byteArray33 = base64_30.decode(byteArray32);
+        boolean boolean34 = base64_30.hasData();
+        byte[] byteArray37 = new byte[] { (byte) 10 };
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray37);
+        org.apache.commons.codec.binary.Base64 base64_40 = new org.apache.commons.codec.binary.Base64(0, byteArray37);
+        byte[] byteArray41 = new byte[] {};
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray41);
+        byte[] byteArray43 = base64_40.decode(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray42);
+        byte[] byteArray45 = base64_30.encode(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_48 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray44, false);
+        org.apache.commons.codec.binary.Base64 base64_49 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray44);
+        byte[] byteArray50 = base64_15.encode(byteArray44);
+        int int51 = base64InputStream14.read(byteArray44);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream53 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream14, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream53, true);
+        org.apache.commons.codec.binary.Base64 base64_60 = new org.apache.commons.codec.binary.Base64(false);
+        byte[] byteArray64 = new byte[] { (byte) 10 };
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray64);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray64);
+        org.apache.commons.codec.binary.Base64 base64_67 = new org.apache.commons.codec.binary.Base64(0, byteArray64);
+        byte[] byteArray68 = new byte[] {};
+        byte[] byteArray69 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray68);
+        byte[] byteArray70 = base64_67.decode(byteArray69);
+        boolean boolean71 = base64_67.hasData();
+        byte[] byteArray74 = new byte[] { (byte) 10 };
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray74);
+        byte[] byteArray76 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray74);
+        org.apache.commons.codec.binary.Base64 base64_77 = new org.apache.commons.codec.binary.Base64(0, byteArray74);
+        byte[] byteArray78 = new byte[] {};
+        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray78);
+        byte[] byteArray80 = base64_77.decode(byteArray79);
+        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray79);
+        byte[] byteArray82 = base64_67.encode(byteArray81);
+        byte[] byteArray83 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray81);
+        org.apache.commons.codec.binary.Base64 base64_85 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray81, false);
+        base64_60.decode(byteArray81, (int) 'a', (int) (short) -1);
+        boolean boolean89 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray81);
+        org.apache.commons.codec.binary.Base64 base64_91 = new org.apache.commons.codec.binary.Base64((int) (short) 100, byteArray81, false);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream92 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream55, false, 10, byteArray81);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream93 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream55);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[10]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[10]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[10]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[10]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray78);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertNotNull(byteArray83);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray83), "[]");
+        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + true + "'", boolean89 == true);
+    }
+
+    @Test
+    public void test461() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test461");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        int int1 = base64_0.avail();
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        byte[] byteArray10 = base64_7.decode(byteArray9);
+        boolean boolean11 = base64_7.hasData();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
+        byte[] byteArray22 = base64_7.encode(byteArray21);
+        int int25 = base64_0.readResults(byteArray21, (int) '#', 76);
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        byte[] byteArray34 = base64_31.decode(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
+        java.math.BigInteger bigInteger36 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray33);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger36);
+        java.math.BigInteger bigInteger38 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray37);
+        int int41 = base64_0.readResults(byteArray37, (int) (short) 10, 10);
+        boolean boolean42 = base64_0.isUrlSafe();
+        java.lang.Class<?> wildcardClass43 = base64_0.getClass();
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(bigInteger36);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(bigInteger38);
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
+        org.junit.Assert.assertNotNull(wildcardClass43);
+    }
+
+    @Test
+    public void test462() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test462");
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean8 = base64_7.isUrlSafe();
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int13 = base64_7.readResults(byteArray10, (int) (short) 10, (int) (short) 100);
+        boolean boolean14 = base64_7.isUrlSafe();
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        boolean boolean25 = base64_21.hasData();
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        byte[] byteArray34 = base64_31.decode(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
+        byte[] byteArray36 = base64_21.encode(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray35, false);
+        base64_7.encode(byteArray35, (int) (byte) 0, 0);
+        byte[] byteArray43 = base64_6.encode(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_45 = new org.apache.commons.codec.binary.Base64((int) (byte) 1, byteArray43, true);
+        byte[] byteArray47 = new byte[] { (byte) 10 };
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
+        boolean boolean49 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray47);
+        byte[] byteArray50 = base64_45.decode(byteArray47);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+    }
+
+    @Test
+    public void test463() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test463");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(false);
+        java.io.OutputStream outputStream2 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream4 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream2, false);
+        byte[] byteArray9 = new byte[] { (byte) 10 };
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray9);
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray9);
+        org.apache.commons.codec.binary.Base64 base64_12 = new org.apache.commons.codec.binary.Base64(0, byteArray9);
+        byte[] byteArray13 = new byte[] {};
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray13);
+        byte[] byteArray15 = base64_12.decode(byteArray14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream4, true, (int) (byte) 0, byteArray15);
+        java.io.InputStream inputStream17 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream19 = new org.apache.commons.codec.binary.Base64InputStream(inputStream17, false);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        int int22 = base64InputStream19.read(byteArray21);
+        byte[] byteArray26 = new byte[] { (byte) 10 };
+        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray26);
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray26);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream29 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream19, false, 10, byteArray26);
+        boolean boolean30 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray26);
+        base64OutputStream16.write(byteArray26);
+        byte[] byteArray32 = base64_1.encode(byteArray26);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32, true);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray34);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray34, true);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[10]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[10]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[81, 50, 99, 57, 80, 81, 61, 61, 13, 10]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[85, 84, 74, 106, 79, 86, 66, 82, 80, 84, 48, 78, 67, 103, 61, 61, 13, 10]");
+    }
+
+    @Test
+    public void test464() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test464");
+        byte[] byteArray0 = null;
+        byte[] byteArray1 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray0);
+        org.junit.Assert.assertNull(byteArray1);
+    }
+
+    @Test
+    public void test465() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test465");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean2 = base64_1.isUrlSafe();
+        byte[] byteArray3 = new byte[] {};
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray3);
+        int int7 = base64_1.readResults(byteArray4, (int) (short) 10, (int) (short) 100);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray4);
+        byte[] byteArray9 = base64_0.decode(byteArray4);
+        int int10 = base64_0.avail();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
+    }
+
+    @Test
+    public void test466() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test466");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream16 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15);
+        base64OutputStream15.write(100);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream20 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15, true);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream21 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream20);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream22 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream21);
+        org.apache.commons.codec.binary.Base64 base64_24 = new org.apache.commons.codec.binary.Base64(false);
+        java.io.OutputStream outputStream25 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream27 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream25, false);
+        byte[] byteArray32 = new byte[] { (byte) 10 };
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray32);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64(0, byteArray32);
+        byte[] byteArray36 = new byte[] {};
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray36);
+        byte[] byteArray38 = base64_35.decode(byteArray37);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream39 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream27, true, (int) (byte) 0, byteArray38);
+        java.io.InputStream inputStream40 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream42 = new org.apache.commons.codec.binary.Base64InputStream(inputStream40, false);
+        byte[] byteArray43 = new byte[] {};
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray43);
+        int int45 = base64InputStream42.read(byteArray44);
+        byte[] byteArray49 = new byte[] { (byte) 10 };
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray49);
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray49);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream52 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream42, false, 10, byteArray49);
+        boolean boolean53 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray49);
+        base64OutputStream39.write(byteArray49);
+        byte[] byteArray55 = base64_24.encode(byteArray49);
+        // The following exception was thrown during execution in test generation
+        try {
+            base64OutputStream21.write(byteArray49, (int) (short) 0, (int) '#');
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: null");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[10]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[10]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[67, 103, 61, 61]");
+    }
+
+    @Test
+    public void test467() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test467");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream17 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14, true);
+        base64OutputStream17.write(0);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+    }
+
+    @Test
+    public void test468() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test468");
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64((-1));
+        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean4 = base64_3.isUrlSafe();
+        byte[] byteArray5 = new byte[] {};
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray5);
+        int int9 = base64_3.readResults(byteArray6, (int) (short) 10, (int) (short) 100);
+        boolean boolean10 = base64_3.isUrlSafe();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        boolean boolean21 = base64_17.hasData();
+        byte[] byteArray24 = new byte[] { (byte) 10 };
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray24);
+        byte[] byteArray26 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray24);
+        org.apache.commons.codec.binary.Base64 base64_27 = new org.apache.commons.codec.binary.Base64(0, byteArray24);
+        byte[] byteArray28 = new byte[] {};
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray28);
+        byte[] byteArray30 = base64_27.decode(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray29);
+        byte[] byteArray32 = base64_17.encode(byteArray31);
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray31);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray31, false);
+        base64_3.encode(byteArray31, (int) (byte) 0, 0);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray31);
+        base64_2.setInitialBuffer(byteArray31, (int) (byte) 1, (int) '#');
+        org.apache.commons.codec.binary.Base64 base64_43 = new org.apache.commons.codec.binary.Base64((int) 'a', byteArray31);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[10]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+    }
+
+    @Test
+    public void test469() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test469");
+        java.io.OutputStream outputStream0 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream2 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream0, false);
+        byte[] byteArray7 = new byte[] { (byte) 10 };
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray7);
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray7);
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64(0, byteArray7);
+        byte[] byteArray11 = new byte[] {};
+        byte[] byteArray12 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray11);
+        byte[] byteArray13 = base64_10.decode(byteArray12);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream14 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream2, true, (int) (byte) 0, byteArray13);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream15 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream14);
+        base64OutputStream15.write((int) (byte) 0);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream19 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream15, false);
+        byte[] byteArray22 = new byte[] { (byte) 10 };
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray22);
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray22);
+        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64(0, byteArray22);
+        byte[] byteArray26 = new byte[] {};
+        byte[] byteArray27 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray26);
+        byte[] byteArray28 = base64_25.decode(byteArray27);
+        boolean boolean29 = base64_25.hasData();
+        byte[] byteArray32 = new byte[] { (byte) 10 };
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray32);
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray32);
+        org.apache.commons.codec.binary.Base64 base64_35 = new org.apache.commons.codec.binary.Base64(0, byteArray32);
+        byte[] byteArray36 = new byte[] {};
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray36);
+        byte[] byteArray38 = base64_35.decode(byteArray37);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray37);
+        byte[] byteArray40 = base64_25.encode(byteArray39);
+        byte[] byteArray41 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray39);
+        byte[] byteArray42 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray41);
+        java.math.BigInteger bigInteger43 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray42);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.toIntegerBytes(bigInteger43);
+        base64OutputStream15.write(byteArray44);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[10]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[10]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertNotNull(byteArray26);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[10]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertNotNull(byteArray41);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(bigInteger43);
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+    }
+
+    @Test
+    public void test470() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test470");
+        org.apache.commons.codec.binary.Base64 base64_0 = new org.apache.commons.codec.binary.Base64();
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean8 = base64_7.isUrlSafe();
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int13 = base64_7.readResults(byteArray10, (int) (short) 10, (int) (short) 100);
+        boolean boolean14 = base64_7.isUrlSafe();
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        boolean boolean25 = base64_21.hasData();
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        byte[] byteArray34 = base64_31.decode(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
+        byte[] byteArray36 = base64_21.encode(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray35, false);
+        base64_7.encode(byteArray35, (int) (byte) 0, 0);
+        byte[] byteArray43 = base64_6.encode(byteArray35);
+        byte[] byteArray45 = new byte[] { (byte) 10 };
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray45);
+        java.math.BigInteger bigInteger47 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray46);
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger47);
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray49);
+        boolean boolean51 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray50);
+        byte[] byteArray52 = base64_6.decode(byteArray50);
+        java.io.InputStream inputStream53 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream55 = new org.apache.commons.codec.binary.Base64InputStream(inputStream53, false);
+        byte[] byteArray56 = new byte[] {};
+        byte[] byteArray57 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray56);
+        int int58 = base64InputStream55.read(byteArray57);
+        byte[] byteArray62 = new byte[] { (byte) 10 };
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62);
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray62);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream65 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream55, false, 10, byteArray62);
+        boolean boolean66 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray62);
+        byte[] byteArray67 = base64_6.decode(byteArray62);
+        java.math.BigInteger bigInteger68 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray62);
+        base64_0.setInitialBuffer(byteArray62, 76, 10);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[10]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(bigInteger47);
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[81, 50, 99, 57, 80, 81, 61, 61]");
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + true + "'", boolean51 == true);
+        org.junit.Assert.assertNotNull(byteArray52);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray57);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray57), "[]");
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[10]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[]");
+        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + true + "'", boolean66 == true);
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(bigInteger68);
+    }
+
+    @Test
+    public void test471() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test471");
+        byte[] byteArray4 = new byte[] { (byte) 10 };
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray4);
+        byte[] byteArray6 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray4);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64(0, byteArray4);
+        byte[] byteArray8 = new byte[] {};
+        byte[] byteArray9 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray8);
+        byte[] byteArray10 = base64_7.decode(byteArray9);
+        boolean boolean11 = base64_7.hasData();
+        byte[] byteArray14 = new byte[] { (byte) 10 };
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray14);
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray14);
+        org.apache.commons.codec.binary.Base64 base64_17 = new org.apache.commons.codec.binary.Base64(0, byteArray14);
+        byte[] byteArray18 = new byte[] {};
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray18);
+        byte[] byteArray20 = base64_17.decode(byteArray19);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray19);
+        byte[] byteArray22 = base64_7.encode(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray21);
+        org.apache.commons.codec.binary.Base64 base64_25 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray21, false);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64((int) (byte) 100, byteArray21);
+        byte[] byteArray29 = new byte[] { (byte) 10 };
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray29);
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray29);
+        org.apache.commons.codec.binary.Base64 base64_32 = new org.apache.commons.codec.binary.Base64(0, byteArray29);
+        byte[] byteArray33 = new byte[] {};
+        byte[] byteArray34 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray33);
+        byte[] byteArray35 = base64_32.decode(byteArray34);
+        byte[] byteArray36 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray34);
+        java.math.BigInteger bigInteger37 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray34);
+        byte[] byteArray38 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray34);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        byte[] byteArray40 = base64_26.encode(byteArray39);
+        int int41 = base64_26.avail();
+        byte[] byteArray44 = new byte[] { (byte) 10 };
+        byte[] byteArray45 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray44);
+        byte[] byteArray46 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray44);
+        org.apache.commons.codec.binary.Base64 base64_47 = new org.apache.commons.codec.binary.Base64(0, byteArray44);
+        byte[] byteArray48 = new byte[] {};
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray48);
+        byte[] byteArray50 = base64_47.decode(byteArray49);
+        boolean boolean51 = base64_47.hasData();
+        byte[] byteArray54 = new byte[] { (byte) 10 };
+        byte[] byteArray55 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray54);
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray54);
+        org.apache.commons.codec.binary.Base64 base64_57 = new org.apache.commons.codec.binary.Base64(0, byteArray54);
+        byte[] byteArray58 = new byte[] {};
+        byte[] byteArray59 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray58);
+        byte[] byteArray60 = base64_57.decode(byteArray59);
+        byte[] byteArray61 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray59);
+        byte[] byteArray62 = base64_47.decode(byteArray61);
+        java.io.OutputStream outputStream63 = null;
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream65 = new org.apache.commons.codec.binary.Base64OutputStream(outputStream63, false);
+        byte[] byteArray70 = new byte[] { (byte) 10 };
+        byte[] byteArray71 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray70);
+        byte[] byteArray72 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray70);
+        org.apache.commons.codec.binary.Base64 base64_73 = new org.apache.commons.codec.binary.Base64(0, byteArray70);
+        byte[] byteArray74 = new byte[] {};
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray74);
+        byte[] byteArray76 = base64_73.decode(byteArray75);
+        org.apache.commons.codec.binary.Base64OutputStream base64OutputStream77 = new org.apache.commons.codec.binary.Base64OutputStream((java.io.OutputStream) base64OutputStream65, true, (int) (byte) 0, byteArray76);
+        java.io.InputStream inputStream78 = null;
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream80 = new org.apache.commons.codec.binary.Base64InputStream(inputStream78, false);
+        byte[] byteArray81 = new byte[] {};
+        byte[] byteArray82 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray81);
+        int int83 = base64InputStream80.read(byteArray82);
+        byte[] byteArray87 = new byte[] { (byte) 10 };
+        byte[] byteArray88 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray87);
+        byte[] byteArray89 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray87);
+        org.apache.commons.codec.binary.Base64InputStream base64InputStream90 = new org.apache.commons.codec.binary.Base64InputStream((java.io.InputStream) base64InputStream80, false, 10, byteArray87);
+        boolean boolean91 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray87);
+        base64OutputStream77.write(byteArray87);
+        base64_47.decode(byteArray87, (int) (byte) 100, (-1));
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj96 = base64_26.decode((java.lang.Object) (byte) 100);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.DecoderException; message: Parameter supplied to Base64 decode is not a byte[]");
+        } catch (org.apache.commons.codec.DecoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[10]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[10]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(bigInteger37);
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[10]");
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[]");
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[10]");
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertNotNull(byteArray59);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[]");
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[]");
+        org.junit.Assert.assertNotNull(byteArray61);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[]");
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[10]");
+        org.junit.Assert.assertNotNull(byteArray71);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
+        org.junit.Assert.assertNotNull(byteArray87);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray87), "[10]");
+        org.junit.Assert.assertNotNull(byteArray88);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray89);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray89), "[]");
+        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + true + "'", boolean91 == true);
+    }
+
+    @Test
+    public void test472() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test472");
+        byte[] byteArray3 = new byte[] { (byte) 10 };
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray3);
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_6 = new org.apache.commons.codec.binary.Base64(0, byteArray3);
+        org.apache.commons.codec.binary.Base64 base64_7 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean8 = base64_7.isUrlSafe();
+        byte[] byteArray9 = new byte[] {};
+        byte[] byteArray10 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray9);
+        int int13 = base64_7.readResults(byteArray10, (int) (short) 10, (int) (short) 100);
+        boolean boolean14 = base64_7.isUrlSafe();
+        byte[] byteArray18 = new byte[] { (byte) 10 };
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray18);
+        byte[] byteArray20 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray18);
+        org.apache.commons.codec.binary.Base64 base64_21 = new org.apache.commons.codec.binary.Base64(0, byteArray18);
+        byte[] byteArray22 = new byte[] {};
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray22);
+        byte[] byteArray24 = base64_21.decode(byteArray23);
+        boolean boolean25 = base64_21.hasData();
+        byte[] byteArray28 = new byte[] { (byte) 10 };
+        byte[] byteArray29 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray28);
+        org.apache.commons.codec.binary.Base64 base64_31 = new org.apache.commons.codec.binary.Base64(0, byteArray28);
+        byte[] byteArray32 = new byte[] {};
+        byte[] byteArray33 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray32);
+        byte[] byteArray34 = base64_31.decode(byteArray33);
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray33);
+        byte[] byteArray36 = base64_21.encode(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_39 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray35, false);
+        base64_7.encode(byteArray35, (int) (byte) 0, 0);
+        byte[] byteArray43 = base64_6.encode(byteArray35);
+        byte[] byteArray44 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray35);
+        org.apache.commons.codec.binary.Base64 base64_46 = new org.apache.commons.codec.binary.Base64((int) (short) 0, byteArray44, true);
+        boolean boolean47 = base64_46.isUrlSafe();
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[10]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[10]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[10]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
+    }
+
+    @Test
+    public void test473() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test473");
+        org.apache.commons.codec.binary.Base64 base64_1 = new org.apache.commons.codec.binary.Base64(true);
+        org.apache.commons.codec.binary.Base64 base64_2 = new org.apache.commons.codec.binary.Base64();
+        int int3 = base64_2.avail();
+        byte[] byteArray6 = new byte[] { (byte) 10 };
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray6);
+        byte[] byteArray8 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray6);
+        org.apache.commons.codec.binary.Base64 base64_9 = new org.apache.commons.codec.binary.Base64(0, byteArray6);
+        byte[] byteArray10 = new byte[] {};
+        byte[] byteArray11 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray10);
+        byte[] byteArray12 = base64_9.decode(byteArray11);
+        boolean boolean13 = base64_9.hasData();
+        byte[] byteArray16 = new byte[] { (byte) 10 };
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray16);
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray16);
+        org.apache.commons.codec.binary.Base64 base64_19 = new org.apache.commons.codec.binary.Base64(0, byteArray16);
+        byte[] byteArray20 = new byte[] {};
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray20);
+        byte[] byteArray22 = base64_19.decode(byteArray21);
+        byte[] byteArray23 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray21);
+        byte[] byteArray24 = base64_9.encode(byteArray23);
+        int int27 = base64_2.readResults(byteArray23, (int) '#', 76);
+        byte[] byteArray30 = new byte[] { (byte) 10 };
+        byte[] byteArray31 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray30);
+        org.apache.commons.codec.binary.Base64 base64_33 = new org.apache.commons.codec.binary.Base64(0, byteArray30);
+        byte[] byteArray34 = new byte[] {};
+        byte[] byteArray35 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray34);
+        byte[] byteArray36 = base64_33.decode(byteArray35);
+        byte[] byteArray37 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray35);
+        java.math.BigInteger bigInteger38 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray35);
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeInteger(bigInteger38);
+        java.math.BigInteger bigInteger40 = org.apache.commons.codec.binary.Base64.decodeInteger(byteArray39);
+        int int43 = base64_2.readResults(byteArray39, (int) (short) 10, 10);
+        byte[] byteArray44 = base64_1.decode(byteArray39);
+        byte[] byteArray49 = new byte[] { (byte) 10 };
+        byte[] byteArray50 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray49);
+        byte[] byteArray51 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray49);
+        org.apache.commons.codec.binary.Base64 base64_52 = new org.apache.commons.codec.binary.Base64(0, byteArray49);
+        org.apache.commons.codec.binary.Base64 base64_53 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean54 = base64_53.isUrlSafe();
+        byte[] byteArray55 = new byte[] {};
+        byte[] byteArray56 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray55);
+        int int59 = base64_53.readResults(byteArray56, (int) (short) 10, (int) (short) 100);
+        boolean boolean60 = base64_53.isUrlSafe();
+        byte[] byteArray64 = new byte[] { (byte) 10 };
+        byte[] byteArray65 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray64);
+        byte[] byteArray66 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray64);
+        org.apache.commons.codec.binary.Base64 base64_67 = new org.apache.commons.codec.binary.Base64(0, byteArray64);
+        byte[] byteArray68 = new byte[] {};
+        byte[] byteArray69 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray68);
+        byte[] byteArray70 = base64_67.decode(byteArray69);
+        boolean boolean71 = base64_67.hasData();
+        byte[] byteArray74 = new byte[] { (byte) 10 };
+        byte[] byteArray75 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray74);
+        byte[] byteArray76 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray74);
+        org.apache.commons.codec.binary.Base64 base64_77 = new org.apache.commons.codec.binary.Base64(0, byteArray74);
+        byte[] byteArray78 = new byte[] {};
+        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray78);
+        byte[] byteArray80 = base64_77.decode(byteArray79);
+        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray79);
+        byte[] byteArray82 = base64_67.encode(byteArray81);
+        byte[] byteArray83 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray81);
+        org.apache.commons.codec.binary.Base64 base64_85 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray81, false);
+        base64_53.encode(byteArray81, (int) (byte) 0, 0);
+        byte[] byteArray89 = base64_52.encode(byteArray81);
+        org.apache.commons.codec.binary.Base64 base64_91 = new org.apache.commons.codec.binary.Base64((int) (byte) 1, byteArray89, true);
+        org.apache.commons.codec.binary.Base64 base64_93 = new org.apache.commons.codec.binary.Base64((int) '#', byteArray89, true);
+        base64_1.setInitialBuffer(byteArray89, (int) (byte) 10, (int) (byte) -1);
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[10]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[]");
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[]");
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[]");
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[10]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[]");
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[]");
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[10]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[]");
+        org.junit.Assert.assertNotNull(byteArray35);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[]");
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[]");
+        org.junit.Assert.assertNotNull(bigInteger38);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[]");
+        org.junit.Assert.assertNotNull(bigInteger40);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[10]");
+        org.junit.Assert.assertNotNull(byteArray50);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray50), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[]");
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[]");
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertTrue("'" + boolean60 + "' != '" + false + "'", boolean60 == false);
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[10]");
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[]");
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[10]");
+        org.junit.Assert.assertNotNull(byteArray75);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray78);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray82);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray82), "[]");
+        org.junit.Assert.assertNotNull(byteArray83);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray83), "[]");
+        org.junit.Assert.assertNotNull(byteArray89);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray89), "[]");
+    }
+
+    @Test
+    public void test474() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test474");
+        byte[] byteArray2 = new byte[] { (byte) 10 };
+        byte[] byteArray3 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray2);
+        org.apache.commons.codec.binary.Base64 base64_5 = new org.apache.commons.codec.binary.Base64(0, byteArray2);
+        byte[] byteArray6 = new byte[] {};
+        byte[] byteArray7 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray6);
+        byte[] byteArray8 = base64_5.decode(byteArray7);
+        byte[] byteArray9 = null;
+        base64_5.encode(byteArray9, (int) (byte) 100, (int) (byte) 0);
+        byte[] byteArray15 = new byte[] { (byte) 10 };
+        byte[] byteArray16 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray15);
+        byte[] byteArray17 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray15);
+        org.apache.commons.codec.binary.Base64 base64_18 = new org.apache.commons.codec.binary.Base64(0, byteArray15);
+        byte[] byteArray19 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray15);
+        byte[] byteArray20 = base64_5.encode(byteArray15);
+        byte[] byteArray21 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray20);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[10]");
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[]");
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[]");
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[]");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[10]");
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[81, 50, 99, 57, 80, 81, 61, 61]");
+    }
+
+    @Test
+    public void test475() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test475");
+        byte[] byteArray1 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
+        byte[] byteArray2 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray1);
+        org.apache.commons.codec.binary.Base64 base64_3 = new org.apache.commons.codec.binary.Base64(76, byteArray2);
+        byte[] byteArray4 = org.apache.commons.codec.binary.Base64.CHUNK_SEPARATOR;
+        byte[] byteArray5 = org.apache.commons.codec.binary.Base64.discardNonBase64(byteArray4);
+        int int8 = base64_3.readResults(byteArray4, (int) (short) 10, (int) '4');
+        org.apache.commons.codec.binary.Base64 base64_10 = new org.apache.commons.codec.binary.Base64((int) (short) 1);
+        byte[] byteArray13 = new byte[] { (byte) 10 };
+        byte[] byteArray14 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray13);
+        byte[] byteArray15 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray13);
+        org.apache.commons.codec.binary.Base64 base64_16 = new org.apache.commons.codec.binary.Base64(0, byteArray13);
+        byte[] byteArray17 = new byte[] {};
+        byte[] byteArray18 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray17);
+        byte[] byteArray19 = base64_16.decode(byteArray18);
+        boolean boolean20 = base64_16.hasData();
+        byte[] byteArray23 = new byte[] { (byte) 10 };
+        byte[] byteArray24 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray23);
+        byte[] byteArray25 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray23);
+        org.apache.commons.codec.binary.Base64 base64_26 = new org.apache.commons.codec.binary.Base64(0, byteArray23);
+        byte[] byteArray27 = new byte[] {};
+        byte[] byteArray28 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray27);
+        byte[] byteArray29 = base64_26.decode(byteArray28);
+        byte[] byteArray30 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray28);
+        byte[] byteArray31 = base64_16.encode(byteArray30);
+        byte[] byteArray32 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray30);
+        base64_10.decode(byteArray32, (int) (short) -1, (int) (short) 0);
+        byte[] byteArray38 = new byte[] { (byte) 10 };
+        byte[] byteArray39 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray38);
+        byte[] byteArray40 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray38);
+        org.apache.commons.codec.binary.Base64 base64_41 = new org.apache.commons.codec.binary.Base64(0, byteArray38);
+        byte[] byteArray42 = new byte[] {};
+        byte[] byteArray43 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray42);
+        byte[] byteArray44 = base64_41.decode(byteArray43);
+        byte[] byteArray47 = new byte[] { (byte) 10 };
+        byte[] byteArray48 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray47);
+        byte[] byteArray49 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray47);
+        org.apache.commons.codec.binary.Base64 base64_50 = new org.apache.commons.codec.binary.Base64(0, byteArray47);
+        org.apache.commons.codec.binary.Base64 base64_51 = new org.apache.commons.codec.binary.Base64();
+        boolean boolean52 = base64_51.isUrlSafe();
+        byte[] byteArray53 = new byte[] {};
+        byte[] byteArray54 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray53);
+        int int57 = base64_51.readResults(byteArray54, (int) (short) 10, (int) (short) 100);
+        boolean boolean58 = base64_51.isUrlSafe();
+        byte[] byteArray62 = new byte[] { (byte) 10 };
+        byte[] byteArray63 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray62);
+        byte[] byteArray64 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray62);
+        org.apache.commons.codec.binary.Base64 base64_65 = new org.apache.commons.codec.binary.Base64(0, byteArray62);
+        byte[] byteArray66 = new byte[] {};
+        byte[] byteArray67 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray66);
+        byte[] byteArray68 = base64_65.decode(byteArray67);
+        boolean boolean69 = base64_65.hasData();
+        byte[] byteArray72 = new byte[] { (byte) 10 };
+        byte[] byteArray73 = org.apache.commons.codec.binary.Base64.encodeBase64(byteArray72);
+        byte[] byteArray74 = org.apache.commons.codec.binary.Base64.decodeBase64(byteArray72);
+        org.apache.commons.codec.binary.Base64 base64_75 = new org.apache.commons.codec.binary.Base64(0, byteArray72);
+        byte[] byteArray76 = new byte[] {};
+        byte[] byteArray77 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray76);
+        byte[] byteArray78 = base64_75.decode(byteArray77);
+        byte[] byteArray79 = org.apache.commons.codec.binary.Base64.encodeBase64Chunked(byteArray77);
+        byte[] byteArray80 = base64_65.encode(byteArray79);
+        byte[] byteArray81 = org.apache.commons.codec.binary.Base64.discardWhitespace(byteArray79);
+        org.apache.commons.codec.binary.Base64 base64_83 = new org.apache.commons.codec.binary.Base64((int) (short) 1, byteArray79, false);
+        base64_51.encode(byteArray79, (int) (byte) 0, 0);
+        byte[] byteArray87 = base64_50.encode(byteArray79);
+        byte[] byteArray88 = org.apache.commons.codec.binary.Base64.encodeBase64URLSafe(byteArray79);
+        base64_41.decode(byteArray79, (int) (byte) 1, 0);
+        byte[] byteArray92 = base64_10.encode(byteArray79);
+        byte[] byteArray93 = base64_3.decode(byteArray92);
+        boolean boolean94 = org.apache.commons.codec.binary.Base64.isArrayByteBase64(byteArray93);
+        org.junit.Assert.assertNotNull(byteArray1);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[13, 10]");
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[]");
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[13, 10]");
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[]");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[10]");
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[]");
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[]");
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[]");
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[]");
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(byteArray23);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[10]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[]");
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[]");
+        org.junit.Assert.assertNotNull(byteArray29);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[]");
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[]");
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray31), "[]");
+        org.junit.Assert.assertNotNull(byteArray32);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[]");
+        org.junit.Assert.assertNotNull(byteArray38);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray38), "[10]");
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray40);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray40), "[]");
+        org.junit.Assert.assertNotNull(byteArray42);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[]");
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[]");
+        org.junit.Assert.assertNotNull(byteArray44);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray44), "[]");
+        org.junit.Assert.assertNotNull(byteArray47);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[10]");
+        org.junit.Assert.assertNotNull(byteArray48);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[]");
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertNotNull(byteArray53);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[]");
+        org.junit.Assert.assertNotNull(byteArray54);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[]");
+        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNotNull(byteArray62);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[10]");
+        org.junit.Assert.assertNotNull(byteArray63);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray64);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray64), "[]");
+        org.junit.Assert.assertNotNull(byteArray66);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[]");
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[]");
+        org.junit.Assert.assertNotNull(byteArray68);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[]");
+        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[10]");
+        org.junit.Assert.assertNotNull(byteArray73);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray73), "[67, 103, 61, 61]");
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[]");
+        org.junit.Assert.assertNotNull(byteArray76);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray76), "[]");
+        org.junit.Assert.assertNotNull(byteArray77);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray77), "[]");
+        org.junit.Assert.assertNotNull(byteArray78);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray78), "[]");
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[]");
+        org.junit.Assert.assertNotNull(byteArray80);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray80), "[]");
+        org.junit.Assert.assertNotNull(byteArray81);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray81), "[]");
+        org.junit.Assert.assertNotNull(byteArray87);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray87), "[]");
+        org.junit.Assert.assertNotNull(byteArray88);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray88), "[]");
+        org.junit.Assert.assertNotNull(byteArray92);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray92), "[]");
+        org.junit.Assert.assertNotNull(byteArray93);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray93), "[]");
+        org.junit.Assert.assertTrue("'" + boolean94 + "' != '" + true + "'", boolean94 == true);
     }
 }
 

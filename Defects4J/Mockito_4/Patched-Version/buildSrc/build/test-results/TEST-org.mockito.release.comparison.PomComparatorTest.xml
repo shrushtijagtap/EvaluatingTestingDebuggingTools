@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.comparison.PomComparatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-01T21:10:46" hostname="Shrushtis-MacBook-Air.local" time="0.023">
+<testsuite name="org.mockito.release.comparison.PomComparatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-02T18:35:17" hostname="Shrushtis-MacBook-Air.local" time="0.024">
   <properties/>
   <testcase name="compares poms" classname="org.mockito.release.comparison.PomComparatorTest" time="0.021"/>
   <testcase name="does not allow null content" classname="org.mockito.release.comparison.PomComparatorTest" time="0.002"/>

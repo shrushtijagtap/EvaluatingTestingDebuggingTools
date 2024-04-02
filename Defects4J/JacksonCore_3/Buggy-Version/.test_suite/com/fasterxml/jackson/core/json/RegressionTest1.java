@@ -13,6 +13,809 @@ public class RegressionTest1 {
     public void test501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test501");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.SerializableString serializableString3 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString3);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter5 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter4);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = defaultPrettyPrinter5.createInstance();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray9 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
+        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray21 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
+        java.io.OutputStream outputStream27 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
+        jsonGenerator28.flush();
+        defaultPrettyPrinter5.beforeObjectEntries(jsonGenerator28);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator32 = jsonGenerator28.setFeatureMask(35);
+        com.fasterxml.jackson.core.JsonGenerator.Feature feature33 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator35 = jsonGenerator28.configure(feature33, false);
+        com.fasterxml.jackson.core.io.SerializedString serializedString36 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray39 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory37.createParser(byteArray39);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec41 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory37.setCodec(objectCodec41);
+        byte[] byteArray45 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory42.createParser(byteArray45, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory49 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray51 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory49.createParser(byteArray51);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature53 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory54 = jsonFactory49.enable(feature53);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory55 = jsonFactory42.enable(feature53);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory56 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray58 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser59 = jsonFactory56.createParser(byteArray58);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature60 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory61 = jsonFactory56.enable(feature60);
+        byte[] byteArray62 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser65 = jsonFactory61.createJsonParser(byteArray62, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser66 = jsonFactory42.createParser(byteArray62);
+        int int68 = serializedString36.appendUnquotedUTF8(byteArray62, 56319);
+        byte[] byteArray69 = serializedString36.asUnquotedUTF8();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory70 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray72 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser73 = jsonFactory70.createParser(byteArray72);
+        int int75 = serializedString36.appendQuotedUTF8(byteArray72, (int) (byte) 0);
+        java.lang.String str76 = serializedString36.getValue();
+        java.lang.String str77 = serializedString36.getValue();
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator78 = jsonGenerator28.setRootValueSeparator((com.fasterxml.jackson.core.SerializableString) serializedString36);
+        defaultPrettyPrinter1.writeEndObject(jsonGenerator28, (int) '4');
+        boolean boolean81 = jsonGenerator28.canWriteBinaryNatively();
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter6);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser10);
+        org.junit.Assert.assertNotNull(jsonFactory12);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser18);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser22);
+        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertNotNull(bufferRecycler26);
+        org.junit.Assert.assertNotNull(jsonGenerator28);
+        org.junit.Assert.assertNotNull(jsonGenerator32);
+        org.junit.Assert.assertTrue("'" + feature33 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature33.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
+        org.junit.Assert.assertNotNull(jsonGenerator35);
+        org.junit.Assert.assertNotNull(serializedString36);
+        org.junit.Assert.assertNotNull(byteArray39);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser40);
+        org.junit.Assert.assertNotNull(jsonFactory42);
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser48);
+        org.junit.Assert.assertNotNull(byteArray51);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser52);
+        org.junit.Assert.assertTrue("'" + feature53 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature53.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory54);
+        org.junit.Assert.assertNotNull(jsonFactory55);
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser59);
+        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature60.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory61);
+        org.junit.Assert.assertNotNull(byteArray62);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser65);
+        org.junit.Assert.assertNotNull(jsonParser66);
+        org.junit.Assert.assertTrue("'" + int68 + "' != '" + (-1) + "'", int68 == (-1));
+        org.junit.Assert.assertNotNull(byteArray69);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[32]");
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[32]");
+        org.junit.Assert.assertNotNull(jsonParser73);
+        org.junit.Assert.assertTrue("'" + int75 + "' != '" + 1 + "'", int75 == 1);
+        org.junit.Assert.assertEquals("'" + str76 + "' != '" + " " + "'", str76, " ");
+        org.junit.Assert.assertEquals("'" + str77 + "' != '" + " " + "'", str77, " ");
+        org.junit.Assert.assertNotNull(jsonGenerator78);
+        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
+    }
+
+    @Test
+    public void test502() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test502");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        int int16 = uTF8StreamJsonParser12._decodeCharForError((int) '#');
+        com.fasterxml.jackson.core.JsonToken jsonToken17 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
+        byte[] byteArray18 = jsonToken17.asByteArray();
+        java.lang.String str19 = uTF8StreamJsonParser12._getText2(jsonToken17);
+        com.fasterxml.jackson.core.Version version20 = uTF8StreamJsonParser12.version();
+        // The following exception was thrown during execution in test generation
+        try {
+            int int21 = uTF8StreamJsonParser12.getIntValue();
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+        } catch (com.fasterxml.jackson.core.JsonParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 35 + "'", int16 == 35);
+        org.junit.Assert.assertTrue("'" + jsonToken17 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken17.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[102, 97, 108, 115, 101]");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "false" + "'", str19, "false");
+        org.junit.Assert.assertNotNull(version20);
+    }
+
+    @Test
+    public void test503() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test503");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonEncoding jsonEncoding13 = null;
+        iOContext3.setEncoding(jsonEncoding13);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler16 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext19 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler16, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream21 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = null;
+        byte[] byteArray24 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser28 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, 0, inputStream21, objectCodec22, bytesToNameCanonicalizer23, byteArray24, 33, 33, false);
+        java.io.InputStream inputStream30 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer35 = bytesToNameCanonicalizer32.makeChild(false, false);
+        byte[] byteArray36 = new byte[] {};
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser40 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, (int) 'a', inputStream30, objectCodec31, bytesToNameCanonicalizer35, byteArray36, (int) (byte) 10, 33, false);
+        java.io.InputStream inputStream41 = null;
+        com.fasterxml.jackson.core.JsonToken jsonToken42 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
+        byte[] byteArray43 = jsonToken42.asByteArray();
+        com.fasterxml.jackson.core.io.MergedStream mergedStream46 = new com.fasterxml.jackson.core.io.MergedStream(iOContext19, inputStream41, byteArray43, 56319, (int) (short) 100);
+        boolean boolean47 = mergedStream46.markSupported();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec48 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer49 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        int int51 = bytesToNameCanonicalizer49.calcHash((int) (short) 1);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler52 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext55 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler52, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream57 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec58 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer59 = null;
+        byte[] byteArray60 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser64 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext55, 0, inputStream57, objectCodec58, bytesToNameCanonicalizer59, byteArray60, 33, 33, false);
+        java.io.InputStream inputStream65 = null;
+        byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.math.BigDecimal bigDecimal75 = uTF8StreamJsonParser74.getDecimalValue();
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 4]");
+        } catch (com.fasterxml.jackson.core.JsonParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer32);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer35);
+        org.junit.Assert.assertNotNull(byteArray36);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
+        org.junit.Assert.assertTrue("'" + jsonToken42 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken42.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728784547) + "'", int51 == (-1728784547));
+        org.junit.Assert.assertNotNull(byteArray60);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(byteArray66);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+    }
+
+    @Test
+    public void test504() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test504");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
+        com.fasterxml.jackson.core.SerializableString serializableString5 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString5);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray9 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
+        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray21 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
+        java.io.OutputStream outputStream27 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
+        defaultPrettyPrinter6.writeObjectEntrySeparator(jsonGenerator28);
+        com.fasterxml.jackson.core.SerializableString serializableString30 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString30);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter32 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter31);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        defaultPrettyPrinter31.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
+        defaultPrettyPrinter6.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter36 = defaultPrettyPrinter6.createInstance();
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter37 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        com.fasterxml.jackson.core.SerializableString serializableString38 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter39 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString38);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter40 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter39);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray43 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser44 = jsonFactory41.createParser(byteArray43);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.setCodec(objectCodec45);
+        byte[] byteArray49 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory46.createParser(byteArray49, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray55 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory46.enable(feature57);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler60 = jsonFactory59._getBufferRecycler();
+        java.io.OutputStream outputStream61 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator62 = jsonFactory59.createJsonGenerator(outputStream61);
+        jsonGenerator62.flush();
+        defaultPrettyPrinter40.beforeObjectEntries(jsonGenerator62);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec65 = jsonGenerator62.getCodec();
+        com.fasterxml.jackson.core.Version version66 = jsonGenerator62.version();
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator68 = jsonGenerator62.setHighestNonEscapedChar((int) (short) 0);
+        lf2SpacesIndenter37.writeIndentation(jsonGenerator62, 79);
+        jsonGenerator62.writeNumberField(" ", (long) (byte) 10);
+        defaultPrettyPrinter6.beforeArrayValues(jsonGenerator62);
+        com.fasterxml.jackson.core.FormatSchema formatSchema75 = null;
+        boolean boolean76 = jsonGenerator62.canUseSchema(formatSchema75);
+        defaultPrettyPrinter2.writeRootValueSeparator(jsonGenerator62);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator62.setHighestNonEscapedChar((-1728422374));
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser10);
+        org.junit.Assert.assertNotNull(jsonFactory12);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser18);
+        org.junit.Assert.assertNotNull(byteArray21);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser22);
+        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertNotNull(bufferRecycler26);
+        org.junit.Assert.assertNotNull(jsonGenerator28);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter33);
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter36);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter37);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser44);
+        org.junit.Assert.assertNotNull(jsonFactory46);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser52);
+        org.junit.Assert.assertNotNull(byteArray55);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser56);
+        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory58);
+        org.junit.Assert.assertNotNull(jsonFactory59);
+        org.junit.Assert.assertNotNull(bufferRecycler60);
+        org.junit.Assert.assertNotNull(jsonGenerator62);
+        org.junit.Assert.assertNull(objectCodec65);
+        org.junit.Assert.assertNotNull(version66);
+        org.junit.Assert.assertNotNull(jsonGenerator68);
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
+        org.junit.Assert.assertNotNull(jsonGenerator79);
+    }
+
+    @Test
+    public void test505() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test505");
+        com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray3 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory1.createParser(byteArray3);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec5 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory1.setCodec(objectCodec5);
+        byte[] byteArray9 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser12 = jsonFactory6.createParser(byteArray9, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray15 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory13.createParser(byteArray15);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature17 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory13.enable(feature17);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory6.enable(feature17);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray22 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory20.createParser(byteArray22);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature24 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory20.enable(feature24);
+        byte[] byteArray26 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory25.createJsonParser(byteArray26, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory6.createParser(byteArray26);
+        int int32 = serializedString0.appendUnquotedUTF8(byteArray26, 56319);
+        byte[] byteArray33 = serializedString0.asUnquotedUTF8();
+        com.fasterxml.jackson.core.io.SerializedString serializedString34 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray37 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory35.createParser(byteArray37);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec39 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory35.setCodec(objectCodec39);
+        byte[] byteArray43 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser46 = jsonFactory40.createParser(byteArray43, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray49 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory47.createParser(byteArray49);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature51 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory47.enable(feature51);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory40.enable(feature51);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory54 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray56 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser57 = jsonFactory54.createParser(byteArray56);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature58 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory54.enable(feature58);
+        byte[] byteArray60 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser63 = jsonFactory59.createJsonParser(byteArray60, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser64 = jsonFactory40.createParser(byteArray60);
+        int int66 = serializedString34.appendUnquotedUTF8(byteArray60, 56319);
+        byte[] byteArray67 = serializedString34.asUnquotedUTF8();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory68 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray70 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser71 = jsonFactory68.createParser(byteArray70);
+        int int73 = serializedString34.appendQuotedUTF8(byteArray70, (int) (byte) 0);
+        char[] charArray74 = serializedString34.asQuotedChars();
+        int int76 = serializedString0.appendUnquoted(charArray74, 56320);
+        java.lang.String str77 = serializedString0.getValue();
+        org.junit.Assert.assertNotNull(serializedString0);
+        org.junit.Assert.assertNotNull(byteArray3);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray3), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser4);
+        org.junit.Assert.assertNotNull(jsonFactory6);
+        org.junit.Assert.assertNotNull(byteArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser12);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser16);
+        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature17.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory18);
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser23);
+        org.junit.Assert.assertTrue("'" + feature24 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature24.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertNotNull(byteArray26);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray26), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser29);
+        org.junit.Assert.assertNotNull(jsonParser30);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[32]");
+        org.junit.Assert.assertNotNull(serializedString34);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser38);
+        org.junit.Assert.assertNotNull(jsonFactory40);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser46);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser50);
+        org.junit.Assert.assertTrue("'" + feature51 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature51.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory52);
+        org.junit.Assert.assertNotNull(jsonFactory53);
+        org.junit.Assert.assertNotNull(byteArray56);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray56), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser57);
+        org.junit.Assert.assertTrue("'" + feature58 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature58.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory59);
+        org.junit.Assert.assertNotNull(byteArray60);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser63);
+        org.junit.Assert.assertNotNull(jsonParser64);
+        org.junit.Assert.assertTrue("'" + int66 + "' != '" + (-1) + "'", int66 == (-1));
+        org.junit.Assert.assertNotNull(byteArray67);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[32]");
+        org.junit.Assert.assertNotNull(byteArray70);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray70), "[32]");
+        org.junit.Assert.assertNotNull(jsonParser71);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 1 + "'", int73 == 1);
+        org.junit.Assert.assertNotNull(charArray74);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray74), " ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray74), " ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray74), "[ ]");
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-1) + "'", int76 == (-1));
+        org.junit.Assert.assertEquals("'" + str77 + "' != '" + " " + "'", str77, " ");
+    }
+
+    @Test
+    public void test506() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test506");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray4 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
+        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray16 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
+        java.io.OutputStream outputStream22 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
+        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
+        com.fasterxml.jackson.core.SerializableString serializableString25 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter26 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString25);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter27 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter26);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter28 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        defaultPrettyPrinter26.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter28);
+        defaultPrettyPrinter1.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter28);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = defaultPrettyPrinter1.createInstance();
+        com.fasterxml.jackson.core.SerializableString serializableString32 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter33 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString32);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter34 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter33);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray37 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory35.createParser(byteArray37);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec39 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory35.setCodec(objectCodec39);
+        byte[] byteArray43 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser46 = jsonFactory40.createParser(byteArray43, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray49 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory47.createParser(byteArray49);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature51 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory47.enable(feature51);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory40.enable(feature51);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler54 = jsonFactory53._getBufferRecycler();
+        java.io.OutputStream outputStream55 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator56 = jsonFactory53.createJsonGenerator(outputStream55);
+        jsonGenerator56.flush();
+        defaultPrettyPrinter34.beforeObjectEntries(jsonGenerator56);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec59 = jsonGenerator56.getCodec();
+        com.fasterxml.jackson.core.Version version60 = jsonGenerator56.version();
+        int int61 = jsonGenerator56.getHighestEscapedChar();
+        defaultPrettyPrinter1.writeStartArray(jsonGenerator56);
+        jsonGenerator56.writeNumber("ROOT");
+        boolean boolean65 = jsonGenerator56.canWriteBinaryNatively();
+        org.junit.Assert.assertNotNull(byteArray4);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser5);
+        org.junit.Assert.assertNotNull(jsonFactory7);
+        org.junit.Assert.assertNotNull(byteArray10);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser13);
+        org.junit.Assert.assertNotNull(byteArray16);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser17);
+        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(jsonFactory20);
+        org.junit.Assert.assertNotNull(bufferRecycler21);
+        org.junit.Assert.assertNotNull(jsonGenerator23);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter28);
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter31);
+        org.junit.Assert.assertNotNull(byteArray37);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser38);
+        org.junit.Assert.assertNotNull(jsonFactory40);
+        org.junit.Assert.assertNotNull(byteArray43);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser46);
+        org.junit.Assert.assertNotNull(byteArray49);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser50);
+        org.junit.Assert.assertTrue("'" + feature51 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature51.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory52);
+        org.junit.Assert.assertNotNull(jsonFactory53);
+        org.junit.Assert.assertNotNull(bufferRecycler54);
+        org.junit.Assert.assertNotNull(jsonGenerator56);
+        org.junit.Assert.assertNull(objectCodec59);
+        org.junit.Assert.assertNotNull(version60);
+        org.junit.Assert.assertTrue("'" + int61 + "' != '" + 0 + "'", int61 == 0);
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
+    }
+
+    @Test
+    public void test507() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test507");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray6 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
+        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray18 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
+        java.io.OutputStream outputStream24 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
+        jsonGenerator25.flush();
+        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator29 = jsonGenerator25.setFeatureMask(35);
+        boolean boolean30 = jsonGenerator29.canWriteObjectId();
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser7);
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser19);
+        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(jsonFactory22);
+        org.junit.Assert.assertNotNull(bufferRecycler23);
+        org.junit.Assert.assertNotNull(jsonGenerator25);
+        org.junit.Assert.assertNotNull(jsonGenerator29);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+    }
+
+    @Test
+    public void test508() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test508");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
+        java.lang.String str16 = uTF8StreamJsonParser12.getText();
+        // The following exception was thrown during execution in test generation
+        try {
+            byte[] byteArray17 = uTF8StreamJsonParser12.getBinaryValue();
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
+        } catch (com.fasterxml.jackson.core.JsonParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNull(str16);
+    }
+
+    @Test
+    public void test509() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test509");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray5 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory3.createParser(byteArray5);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec7 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = jsonFactory3.setCodec(objectCodec7);
+        byte[] byteArray11 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory8.createParser(byteArray11, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray17 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory15.createParser(byteArray17);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature19 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory15.enable(feature19);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory8.enable(feature19);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler22 = jsonFactory21._getBufferRecycler();
+        java.io.OutputStream outputStream23 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator24 = jsonFactory21.createJsonGenerator(outputStream23);
+        jsonGenerator24.flush();
+        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator24);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec27 = jsonGenerator24.getCodec();
+        com.fasterxml.jackson.core.Version version28 = jsonGenerator24.version();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec29 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator30 = jsonGenerator24.setCodec(objectCodec29);
+        jsonGenerator30.writeStartObject();
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNotNull(jsonFactory8);
+        org.junit.Assert.assertNotNull(byteArray11);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser14);
+        org.junit.Assert.assertNotNull(byteArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser18);
+        org.junit.Assert.assertTrue("'" + feature19 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature19.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory20);
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(bufferRecycler22);
+        org.junit.Assert.assertNotNull(jsonGenerator24);
+        org.junit.Assert.assertNull(objectCodec27);
+        org.junit.Assert.assertNotNull(version28);
+        org.junit.Assert.assertNotNull(jsonGenerator30);
+    }
+
+    @Test
+    public void test510() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test510");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
+        java.lang.String str2 = jsonFactory0.getFormatName();
+        java.lang.String str3 = jsonFactory0.getFormatName();
+        java.io.Writer writer4 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator5 = jsonFactory0.createJsonGenerator(writer4);
+        com.fasterxml.jackson.core.io.IOContext iOContext6 = null;
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext10 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler7, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream12 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec13 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer14 = null;
+        byte[] byteArray15 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser19 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext10, 0, inputStream12, objectCodec13, bytesToNameCanonicalizer14, byteArray15, 33, 33, false);
+        java.io.InputStream inputStream21 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer26 = bytesToNameCanonicalizer23.makeChild(false, false);
+        byte[] byteArray27 = new byte[] {};
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser31 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext10, (int) 'a', inputStream21, objectCodec22, bytesToNameCanonicalizer26, byteArray27, (int) (byte) 10, 33, false);
+        java.io.InputStream inputStream32 = null;
+        com.fasterxml.jackson.core.JsonToken jsonToken33 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
+        byte[] byteArray34 = jsonToken33.asByteArray();
+        com.fasterxml.jackson.core.io.MergedStream mergedStream37 = new com.fasterxml.jackson.core.io.MergedStream(iOContext10, inputStream32, byteArray34, 56319, (int) (short) 100);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler38 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext41 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler38, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream43 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec44 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer45 = null;
+        byte[] byteArray46 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser50 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext41, 0, inputStream43, objectCodec44, bytesToNameCanonicalizer45, byteArray46, 33, 33, false);
+        java.io.InputStream inputStream52 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec53 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer54 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer57 = bytesToNameCanonicalizer54.makeChild(false, false);
+        byte[] byteArray58 = new byte[] {};
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser62 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext41, (int) 'a', inputStream52, objectCodec53, bytesToNameCanonicalizer57, byteArray58, (int) (byte) 10, 33, false);
+        java.io.InputStream inputStream63 = null;
+        com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
+        byte[] byteArray65 = jsonToken64.asByteArray();
+        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext41, inputStream63, byteArray65, 56319, (int) (short) 100);
+        mergedStream68.mark(32);
+        com.fasterxml.jackson.core.JsonToken jsonToken71 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
+        byte[] byteArray72 = jsonToken71.asByteArray();
+        com.fasterxml.jackson.core.io.MergedStream mergedStream75 = new com.fasterxml.jackson.core.io.MergedStream(iOContext10, (java.io.InputStream) mergedStream68, byteArray72, (int) (byte) 100, 1736418256);
+        int int76 = mergedStream68.available();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory77 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray79 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser80 = jsonFactory77.createParser(byteArray79);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec81 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory82 = jsonFactory77.setCodec(objectCodec81);
+        byte[] byteArray85 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser88 = jsonFactory82.createParser(byteArray85, (-1), 0);
+        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader92 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext6, (java.io.InputStream) mergedStream68, byteArray85, (-1728387439), (-1728387439), true);
+        jsonGenerator5.writeBinary(byteArray85, (int) '4', 0);
+        org.junit.Assert.assertNotNull(version1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "JSON" + "'", str2, "JSON");
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "JSON" + "'", str3, "JSON");
+        org.junit.Assert.assertNotNull(jsonGenerator5);
+        org.junit.Assert.assertNotNull(byteArray15);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer23);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer26);
+        org.junit.Assert.assertNotNull(byteArray27);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[]");
+        org.junit.Assert.assertTrue("'" + jsonToken33 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken33.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
+        org.junit.Assert.assertNotNull(byteArray34);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray34), "[102, 97, 108, 115, 101]");
+        org.junit.Assert.assertNotNull(byteArray46);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray46), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer54);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer57);
+        org.junit.Assert.assertNotNull(byteArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[]");
+        org.junit.Assert.assertTrue("'" + jsonToken64 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken64.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
+        org.junit.Assert.assertNotNull(byteArray65);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[102, 97, 108, 115, 101]");
+        org.junit.Assert.assertTrue("'" + jsonToken71 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken71.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
+        org.junit.Assert.assertNotNull(byteArray72);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray72), "[102, 97, 108, 115, 101]");
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-56219) + "'", int76 == (-56219));
+        org.junit.Assert.assertNotNull(byteArray79);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser80);
+        org.junit.Assert.assertNotNull(jsonFactory82);
+        org.junit.Assert.assertNotNull(byteArray85);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray85), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser88);
+    }
+
+    @Test
+    public void test511() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test511");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
+        java.lang.String str16 = uTF8StreamJsonParser12.getText();
+        java.lang.String str17 = uTF8StreamJsonParser12.getCurrentName();
+        uTF8StreamJsonParser12.overrideCurrentName("");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNull(str16);
+        org.junit.Assert.assertNull(str17);
+    }
+
+    @Test
+    public void test512() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test512");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -39,9 +842,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test502() throws Throwable {
+    public void test513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test502");
+            System.out.format("%n%s%n", "RegressionTest1.test513");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -96,9 +899,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test503() throws Throwable {
+    public void test514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test503");
+            System.out.format("%n%s%n", "RegressionTest1.test514");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -137,9 +940,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test504() throws Throwable {
+    public void test515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test504");
+            System.out.format("%n%s%n", "RegressionTest1.test515");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -243,9 +1046,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test505() throws Throwable {
+    public void test516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test505");
+            System.out.format("%n%s%n", "RegressionTest1.test516");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -273,9 +1076,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test506() throws Throwable {
+    public void test517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test506");
+            System.out.format("%n%s%n", "RegressionTest1.test517");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -398,9 +1201,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test507() throws Throwable {
+    public void test518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test507");
+            System.out.format("%n%s%n", "RegressionTest1.test518");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -425,9 +1228,59 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test508() throws Throwable {
+    public void test519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test508");
+            System.out.format("%n%s%n", "RegressionTest1.test519");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.SerializableString serializableString2 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString2);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray6 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
+        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray18 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
+        java.io.OutputStream outputStream24 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
+        defaultPrettyPrinter3.writeObjectEntrySeparator(jsonGenerator25);
+        com.fasterxml.jackson.core.SerializableString serializableString27 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter28 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString27);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter29 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter28);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter30 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        defaultPrettyPrinter28.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
+        defaultPrettyPrinter3.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
+        defaultPrettyPrinter1.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser7);
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser19);
+        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(jsonFactory22);
+        org.junit.Assert.assertNotNull(bufferRecycler23);
+        org.junit.Assert.assertNotNull(jsonGenerator25);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter30);
+    }
+
+    @Test
+    public void test520() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test520");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -489,9 +1342,72 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test509() throws Throwable {
+    public void test521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test509");
+            System.out.format("%n%s%n", "RegressionTest1.test521");
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter2 = lf2SpacesIndenter0.withLinefeed("");
+        boolean boolean3 = lf2SpacesIndenter2.isInline();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray6 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
+        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray18 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray25 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory23.createParser(byteArray25);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature27 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory23.enable(feature27);
+        byte[] byteArray29 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser32 = jsonFactory28.createJsonParser(byteArray29, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonFactory9.createParser(byteArray29);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = jsonFactory9.setRootValueSeparator(" ");
+        java.io.Writer writer36 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator37 = jsonFactory35.createJsonGenerator(writer36);
+        lf2SpacesIndenter2.writeIndentation(jsonGenerator37, (int) (short) -1);
+        com.fasterxml.jackson.core.Version version40 = jsonGenerator37.version();
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter0);
+        org.junit.Assert.assertNotNull(lf2SpacesIndenter2);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertNotNull(byteArray6);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser7);
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertNotNull(byteArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser19);
+        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(jsonFactory22);
+        org.junit.Assert.assertNotNull(byteArray25);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser26);
+        org.junit.Assert.assertTrue("'" + feature27 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature27.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory28);
+        org.junit.Assert.assertNotNull(byteArray29);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser32);
+        org.junit.Assert.assertNotNull(jsonParser33);
+        org.junit.Assert.assertNotNull(jsonFactory35);
+        org.junit.Assert.assertNotNull(jsonGenerator37);
+        org.junit.Assert.assertNotNull(version40);
+    }
+
+    @Test
+    public void test522() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test522");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -580,9 +1496,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test510() throws Throwable {
+    public void test523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test510");
+            System.out.format("%n%s%n", "RegressionTest1.test523");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -601,7 +1517,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._skipString();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in null? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -618,9 +1534,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test511() throws Throwable {
+    public void test524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test511");
+            System.out.format("%n%s%n", "RegressionTest1.test524");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -692,9 +1608,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test512() throws Throwable {
+    public void test525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test512");
+            System.out.format("%n%s%n", "RegressionTest1.test525");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -719,9 +1635,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test513() throws Throwable {
+    public void test526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test513");
+            System.out.format("%n%s%n", "RegressionTest1.test526");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -741,9 +1657,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test514() throws Throwable {
+    public void test527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test514");
+            System.out.format("%n%s%n", "RegressionTest1.test527");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -818,9 +1734,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test515() throws Throwable {
+    public void test528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test515");
+            System.out.format("%n%s%n", "RegressionTest1.test528");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -905,9 +1821,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test516() throws Throwable {
+    public void test529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test516");
+            System.out.format("%n%s%n", "RegressionTest1.test529");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -988,9 +1904,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test517() throws Throwable {
+    public void test530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test517");
+            System.out.format("%n%s%n", "RegressionTest1.test530");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -1011,9 +1927,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test518() throws Throwable {
+    public void test531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test518");
+            System.out.format("%n%s%n", "RegressionTest1.test531");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1051,9 +1967,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test519() throws Throwable {
+    public void test532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test519");
+            System.out.format("%n%s%n", "RegressionTest1.test532");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1072,7 +1988,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonToken jsonToken25 = uTF8StreamJsonParser12._handleInvalidNumberStart(56320, false);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('?' (code 56320 / 0xdc00)) in numeric value: expected digit (0-9) to follow minus sign, for valid numeric value? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected character ('?' (code 56320 / 0xdc00)) in numeric value: expected digit (0-9) to follow minus sign, for valid numeric value? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1088,9 +2004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test520() throws Throwable {
+    public void test533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test520");
+            System.out.format("%n%s%n", "RegressionTest1.test533");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1111,9 +2027,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test521() throws Throwable {
+    public void test534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test521");
+            System.out.format("%n%s%n", "RegressionTest1.test534");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1142,9 +2058,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test522() throws Throwable {
+    public void test535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test522");
+            System.out.format("%n%s%n", "RegressionTest1.test535");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -1190,7 +2106,7 @@ public class RegressionTest1 {
         java.io.OutputStream outputStream56 = null;
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator57 = jsonFactory54.createJsonGenerator(outputStream56);
         defaultPrettyPrinter1.writeObjectFieldValueSeparator(jsonGenerator57);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator60 = jsonGenerator57.setHighestNonEscapedChar(1788788386);
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator60 = jsonGenerator57.setHighestNonEscapedChar(1746426387);
         jsonGenerator57.writeStartArray();
         org.junit.Assert.assertNotNull(byteArray8);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100]");
@@ -1229,9 +2145,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test523() throws Throwable {
+    public void test536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test523");
+            System.out.format("%n%s%n", "RegressionTest1.test536");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -1310,9 +2226,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test524() throws Throwable {
+    public void test537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test524");
+            System.out.format("%n%s%n", "RegressionTest1.test537");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -1342,9 +2258,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test525() throws Throwable {
+    public void test538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test525");
+            System.out.format("%n%s%n", "RegressionTest1.test538");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1371,9 +2287,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test526() throws Throwable {
+    public void test539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test526");
+            System.out.format("%n%s%n", "RegressionTest1.test539");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1398,9 +2314,31 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test527() throws Throwable {
+    public void test540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test527");
+            System.out.format("%n%s%n", "RegressionTest1.test540");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        uTF8StreamJsonParser12._tokenIncomplete = false;
+        int int15 = uTF8StreamJsonParser12.getTextOffset();
+        boolean boolean16 = uTF8StreamJsonParser12.hasTextCharacters();
+        com.fasterxml.jackson.core.JsonStreamContext jsonStreamContext17 = uTF8StreamJsonParser12.getParsingContext();
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(jsonStreamContext17);
+    }
+
+    @Test
+    public void test541() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test541");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -1460,9 +2398,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test528() throws Throwable {
+    public void test542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test528");
+            System.out.format("%n%s%n", "RegressionTest1.test542");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         com.fasterxml.jackson.core.ObjectCodec objectCodec5 = null;
@@ -1497,9 +2435,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test529() throws Throwable {
+    public void test543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test529");
+            System.out.format("%n%s%n", "RegressionTest1.test543");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -1574,9 +2512,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test530() throws Throwable {
+    public void test544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test530");
+            System.out.format("%n%s%n", "RegressionTest1.test544");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -1643,9 +2581,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test531() throws Throwable {
+    public void test545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test531");
+            System.out.format("%n%s%n", "RegressionTest1.test545");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -1758,9 +2696,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test532() throws Throwable {
+    public void test546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test532");
+            System.out.format("%n%s%n", "RegressionTest1.test546");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -1812,9 +2750,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test533() throws Throwable {
+    public void test547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test533");
+            System.out.format("%n%s%n", "RegressionTest1.test547");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1855,7 +2793,7 @@ public class RegressionTest1 {
         java.io.InputStream inputStream65 = null;
         byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1728476878), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
         uTF8StreamJsonParser74.clearCurrentToken();
         com.fasterxml.jackson.core.Base64Variant base64Variant76 = null;
         // The following exception was thrown during execution in test generation
@@ -1878,7 +2816,7 @@ public class RegressionTest1 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
         org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770238609) + "'", int51 == (-1770238609));
+// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1728803823) + "'", int51 == (-1728803823));
         org.junit.Assert.assertNotNull(byteArray60);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertNotNull(byteArray66);
@@ -1886,9 +2824,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test534() throws Throwable {
+    public void test548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test534");
+            System.out.format("%n%s%n", "RegressionTest1.test548");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -1927,7 +2865,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             int int48 = jsonParser47.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: java.io.StringReader@57e3d8d8; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: java.io.StringReader@4249c209; line: 1, column: 1]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -1970,9 +2908,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test535() throws Throwable {
+    public void test549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test535");
+            System.out.format("%n%s%n", "RegressionTest1.test549");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -1994,9 +2932,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test536() throws Throwable {
+    public void test550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test536");
+            System.out.format("%n%s%n", "RegressionTest1.test550");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2034,7 +2972,7 @@ public class RegressionTest1 {
         mergedStream61.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray65 = jsonToken64.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1736418256);
         // The following exception was thrown during execution in test generation
         try {
             byte[] byteArray69 = iOContext3.allocBase64Buffer();
@@ -2066,9 +3004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test537() throws Throwable {
+    public void test551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test537");
+            System.out.format("%n%s%n", "RegressionTest1.test551");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2096,9 +3034,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test538() throws Throwable {
+    public void test552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test538");
+            System.out.format("%n%s%n", "RegressionTest1.test552");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2172,9 +3110,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test539() throws Throwable {
+    public void test553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test539");
+            System.out.format("%n%s%n", "RegressionTest1.test553");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2215,9 +3153,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test540() throws Throwable {
+    public void test554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test540");
+            System.out.format("%n%s%n", "RegressionTest1.test554");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
@@ -2281,7 +3219,7 @@ public class RegressionTest1 {
         com.fasterxml.jackson.core.JsonParser jsonParser86 = jsonFactory80.createParser(byteArray83, (-1), 0);
         com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader90 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext64, inputStream74, byteArray83, (int) (byte) -1, 2, true);
         jsonGenerator53.writeBinaryField("", byteArray83);
-        com.fasterxml.jackson.core.JsonParser jsonParser94 = jsonFactory9.createJsonParser(byteArray83, 1778260248, (int) (short) -1);
+        com.fasterxml.jackson.core.JsonParser jsonParser94 = jsonFactory9.createJsonParser(byteArray83, 1736057305, (int) (short) -1);
         // The following exception was thrown during execution in test generation
         try {
             iOContext3.releaseReadIOBuffer(byteArray83);
@@ -2335,9 +3273,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test541() throws Throwable {
+    public void test555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test541");
+            System.out.format("%n%s%n", "RegressionTest1.test555");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2361,9 +3299,65 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test542() throws Throwable {
+    public void test556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test542");
+            System.out.format("%n%s%n", "RegressionTest1.test556");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
+        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray14 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec19 = jsonFactory5.getCodec();
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext23 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream25 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec26 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer27 = null;
+        byte[] byteArray28 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser32 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext23, 0, inputStream25, objectCodec26, bytesToNameCanonicalizer27, byteArray28, 33, 33, false);
+        long long34 = uTF8StreamJsonParser32.getValueAsLong(100L);
+        uTF8StreamJsonParser32.clearCurrentToken();
+        com.fasterxml.jackson.core.util.ByteArrayBuilder byteArrayBuilder36 = uTF8StreamJsonParser32._getByteArrayBuilder();
+        com.fasterxml.jackson.core.JsonEncoding jsonEncoding37 = com.fasterxml.jackson.core.JsonEncoding.UTF32_LE;
+        int int38 = jsonEncoding37.bits();
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator39 = jsonFactory5.createGenerator((java.io.OutputStream) byteArrayBuilder36, jsonEncoding37);
+        com.fasterxml.jackson.core.Version version40 = jsonFactory5.version();
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser11);
+        org.junit.Assert.assertNotNull(byteArray14);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser15);
+        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertNotNull(jsonFactory18);
+        org.junit.Assert.assertNull(objectCodec19);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + long34 + "' != '" + 100L + "'", long34 == 100L);
+        org.junit.Assert.assertNotNull(byteArrayBuilder36);
+        org.junit.Assert.assertTrue("'" + jsonEncoding37 + "' != '" + com.fasterxml.jackson.core.JsonEncoding.UTF32_LE + "'", jsonEncoding37.equals(com.fasterxml.jackson.core.JsonEncoding.UTF32_LE));
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 32 + "'", int38 == 32);
+        org.junit.Assert.assertNotNull(jsonGenerator39);
+        org.junit.Assert.assertNotNull(version40);
+    }
+
+    @Test
+    public void test557() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test557");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2379,9 +3373,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test543() throws Throwable {
+    public void test558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test543");
+            System.out.format("%n%s%n", "RegressionTest1.test558");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2426,9 +3420,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test544() throws Throwable {
+    public void test559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test544");
+            System.out.format("%n%s%n", "RegressionTest1.test559");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2503,9 +3497,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test545() throws Throwable {
+    public void test560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test545");
+            System.out.format("%n%s%n", "RegressionTest1.test560");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2538,9 +3532,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test546() throws Throwable {
+    public void test561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test546");
+            System.out.format("%n%s%n", "RegressionTest1.test561");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2557,7 +3551,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.JsonParser.NumberType numberType20 = uTF8StreamJsonParser12.getNumberType();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -2572,9 +3566,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test547() throws Throwable {
+    public void test562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test547");
+            System.out.format("%n%s%n", "RegressionTest1.test562");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2600,9 +3594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test548() throws Throwable {
+    public void test563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test548");
+            System.out.format("%n%s%n", "RegressionTest1.test563");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2624,9 +3618,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test549() throws Throwable {
+    public void test564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test549");
+            System.out.format("%n%s%n", "RegressionTest1.test564");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -2682,9 +3676,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test550() throws Throwable {
+    public void test565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test550");
+            System.out.format("%n%s%n", "RegressionTest1.test565");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2708,9 +3702,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test551() throws Throwable {
+    public void test566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test551");
+            System.out.format("%n%s%n", "RegressionTest1.test566");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2747,9 +3741,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test552() throws Throwable {
+    public void test567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test552");
+            System.out.format("%n%s%n", "RegressionTest1.test567");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -2769,9 +3763,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test553() throws Throwable {
+    public void test568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test553");
+            System.out.format("%n%s%n", "RegressionTest1.test568");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -2875,9 +3869,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test554() throws Throwable {
+    public void test569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test554");
+            System.out.format("%n%s%n", "RegressionTest1.test569");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -2982,9 +3976,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test555() throws Throwable {
+    public void test570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test555");
+            System.out.format("%n%s%n", "RegressionTest1.test570");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3001,7 +3995,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.core.sym.Name name20 = uTF8StreamJsonParser12.parseLongName(33);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unexpected end-of-input in field name? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3016,9 +4010,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test556() throws Throwable {
+    public void test571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test556");
+            System.out.format("%n%s%n", "RegressionTest1.test571");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3050,9 +4044,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test557() throws Throwable {
+    public void test572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test557");
+            System.out.format("%n%s%n", "RegressionTest1.test572");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3064,7 +4058,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number14 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3074,9 +4068,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test558() throws Throwable {
+    public void test573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test558");
+            System.out.format("%n%s%n", "RegressionTest1.test573");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -3191,9 +4185,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test559() throws Throwable {
+    public void test574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test559");
+            System.out.format("%n%s%n", "RegressionTest1.test574");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3211,7 +4205,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidInitial((int) (byte) -65);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0xffffffbf? at [Source: 4; line: 1, column: 67]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 start byte 0xffffffbf? at [Source: 4; line: 1, column: 100]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -3227,9 +4221,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test560() throws Throwable {
+    public void test575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test560");
+            System.out.format("%n%s%n", "RegressionTest1.test575");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3248,9 +4242,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test561() throws Throwable {
+    public void test576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test561");
+            System.out.format("%n%s%n", "RegressionTest1.test576");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         java.io.InputStream inputStream1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext2 = null;
@@ -3326,9 +4320,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test562() throws Throwable {
+    public void test577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test562");
+            System.out.format("%n%s%n", "RegressionTest1.test577");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3369,9 +4363,74 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test563() throws Throwable {
+    public void test578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test563");
+            System.out.format("%n%s%n", "RegressionTest1.test578");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
+        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray7 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
+        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = jsonFactory19._getBufferRecycler();
+        com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType charBufferType21 = com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER;
+        char[] charArray23 = new char[] { '#' };
+        bufferRecycler20.releaseCharBuffer(charBufferType21, charArray23);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext28 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler25, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream30 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = null;
+        byte[] byteArray33 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser37 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, 0, inputStream30, objectCodec31, bytesToNameCanonicalizer32, byteArray33, 33, 33, false);
+        java.io.InputStream inputStream39 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer41 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer44 = bytesToNameCanonicalizer41.makeChild(false, false);
+        byte[] byteArray45 = new byte[] {};
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser49 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, (int) 'a', inputStream39, objectCodec40, bytesToNameCanonicalizer44, byteArray45, (int) (byte) 10, 33, false);
+        com.fasterxml.jackson.core.io.IOContext iOContext51 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) iOContext28, true);
+        java.lang.Object obj52 = iOContext51.getSourceReference();
+        org.junit.Assert.assertNotNull(version1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser8);
+        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory10);
+        org.junit.Assert.assertNotNull(byteArray11);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser14);
+        org.junit.Assert.assertNotNull(jsonParser17);
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(bufferRecycler20);
+        org.junit.Assert.assertTrue("'" + charBufferType21 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER + "'", charBufferType21.equals(com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER));
+        org.junit.Assert.assertNotNull(charArray23);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[#]");
+        org.junit.Assert.assertNotNull(byteArray33);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer41);
+        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer44);
+        org.junit.Assert.assertNotNull(byteArray45);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
+        org.junit.Assert.assertNotNull(obj52);
+    }
+
+    @Test
+    public void test579() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test579");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -3466,9 +4525,45 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test564() throws Throwable {
+    public void test580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test564");
+            System.out.format("%n%s%n", "RegressionTest1.test580");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
+        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray7 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
+        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
+        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
+        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
+        java.io.Writer writer20 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator21 = jsonFactory19.createGenerator(writer20);
+        org.junit.Assert.assertNotNull(version1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser8);
+        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory10);
+        org.junit.Assert.assertNotNull(byteArray11);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonParser14);
+        org.junit.Assert.assertNotNull(jsonParser17);
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(jsonGenerator21);
+    }
+
+    @Test
+    public void test581() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test581");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -3610,9 +4705,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test565() throws Throwable {
+    public void test582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test565");
+            System.out.format("%n%s%n", "RegressionTest1.test582");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -3688,9 +4783,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test566() throws Throwable {
+    public void test583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test566");
+            System.out.format("%n%s%n", "RegressionTest1.test583");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3710,9 +4805,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test567() throws Throwable {
+    public void test584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test567");
+            System.out.format("%n%s%n", "RegressionTest1.test584");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
@@ -3751,7 +4846,7 @@ public class RegressionTest1 {
         mergedStream62.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken65 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray66 = jsonToken65.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream69 = new com.fasterxml.jackson.core.io.MergedStream(iOContext4, (java.io.InputStream) mergedStream62, byteArray66, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream69 = new com.fasterxml.jackson.core.io.MergedStream(iOContext4, (java.io.InputStream) mergedStream62, byteArray66, (int) (byte) 100, 1736418256);
         int int71 = serializedString0.appendUnquotedUTF8(byteArray66, 10);
         java.nio.ByteBuffer byteBuffer72 = null;
         // The following exception was thrown during execution in test generation
@@ -3787,9 +4882,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test568() throws Throwable {
+    public void test585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test568");
+            System.out.format("%n%s%n", "RegressionTest1.test585");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3836,7 +4931,7 @@ public class RegressionTest1 {
         mergedStream76.mark(32);
         com.fasterxml.jackson.core.JsonToken jsonToken79 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
         byte[] byteArray80 = jsonToken79.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream83 = new com.fasterxml.jackson.core.io.MergedStream(iOContext18, (java.io.InputStream) mergedStream76, byteArray80, (int) (byte) 100, 1777981781);
+        com.fasterxml.jackson.core.io.MergedStream mergedStream83 = new com.fasterxml.jackson.core.io.MergedStream(iOContext18, (java.io.InputStream) mergedStream76, byteArray80, (int) (byte) 100, 1736418256);
         uTF8StreamJsonParser12._inputBuffer = byteArray80;
         char[] charArray85 = uTF8StreamJsonParser12.getTextCharacters();
         org.junit.Assert.assertNotNull(byteArray8);
@@ -3868,9 +4963,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test569() throws Throwable {
+    public void test586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test569");
+            System.out.format("%n%s%n", "RegressionTest1.test586");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
         java.io.InputStream inputStream6 = null;
@@ -3909,9 +5004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test570() throws Throwable {
+    public void test587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test570");
+            System.out.format("%n%s%n", "RegressionTest1.test587");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
         java.lang.String str2 = jsonFactory0.getFormatName();
@@ -3944,9 +5039,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test571() throws Throwable {
+    public void test588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test571");
+            System.out.format("%n%s%n", "RegressionTest1.test588");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -3971,9 +5066,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test572() throws Throwable {
+    public void test589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test572");
+            System.out.format("%n%s%n", "RegressionTest1.test589");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4006,9 +5101,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test573() throws Throwable {
+    public void test590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test573");
+            System.out.format("%n%s%n", "RegressionTest1.test590");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -4045,9 +5140,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test574() throws Throwable {
+    public void test591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test574");
+            System.out.format("%n%s%n", "RegressionTest1.test591");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator2 = null;
@@ -4127,9 +5222,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test575() throws Throwable {
+    public void test592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test575");
+            System.out.format("%n%s%n", "RegressionTest1.test592");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4162,9 +5257,58 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test576() throws Throwable {
+    public void test593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test576");
+            System.out.format("%n%s%n", "RegressionTest1.test593");
+        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray7 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec9 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.setCodec(objectCodec9);
+        byte[] byteArray13 = new byte[] { (byte) 100, (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory10.createParser(byteArray13, (-1), 0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray19 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory17.createParser(byteArray19);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature21 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory17.enable(feature21);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory10.enable(feature21);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler24 = jsonFactory23._getBufferRecycler();
+        java.io.OutputStream outputStream25 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator26 = jsonFactory23.createJsonGenerator(outputStream25);
+        jsonGenerator26.flush();
+        defaultPrettyPrinter4.writeEndArray(jsonGenerator26, (int) '4');
+        boolean boolean30 = jsonGenerator26.canWriteTypeId();
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator32 = jsonGenerator26.setFeatureMask((-56219));
+        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
+        org.junit.Assert.assertNotNull(byteArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser8);
+        org.junit.Assert.assertNotNull(jsonFactory10);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[100, 100]");
+        org.junit.Assert.assertNotNull(jsonParser16);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser20);
+        org.junit.Assert.assertTrue("'" + feature21 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature21.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory22);
+        org.junit.Assert.assertNotNull(jsonFactory23);
+        org.junit.Assert.assertNotNull(bufferRecycler24);
+        org.junit.Assert.assertNotNull(jsonGenerator26);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(jsonGenerator32);
+    }
+
+    @Test
+    public void test594() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test594");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -4205,8 +5349,8 @@ public class RegressionTest1 {
         char[] charArray49 = com.fasterxml.jackson.core.json.WriterBasedJsonGenerator.HEX_CHARS;
         // The following exception was thrown during execution in test generation
         try {
-            jsonGenerator46.writeString(charArray49, 1777981781, 56319);
-            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 1777981781");
+            jsonGenerator46.writeString(charArray49, 1736418256, 56319);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 1736418256");
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
         // Expected exception.
         }
@@ -4247,9 +5391,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test577() throws Throwable {
+    public void test595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test577");
+            System.out.format("%n%s%n", "RegressionTest1.test595");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4267,7 +5411,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number21 = uTF8StreamJsonParser12.getNumberValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4284,9 +5428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test578() throws Throwable {
+    public void test596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test578");
+            System.out.format("%n%s%n", "RegressionTest1.test596");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4299,7 +5443,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             uTF8StreamJsonParser12._reportInvalidToken("false", "false");
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'false': was expecting false? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'false': was expecting false? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4309,9 +5453,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test579() throws Throwable {
+    public void test597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test579");
+            System.out.format("%n%s%n", "RegressionTest1.test597");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4343,7 +5487,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             int int42 = uTF8StreamJsonParser12.readBinaryValue(base64Variant20, (java.io.OutputStream) byteArrayBuilder41);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 34]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 67]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -4367,9 +5511,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test580() throws Throwable {
+    public void test598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test580");
+            System.out.format("%n%s%n", "RegressionTest1.test598");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -4451,9 +5595,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test581() throws Throwable {
+    public void test599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test581");
+            System.out.format("%n%s%n", "RegressionTest1.test599");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -4508,9 +5652,61 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test582() throws Throwable {
+    public void test600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test582");
+            System.out.format("%n%s%n", "RegressionTest1.test600");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
+        com.fasterxml.jackson.core.JsonGenerator.Feature feature6 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
+        boolean boolean7 = feature6.enabledByDefault();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory5.configure(feature6, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray12 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory10.createParser(byteArray12);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory10.setCodec(objectCodec14);
+        com.fasterxml.jackson.core.JsonGenerator.Feature feature16 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
+        boolean boolean17 = feature16.enabledByDefault();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory15.configure(feature16, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray22 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory20.createParser(byteArray22);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature24 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory20.enable(feature24);
+        boolean boolean26 = feature24.enabledByDefault();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = jsonFactory19.enable(feature24);
+        boolean boolean28 = jsonFactory9.isEnabled(feature24);
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertTrue("'" + feature6 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature6.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser13);
+        org.junit.Assert.assertNotNull(jsonFactory15);
+        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature16.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertNotNull(byteArray22);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser23);
+        org.junit.Assert.assertTrue("'" + feature24 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature24.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(jsonFactory27);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
+    }
+
+    @Test
+    public void test601() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test601");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4534,9 +5730,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test583() throws Throwable {
+    public void test602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test583");
+            System.out.format("%n%s%n", "RegressionTest1.test602");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4562,9 +5758,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test584() throws Throwable {
+    public void test603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test584");
+            System.out.format("%n%s%n", "RegressionTest1.test603");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4594,9 +5790,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test585() throws Throwable {
+    public void test604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test585");
+            System.out.format("%n%s%n", "RegressionTest1.test604");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -4628,9 +5824,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test586() throws Throwable {
+    public void test605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test586");
+            System.out.format("%n%s%n", "RegressionTest1.test605");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -4736,9 +5932,38 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test587() throws Throwable {
+    public void test606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test587");
+            System.out.format("%n%s%n", "RegressionTest1.test606");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
+        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
+        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
+        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
+        boolean boolean15 = uTF8StreamJsonParser12.isClosed();
+        int int17 = uTF8StreamJsonParser12.getValueAsInt(56320);
+        boolean boolean18 = uTF8StreamJsonParser12.isClosed();
+        com.fasterxml.jackson.core.JsonToken jsonToken19 = uTF8StreamJsonParser12.getLastClearedToken();
+        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext20 = uTF8StreamJsonParser12.getParsingContext();
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 56320 + "'", int17 == 56320);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNull(jsonToken19);
+        org.junit.Assert.assertNotNull(jsonReadContext20);
+    }
+
+    @Test
+    public void test607() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test607");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4777,9 +6002,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test588() throws Throwable {
+    public void test608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test588");
+            System.out.format("%n%s%n", "RegressionTest1.test608");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4806,9 +6031,29 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test589() throws Throwable {
+    public void test609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test589");
+            System.out.format("%n%s%n", "RegressionTest1.test609");
+        com.fasterxml.jackson.core.json.DupDetector dupDetector2 = null;
+        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext3 = com.fasterxml.jackson.core.json.JsonReadContext.createRootContext((int) (short) 10, 1, dupDetector2);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = null;
+        com.fasterxml.jackson.core.io.IOContext iOContext7 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler4, (java.lang.Object) '4', true);
+        java.io.InputStream inputStream9 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = null;
+        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer11 = null;
+        byte[] byteArray12 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
+        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser16 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext7, 0, inputStream9, objectCodec10, bytesToNameCanonicalizer11, byteArray12, 33, 33, false);
+        com.fasterxml.jackson.core.JsonLocation jsonLocation17 = jsonReadContext3.getStartLocation((java.lang.Object) uTF8StreamJsonParser16);
+        org.junit.Assert.assertNotNull(jsonReadContext3);
+        org.junit.Assert.assertNotNull(byteArray12);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
+        org.junit.Assert.assertNotNull(jsonLocation17);
+    }
+
+    @Test
+    public void test610() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test610");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4833,9 +6078,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test590() throws Throwable {
+    public void test611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test590");
+            System.out.format("%n%s%n", "RegressionTest1.test611");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -4911,9 +6156,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test591() throws Throwable {
+    public void test612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test591");
+            System.out.format("%n%s%n", "RegressionTest1.test612");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -4953,7 +6198,7 @@ public class RegressionTest1 {
         boolean boolean44 = jsonFactory38.isEnabled(feature43);
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator45 = jsonGenerator29.enable(feature43);
         jsonGenerator45.writeStartArray();
-        defaultPrettyPrinter3.writeEndArray(jsonGenerator45, (-1770097854));
+        defaultPrettyPrinter3.writeEndArray(jsonGenerator45, (-1728385093));
         org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
         org.junit.Assert.assertNotNull(defaultPrettyPrinter7);
         org.junit.Assert.assertNotNull(byteArray10);
@@ -4985,9 +6230,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test592() throws Throwable {
+    public void test613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test592");
+            System.out.format("%n%s%n", "RegressionTest1.test613");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = defaultPrettyPrinter1.createInstance();
         com.fasterxml.jackson.core.SerializableString serializableString3 = null;
@@ -5025,7 +6270,7 @@ public class RegressionTest1 {
         long long48 = uTF32Reader45.skip((long) ' ');
         char[] charArray49 = new char[] {};
         int int52 = uTF32Reader45.read(charArray49, (int) (byte) -1, 0);
-        jsonGenerator35.writeString(charArray49, 0, (-1770028298));
+        jsonGenerator35.writeString(charArray49, 0, (-1728476878));
         defaultPrettyPrinter1.writeStartObject(jsonGenerator35);
         org.junit.Assert.assertNotNull(defaultPrettyPrinter2);
         org.junit.Assert.assertNotNull(defaultPrettyPrinter6);
@@ -5060,9 +6305,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test593() throws Throwable {
+    public void test614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test593");
+            System.out.format("%n%s%n", "RegressionTest1.test614");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         java.io.InputStream inputStream1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -5097,9 +6342,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test594() throws Throwable {
+    public void test615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test594");
+            System.out.format("%n%s%n", "RegressionTest1.test615");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5121,9 +6366,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test595() throws Throwable {
+    public void test616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test595");
+            System.out.format("%n%s%n", "RegressionTest1.test616");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -5191,9 +6436,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test596() throws Throwable {
+    public void test617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test596");
+            System.out.format("%n%s%n", "RegressionTest1.test617");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5212,9 +6457,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test597() throws Throwable {
+    public void test618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test597");
+            System.out.format("%n%s%n", "RegressionTest1.test618");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5232,8 +6477,8 @@ public class RegressionTest1 {
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory18.createJsonGenerator(writer19);
         // The following exception was thrown during execution in test generation
         try {
-            jsonGenerator20.writeRaw("OBJECT", (-1770150482), 1778272613);
-            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1770150482");
+            jsonGenerator20.writeRaw("OBJECT", (-1728811305), 1736087247);
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1728811305");
         } catch (java.lang.StringIndexOutOfBoundsException e) {
         // Expected exception.
         }
@@ -5254,9 +6499,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test598() throws Throwable {
+    public void test619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test598");
+            System.out.format("%n%s%n", "RegressionTest1.test619");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5324,9 +6569,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test599() throws Throwable {
+    public void test620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test599");
+            System.out.format("%n%s%n", "RegressionTest1.test620");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5383,9 +6628,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test600() throws Throwable {
+    public void test621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test600");
+            System.out.format("%n%s%n", "RegressionTest1.test621");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5405,9 +6650,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test601() throws Throwable {
+    public void test622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test601");
+            System.out.format("%n%s%n", "RegressionTest1.test622");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5447,9 +6692,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test602() throws Throwable {
+    public void test623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test602");
+            System.out.format("%n%s%n", "RegressionTest1.test623");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5468,9 +6713,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test603() throws Throwable {
+    public void test624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test603");
+            System.out.format("%n%s%n", "RegressionTest1.test624");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5495,9 +6740,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test604() throws Throwable {
+    public void test625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test604");
+            System.out.format("%n%s%n", "RegressionTest1.test625");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5511,7 +6756,7 @@ public class RegressionTest1 {
         com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = bytesToNameCanonicalizer16.makeChild(false, false);
         byte[] byteArray20 = new byte[] {};
         com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (int) 'a', inputStream14, objectCodec15, bytesToNameCanonicalizer19, byteArray20, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.sym.Name name28 = bytesToNameCanonicalizer19.addName("[Source: hi!; line: 100, column: 35]", 4, 1777908621);
+        com.fasterxml.jackson.core.sym.Name name28 = bytesToNameCanonicalizer19.addName("[Source: hi!; line: 100, column: 35]", 4, 1735961788);
         int int29 = bytesToNameCanonicalizer19.size();
         org.junit.Assert.assertNotNull(byteArray8);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
@@ -5524,9 +6769,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test605() throws Throwable {
+    public void test626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test605");
+            System.out.format("%n%s%n", "RegressionTest1.test626");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5586,9 +6831,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test606() throws Throwable {
+    public void test627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test606");
+            System.out.format("%n%s%n", "RegressionTest1.test627");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5643,9 +6888,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test607() throws Throwable {
+    public void test628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test607");
+            System.out.format("%n%s%n", "RegressionTest1.test628");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5671,9 +6916,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test608() throws Throwable {
+    public void test629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test608");
+            System.out.format("%n%s%n", "RegressionTest1.test629");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -5745,9 +6990,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test609() throws Throwable {
+    public void test630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test609");
+            System.out.format("%n%s%n", "RegressionTest1.test630");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5774,9 +7019,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test610() throws Throwable {
+    public void test631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test610");
+            System.out.format("%n%s%n", "RegressionTest1.test631");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -5794,9 +7039,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test611() throws Throwable {
+    public void test632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test611");
+            System.out.format("%n%s%n", "RegressionTest1.test632");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
@@ -5896,9 +7141,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test612() throws Throwable {
+    public void test633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test612");
+            System.out.format("%n%s%n", "RegressionTest1.test633");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -5985,9 +7230,23 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test613() throws Throwable {
+    public void test634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test613");
+            System.out.format("%n%s%n", "RegressionTest1.test634");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray2 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
+        com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonParser3.skipChildren();
+        org.junit.Assert.assertNotNull(byteArray2);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser3);
+        org.junit.Assert.assertNotNull(jsonParser4);
+    }
+
+    @Test
+    public void test635() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test635");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6001,7 +7260,7 @@ public class RegressionTest1 {
         java.io.Writer writer17 = null;
         // The following exception was thrown during execution in test generation
         try {
-            com.fasterxml.jackson.core.json.WriterBasedJsonGenerator writerBasedJsonGenerator18 = new com.fasterxml.jackson.core.json.WriterBasedJsonGenerator(iOContext3, 1777981781, objectCodec16, writer17);
+            com.fasterxml.jackson.core.json.WriterBasedJsonGenerator writerBasedJsonGenerator18 = new com.fasterxml.jackson.core.json.WriterBasedJsonGenerator(iOContext3, 1736418256, objectCodec16, writer17);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
         } catch (java.lang.NullPointerException e) {
         // Expected exception.
@@ -6011,9 +7270,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test614() throws Throwable {
+    public void test636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test614");
+            System.out.format("%n%s%n", "RegressionTest1.test636");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray2 = new byte[] { (byte) 100 };
         com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
@@ -6027,9 +7286,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test615() throws Throwable {
+    public void test637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test615");
+            System.out.format("%n%s%n", "RegressionTest1.test637");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
         com.fasterxml.jackson.core.SerializableString serializableString1 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString1);
@@ -6089,7 +7348,7 @@ public class RegressionTest1 {
         boolean boolean73 = feature71.enabledByDefault();
         com.fasterxml.jackson.core.JsonGenerator jsonGenerator74 = jsonGenerator57.disable(feature71);
         lf2SpacesIndenter0.writeIndentation(jsonGenerator74, (int) (short) 1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter78 = lf2SpacesIndenter0.withLinefeed("com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 34]");
+        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter78 = lf2SpacesIndenter0.withLinefeed("com.fasterxml.jackson.core.JsonParseException: false\n at [Source: 4; line: 1, column: 67]");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter80 = lf2SpacesIndenter0.withLinefeed("UTF-32LE");
         org.junit.Assert.assertNotNull(lf2SpacesIndenter0);
         org.junit.Assert.assertNotNull(byteArray6);
@@ -6141,9 +7400,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test616() throws Throwable {
+    public void test638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test616");
+            System.out.format("%n%s%n", "RegressionTest1.test638");
         com.fasterxml.jackson.core.SerializableString serializableString0 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
@@ -6270,9 +7529,39 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test617() throws Throwable {
+    public void test639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test617");
+            System.out.format("%n%s%n", "RegressionTest1.test639");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
+        java.lang.String str2 = jsonFactory0.getFormatName();
+        java.lang.String str3 = jsonFactory0.getFormatName();
+        com.fasterxml.jackson.core.io.IOContext iOContext4 = null;
+        java.io.InputStream inputStream5 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = new com.fasterxml.jackson.core.JsonFactory();
+        byte[] byteArray8 = new byte[] { (byte) 100 };
+        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory6.createParser(byteArray8);
+        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader13 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext4, inputStream5, byteArray8, (int) (short) 10, (int) (short) 10, false);
+        boolean boolean14 = uTF32Reader13.markSupported();
+        boolean boolean15 = uTF32Reader13.markSupported();
+        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory0.createJsonParser((java.io.Reader) uTF32Reader13);
+        boolean boolean17 = uTF32Reader13.markSupported();
+        org.junit.Assert.assertNotNull(version1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "JSON" + "'", str2, "JSON");
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "JSON" + "'", str3, "JSON");
+        org.junit.Assert.assertNotNull(byteArray8);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100]");
+        org.junit.Assert.assertNotNull(jsonParser9);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(jsonParser16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+    }
+
+    @Test
+    public void test640() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test640");
         com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer0 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
         com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer3 = bytesToNameCanonicalizer0.makeChild(false, false);
         int int4 = bytesToNameCanonicalizer0.size();
@@ -6292,7 +7581,7 @@ public class RegressionTest1 {
         int[] intArray26 = uTF8StreamJsonParser21._quadBuffer;
         // The following exception was thrown during execution in test generation
         try {
-            int int28 = bytesToNameCanonicalizer0.calcHash(intArray26, (-1770170129));
+            int int28 = bytesToNameCanonicalizer0.calcHash(intArray26, (-1728319827));
             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: null");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
@@ -6301,7 +7590,7 @@ public class RegressionTest1 {
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer3);
         org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
         org.junit.Assert.assertNotNull(bytesToNameCanonicalizer7);
-// flaky:         org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1774812679) + "'", int8 == (-1774812679));
+// flaky:         org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1732774189) + "'", int8 == (-1732774189));
         org.junit.Assert.assertNotNull(byteArray17);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray17), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
         org.junit.Assert.assertTrue("'" + jsonToken22 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken22.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
@@ -6313,9 +7602,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test618() throws Throwable {
+    public void test641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test618");
+            System.out.format("%n%s%n", "RegressionTest1.test641");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6334,7 +7623,7 @@ public class RegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             long long22 = uTF8StreamJsonParser12.getLongValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -6351,9 +7640,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test619() throws Throwable {
+    public void test642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test619");
+            System.out.format("%n%s%n", "RegressionTest1.test642");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
         java.io.InputStream inputStream5 = null;
@@ -6377,9 +7666,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test620() throws Throwable {
+    public void test643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test620");
+            System.out.format("%n%s%n", "RegressionTest1.test643");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         byte[] byteArray3 = new byte[] { (byte) 100 };
@@ -6488,3426 +7777,5 @@ public class RegressionTest1 {
         org.junit.Assert.assertEquals("'" + str78 + "' != '" + " " + "'", str78, " ");
         org.junit.Assert.assertNotNull(byteArray79);
         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[32]");
-    }
-
-    @Test
-    public void test621() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test621");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        java.io.Writer writer19 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory18.createJsonGenerator(writer19);
-        jsonGenerator20.writeNumberField("UTF-32LE", (double) 1L);
-        jsonGenerator20.writeRawValue(" ");
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonGenerator20);
-    }
-
-    @Test
-    public void test622() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test622");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = uTF8StreamJsonParser12.getLastClearedToken();
-        java.lang.String str17 = uTF8StreamJsonParser12.getText();
-        boolean boolean18 = uTF8StreamJsonParser12.hasCurrentToken();
-        int int19 = uTF8StreamJsonParser12.getCurrentTokenId();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(jsonToken16);
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-    }
-
-    @Test
-    public void test623() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test623");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        long long14 = uTF8StreamJsonParser12.getValueAsLong(100L);
-        uTF8StreamJsonParser12.clearCurrentToken();
-        com.fasterxml.jackson.core.util.ByteArrayBuilder byteArrayBuilder16 = uTF8StreamJsonParser12._getByteArrayBuilder();
-        int int17 = uTF8StreamJsonParser12.getTextOffset();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.math.BigInteger bigInteger18 = uTF8StreamJsonParser12.getBigIntegerValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 100L + "'", long14 == 100L);
-        org.junit.Assert.assertNotNull(byteArrayBuilder16);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-    }
-
-    @Test
-    public void test624() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test624");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType byteBufferType20 = com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version22 = jsonFactory21.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature23 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory21.configure(feature23, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory26 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray28 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory26.createParser(byteArray28);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature30 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory26.enable(feature30);
-        byte[] byteArray32 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser35 = jsonFactory31.createJsonParser(byteArray32, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory21.createParser(byteArray32, (int) (short) 10, 2);
-        bufferRecycler19.releaseByteBuffer(byteBufferType20, byteArray32);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer40 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler19);
-        java.lang.String str41 = textBuffer40.toString();
-        char[] charArray42 = textBuffer40.getTextBuffer();
-        java.lang.String str43 = textBuffer40.toString();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertTrue("'" + byteBufferType20 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER + "'", byteBufferType20.equals(com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER));
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature23.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature30.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(byteArray32);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser35);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "" + "'", str41, "");
-        org.junit.Assert.assertNull(charArray42);
-        org.junit.Assert.assertEquals("'" + str43 + "' != '" + "" + "'", str43, "");
-    }
-
-    @Test
-    public void test625() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test625");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec19 = jsonFactory5.getCodec();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext23 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream25 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec26 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer27 = null;
-        byte[] byteArray28 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser32 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext23, 0, inputStream25, objectCodec26, bytesToNameCanonicalizer27, byteArray28, 33, 33, false);
-        long long34 = uTF8StreamJsonParser32.getValueAsLong(100L);
-        uTF8StreamJsonParser32.clearCurrentToken();
-        com.fasterxml.jackson.core.util.ByteArrayBuilder byteArrayBuilder36 = uTF8StreamJsonParser32._getByteArrayBuilder();
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding37 = com.fasterxml.jackson.core.JsonEncoding.UTF32_LE;
-        int int38 = jsonEncoding37.bits();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator39 = jsonFactory5.createGenerator((java.io.OutputStream) byteArrayBuilder36, jsonEncoding37);
-        com.fasterxml.jackson.core.Version version40 = jsonFactory5.version();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature41 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory5.enable(feature41);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNull(objectCodec19);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + long34 + "' != '" + 100L + "'", long34 == 100L);
-        org.junit.Assert.assertNotNull(byteArrayBuilder36);
-        org.junit.Assert.assertTrue("'" + jsonEncoding37 + "' != '" + com.fasterxml.jackson.core.JsonEncoding.UTF32_LE + "'", jsonEncoding37.equals(com.fasterxml.jackson.core.JsonEncoding.UTF32_LE));
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 32 + "'", int38 == 32);
-        org.junit.Assert.assertNotNull(jsonGenerator39);
-        org.junit.Assert.assertNotNull(version40);
-        org.junit.Assert.assertTrue("'" + feature41 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature41.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory42);
-    }
-
-    @Test
-    public void test626() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test626");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.isClosed();
-        int int17 = uTF8StreamJsonParser12.getValueAsInt(56320);
-        boolean boolean18 = uTF8StreamJsonParser12.isClosed();
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = uTF8StreamJsonParser12.getLastClearedToken();
-        boolean boolean20 = uTF8StreamJsonParser12.hasTextCharacters();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 56320 + "'", int17 == 56320);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(jsonToken19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-    }
-
-    @Test
-    public void test627() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test627");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = uTF8StreamJsonParser12.getLastClearedToken();
-        java.lang.String str17 = uTF8StreamJsonParser12.getText();
-        boolean boolean18 = uTF8StreamJsonParser12.hasCurrentToken();
-        java.lang.String str20 = uTF8StreamJsonParser12.getValueAsString("false");
-        boolean boolean21 = uTF8StreamJsonParser12.isClosed();
-        java.lang.String str22 = uTF8StreamJsonParser12.getValueAsString();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(jsonToken16);
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "false" + "'", str20, "false");
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNull(str22);
-    }
-
-    @Test
-    public void test628() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test628");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.SerializableString serializableString2 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString2);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
-        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray18 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
-        java.io.OutputStream outputStream24 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
-        defaultPrettyPrinter3.writeObjectEntrySeparator(jsonGenerator25);
-        com.fasterxml.jackson.core.SerializableString serializableString27 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter28 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString27);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter29 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter28);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter30 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        defaultPrettyPrinter28.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
-        defaultPrettyPrinter3.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
-        defaultPrettyPrinter1.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter30);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version35 = jsonFactory34.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature36 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = jsonFactory34.configure(feature36, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory39 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray41 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser42 = jsonFactory39.createParser(byteArray41);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature43 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = jsonFactory39.enable(feature43);
-        byte[] byteArray45 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory44.createJsonParser(byteArray45, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser51 = jsonFactory34.createParser(byteArray45, (int) (short) 10, 2);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes52 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory34.setCharacterEscapes(characterEscapes52);
-        java.io.Writer writer54 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator55 = jsonFactory53.createGenerator(writer54);
-        defaultPrettyPrinter1.writeEndArray(jsonGenerator55, (-56219));
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(bufferRecycler23);
-        org.junit.Assert.assertNotNull(jsonGenerator25);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter30);
-        org.junit.Assert.assertNotNull(version35);
-        org.junit.Assert.assertTrue("'" + feature36 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature36.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory38);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser42);
-        org.junit.Assert.assertTrue("'" + feature43 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature43.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory44);
-        org.junit.Assert.assertNotNull(byteArray45);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser48);
-        org.junit.Assert.assertNotNull(jsonParser51);
-        org.junit.Assert.assertNotNull(jsonFactory53);
-        org.junit.Assert.assertNotNull(jsonGenerator55);
-    }
-
-    @Test
-    public void test629() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test629");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        uTF8StreamJsonParser12._tokenIncomplete = false;
-        int int15 = uTF8StreamJsonParser12.getTextOffset();
-        double double17 = uTF8StreamJsonParser12.getValueAsDouble((double) 'a');
-        boolean boolean18 = uTF8StreamJsonParser12.hasCurrentToken();
-        java.lang.Object obj19 = uTF8StreamJsonParser12.getInputSource();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + double17 + "' != '" + 97.0d + "'", double17 == 97.0d);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(obj19);
-    }
-
-    @Test
-    public void test630() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test630");
-        com.fasterxml.jackson.core.json.DupDetector dupDetector0 = null;
-        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext1 = com.fasterxml.jackson.core.json.JsonReadContext.createRootContext(dupDetector0);
-        boolean boolean2 = jsonReadContext1.inArray();
-        jsonReadContext1._currentName = "N/A";
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec9 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.setCodec(objectCodec9);
-        byte[] byteArray13 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory10.createParser(byteArray13, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray19 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory17.createParser(byteArray19);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature21 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory17.enable(feature21);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory10.enable(feature21);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler24 = jsonFactory23._getBufferRecycler();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation25 = jsonReadContext1.getStartLocation((java.lang.Object) jsonFactory23);
-        com.fasterxml.jackson.core.JsonParser.Feature feature26 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        boolean boolean27 = feature26.enabledByDefault();
-        boolean boolean28 = jsonFactory23.isEnabled(feature26);
-        org.junit.Assert.assertNotNull(jsonReadContext1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertTrue("'" + feature21 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature21.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(jsonFactory23);
-        org.junit.Assert.assertNotNull(bufferRecycler24);
-        org.junit.Assert.assertNotNull(jsonLocation25);
-        org.junit.Assert.assertTrue("'" + feature26 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature26.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-    }
-
-    @Test
-    public void test631() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test631");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
-        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = jsonFactory19._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType charBufferType21 = com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER;
-        char[] charArray23 = new char[] { '#' };
-        bufferRecycler20.releaseCharBuffer(charBufferType21, charArray23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext28 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler25, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = null;
-        byte[] byteArray33 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser37 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, 0, inputStream30, objectCodec31, bytesToNameCanonicalizer32, byteArray33, 33, 33, false);
-        java.io.InputStream inputStream39 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer41 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer44 = bytesToNameCanonicalizer41.makeChild(false, false);
-        byte[] byteArray45 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser49 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, (int) 'a', inputStream39, objectCodec40, bytesToNameCanonicalizer44, byteArray45, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.io.IOContext iOContext51 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) iOContext28, true);
-        java.lang.Object obj52 = iOContext51.getSourceReference();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec54 = null;
-        java.io.OutputStream outputStream55 = null;
-        com.fasterxml.jackson.core.json.UTF8JsonGenerator uTF8JsonGenerator56 = new com.fasterxml.jackson.core.json.UTF8JsonGenerator(iOContext51, (-1770006982), objectCodec54, outputStream55);
-        uTF8JsonGenerator56.writeNumber((double) (-1770097854));
-        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray61 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory59.createParser(byteArray61);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec63 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory64 = jsonFactory59.setCodec(objectCodec63);
-        byte[] byteArray67 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser70 = jsonFactory64.createParser(byteArray67, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory71 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray73 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser74 = jsonFactory71.createParser(byteArray73);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec75 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory76 = jsonFactory71.setCodec(objectCodec75);
-        byte[] byteArray79 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser82 = jsonFactory76.createParser(byteArray79, (-1), 0);
-        com.fasterxml.jackson.core.JsonParser jsonParser83 = jsonFactory64.createParser(byteArray79);
-        com.fasterxml.jackson.core.FormatSchema formatSchema84 = jsonParser83.getSchema();
-        // The following exception was thrown during execution in test generation
-        try {
-            uTF8JsonGenerator56.copyCurrentEvent(jsonParser83);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonGenerationException; message: No current event to copy");
-        } catch (com.fasterxml.jackson.core.JsonGenerationException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray11);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(bufferRecycler20);
-        org.junit.Assert.assertTrue("'" + charBufferType21 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER + "'", charBufferType21.equals(com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER));
-        org.junit.Assert.assertNotNull(charArray23);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[#]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer41);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer44);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(obj52);
-        org.junit.Assert.assertNotNull(byteArray61);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray61), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertNotNull(jsonFactory64);
-        org.junit.Assert.assertNotNull(byteArray67);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray67), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser70);
-        org.junit.Assert.assertNotNull(byteArray73);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray73), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser74);
-        org.junit.Assert.assertNotNull(jsonFactory76);
-        org.junit.Assert.assertNotNull(byteArray79);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray79), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser82);
-        org.junit.Assert.assertNotNull(jsonParser83);
-        org.junit.Assert.assertNull(formatSchema84);
-    }
-
-    @Test
-    public void test632() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test632");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray6 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory5.createJsonParser(byteArray6);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler8 = jsonFactory5._getBufferRecycler();
-        com.fasterxml.jackson.core.io.IOContext iOContext11 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler8, (java.lang.Object) (-1770091375), true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version14 = jsonFactory13.version();
-        java.lang.String str15 = jsonFactory13.getFormatName();
-        java.lang.String str16 = jsonFactory13.getFormatName();
-        com.fasterxml.jackson.core.io.IOContext iOContext17 = null;
-        java.io.InputStream inputStream18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader26 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext17, inputStream18, byteArray21, (int) (short) 10, (int) (short) 10, false);
-        boolean boolean27 = uTF32Reader26.markSupported();
-        boolean boolean28 = uTF32Reader26.markSupported();
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory13.createJsonParser((java.io.Reader) uTF32Reader26);
-        boolean boolean30 = uTF32Reader26.markSupported();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer charsToNameCanonicalizer32 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.json.ReaderBasedJsonParser readerBasedJsonParser33 = new com.fasterxml.jackson.core.json.ReaderBasedJsonParser(iOContext11, 256, (java.io.Reader) uTF32Reader26, objectCodec31, charsToNameCanonicalizer32);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray6);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(bufferRecycler8);
-        org.junit.Assert.assertNotNull(version14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "JSON" + "'", str15, "JSON");
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "JSON" + "'", str16, "JSON");
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test633() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test633");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray4 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
-        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray16 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
-        java.io.OutputStream outputStream22 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
-        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
-        com.fasterxml.jackson.core.SerializableString serializableString25 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter26 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString25);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray29 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory27.createParser(byteArray29);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = jsonFactory27.setCodec(objectCodec31);
-        byte[] byteArray35 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory32.createParser(byteArray35, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory39 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray41 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser42 = jsonFactory39.createParser(byteArray41);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature43 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = jsonFactory39.enable(feature43);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory45 = jsonFactory32.enable(feature43);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler46 = jsonFactory45._getBufferRecycler();
-        java.io.OutputStream outputStream47 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator48 = jsonFactory45.createJsonGenerator(outputStream47);
-        defaultPrettyPrinter26.writeObjectEntrySeparator(jsonGenerator48);
-        com.fasterxml.jackson.core.SerializableString serializableString50 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter51 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString50);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter52 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter51);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter53 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        defaultPrettyPrinter51.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter53);
-        defaultPrettyPrinter26.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter53);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter56 = defaultPrettyPrinter26.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter57 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        com.fasterxml.jackson.core.SerializableString serializableString58 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter59 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString58);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter60 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter59);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory61 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray63 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser64 = jsonFactory61.createParser(byteArray63);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec65 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory66 = jsonFactory61.setCodec(objectCodec65);
-        byte[] byteArray69 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser72 = jsonFactory66.createParser(byteArray69, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory73 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray75 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser76 = jsonFactory73.createParser(byteArray75);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature77 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory78 = jsonFactory73.enable(feature77);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory79 = jsonFactory66.enable(feature77);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler80 = jsonFactory79._getBufferRecycler();
-        java.io.OutputStream outputStream81 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator82 = jsonFactory79.createJsonGenerator(outputStream81);
-        jsonGenerator82.flush();
-        defaultPrettyPrinter60.beforeObjectEntries(jsonGenerator82);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec85 = jsonGenerator82.getCodec();
-        com.fasterxml.jackson.core.Version version86 = jsonGenerator82.version();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator88 = jsonGenerator82.setHighestNonEscapedChar((int) (short) 0);
-        lf2SpacesIndenter57.writeIndentation(jsonGenerator82, 79);
-        jsonGenerator82.writeNumberField(" ", (long) (byte) 10);
-        defaultPrettyPrinter26.beforeArrayValues(jsonGenerator82);
-        com.fasterxml.jackson.core.FormatSchema formatSchema95 = null;
-        boolean boolean96 = jsonGenerator82.canUseSchema(formatSchema95);
-        defaultPrettyPrinter1.writeObjectFieldValueSeparator(jsonGenerator82);
-        com.fasterxml.jackson.core.TreeNode treeNode98 = null;
-        jsonGenerator82.writeTree(treeNode98);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(bufferRecycler21);
-        org.junit.Assert.assertNotNull(jsonGenerator23);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertNotNull(jsonFactory32);
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser42);
-        org.junit.Assert.assertTrue("'" + feature43 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature43.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory44);
-        org.junit.Assert.assertNotNull(jsonFactory45);
-        org.junit.Assert.assertNotNull(bufferRecycler46);
-        org.junit.Assert.assertNotNull(jsonGenerator48);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter53);
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter56);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter57);
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray63), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser64);
-        org.junit.Assert.assertNotNull(jsonFactory66);
-        org.junit.Assert.assertNotNull(byteArray69);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser72);
-        org.junit.Assert.assertNotNull(byteArray75);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser76);
-        org.junit.Assert.assertTrue("'" + feature77 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature77.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory78);
-        org.junit.Assert.assertNotNull(jsonFactory79);
-        org.junit.Assert.assertNotNull(bufferRecycler80);
-        org.junit.Assert.assertNotNull(jsonGenerator82);
-        org.junit.Assert.assertNull(objectCodec85);
-        org.junit.Assert.assertNotNull(version86);
-        org.junit.Assert.assertNotNull(jsonGenerator88);
-        org.junit.Assert.assertTrue("'" + boolean96 + "' != '" + false + "'", boolean96 == false);
-    }
-
-    @Test
-    public void test634() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test634");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType byteBufferType20 = com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version22 = jsonFactory21.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature23 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory21.configure(feature23, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory26 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray28 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory26.createParser(byteArray28);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature30 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory26.enable(feature30);
-        byte[] byteArray32 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser35 = jsonFactory31.createJsonParser(byteArray32, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory21.createParser(byteArray32, (int) (short) 10, 2);
-        bufferRecycler19.releaseByteBuffer(byteBufferType20, byteArray32);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer40 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler19);
-        java.lang.String str41 = textBuffer40.toString();
-        char[] charArray42 = textBuffer40.getTextBuffer();
-        java.lang.String str43 = textBuffer40.contentsAsString();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertTrue("'" + byteBufferType20 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER + "'", byteBufferType20.equals(com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER));
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature23.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature30.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(byteArray32);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser35);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "" + "'", str41, "");
-        org.junit.Assert.assertNull(charArray42);
-        org.junit.Assert.assertEquals("'" + str43 + "' != '" + "" + "'", str43, "");
-    }
-
-    @Test
-    public void test635() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test635");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        java.io.InputStream inputStream14 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec15 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer16 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = bytesToNameCanonicalizer16.makeChild(false, false);
-        byte[] byteArray20 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (int) 'a', inputStream14, objectCodec15, bytesToNameCanonicalizer19, byteArray20, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec26 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray29 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory27.createParser(byteArray29);
-        int int31 = jsonParser30.getTextOffset();
-        long long32 = jsonParser30.getValueAsLong();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler33 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext36 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler33, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream38 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec39 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer40 = null;
-        byte[] byteArray41 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser45 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext36, 0, inputStream38, objectCodec39, bytesToNameCanonicalizer40, byteArray41, 33, 33, false);
-        long long47 = uTF8StreamJsonParser45.getValueAsLong(100L);
-        uTF8StreamJsonParser45.clearCurrentToken();
-        com.fasterxml.jackson.core.util.ByteArrayBuilder byteArrayBuilder49 = uTF8StreamJsonParser45._getByteArrayBuilder();
-        int int50 = jsonParser30.releaseBuffered((java.io.OutputStream) byteArrayBuilder49);
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.json.UTF8JsonGenerator uTF8JsonGenerator51 = new com.fasterxml.jackson.core.json.UTF8JsonGenerator(iOContext3, (int) (short) 100, objectCodec26, (java.io.OutputStream) byteArrayBuilder49);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer16);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer19);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertTrue("'" + long32 + "' != '" + 0L + "'", long32 == 0L);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + long47 + "' != '" + 100L + "'", long47 == 100L);
-        org.junit.Assert.assertNotNull(byteArrayBuilder49);
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 1 + "'", int50 == 1);
-    }
-
-    @Test
-    public void test636() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test636");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
-        byte[] byteArray25 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser28 = jsonFactory24.createJsonParser(byteArray25, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory5.createParser(byteArray25);
-        byte[] byteArray30 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.JsonParser jsonParser31 = jsonFactory5.createJsonParser(byteArray30);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec32 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory33 = jsonFactory5.setCodec(objectCodec32);
-        com.fasterxml.jackson.core.io.IOContext iOContext34 = null;
-        java.io.InputStream inputStream35 = null;
-        byte[] byteArray36 = null;
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader40 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext34, inputStream35, byteArray36, (-1), (int) 'a', false);
-        boolean boolean41 = uTF32Reader40.markSupported();
-        com.fasterxml.jackson.core.JsonParser jsonParser42 = jsonFactory5.createParser((java.io.Reader) uTF32Reader40);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(byteArray25);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser28);
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser31);
-        org.junit.Assert.assertNotNull(jsonFactory33);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-        org.junit.Assert.assertNotNull(jsonParser42);
-    }
-
-    @Test
-    public void test637() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test637");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
-        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray18 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
-        java.io.OutputStream outputStream24 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
-        jsonGenerator25.flush();
-        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator29 = jsonGenerator25.setFeatureMask(35);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature30 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator32 = jsonGenerator25.configure(feature30, false);
-        com.fasterxml.jackson.core.io.SerializedString serializedString33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray36 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser37 = jsonFactory34.createParser(byteArray36);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec38 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory39 = jsonFactory34.setCodec(objectCodec38);
-        byte[] byteArray42 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser45 = jsonFactory39.createParser(byteArray42, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray48 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser49 = jsonFactory46.createParser(byteArray48);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature50 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = jsonFactory46.enable(feature50);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory39.enable(feature50);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray55 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
-        byte[] byteArray59 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory58.createJsonParser(byteArray59, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser63 = jsonFactory39.createParser(byteArray59);
-        int int65 = serializedString33.appendUnquotedUTF8(byteArray59, 56319);
-        byte[] byteArray66 = serializedString33.asUnquotedUTF8();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory67 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray69 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser70 = jsonFactory67.createParser(byteArray69);
-        int int72 = serializedString33.appendQuotedUTF8(byteArray69, (int) (byte) 0);
-        java.lang.String str73 = serializedString33.getValue();
-        java.lang.String str74 = serializedString33.getValue();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator75 = jsonGenerator25.setRootValueSeparator((com.fasterxml.jackson.core.SerializableString) serializedString33);
-        byte[] byteArray77 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            jsonGenerator25.writeBinaryField("/", byteArray77);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(bufferRecycler23);
-        org.junit.Assert.assertNotNull(jsonGenerator25);
-        org.junit.Assert.assertNotNull(jsonGenerator29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature30.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertNotNull(jsonGenerator32);
-        org.junit.Assert.assertNotNull(serializedString33);
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser37);
-        org.junit.Assert.assertNotNull(jsonFactory39);
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser45);
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser49);
-        org.junit.Assert.assertTrue("'" + feature50 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature50.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory51);
-        org.junit.Assert.assertNotNull(jsonFactory52);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser56);
-        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory58);
-        org.junit.Assert.assertNotNull(byteArray59);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertNotNull(jsonParser63);
-        org.junit.Assert.assertTrue("'" + int65 + "' != '" + (-1) + "'", int65 == (-1));
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[32]");
-        org.junit.Assert.assertNotNull(byteArray69);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[32]");
-        org.junit.Assert.assertNotNull(jsonParser70);
-        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 1 + "'", int72 == 1);
-        org.junit.Assert.assertEquals("'" + str73 + "' != '" + " " + "'", str73, " ");
-        org.junit.Assert.assertEquals("'" + str74 + "' != '" + " " + "'", str74, " ");
-        org.junit.Assert.assertNotNull(jsonGenerator75);
-    }
-
-    @Test
-    public void test638() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test638");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        java.io.OutputStream outputStream20 = null;
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding21 = com.fasterxml.jackson.core.JsonEncoding.UTF8;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator22 = jsonFactory18.createJsonGenerator(outputStream20, jsonEncoding21);
-        boolean boolean23 = jsonFactory18.requiresCustomCodec();
-        java.io.File file24 = null;
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding25 = com.fasterxml.jackson.core.JsonEncoding.UTF8;
-        boolean boolean26 = jsonEncoding25.isBigEndian();
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonGenerator jsonGenerator27 = jsonFactory18.createJsonGenerator(file24, jsonEncoding25);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertTrue("'" + jsonEncoding21 + "' != '" + com.fasterxml.jackson.core.JsonEncoding.UTF8 + "'", jsonEncoding21.equals(com.fasterxml.jackson.core.JsonEncoding.UTF8));
-        org.junit.Assert.assertNotNull(jsonGenerator22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + jsonEncoding25 + "' != '" + com.fasterxml.jackson.core.JsonEncoding.UTF8 + "'", jsonEncoding25.equals(com.fasterxml.jackson.core.JsonEncoding.UTF8));
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-    }
-
-    @Test
-    public void test639() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test639");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
-        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = jsonFactory19._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType charBufferType21 = com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER;
-        char[] charArray23 = new char[] { '#' };
-        bufferRecycler20.releaseCharBuffer(charBufferType21, charArray23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext28 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler25, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = null;
-        byte[] byteArray33 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser37 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, 0, inputStream30, objectCodec31, bytesToNameCanonicalizer32, byteArray33, 33, 33, false);
-        java.io.InputStream inputStream39 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer41 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer44 = bytesToNameCanonicalizer41.makeChild(false, false);
-        byte[] byteArray45 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser49 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, (int) 'a', inputStream39, objectCodec40, bytesToNameCanonicalizer44, byteArray45, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.io.IOContext iOContext51 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) iOContext28, true);
-        java.lang.Object obj52 = iOContext51.getSourceReference();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec54 = null;
-        java.io.OutputStream outputStream55 = null;
-        com.fasterxml.jackson.core.json.UTF8JsonGenerator uTF8JsonGenerator56 = new com.fasterxml.jackson.core.json.UTF8JsonGenerator(iOContext51, (-1770006982), objectCodec54, outputStream55);
-        uTF8JsonGenerator56.writeNumber((double) (-1770097854));
-        uTF8JsonGenerator56._writeFieldName("JSON");
-        org.junit.Assert.assertNotNull(version1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray11);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(bufferRecycler20);
-        org.junit.Assert.assertTrue("'" + charBufferType21 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER + "'", charBufferType21.equals(com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER));
-        org.junit.Assert.assertNotNull(charArray23);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[#]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer41);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer44);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(obj52);
-    }
-
-    @Test
-    public void test640() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test640");
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer0 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        boolean boolean1 = bytesToNameCanonicalizer0.maybeDirty();
-        int int3 = bytesToNameCanonicalizer0.calcHash(100);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext7 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler4, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream9 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer11 = null;
-        byte[] byteArray12 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser16 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext7, 0, inputStream9, objectCodec10, bytesToNameCanonicalizer11, byteArray12, 33, 33, false);
-        java.io.InputStream inputStream18 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec19 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer20 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = bytesToNameCanonicalizer20.makeChild(false, false);
-        byte[] byteArray24 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser28 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext7, (int) 'a', inputStream18, objectCodec19, bytesToNameCanonicalizer23, byteArray24, (int) (byte) 10, 33, false);
-        int int29 = bytesToNameCanonicalizer23.maxCollisionLength();
-        int[] intArray30 = com.fasterxml.jackson.core.io.CharTypes.getInputCodeComment();
-        int[] intArray32 = com.fasterxml.jackson.core.json.UTF8StreamJsonParser.growArrayBy(intArray30, 100);
-        com.fasterxml.jackson.core.sym.Name name34 = bytesToNameCanonicalizer23.findName(intArray32, (-1770097854));
-        int int36 = bytesToNameCanonicalizer0.calcHash(intArray32, 8);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer0);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
-// flaky:         org.junit.Assert.assertTrue("'" + int3 + "' != '" + (-1770204638) + "'", int3 == (-1770204638));
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer20);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer23);
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[]");
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
-        org.junit.Assert.assertNotNull(intArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(intArray30), "[-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 10, -1, -1, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1]");
-        org.junit.Assert.assertNotNull(intArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(intArray32), "[-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 10, -1, -1, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]");
-        org.junit.Assert.assertNull(name34);
-// flaky:         org.junit.Assert.assertTrue("'" + int36 + "' != '" + (-718795651) + "'", int36 == (-718795651));
-    }
-
-    @Test
-    public void test641() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test641");
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter2 = lf2SpacesIndenter0.withLinefeed("");
-        boolean boolean3 = lf2SpacesIndenter2.isInline();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
-        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray18 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray25 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory23.createParser(byteArray25);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature27 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory23.enable(feature27);
-        byte[] byteArray29 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser32 = jsonFactory28.createJsonParser(byteArray29, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonFactory9.createParser(byteArray29);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = jsonFactory9.setRootValueSeparator(" ");
-        java.io.Writer writer36 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator37 = jsonFactory35.createJsonGenerator(writer36);
-        lf2SpacesIndenter2.writeIndentation(jsonGenerator37, (int) (short) -1);
-        com.fasterxml.jackson.core.Version version40 = jsonGenerator37.version();
-        com.fasterxml.jackson.core.Version version41 = jsonGenerator37.version();
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter0);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter2);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(byteArray25);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray25), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser26);
-        org.junit.Assert.assertTrue("'" + feature27 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature27.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory28);
-        org.junit.Assert.assertNotNull(byteArray29);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser32);
-        org.junit.Assert.assertNotNull(jsonParser33);
-        org.junit.Assert.assertNotNull(jsonFactory35);
-        org.junit.Assert.assertNotNull(jsonGenerator37);
-        org.junit.Assert.assertNotNull(version40);
-        org.junit.Assert.assertNotNull(version41);
-    }
-
-    @Test
-    public void test642() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test642");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature6 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        boolean boolean7 = feature6.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory5.configure(feature6, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray12 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory10.createParser(byteArray12);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory10.setCodec(objectCodec14);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature16 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        boolean boolean17 = feature16.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory15.configure(feature16, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray22 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory20.createParser(byteArray22);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature24 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory20.enable(feature24);
-        boolean boolean26 = feature24.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = jsonFactory19.enable(feature24);
-        boolean boolean28 = jsonFactory9.isEnabled(feature24);
-        boolean boolean30 = feature24.enabledIn((-1774821391));
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertTrue("'" + feature6 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature6.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertNotNull(jsonFactory15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature16.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser23);
-        org.junit.Assert.assertTrue("'" + feature24 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature24.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-        org.junit.Assert.assertNotNull(jsonFactory27);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test643() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test643");
-        com.fasterxml.jackson.core.json.DupDetector dupDetector2 = null;
-        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext3 = com.fasterxml.jackson.core.json.JsonReadContext.createRootContext((int) (short) 10, 1, dupDetector2);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext7 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler4, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream9 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer11 = null;
-        byte[] byteArray12 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser16 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext7, 0, inputStream9, objectCodec10, bytesToNameCanonicalizer11, byteArray12, 33, 33, false);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation17 = jsonReadContext3.getStartLocation((java.lang.Object) uTF8StreamJsonParser16);
-        int int18 = jsonReadContext3.getEntryCount();
-        org.junit.Assert.assertNotNull(jsonReadContext3);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonLocation17);
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
-    }
-
-    @Test
-    public void test644() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test644");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray4 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
-        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray16 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
-        java.io.OutputStream outputStream22 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
-        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray27 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser28 = jsonFactory25.createParser(byteArray27);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec29 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory25.setCodec(objectCodec29);
-        byte[] byteArray33 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser36 = jsonFactory30.createParser(byteArray33, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray39 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory37.createParser(byteArray39);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature41 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory37.enable(feature41);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory43 = jsonFactory30.enable(feature41);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler44 = jsonFactory43._getBufferRecycler();
-        java.io.OutputStream outputStream45 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator46 = jsonFactory43.createJsonGenerator(outputStream45);
-        jsonGenerator46.flush();
-        defaultPrettyPrinter1.writeObjectFieldValueSeparator(jsonGenerator46);
-        jsonGenerator46.writeRaw("ROOT");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray53 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser54 = jsonFactory51.createParser(byteArray53);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec55 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory56 = jsonFactory51.setCodec(objectCodec55);
-        byte[] byteArray59 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory56.createParser(byteArray59, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory63 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray65 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser66 = jsonFactory63.createParser(byteArray65);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature67 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory68 = jsonFactory63.enable(feature67);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory69 = jsonFactory56.enable(feature67);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler70 = jsonFactory69._getBufferRecycler();
-        java.lang.String str71 = jsonFactory69.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory72 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray74 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser75 = jsonFactory72.createParser(byteArray74);
-        com.fasterxml.jackson.core.JsonParser jsonParser76 = jsonFactory69.createParser(byteArray74);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature77 = com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory78 = jsonFactory69.disable(feature77);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator46.enable(feature77);
-        boolean boolean80 = jsonGenerator46.canWriteBinaryNatively();
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(bufferRecycler21);
-        org.junit.Assert.assertNotNull(jsonGenerator23);
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser28);
-        org.junit.Assert.assertNotNull(jsonFactory30);
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser36);
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser40);
-        org.junit.Assert.assertTrue("'" + feature41 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature41.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory42);
-        org.junit.Assert.assertNotNull(jsonFactory43);
-        org.junit.Assert.assertNotNull(bufferRecycler44);
-        org.junit.Assert.assertNotNull(jsonGenerator46);
-        org.junit.Assert.assertNotNull(byteArray53);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray53), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser54);
-        org.junit.Assert.assertNotNull(jsonFactory56);
-        org.junit.Assert.assertNotNull(byteArray59);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser66);
-        org.junit.Assert.assertTrue("'" + feature67 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature67.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory68);
-        org.junit.Assert.assertNotNull(jsonFactory69);
-        org.junit.Assert.assertNotNull(bufferRecycler70);
-        org.junit.Assert.assertEquals("'" + str71 + "' != '" + " " + "'", str71, " ");
-        org.junit.Assert.assertNotNull(byteArray74);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser75);
-        org.junit.Assert.assertNotNull(jsonParser76);
-        org.junit.Assert.assertTrue("'" + feature77 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET + "'", feature77.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET));
-        org.junit.Assert.assertNotNull(jsonFactory78);
-        org.junit.Assert.assertNotNull(jsonGenerator79);
-        org.junit.Assert.assertTrue("'" + boolean80 + "' != '" + false + "'", boolean80 == false);
-    }
-
-    @Test
-    public void test645() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test645");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        uTF8StreamJsonParser12._tokenIncomplete = false;
-        int int15 = uTF8StreamJsonParser12.getTextOffset();
-        boolean boolean16 = uTF8StreamJsonParser12.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonStreamContext jsonStreamContext17 = uTF8StreamJsonParser12.getParsingContext();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec18 = uTF8StreamJsonParser12.getCodec();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(jsonStreamContext17);
-        org.junit.Assert.assertNull(objectCodec18);
-    }
-
-    @Test
-    public void test646() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test646");
-        com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
-        java.io.InputStream inputStream1 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext2 = null;
-        java.io.InputStream inputStream3 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader11 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext2, inputStream3, byteArray6, (int) (short) 10, (int) (short) 10, false);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader15 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext0, inputStream1, byteArray6, (int) (byte) 100, 0, true);
-        boolean boolean16 = uTF32Reader15.markSupported();
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-    }
-
-    @Test
-    public void test647() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test647");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.SerializableString serializableString4 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter5 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString4);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray8 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory6.createParser(byteArray8);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory6.setCodec(objectCodec10);
-        byte[] byteArray14 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory11.createParser(byteArray14, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray20 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser21 = jsonFactory18.createParser(byteArray20);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature22 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory18.enable(feature22);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory11.enable(feature22);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = jsonFactory24._getBufferRecycler();
-        java.io.OutputStream outputStream26 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator27 = jsonFactory24.createJsonGenerator(outputStream26);
-        defaultPrettyPrinter5.writeObjectEntrySeparator(jsonGenerator27);
-        char[] charArray33 = new char[] { 'a', ' ', '#', ' ' };
-        jsonGenerator27.writeRaw(charArray33, 1, (int) (short) 0);
-        int int37 = jsonGenerator27.getHighestEscapedChar();
-        java.math.BigDecimal bigDecimal38 = null;
-        jsonGenerator27.writeNumber(bigDecimal38);
-        jsonGenerator27.writeRaw("/");
-        defaultPrettyPrinter2.writeEndObject(jsonGenerator27, 79);
-        com.fasterxml.jackson.core.FormatSchema formatSchema44 = jsonGenerator27.getSchema();
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser21);
-        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature22.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory23);
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(bufferRecycler25);
-        org.junit.Assert.assertNotNull(jsonGenerator27);
-        org.junit.Assert.assertNotNull(charArray33);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray33), "a # ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray33), "a # ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray33), "[a,  , #,  ]");
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertNull(formatSchema44);
-    }
-
-    @Test
-    public void test648() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test648");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str17 = uTF8StreamJsonParser12._getText2(jsonToken16);
-        char[] charArray18 = jsonToken16.asCharArray();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + jsonToken16 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken16.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertNull(charArray18);
-    }
-
-    @Test
-    public void test649() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test649");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        java.io.InputStream inputStream14 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec15 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer16 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = bytesToNameCanonicalizer16.makeChild(false, false);
-        byte[] byteArray20 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (int) 'a', inputStream14, objectCodec15, bytesToNameCanonicalizer19, byteArray20, (int) (byte) 10, 33, false);
-        // The following exception was thrown during execution in test generation
-        try {
-            uTF8StreamJsonParser24._reportInvalidOther(1777981781);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Invalid UTF-8 middle byte 0x69f9d955? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer16);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer19);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-    }
-
-    @Test
-    public void test650() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test650");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.isClosed();
-        int int17 = uTF8StreamJsonParser12.getValueAsInt(56320);
-        boolean boolean18 = uTF8StreamJsonParser12.isClosed();
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = uTF8StreamJsonParser12.getLastClearedToken();
-        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext20 = uTF8StreamJsonParser12.getParsingContext();
-        char[] charArray21 = uTF8StreamJsonParser12.getTextCharacters();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 56320 + "'", int17 == 56320);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(jsonToken19);
-        org.junit.Assert.assertNotNull(jsonReadContext20);
-        org.junit.Assert.assertNull(charArray21);
-    }
-
-    @Test
-    public void test651() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test651");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        java.lang.String str16 = uTF8StreamJsonParser12.getText();
-        long long17 = uTF8StreamJsonParser12.getTokenCharacterOffset();
-        boolean boolean18 = uTF8StreamJsonParser12.canReadObjectId();
-        byte[] byteArray19 = uTF8StreamJsonParser12._inputBuffer;
-        uTF8StreamJsonParser12._skipCR();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(str16);
-        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 0L + "'", long17 == 0L);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-    }
-
-    @Test
-    public void test652() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test652");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str17 = uTF8StreamJsonParser12._getText2(jsonToken16);
-        uTF8StreamJsonParser12.overrideCurrentName("ROOT");
-        // The following exception was thrown during execution in test generation
-        try {
-            java.math.BigDecimal bigDecimal20 = uTF8StreamJsonParser12.getDecimalValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 34]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + jsonToken16 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken16.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str17);
-    }
-
-    @Test
-    public void test653() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test653");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        java.io.Writer writer19 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory18.createJsonGenerator(writer19);
-        boolean boolean21 = jsonGenerator20.canWriteTypeId();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonGenerator20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-    }
-
-    @Test
-    public void test654() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test654");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        java.io.InputStream inputStream13 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray16 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.setCodec(objectCodec18);
-        byte[] byteArray22 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser25 = jsonFactory19.createParser(byteArray22, (-1), 0);
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader29 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext3, inputStream13, byteArray22, (int) (byte) -1, 2, true);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding30 = iOContext3.getEncoding();
-        com.fasterxml.jackson.core.io.SerializedString serializedString31 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.io.SerializedString serializedString32 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory33 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray35 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser36 = jsonFactory33.createParser(byteArray35);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec37 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = jsonFactory33.setCodec(objectCodec37);
-        byte[] byteArray41 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser44 = jsonFactory38.createParser(byteArray41, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory45 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray47 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory45.createParser(byteArray47);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature49 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory50 = jsonFactory45.enable(feature49);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = jsonFactory38.enable(feature49);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray54 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser55 = jsonFactory52.createParser(byteArray54);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature56 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory57 = jsonFactory52.enable(feature56);
-        byte[] byteArray58 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser61 = jsonFactory57.createJsonParser(byteArray58, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory38.createParser(byteArray58);
-        int int64 = serializedString32.appendUnquotedUTF8(byteArray58, 56319);
-        byte[] byteArray65 = serializedString32.asUnquotedUTF8();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory66 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray68 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser69 = jsonFactory66.createParser(byteArray68);
-        int int71 = serializedString32.appendQuotedUTF8(byteArray68, (int) (byte) 0);
-        char[] charArray72 = serializedString32.asQuotedChars();
-        int int74 = serializedString31.appendUnquoted(charArray72, (int) (byte) 10);
-        // The following exception was thrown during execution in test generation
-        try {
-            iOContext3.releaseConcatBuffer(charArray72);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Trying to release buffer not owned by the context");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray22), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser25);
-        org.junit.Assert.assertNull(jsonEncoding30);
-        org.junit.Assert.assertNotNull(serializedString31);
-        org.junit.Assert.assertNotNull(serializedString32);
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser36);
-        org.junit.Assert.assertNotNull(jsonFactory38);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser44);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser48);
-        org.junit.Assert.assertTrue("'" + feature49 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature49.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory50);
-        org.junit.Assert.assertNotNull(jsonFactory51);
-        org.junit.Assert.assertNotNull(byteArray54);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser55);
-        org.junit.Assert.assertTrue("'" + feature56 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature56.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory57);
-        org.junit.Assert.assertNotNull(byteArray58);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser61);
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + (-1) + "'", int64 == (-1));
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[32]");
-        org.junit.Assert.assertNotNull(byteArray68);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray68), "[32]");
-        org.junit.Assert.assertNotNull(jsonParser69);
-        org.junit.Assert.assertTrue("'" + int71 + "' != '" + 1 + "'", int71 == 1);
-        org.junit.Assert.assertNotNull(charArray72);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray72), " ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray72), " ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray72), "[ ]");
-        org.junit.Assert.assertTrue("'" + int74 + "' != '" + (-1) + "'", int74 == (-1));
-    }
-
-    @Test
-    public void test655() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test655");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType byteBufferType20 = com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version22 = jsonFactory21.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature23 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory21.configure(feature23, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory26 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray28 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory26.createParser(byteArray28);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature30 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory26.enable(feature30);
-        byte[] byteArray32 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser35 = jsonFactory31.createJsonParser(byteArray32, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory21.createParser(byteArray32, (int) (short) 10, 2);
-        bufferRecycler19.releaseByteBuffer(byteBufferType20, byteArray32);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer40 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler19);
-        java.lang.String str41 = textBuffer40.toString();
-        char[] charArray42 = textBuffer40.getTextBuffer();
-        char[] charArray43 = textBuffer40.emptyAndGetCurrentSegment();
-        char[] charArray44 = textBuffer40.getCurrentSegment();
-        char[] charArray45 = textBuffer40.getCurrentSegment();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertTrue("'" + byteBufferType20 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER + "'", byteBufferType20.equals(com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER));
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature23.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature30.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(byteArray32);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser35);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "" + "'", str41, "");
-        org.junit.Assert.assertNull(charArray42);
-        org.junit.Assert.assertNotNull(charArray43);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray43), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray43), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray43), "[\000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000]");
-        org.junit.Assert.assertNotNull(charArray44);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray44), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray44), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray44), "[\000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000]");
-        org.junit.Assert.assertNotNull(charArray45);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray45), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray45), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray45), "[\000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000]");
-    }
-
-    @Test
-    public void test656() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test656");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.isClosed();
-        int int17 = uTF8StreamJsonParser12.getValueAsInt(56320);
-        boolean boolean18 = uTF8StreamJsonParser12.isClosed();
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = uTF8StreamJsonParser12.getLastClearedToken();
-        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext20 = uTF8StreamJsonParser12.getParsingContext();
-        long long22 = uTF8StreamJsonParser12.getValueAsLong((long) 79);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 56320 + "'", int17 == 56320);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(jsonToken19);
-        org.junit.Assert.assertNotNull(jsonReadContext20);
-        org.junit.Assert.assertTrue("'" + long22 + "' != '" + 79L + "'", long22 == 79L);
-    }
-
-    @Test
-    public void test657() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test657");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        java.io.InputStream inputStream14 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec15 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer16 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = bytesToNameCanonicalizer16.makeChild(false, false);
-        byte[] byteArray20 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (int) 'a', inputStream14, objectCodec15, bytesToNameCanonicalizer19, byteArray20, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream25 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken26 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray27 = jsonToken26.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream30 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, inputStream25, byteArray27, 56319, (int) (short) 100);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler31 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext34 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler31, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream36 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec37 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer38 = null;
-        byte[] byteArray39 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser43 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext34, 0, inputStream36, objectCodec37, bytesToNameCanonicalizer38, byteArray39, 33, 33, false);
-        java.io.InputStream inputStream45 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec46 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer47 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer50 = bytesToNameCanonicalizer47.makeChild(false, false);
-        byte[] byteArray51 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser55 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext34, (int) 'a', inputStream45, objectCodec46, bytesToNameCanonicalizer50, byteArray51, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream56 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken57 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray58 = jsonToken57.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream61 = new com.fasterxml.jackson.core.io.MergedStream(iOContext34, inputStream56, byteArray58, 56319, (int) (short) 100);
-        mergedStream61.mark(32);
-        com.fasterxml.jackson.core.JsonToken jsonToken64 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray65 = jsonToken64.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream68 = new com.fasterxml.jackson.core.io.MergedStream(iOContext3, (java.io.InputStream) mergedStream61, byteArray65, (int) (byte) 100, 1777981781);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding69 = iOContext3.getEncoding();
-        java.lang.Object obj70 = iOContext3.getSourceReference();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer16);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer19);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken26 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken26.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray27);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray27), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertNotNull(byteArray39);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray39), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer47);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer50);
-        org.junit.Assert.assertNotNull(byteArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray51), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken57 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken57.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray58);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray58), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + jsonToken64 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken64.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertNull(jsonEncoding69);
-        org.junit.Assert.assertEquals("'" + obj70 + "' != '" + '4' + "'", obj70, '4');
-    }
-
-    @Test
-    public void test658() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test658");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation18 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) uTF8StreamJsonParser12, (long) 33, (int) (byte) -1, (int) (short) 1);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec23 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.setCodec(objectCodec23);
-        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory24.createJsonParser("hi!");
-        java.lang.Object obj27 = jsonParser26.getEmbeddedObject();
-        com.fasterxml.jackson.core.JsonParser.Feature feature28 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES;
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonParser26.disable(feature28);
-        com.fasterxml.jackson.core.JsonParser jsonParser31 = uTF8StreamJsonParser12.configure(feature28, false);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation36 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) jsonParser31, 1L, (long) (short) 100, 0, (int) (short) 10);
-        // The following exception was thrown during execution in test generation
-        try {
-            byte[] byteArray37 = jsonParser31.getBinaryValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(jsonParser26);
-        org.junit.Assert.assertNull(obj27);
-        org.junit.Assert.assertTrue("'" + feature28 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES + "'", feature28.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES));
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertNotNull(jsonParser31);
-    }
-
-    @Test
-    public void test659() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test659");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
-        com.fasterxml.jackson.core.SerializableString serializableString5 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter6 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString5);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray9 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory7.createParser(byteArray9);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec11 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory7.setCodec(objectCodec11);
-        byte[] byteArray15 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser(byteArray15, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray21 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory19.createParser(byteArray21);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature23 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory19.enable(feature23);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory12.enable(feature23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler26 = jsonFactory25._getBufferRecycler();
-        java.io.OutputStream outputStream27 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory25.createJsonGenerator(outputStream27);
-        defaultPrettyPrinter6.writeObjectEntrySeparator(jsonGenerator28);
-        com.fasterxml.jackson.core.SerializableString serializableString30 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter31 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString30);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter32 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter31);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        defaultPrettyPrinter31.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
-        defaultPrettyPrinter6.indentObjectsWith((com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter) lf2SpacesIndenter33);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter36 = defaultPrettyPrinter6.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter lf2SpacesIndenter37 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.instance;
-        com.fasterxml.jackson.core.SerializableString serializableString38 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter39 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString38);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter40 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter39);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray43 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser44 = jsonFactory41.createParser(byteArray43);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.setCodec(objectCodec45);
-        byte[] byteArray49 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonFactory46.createParser(byteArray49, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray55 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory46.enable(feature57);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler60 = jsonFactory59._getBufferRecycler();
-        java.io.OutputStream outputStream61 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator62 = jsonFactory59.createJsonGenerator(outputStream61);
-        jsonGenerator62.flush();
-        defaultPrettyPrinter40.beforeObjectEntries(jsonGenerator62);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec65 = jsonGenerator62.getCodec();
-        com.fasterxml.jackson.core.Version version66 = jsonGenerator62.version();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator68 = jsonGenerator62.setHighestNonEscapedChar((int) (short) 0);
-        lf2SpacesIndenter37.writeIndentation(jsonGenerator62, 79);
-        jsonGenerator62.writeNumberField(" ", (long) (byte) 10);
-        defaultPrettyPrinter6.beforeArrayValues(jsonGenerator62);
-        com.fasterxml.jackson.core.FormatSchema formatSchema75 = null;
-        boolean boolean76 = jsonGenerator62.canUseSchema(formatSchema75);
-        defaultPrettyPrinter2.writeRootValueSeparator(jsonGenerator62);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator79 = jsonGenerator62.setFeatureMask((int) (byte) -1);
-        com.fasterxml.jackson.core.PrettyPrinter prettyPrinter80 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator81 = jsonGenerator79.setPrettyPrinter(prettyPrinter80);
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertNotNull(byteArray15);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray15), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser18);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature23.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(bufferRecycler26);
-        org.junit.Assert.assertNotNull(jsonGenerator28);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter33);
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter36);
-        org.junit.Assert.assertNotNull(lf2SpacesIndenter37);
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser44);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser52);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser56);
-        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory58);
-        org.junit.Assert.assertNotNull(jsonFactory59);
-        org.junit.Assert.assertNotNull(bufferRecycler60);
-        org.junit.Assert.assertNotNull(jsonGenerator62);
-        org.junit.Assert.assertNull(objectCodec65);
-        org.junit.Assert.assertNotNull(version66);
-        org.junit.Assert.assertNotNull(jsonGenerator68);
-        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator79);
-        org.junit.Assert.assertNotNull(jsonGenerator81);
-    }
-
-    @Test
-    public void test660() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test660");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory5.createJsonParser("hi!");
-        boolean boolean8 = jsonFactory5.requiresCustomCodec();
-        java.io.Writer writer9 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator10 = jsonFactory5.createGenerator(writer9);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler11 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext14 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler11, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream16 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec17 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer18 = null;
-        byte[] byteArray19 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser23 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext14, 0, inputStream16, objectCodec17, bytesToNameCanonicalizer18, byteArray19, 33, 33, false);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding24 = null;
-        iOContext14.setEncoding(jsonEncoding24);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler27 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext30 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler27, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream32 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec33 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer34 = null;
-        byte[] byteArray35 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser39 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext30, 0, inputStream32, objectCodec33, bytesToNameCanonicalizer34, byteArray35, 33, 33, false);
-        java.io.InputStream inputStream41 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec42 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer43 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer46 = bytesToNameCanonicalizer43.makeChild(false, false);
-        byte[] byteArray47 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser51 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext30, (int) 'a', inputStream41, objectCodec42, bytesToNameCanonicalizer46, byteArray47, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream52 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken53 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray54 = jsonToken53.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream57 = new com.fasterxml.jackson.core.io.MergedStream(iOContext30, inputStream52, byteArray54, 56319, (int) (short) 100);
-        boolean boolean58 = mergedStream57.markSupported();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec59 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer60 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        int int62 = bytesToNameCanonicalizer60.calcHash((int) (short) 1);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler63 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext66 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler63, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream68 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec69 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer70 = null;
-        byte[] byteArray71 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser75 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext66, 0, inputStream68, objectCodec69, bytesToNameCanonicalizer70, byteArray71, 33, 33, false);
-        java.io.InputStream inputStream76 = null;
-        byte[] byteArray77 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader81 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext66, inputStream76, byteArray77, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser85 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext14, (-1770028298), (java.io.InputStream) mergedStream57, objectCodec59, bytesToNameCanonicalizer60, byteArray77, 3, 0, false);
-        mergedStream57.reset();
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser87 = jsonFactory5.createJsonParser((java.io.InputStream) mergedStream57);
-            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
-        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator10);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray35), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer43);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer46);
-        org.junit.Assert.assertNotNull(byteArray47);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray47), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken53 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken53.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray54);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray54), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer60);
-// flaky:         org.junit.Assert.assertTrue("'" + int62 + "' != '" + (-1770207451) + "'", int62 == (-1770207451));
-        org.junit.Assert.assertNotNull(byteArray71);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray71), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray77);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray77), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-    }
-
-    @Test
-    public void test661() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test661");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str17 = uTF8StreamJsonParser12._getText2(jsonToken16);
-        boolean boolean18 = jsonToken16.isStructStart();
-        java.lang.String str19 = jsonToken16.asString();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + jsonToken16 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken16.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(str19);
-    }
-
-    @Test
-    public void test662() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test662");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str17 = uTF8StreamJsonParser12._getText2(jsonToken16);
-        com.fasterxml.jackson.core.JsonToken jsonToken18 = uTF8StreamJsonParser12.getLastClearedToken();
-        java.io.Writer writer19 = null;
-        int int20 = uTF8StreamJsonParser12.releaseBuffered(writer19);
-        long long22 = uTF8StreamJsonParser12.getValueAsLong((-1770116376L));
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + jsonToken16 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken16.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertNull(jsonToken18);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
-        org.junit.Assert.assertTrue("'" + long22 + "' != '" + (-1770116376L) + "'", long22 == (-1770116376L));
-    }
-
-    @Test
-    public void test663() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test663");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
-        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = jsonFactory19._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType charBufferType21 = com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER;
-        char[] charArray23 = new char[] { '#' };
-        bufferRecycler20.releaseCharBuffer(charBufferType21, charArray23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext28 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler25, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = null;
-        byte[] byteArray33 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser37 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, 0, inputStream30, objectCodec31, bytesToNameCanonicalizer32, byteArray33, 33, 33, false);
-        java.io.InputStream inputStream39 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer41 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer44 = bytesToNameCanonicalizer41.makeChild(false, false);
-        byte[] byteArray45 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser49 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, (int) 'a', inputStream39, objectCodec40, bytesToNameCanonicalizer44, byteArray45, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.io.IOContext iOContext51 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) iOContext28, true);
-        java.lang.Object obj52 = iOContext51.getSourceReference();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec54 = null;
-        java.io.OutputStream outputStream55 = null;
-        com.fasterxml.jackson.core.json.UTF8JsonGenerator uTF8JsonGenerator56 = new com.fasterxml.jackson.core.json.UTF8JsonGenerator(iOContext51, (-1770006982), objectCodec54, outputStream55);
-        uTF8JsonGenerator56.writeNumber(0.0f);
-        uTF8JsonGenerator56.writeNull();
-        int int60 = uTF8JsonGenerator56._outputTail;
-        org.junit.Assert.assertNotNull(version1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray11);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(bufferRecycler20);
-        org.junit.Assert.assertTrue("'" + charBufferType21 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER + "'", charBufferType21.equals(com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER));
-        org.junit.Assert.assertNotNull(charArray23);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[#]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer41);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer44);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(obj52);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 10 + "'", int60 == 10);
-    }
-
-    @Test
-    public void test664() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test664");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.FormatSchema formatSchema4 = null;
-        boolean boolean5 = jsonParser3.canUseSchema(formatSchema4);
-        double double6 = jsonParser3.getValueAsDouble();
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonParser3.skipChildren();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        jsonParser3.setCodec(objectCodec8);
-        jsonParser3.clearCurrentToken();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + double6 + "' != '" + 0.0d + "'", double6 == 0.0d);
-        org.junit.Assert.assertNotNull(jsonParser7);
-    }
-
-    @Test
-    public void test665() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test665");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray6 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory4.createParser(byteArray6);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec8 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory4.setCodec(objectCodec8);
-        byte[] byteArray12 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory9.createParser(byteArray12, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray18 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory16.createParser(byteArray18);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory16.enable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory9.enable(feature20);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = jsonFactory22._getBufferRecycler();
-        java.io.OutputStream outputStream24 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator25 = jsonFactory22.createJsonGenerator(outputStream24);
-        jsonGenerator25.flush();
-        defaultPrettyPrinter2.beforeObjectEntries(jsonGenerator25);
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator29 = jsonGenerator25.setFeatureMask(35);
-        boolean boolean30 = jsonGenerator25.canOmitFields();
-        int int31 = jsonGenerator25.getHighestEscapedChar();
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(bufferRecycler23);
-        org.junit.Assert.assertNotNull(jsonGenerator25);
-        org.junit.Assert.assertNotNull(jsonGenerator29);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-    }
-
-    @Test
-    public void test666() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test666");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType byteBufferType20 = com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version22 = jsonFactory21.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature23 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory21.configure(feature23, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory26 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray28 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory26.createParser(byteArray28);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature30 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory26.enable(feature30);
-        byte[] byteArray32 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser35 = jsonFactory31.createJsonParser(byteArray32, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory21.createParser(byteArray32, (int) (short) 10, 2);
-        bufferRecycler19.releaseByteBuffer(byteBufferType20, byteArray32);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler40 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext43 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler40, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream45 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec46 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer47 = null;
-        byte[] byteArray48 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser52 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext43, 0, inputStream45, objectCodec46, bytesToNameCanonicalizer47, byteArray48, 33, 33, false);
-        uTF8StreamJsonParser52._tokenIncomplete = false;
-        int int55 = uTF8StreamJsonParser52.getTextOffset();
-        double double57 = uTF8StreamJsonParser52.getValueAsDouble((double) 'a');
-        com.fasterxml.jackson.core.io.IOContext iOContext59 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler19, (java.lang.Object) 'a', false);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertTrue("'" + byteBufferType20 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER + "'", byteBufferType20.equals(com.fasterxml.jackson.core.util.BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER));
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertTrue("'" + feature23 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature23.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory25);
-        org.junit.Assert.assertNotNull(byteArray28);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature30.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(byteArray32);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser35);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
-        org.junit.Assert.assertTrue("'" + double57 + "' != '" + 97.0d + "'", double57 == 97.0d);
-    }
-
-    @Test
-    public void test667() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test667");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        uTF8StreamJsonParser12._tokenIncomplete = false;
-        int int15 = uTF8StreamJsonParser12.getTextOffset();
-        // The following exception was thrown during execution in test generation
-        try {
-            int int16 = uTF8StreamJsonParser12.getIntValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not numeric, can not use numeric value accessors? at [Source: 4; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-    }
-
-    @Test
-    public void test668() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test668");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding13 = null;
-        iOContext3.setEncoding(jsonEncoding13);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler16 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext19 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler16, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream21 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer23 = null;
-        byte[] byteArray24 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser28 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, 0, inputStream21, objectCodec22, bytesToNameCanonicalizer23, byteArray24, 33, 33, false);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer35 = bytesToNameCanonicalizer32.makeChild(false, false);
-        byte[] byteArray36 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser40 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext19, (int) 'a', inputStream30, objectCodec31, bytesToNameCanonicalizer35, byteArray36, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream41 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken42 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray43 = jsonToken42.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream46 = new com.fasterxml.jackson.core.io.MergedStream(iOContext19, inputStream41, byteArray43, 56319, (int) (short) 100);
-        boolean boolean47 = mergedStream46.markSupported();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec48 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer49 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        int int51 = bytesToNameCanonicalizer49.calcHash((int) (short) 1);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler52 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext55 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler52, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream57 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec58 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer59 = null;
-        byte[] byteArray60 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser64 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext55, 0, inputStream57, objectCodec58, bytesToNameCanonicalizer59, byteArray60, 33, 33, false);
-        java.io.InputStream inputStream65 = null;
-        byte[] byteArray66 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader70 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext55, inputStream65, byteArray66, (int) ' ', 100, true);
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser74 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, (-1770028298), (java.io.InputStream) mergedStream46, objectCodec48, bytesToNameCanonicalizer49, byteArray66, 3, 0, false);
-        mergedStream46.reset();
-        mergedStream46.reset();
-        // The following exception was thrown during execution in test generation
-        try {
-            long long78 = mergedStream46.skip((long) 0);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Trying to release buffer not owned by the context");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer32);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer35);
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken42 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken42.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray43);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray43), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer49);
-// flaky:         org.junit.Assert.assertTrue("'" + int51 + "' != '" + (-1770194353) + "'", int51 == (-1770194353));
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(byteArray66);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-    }
-
-    @Test
-    public void test669() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test669");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec19 = jsonFactory5.getCodec();
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes20 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory5.setCharacterEscapes(characterEscapes20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray24 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser25 = jsonFactory22.createParser(byteArray24);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec26 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = jsonFactory22.setCodec(objectCodec26);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature28 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean30 = feature28.enabledIn((int) '#');
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory27.enable(feature28);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature32 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        boolean boolean33 = jsonFactory27.isEnabled(feature32);
-        boolean boolean34 = feature32.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = jsonFactory5.enable(feature32);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNull(objectCodec19);
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser25);
-        org.junit.Assert.assertNotNull(jsonFactory27);
-        org.junit.Assert.assertTrue("'" + feature28 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature28.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertTrue("'" + feature32 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature32.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(jsonFactory35);
-    }
-
-    @Test
-    public void test670() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test670");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonParser3.skipChildren();
-        int int6 = jsonParser4.getValueAsInt((int) ' ');
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonParser4);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 32 + "'", int6 == 32);
-    }
-
-    @Test
-    public void test671() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test671");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.Version version1 = jsonFactory0.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.enable(feature9);
-        byte[] byteArray11 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray11, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory0.createParser(byteArray11, (int) (short) 10, 2);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory0.setCharacterEscapes(characterEscapes18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = jsonFactory19._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType charBufferType21 = com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER;
-        char[] charArray23 = new char[] { '#' };
-        bufferRecycler20.releaseCharBuffer(charBufferType21, charArray23);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler25 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext28 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler25, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream30 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer32 = null;
-        byte[] byteArray33 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser37 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, 0, inputStream30, objectCodec31, bytesToNameCanonicalizer32, byteArray33, 33, 33, false);
-        java.io.InputStream inputStream39 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer41 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer44 = bytesToNameCanonicalizer41.makeChild(false, false);
-        byte[] byteArray45 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser49 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext28, (int) 'a', inputStream39, objectCodec40, bytesToNameCanonicalizer44, byteArray45, (int) (byte) 10, 33, false);
-        com.fasterxml.jackson.core.io.IOContext iOContext51 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler20, (java.lang.Object) iOContext28, true);
-        java.lang.Object obj52 = iOContext51.getSourceReference();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec54 = null;
-        java.io.OutputStream outputStream55 = null;
-        com.fasterxml.jackson.core.json.UTF8JsonGenerator uTF8JsonGenerator56 = new com.fasterxml.jackson.core.json.UTF8JsonGenerator(iOContext51, (-1770006982), objectCodec54, outputStream55);
-        uTF8JsonGenerator56.writeNumber(0.0f);
-        uTF8JsonGenerator56.writeNull();
-// flaky:         uTF8JsonGenerator56.writeNumber(100.0f);
-        org.junit.Assert.assertNotNull(version1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray11);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray11), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(bufferRecycler20);
-        org.junit.Assert.assertTrue("'" + charBufferType21 + "' != '" + com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER + "'", charBufferType21.equals(com.fasterxml.jackson.core.util.BufferRecycler.CharBufferType.NAME_COPY_BUFFER));
-        org.junit.Assert.assertNotNull(charArray23);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[#]");
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer41);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer44);
-        org.junit.Assert.assertNotNull(byteArray45);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray45), "[]");
-        org.junit.Assert.assertNotNull(obj52);
-    }
-
-    @Test
-    public void test672() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test672");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        int int16 = uTF8StreamJsonParser12._decodeCharForError((int) '#');
-        com.fasterxml.jackson.core.JsonToken jsonToken17 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray18 = jsonToken17.asByteArray();
-        java.lang.String str19 = uTF8StreamJsonParser12._getText2(jsonToken17);
-        boolean boolean20 = jsonToken17.isNumeric();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 35 + "'", int16 == 35);
-        org.junit.Assert.assertTrue("'" + jsonToken17 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken17.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "false" + "'", str19, "false");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-    }
-
-    @Test
-    public void test673() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test673");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray4 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser5 = jsonFactory2.createParser(byteArray4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory2.setCodec(objectCodec6);
-        byte[] byteArray10 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory7.createParser(byteArray10, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray16 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory14.createParser(byteArray16);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory14.enable(feature18);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory7.enable(feature18);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = jsonFactory20._getBufferRecycler();
-        java.io.OutputStream outputStream22 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory20.createJsonGenerator(outputStream22);
-        defaultPrettyPrinter1.writeObjectEntrySeparator(jsonGenerator23);
-        jsonGenerator23.writeString("");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray29 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory27.createParser(byteArray29);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = jsonFactory27.setCodec(objectCodec31);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature33 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean35 = feature33.enabledIn((int) '#');
-        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory32.enable(feature33);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature37 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        boolean boolean38 = jsonFactory32.isEnabled(feature37);
-        boolean boolean39 = feature37.enabledByDefault();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator40 = jsonGenerator23.disable(feature37);
-        jsonGenerator23.writeFieldName("UTF-16LE");
-        jsonGenerator23.writeNumber((short) 100);
-        org.junit.Assert.assertNotNull(byteArray4);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray4), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray16), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(bufferRecycler21);
-        org.junit.Assert.assertNotNull(jsonGenerator23);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertNotNull(jsonFactory32);
-        org.junit.Assert.assertTrue("'" + feature33 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature33.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
-        org.junit.Assert.assertNotNull(jsonFactory36);
-        org.junit.Assert.assertTrue("'" + feature37 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature37.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator40);
-    }
-
-    @Test
-    public void test674() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test674");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        java.lang.String str16 = uTF8StreamJsonParser12.getText();
-        boolean boolean17 = uTF8StreamJsonParser12.loadMore();
-        long long18 = uTF8StreamJsonParser12.getTokenCharacterOffset();
-        char[] charArray19 = uTF8StreamJsonParser12.getTextCharacters();
-        boolean boolean20 = uTF8StreamJsonParser12.hasCurrentToken();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler21 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext24 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler21, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream26 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec27 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer28 = null;
-        byte[] byteArray29 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser33 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext24, 0, inputStream26, objectCodec27, bytesToNameCanonicalizer28, byteArray29, 33, 33, false);
-        java.io.InputStream inputStream35 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec36 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer37 = com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer.createRoot();
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer40 = bytesToNameCanonicalizer37.makeChild(false, false);
-        byte[] byteArray41 = new byte[] {};
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser45 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext24, (int) 'a', inputStream35, objectCodec36, bytesToNameCanonicalizer40, byteArray41, (int) (byte) 10, 33, false);
-        java.io.InputStream inputStream46 = null;
-        com.fasterxml.jackson.core.JsonToken jsonToken47 = com.fasterxml.jackson.core.JsonToken.VALUE_FALSE;
-        byte[] byteArray48 = jsonToken47.asByteArray();
-        com.fasterxml.jackson.core.io.MergedStream mergedStream51 = new com.fasterxml.jackson.core.io.MergedStream(iOContext24, inputStream46, byteArray48, 56319, (int) (short) 100);
-        boolean boolean52 = mergedStream51.markSupported();
-        uTF8StreamJsonParser12._inputStream = mergedStream51;
-        // The following exception was thrown during execution in test generation
-        try {
-            uTF8StreamJsonParser12._closeInput();
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Trying to release buffer not owned by the context");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(str16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertTrue("'" + long18 + "' != '" + 0L + "'", long18 == 0L);
-        org.junit.Assert.assertNull(charArray19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(byteArray29);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray29), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer37);
-        org.junit.Assert.assertNotNull(bytesToNameCanonicalizer40);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[]");
-        org.junit.Assert.assertTrue("'" + jsonToken47 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_FALSE + "'", jsonToken47.equals(com.fasterxml.jackson.core.JsonToken.VALUE_FALSE));
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[102, 97, 108, 115, 101]");
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-    }
-
-    @Test
-    public void test675() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test675");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.Version version13 = uTF8StreamJsonParser12.version();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = uTF8StreamJsonParser12.getCodec();
-        boolean boolean15 = uTF8StreamJsonParser12.hasTextCharacters();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(version13);
-        org.junit.Assert.assertNull(objectCodec14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-    }
-
-    @Test
-    public void test676() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test676");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream6 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec7 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer8 = null;
-        byte[] byteArray9 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser13 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext4, 0, inputStream6, objectCodec7, bytesToNameCanonicalizer8, byteArray9, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken14 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str15 = uTF8StreamJsonParser13._getText2(jsonToken14);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation19 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) uTF8StreamJsonParser13, (long) 33, (int) (byte) -1, (int) (short) 1);
-        int int20 = jsonLocation19.getLineNr();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException21 = new com.fasterxml.jackson.core.JsonParseException("/", jsonLocation19);
-        long long22 = jsonLocation19.getByteOffset();
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken14 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken14.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
-        org.junit.Assert.assertTrue("'" + long22 + "' != '" + (-1L) + "'", long22 == (-1L));
-    }
-
-    @Test
-    public void test677() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test677");
-        com.fasterxml.jackson.core.SerializableString serializableString0 = null;
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(serializableString0);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1);
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = defaultPrettyPrinter2.createInstance();
-        com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter4 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter2);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray7 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser8 = jsonFactory5.createParser(byteArray7);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec9 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory5.setCodec(objectCodec9);
-        byte[] byteArray13 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonFactory10.createParser(byteArray13, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray19 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory17.createParser(byteArray19);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature21 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory17.enable(feature21);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory10.enable(feature21);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler24 = jsonFactory23._getBufferRecycler();
-        java.io.OutputStream outputStream25 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator26 = jsonFactory23.createJsonGenerator(outputStream25);
-        jsonGenerator26.flush();
-        defaultPrettyPrinter4.writeEndArray(jsonGenerator26, (int) '4');
-        boolean boolean30 = jsonGenerator26.canWriteTypeId();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator32 = jsonGenerator26.setFeatureMask((-56219));
-        // The following exception was thrown during execution in test generation
-        try {
-            jsonGenerator32.writeEndObject();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonGenerationException; message: Current context not an object but ROOT");
-        } catch (com.fasterxml.jackson.core.JsonGenerationException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(defaultPrettyPrinter3);
-        org.junit.Assert.assertNotNull(byteArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray7), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser8);
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertTrue("'" + feature21 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature21.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(jsonFactory23);
-        org.junit.Assert.assertNotNull(bufferRecycler24);
-        org.junit.Assert.assertNotNull(jsonGenerator26);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator32);
-    }
-
-    @Test
-    public void test678() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test678");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        java.lang.String str16 = uTF8StreamJsonParser12.getText();
-        boolean boolean17 = uTF8StreamJsonParser12.loadMore();
-        long long18 = uTF8StreamJsonParser12.getTokenCharacterOffset();
-        char[] charArray19 = uTF8StreamJsonParser12.getTextCharacters();
-        boolean boolean20 = uTF8StreamJsonParser12.hasCurrentToken();
-        int int22 = uTF8StreamJsonParser12.getValueAsInt(0);
-        boolean boolean23 = uTF8StreamJsonParser12._bufferRecyclable;
-        com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext24 = uTF8StreamJsonParser12.getParsingContext();
-        int int25 = uTF8StreamJsonParser12.getTextOffset();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(str16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertTrue("'" + long18 + "' != '" + 0L + "'", long18 == 0L);
-        org.junit.Assert.assertNull(charArray19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(jsonReadContext24);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-    }
-
-    @Test
-    public void test679() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test679");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler12 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext15 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler12, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream17 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec18 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer19 = null;
-        byte[] byteArray20 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser24 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext15, 0, inputStream17, objectCodec18, bytesToNameCanonicalizer19, byteArray20, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken25 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str26 = uTF8StreamJsonParser24._getText2(jsonToken25);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation30 = new com.fasterxml.jackson.core.JsonLocation((java.lang.Object) uTF8StreamJsonParser24, (long) 33, (int) (byte) -1, (int) (short) 1);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray33 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser34 = jsonFactory31.createParser(byteArray33);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec35 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory31.setCodec(objectCodec35);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory36.createJsonParser("hi!");
-        java.lang.Object obj39 = jsonParser38.getEmbeddedObject();
-        com.fasterxml.jackson.core.JsonParser.Feature feature40 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES;
-        com.fasterxml.jackson.core.JsonParser jsonParser41 = jsonParser38.disable(feature40);
-        com.fasterxml.jackson.core.JsonParser jsonParser43 = uTF8StreamJsonParser24.configure(feature40, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = jsonFactory5.disable(feature40);
-        java.net.URL uRL45 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser46 = jsonFactory5.createJsonParser(uRL45);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken25 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken25.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str26);
-        org.junit.Assert.assertNotNull(byteArray33);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray33), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser34);
-        org.junit.Assert.assertNotNull(jsonFactory36);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNull(obj39);
-        org.junit.Assert.assertTrue("'" + feature40 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES + "'", feature40.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES));
-        org.junit.Assert.assertNotNull(jsonParser41);
-        org.junit.Assert.assertNotNull(jsonParser43);
-        org.junit.Assert.assertNotNull(jsonFactory44);
-    }
-
-    @Test
-    public void test680() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test680");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.loadMore();
-        com.fasterxml.jackson.core.JsonToken jsonToken16 = uTF8StreamJsonParser12.getLastClearedToken();
-        java.lang.String str17 = uTF8StreamJsonParser12.getText();
-        boolean boolean18 = uTF8StreamJsonParser12.hasCurrentToken();
-        java.lang.String str20 = uTF8StreamJsonParser12.getValueAsString("false");
-        java.lang.String str21 = uTF8StreamJsonParser12.getCurrentName();
-        com.fasterxml.jackson.core.Version version22 = uTF8StreamJsonParser12.version();
-        boolean boolean23 = uTF8StreamJsonParser12._tokenIncomplete;
-        int int24 = uTF8StreamJsonParser12.getTokenLineNr();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(jsonToken16);
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "false" + "'", str20, "false");
-        org.junit.Assert.assertNull(str21);
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 1 + "'", int24 == 1);
-    }
-
-    @Test
-    public void test681() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test681");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream5 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer7 = null;
-        byte[] byteArray8 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser12 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext3, 0, inputStream5, objectCodec6, bytesToNameCanonicalizer7, byteArray8, 33, 33, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken13 = com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
-        java.lang.String str14 = uTF8StreamJsonParser12._getText2(jsonToken13);
-        boolean boolean15 = uTF8StreamJsonParser12.hasCurrentToken();
-        com.fasterxml.jackson.core.Version version16 = uTF8StreamJsonParser12.version();
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + jsonToken13 + "' != '" + com.fasterxml.jackson.core.JsonToken.FIELD_NAME + "'", jsonToken13.equals(com.fasterxml.jackson.core.JsonToken.FIELD_NAME));
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(version16);
-    }
-
-    @Test
-    public void test682() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test682");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        com.fasterxml.jackson.core.JsonGenerator.Feature feature6 = com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
-        boolean boolean7 = feature6.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory5.configure(feature6, false);
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator10 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory5.setOutputDecorator(outputDecorator10);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator12 = jsonFactory11.getInputDecorator();
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertTrue("'" + feature6 + "' != '" + com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS + "'", feature6.equals(com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS));
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNull(inputDecorator12);
-    }
-
-    @Test
-    public void test683() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test683");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray2 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser3 = jsonFactory0.createParser(byteArray2);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.setCodec(objectCodec4);
-        byte[] byteArray8 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser11 = jsonFactory5.createParser(byteArray8, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray14 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory12.enable(feature16);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory5.enable(feature16);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler19 = jsonFactory18._getBufferRecycler();
-        java.lang.String str20 = jsonFactory18.getRootValueSeparator();
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes21 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory18.setCharacterEscapes(characterEscapes21);
-        com.fasterxml.jackson.core.io.IOContext iOContext23 = null;
-        java.io.InputStream inputStream24 = null;
-        byte[] byteArray25 = null;
-        com.fasterxml.jackson.core.io.UTF32Reader uTF32Reader29 = new com.fasterxml.jackson.core.io.UTF32Reader(iOContext23, inputStream24, byteArray25, (-1), (int) 'a', false);
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory22.createParser((java.io.Reader) uTF32Reader29);
-        com.fasterxml.jackson.core.JsonParser.Feature feature31 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = jsonFactory22.enable(feature31);
-        com.fasterxml.jackson.core.io.SerializedString serializedString33 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray36 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser37 = jsonFactory34.createParser(byteArray36);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec38 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory39 = jsonFactory34.setCodec(objectCodec38);
-        byte[] byteArray42 = new byte[] { (byte) 100, (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser45 = jsonFactory39.createParser(byteArray42, (-1), 0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray48 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser49 = jsonFactory46.createParser(byteArray48);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature50 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = jsonFactory46.enable(feature50);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory52 = jsonFactory39.enable(feature50);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray55 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser56 = jsonFactory53.createParser(byteArray55);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature57 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = jsonFactory53.enable(feature57);
-        byte[] byteArray59 = com.fasterxml.jackson.core.json.UTF8JsonGenerator.HEX_CHARS;
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory58.createJsonParser(byteArray59, 2, 10);
-        com.fasterxml.jackson.core.JsonParser jsonParser63 = jsonFactory39.createParser(byteArray59);
-        int int65 = serializedString33.appendUnquotedUTF8(byteArray59, 56319);
-        byte[] byteArray66 = serializedString33.asUnquotedUTF8();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory67 = new com.fasterxml.jackson.core.JsonFactory();
-        byte[] byteArray69 = new byte[] { (byte) 100 };
-        com.fasterxml.jackson.core.JsonParser jsonParser70 = jsonFactory67.createParser(byteArray69);
-        int int72 = serializedString33.appendQuotedUTF8(byteArray69, (int) (byte) 0);
-        java.lang.String str73 = serializedString33.getValue();
-        java.lang.String str74 = serializedString33.getValue();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler75 = null;
-        com.fasterxml.jackson.core.io.IOContext iOContext78 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler75, (java.lang.Object) '4', true);
-        java.io.InputStream inputStream80 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec81 = null;
-        com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer bytesToNameCanonicalizer82 = null;
-        byte[] byteArray83 = com.fasterxml.jackson.core.io.CharTypes.copyHexBytes();
-        com.fasterxml.jackson.core.json.UTF8StreamJsonParser uTF8StreamJsonParser87 = new com.fasterxml.jackson.core.json.UTF8StreamJsonParser(iOContext78, 0, inputStream80, objectCodec81, bytesToNameCanonicalizer82, byteArray83, 33, 33, false);
-        long long89 = uTF8StreamJsonParser87.getValueAsLong(100L);
-        uTF8StreamJsonParser87.clearCurrentToken();
-        com.fasterxml.jackson.core.util.ByteArrayBuilder byteArrayBuilder91 = uTF8StreamJsonParser87._getByteArrayBuilder();
-        int int92 = serializedString33.writeUnquotedUTF8((java.io.OutputStream) byteArrayBuilder91);
-        com.fasterxml.jackson.core.JsonEncoding jsonEncoding93 = com.fasterxml.jackson.core.JsonEncoding.UTF8;
-        boolean boolean94 = jsonEncoding93.isBigEndian();
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator95 = jsonFactory22.createJsonGenerator((java.io.OutputStream) byteArrayBuilder91, jsonEncoding93);
-        org.junit.Assert.assertNotNull(byteArray2);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray2), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser3);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser11);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(bufferRecycler19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + " " + "'", str20, " ");
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertTrue("'" + feature31 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS + "'", feature31.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS));
-        org.junit.Assert.assertNotNull(jsonFactory32);
-        org.junit.Assert.assertNotNull(serializedString33);
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser37);
-        org.junit.Assert.assertNotNull(jsonFactory39);
-        org.junit.Assert.assertNotNull(byteArray42);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray42), "[100, 100]");
-        org.junit.Assert.assertNotNull(jsonParser45);
-        org.junit.Assert.assertNotNull(byteArray48);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray48), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser49);
-        org.junit.Assert.assertTrue("'" + feature50 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature50.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory51);
-        org.junit.Assert.assertNotNull(jsonFactory52);
-        org.junit.Assert.assertNotNull(byteArray55);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray55), "[100]");
-        org.junit.Assert.assertNotNull(jsonParser56);
-        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature57.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory58);
-        org.junit.Assert.assertNotNull(byteArray59);
-// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray59), "[48, 49, 32, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertNotNull(jsonParser63);
-        org.junit.Assert.assertTrue("'" + int65 + "' != '" + (-1) + "'", int65 == (-1));
-        org.junit.Assert.assertNotNull(byteArray66);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray66), "[32]");
-        org.junit.Assert.assertNotNull(byteArray69);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray69), "[32]");
-        org.junit.Assert.assertNotNull(jsonParser70);
-        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 1 + "'", int72 == 1);
-        org.junit.Assert.assertEquals("'" + str73 + "' != '" + " " + "'", str73, " ");
-        org.junit.Assert.assertEquals("'" + str74 + "' != '" + " " + "'", str74, " ");
-        org.junit.Assert.assertNotNull(byteArray83);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray83), "[48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70]");
-        org.junit.Assert.assertTrue("'" + long89 + "' != '" + 100L + "'", long89 == 100L);
-        org.junit.Assert.assertNotNull(byteArrayBuilder91);
-        org.junit.Assert.assertTrue("'" + int92 + "' != '" + 1 + "'", int92 == 1);
-        org.junit.Assert.assertTrue("'" + jsonEncoding93 + "' != '" + com.fasterxml.jackson.core.JsonEncoding.UTF8 + "'", jsonEncoding93.equals(com.fasterxml.jackson.core.JsonEncoding.UTF8));
-        org.junit.Assert.assertTrue("'" + boolean94 + "' != '" + false + "'", boolean94 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator95);
     }
 }

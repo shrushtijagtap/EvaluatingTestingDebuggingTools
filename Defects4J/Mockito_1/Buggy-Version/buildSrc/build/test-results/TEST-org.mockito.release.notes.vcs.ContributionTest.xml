@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.notes.vcs.ContributionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-01T20:52:55" hostname="Shrushtis-MacBook-Air.local" time="0.09">
+<testsuite name="org.mockito.release.notes.vcs.ContributionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-02T17:28:23" hostname="Shrushtis-MacBook-Air.local" time="0.012">
   <properties/>
-  <testcase name="accumulates commits" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.02"/>
-  <testcase name="can be sorted by number of commits" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.064"/>
-  <testcase name="has String representation" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.001"/>
+  <testcase name="accumulates commits" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.007"/>
+  <testcase name="can be sorted by number of commits" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.005"/>
+  <testcase name="has String representation" classname="org.mockito.release.notes.vcs.ContributionTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -99,5 +99,36 @@ public class RegressionTest0 {
         org.junit.Assert.assertNull(inputId57);
         org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
     }
+
+    @Test
+    public void test2() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test2");
+        com.google.javascript.jscomp.ErrorFormat errorFormat0 = com.google.javascript.jscomp.ErrorFormat.LEGACY;
+        com.google.javascript.jscomp.Compiler compiler1 = new com.google.javascript.jscomp.Compiler();
+        compiler1.setProgress((double) 53, "L ");
+        com.google.common.base.Supplier<java.lang.String> strSupplier5 = compiler1.getUniqueNameIdSupplier();
+        java.io.PrintStream printStream6 = null;
+        com.google.common.base.Predicate<java.lang.String> strPredicate7 = null;
+        com.google.javascript.jscomp.GlobalNamespace.Tracker tracker8 = new com.google.javascript.jscomp.GlobalNamespace.Tracker((com.google.javascript.jscomp.AbstractCompiler) compiler1, printStream6, strPredicate7);
+        double double9 = compiler1.getProgress();
+        com.google.javascript.jscomp.CheckLevel checkLevel10 = com.google.javascript.jscomp.CheckLevel.WARNING;
+        com.google.javascript.jscomp.CheckSideEffects checkSideEffects12 = new com.google.javascript.jscomp.CheckSideEffects((com.google.javascript.jscomp.AbstractCompiler) compiler1, checkLevel10, true);
+        com.google.javascript.jscomp.Denormalize denormalize13 = new com.google.javascript.jscomp.Denormalize((com.google.javascript.jscomp.AbstractCompiler) compiler1);
+        com.google.javascript.jscomp.CleanupPasses.MemoizedScopeCleanupPass memoizedScopeCleanupPass14 = new com.google.javascript.jscomp.CleanupPasses.MemoizedScopeCleanupPass((com.google.javascript.jscomp.AbstractCompiler) compiler1);
+        com.google.javascript.jscomp.MessageFormatter messageFormatter16 = errorFormat0.toFormatter((com.google.javascript.jscomp.SourceExcerptProvider) compiler1, true);
+        // The following exception was thrown during execution in test generation
+        try {
+            com.google.javascript.jscomp.RemoveUnusedVars removeUnusedVars20 = new com.google.javascript.jscomp.RemoveUnusedVars((com.google.javascript.jscomp.AbstractCompiler) compiler1, false, false, true);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(errorFormat0);
+        org.junit.Assert.assertNotNull(strSupplier5);
+        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 1.0d + "'", double9 == 1.0d);
+        org.junit.Assert.assertTrue("'" + checkLevel10 + "' != '" + com.google.javascript.jscomp.CheckLevel.WARNING + "'", checkLevel10.equals(com.google.javascript.jscomp.CheckLevel.WARNING));
+        org.junit.Assert.assertNotNull(messageFormatter16);
+    }
 }
 

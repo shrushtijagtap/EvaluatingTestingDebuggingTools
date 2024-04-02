@@ -17657,4 +17657,158 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(commandLine29);
         org.junit.Assert.assertNotNull(collection30);
     }
+
+    @Test
+    public void test298() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test298");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String str14 = commandLine10.getOptionValue('4', "org.apache.commons.cli.MissingArgumentException: arg");
+        commandLine10.addArg("org.apache.commons.cli.MissingOptionException: ");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "org.apache.commons.cli.MissingArgumentException: arg" + "'", str14, "org.apache.commons.cli.MissingArgumentException: arg");
+    }
+
+    @Test
+    public void test299() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test299");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options26, strArray50);
+        java.lang.String[] strArray55 = commandLine54.getArgs();
+        java.lang.Object obj57 = commandLine54.getOptionObject(" ");
+        org.apache.commons.cli.OptionBuilder optionBuilder58 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) commandLine54);
+        java.lang.String[] strArray59 = commandLine54.getArgs();
+        boolean boolean61 = commandLine54.hasOption('4');
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNotNull(strArray55);
+        org.junit.Assert.assertNull(obj57);
+        org.junit.Assert.assertNotNull(optionBuilder58);
+        org.junit.Assert.assertNotNull(strArray59);
+        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
+    }
+
+    @Test
+    public void test300() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test300");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        boolean boolean71 = options37.hasOption("[ Options: [ short {} ] [ long {} ]");
+        boolean boolean73 = options37.hasOption("");
+        org.apache.commons.cli.Option option75 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean76 = option75.isRequired();
+        java.lang.String str77 = option75.getValue();
+        option75.setType((java.lang.Object) 0);
+        java.lang.String str80 = option75.toString();
+        org.apache.commons.cli.Options options81 = options37.addOption(option75);
+        org.apache.commons.cli.OptionBuilder optionBuilder82 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options37);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
+        org.junit.Assert.assertNotNull(option75);
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
+        org.junit.Assert.assertNull(str77);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str80, "[ option:   :: null :: 0 ]");
+        org.junit.Assert.assertNotNull(options81);
+        org.junit.Assert.assertNotNull(optionBuilder82);
+    }
 }

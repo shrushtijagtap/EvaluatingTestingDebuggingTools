@@ -7932,28 +7932,6 @@ public class RegressionTest9 {
         int int6 = cSVRecord5.size();
         int int7 = cSVRecord5.size();
         java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
-        java.lang.String str10 = cSVRecord5.get(0);
-        long long11 = cSVRecord5.getRecordNumber();
-        java.util.Iterator<java.lang.String> strItor12 = cSVRecord5.iterator();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
-        org.junit.Assert.assertNotNull(strSpliterator8);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 10L + "'", long11 == 10L);
-        org.junit.Assert.assertNotNull(strItor12);
-    }
-
-    @Test
-    public void test4788() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4788");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        int int6 = cSVRecord5.size();
-        int int7 = cSVRecord5.size();
-        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
         boolean boolean9 = cSVRecord5.isConsistent();
         long long10 = cSVRecord5.getRecordNumber();
         boolean boolean12 = cSVRecord5.isMapped("hi!");
@@ -7974,9 +7952,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4789() throws Throwable {
+    public void test4788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4789");
+            System.out.format("%n%s%n", "RegressionTest9.test4788");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8001,9 +7979,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4790() throws Throwable {
+    public void test4789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4790");
+            System.out.format("%n%s%n", "RegressionTest9.test4789");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8027,9 +8005,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4791() throws Throwable {
+    public void test4790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4791");
+            System.out.format("%n%s%n", "RegressionTest9.test4790");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8053,9 +8031,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4792() throws Throwable {
+    public void test4791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4792");
+            System.out.format("%n%s%n", "RegressionTest9.test4791");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8084,9 +8062,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4793() throws Throwable {
+    public void test4792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4793");
+            System.out.format("%n%s%n", "RegressionTest9.test4792");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8096,9 +8074,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4794() throws Throwable {
+    public void test4793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4794");
+            System.out.format("%n%s%n", "RegressionTest9.test4793");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8117,9 +8095,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4795() throws Throwable {
+    public void test4794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4795");
+            System.out.format("%n%s%n", "RegressionTest9.test4794");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8136,9 +8114,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4796() throws Throwable {
+    public void test4795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4796");
+            System.out.format("%n%s%n", "RegressionTest9.test4795");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8158,9 +8136,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4797() throws Throwable {
+    public void test4796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4797");
+            System.out.format("%n%s%n", "RegressionTest9.test4796");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8178,9 +8156,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4798() throws Throwable {
+    public void test4797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4798");
+            System.out.format("%n%s%n", "RegressionTest9.test4797");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8197,9 +8175,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4799() throws Throwable {
+    public void test4798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4799");
+            System.out.format("%n%s%n", "RegressionTest9.test4798");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8224,9 +8202,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4800() throws Throwable {
+    public void test4799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4800");
+            System.out.format("%n%s%n", "RegressionTest9.test4799");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8250,43 +8228,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4801() throws Throwable {
+    public void test4800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4801");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.lang.String[] strArray6 = cSVRecord5.values();
-        java.lang.String str7 = cSVRecord5.getComment();
-        java.lang.String str8 = cSVRecord5.getComment();
-        boolean boolean10 = cSVRecord5.isSet("");
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strArray6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-    }
-
-    @Test
-    public void test4802() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4802");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.lang.String[] strArray6 = cSVRecord5.values();
-        java.util.Map<java.lang.String, java.lang.Integer> strMap7 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord10 = new org.apache.commons.csv.CSVRecord(strArray6, strMap7, "hi!", (long) 10);
-        long long11 = cSVRecord10.getRecordNumber();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strArray6);
-        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 10L + "'", long11 == 10L);
-    }
-
-    @Test
-    public void test4803() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4803");
+            System.out.format("%n%s%n", "RegressionTest9.test4800");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8305,9 +8249,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4804() throws Throwable {
+    public void test4801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4804");
+            System.out.format("%n%s%n", "RegressionTest9.test4801");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8323,9 +8267,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4805() throws Throwable {
+    public void test4802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4805");
+            System.out.format("%n%s%n", "RegressionTest9.test4802");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8352,9 +8296,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4806() throws Throwable {
+    public void test4803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4806");
+            System.out.format("%n%s%n", "RegressionTest9.test4803");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8372,9 +8316,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4807() throws Throwable {
+    public void test4804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4807");
+            System.out.format("%n%s%n", "RegressionTest9.test4804");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8395,9 +8339,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4808() throws Throwable {
+    public void test4805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4808");
+            System.out.format("%n%s%n", "RegressionTest9.test4805");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8426,9 +8370,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4809() throws Throwable {
+    public void test4806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4809");
+            System.out.format("%n%s%n", "RegressionTest9.test4806");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8450,9 +8394,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4810() throws Throwable {
+    public void test4807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4810");
+            System.out.format("%n%s%n", "RegressionTest9.test4807");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8466,9 +8410,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4811() throws Throwable {
+    public void test4808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4811");
+            System.out.format("%n%s%n", "RegressionTest9.test4808");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8488,9 +8432,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4812() throws Throwable {
+    public void test4809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4812");
+            System.out.format("%n%s%n", "RegressionTest9.test4809");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8517,9 +8461,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4813() throws Throwable {
+    public void test4810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4813");
+            System.out.format("%n%s%n", "RegressionTest9.test4810");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8531,25 +8475,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4814() throws Throwable {
+    public void test4811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4814");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        int int6 = cSVRecord5.size();
-        java.lang.String str8 = cSVRecord5.get(0);
-        boolean boolean9 = cSVRecord5.isConsistent();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
-    }
-
-    @Test
-    public void test4815() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4815");
+            System.out.format("%n%s%n", "RegressionTest9.test4811");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8570,9 +8498,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4816() throws Throwable {
+    public void test4812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4816");
+            System.out.format("%n%s%n", "RegressionTest9.test4812");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8595,9 +8523,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4817() throws Throwable {
+    public void test4813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4817");
+            System.out.format("%n%s%n", "RegressionTest9.test4813");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8632,9 +8560,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4818() throws Throwable {
+    public void test4814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4818");
+            System.out.format("%n%s%n", "RegressionTest9.test4814");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8653,9 +8581,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4819() throws Throwable {
+    public void test4815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4819");
+            System.out.format("%n%s%n", "RegressionTest9.test4815");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8676,9 +8604,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4820() throws Throwable {
+    public void test4816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4820");
+            System.out.format("%n%s%n", "RegressionTest9.test4816");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8696,9 +8624,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4821() throws Throwable {
+    public void test4817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4821");
+            System.out.format("%n%s%n", "RegressionTest9.test4817");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8733,9 +8661,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4822() throws Throwable {
+    public void test4818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4822");
+            System.out.format("%n%s%n", "RegressionTest9.test4818");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8762,9 +8690,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4823() throws Throwable {
+    public void test4819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4823");
+            System.out.format("%n%s%n", "RegressionTest9.test4819");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) 1);
@@ -8773,9 +8701,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4824() throws Throwable {
+    public void test4820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4824");
+            System.out.format("%n%s%n", "RegressionTest9.test4820");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8794,9 +8722,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4825() throws Throwable {
+    public void test4821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4825");
+            System.out.format("%n%s%n", "RegressionTest9.test4821");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8824,9 +8752,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4826() throws Throwable {
+    public void test4822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4826");
+            System.out.format("%n%s%n", "RegressionTest9.test4822");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8848,9 +8776,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4827() throws Throwable {
+    public void test4823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4827");
+            System.out.format("%n%s%n", "RegressionTest9.test4823");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8871,9 +8799,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4828() throws Throwable {
+    public void test4824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4828");
+            System.out.format("%n%s%n", "RegressionTest9.test4824");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8895,9 +8823,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4829() throws Throwable {
+    public void test4825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4829");
+            System.out.format("%n%s%n", "RegressionTest9.test4825");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8919,9 +8847,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4830() throws Throwable {
+    public void test4826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4830");
+            System.out.format("%n%s%n", "RegressionTest9.test4826");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -8944,9 +8872,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4831() throws Throwable {
+    public void test4827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4831");
+            System.out.format("%n%s%n", "RegressionTest9.test4827");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -8967,9 +8895,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4832() throws Throwable {
+    public void test4828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4832");
+            System.out.format("%n%s%n", "RegressionTest9.test4828");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9004,9 +8932,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4833() throws Throwable {
+    public void test4829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4833");
+            System.out.format("%n%s%n", "RegressionTest9.test4829");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9035,9 +8963,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4834() throws Throwable {
+    public void test4830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4834");
+            System.out.format("%n%s%n", "RegressionTest9.test4830");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9059,9 +8987,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4835() throws Throwable {
+    public void test4831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4835");
+            System.out.format("%n%s%n", "RegressionTest9.test4831");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9077,29 +9005,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4836() throws Throwable {
+    public void test4832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4836");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
-        java.lang.String[] strArray10 = cSVRecord9.values();
-        java.lang.String str11 = cSVRecord9.getComment();
-        boolean boolean13 = cSVRecord9.isSet("hi!");
-        long long14 = cSVRecord9.getRecordNumber();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + long14 + "' != '" + (-1L) + "'", long14 == (-1L));
-    }
-
-    @Test
-    public void test4837() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4837");
+            System.out.format("%n%s%n", "RegressionTest9.test4832");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9115,9 +9023,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4838() throws Throwable {
+    public void test4833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4838");
+            System.out.format("%n%s%n", "RegressionTest9.test4833");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9138,9 +9046,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4839() throws Throwable {
+    public void test4834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4839");
+            System.out.format("%n%s%n", "RegressionTest9.test4834");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9154,9 +9062,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4840() throws Throwable {
+    public void test4835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4840");
+            System.out.format("%n%s%n", "RegressionTest9.test4835");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9183,9 +9091,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4841() throws Throwable {
+    public void test4836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4841");
+            System.out.format("%n%s%n", "RegressionTest9.test4836");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9199,9 +9107,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4842() throws Throwable {
+    public void test4837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4842");
+            System.out.format("%n%s%n", "RegressionTest9.test4837");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9225,9 +9133,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4843() throws Throwable {
+    public void test4838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4843");
+            System.out.format("%n%s%n", "RegressionTest9.test4838");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9253,9 +9161,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4844() throws Throwable {
+    public void test4839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4844");
+            System.out.format("%n%s%n", "RegressionTest9.test4839");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9278,9 +9186,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4845() throws Throwable {
+    public void test4840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4845");
+            System.out.format("%n%s%n", "RegressionTest9.test4840");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -9299,9 +9207,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4846() throws Throwable {
+    public void test4841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4846");
+            System.out.format("%n%s%n", "RegressionTest9.test4841");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9322,9 +9230,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4847() throws Throwable {
+    public void test4842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4847");
+            System.out.format("%n%s%n", "RegressionTest9.test4842");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9345,9 +9253,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4848() throws Throwable {
+    public void test4843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4848");
+            System.out.format("%n%s%n", "RegressionTest9.test4843");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -9365,9 +9273,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4849() throws Throwable {
+    public void test4844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4849");
+            System.out.format("%n%s%n", "RegressionTest9.test4844");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9400,9 +9308,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4850() throws Throwable {
+    public void test4845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4850");
+            System.out.format("%n%s%n", "RegressionTest9.test4845");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9431,9 +9339,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4851() throws Throwable {
+    public void test4846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4851");
+            System.out.format("%n%s%n", "RegressionTest9.test4846");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9459,9 +9367,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4852() throws Throwable {
+    public void test4847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4852");
+            System.out.format("%n%s%n", "RegressionTest9.test4847");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) '#');
@@ -9477,9 +9385,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4853() throws Throwable {
+    public void test4848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4853");
+            System.out.format("%n%s%n", "RegressionTest9.test4848");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9508,9 +9416,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4854() throws Throwable {
+    public void test4849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4854");
+            System.out.format("%n%s%n", "RegressionTest9.test4849");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9549,9 +9457,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4855() throws Throwable {
+    public void test4850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4855");
+            System.out.format("%n%s%n", "RegressionTest9.test4850");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9569,25 +9477,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4856() throws Throwable {
+    public void test4851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4856");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
-        java.lang.String[] strArray10 = cSVRecord9.values();
-        java.util.Spliterator<java.lang.String> strSpliterator11 = cSVRecord9.spliterator();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertNotNull(strSpliterator11);
-    }
-
-    @Test
-    public void test4857() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4857");
+            System.out.format("%n%s%n", "RegressionTest9.test4851");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9615,9 +9507,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4858() throws Throwable {
+    public void test4852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4858");
+            System.out.format("%n%s%n", "RegressionTest9.test4852");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9641,9 +9533,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4859() throws Throwable {
+    public void test4853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4859");
+            System.out.format("%n%s%n", "RegressionTest9.test4853");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9667,9 +9559,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4860() throws Throwable {
+    public void test4854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4860");
+            System.out.format("%n%s%n", "RegressionTest9.test4854");
         java.lang.String[] strArray0 = new java.lang.String[] {};
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", 0L);
@@ -9683,9 +9575,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4861() throws Throwable {
+    public void test4855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4861");
+            System.out.format("%n%s%n", "RegressionTest9.test4855");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9708,9 +9600,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4862() throws Throwable {
+    public void test4856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4862");
+            System.out.format("%n%s%n", "RegressionTest9.test4856");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9724,9 +9616,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4863() throws Throwable {
+    public void test4857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4863");
+            System.out.format("%n%s%n", "RegressionTest9.test4857");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9742,9 +9634,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4864() throws Throwable {
+    public void test4858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4864");
+            System.out.format("%n%s%n", "RegressionTest9.test4858");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9773,9 +9665,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4865() throws Throwable {
+    public void test4859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4865");
+            System.out.format("%n%s%n", "RegressionTest9.test4859");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9806,9 +9698,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4866() throws Throwable {
+    public void test4860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4866");
+            System.out.format("%n%s%n", "RegressionTest9.test4860");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9832,9 +9724,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4867() throws Throwable {
+    public void test4861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4867");
+            System.out.format("%n%s%n", "RegressionTest9.test4861");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9865,9 +9757,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4868() throws Throwable {
+    public void test4862() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4868");
+            System.out.format("%n%s%n", "RegressionTest9.test4862");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9889,9 +9781,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4869() throws Throwable {
+    public void test4863() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4869");
+            System.out.format("%n%s%n", "RegressionTest9.test4863");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9907,9 +9799,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4870() throws Throwable {
+    public void test4864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4870");
+            System.out.format("%n%s%n", "RegressionTest9.test4864");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9929,9 +9821,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4871() throws Throwable {
+    public void test4865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4871");
+            System.out.format("%n%s%n", "RegressionTest9.test4865");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9966,9 +9858,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4872() throws Throwable {
+    public void test4866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4872");
+            System.out.format("%n%s%n", "RegressionTest9.test4866");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -9986,9 +9878,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4873() throws Throwable {
+    public void test4867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4873");
+            System.out.format("%n%s%n", "RegressionTest9.test4867");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10009,9 +9901,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4874() throws Throwable {
+    public void test4868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4874");
+            System.out.format("%n%s%n", "RegressionTest9.test4868");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10044,9 +9936,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4875() throws Throwable {
+    public void test4869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4875");
+            System.out.format("%n%s%n", "RegressionTest9.test4869");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10068,9 +9960,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4876() throws Throwable {
+    public void test4870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4876");
+            System.out.format("%n%s%n", "RegressionTest9.test4870");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10097,9 +9989,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4877() throws Throwable {
+    public void test4871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4877");
+            System.out.format("%n%s%n", "RegressionTest9.test4871");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10117,9 +10009,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4878() throws Throwable {
+    public void test4872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4878");
+            System.out.format("%n%s%n", "RegressionTest9.test4872");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10135,9 +10027,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4879() throws Throwable {
+    public void test4873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4879");
+            System.out.format("%n%s%n", "RegressionTest9.test4873");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10163,9 +10055,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4880() throws Throwable {
+    public void test4874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4880");
+            System.out.format("%n%s%n", "RegressionTest9.test4874");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10185,9 +10077,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4881() throws Throwable {
+    public void test4875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4881");
+            System.out.format("%n%s%n", "RegressionTest9.test4875");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10210,9 +10102,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4882() throws Throwable {
+    public void test4876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4882");
+            System.out.format("%n%s%n", "RegressionTest9.test4876");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10244,9 +10136,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4883() throws Throwable {
+    public void test4877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4883");
+            System.out.format("%n%s%n", "RegressionTest9.test4877");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10264,9 +10156,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4884() throws Throwable {
+    public void test4878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4884");
+            System.out.format("%n%s%n", "RegressionTest9.test4878");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10284,9 +10176,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4885() throws Throwable {
+    public void test4879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4885");
+            System.out.format("%n%s%n", "RegressionTest9.test4879");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -10309,9 +10201,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4886() throws Throwable {
+    public void test4880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4886");
+            System.out.format("%n%s%n", "RegressionTest9.test4880");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10342,9 +10234,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4887() throws Throwable {
+    public void test4881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4887");
+            System.out.format("%n%s%n", "RegressionTest9.test4881");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10377,9 +10269,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4888() throws Throwable {
+    public void test4882() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4888");
+            System.out.format("%n%s%n", "RegressionTest9.test4882");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) (byte) 0);
@@ -10393,9 +10285,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4889() throws Throwable {
+    public void test4883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4889");
+            System.out.format("%n%s%n", "RegressionTest9.test4883");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10420,9 +10312,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4890() throws Throwable {
+    public void test4884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4890");
+            System.out.format("%n%s%n", "RegressionTest9.test4884");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10440,9 +10332,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4891() throws Throwable {
+    public void test4885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4891");
+            System.out.format("%n%s%n", "RegressionTest9.test4885");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10471,9 +10363,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4892() throws Throwable {
+    public void test4886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4892");
+            System.out.format("%n%s%n", "RegressionTest9.test4886");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -10491,9 +10383,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4893() throws Throwable {
+    public void test4887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4893");
+            System.out.format("%n%s%n", "RegressionTest9.test4887");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10509,9 +10401,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4894() throws Throwable {
+    public void test4888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4894");
+            System.out.format("%n%s%n", "RegressionTest9.test4888");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10533,9 +10425,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4895() throws Throwable {
+    public void test4889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4895");
+            System.out.format("%n%s%n", "RegressionTest9.test4889");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10553,9 +10445,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4896() throws Throwable {
+    public void test4890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4896");
+            System.out.format("%n%s%n", "RegressionTest9.test4890");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10583,9 +10475,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4897() throws Throwable {
+    public void test4891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4897");
+            System.out.format("%n%s%n", "RegressionTest9.test4891");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10601,9 +10493,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4898() throws Throwable {
+    public void test4892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4898");
+            System.out.format("%n%s%n", "RegressionTest9.test4892");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10634,9 +10526,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4899() throws Throwable {
+    public void test4893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4899");
+            System.out.format("%n%s%n", "RegressionTest9.test4893");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10652,9 +10544,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4900() throws Throwable {
+    public void test4894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4900");
+            System.out.format("%n%s%n", "RegressionTest9.test4894");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10684,9 +10576,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4901() throws Throwable {
+    public void test4895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4901");
+            System.out.format("%n%s%n", "RegressionTest9.test4895");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10708,9 +10600,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4902() throws Throwable {
+    public void test4896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4902");
+            System.out.format("%n%s%n", "RegressionTest9.test4896");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10736,9 +10628,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4903() throws Throwable {
+    public void test4897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4903");
+            System.out.format("%n%s%n", "RegressionTest9.test4897");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10754,9 +10646,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4904() throws Throwable {
+    public void test4898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4904");
+            System.out.format("%n%s%n", "RegressionTest9.test4898");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10783,9 +10675,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4905() throws Throwable {
+    public void test4899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4905");
+            System.out.format("%n%s%n", "RegressionTest9.test4899");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -10795,9 +10687,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4906() throws Throwable {
+    public void test4900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4906");
+            System.out.format("%n%s%n", "RegressionTest9.test4900");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10823,9 +10715,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4907() throws Throwable {
+    public void test4901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4907");
+            System.out.format("%n%s%n", "RegressionTest9.test4901");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10851,9 +10743,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4908() throws Throwable {
+    public void test4902() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4908");
+            System.out.format("%n%s%n", "RegressionTest9.test4902");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10878,9 +10770,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4909() throws Throwable {
+    public void test4903() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4909");
+            System.out.format("%n%s%n", "RegressionTest9.test4903");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10902,9 +10794,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4910() throws Throwable {
+    public void test4904() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4910");
+            System.out.format("%n%s%n", "RegressionTest9.test4904");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10918,9 +10810,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4911() throws Throwable {
+    public void test4905() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4911");
+            System.out.format("%n%s%n", "RegressionTest9.test4905");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) 1);
@@ -10938,9 +10830,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4912() throws Throwable {
+    public void test4906() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4912");
+            System.out.format("%n%s%n", "RegressionTest9.test4906");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10958,9 +10850,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4913() throws Throwable {
+    public void test4907() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4913");
+            System.out.format("%n%s%n", "RegressionTest9.test4907");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -10978,9 +10870,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4914() throws Throwable {
+    public void test4908() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4914");
+            System.out.format("%n%s%n", "RegressionTest9.test4908");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -10995,9 +10887,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4915() throws Throwable {
+    public void test4909() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4915");
+            System.out.format("%n%s%n", "RegressionTest9.test4909");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11027,9 +10919,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4916() throws Throwable {
+    public void test4910() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4916");
+            System.out.format("%n%s%n", "RegressionTest9.test4910");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11049,9 +10941,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4917() throws Throwable {
+    public void test4911() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4917");
+            System.out.format("%n%s%n", "RegressionTest9.test4911");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11077,9 +10969,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4918() throws Throwable {
+    public void test4912() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4918");
+            System.out.format("%n%s%n", "RegressionTest9.test4912");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11112,9 +11004,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4919() throws Throwable {
+    public void test4913() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4919");
+            System.out.format("%n%s%n", "RegressionTest9.test4913");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11139,9 +11031,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4920() throws Throwable {
+    public void test4914() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4920");
+            System.out.format("%n%s%n", "RegressionTest9.test4914");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -11166,9 +11058,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4921() throws Throwable {
+    public void test4915() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4921");
+            System.out.format("%n%s%n", "RegressionTest9.test4915");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11195,9 +11087,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4922() throws Throwable {
+    public void test4916() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4922");
+            System.out.format("%n%s%n", "RegressionTest9.test4916");
         java.lang.String[] strArray0 = new java.lang.String[] {};
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", 0L);
@@ -11216,9 +11108,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4923() throws Throwable {
+    public void test4917() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4923");
+            System.out.format("%n%s%n", "RegressionTest9.test4917");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) (short) 10);
@@ -11234,9 +11126,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4924() throws Throwable {
+    public void test4918() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4924");
+            System.out.format("%n%s%n", "RegressionTest9.test4918");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11257,9 +11149,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4925() throws Throwable {
+    public void test4919() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4925");
+            System.out.format("%n%s%n", "RegressionTest9.test4919");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11281,9 +11173,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4926() throws Throwable {
+    public void test4920() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4926");
+            System.out.format("%n%s%n", "RegressionTest9.test4920");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11301,9 +11193,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4927() throws Throwable {
+    public void test4921() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4927");
+            System.out.format("%n%s%n", "RegressionTest9.test4921");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11322,9 +11214,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4928() throws Throwable {
+    public void test4922() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4928");
+            System.out.format("%n%s%n", "RegressionTest9.test4922");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11346,9 +11238,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4929() throws Throwable {
+    public void test4923() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4929");
+            System.out.format("%n%s%n", "RegressionTest9.test4923");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11368,9 +11260,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4930() throws Throwable {
+    public void test4924() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4930");
+            System.out.format("%n%s%n", "RegressionTest9.test4924");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11400,9 +11292,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4931() throws Throwable {
+    public void test4925() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4931");
+            System.out.format("%n%s%n", "RegressionTest9.test4925");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11418,9 +11310,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4932() throws Throwable {
+    public void test4926() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4932");
+            System.out.format("%n%s%n", "RegressionTest9.test4926");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11439,9 +11331,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4933() throws Throwable {
+    public void test4927() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4933");
+            System.out.format("%n%s%n", "RegressionTest9.test4927");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11467,9 +11359,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4934() throws Throwable {
+    public void test4928() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4934");
+            System.out.format("%n%s%n", "RegressionTest9.test4928");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11495,9 +11387,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4935() throws Throwable {
+    public void test4929() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4935");
+            System.out.format("%n%s%n", "RegressionTest9.test4929");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11511,9 +11403,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4936() throws Throwable {
+    public void test4930() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4936");
+            System.out.format("%n%s%n", "RegressionTest9.test4930");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11542,9 +11434,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4937() throws Throwable {
+    public void test4931() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4937");
+            System.out.format("%n%s%n", "RegressionTest9.test4931");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11566,9 +11458,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4938() throws Throwable {
+    public void test4932() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4938");
+            System.out.format("%n%s%n", "RegressionTest9.test4932");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11589,9 +11481,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4939() throws Throwable {
+    public void test4933() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4939");
+            System.out.format("%n%s%n", "RegressionTest9.test4933");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11614,37 +11506,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4940() throws Throwable {
+    public void test4934() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4940");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        int int6 = cSVRecord5.size();
-        int int7 = cSVRecord5.size();
-        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
-        boolean boolean10 = cSVRecord5.isSet("hi!");
-        long long11 = cSVRecord5.getRecordNumber();
-        java.lang.String[] strArray12 = cSVRecord5.values();
-        java.util.Map<java.lang.String, java.lang.Integer> strMap13 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord16 = new org.apache.commons.csv.CSVRecord(strArray12, strMap13, "hi!", 0L);
-        java.lang.String str17 = cSVRecord16.getComment();
-        int int18 = cSVRecord16.size();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
-        org.junit.Assert.assertNotNull(strSpliterator8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 10L + "'", long11 == 10L);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "hi!" + "'", str17, "hi!");
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 1 + "'", int18 == 1);
-    }
-
-    @Test
-    public void test4941() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4941");
+            System.out.format("%n%s%n", "RegressionTest9.test4934");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11670,9 +11534,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4942() throws Throwable {
+    public void test4935() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4942");
+            System.out.format("%n%s%n", "RegressionTest9.test4935");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11695,9 +11559,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4943() throws Throwable {
+    public void test4936() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4943");
+            System.out.format("%n%s%n", "RegressionTest9.test4936");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11730,9 +11594,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4944() throws Throwable {
+    public void test4937() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4944");
+            System.out.format("%n%s%n", "RegressionTest9.test4937");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11752,9 +11616,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4945() throws Throwable {
+    public void test4938() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4945");
+            System.out.format("%n%s%n", "RegressionTest9.test4938");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11779,9 +11643,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4946() throws Throwable {
+    public void test4939() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4946");
+            System.out.format("%n%s%n", "RegressionTest9.test4939");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11799,31 +11663,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4947() throws Throwable {
+    public void test4940() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4947");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "", 0L);
-        java.util.Spliterator<java.lang.String> strSpliterator10 = cSVRecord9.spliterator();
-        java.lang.String str12 = cSVRecord9.get(0);
-        boolean boolean13 = cSVRecord9.isConsistent();
-        java.lang.String str14 = cSVRecord9.getComment();
-        java.lang.String[] strArray15 = cSVRecord9.values();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strSpliterator10);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertNotNull(strArray15);
-    }
-
-    @Test
-    public void test4948() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4948");
+            System.out.format("%n%s%n", "RegressionTest9.test4940");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) '#');
@@ -11841,9 +11683,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4949() throws Throwable {
+    public void test4941() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4949");
+            System.out.format("%n%s%n", "RegressionTest9.test4941");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11878,9 +11720,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4950() throws Throwable {
+    public void test4942() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4950");
+            System.out.format("%n%s%n", "RegressionTest9.test4942");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -11896,9 +11738,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4951() throws Throwable {
+    public void test4943() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4951");
+            System.out.format("%n%s%n", "RegressionTest9.test4943");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) 1);
@@ -11909,9 +11751,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4952() throws Throwable {
+    public void test4944() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4952");
+            System.out.format("%n%s%n", "RegressionTest9.test4944");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11929,9 +11771,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4953() throws Throwable {
+    public void test4945() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4953");
+            System.out.format("%n%s%n", "RegressionTest9.test4945");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -11952,9 +11794,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4954() throws Throwable {
+    public void test4946() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4954");
+            System.out.format("%n%s%n", "RegressionTest9.test4946");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -11977,9 +11819,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4955() throws Throwable {
+    public void test4947() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4955");
+            System.out.format("%n%s%n", "RegressionTest9.test4947");
         java.lang.String[] strArray0 = new java.lang.String[] {};
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", 0L);
@@ -11998,33 +11840,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4956() throws Throwable {
+    public void test4948() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4956");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
-        java.lang.String str10 = cSVRecord9.getComment();
-        java.lang.String[] strArray11 = cSVRecord9.values();
-        java.lang.String str12 = cSVRecord9.getComment();
-        java.lang.String str13 = cSVRecord9.toString();
-        java.lang.String str14 = cSVRecord9.toString();
-        java.util.Iterator<java.lang.String> strItor15 = cSVRecord9.iterator();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "hi!" + "'", str10, "hi!");
-        org.junit.Assert.assertNotNull(strArray11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "hi!" + "'", str12, "hi!");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "[]" + "'", str13, "[]");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "[]" + "'", str14, "[]");
-        org.junit.Assert.assertNotNull(strItor15);
-    }
-
-    @Test
-    public void test4957() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4957");
+            System.out.format("%n%s%n", "RegressionTest9.test4948");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12052,9 +11870,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4958() throws Throwable {
+    public void test4949() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4958");
+            System.out.format("%n%s%n", "RegressionTest9.test4949");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12074,9 +11892,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4959() throws Throwable {
+    public void test4950() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4959");
+            System.out.format("%n%s%n", "RegressionTest9.test4950");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12094,9 +11912,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4960() throws Throwable {
+    public void test4951() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4960");
+            System.out.format("%n%s%n", "RegressionTest9.test4951");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12115,9 +11933,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4961() throws Throwable {
+    public void test4952() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4961");
+            System.out.format("%n%s%n", "RegressionTest9.test4952");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12138,9 +11956,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4962() throws Throwable {
+    public void test4953() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4962");
+            System.out.format("%n%s%n", "RegressionTest9.test4953");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12171,41 +11989,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4963() throws Throwable {
+    public void test4954() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4963");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        int int6 = cSVRecord5.size();
-        int int7 = cSVRecord5.size();
-        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
-        java.util.Spliterator<java.lang.String> strSpliterator9 = cSVRecord5.spliterator();
-        boolean boolean10 = cSVRecord5.isConsistent();
-        java.util.Iterator<java.lang.String> strItor11 = cSVRecord5.iterator();
-        boolean boolean12 = cSVRecord5.isConsistent();
-        boolean boolean14 = cSVRecord5.isMapped("");
-        java.lang.String str15 = cSVRecord5.getComment();
-        java.util.Spliterator<java.lang.String> strSpliterator16 = cSVRecord5.spliterator();
-        java.util.Iterator<java.lang.String> strItor17 = cSVRecord5.iterator();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
-        org.junit.Assert.assertNotNull(strSpliterator8);
-        org.junit.Assert.assertNotNull(strSpliterator9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(strSpliterator16);
-        org.junit.Assert.assertNotNull(strItor17);
-    }
-
-    @Test
-    public void test4964() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4964");
+            System.out.format("%n%s%n", "RegressionTest9.test4954");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12232,33 +12018,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4965() throws Throwable {
+    public void test4955() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4965");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
-        java.lang.String str10 = cSVRecord9.getComment();
-        java.lang.String[] strArray11 = cSVRecord9.values();
-        java.lang.String str12 = cSVRecord9.getComment();
-        java.lang.String str13 = cSVRecord9.toString();
-        java.lang.String str14 = cSVRecord9.toString();
-        int int15 = cSVRecord9.size();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "hi!" + "'", str10, "hi!");
-        org.junit.Assert.assertNotNull(strArray11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "hi!" + "'", str12, "hi!");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "[]" + "'", str13, "[]");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "[]" + "'", str14, "[]");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 1 + "'", int15 == 1);
-    }
-
-    @Test
-    public void test4966() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4966");
+            System.out.format("%n%s%n", "RegressionTest9.test4955");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -12279,9 +12041,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4967() throws Throwable {
+    public void test4956() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4967");
+            System.out.format("%n%s%n", "RegressionTest9.test4956");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12303,9 +12065,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4968() throws Throwable {
+    public void test4957() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4968");
+            System.out.format("%n%s%n", "RegressionTest9.test4957");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12328,9 +12090,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4969() throws Throwable {
+    public void test4958() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4969");
+            System.out.format("%n%s%n", "RegressionTest9.test4958");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "hi!", (long) 'a');
@@ -12339,9 +12101,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4970() throws Throwable {
+    public void test4959() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4970");
+            System.out.format("%n%s%n", "RegressionTest9.test4959");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) 0);
@@ -12355,9 +12117,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4971() throws Throwable {
+    public void test4960() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4971");
+            System.out.format("%n%s%n", "RegressionTest9.test4960");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12375,9 +12137,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4972() throws Throwable {
+    public void test4961() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4972");
+            System.out.format("%n%s%n", "RegressionTest9.test4961");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -12393,9 +12155,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4973() throws Throwable {
+    public void test4962() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4973");
+            System.out.format("%n%s%n", "RegressionTest9.test4962");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12413,9 +12175,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4974() throws Throwable {
+    public void test4963() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4974");
+            System.out.format("%n%s%n", "RegressionTest9.test4963");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12442,9 +12204,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4975() throws Throwable {
+    public void test4964() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4975");
+            System.out.format("%n%s%n", "RegressionTest9.test4964");
         java.lang.String[] strArray0 = null;
         java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
         org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) '#');
@@ -12455,9 +12217,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4976() throws Throwable {
+    public void test4965() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4976");
+            System.out.format("%n%s%n", "RegressionTest9.test4965");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12491,9 +12253,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4977() throws Throwable {
+    public void test4966() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4977");
+            System.out.format("%n%s%n", "RegressionTest9.test4966");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12519,41 +12281,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4978() throws Throwable {
+    public void test4967() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4978");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        int int6 = cSVRecord5.size();
-        int int7 = cSVRecord5.size();
-        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
-        java.util.Spliterator<java.lang.String> strSpliterator9 = cSVRecord5.spliterator();
-        boolean boolean10 = cSVRecord5.isConsistent();
-        java.util.Iterator<java.lang.String> strItor11 = cSVRecord5.iterator();
-        java.util.Spliterator<java.lang.String> strSpliterator12 = cSVRecord5.spliterator();
-        int int13 = cSVRecord5.size();
-        boolean boolean14 = cSVRecord5.isConsistent();
-        java.lang.String str15 = cSVRecord5.getComment();
-        java.lang.String[] strArray16 = cSVRecord5.values();
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
-        org.junit.Assert.assertNotNull(strSpliterator8);
-        org.junit.Assert.assertNotNull(strSpliterator9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(strSpliterator12);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 1 + "'", int13 == 1);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(strArray16);
-    }
-
-    @Test
-    public void test4979() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4979");
+            System.out.format("%n%s%n", "RegressionTest9.test4967");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12578,9 +12308,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4980() throws Throwable {
+    public void test4968() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4980");
+            System.out.format("%n%s%n", "RegressionTest9.test4968");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12600,9 +12330,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4981() throws Throwable {
+    public void test4969() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4981");
+            System.out.format("%n%s%n", "RegressionTest9.test4969");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12632,9 +12362,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4982() throws Throwable {
+    public void test4970() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4982");
+            System.out.format("%n%s%n", "RegressionTest9.test4970");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12662,9 +12392,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4983() throws Throwable {
+    public void test4971() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4983");
+            System.out.format("%n%s%n", "RegressionTest9.test4971");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12685,9 +12415,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4984() throws Throwable {
+    public void test4972() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4984");
+            System.out.format("%n%s%n", "RegressionTest9.test4972");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12707,9 +12437,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4985() throws Throwable {
+    public void test4973() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4985");
+            System.out.format("%n%s%n", "RegressionTest9.test4973");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12743,9 +12473,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4986() throws Throwable {
+    public void test4974() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4986");
+            System.out.format("%n%s%n", "RegressionTest9.test4974");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12775,9 +12505,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4987() throws Throwable {
+    public void test4975() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4987");
+            System.out.format("%n%s%n", "RegressionTest9.test4975");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12797,29 +12527,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4988() throws Throwable {
+    public void test4976() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4988");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
-        int int6 = cSVRecord5.size();
-        java.lang.String[] strArray7 = cSVRecord5.values();
-        java.lang.String str8 = cSVRecord5.toString();
-        java.lang.String[] strArray9 = cSVRecord5.values();
-        java.util.Map<java.lang.String, java.lang.Integer> strMap10 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord13 = new org.apache.commons.csv.CSVRecord(strArray9, strMap10, "", (long) (short) 100);
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
-        org.junit.Assert.assertNotNull(strArray7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "[]" + "'", str8, "[]");
-        org.junit.Assert.assertNotNull(strArray9);
-    }
-
-    @Test
-    public void test4989() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4989");
+            System.out.format("%n%s%n", "RegressionTest9.test4976");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12846,9 +12556,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4990() throws Throwable {
+    public void test4977() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4990");
+            System.out.format("%n%s%n", "RegressionTest9.test4977");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12884,9 +12594,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4991() throws Throwable {
+    public void test4978() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4991");
+            System.out.format("%n%s%n", "RegressionTest9.test4978");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -12907,9 +12617,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4992() throws Throwable {
+    public void test4979() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4992");
+            System.out.format("%n%s%n", "RegressionTest9.test4979");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12936,9 +12646,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4993() throws Throwable {
+    public void test4980() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4993");
+            System.out.format("%n%s%n", "RegressionTest9.test4980");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12962,9 +12672,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4994() throws Throwable {
+    public void test4981() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4994");
+            System.out.format("%n%s%n", "RegressionTest9.test4981");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -12993,31 +12703,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4995() throws Throwable {
+    public void test4982() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4995");
-        java.lang.String[] strArray1 = new java.lang.String[] { "" };
-        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
-        java.util.Iterator<java.lang.String> strItor10 = cSVRecord9.iterator();
-        boolean boolean11 = cSVRecord9.isConsistent();
-        java.lang.String[] strArray12 = cSVRecord9.values();
-        int int13 = cSVRecord9.size();
-        boolean boolean15 = cSVRecord9.isMapped("hi!");
-        org.junit.Assert.assertNotNull(strArray1);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 1 + "'", int13 == 1);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-    }
-
-    @Test
-    public void test4996() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4996");
+            System.out.format("%n%s%n", "RegressionTest9.test4982");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -13054,9 +12742,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4997() throws Throwable {
+    public void test4983() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4997");
+            System.out.format("%n%s%n", "RegressionTest9.test4983");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -13088,9 +12776,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4998() throws Throwable {
+    public void test4984() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4998");
+            System.out.format("%n%s%n", "RegressionTest9.test4984");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -13108,9 +12796,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test4999() throws Throwable {
+    public void test4985() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test4999");
+            System.out.format("%n%s%n", "RegressionTest9.test4985");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
@@ -13124,9 +12812,9 @@ public class RegressionTest9 {
     }
 
     @Test
-    public void test5000() throws Throwable {
+    public void test4986() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest9.test5000");
+            System.out.format("%n%s%n", "RegressionTest9.test4986");
         java.lang.String[] strArray1 = new java.lang.String[] { "" };
         java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
         org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
@@ -13156,6 +12844,366 @@ public class RegressionTest9 {
         org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
         org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
         org.junit.Assert.assertEquals("'" + str14 + "' != '" + "[]" + "'", str14, "[]");
+    }
+
+    @Test
+    public void test4987() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4987");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
+        java.lang.String[] strArray6 = cSVRecord5.values();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap7 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord10 = new org.apache.commons.csv.CSVRecord(strArray6, strMap7, "", 0L);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str12 = cSVRecord10.get(100);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 100");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strArray6);
+    }
+
+    @Test
+    public void test4988() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4988");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        java.lang.String[] strArray6 = cSVRecord5.values();
+        java.lang.String str7 = cSVRecord5.getComment();
+        boolean boolean9 = cSVRecord5.isMapped("");
+        java.lang.String str10 = cSVRecord5.toString();
+        java.util.Spliterator<java.lang.String> strSpliterator11 = cSVRecord5.spliterator();
+        java.lang.String str12 = cSVRecord5.getComment();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strArray6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "[]" + "'", str10, "[]");
+        org.junit.Assert.assertNotNull(strSpliterator11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+    }
+
+    @Test
+    public void test4989() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4989");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        boolean boolean9 = cSVRecord5.isMapped("");
+        java.lang.String str11 = cSVRecord5.get(0);
+        java.lang.String str12 = cSVRecord5.getComment();
+        boolean boolean14 = cSVRecord5.isSet("hi!");
+        boolean boolean16 = cSVRecord5.isSet("");
+        int int17 = cSVRecord5.size();
+        java.util.Spliterator<java.lang.String> strSpliterator18 = cSVRecord5.spliterator();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 1 + "'", int17 == 1);
+        org.junit.Assert.assertNotNull(strSpliterator18);
+    }
+
+    @Test
+    public void test4990() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4990");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        boolean boolean9 = cSVRecord5.isMapped("");
+        java.lang.String str11 = cSVRecord5.get(0);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str13 = cSVRecord5.get("");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: No header mapping was specified, the record values can't be accessed by name");
+        } catch (java.lang.IllegalStateException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+    }
+
+    @Test
+    public void test4991() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4991");
+        java.lang.String[] strArray0 = null;
+        java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) (short) 10);
+        boolean boolean6 = cSVRecord4.isMapped("");
+        java.lang.String str7 = cSVRecord4.toString();
+        long long8 = cSVRecord4.getRecordNumber();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str10 = cSVRecord4.get("");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: No header mapping was specified, the record values can't be accessed by name");
+        } catch (java.lang.IllegalStateException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "[]" + "'", str7, "[]");
+        org.junit.Assert.assertTrue("'" + long8 + "' != '" + 10L + "'", long8 == 10L);
+    }
+
+    @Test
+    public void test4992() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4992");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
+        java.util.Iterator<java.lang.String> strItor10 = cSVRecord9.iterator();
+        long long11 = cSVRecord9.getRecordNumber();
+        java.lang.Class<?> wildcardClass12 = cSVRecord9.getClass();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strItor10);
+        org.junit.Assert.assertTrue("'" + long11 + "' != '" + (-1L) + "'", long11 == (-1L));
+        org.junit.Assert.assertNotNull(wildcardClass12);
+    }
+
+    @Test
+    public void test4993() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4993");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", 0L);
+        java.lang.String[] strArray6 = cSVRecord5.values();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap7 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord10 = new org.apache.commons.csv.CSVRecord(strArray6, strMap7, "", 0L);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap11 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord14 = new org.apache.commons.csv.CSVRecord(strArray6, strMap11, "hi!", (long) (-1));
+        java.util.Map<java.lang.String, java.lang.Integer> strMap15 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord18 = new org.apache.commons.csv.CSVRecord(strArray6, strMap15, "", (long) 0);
+        java.lang.String[] strArray19 = cSVRecord18.values();
+        int int20 = cSVRecord18.size();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strArray6);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 1 + "'", int20 == 1);
+    }
+
+    @Test
+    public void test4994() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4994");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap6 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord9 = new org.apache.commons.csv.CSVRecord(strArray1, strMap6, "hi!", (long) (byte) -1);
+        java.lang.String[] strArray10 = cSVRecord9.values();
+        java.lang.String str11 = cSVRecord9.getComment();
+        int int12 = cSVRecord9.size();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str14 = cSVRecord9.get((int) '4');
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 52");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 1 + "'", int12 == 1);
+    }
+
+    @Test
+    public void test4995() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4995");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        java.lang.String[] strArray6 = cSVRecord5.values();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap7 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord10 = new org.apache.commons.csv.CSVRecord(strArray6, strMap7, "hi!", (long) 10);
+        java.util.Iterator<java.lang.String> strItor11 = cSVRecord10.iterator();
+        boolean boolean13 = cSVRecord10.isMapped("hi!");
+        java.util.Iterator<java.lang.String> strItor14 = cSVRecord10.iterator();
+        java.util.Iterator<java.lang.String> strItor15 = cSVRecord10.iterator();
+        int int16 = cSVRecord10.size();
+        long long17 = cSVRecord10.getRecordNumber();
+        java.util.Iterator<java.lang.String> strItor18 = cSVRecord10.iterator();
+        java.lang.Class<?> wildcardClass19 = cSVRecord10.getClass();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertNotNull(strArray6);
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(strItor14);
+        org.junit.Assert.assertNotNull(strItor15);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 1 + "'", int16 == 1);
+        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 10L + "'", long17 == 10L);
+        org.junit.Assert.assertNotNull(strItor18);
+        org.junit.Assert.assertNotNull(wildcardClass19);
+    }
+
+    @Test
+    public void test4996() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4996");
+        java.lang.String[] strArray0 = null;
+        java.util.Map<java.lang.String, java.lang.Integer> strMap1 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord4 = new org.apache.commons.csv.CSVRecord(strArray0, strMap1, "", (long) '#');
+        java.lang.String str5 = cSVRecord4.toString();
+        long long6 = cSVRecord4.getRecordNumber();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str8 = cSVRecord4.get(0);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 0");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "[]" + "'", str5, "[]");
+        org.junit.Assert.assertTrue("'" + long6 + "' != '" + 35L + "'", long6 == 35L);
+    }
+
+    @Test
+    public void test4997() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4997");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
+        java.lang.String str10 = cSVRecord5.get(0);
+        long long11 = cSVRecord5.getRecordNumber();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str13 = cSVRecord5.get((int) (byte) 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 10");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertNotNull(strSpliterator8);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 10L + "'", long11 == 10L);
+    }
+
+    @Test
+    public void test4998() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4998");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
+        java.util.Spliterator<java.lang.String> strSpliterator9 = cSVRecord5.spliterator();
+        boolean boolean10 = cSVRecord5.isConsistent();
+        java.util.Iterator<java.lang.String> strItor11 = cSVRecord5.iterator();
+        java.util.Spliterator<java.lang.String> strSpliterator12 = cSVRecord5.spliterator();
+        boolean boolean14 = cSVRecord5.isMapped("hi!");
+        boolean boolean16 = cSVRecord5.isSet("hi!");
+        java.lang.String str17 = cSVRecord5.toString();
+        java.lang.String str18 = cSVRecord5.getComment();
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertNotNull(strSpliterator8);
+        org.junit.Assert.assertNotNull(strSpliterator9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(strSpliterator12);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "[]" + "'", str17, "[]");
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+    }
+
+    @Test
+    public void test4999() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test4999");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
+        boolean boolean10 = cSVRecord5.isSet("hi!");
+        long long11 = cSVRecord5.getRecordNumber();
+        java.lang.String[] strArray12 = cSVRecord5.values();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap13 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord16 = new org.apache.commons.csv.CSVRecord(strArray12, strMap13, "", 10L);
+        long long17 = cSVRecord16.getRecordNumber();
+        java.lang.String[] strArray18 = cSVRecord16.values();
+        boolean boolean20 = cSVRecord16.isMapped("hi!");
+        int int21 = cSVRecord16.size();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str23 = cSVRecord16.get((int) (short) -1);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: -1");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertNotNull(strSpliterator8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 10L + "'", long11 == 10L);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertTrue("'" + long17 + "' != '" + 10L + "'", long17 == 10L);
+        org.junit.Assert.assertNotNull(strArray18);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
+    }
+
+    @Test
+    public void test5000() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest9.test5000");
+        java.lang.String[] strArray1 = new java.lang.String[] { "" };
+        java.util.Map<java.lang.String, java.lang.Integer> strMap2 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord5 = new org.apache.commons.csv.CSVRecord(strArray1, strMap2, "", (long) 10);
+        int int6 = cSVRecord5.size();
+        int int7 = cSVRecord5.size();
+        java.util.Spliterator<java.lang.String> strSpliterator8 = cSVRecord5.spliterator();
+        java.util.Spliterator<java.lang.String> strSpliterator9 = cSVRecord5.spliterator();
+        java.lang.String str10 = cSVRecord5.toString();
+        boolean boolean11 = cSVRecord5.isConsistent();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str13 = cSVRecord5.get((int) (short) 1);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: 1");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray1);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 1 + "'", int6 == 1);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 1 + "'", int7 == 1);
+        org.junit.Assert.assertNotNull(strSpliterator8);
+        org.junit.Assert.assertNotNull(strSpliterator9);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "[]" + "'", str10, "[]");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
     }
 }
 
