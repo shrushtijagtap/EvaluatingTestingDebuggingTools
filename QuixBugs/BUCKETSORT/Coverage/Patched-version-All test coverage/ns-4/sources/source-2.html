@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > QuixFixOracleHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">java_testcases.junit.crt_program</a>
+</div>
+
+<h1>Coverage Summary for Class: QuixFixOracleHelper (java_testcases.junit.crt_program)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuixFixOracleHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.4%
+  </span>
+  <span class="absValue">
+    (17/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package java_testcases.junit.crt_program;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Methods to format the output from the subject programs.
+&nbsp; *
+&nbsp; * @author Matias Martinez
+&nbsp; *
+&nbsp; */
+<b class="nc">&nbsp;public class QuixFixOracleHelper {</b>
+&nbsp;
+&nbsp;    public static String format(Object out, boolean cutDecimal) {
+<b class="fc">&nbsp;        Object jsonOutObtained = transformToString(out, cutDecimal);</b>
+<b class="fc">&nbsp;        String obtained = removeSymbols(jsonOutObtained.toString());</b>
+<b class="fc">&nbsp;        return obtained;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String removeSymbols(String r) {
+&nbsp;
+<b class="fc">&nbsp;        r = r.replaceAll(&quot;\\(&quot;, &quot;[&quot;).replaceAll(&quot;\\)&quot;, &quot;]&quot;).replace(&quot; &quot;, &quot;&quot;).replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</b>
+<b class="fc">&nbsp;        return r;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String transformToString(Object out, boolean mustRemoveDecimal) {
+<b class="fc">&nbsp;        if (out instanceof Iterable) {</b>
+<b class="fc">&nbsp;            String r = &quot;[&quot;;</b>
+<b class="fc">&nbsp;            for (Object o : (Iterable) out) {</b>
+<b class="fc">&nbsp;                r += transformToString(o, mustRemoveDecimal) + &quot;,&quot;;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            if (r.length() &gt;= 2) {</b>
+<b class="fc">&nbsp;                r = r.trim().substring(0, r.length() - 1);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return r + &quot;]&quot;;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            String s = &quot;&quot;;</b>
+<b class="fc">&nbsp;            if (out instanceof String &amp;&amp; !isInteger(out.toString()))</b>
+<b class="nc">&nbsp;                s += out.toString();</b>
+&nbsp;            else {
+<b class="fc">&nbsp;                s = (mustRemoveDecimal &amp;&amp; out.toString().endsWith(&quot;.0&quot;)</b>
+<b class="nc">&nbsp;                        ? out.toString().substring(0, out.toString().length() - 2) : out.toString());</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return s;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isInteger(String s) {
+<b class="nc">&nbsp;        boolean isValidInteger = false;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            Integer.parseInt(s);</b>
+<b class="nc">&nbsp;            isValidInteger = true;</b>
+<b class="nc">&nbsp;        } catch (NumberFormatException ex) {</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return isValidInteger;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-02 22:30</div>
+</div>
+</body>
+</html>
