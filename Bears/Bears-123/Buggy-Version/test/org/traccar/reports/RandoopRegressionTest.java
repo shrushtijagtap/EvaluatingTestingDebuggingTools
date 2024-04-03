@@ -1,4 +1,4 @@
-package org.traccar.protocol;
+package org.traccar.reports;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

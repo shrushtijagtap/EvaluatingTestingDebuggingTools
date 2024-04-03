@@ -1,4 +1,4 @@
-package org.traccar.protocol;
+package com.amazonaws.encryptionsdk;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

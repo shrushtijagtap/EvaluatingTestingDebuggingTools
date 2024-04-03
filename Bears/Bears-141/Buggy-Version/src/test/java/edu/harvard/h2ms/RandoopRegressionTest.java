@@ -1,4 +1,4 @@
-package org.traccar.protocol;
+package edu.harvard.h2ms;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

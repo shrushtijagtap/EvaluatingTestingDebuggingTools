@@ -1,8 +1,8 @@
-package org.traccar.protocol;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.traccar.protocol.H02Protocol;
+import org.traccar.protocol.H02ProtocolDecoder;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RandoopRegressionTest0 {

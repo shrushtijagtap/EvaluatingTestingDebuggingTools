@@ -1,4 +1,4 @@
-package org.traccar.protocol;
+package com.fasterxml.jackson.databind.ser.std;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
