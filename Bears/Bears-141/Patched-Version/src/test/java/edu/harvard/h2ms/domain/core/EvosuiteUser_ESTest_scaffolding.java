@@ -15,12 +15,12 @@ import org.evosuite.runtime.sandbox.Sandbox;
 import org.evosuite.runtime.sandbox.Sandbox.SandboxMode;
 
 @EvoSuiteClassExclude
-public class User_ESTest_scaffolding {
+public class EvosuiteUser_ESTest_scaffolding {
 
   @org.junit.Rule
   public org.evosuite.runtime.vnet.NonFunctionalRequirementRule nfr = new org.evosuite.runtime.vnet.NonFunctionalRequirementRule();
 
-  private static final java.util.Properties defaultProperties = (java.util.Properties) java.lang.System.getProperties().clone(); 
+  private static final java.util.Properties defaultProperties = (java.util.Properties) System.getProperties().clone();
 
   private org.evosuite.runtime.thread.ThreadStopper threadStopper =  new org.evosuite.runtime.thread.ThreadStopper (org.evosuite.runtime.thread.KillSwitchHandler.getInstance(), 3000);
 
@@ -43,7 +43,7 @@ public class User_ESTest_scaffolding {
   @AfterClass
   public static void clearEvoSuiteFramework(){ 
     Sandbox.resetDefaultSecurityManager(); 
-    java.lang.System.setProperties((java.util.Properties) defaultProperties.clone()); 
+    System.setProperties((java.util.Properties) defaultProperties.clone());
   } 
 
   @Before
@@ -71,13 +71,13 @@ public class User_ESTest_scaffolding {
 
   public static void setSystemProperties() {
  
-    java.lang.System.setProperties((java.util.Properties) defaultProperties.clone()); 
-    java.lang.System.setProperty("user.dir", "/Users/strider/Dev/CS527-Project/Bears/Bears-141/Patched-Version"); 
-    java.lang.System.setProperty("java.io.tmpdir", "/var/folders/p8/yfnxf01j0zl1djdmz617g_980000gn/T/"); 
+    System.setProperties((java.util.Properties) defaultProperties.clone());
+    System.setProperty("user.dir", "/Users/strider/Dev/CS527-Project/Bears/Bears-141/Patched-Version");
+    System.setProperty("java.io.tmpdir", "/var/folders/p8/yfnxf01j0zl1djdmz617g_980000gn/T/");
   }
 
   private static void initializeClasses() {
-    org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(User_ESTest_scaffolding.class.getClassLoader() ,
+    org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(EvosuiteUser_ESTest_scaffolding.class.getClassLoader() ,
       "edu.harvard.h2ms.domain.core.User",
       "org.springframework.security.crypto.password.PasswordEncoder",
       "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder",
@@ -89,7 +89,7 @@ public class User_ESTest_scaffolding {
   } 
 
   private static void resetClasses() {
-    org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(User_ESTest_scaffolding.class.getClassLoader()); 
+    org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(EvosuiteUser_ESTest_scaffolding.class.getClassLoader());
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
       "edu.harvard.h2ms.domain.core.User",

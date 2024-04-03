@@ -16,12 +16,12 @@ import org.evosuite.runtime.sandbox.Sandbox.SandboxMode;
 
 import static org.evosuite.shaded.org.mockito.Mockito.*;
 @EvoSuiteClassExclude
-public class EelinkProtocolDecoder_ESTest_scaffolding {
+public class EvosuiteEelinkProtocolDecoder_ESTest_scaffolding {
 
   @org.junit.Rule
   public org.evosuite.runtime.vnet.NonFunctionalRequirementRule nfr = new org.evosuite.runtime.vnet.NonFunctionalRequirementRule();
 
-  private static final java.util.Properties defaultProperties = (java.util.Properties) java.lang.System.getProperties().clone(); 
+  private static final java.util.Properties defaultProperties = (java.util.Properties) System.getProperties().clone();
 
   private org.evosuite.runtime.thread.ThreadStopper threadStopper =  new org.evosuite.runtime.thread.ThreadStopper (org.evosuite.runtime.thread.KillSwitchHandler.getInstance(), 3000);
 
@@ -33,8 +33,8 @@ public class EelinkProtocolDecoder_ESTest_scaffolding {
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
     org.evosuite.runtime.RuntimeSettings.mockSystemIn = true; 
-    org.evosuite.runtime.RuntimeSettings.sandboxMode = org.evosuite.runtime.sandbox.Sandbox.SandboxMode.RECOMMENDED; 
-    org.evosuite.runtime.sandbox.Sandbox.initializeSecurityManagerForSUT(); 
+    org.evosuite.runtime.RuntimeSettings.sandboxMode = SandboxMode.RECOMMENDED;
+    Sandbox.initializeSecurityManagerForSUT();
     org.evosuite.runtime.classhandling.JDKClassResetter.init();
     setSystemProperties();
     initializeClasses();
@@ -45,7 +45,7 @@ public class EelinkProtocolDecoder_ESTest_scaffolding {
   @AfterClass
   public static void clearEvoSuiteFramework(){ 
     Sandbox.resetDefaultSecurityManager(); 
-    java.lang.System.setProperties((java.util.Properties) defaultProperties.clone()); 
+    System.setProperties((java.util.Properties) defaultProperties.clone());
   } 
 
   @Before
@@ -53,7 +53,7 @@ public class EelinkProtocolDecoder_ESTest_scaffolding {
     threadStopper.storeCurrentThreads();
     threadStopper.startRecordingTime();
     org.evosuite.runtime.jvm.ShutdownHookHandler.getInstance().initHandler(); 
-    org.evosuite.runtime.sandbox.Sandbox.goingToExecuteSUTCode(); 
+    Sandbox.goingToExecuteSUTCode();
     setSystemProperties(); 
     org.evosuite.runtime.GuiSupport.setHeadless(); 
     org.evosuite.runtime.Runtime.getInstance().resetRuntime(); 
@@ -66,21 +66,21 @@ public class EelinkProtocolDecoder_ESTest_scaffolding {
     org.evosuite.runtime.jvm.ShutdownHookHandler.getInstance().safeExecuteAddedHooks(); 
     org.evosuite.runtime.classhandling.JDKClassResetter.reset(); 
     resetClasses(); 
-    org.evosuite.runtime.sandbox.Sandbox.doneWithExecutingSUTCode(); 
+    Sandbox.doneWithExecutingSUTCode();
     org.evosuite.runtime.agent.InstrumentingAgent.deactivate(); 
     org.evosuite.runtime.GuiSupport.restoreHeadlessMode(); 
   } 
 
   public static void setSystemProperties() {
  
-    java.lang.System.setProperties((java.util.Properties) defaultProperties.clone()); 
-    java.lang.System.setProperty("sun.arch.data.model", "64"); 
-    java.lang.System.setProperty("user.dir", "/Users/strider/Dev/CS527-Project/Bears/Bears-127/Patched-Version"); 
-    java.lang.System.setProperty("java.io.tmpdir", "/var/folders/p8/yfnxf01j0zl1djdmz617g_980000gn/T/"); 
+    System.setProperties((java.util.Properties) defaultProperties.clone());
+    System.setProperty("sun.arch.data.model", "64");
+    System.setProperty("user.dir", "/Users/strider/Dev/CS527-Project/Bears/Bears-127/Patched-Version");
+    System.setProperty("java.io.tmpdir", "/var/folders/p8/yfnxf01j0zl1djdmz617g_980000gn/T/");
   }
 
   private static void initializeClasses() {
-    org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(EelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader() ,
+    org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(EvosuiteEelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader() ,
       "org.jboss.netty.channel.ChannelEvent",
       "org.traccar.ExtendedObjectDecoder",
       "org.traccar.BaseProtocolDecoder",
@@ -116,13 +116,13 @@ public class EelinkProtocolDecoder_ESTest_scaffolding {
     );
   } 
   private static void initMocksToAvoidTimeoutsInTheTests() throws ClassNotFoundException { 
-    mock(Class.forName("java.net.SocketAddress", false, EelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
-    mock(Class.forName("org.jboss.netty.channel.Channel", false, EelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
-    mock(Class.forName("org.traccar.protocol.EelinkProtocol", false, EelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
+    mock(Class.forName("java.net.SocketAddress", false, EvosuiteEelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
+    mock(Class.forName("org.jboss.netty.channel.Channel", false, EvosuiteEelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
+    mock(Class.forName("org.traccar.protocol.EelinkProtocol", false, EvosuiteEelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()));
   }
 
   private static void resetClasses() {
-    org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(EelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader()); 
+    org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(EvosuiteEelinkProtocolDecoder_ESTest_scaffolding.class.getClassLoader());
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
       "org.traccar.ExtendedObjectDecoder",

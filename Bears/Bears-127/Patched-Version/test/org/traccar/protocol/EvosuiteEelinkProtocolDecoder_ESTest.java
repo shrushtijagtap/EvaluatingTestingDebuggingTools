@@ -15,11 +15,9 @@ import org.evosuite.runtime.EvoRunnerParameters;
 import org.evosuite.runtime.ViolatedAssumptionAnswer;
 import org.jboss.netty.channel.Channel;
 import org.junit.runner.RunWith;
-import org.traccar.protocol.EelinkProtocol;
-import org.traccar.protocol.EelinkProtocolDecoder;
 
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
-public class EelinkProtocolDecoder_ESTest extends EelinkProtocolDecoder_ESTest_scaffolding {
+public class EvosuiteEelinkProtocolDecoder_ESTest extends EvosuiteEelinkProtocolDecoder_ESTest_scaffolding {
 
   @Test(timeout = 4000)
   public void test0()  throws Throwable  {

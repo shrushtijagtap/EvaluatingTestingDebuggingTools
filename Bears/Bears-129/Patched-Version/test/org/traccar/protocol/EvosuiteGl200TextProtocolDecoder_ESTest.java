@@ -11,11 +11,9 @@ import static org.evosuite.runtime.EvoAssertions.*;
 import org.evosuite.runtime.EvoRunner;
 import org.evosuite.runtime.EvoRunnerParameters;
 import org.junit.runner.RunWith;
-import org.traccar.protocol.Gl200Protocol;
-import org.traccar.protocol.Gl200TextProtocolDecoder;
 
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
-public class Gl200TextProtocolDecoder_ESTest extends Gl200TextProtocolDecoder_ESTest_scaffolding {
+public class EvosuiteGl200TextProtocolDecoder_ESTest extends EvosuiteGl200TextProtocolDecoder_ESTest_scaffolding {
 
   @Test(timeout = 4000)
   public void test0()  throws Throwable  {

@@ -34,12 +34,9 @@ import org.jboss.netty.util.ThreadNameDeterminer;
 import org.junit.runner.RunWith;
 import org.traccar.Context;
 import org.traccar.database.IdentityManager;
-import org.traccar.protocol.GranitProtocolSmsEncoder;
-import org.traccar.protocol.H02Protocol;
-import org.traccar.protocol.H02ProtocolDecoder;
 
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
-public class H02ProtocolDecoder_ESTest extends H02ProtocolDecoder_ESTest_scaffolding {
+public class EvosuiteH02ProtocolDecoder_ESTest extends EvosuiteH02ProtocolDecoder_ESTest_scaffolding {
 
   @Test(timeout = 4000)
   public void test0()  throws Throwable  {

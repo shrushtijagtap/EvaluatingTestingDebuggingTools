@@ -117,7 +117,7 @@ public class CguardProtocolDecoder extends BaseProtocolDecoder {
     }
 
     @Override
-    protected Object decode(
+    public Object decode(
             Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
 
         String sentence = (String) msg;
