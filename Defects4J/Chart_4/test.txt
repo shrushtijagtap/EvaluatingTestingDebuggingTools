@@ -20,3 +20,6 @@ org.jfree.chart.junit.XYStepChartTests.testDrawWithNullInfo
 org.jfree.chart.junit.XYStepChartTests.testSetSeriesToolTipGenerator
 org.jfree.chart.junit.XYStepChartTests.testReplaceDataset
 org.jfree.chart.plot.junit.XYPlotTests.testDrawRangeGridlines
+org.jfree.chart.plot.junit.RandoopRegressionTest0.test116
+org.jfree.chart.plot.junit.RandoopRegressionTest0.test290
+org.jfree.chart.plot.junit.RandoopRegressionTest0.test452

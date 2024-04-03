@@ -2,3 +2,7 @@ SHUNTING_YARD_TEST.test_0
 SHUNTING_YARD_TEST.test_1
 SHUNTING_YARD_TEST.test_2
 SHUNTING_YARD_TEST.test_3
+correct_java_programs.EvosuiteSHUNTING_YARD_ESTest.test0
+correct_java_programs.EvosuiteSHUNTING_YARD_ESTest.test1
+correct_java_programs.EvosuiteSHUNTING_YARD_ESTest.test4
+correct_java_programs.EvosuiteSHUNTING_YARD_ESTest.test3

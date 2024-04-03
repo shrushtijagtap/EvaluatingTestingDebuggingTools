@@ -8,3 +8,5 @@ GET_FACTORS_TEST.test_7
 GET_FACTORS_TEST.test_8
 GET_FACTORS_TEST.test_9
 GET_FACTORS_TEST.test_10
+correct_java_programs.EvosuiteGET_FACTORS_ESTest.test2
+correct_java_programs.EvosuiteGET_FACTORS_ESTest.test1

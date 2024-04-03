@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_testcases.junit.crt_program.BUCKETSORT_TEST" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-04-02T22:42:37" hostname="Andress-MBP-3" time="0.044">
+<testsuite name="java_testcases.junit.crt_program.BUCKETSORT_TEST" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-04-02T01:59:03" hostname="Sejals-MacBook-Air.local" time="0.001">
   <properties/>
-  <testcase name="test_0" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.04"/>
+  <testcase name="test_0" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
   <testcase name="test_1" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
   <testcase name="test_2" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
   <testcase name="test_3" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
-  <testcase name="test_4" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
+  <testcase name="test_4" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.001"/>
   <testcase name="test_5" classname="java_testcases.junit.crt_program.BUCKETSORT_TEST" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

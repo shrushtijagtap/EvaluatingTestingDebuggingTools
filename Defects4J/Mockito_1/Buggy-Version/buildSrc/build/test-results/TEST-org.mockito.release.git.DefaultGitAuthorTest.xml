@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.git.DefaultGitAuthorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:45:51" hostname="Shrushtis-MacBook-Air.local" time="0.006">
+<testsuite name="org.mockito.release.git.DefaultGitAuthorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-02T17:28:23" hostname="Shrushtis-MacBook-Air.local" time="0.005">
   <properties/>
-  <testcase name="restores specific author" classname="org.mockito.release.git.DefaultGitAuthorTest" time="0.006"/>
+  <testcase name="restores specific author" classname="org.mockito.release.git.DefaultGitAuthorTest" time="0.005"/>
   <testcase name="unsets author if not configured previously" classname="org.mockito.release.git.DefaultGitAuthorTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

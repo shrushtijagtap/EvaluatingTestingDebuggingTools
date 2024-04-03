@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.version.DefaultVersionFileTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:55:48" hostname="Shrushtis-MacBook-Air.local" time="0.024">
+<testsuite name="org.mockito.release.version.DefaultVersionFileTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-02T18:32:09" hostname="Shrushtis-MacBook-Air.local" time="0.031">
   <properties/>
-  <testcase name="does not support files without 'version' property" classname="org.mockito.release.version.DefaultVersionFileTest" time="0.016"/>
-  <testcase name="knows version stored in the file" classname="org.mockito.release.version.DefaultVersionFileTest" time="0.001"/>
+  <testcase name="does not support files without 'version' property" classname="org.mockito.release.version.DefaultVersionFileTest" time="0.022"/>
+  <testcase name="knows version stored in the file" classname="org.mockito.release.version.DefaultVersionFileTest" time="0.002"/>
   <testcase name="increments version in file" classname="org.mockito.release.version.DefaultVersionFileTest" time="0.007"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

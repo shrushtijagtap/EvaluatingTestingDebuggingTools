@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" tests="7" skipped="1" failures="0" errors="0" timestamp="2024-04-01T05:09:08" hostname="Sejals-MacBook-Air.local" time="0.12">
+  <properties/>
+  <testcase name="test_0" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.005"/>
+  <testcase name="test_1" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.0"/>
+  <testcase name="test_2" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.113"/>
+  <testcase name="test_3" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="test_4" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.0"/>
+  <testcase name="test_5" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.0"/>
+  <testcase name="test_6" classname="java_testcases.junit.crt_program.LEVENSHTEIN_TEST" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

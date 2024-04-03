@@ -1,1 +1,5 @@
 org.joda.time.TestPartial_Basics.testWith_baseAndArgHaveNoRange
+org.joda.time.field.RandoopErrorTest0.test10
+org.joda.time.field.RandoopErrorTest0.test13
+org.joda.time.field.RandoopErrorTest0.test16
+org.joda.time.field.RandoopErrorTest0.test19

@@ -6,3 +6,4 @@ LCS_LENGTH_TEST.test_5
 LCS_LENGTH_TEST.test_6
 LCS_LENGTH_TEST.test_7
 LCS_LENGTH_TEST.test_8
+correct_java_programs.EvosuiteLCS_LENGTH_ESTest.test4

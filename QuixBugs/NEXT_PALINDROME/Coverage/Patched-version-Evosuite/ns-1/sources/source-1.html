@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NEXT_PALINDROME</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">correct_java_programs</a>
+</div>
+
+<h1>Coverage Summary for Class: NEXT_PALINDROME (correct_java_programs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NEXT_PALINDROME</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package correct_java_programs;
+&nbsp;import java.util.*;
+&nbsp;import java.lang.Math.*;
+&nbsp;/*
+&nbsp; * To change this template, choose Tools | Templates
+&nbsp; * and open the template in the editor.
+&nbsp; */
+&nbsp;
+&nbsp;/**
+&nbsp; *
+&nbsp; * @author derricklin
+&nbsp; */
+<b class="fc">&nbsp;public class NEXT_PALINDROME {</b>
+&nbsp;    public static String next_palindrome(int[] digit_list) {
+<b class="fc">&nbsp;        int high_mid = Math.floorDiv(digit_list.length, 2);</b>
+<b class="fc">&nbsp;        int low_mid = Math.floorDiv(digit_list.length - 1, 2);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (high_mid &lt; digit_list.length &amp;&amp; low_mid &gt;= 0) {</b>
+<b class="fc">&nbsp;            if (digit_list[high_mid] == 9) {</b>
+<b class="fc">&nbsp;                digit_list[high_mid] = 0;</b>
+<b class="fc">&nbsp;                digit_list[low_mid] = 0;</b>
+<b class="fc">&nbsp;                high_mid += 1;</b>
+<b class="fc">&nbsp;                low_mid -= 1;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                digit_list[high_mid] += 1;</b>
+<b class="fc">&nbsp;                if (low_mid != high_mid) {</b>
+<b class="fc">&nbsp;                    digit_list[low_mid] += 1;</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return Arrays.toString(digit_list);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        ArrayList&lt;Integer&gt; otherwise = new ArrayList&lt;Integer&gt;();</b>
+<b class="fc">&nbsp;        otherwise.add(1);</b>
+<b class="fc">&nbsp;        otherwise.addAll(Collections.nCopies(digit_list.length-1, 0));</b>
+<b class="fc">&nbsp;        otherwise.add(1);</b>
+&nbsp;
+<b class="fc">&nbsp;        return String.valueOf(otherwise);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-02 21:49</div>
+</div>
+</body>
+</html>

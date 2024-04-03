@@ -11,3 +11,41 @@ Parameters:
 Created test suite archive: JacksonXml-2b-evosuite.1.tar.bz2
 Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/JacksonXml_2/Buggy-Version/JacksonXml/evosuite/1
 ######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 18:16:22  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:29:37  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p JacksonXml
+ -v 2b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonXml/modified_classes/2.src
+ -s 1002
+Created test suite archive: JacksonXml-2b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/JacksonXml_2/Buggy-Version/JacksonXml/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:33:51  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:34:58  ######
+Mode: error-revealing
+Parameters:
+ -g randoop
+ -p JacksonXml
+ -v 2b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonXml/modified_classes/2.src
+ -s 1002
+Test generator (randoop) did not generate any tests!
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:39:05  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:39:09  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p JacksonXml
+ -v 2b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonXml/modified_classes/2.src
+ -s 1002
+Created test suite archive: JacksonXml-2b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/JacksonXml_2/Buggy-Version/JacksonXml/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:43:23  ######

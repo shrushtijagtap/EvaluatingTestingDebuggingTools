@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.exec.DefaultProcessRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-30T07:00:36" hostname="Shrushtis-MacBook-Air.local" time="0.033">
+<testsuite name="org.mockito.release.exec.DefaultProcessRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-02T18:38:28" hostname="Shrushtis-MacBook-Air.local" time="0.023">
   <properties/>
-  <testcase name="runs processes" classname="org.mockito.release.exec.DefaultProcessRunnerTest" time="0.033"/>
-  <system-out><![CDATA[00:00:36.223 [Test worker] INFO  o.m.r.exec.DefaultProcessRunner - Executing command: [ls]
+  <testcase name="runs processes" classname="org.mockito.release.exec.DefaultProcessRunnerTest" time="0.023"/>
+  <system-out><![CDATA[11:38:28.054 [Test worker] INFO  o.m.r.exec.DefaultProcessRunner - Executing command: [ls]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
