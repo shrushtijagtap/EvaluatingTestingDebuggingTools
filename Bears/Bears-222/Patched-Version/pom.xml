@@ -105,6 +105,16 @@
 				<version>4.12</version>
 				<scope>test</scope>
 			</dependency>
+
+			<!-- Evosuite -->
+			<dependency>
+				<groupId>org.evosuite</groupId>
+				<artifactId>evosuite-standalone-runtime</artifactId>
+				<version>1.2.0</version>
+				<scope>system</scope>
+				<systemPath>${project.basedir}/../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -229,6 +239,19 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+
+				<!-- Clover -->
+				<plugin>
+					<groupId>org.openclover</groupId>
+					<artifactId>clover-maven-plugin</artifactId>
+					<version>4.5.2</version>
+					<configuration>
+						<excludes>
+							<excludes>**/*ES*.java</excludes>
+						</excludes>
+					</configuration>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
