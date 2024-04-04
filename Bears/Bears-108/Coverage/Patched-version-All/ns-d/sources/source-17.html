@@ -1,0 +1,374 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ISOChronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: ISOChronology (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ISOChronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.3%
+  </span>
+  <span class="absValue">
+    (7/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    48.7%
+  </span>
+  <span class="absValue">
+    (19/39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ISOChronology$Stub</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    43.8%
+  </span>
+  <span class="absValue">
+    (7/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    43.2%
+  </span>
+  <span class="absValue">
+    (19/44)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.io.ObjectOutputStream;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.field.DividedDateTimeField;
+&nbsp;import org.joda.time.field.RemainderDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implements a chronology that follows the rules of the ISO8601 standard,
+&nbsp; * which is compatible with Gregorian for all modern dates.
+&nbsp; * When ISO does not define a field, but it can be determined (such as AM/PM)
+&nbsp; * it is included.
+&nbsp; * &lt;p&gt;
+&nbsp; * With the exception of century related fields, ISOChronology is exactly the
+&nbsp; * same as {@link GregorianChronology}. In this chronology, centuries and year
+&nbsp; * of century are zero based. For all years, the century is determined by
+&nbsp; * dropping the last two digits of the year, ignoring sign. The year of century
+&nbsp; * is the value of the last two year digits.
+&nbsp; * &lt;p&gt;
+&nbsp; * ISOChronology is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class ISOChronology extends AssembledChronology {
+&nbsp;    
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = -6212696554273812441L;
+&nbsp;
+&nbsp;    /** Singleton instance of a UTC ISOChronology */
+&nbsp;    private static final ISOChronology INSTANCE_UTC;
+&nbsp;        
+<b class="fc">&nbsp;    private static final int FAST_CACHE_SIZE = 64;</b>
+&nbsp;
+<b class="fc">&nbsp;    /** Fast cache of zone to chronology */</b>
+<b class="fc">&nbsp;    private static final ISOChronology[] cFastCache;</b>
+&nbsp;
+&nbsp;    /** Cache of zone to chronology */
+&nbsp;    private static final Map&lt;DateTimeZone, ISOChronology&gt; cCache = new HashMap&lt;DateTimeZone, ISOChronology&gt;();
+&nbsp;    static {
+&nbsp;        cFastCache = new ISOChronology[FAST_CACHE_SIZE];
+&nbsp;        INSTANCE_UTC = new ISOChronology(GregorianChronology.getInstanceUTC());
+&nbsp;        cCache.put(DateTimeZone.UTC, INSTANCE_UTC);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    /**</b>
+&nbsp;     * Gets an instance of the ISOChronology.
+&nbsp;     * The time zone of the returned instance is UTC.
+&nbsp;     * 
+&nbsp;     * @return a singleton UTC instance of the chronology
+&nbsp;     */
+&nbsp;    public static ISOChronology getInstanceUTC() {
+&nbsp;        return INSTANCE_UTC;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    /**
+&nbsp;     * Gets an instance of the ISOChronology in the default time zone.
+&nbsp;     * 
+&nbsp;     * @return a chronology in the default time zone
+&nbsp;     */
+&nbsp;    public static ISOChronology getInstance() {
+&nbsp;        return getInstance(DateTimeZone.getDefault());
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * Gets an instance of the ISOChronology in the given time zone.</b>
+&nbsp;     * 
+<b class="fc">&nbsp;     * @param zone  the time zone to get the chronology in, null is default</b>
+<b class="fc">&nbsp;     * @return a chronology in the specified time zone</b>
+<b class="fc">&nbsp;     */</b>
+<b class="fc">&nbsp;    public static ISOChronology getInstance(DateTimeZone zone) {</b>
+<b class="fc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+&nbsp;        int index = System.identityHashCode(zone) &amp; (FAST_CACHE_SIZE - 1);
+<b class="fc">&nbsp;        ISOChronology chrono = cFastCache[index];</b>
+&nbsp;        if (chrono != null &amp;&amp; chrono.getZone() == zone) {
+&nbsp;            return chrono;
+&nbsp;        }
+&nbsp;        synchronized (cCache) {
+&nbsp;            chrono = cCache.get(zone);
+&nbsp;            if (chrono == null) {
+&nbsp;                chrono = new ISOChronology(ZonedChronology.getInstance(INSTANCE_UTC, zone));
+&nbsp;                cCache.put(zone, chrono);
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;        cFastCache[index] = chrono;
+&nbsp;        return chrono;
+&nbsp;    }
+&nbsp;
+&nbsp;    // Constructors and instance variables
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor
+&nbsp;     */
+<b class="fc">&nbsp;    private ISOChronology(Chronology base) {</b>
+&nbsp;        super(base, null);
+&nbsp;    }
+&nbsp;
+&nbsp;    // Conversion
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the Chronology in the UTC time zone.
+&nbsp;     * 
+&nbsp;     * @return the chronology in UTC
+<b class="nc">&nbsp;     */</b>
+<b class="nc">&nbsp;    public Chronology withUTC() {</b>
+&nbsp;        return INSTANCE_UTC;
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    /**
+<b class="nc">&nbsp;     * Gets the Chronology in a specific time zone.</b>
+&nbsp;     * 
+&nbsp;     * @param zone  the zone to get the chronology in, null is default
+&nbsp;     * @return the chronology
+&nbsp;     */
+&nbsp;    public Chronology withZone(DateTimeZone zone) {
+&nbsp;        if (zone == null) {
+&nbsp;            zone = DateTimeZone.getDefault();
+&nbsp;        }
+&nbsp;        if (zone == getZone()) {
+&nbsp;            return this;
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return getInstance(zone);</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    // Output
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+&nbsp;    /**
+&nbsp;     * Gets a debugging toString.
+&nbsp;     * 
+<b class="fc">&nbsp;     * @return a debugging string</b>
+&nbsp;     */
+<b class="fc">&nbsp;    public String toString() {</b>
+&nbsp;        String str = &quot;ISOChronology&quot;;
+<b class="fc">&nbsp;        DateTimeZone zone = getZone();</b>
+&nbsp;        if (zone != null) {
+<b class="fc">&nbsp;            str = str + &#39;[&#39; + zone.getID() + &#39;]&#39;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void assemble(Fields fields) {
+&nbsp;        if (getBase().getZone() == DateTimeZone.UTC) {
+&nbsp;            // Use zero based century and year of century.
+&nbsp;            fields.centuryOfEra = new DividedDateTimeField(
+&nbsp;                ISOYearOfEraDateTimeField.INSTANCE, DateTimeFieldType.centuryOfEra(), 100);
+&nbsp;            fields.centuries = fields.centuryOfEra.getDurationField();
+&nbsp;            
+&nbsp;            fields.yearOfCentury = new RemainderDateTimeField(
+&nbsp;                (DividedDateTimeField) fields.centuryOfEra, DateTimeFieldType.yearOfCentury());
+&nbsp;            fields.weekyearOfCentury = new RemainderDateTimeField(
+&nbsp;                (DividedDateTimeField) fields.centuryOfEra, fields.weekyears, DateTimeFieldType.weekyearOfCentury());
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="nc">&nbsp;    /**</b>
+<b class="nc">&nbsp;     * Checks if this chronology instance equals another.</b>
+&nbsp;     * 
+<b class="nc">&nbsp;     * @param obj  the object to compare to</b>
+&nbsp;     * @return true if equal
+&nbsp;     * @since 1.6
+&nbsp;     */
+&nbsp;    public boolean equals(Object obj) {
+&nbsp;        if (this == obj) {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;        if (obj instanceof ISOChronology) {
+&nbsp;            ISOChronology chrono = (ISOChronology) obj;
+<b class="nc">&nbsp;            return getZone().equals(chrono.getZone());</b>
+&nbsp;        }
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A suitable hash code for the chronology.
+&nbsp;     * 
+&nbsp;     * @return the hash code
+<b class="nc">&nbsp;     * @since 1.6</b>
+&nbsp;     */
+&nbsp;    public int hashCode() {
+&nbsp;        return &quot;ISO&quot;.hashCode() * 11 + getZone().hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Serialize ISOChronology instances using a small stub. This reduces the
+&nbsp;     * serialized size, and deserialized instances come from the cache.
+&nbsp;     */
+&nbsp;    private Object writeReplace() {
+&nbsp;        return new Stub(getZone());
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final class Stub implements Serializable {
+&nbsp;        private static final long serialVersionUID = -6212696554273812441L;
+&nbsp;
+&nbsp;        private transient DateTimeZone iZone;
+&nbsp;
+<b class="nc">&nbsp;        Stub(DateTimeZone zone) {</b>
+<b class="nc">&nbsp;            iZone = zone;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private Object readResolve() {
+<b class="nc">&nbsp;            return ISOChronology.getInstance(iZone);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void writeObject(ObjectOutputStream out) throws IOException {
+<b class="nc">&nbsp;            out.writeObject(iZone);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void readObject(ObjectInputStream in)
+&nbsp;            throws IOException, ClassNotFoundException
+&nbsp;        {
+<b class="nc">&nbsp;            iZone = (DateTimeZone)in.readObject();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:53</div>
+</div>
+</body>
+</html>

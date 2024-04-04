@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptionMaterialsRequest_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       Vector<KeyBlob> vector0 = new Vector<KeyBlob>();
@@ -30,7 +30,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertSame(decryptionMaterialsRequest_Builder0, decryptionMaterialsRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       CryptoAlgorithm cryptoAlgorithm0 = CryptoAlgorithm.ALG_AES_256_GCM_IV12_TAG16_NO_KDF;
@@ -40,7 +40,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertEquals("AES", cryptoAlgorithm1.getDataKeyAlgo());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       Vector<KeyBlob> vector0 = new Vector<KeyBlob>(1263, (-406));
       CiphertextType ciphertextType0 = CiphertextType.CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA;
@@ -52,7 +52,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertEquals(CryptoAlgorithm.ALG_AES_256_GCM_IV12_TAG16_NO_KDF, decryptionMaterialsRequest0.getAlgorithm());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       CiphertextHeaders ciphertextHeaders0 = new CiphertextHeaders();
       // Undeclared exception!
@@ -68,7 +68,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       CiphertextType ciphertextType0 = CiphertextType.CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA;
       CryptoAlgorithm cryptoAlgorithm0 = CryptoAlgorithm.ALG_AES_192_GCM_IV12_TAG16_NO_KDF;
@@ -91,14 +91,14 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       Map<String, String> map0 = decryptionMaterialsRequest_Builder0.getEncryptionContext();
       assertNull(map0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       CryptoAlgorithm cryptoAlgorithm0 = CryptoAlgorithm.ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384;
@@ -108,7 +108,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertEquals((short)838, cryptoAlgorithm1.getValue());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       DecryptionMaterialsRequest decryptionMaterialsRequest0 = decryptionMaterialsRequest_Builder0.build();
@@ -116,13 +116,13 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertNull(list0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       decryptionMaterialsRequest_Builder0.getAlgorithm();
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       Map<String, String> map0 = ZoneId.SHORT_IDS;
@@ -130,7 +130,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertNull(decryptionMaterialsRequest_Builder1.getAlgorithm());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       CiphertextType ciphertextType0 = CiphertextType.CUSTOMER_AUTHENTICATED_ENCRYPTED_DATA;
       CryptoAlgorithm cryptoAlgorithm0 = CryptoAlgorithm.ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA256;
@@ -151,7 +151,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       DecryptionMaterialsRequest decryptionMaterialsRequest0 = decryptionMaterialsRequest_Builder0.build();
@@ -159,7 +159,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertNull(decryptionMaterialsRequest_Builder1.getAlgorithm());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       DecryptionMaterialsRequest decryptionMaterialsRequest0 = decryptionMaterialsRequest_Builder0.build();
@@ -167,7 +167,7 @@ public class EvosuiteDecryptionMaterialsRequest_ESTest extends EvosuiteDecryptio
       assertNull(map0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       DecryptionMaterialsRequest.Builder decryptionMaterialsRequest_Builder0 = DecryptionMaterialsRequest.newBuilder();
       DecryptionMaterialsRequest decryptionMaterialsRequest0 = decryptionMaterialsRequest_Builder0.build();

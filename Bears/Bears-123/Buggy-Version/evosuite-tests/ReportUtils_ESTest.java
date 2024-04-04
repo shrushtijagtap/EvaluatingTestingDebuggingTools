@@ -34,7 +34,7 @@ import org.traccar.reports.model.TripsConfig;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       Position position0 = new Position();
       LinkedList<Position> linkedList0 = new LinkedList<Position>();
@@ -47,7 +47,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       Position position0 = new Position();
       LinkedList<Position> linkedList0 = new LinkedList<Position>();
@@ -67,7 +67,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       Position position0 = new Position();
       LinkedList<Position> linkedList0 = new LinkedList<Position>();
@@ -83,7 +83,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       DOMNamespace dOMNamespace0 = new DOMNamespace("9eqe", "");
       BeanElement beanElement0 = new BeanElement((String) null, dOMNamespace0, "9eqe");
@@ -105,7 +105,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       Position position0 = new Position();
       Long long0 = new Long((-4007));
@@ -124,7 +124,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       LinkedList<Long> linkedList0 = new LinkedList<Long>();
       XmlSimpleList xmlSimpleList0 = new XmlSimpleList(linkedList0);
@@ -132,7 +132,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       LinkedList<Long> linkedList0 = new LinkedList<Long>();
       Long long0 = new Long((-2181L));
@@ -150,14 +150,14 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       Position position0 = new Position();
       double double0 = ReportUtils.calculateDistance(position0, position0);
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       File file0 = MockFile.createTempFile("sos", "motion");
       MockFileInputStream mockFileInputStream0 = new MockFileInputStream(file0);
@@ -175,7 +175,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -190,7 +190,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -205,7 +205,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -220,7 +220,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -235,7 +235,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -250,7 +250,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       Position position0 = new Position();
       position0.set("totalDistance", "Time period exceeds the limit");
@@ -267,7 +267,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -282,7 +282,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       Position position0 = new Position();
       LinkedList<Position> linkedList0 = new LinkedList<Position>();
@@ -295,7 +295,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       LinkedHashSet<Position> linkedHashSet0 = new LinkedHashSet<Position>();
       Class<TripReport> class0 = TripReport.class;
@@ -303,19 +303,19 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       String string0 = ReportUtils.findDriverName("Ay3");
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       String string0 = ReportUtils.findDriverName((String) null);
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       Long long0 = new Long((-1L));
       Position position0 = new Position();
@@ -334,14 +334,14 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       Position position0 = new Position();
       String string0 = ReportUtils.findDriver(position0, position0);
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       Position position0 = new Position();
       Position position1 = new Position();
@@ -351,7 +351,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test23()  throws Throwable  {
       Position position0 = new Position();
       Long long0 = new Long(2520L);
@@ -360,14 +360,14 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test24()  throws Throwable  {
       Position position0 = new Position();
       double double0 = ReportUtils.calculateFuel(position0, position0);
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test25()  throws Throwable  {
       Position position0 = new Position();
       Short short0 = new Short((short) (-1));
@@ -377,7 +377,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test26()  throws Throwable  {
       Position position0 = new Position();
       Short short0 = new Short((short) (-1));
@@ -386,14 +386,14 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test27()  throws Throwable  {
       Position position0 = new Position();
       double double0 = ReportUtils.calculateDistance(position0, position0, true);
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test28()  throws Throwable  {
       Class<Object> class0 = Object.class;
       BeanMetaData beanMetaData0 = BeanMetaData.get(class0);
@@ -411,7 +411,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test29()  throws Throwable  {
       Position position0 = new Position();
       // Undeclared exception!
@@ -427,7 +427,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test30()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -442,7 +442,7 @@ public class ReportUtils_ESTest extends ReportUtils_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test31()  throws Throwable  {
       // Undeclared exception!
       try { 

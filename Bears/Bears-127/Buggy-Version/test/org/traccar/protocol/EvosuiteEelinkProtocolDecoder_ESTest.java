@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteEelinkProtocolDecoder_ESTest extends EvosuiteEelinkProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       EelinkProtocol eelinkProtocol0 = mock(EelinkProtocol.class, new ViolatedAssumptionAnswer());
       EelinkProtocolDecoder eelinkProtocolDecoder0 = new EelinkProtocolDecoder(eelinkProtocol0);
@@ -36,7 +36,7 @@ public class EvosuiteEelinkProtocolDecoder_ESTest extends EvosuiteEelinkProtocol
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       EelinkProtocolDecoder eelinkProtocolDecoder0 = new EelinkProtocolDecoder((EelinkProtocol) null);
       try { 

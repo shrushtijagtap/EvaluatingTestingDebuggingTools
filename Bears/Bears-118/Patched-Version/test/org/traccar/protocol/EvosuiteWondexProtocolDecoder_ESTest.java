@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteWondexProtocolDecoder_ESTest extends EvosuiteWondexProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       WondexProtocolDecoder wondexProtocolDecoder0 = new WondexProtocolDecoder((WondexProtocol) null);
       try { 
@@ -32,7 +32,7 @@ public class EvosuiteWondexProtocolDecoder_ESTest extends EvosuiteWondexProtocol
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       WondexProtocolDecoder wondexProtocolDecoder0 = new WondexProtocolDecoder((WondexProtocol) null);
       try { 

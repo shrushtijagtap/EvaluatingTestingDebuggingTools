@@ -20,7 +20,7 @@ import org.traccar.protocol.CguardProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class CguardProtocolDecoder_ESTest extends CguardProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       InetSocketAddress inetSocketAddress0 = MockInetSocketAddress.createUnresolved("'N[", 0);
@@ -37,7 +37,7 @@ public class CguardProtocolDecoder_ESTest extends CguardProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       CguardProtocolDecoder cguardProtocolDecoder0 = new CguardProtocolDecoder((CguardProtocol) null);
       InetSocketAddress inetSocketAddress0 = MockInetSocketAddress.createUnresolved("ID:a_yF6[", 351);
@@ -53,7 +53,7 @@ public class CguardProtocolDecoder_ESTest extends CguardProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       CguardProtocolDecoder cguardProtocolDecoder0 = new CguardProtocolDecoder(cguardProtocol0);

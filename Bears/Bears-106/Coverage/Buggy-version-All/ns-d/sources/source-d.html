@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BuddhistChronology</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: BuddhistChronology (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BuddhistChronology</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTime;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DateTimeZone;
+&nbsp;import org.joda.time.DurationFieldType;
+&nbsp;import org.joda.time.field.DelegatedDateTimeField;
+&nbsp;import org.joda.time.field.DividedDateTimeField;
+&nbsp;import org.joda.time.field.OffsetDateTimeField;
+&nbsp;import org.joda.time.field.RemainderDateTimeField;
+&nbsp;import org.joda.time.field.SkipUndoDateTimeField;
+&nbsp;import org.joda.time.field.UnsupportedDurationField;
+&nbsp;
+&nbsp;/**
+&nbsp; * A chronology that matches the BuddhistCalendar class supplied by Sun.
+&nbsp; * &lt;p&gt;
+&nbsp; * The chronology is identical to the Gregorian/Julian, except that the
+&nbsp; * year is offset by +543 and the era is named &#39;BE&#39; for Buddhist Era.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class was intended by Sun to model the calendar used in Thailand.
+&nbsp; * However, the actual rules for Thailand are much more involved than
+&nbsp; * this class covers. (This class is accurate after 1941-01-01 ISO).
+&nbsp; * &lt;p&gt;
+&nbsp; * This chronlogy is being retained for those who want a same effect
+&nbsp; * replacement for the Sun class. It is hoped that community support will
+&nbsp; * enable a more accurate chronology for Thailand, to be developed.
+&nbsp; * &lt;p&gt;
+&nbsp; * BuddhistChronology is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class BuddhistChronology extends AssembledChronology {
+&nbsp;    
+&nbsp;    /** Serialization lock */
+&nbsp;    private static final long serialVersionUID = -3474595157769370126L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constant value for &#39;Buddhist Era&#39;, equivalent to the value returned
+&nbsp;     * for AD/CE. Note that this differs from the constant in BuddhistCalendar.
+&nbsp;     */
+&nbsp;    public static final int BE = DateTimeConstants.CE;
+&nbsp;
+&nbsp;    /** A singleton era field. */
+<b class="nc">&nbsp;    private static final DateTimeField ERA_FIELD = new BasicSingleEraDateTimeField(&quot;BE&quot;);</b>
+&nbsp;
+&nbsp;    /** Number of years difference in calendars. */
+&nbsp;    private static final int BUDDHIST_OFFSET = 543;
+&nbsp;
+&nbsp;    /** Cache of zone to chronology */
+<b class="nc">&nbsp;    private static final Map&lt;DateTimeZone, BuddhistChronology&gt; cCache = new HashMap&lt;DateTimeZone, BuddhistChronology&gt;();</b>
+&nbsp;
+&nbsp;    /** UTC instance of the chronology */
+<b class="nc">&nbsp;    private static final BuddhistChronology INSTANCE_UTC = getInstance(DateTimeZone.UTC);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard instance of a Buddhist Chronology, that matches
+&nbsp;     * Sun&#39;s BuddhistCalendar class. This means that it follows the
+&nbsp;     * GregorianJulian calendar rules with a cutover date.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The time zone of the returned instance is UTC.
+&nbsp;     */
+&nbsp;    public static BuddhistChronology getInstanceUTC() {
+<b class="nc">&nbsp;        return INSTANCE_UTC;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard instance of a Buddhist Chronology, that matches
+&nbsp;     * Sun&#39;s BuddhistCalendar class. This means that it follows the
+&nbsp;     * GregorianJulian calendar rules with a cutover date.
+&nbsp;     */
+&nbsp;    public static BuddhistChronology getInstance() {
+<b class="nc">&nbsp;        return getInstance(DateTimeZone.getDefault());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Standard instance of a Buddhist Chronology, that matches
+&nbsp;     * Sun&#39;s BuddhistCalendar class. This means that it follows the
+&nbsp;     * GregorianJulian calendar rules with a cutover date.
+&nbsp;     *
+&nbsp;     * @param zone  the time zone to use, null is default
+&nbsp;     */
+&nbsp;    public static synchronized BuddhistChronology getInstance(DateTimeZone zone) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+&nbsp;        BuddhistChronology chrono;
+<b class="nc">&nbsp;        synchronized (cCache) {</b>
+<b class="nc">&nbsp;            chrono = cCache.get(zone);</b>
+<b class="nc">&nbsp;            if (chrono == null) {</b>
+&nbsp;                // First create without a lower limit.
+<b class="nc">&nbsp;                chrono = new BuddhistChronology(GJChronology.getInstance(zone, null), null);</b>
+&nbsp;                // Impose lower limit and make another BuddhistChronology.
+<b class="nc">&nbsp;                DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);</b>
+<b class="nc">&nbsp;                chrono = new BuddhistChronology(LimitChronology.getInstance(chrono, lowerLimit, null), &quot;&quot;);</b>
+<b class="nc">&nbsp;                cCache.put(zone, chrono);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return chrono;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Constructors and instance variables
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     *
+&nbsp;     * @param param if non-null, then don&#39;t change the field set
+&nbsp;     */
+&nbsp;    private BuddhistChronology(Chronology base, Object param) {
+<b class="nc">&nbsp;        super(base, param);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization singleton
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        Chronology base = getBase();</b>
+<b class="nc">&nbsp;        return base == null ? getInstanceUTC() : getInstance(base.getZone());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Conversion
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the Chronology in the UTC time zone.
+&nbsp;     * 
+&nbsp;     * @return the chronology in UTC
+&nbsp;     */
+&nbsp;    public Chronology withUTC() {
+<b class="nc">&nbsp;        return INSTANCE_UTC;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the Chronology in a specific time zone.
+&nbsp;     * 
+&nbsp;     * @param zone  the zone to get the chronology in, null is default
+&nbsp;     * @return the chronology
+&nbsp;     */
+&nbsp;    public Chronology withZone(DateTimeZone zone) {
+<b class="nc">&nbsp;        if (zone == null) {</b>
+<b class="nc">&nbsp;            zone = DateTimeZone.getDefault();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (zone == getZone()) {</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getInstance(zone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Checks if this chronology instance equals another.
+&nbsp;     * 
+&nbsp;     * @param obj  the object to compare to
+&nbsp;     * @return true if equal
+&nbsp;     * @since 1.6
+&nbsp;     */
+&nbsp;    public boolean equals(Object obj) {
+<b class="nc">&nbsp;        if (this == obj) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (obj instanceof BuddhistChronology) {</b>
+<b class="nc">&nbsp;            BuddhistChronology chrono = (BuddhistChronology) obj;</b>
+<b class="nc">&nbsp;            return getZone().equals(chrono.getZone());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A suitable hash code for the chronology.
+&nbsp;     * 
+&nbsp;     * @return the hash code
+&nbsp;     * @since 1.6
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return &quot;Buddhist&quot;.hashCode() * 11 + getZone().hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Output
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets a debugging toString.
+&nbsp;     * 
+&nbsp;     * @return a debugging string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        String str = &quot;BuddhistChronology&quot;;</b>
+<b class="nc">&nbsp;        DateTimeZone zone = getZone();</b>
+<b class="nc">&nbsp;        if (zone != null) {</b>
+<b class="nc">&nbsp;            str = str + &#39;[&#39; + zone.getID() + &#39;]&#39;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return str;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void assemble(Fields fields) {
+<b class="nc">&nbsp;        if (getParam() == null) {</b>
+&nbsp;            // force init as used below
+<b class="nc">&nbsp;            fields.eras = UnsupportedDurationField.getInstance(DurationFieldType.eras());</b>
+&nbsp;            
+&nbsp;            // julian chrono removed zero, but we need to put it back
+<b class="nc">&nbsp;            DateTimeField field = fields.year;</b>
+<b class="nc">&nbsp;            fields.year = new OffsetDateTimeField(</b>
+&nbsp;                    new SkipUndoDateTimeField(this, field), BUDDHIST_OFFSET);
+&nbsp;            
+&nbsp;            // one era, so yearOfEra is the same
+<b class="nc">&nbsp;            field = fields.yearOfEra;</b>
+<b class="nc">&nbsp;            fields.yearOfEra = new DelegatedDateTimeField(</b>
+<b class="nc">&nbsp;                fields.year, fields.eras, DateTimeFieldType.yearOfEra());</b>
+&nbsp;            
+&nbsp;            // julian chrono removed zero, but we need to put it back
+<b class="nc">&nbsp;            field = fields.weekyear;</b>
+<b class="nc">&nbsp;            fields.weekyear = new OffsetDateTimeField(</b>
+&nbsp;                    new SkipUndoDateTimeField(this, field), BUDDHIST_OFFSET);
+&nbsp;            
+<b class="nc">&nbsp;            field = new OffsetDateTimeField(fields.yearOfEra, 99);</b>
+<b class="nc">&nbsp;            fields.centuryOfEra = new DividedDateTimeField(</b>
+<b class="nc">&nbsp;                field, fields.eras, DateTimeFieldType.centuryOfEra(), 100);</b>
+<b class="nc">&nbsp;            fields.centuries = fields.centuryOfEra.getDurationField();</b>
+&nbsp;            
+<b class="nc">&nbsp;            field = new RemainderDateTimeField(</b>
+&nbsp;                (DividedDateTimeField) fields.centuryOfEra);
+<b class="nc">&nbsp;            fields.yearOfCentury = new OffsetDateTimeField(</b>
+<b class="nc">&nbsp;                field, DateTimeFieldType.yearOfCentury(), 1);</b>
+&nbsp;            
+<b class="nc">&nbsp;            field = new RemainderDateTimeField(</b>
+<b class="nc">&nbsp;                fields.weekyear, fields.centuries, DateTimeFieldType.weekyearOfCentury(), 100);</b>
+<b class="nc">&nbsp;            fields.weekyearOfCentury = new OffsetDateTimeField(</b>
+<b class="nc">&nbsp;                field, DateTimeFieldType.weekyearOfCentury(), 1);</b>
+&nbsp;            
+<b class="nc">&nbsp;            fields.era = ERA_FIELD;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;   
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GoSafeProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: GoSafeProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GoSafeProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/164)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class GoSafeProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public GoSafeProtocolDecoder(GoSafeProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;*GS&quot;)                         // header</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // protocol version</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .expression(&quot;(.*)#?&quot;)                // data</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_ITEM = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .number(&quot;(x+)?,&quot;).optional()         // event</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;SYS:&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]*,&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;GPS:&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;([AV]);&quot;)               // validity</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // satellites</b>
+<b class="nc">&nbsp;            .number(&quot;([NS])(d+.d+);&quot;)            // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;([EW])(d+.d+);&quot;)            // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)?;&quot;)                    // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // course</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // altitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)&quot;)                   // hdop</b>
+<b class="nc">&nbsp;            .number(&quot;;(d+.d+)&quot;).optional()       // vdop</b>
+<b class="nc">&nbsp;            .expression(&quot;,?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd()</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;GSM:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;d*;&quot;)                       // registration</b>
+<b class="nc">&nbsp;            .number(&quot;d*;&quot;)                       // gsm signal</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // mcc</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // mnc</b>
+<b class="nc">&nbsp;            .number(&quot;(x+);&quot;)                     // lac</b>
+<b class="nc">&nbsp;            .number(&quot;(x+);&quot;)                     // cid</b>
+<b class="nc">&nbsp;            .number(&quot;(-d+)&quot;)                     // rssi</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]*,?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;COT:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)&quot;)                      // odometer</b>
+<b class="nc">&nbsp;            .number(&quot;(?:;d+:d+:d+)?&quot;)            // engine hours</b>
+<b class="nc">&nbsp;            .expression(&quot;,?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;ADC:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.d+)&quot;)                   // power</b>
+<b class="nc">&nbsp;            .number(&quot;(?:;(d+.d+))?,?&quot;)           // battery</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;DTT:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(x+);&quot;)                     // status</b>
+<b class="nc">&nbsp;            .number(&quot;(x+)?;&quot;)                    // io</b>
+<b class="nc">&nbsp;            .number(&quot;(x+);&quot;)                     // geo-fence 0-119</b>
+<b class="nc">&nbsp;            .number(&quot;(x+);&quot;)                     // geo-fence 120-155</b>
+<b class="nc">&nbsp;            .number(&quot;(x+)&quot;)                      // event status</b>
+<b class="nc">&nbsp;            .number(&quot;(?:;(x+))?,?&quot;)              // packet type</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;ETD:&quot;).expression(&quot;([^,]+),?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;OBD:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(x+),?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;FUL:&quot;).expression(&quot;[^,]*,?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;TRU:&quot;).expression(&quot;[^,]*,?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .groupBegin()</b>
+<b class="nc">&nbsp;            .text(&quot;TAG:&quot;).expression(&quot;([^,]+),?&quot;)</b>
+<b class="nc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN_OLD = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;*GS&quot;)                         // header</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // protocol version</b>
+<b class="nc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="nc">&nbsp;            .text(&quot;GPS:&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd);&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;d;&quot;).optional()             // fix type</b>
+<b class="nc">&nbsp;            .expression(&quot;([AV]);&quot;)               // validity</b>
+<b class="nc">&nbsp;            .number(&quot;([NS])(d+.d+);&quot;)            // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;([EW])(d+.d+);&quot;)            // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d+)?;&quot;)                    // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(d+);&quot;)                     // course</b>
+<b class="nc">&nbsp;            .number(&quot;(d+.?d*)&quot;).optional()       // hdop</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private Position decodePosition(DeviceSession deviceSession, Parser parser, Date time) {
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (time != null) {</b>
+<b class="nc">&nbsp;            position.setTime(time);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_EVENT, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble()));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setAltitude(parser.nextDouble());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_HDOP, parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_VDOP, parser.nextDouble());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(5)) {</b>
+<b class="nc">&nbsp;            position.setNetwork(new Network(CellTower.from(</b>
+<b class="nc">&nbsp;                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER, parser.nextInt());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, parser.next());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext(6)) {</b>
+<b class="nc">&nbsp;            long status = parser.nextLong(16);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_IGNITION, BitUtil.check(status, 13));</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_STATUS, status);</b>
+<b class="nc">&nbsp;            position.set(&quot;ioStatus&quot;, parser.next());</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_GEOFENCE, parser.next() + parser.next());</b>
+<b class="nc">&nbsp;            position.set(&quot;eventStatus&quot;, parser.next());</b>
+<b class="nc">&nbsp;            position.set(&quot;packetType&quot;, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="nc">&nbsp;            position.set(&quot;eventData&quot;, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="nc">&nbsp;            position.set(&quot;obd&quot;, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="nc">&nbsp;            position.set(&quot;tagData&quot;, parser.next());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(&quot;1234&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String sentence = (String) msg;</b>
+<b class="nc">&nbsp;        Pattern pattern = PATTERN;</b>
+<b class="nc">&nbsp;        if (sentence.startsWith(&quot;*GS02&quot;)) {</b>
+<b class="nc">&nbsp;            pattern = PATTERN_OLD;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(pattern, (String) msg);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (pattern == PATTERN_OLD) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                    .setTime(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="nc">&nbsp;            position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;            position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));</b>
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble()));</b>
+<b class="nc">&nbsp;            position.setCourse(parser.nextDouble());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_HDOP, parser.next());</b>
+&nbsp;
+<b class="nc">&nbsp;            dateBuilder.setDateReverse(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            Date time = null;</b>
+<b class="nc">&nbsp;            if (parser.hasNext(6)) {</b>
+<b class="nc">&nbsp;                time = parser.nextDateTime(Parser.DateTimeFormat.HMS_DMY);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;            Parser itemParser = new Parser(PATTERN_ITEM, parser.next());</b>
+<b class="nc">&nbsp;            while (itemParser.find()) {</b>
+<b class="nc">&nbsp;                positions.add(decodePosition(deviceSession, itemParser, time));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:55</div>
+</div>
+</body>
+</html>

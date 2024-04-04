@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NavisProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: NavisProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NavisProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/129)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NavisProtocolDecoder$1</td>
+  </tr>
+  <tr>
+    <td class="name">NavisProtocolDecoder$ParseResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/135)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class NavisProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    private String prefix;
+&nbsp;    private long deviceUniqueId, serverId;
+&nbsp;
+&nbsp;    public NavisProtocolDecoder(NavisProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int F10 = 0x01;
+&nbsp;    public static final int F20 = 0x02;
+&nbsp;    public static final int F30 = 0x03;
+&nbsp;    public static final int F40 = 0x04;
+&nbsp;    public static final int F50 = 0x05;
+&nbsp;    public static final int F51 = 0x15;
+&nbsp;    public static final int F52 = 0x25;
+&nbsp;
+&nbsp;    private static boolean isFormat(int type, int... types) {
+<b class="nc">&nbsp;        for (int i : types) {</b>
+<b class="nc">&nbsp;            if (type == i) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final class ParseResult {</b>
+&nbsp;        private final long id;
+&nbsp;        private final Position position;
+&nbsp;
+<b class="nc">&nbsp;        private ParseResult(long id, Position position) {</b>
+<b class="nc">&nbsp;            this.id = id;</b>
+<b class="nc">&nbsp;            this.position = position;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getId() {
+<b class="nc">&nbsp;            return id;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Position getPosition() {
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private ParseResult parsePosition(DeviceSession deviceSession, ChannelBuffer buf) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+&nbsp;        int format;
+<b class="nc">&nbsp;        if (buf.getUnsignedByte(buf.readerIndex()) == 0) {</b>
+<b class="nc">&nbsp;            format = buf.readUnsignedShort();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            format = buf.readUnsignedByte();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.set(&quot;format&quot;, format);</b>
+&nbsp;
+<b class="nc">&nbsp;        long index = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, index);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_EVENT, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(6); // event time</b>
+&nbsp;
+<b class="nc">&nbsp;        short armedStatus = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ARMED, armedStatus &amp; 0x7F);</b>
+<b class="nc">&nbsp;        if (BitUtil.check(armedStatus, 7)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isFormat(format, F10, F20, F30)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_OUTPUT, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;        } else if (isFormat(format, F40, F50, F51, F52)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isFormat(format, F10, F20, F30, F40)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;        } else if (isFormat(format, F50, F51, F52)) {</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_INPUT, buf.readUnsignedByte());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.001);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (isFormat(format, F10, F20, F30)) {</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, buf.readShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isFormat(format, F10, F20, F50, F52)) {</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;            position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Impulse counters
+<b class="nc">&nbsp;        if (isFormat(format, F20, F50, F51, F52)) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;            buf.readUnsignedInt();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (isFormat(format, F20, F50, F51, F52)) {</b>
+<b class="nc">&nbsp;            int locationStatus = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;            position.setValid(BitUtil.check(locationStatus, 1));</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                    .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="nc">&nbsp;                    .setDateReverse(buf.readUnsignedByte(), buf.readUnsignedByte() + 1, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setLatitude(buf.readFloat() / Math.PI * 180);</b>
+<b class="nc">&nbsp;            position.setLongitude(buf.readFloat() / Math.PI * 180);</b>
+<b class="nc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readFloat()));</b>
+<b class="nc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readFloat() * 1000);</b>
+<b class="nc">&nbsp;            position.set(Position.KEY_DISTANCE, buf.readFloat());</b>
+&nbsp;
+&nbsp;            // Segment times
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Other
+<b class="nc">&nbsp;        if (isFormat(format, F51, F52)) {</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readUnsignedShort();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Four temperature sensors
+<b class="nc">&nbsp;        if (isFormat(format, F40, F52)) {</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+<b class="nc">&nbsp;            buf.readByte();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return new ParseResult(index, position);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object processSingle(DeviceSession deviceSession, Channel channel, ChannelBuffer buf) {
+<b class="nc">&nbsp;        ParseResult result = parsePosition(deviceSession, buf);</b>
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer response = ChannelBuffers.dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8);</b>
+<b class="nc">&nbsp;        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, &quot;*&lt;T&quot;, StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;        response.writeInt((int) result.getId());</b>
+<b class="nc">&nbsp;        sendReply(channel, response);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (result.getPosition().getFixTime() == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result.getPosition();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object processArray(DeviceSession deviceSession, Channel channel, ChannelBuffer buf) {
+<b class="nc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;        int count = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;            Position position = parsePosition(deviceSession, buf).getPosition();</b>
+<b class="nc">&nbsp;            if (position.getFixTime() != null) {</b>
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer response = ChannelBuffers.dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8);</b>
+<b class="nc">&nbsp;        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, &quot;*&lt;A&quot;, StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;        response.writeByte(count);</b>
+<b class="nc">&nbsp;        sendReply(channel, response);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (positions.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object processHandshake(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) {
+<b class="nc">&nbsp;        buf.readByte(); // semicolon symbol</b>
+<b class="nc">&nbsp;        if (getDeviceSession(channel, remoteAddress, buf.toString(StandardCharsets.US_ASCII)) != null) {</b>
+<b class="nc">&nbsp;            sendReply(channel, ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, &quot;*&lt;S&quot;, StandardCharsets.US_ASCII));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static short checksum(ChannelBuffer buf) {
+<b class="nc">&nbsp;        short sum = 0;</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; buf.readableBytes(); i++) {</b>
+<b class="nc">&nbsp;            sum ^= buf.getUnsignedByte(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void sendReply(Channel channel, ChannelBuffer data) {
+<b class="nc">&nbsp;        ChannelBuffer header = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 16);</b>
+<b class="nc">&nbsp;        header.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, prefix, StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;        header.writeInt((int) deviceUniqueId);</b>
+<b class="nc">&nbsp;        header.writeInt((int) serverId);</b>
+<b class="nc">&nbsp;        header.writeShort(data.readableBytes());</b>
+<b class="nc">&nbsp;        header.writeByte(checksum(data));</b>
+<b class="nc">&nbsp;        header.writeByte(checksum(header));</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(ChannelBuffers.copiedBuffer(header, data));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        prefix = buf.toString(buf.readerIndex(), 4, StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        buf.skipBytes(prefix.length()); // prefix @NTC by default</b>
+<b class="nc">&nbsp;        serverId = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;        deviceUniqueId = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;        int length = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        buf.skipBytes(2); // header and data XOR checksum</b>
+&nbsp;
+<b class="nc">&nbsp;        if (length == 0) {</b>
+<b class="nc">&nbsp;            return null; // keep alive message</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String type = buf.toString(buf.readerIndex(), 3, StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;        buf.skipBytes(type.length());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type.equals(&quot;*&gt;S&quot;)) {</b>
+<b class="nc">&nbsp;            return processHandshake(channel, remoteAddress, buf);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession != null) {</b>
+<b class="nc">&nbsp;                if (type.equals(&quot;*&gt;T&quot;)) {</b>
+<b class="nc">&nbsp;                    return processSingle(deviceSession, channel, buf);</b>
+<b class="nc">&nbsp;                } else if (type.equals(&quot;*&gt;A&quot;)) {</b>
+<b class="nc">&nbsp;                    return processArray(deviceSession, channel, buf);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:50</div>
+</div>
+</body>
+</html>

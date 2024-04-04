@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotificationMail</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.notification</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationMail (org.traccar.notification)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationMail</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NotificationMail$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.notification;
+&nbsp;
+&nbsp;import java.util.Properties;
+&nbsp;
+&nbsp;import javax.mail.Message;
+&nbsp;import javax.mail.MessagingException;
+&nbsp;import javax.mail.Session;
+&nbsp;import javax.mail.Transport;
+&nbsp;import javax.mail.internet.InternetAddress;
+&nbsp;import javax.mail.internet.MimeMessage;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.User;
+&nbsp;
+&nbsp;public final class NotificationMail {
+&nbsp;
+&nbsp;    private NotificationMail() {
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Properties getProperties(PropertiesProvider provider) {
+<b class="nc">&nbsp;        Properties properties = new Properties();</b>
+<b class="nc">&nbsp;        String host = provider.getString(&quot;mail.smtp.host&quot;);</b>
+<b class="nc">&nbsp;        if (host != null) {</b>
+<b class="nc">&nbsp;            properties.put(&quot;mail.transport.protocol&quot;, provider.getString(&quot;mail.transport.protocol&quot;, &quot;smtp&quot;));</b>
+<b class="nc">&nbsp;            properties.put(&quot;mail.smtp.host&quot;, host);</b>
+<b class="nc">&nbsp;            properties.put(&quot;mail.smtp.port&quot;, provider.getString(&quot;mail.smtp.port&quot;, &quot;25&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            String starttlsEnable = provider.getString(&quot;mail.smtp.starttls.enable&quot;);</b>
+<b class="nc">&nbsp;            if (starttlsEnable != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.starttls.enable&quot;, Boolean.parseBoolean(starttlsEnable));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String starttlsRequired = provider.getString(&quot;mail.smtp.starttls.required&quot;);</b>
+<b class="nc">&nbsp;            if (starttlsRequired != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.starttls.required&quot;, Boolean.parseBoolean(starttlsRequired));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String sslEnable = provider.getString(&quot;mail.smtp.ssl.enable&quot;);</b>
+<b class="nc">&nbsp;            if (sslEnable != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.ssl.enable&quot;, Boolean.parseBoolean(sslEnable));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String sslTrust = provider.getString(&quot;mail.smtp.ssl.trust&quot;);</b>
+<b class="nc">&nbsp;            if (sslTrust != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.ssl.trust&quot;, sslTrust);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String sslProtocols = provider.getString(&quot;mail.smtp.ssl.protocols&quot;);</b>
+<b class="nc">&nbsp;            if (sslProtocols != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.ssl.protocols&quot;, sslProtocols);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            properties.put(&quot;mail.smtp.auth&quot;, provider.getString(&quot;mail.smtp.auth&quot;));</b>
+&nbsp;
+<b class="nc">&nbsp;            String username = provider.getString(&quot;mail.smtp.username&quot;);</b>
+<b class="nc">&nbsp;            if (username != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.username&quot;, username);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String password = provider.getString(&quot;mail.smtp.password&quot;);</b>
+<b class="nc">&nbsp;            if (password != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.password&quot;, password);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            String from = provider.getString(&quot;mail.smtp.from&quot;);</b>
+<b class="nc">&nbsp;            if (from != null) {</b>
+<b class="nc">&nbsp;                properties.put(&quot;mail.smtp.from&quot;, from);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void sendMailSync(long userId, Event event, Position position) throws MessagingException {
+<b class="nc">&nbsp;        User user = Context.getPermissionsManager().getUser(userId);</b>
+&nbsp;
+<b class="nc">&nbsp;        Properties properties = getProperties(new PropertiesProvider(Context.getConfig()));</b>
+<b class="nc">&nbsp;        if (!properties.containsKey(&quot;mail.smtp.host&quot;)) {</b>
+<b class="nc">&nbsp;            properties = getProperties(new PropertiesProvider(user));</b>
+<b class="nc">&nbsp;            if (!properties.containsKey(&quot;mail.smtp.host&quot;)) {</b>
+<b class="nc">&nbsp;                Log.warning(&quot;No SMTP configuration found&quot;);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Session session = Session.getInstance(properties);</b>
+&nbsp;
+<b class="nc">&nbsp;        MimeMessage message = new MimeMessage(session);</b>
+&nbsp;
+<b class="nc">&nbsp;        String from = properties.getProperty(&quot;mail.smtp.from&quot;);</b>
+<b class="nc">&nbsp;        if (from != null) {</b>
+<b class="nc">&nbsp;            message.setFrom(new InternetAddress(from));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));</b>
+<b class="nc">&nbsp;        MailMessage mailMessage = NotificationFormatter.formatMailMessage(userId, event, position);</b>
+<b class="nc">&nbsp;        message.setSubject(mailMessage.getSubject());</b>
+<b class="nc">&nbsp;        message.setContent(mailMessage.getBody(), &quot;text/html; charset=utf-8&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Transport transport = session.getTransport();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            transport.connect(</b>
+<b class="nc">&nbsp;                    properties.getProperty(&quot;mail.smtp.host&quot;),</b>
+<b class="nc">&nbsp;                    properties.getProperty(&quot;mail.smtp.username&quot;),</b>
+<b class="nc">&nbsp;                    properties.getProperty(&quot;mail.smtp.password&quot;));</b>
+<b class="nc">&nbsp;            transport.sendMessage(message, message.getAllRecipients());</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            transport.close();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void sendMailAsync(final long userId, final Event event, final Position position) {
+<b class="nc">&nbsp;        new Thread(new Runnable() {</b>
+&nbsp;            public void run() {
+&nbsp;                try {
+<b class="nc">&nbsp;                    sendMailSync(userId, event, position);</b>
+<b class="nc">&nbsp;                } catch (MessagingException error) {</b>
+<b class="nc">&nbsp;                    Log.warning(error);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }).start();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:42</div>
+</div>
+</body>
+</html>

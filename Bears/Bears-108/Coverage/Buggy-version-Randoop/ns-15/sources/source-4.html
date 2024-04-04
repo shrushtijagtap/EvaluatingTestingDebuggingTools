@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConnectionManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: ConnectionManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectionManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConnectionManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConnectionManager$UpdateListener</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.util.Timeout;
+&nbsp;import org.jboss.netty.util.TimerTask;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.GlobalTimer;
+&nbsp;import org.traccar.Protocol;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.TimeUnit;
+&nbsp;
+&nbsp;public class ConnectionManager {
+&nbsp;
+&nbsp;    private static final long DEFAULT_TIMEOUT = 600;
+&nbsp;
+&nbsp;    private final long deviceTimeout;
+&nbsp;    private final boolean enableStatusEvents;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, ActiveDevice&gt; activeDevices = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;UpdateListener&gt;&gt; listeners = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Timeout&gt; timeouts = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public ConnectionManager() {</b>
+<b class="nc">&nbsp;        deviceTimeout = Context.getConfig().getLong(&quot;status.timeout&quot;, DEFAULT_TIMEOUT) * 1000;</b>
+<b class="nc">&nbsp;        enableStatusEvents = Context.getConfig().getBoolean(&quot;event.statusHandler&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addActiveDevice(long deviceId, Protocol protocol, Channel channel, SocketAddress remoteAddress) {
+<b class="nc">&nbsp;        activeDevices.put(deviceId, new ActiveDevice(deviceId, protocol, channel, remoteAddress));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeActiveDevice(Channel channel) {
+<b class="nc">&nbsp;        for (ActiveDevice activeDevice : activeDevices.values()) {</b>
+<b class="nc">&nbsp;            if (activeDevice.getChannel() == channel) {</b>
+<b class="nc">&nbsp;                updateDevice(activeDevice.getDeviceId(), Device.STATUS_OFFLINE, null);</b>
+<b class="nc">&nbsp;                activeDevices.remove(activeDevice.getDeviceId());</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ActiveDevice getActiveDevice(long deviceId) {
+<b class="nc">&nbsp;        return activeDevices.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateDevice(final long deviceId, String status, Date time) {
+<b class="nc">&nbsp;        Device device = Context.getIdentityManager().getDeviceById(deviceId);</b>
+<b class="nc">&nbsp;        if (device == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (enableStatusEvents &amp;&amp; !status.equals(device.getStatus())) {</b>
+&nbsp;            String eventType;
+<b class="nc">&nbsp;            switch (status) {</b>
+&nbsp;                case Device.STATUS_ONLINE:
+<b class="nc">&nbsp;                    eventType = Event.TYPE_DEVICE_ONLINE;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                case Device.STATUS_UNKNOWN:
+<b class="nc">&nbsp;                    eventType = Event.TYPE_DEVICE_UNKNOWN;</b>
+<b class="nc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    eventType = Event.TYPE_DEVICE_OFFLINE;</b>
+&nbsp;                    break;
+&nbsp;            }
+<b class="nc">&nbsp;            Event event = new Event(eventType, deviceId);</b>
+<b class="nc">&nbsp;            if (Context.getNotificationManager() != null) {</b>
+<b class="nc">&nbsp;                Context.getNotificationManager().updateEvent(event, null);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        device.setStatus(status);</b>
+&nbsp;
+<b class="nc">&nbsp;        Timeout timeout = timeouts.remove(deviceId);</b>
+<b class="nc">&nbsp;        if (timeout != null) {</b>
+<b class="nc">&nbsp;            timeout.cancel();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (time != null) {</b>
+<b class="nc">&nbsp;            device.setLastUpdate(time);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (status.equals(Device.STATUS_ONLINE)) {</b>
+<b class="nc">&nbsp;            timeouts.put(deviceId, GlobalTimer.getTimer().newTimeout(new TimerTask() {</b>
+&nbsp;                @Override
+&nbsp;                public void run(Timeout timeout) throws Exception {
+<b class="nc">&nbsp;                    if (!timeout.isCancelled()) {</b>
+<b class="nc">&nbsp;                        updateDevice(deviceId, Device.STATUS_UNKNOWN, null);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }, deviceTimeout, TimeUnit.MILLISECONDS));
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Context.getDeviceManager().updateDeviceStatus(device);</b>
+<b class="nc">&nbsp;        } catch (SQLException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        updateDevice(device);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized void updateDevice(Device device) {
+<b class="nc">&nbsp;        for (long userId : Context.getPermissionsManager().getDeviceUsers(device.getId())) {</b>
+<b class="nc">&nbsp;            if (listeners.containsKey(userId)) {</b>
+<b class="nc">&nbsp;                for (UpdateListener listener : listeners.get(userId)) {</b>
+<b class="nc">&nbsp;                    listener.onUpdateDevice(device);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized void updatePosition(Position position) {
+<b class="nc">&nbsp;        long deviceId = position.getDeviceId();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (long userId : Context.getPermissionsManager().getDeviceUsers(deviceId)) {</b>
+<b class="nc">&nbsp;            if (listeners.containsKey(userId)) {</b>
+<b class="nc">&nbsp;                for (UpdateListener listener : listeners.get(userId)) {</b>
+<b class="nc">&nbsp;                    listener.onUpdatePosition(position);</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized void updateEvent(long userId, Event event) {
+<b class="nc">&nbsp;        if (listeners.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            for (UpdateListener listener : listeners.get(userId)) {</b>
+<b class="nc">&nbsp;                listener.onUpdateEvent(event);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface UpdateListener {
+&nbsp;        void onUpdateDevice(Device device);
+&nbsp;        void onUpdatePosition(Position position);
+&nbsp;        void onUpdateEvent(Event event);
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized void addListener(long userId, UpdateListener listener) {
+<b class="nc">&nbsp;        if (!listeners.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            listeners.put(userId, new HashSet&lt;UpdateListener&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        listeners.get(userId).add(listener);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized void removeListener(long userId, UpdateListener listener) {
+<b class="nc">&nbsp;        if (!listeners.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            listeners.put(userId, new HashSet&lt;UpdateListener&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        listeners.get(userId).remove(listener);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:50</div>
+</div>
+</body>
+</html>

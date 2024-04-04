@@ -20,7 +20,7 @@ import org.traccar.protocol.MeitrackProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class MeitrackProtocolDecoder_ESTest extends MeitrackProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       MeitrackProtocolDecoder meitrackProtocolDecoder0 = new MeitrackProtocolDecoder((MeitrackProtocol) null);
       try { 
@@ -35,7 +35,7 @@ public class MeitrackProtocolDecoder_ESTest extends MeitrackProtocolDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       MeitrackProtocol meitrackProtocol0 = new MeitrackProtocol();
       MeitrackProtocolDecoder meitrackProtocolDecoder0 = new MeitrackProtocolDecoder(meitrackProtocol0);

@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotificationResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.api.resource</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationResource (org.traccar.api.resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.api.resource;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;import javax.mail.MessagingException;
+&nbsp;import javax.ws.rs.Consumes;
+&nbsp;import javax.ws.rs.GET;
+&nbsp;import javax.ws.rs.POST;
+&nbsp;import javax.ws.rs.Path;
+&nbsp;import javax.ws.rs.Produces;
+&nbsp;import javax.ws.rs.QueryParam;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;import javax.ws.rs.core.Response;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.api.BaseResource;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Notification;
+&nbsp;import org.traccar.notification.NotificationMail;
+&nbsp;import org.traccar.notification.NotificationSms;
+&nbsp;
+&nbsp;import com.cloudhopper.smpp.type.RecoverablePduException;
+&nbsp;import com.cloudhopper.smpp.type.SmppChannelException;
+&nbsp;import com.cloudhopper.smpp.type.SmppTimeoutException;
+&nbsp;import com.cloudhopper.smpp.type.UnrecoverablePduException;
+&nbsp;
+&nbsp;@Path(&quot;users/notifications&quot;)
+&nbsp;@Produces(MediaType.APPLICATION_JSON)
+&nbsp;@Consumes(MediaType.APPLICATION_JSON)
+<b class="nc">&nbsp;public class NotificationResource extends BaseResource {</b>
+&nbsp;
+&nbsp;    @GET
+&nbsp;    public Collection&lt;Notification&gt; get(@QueryParam(&quot;all&quot;) boolean all,
+&nbsp;            @QueryParam(&quot;userId&quot;) long userId) throws SQLException {
+<b class="nc">&nbsp;        if (all) {</b>
+<b class="nc">&nbsp;            return Context.getNotificationManager().getAllNotifications();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (userId == 0) {</b>
+<b class="nc">&nbsp;            userId = getUserId();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Context.getPermissionsManager().checkUser(getUserId(), userId);</b>
+<b class="nc">&nbsp;        return Context.getNotificationManager().getAllUserNotifications(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @POST
+&nbsp;    public Response update(Notification entity) throws SQLException {
+<b class="nc">&nbsp;        Context.getPermissionsManager().checkReadonly(getUserId());</b>
+<b class="nc">&nbsp;        Context.getPermissionsManager().checkUser(getUserId(), entity.getUserId());</b>
+<b class="nc">&nbsp;        Context.getNotificationManager().updateNotification(entity);</b>
+<b class="nc">&nbsp;        return Response.ok(entity).build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Path(&quot;test&quot;)
+&nbsp;    @POST
+&nbsp;    public Response testMessage() throws MessagingException, RecoverablePduException,
+&nbsp;            UnrecoverablePduException, SmppTimeoutException, SmppChannelException, InterruptedException {
+<b class="nc">&nbsp;        NotificationMail.sendMailSync(getUserId(), new Event(&quot;test&quot;, 0), null);</b>
+<b class="nc">&nbsp;        NotificationSms.sendSmsSync(getUserId(), new Event(&quot;test&quot;, 0), null);</b>
+<b class="nc">&nbsp;        return Response.noContent().build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:05</div>
+</div>
+</body>
+</html>

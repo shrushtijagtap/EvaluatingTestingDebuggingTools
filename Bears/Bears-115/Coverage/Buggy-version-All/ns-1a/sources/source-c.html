@@ -1,0 +1,500 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Parser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.helper</a>
+</div>
+
+<h1>Coverage Summary for Class: Parser (org.traccar.helper)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Parser</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.5%
+  </span>
+  <span class="absValue">
+    (21/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.6%
+  </span>
+  <span class="absValue">
+    (114/147)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Parser$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Parser$CoordinateFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Parser$DateTimeFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.6%
+  </span>
+  <span class="absValue">
+    (137/170)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.helper;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.TimeZone;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class Parser {
+&nbsp;
+&nbsp;    private int position;
+&nbsp;    private final Matcher matcher;
+&nbsp;
+<b class="fc">&nbsp;    public Parser(Pattern pattern, String input) {</b>
+<b class="fc">&nbsp;        matcher = pattern.matcher(input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean matches() {
+<b class="fc">&nbsp;        position = 1;</b>
+<b class="fc">&nbsp;        return matcher.matches();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean find() {
+<b class="fc">&nbsp;        position = 1;</b>
+<b class="fc">&nbsp;        return matcher.find();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void skip(int number) {
+<b class="fc">&nbsp;        position += number;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasNext() {
+<b class="fc">&nbsp;        return hasNext(1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasNext(int number) {
+<b class="fc">&nbsp;        String value = matcher.group(position);</b>
+<b class="fc">&nbsp;        if (value != null &amp;&amp; !value.isEmpty()) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            position += number;</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String next() {
+<b class="fc">&nbsp;        return matcher.group(position++);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer nextInt() {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Integer.parseInt(next());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int nextInt(int defaultValue) {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Integer.parseInt(next());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer nextHexInt() {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Integer.parseInt(next(), 16);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int nextHexInt(int defaultValue) {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Integer.parseInt(next(), 16);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer nextBinInt() {
+<b class="nc">&nbsp;        if (hasNext()) {</b>
+<b class="nc">&nbsp;            return Integer.parseInt(next(), 2);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int nextBinInt(int defaultValue) {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Integer.parseInt(next(), 2);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public long nextLong(long defaultValue) {
+<b class="fc">&nbsp;        return nextLong(10, defaultValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long nextLong(int radix, long defaultValue) {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Long.parseLong(next(), radix);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Double nextDouble() {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Double.parseDouble(next());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public double nextDouble(double defaultValue) {
+<b class="fc">&nbsp;        if (hasNext()) {</b>
+<b class="fc">&nbsp;            return Double.parseDouble(next());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return defaultValue;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public enum CoordinateFormat {</b>
+<b class="fc">&nbsp;        DEG_DEG,</b>
+<b class="fc">&nbsp;        DEG_HEM,</b>
+<b class="fc">&nbsp;        DEG_MIN_MIN,</b>
+<b class="fc">&nbsp;        DEG_MIN_HEM,</b>
+<b class="fc">&nbsp;        DEG_MIN_MIN_HEM,</b>
+<b class="fc">&nbsp;        HEM_DEG_MIN_MIN,</b>
+<b class="fc">&nbsp;        HEM_DEG,</b>
+<b class="fc">&nbsp;        HEM_DEG_MIN,</b>
+<b class="fc">&nbsp;        HEM_DEG_MIN_HEM</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double nextCoordinate(CoordinateFormat format) {
+&nbsp;        double coordinate;
+<b class="fc">&nbsp;        String hemisphere = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        switch (format) {</b>
+&nbsp;            case DEG_DEG:
+<b class="fc">&nbsp;                coordinate = Double.parseDouble(next() + &#39;.&#39; + next());</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case DEG_HEM:
+<b class="fc">&nbsp;                coordinate = nextDouble(0);</b>
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case DEG_MIN_MIN:
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += Double.parseDouble(next() + &#39;.&#39; + next()) / 60;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case DEG_MIN_MIN_HEM:
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += Double.parseDouble(next() + &#39;.&#39; + next()) / 60;</b>
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case HEM_DEG:
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                coordinate = nextDouble(0);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case HEM_DEG_MIN:
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += nextDouble(0) / 60;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case HEM_DEG_MIN_HEM:
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += nextDouble(0) / 60;</b>
+<b class="fc">&nbsp;                if (hasNext()) {</b>
+<b class="fc">&nbsp;                    hemisphere = next();</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            case HEM_DEG_MIN_MIN:
+<b class="fc">&nbsp;                hemisphere = next();</b>
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += Double.parseDouble(next() + &#39;.&#39; + next()) / 60;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case DEG_MIN_HEM:
+&nbsp;            default:
+<b class="fc">&nbsp;                coordinate = nextInt(0);</b>
+<b class="fc">&nbsp;                coordinate += nextDouble(0) / 60;</b>
+<b class="fc">&nbsp;                hemisphere = next();</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (hemisphere != null &amp;&amp; (hemisphere.equals(&quot;S&quot;) || hemisphere.equals(&quot;W&quot;) || hemisphere.equals(&quot;-&quot;))) {</b>
+<b class="fc">&nbsp;            coordinate = -Math.abs(coordinate);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return coordinate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double nextCoordinate() {
+<b class="fc">&nbsp;        return nextCoordinate(CoordinateFormat.DEG_MIN_HEM);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public enum DateTimeFormat {</b>
+<b class="fc">&nbsp;        HMS,</b>
+<b class="fc">&nbsp;        SMH,</b>
+<b class="fc">&nbsp;        HMS_YMD,</b>
+<b class="fc">&nbsp;        HMS_DMY,</b>
+<b class="fc">&nbsp;        SMH_YMD,</b>
+<b class="fc">&nbsp;        SMH_DMY,</b>
+<b class="fc">&nbsp;        DMY_HMS,</b>
+<b class="fc">&nbsp;        DMY_HMSS,</b>
+<b class="fc">&nbsp;        YMD_HMS,</b>
+<b class="fc">&nbsp;        YMD_HMSS,</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date nextDateTime(DateTimeFormat format, String timeZone) {
+<b class="fc">&nbsp;        int year = 0, month = 0, day = 0;</b>
+<b class="fc">&nbsp;        int hour = 0, minute = 0, second = 0, millisecond = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        switch (format) {</b>
+&nbsp;            case HMS:
+<b class="fc">&nbsp;                hour = nextInt(0);</b>
+<b class="fc">&nbsp;                minute = nextInt(0);</b>
+<b class="fc">&nbsp;                second = nextInt(0);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case SMH:
+<b class="nc">&nbsp;                second = nextInt(0);</b>
+<b class="nc">&nbsp;                minute = nextInt(0);</b>
+<b class="nc">&nbsp;                hour = nextInt(0);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case HMS_YMD:
+<b class="nc">&nbsp;                hour = nextInt(0);</b>
+<b class="nc">&nbsp;                minute = nextInt(0);</b>
+<b class="nc">&nbsp;                second = nextInt(0);</b>
+<b class="nc">&nbsp;                year = nextInt(0);</b>
+<b class="nc">&nbsp;                month = nextInt(0);</b>
+<b class="nc">&nbsp;                day = nextInt(0);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case HMS_DMY:
+<b class="fc">&nbsp;                hour = nextInt(0);</b>
+<b class="fc">&nbsp;                minute = nextInt(0);</b>
+<b class="fc">&nbsp;                second = nextInt(0);</b>
+<b class="fc">&nbsp;                day = nextInt(0);</b>
+<b class="fc">&nbsp;                month = nextInt(0);</b>
+<b class="fc">&nbsp;                year = nextInt(0);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case SMH_YMD:
+<b class="nc">&nbsp;                second = nextInt(0);</b>
+<b class="nc">&nbsp;                minute = nextInt(0);</b>
+<b class="nc">&nbsp;                hour = nextInt(0);</b>
+<b class="nc">&nbsp;                year = nextInt(0);</b>
+<b class="nc">&nbsp;                month = nextInt(0);</b>
+<b class="nc">&nbsp;                day = nextInt(0);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case SMH_DMY:
+<b class="nc">&nbsp;                second = nextInt(0);</b>
+<b class="nc">&nbsp;                minute = nextInt(0);</b>
+<b class="nc">&nbsp;                hour = nextInt(0);</b>
+<b class="nc">&nbsp;                day = nextInt(0);</b>
+<b class="nc">&nbsp;                month = nextInt(0);</b>
+<b class="nc">&nbsp;                year = nextInt(0);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case DMY_HMS:
+&nbsp;            case DMY_HMSS:
+<b class="fc">&nbsp;                day = nextInt(0);</b>
+<b class="fc">&nbsp;                month = nextInt(0);</b>
+<b class="fc">&nbsp;                year = nextInt(0);</b>
+<b class="fc">&nbsp;                hour = nextInt(0);</b>
+<b class="fc">&nbsp;                minute = nextInt(0);</b>
+<b class="fc">&nbsp;                second = nextInt(0);</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case YMD_HMS:
+&nbsp;            case YMD_HMSS:
+&nbsp;            default:
+<b class="fc">&nbsp;                year = nextInt(0);</b>
+<b class="fc">&nbsp;                month = nextInt(0);</b>
+<b class="fc">&nbsp;                day = nextInt(0);</b>
+<b class="fc">&nbsp;                hour = nextInt(0);</b>
+<b class="fc">&nbsp;                minute = nextInt(0);</b>
+<b class="fc">&nbsp;                second = nextInt(0);</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (format == DateTimeFormat.YMD_HMSS || format == DateTimeFormat.DMY_HMSS) {</b>
+<b class="nc">&nbsp;            millisecond = nextInt(0); // (ddd)</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (year &gt;= 0 &amp;&amp; year &lt; 100) {</b>
+<b class="fc">&nbsp;            year += 2000;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        DateBuilder dateBuilder;
+<b class="fc">&nbsp;        if (format != DateTimeFormat.HMS &amp;&amp; format != DateTimeFormat.SMH) {</b>
+<b class="fc">&nbsp;            if (timeZone != null) {</b>
+<b class="fc">&nbsp;                dateBuilder = new DateBuilder(TimeZone.getTimeZone(timeZone));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                dateBuilder = new DateBuilder();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            dateBuilder.setDate(year, month, day);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            if (timeZone != null) {</b>
+<b class="nc">&nbsp;                dateBuilder = new DateBuilder(new Date(), TimeZone.getTimeZone(timeZone));</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                dateBuilder = new DateBuilder(new Date());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        dateBuilder.setTime(hour, minute, second, millisecond);</b>
+&nbsp;
+<b class="fc">&nbsp;        return dateBuilder.getDate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date nextDateTime(DateTimeFormat format) {
+<b class="fc">&nbsp;        return nextDateTime(format, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date nextDateTime() {
+<b class="fc">&nbsp;        return nextDateTime(DateTimeFormat.YMD_HMS, null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:58</div>
+</div>
+</body>
+</html>

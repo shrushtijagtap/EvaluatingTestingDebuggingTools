@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableDurationConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.convert</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableDurationConverter (org.joda.time.convert)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReadableDurationConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.convert;
+&nbsp;
+&nbsp;import org.joda.time.Chronology;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.ReadWritablePeriod;
+&nbsp;import org.joda.time.ReadableDuration;
+&nbsp;
+&nbsp;/**
+&nbsp; * ReadableDurationConverter extracts milliseconds and chronology from a ReadableDuration.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;class ReadableDurationConverter extends AbstractConverter
+&nbsp;        implements DurationConverter, PeriodConverter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Singleton instance.
+&nbsp;     */
+<b class="nc">&nbsp;    static final ReadableDurationConverter INSTANCE = new ReadableDurationConverter();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    protected ReadableDurationConverter() {
+<b class="nc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Extracts the millis from an object of this convertor&#39;s type.
+&nbsp;     * 
+&nbsp;     * @param object  the object to convert, must not be null
+&nbsp;     * @return the millisecond value
+&nbsp;     * @throws NullPointerException if the object is null
+&nbsp;     * @throws ClassCastException if the object is an invalid type
+&nbsp;     * @throws IllegalArgumentException if the object is invalid
+&nbsp;     */
+&nbsp;    public long getDurationMillis(Object object) {
+<b class="nc">&nbsp;        return ((ReadableDuration) object).getMillis();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Extracts duration values from an object of this converter&#39;s type, and
+&nbsp;     * sets them into the given ReadWritableDuration.
+&nbsp;     *
+&nbsp;     * @param writablePeriod  period to get modified
+&nbsp;     * @param object  the object to convert, must not be null
+&nbsp;     * @param chrono  the chronology to use, must not be null
+&nbsp;     * @throws NullPointerException if the duration or object is null
+&nbsp;     * @throws ClassCastException if the object is an invalid type
+&nbsp;     * @throws IllegalArgumentException if the object is invalid
+&nbsp;     */
+&nbsp;    public void setInto(ReadWritablePeriod writablePeriod, Object object, Chronology chrono) {
+<b class="nc">&nbsp;        ReadableDuration dur = (ReadableDuration) object;</b>
+<b class="nc">&nbsp;        chrono = DateTimeUtils.getChronology(chrono);</b>
+<b class="nc">&nbsp;        long duration = dur.getMillis();</b>
+<b class="nc">&nbsp;        int[] values = chrono.get(writablePeriod, duration);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; values.length; i++) {</b>
+<b class="nc">&nbsp;            writablePeriod.setValue(i, values[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Returns ReadableDuration.class.
+&nbsp;     * 
+&nbsp;     * @return ReadableDuration.class
+&nbsp;     */
+&nbsp;    public Class&lt;?&gt; getSupportedType() {
+<b class="nc">&nbsp;        return ReadableDuration.class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

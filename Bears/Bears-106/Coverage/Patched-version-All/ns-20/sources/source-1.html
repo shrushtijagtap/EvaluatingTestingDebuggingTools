@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ClientSmppSessionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.smpp</a>
+</div>
+
+<h1>Coverage Summary for Class: ClientSmppSessionHandler (org.traccar.smpp)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientSmppSessionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.smpp;
+&nbsp;
+&nbsp;import org.traccar.events.TextMessageEventHandler;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;
+&nbsp;import com.cloudhopper.commons.charset.CharsetUtil;
+&nbsp;import com.cloudhopper.smpp.SmppConstants;
+&nbsp;import com.cloudhopper.smpp.impl.DefaultSmppSessionHandler;
+&nbsp;import com.cloudhopper.smpp.pdu.DeliverSm;
+&nbsp;import com.cloudhopper.smpp.pdu.PduRequest;
+&nbsp;import com.cloudhopper.smpp.pdu.PduResponse;
+&nbsp;
+&nbsp;public class ClientSmppSessionHandler extends DefaultSmppSessionHandler {
+&nbsp;
+&nbsp;    private SmppClient smppClient;
+&nbsp;
+<b class="nc">&nbsp;    public ClientSmppSessionHandler(SmppClient smppClient) {</b>
+<b class="nc">&nbsp;        this.smppClient = smppClient;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void firePduRequestExpired(PduRequest pduRequest) {
+<b class="nc">&nbsp;        Log.warning(&quot;PDU request expired: &quot; + pduRequest);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PduResponse firePduRequestReceived(PduRequest request) {
+<b class="nc">&nbsp;        PduResponse response = null;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (request instanceof DeliverSm) {</b>
+<b class="nc">&nbsp;                if (request.getOptionalParameters() != null) {</b>
+<b class="nc">&nbsp;                    Log.debug(&quot;SMS Message Delivered: &quot;</b>
+<b class="nc">&nbsp;                            + request.getOptionalParameter(SmppConstants.TAG_RECEIPTED_MSG_ID).getValueAsString()</b>
+&nbsp;                            + &quot;, State: &quot;
+<b class="nc">&nbsp;                            + request.getOptionalParameter(SmppConstants.TAG_MSG_STATE).getValueAsByte());</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    String sourceAddress = ((DeliverSm) request).getSourceAddress().getAddress();</b>
+<b class="nc">&nbsp;                    String message = CharsetUtil.decode(((DeliverSm) request).getShortMessage(),</b>
+<b class="nc">&nbsp;                            smppClient.mapDataCodingToCharset(((DeliverSm) request).getDataCoding()));</b>
+<b class="nc">&nbsp;                    Log.debug(&quot;SMS Message Received: &quot; + message.trim() + &quot;, Source Address: &quot; + sourceAddress);</b>
+<b class="nc">&nbsp;                    TextMessageEventHandler.handleTextMessage(sourceAddress, message);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            response = request.createResponse();</b>
+<b class="nc">&nbsp;        } catch (Throwable error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;            response = request.createResponse();</b>
+<b class="nc">&nbsp;            response.setResultMessage(error.getMessage());</b>
+<b class="nc">&nbsp;            response.setCommandStatus(SmppConstants.STATUS_UNKNOWNERR);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return response;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void fireChannelUnexpectedlyClosed() {
+<b class="nc">&nbsp;        Log.warning(&quot;SMPP session channel unexpectedly closed&quot;);</b>
+<b class="nc">&nbsp;        smppClient.scheduleReconnect();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:42</div>
+</div>
+</body>
+</html>

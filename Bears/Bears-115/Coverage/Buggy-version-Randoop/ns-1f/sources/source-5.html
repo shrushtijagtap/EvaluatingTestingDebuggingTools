@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Trips</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.reports</a>
+</div>
+
+<h1>Coverage Summary for Class: Trips (org.traccar.reports)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Trips</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/119)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.reports;
+&nbsp;
+&nbsp;import java.io.FileInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import org.apache.poi.ss.util.WorkbookUtil;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.reports.model.DeviceReport;
+&nbsp;import org.traccar.reports.model.TripReport;
+&nbsp;
+&nbsp;public final class Trips {
+&nbsp;
+&nbsp;    private Trips() {
+&nbsp;    }
+&nbsp;
+&nbsp;    private static TripReport calculateTrip(
+&nbsp;            ArrayList&lt;Position&gt; positions, int startIndex, int endIndex, boolean ignoreOdometer) {
+<b class="nc">&nbsp;        Position startTrip = positions.get(startIndex);</b>
+<b class="nc">&nbsp;        Position endTrip = positions.get(endIndex);</b>
+&nbsp;
+<b class="nc">&nbsp;        double speedMax = 0.0;</b>
+<b class="nc">&nbsp;        double speedSum = 0.0;</b>
+<b class="nc">&nbsp;        for (int i = startIndex; i &lt;= endIndex; i++) {</b>
+<b class="nc">&nbsp;            double speed = positions.get(i).getSpeed();</b>
+<b class="nc">&nbsp;            speedSum += speed;</b>
+<b class="nc">&nbsp;            if (speed &gt; speedMax) {</b>
+<b class="nc">&nbsp;                speedMax = speed;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TripReport trip = new TripReport();</b>
+&nbsp;
+<b class="nc">&nbsp;        long tripDuration = endTrip.getFixTime().getTime() - positions.get(startIndex).getFixTime().getTime();</b>
+<b class="nc">&nbsp;        long deviceId = startTrip.getDeviceId();</b>
+<b class="nc">&nbsp;        trip.setDeviceId(deviceId);</b>
+<b class="nc">&nbsp;        trip.setDeviceName(Context.getIdentityManager().getDeviceById(deviceId).getName());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setStartPositionId(startTrip.getId());</b>
+<b class="nc">&nbsp;        trip.setStartLat(startTrip.getLatitude());</b>
+<b class="nc">&nbsp;        trip.setStartLon(startTrip.getLongitude());</b>
+<b class="nc">&nbsp;        trip.setStartTime(startTrip.getFixTime());</b>
+<b class="nc">&nbsp;        trip.setStartAddress(startTrip.getAddress());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setEndPositionId(endTrip.getId());</b>
+<b class="nc">&nbsp;        trip.setEndLat(endTrip.getLatitude());</b>
+<b class="nc">&nbsp;        trip.setEndLon(endTrip.getLongitude());</b>
+<b class="nc">&nbsp;        trip.setEndTime(endTrip.getFixTime());</b>
+<b class="nc">&nbsp;        trip.setEndAddress(endTrip.getAddress());</b>
+&nbsp;
+<b class="nc">&nbsp;        trip.setDistance(ReportUtils.calculateDistance(startTrip, endTrip, !ignoreOdometer));</b>
+<b class="nc">&nbsp;        trip.setDuration(tripDuration);</b>
+<b class="nc">&nbsp;        trip.setAverageSpeed(speedSum / (endIndex - startIndex));</b>
+<b class="nc">&nbsp;        trip.setMaxSpeed(speedMax);</b>
+<b class="nc">&nbsp;        trip.setSpentFuel(ReportUtils.calculateFuel(startTrip, endTrip));</b>
+&nbsp;
+<b class="nc">&nbsp;        return trip;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static Collection&lt;TripReport&gt; detectTrips(
+&nbsp;            double speedThreshold, double minimalTripDistance,
+&nbsp;            long minimalTripDuration, long minimalParkingDuration, boolean greedyParking, boolean ignoreOdometer,
+&nbsp;            Collection&lt;Position&gt; positionCollection) {
+&nbsp;
+<b class="nc">&nbsp;        Collection&lt;TripReport&gt; result = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        ArrayList&lt;Position&gt; positions = new ArrayList&lt;&gt;(positionCollection);</b>
+<b class="nc">&nbsp;        if (positions != null &amp;&amp; !positions.isEmpty()) {</b>
+<b class="nc">&nbsp;            int previousStartParkingIndex = 0;</b>
+<b class="nc">&nbsp;            int startParkingIndex = -1;</b>
+<b class="nc">&nbsp;            int previousEndParkingIndex = 0;</b>
+<b class="nc">&nbsp;            int endParkingIndex = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean isMoving = false;</b>
+<b class="nc">&nbsp;            boolean isLast = false;</b>
+<b class="nc">&nbsp;            boolean skipped = false;</b>
+<b class="nc">&nbsp;            boolean tripFiltered = false;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; positions.size(); i++) {</b>
+<b class="nc">&nbsp;                isMoving = positions.get(i).getSpeed() &gt; speedThreshold;</b>
+<b class="nc">&nbsp;                isLast = i == positions.size() - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;                if ((isMoving || isLast) &amp;&amp; startParkingIndex != -1) {</b>
+<b class="nc">&nbsp;                    if (!skipped || previousEndParkingIndex == 0) {</b>
+<b class="nc">&nbsp;                        previousEndParkingIndex = endParkingIndex;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    endParkingIndex = i;</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (!isMoving &amp;&amp; startParkingIndex == -1) {</b>
+<b class="nc">&nbsp;                    if (greedyParking) {</b>
+<b class="nc">&nbsp;                        long tripDuration = positions.get(i).getFixTime().getTime()</b>
+<b class="nc">&nbsp;                                - positions.get(endParkingIndex).getFixTime().getTime();</b>
+<b class="nc">&nbsp;                        double tripDistance = ReportUtils.calculateDistance(positions.get(endParkingIndex),</b>
+<b class="nc">&nbsp;                                positions.get(i), false);</b>
+<b class="nc">&nbsp;                        tripFiltered = tripDuration &lt; minimalTripDuration &amp;&amp; tripDistance &lt; minimalTripDistance;</b>
+<b class="nc">&nbsp;                        if (tripFiltered) {</b>
+<b class="nc">&nbsp;                            startParkingIndex = previousStartParkingIndex;</b>
+<b class="nc">&nbsp;                            endParkingIndex = previousEndParkingIndex;</b>
+<b class="nc">&nbsp;                            tripFiltered = false;</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            previousStartParkingIndex = i;</b>
+<b class="nc">&nbsp;                            startParkingIndex = i;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        long tripDuration = positions.get(i).getFixTime().getTime()</b>
+<b class="nc">&nbsp;                                - positions.get(previousEndParkingIndex).getFixTime().getTime();</b>
+<b class="nc">&nbsp;                        double tripDistance = ReportUtils.calculateDistance(positions.get(previousEndParkingIndex),</b>
+<b class="nc">&nbsp;                                positions.get(i), false);</b>
+<b class="nc">&nbsp;                        tripFiltered = tripDuration &lt; minimalTripDuration &amp;&amp; tripDistance &lt; minimalTripDistance;</b>
+<b class="nc">&nbsp;                        startParkingIndex = i;</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                if (startParkingIndex != -1 &amp;&amp; (endParkingIndex &gt; startParkingIndex || isLast)) {</b>
+<b class="nc">&nbsp;                    long parkingDuration = positions.get(endParkingIndex).getFixTime().getTime()</b>
+<b class="nc">&nbsp;                            - positions.get(startParkingIndex).getFixTime().getTime();</b>
+<b class="nc">&nbsp;                    if ((parkingDuration &gt;= minimalParkingDuration || isLast)</b>
+&nbsp;                            &amp;&amp; previousEndParkingIndex &lt; startParkingIndex) {
+<b class="nc">&nbsp;                        if (!tripFiltered) {</b>
+<b class="nc">&nbsp;                            result.add(calculateTrip(</b>
+&nbsp;                                    positions, previousEndParkingIndex, startParkingIndex, ignoreOdometer));
+&nbsp;                        }
+<b class="nc">&nbsp;                        previousEndParkingIndex = endParkingIndex;</b>
+<b class="nc">&nbsp;                        skipped = false;</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        skipped = true;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    startParkingIndex = -1;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Collection&lt;TripReport&gt; detectTrips(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        double speedThreshold = Context.getConfig().getDouble(&quot;event.motion.speedThreshold&quot;, 0.01);</b>
+<b class="nc">&nbsp;        long minimalTripDuration = Context.getConfig().getLong(&quot;report.trip.minimalTripDuration&quot;, 300) * 1000;</b>
+<b class="nc">&nbsp;        double minimalTripDistance = Context.getConfig().getLong(&quot;report.trip.minimalTripDistance&quot;, 500);</b>
+<b class="nc">&nbsp;        long minimalParkingDuration = Context.getConfig().getLong(&quot;report.trip.minimalParkingDuration&quot;, 300) * 1000;</b>
+<b class="nc">&nbsp;        boolean greedyParking = Context.getConfig().getBoolean(&quot;report.trip.greedyParking&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        boolean ignoreOdometer = Context.getDeviceManager()</b>
+<b class="nc">&nbsp;                .lookupAttributeBoolean(deviceId, &quot;report.ignoreOdometer&quot;, false, true);</b>
+&nbsp;
+<b class="nc">&nbsp;        return detectTrips(</b>
+&nbsp;                speedThreshold, minimalTripDistance, minimalTripDuration,
+&nbsp;                minimalParkingDuration, greedyParking, ignoreOdometer,
+<b class="nc">&nbsp;                Context.getDataManager().getPositions(deviceId, from, to));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Collection&lt;TripReport&gt; getObjects(long userId, Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds,
+&nbsp;            Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        ArrayList&lt;TripReport&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId: ReportUtils.getDeviceList(deviceIds, groupIds)) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(userId, deviceId);</b>
+<b class="nc">&nbsp;            result.addAll(detectTrips(deviceId, from, to));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void getExcel(OutputStream outputStream,
+&nbsp;            long userId, Collection&lt;Long&gt; deviceIds, Collection&lt;Long&gt; groupIds,
+&nbsp;            Date from, Date to) throws SQLException, IOException {
+<b class="nc">&nbsp;        ArrayList&lt;DeviceReport&gt; devicesTrips = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; sheetNames = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId: ReportUtils.getDeviceList(deviceIds, groupIds)) {</b>
+<b class="nc">&nbsp;            Context.getPermissionsManager().checkDevice(userId, deviceId);</b>
+<b class="nc">&nbsp;            Collection&lt;TripReport&gt; trips = detectTrips(deviceId, from, to);</b>
+<b class="nc">&nbsp;            DeviceReport deviceTrips = new DeviceReport();</b>
+<b class="nc">&nbsp;            Device device = Context.getIdentityManager().getDeviceById(deviceId);</b>
+<b class="nc">&nbsp;            deviceTrips.setDeviceName(device.getName());</b>
+<b class="nc">&nbsp;            sheetNames.add(WorkbookUtil.createSafeSheetName(deviceTrips.getDeviceName()));</b>
+<b class="nc">&nbsp;            if (device.getGroupId() != 0) {</b>
+<b class="nc">&nbsp;                Group group = Context.getDeviceManager().getGroupById(device.getGroupId());</b>
+<b class="nc">&nbsp;                if (group != null) {</b>
+<b class="nc">&nbsp;                    deviceTrips.setGroupName(group.getName());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            deviceTrips.setObjects(trips);</b>
+<b class="nc">&nbsp;            devicesTrips.add(deviceTrips);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        String templatePath = Context.getConfig().getString(&quot;report.templatesPath&quot;,</b>
+&nbsp;                &quot;templates/export/&quot;);
+<b class="nc">&nbsp;        try (InputStream inputStream = new FileInputStream(templatePath + &quot;/trips.xlsx&quot;)) {</b>
+<b class="nc">&nbsp;            org.jxls.common.Context jxlsContext = ReportUtils.initializeContext(userId);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;devices&quot;, devicesTrips);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;sheetNames&quot;, sheetNames);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;from&quot;, from);</b>
+<b class="nc">&nbsp;            jxlsContext.putVar(&quot;to&quot;, to);</b>
+<b class="nc">&nbsp;            ReportUtils.processTemplateWithSheets(inputStream, outputStream, jxlsContext);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:00</div>
+</div>
+</body>
+</html>

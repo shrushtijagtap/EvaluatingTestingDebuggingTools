@@ -21,14 +21,14 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class User_ESTest extends User_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getUsername();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       User user0 = new User("4}c2)Tp!>.i;^o^", "$", "$", "$", (String) null, "i0BOm\"$g1nr$-[Tk#}S");
       String string0 = user0.getUsername();
@@ -40,7 +40,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("4}c2)Tp!>.i;^o^", user0.getFirstName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       User user0 = new User();
       user0.setType("U");
@@ -48,7 +48,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("U", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       User user0 = new User();
       user0.setType("");
@@ -56,7 +56,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       User user0 = new User();
       LinkedHashSet<Role> linkedHashSet0 = new LinkedHashSet<Role>();
@@ -67,7 +67,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals(1, set0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       User user0 = new User();
       user0.setResetToken("");
@@ -75,7 +75,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       User user0 = new User();
       user0.setNotificationFrequency("$");
@@ -83,7 +83,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("$", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       User user0 = new User();
       user0.setNotificationFrequency("");
@@ -91,7 +91,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       User user0 = new User("V1t<z", "V1t<z", "V1t<z", ";iW4dLqR+Q8?", (String) null, "V1t<z");
       String string0 = user0.getMiddleName();
@@ -103,7 +103,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("V1t<z", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       User user0 = new User();
       user0.setMiddleName("");
@@ -111,7 +111,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       User user0 = new User("eo:qH&&V>", "hB!9\"r_1R9%^'Uu)#", "eo:qH&&V>", "eo:qH&&V>", (String) null, "edu.harvard.h2ms.domain.core.User");
       String string0 = user0.getLastName();
@@ -123,7 +123,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("eo:qH&&V>", user0.getFirstName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       User user0 = new User();
       user0.setLastName("");
@@ -131,7 +131,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       User user0 = new User();
       MockDate mockDate0 = new MockDate(1, 1, 1, (-861), 1, 0);
@@ -140,7 +140,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertSame(date0, mockDate0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long(0L);
@@ -149,7 +149,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals(0L, (long)long1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long((-1621L));
@@ -158,7 +158,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals((-1621L), (long)long1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       User user0 = new User();
       user0.setFirstName("m");
@@ -166,7 +166,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("m", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       User user0 = new User();
       user0.setFirstName("");
@@ -174,14 +174,14 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getEmail();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       User user0 = new User("", "", "", "", (String) null, ", type");
       String string0 = user0.getEmail();
@@ -193,7 +193,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", user0.getFirstName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       User user0 = new User();
       MockDate mockDate0 = new MockDate(1156, 1156, 5647, 3627, 1156);
@@ -202,26 +202,26 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("Fri Mar 15 22:16:00 GMT 3168", date0.toString());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       User user0 = new User("", "", "", "", "", "");
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       User user0 = new User();
       user0.setPassword((String) null);
       assertTrue(user0.isCredentialsNonExpired());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       User user0 = new User();
       user0.setEmail((String) null);
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test23()  throws Throwable  {
       User user0 = new User("eo:qH&&V>", "hB!9\"r_1R9%^'Uu)#", "eo:qH&&V>", "eo:qH&&V>", (String) null, "edu.harvard.h2ms.domain.core.User");
       assertEquals("eo:qh&&v>", user0.getUsername());
@@ -230,28 +230,28 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("hB!9\"r_1R9%^'Uu)#", user0.getMiddleName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test24()  throws Throwable  {
       User user0 = new User("", "", "", "", (String) null, "=sv");
       // Undeclared exception!
       user0.setPassword("");
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test25()  throws Throwable  {
       User user0 = new User();
       Date date0 = user0.getLastLogin();
       assertNull(date0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test26()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getNotificationFrequency();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test27()  throws Throwable  {
       User user0 = new User("4}c2)Tp!>.i;^o^", "$", "$", "$", (String) null, "i0BOm\"$g1nr$-[Tk#}S");
       user0.getResetToken();
@@ -262,28 +262,28 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("i0BOm\"$g1nr$-[Tk#}S", user0.getType());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test28()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getMiddleName();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test29()  throws Throwable  {
       User user0 = new User("4}c2)Tp!>.i;^o^", "$", "$", "$", (String) null, "i0BOm\"$g1nr$-[Tk#}S");
       String string0 = user0.toString();
       assertEquals("User [id=null, firstName=4}c2)Tp!>.i;^o^, middleName=$, lastName=$, email=$, typei0BOm\"$g1nr$-[Tk#}S, notificationFrequency=null", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test30()  throws Throwable  {
       User user0 = new User();
       Long long0 = user0.getId();
       assertNull(long0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test31()  throws Throwable  {
       User user0 = new User("4}c2)Tp!>.i;^o^", "$", "$", "$", (String) null, "i0BOm\"$g1nr$-[Tk#}S");
       user0.setEnabled(false);
@@ -294,7 +294,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("$", user0.getUsername());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test32()  throws Throwable  {
       User user0 = new User("", "", "", "", (String) null, "=sv");
       user0.getAuthorities();
@@ -305,7 +305,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", user0.getEmail());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test33()  throws Throwable  {
       User user0 = new User();
       LinkedHashSet<Role> linkedHashSet0 = new LinkedHashSet<Role>();
@@ -314,7 +314,7 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals(0, set0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test34()  throws Throwable  {
       User user0 = new User();
       user0.setResetToken("I@M{lNsP0N^8");
@@ -322,28 +322,28 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("I@M{lNsP0N^8", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test35()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getPassword();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test36()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isEnabled();
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test37()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getFirstName();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test38()  throws Throwable  {
       User user0 = new User("4}c2)Tp!>.i;^o^", "$", "$", "$", (String) null, "i0BOm\"$g1nr$-[Tk#}S");
       String string0 = user0.getEmail();
@@ -355,14 +355,14 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("$", user0.getMiddleName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test39()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isAccountNonLocked();
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test40()  throws Throwable  {
       User user0 = new User("", "", "", "", (String) null, "=sv");
       String string0 = user0.getUsername();
@@ -374,14 +374,14 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals("", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test41()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isAccountNonExpired();
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test42()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long(827L);
@@ -390,35 +390,35 @@ public class User_ESTest extends User_ESTest_scaffolding {
       assertEquals(827L, (long)long1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test43()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getLastName();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test44()  throws Throwable  {
       User user0 = new User();
       Date date0 = user0.getCreatedOn();
       assertNull(date0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test45()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isCredentialsNonExpired();
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test46()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.getType();
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test47()  throws Throwable  {
       User user0 = new User();
       Set<Role> set0 = user0.getRoles();

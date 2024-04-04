@@ -1,0 +1,417 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Log</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.helper</a>
+</div>
+
+<h1>Coverage Summary for Class: Log (org.traccar.helper)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Log</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53%
+  </span>
+  <span class="absValue">
+    (44/83)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Log$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Log$NettyInternalLogger</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    22.2%
+  </span>
+  <span class="absValue">
+    (6/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.9%
+  </span>
+  <span class="absValue">
+    (44/98)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.helper;
+&nbsp;
+&nbsp;import org.apache.log4j.Appender;
+&nbsp;import org.apache.log4j.DailyRollingFileAppender;
+&nbsp;import org.apache.log4j.Layout;
+&nbsp;import org.apache.log4j.Level;
+&nbsp;import org.apache.log4j.LogManager;
+&nbsp;import org.apache.log4j.Logger;
+&nbsp;import org.apache.log4j.PatternLayout;
+&nbsp;import org.apache.log4j.varia.NullAppender;
+&nbsp;import org.jboss.netty.logging.AbstractInternalLogger;
+&nbsp;import org.jboss.netty.logging.InternalLogger;
+&nbsp;import org.jboss.netty.logging.InternalLoggerFactory;
+&nbsp;import org.traccar.Config;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.management.ManagementFactory;
+&nbsp;import java.lang.management.MemoryMXBean;
+&nbsp;import java.lang.management.OperatingSystemMXBean;
+&nbsp;import java.lang.management.RuntimeMXBean;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;
+&nbsp;public final class Log {
+&nbsp;
+&nbsp;    private Log() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final String DATE_FORMAT = &quot;yyyy-MM-dd HH:mm:ss&quot;;
+&nbsp;
+&nbsp;    private static final String LOGGER_NAME = &quot;traccar&quot;;
+&nbsp;
+&nbsp;    private static final String STACK_PACKAGE = &quot;org.traccar&quot;;
+&nbsp;    private static final int STACK_LIMIT = 3;
+&nbsp;
+<b class="fc">&nbsp;    private static Logger logger = null;</b>
+&nbsp;
+&nbsp;    public static String getAppVersion() {
+<b class="nc">&nbsp;        return Log.class.getPackage().getImplementationVersion();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setupLogger(Config config) throws IOException {
+&nbsp;
+<b class="nc">&nbsp;        Layout layout = new PatternLayout(&quot;%d{&quot; + DATE_FORMAT + &quot;} %5p: %m%n&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Appender appender = new DailyRollingFileAppender(</b>
+<b class="nc">&nbsp;                layout, config.getString(&quot;logger.file&quot;), &quot;&#39;.&#39;yyyyMMdd&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        LogManager.resetConfiguration();</b>
+<b class="nc">&nbsp;        LogManager.getRootLogger().addAppender(new NullAppender());</b>
+&nbsp;
+<b class="nc">&nbsp;        logger = Logger.getLogger(LOGGER_NAME);</b>
+<b class="nc">&nbsp;        logger.addAppender(appender);</b>
+<b class="nc">&nbsp;        logger.setLevel(Level.toLevel(config.getString(&quot;logger.level&quot;), Level.ALL));</b>
+&nbsp;
+&nbsp;        // Workaround for &quot;Bug 745866 - (EDG-45) Possible netty logging config problem&quot;
+<b class="nc">&nbsp;        InternalLoggerFactory.setDefaultFactory(new InternalLoggerFactory() {</b>
+&nbsp;            @Override
+&nbsp;            public InternalLogger newInstance(String string) {
+<b class="nc">&nbsp;                return new NettyInternalLogger();</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        Log.logSystemInfo();</b>
+<b class="nc">&nbsp;        Log.info(&quot;Version: &quot; + getAppVersion());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Logger getLogger() {
+<b class="fc">&nbsp;        if (logger == null) {</b>
+<b class="fc">&nbsp;            logger = Logger.getLogger(LOGGER_NAME);</b>
+<b class="fc">&nbsp;            logger.setLevel(Level.OFF);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return logger;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void logSystemInfo() {
+&nbsp;        try {
+<b class="nc">&nbsp;            OperatingSystemMXBean operatingSystemBean = ManagementFactory.getOperatingSystemMXBean();</b>
+<b class="nc">&nbsp;            Log.info(&quot;Operating system&quot;</b>
+<b class="nc">&nbsp;                    + &quot; name: &quot; + operatingSystemBean.getName()</b>
+<b class="nc">&nbsp;                    + &quot; version: &quot; + operatingSystemBean.getVersion()</b>
+<b class="nc">&nbsp;                    + &quot; architecture: &quot; + operatingSystemBean.getArch());</b>
+&nbsp;
+<b class="nc">&nbsp;            RuntimeMXBean runtimeBean = ManagementFactory.getRuntimeMXBean();</b>
+<b class="nc">&nbsp;            Log.info(&quot;Java runtime&quot;</b>
+<b class="nc">&nbsp;                    + &quot; name: &quot; + runtimeBean.getVmName()</b>
+<b class="nc">&nbsp;                    + &quot; vendor: &quot; + runtimeBean.getVmVendor()</b>
+<b class="nc">&nbsp;                    + &quot; version: &quot; + runtimeBean.getVmVersion());</b>
+&nbsp;
+<b class="nc">&nbsp;            MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();</b>
+<b class="nc">&nbsp;            Log.info(&quot;Memory limit&quot;</b>
+<b class="nc">&nbsp;                    + &quot; heap: &quot; + memoryBean.getHeapMemoryUsage().getMax() / (1024 * 1024) + &quot;mb&quot;</b>
+<b class="nc">&nbsp;                    + &quot; non-heap: &quot; + memoryBean.getNonHeapMemoryUsage().getMax() / (1024 * 1024) + &quot;mb&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            Log.info(&quot;Character encoding: &quot;</b>
+<b class="nc">&nbsp;                    + System.getProperty(&quot;file.encoding&quot;) + &quot; charset: &quot; + Charset.defaultCharset());</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (Exception error) {</b>
+<b class="nc">&nbsp;            Log.warning(&quot;Failed to get system info&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void error(String msg) {
+<b class="nc">&nbsp;        getLogger().error(msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void warning(String msg) {
+<b class="nc">&nbsp;        getLogger().warn(msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void warning(Throwable exception) {
+<b class="fc">&nbsp;        warning(null, exception);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void warning(String msg, Throwable exception) {
+<b class="fc">&nbsp;        StringBuilder s = new StringBuilder();</b>
+<b class="fc">&nbsp;        if (msg != null) {</b>
+<b class="nc">&nbsp;            s.append(msg);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (exception != null) {</b>
+<b class="fc">&nbsp;            if (msg != null) {</b>
+<b class="nc">&nbsp;                s.append(&quot; - &quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            s.append(exceptionStack(exception));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        getLogger().warn(s.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void info(String msg) {
+<b class="fc">&nbsp;        getLogger().info(msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void debug(String msg) {
+<b class="nc">&nbsp;        getLogger().debug(msg);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String exceptionStack(Throwable exception) {
+<b class="fc">&nbsp;        StringBuilder s = new StringBuilder();</b>
+<b class="fc">&nbsp;        String exceptionMsg = exception.getMessage();</b>
+<b class="fc">&nbsp;        if (exceptionMsg != null) {</b>
+<b class="fc">&nbsp;            s.append(exceptionMsg);</b>
+<b class="fc">&nbsp;            s.append(&quot; - &quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        s.append(exception.getClass().getSimpleName());</b>
+<b class="fc">&nbsp;        StackTraceElement[] stack = exception.getStackTrace();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (stack.length &gt; 0) {</b>
+<b class="fc">&nbsp;            int count = STACK_LIMIT;</b>
+<b class="fc">&nbsp;            boolean first = true;</b>
+<b class="fc">&nbsp;            boolean skip = false;</b>
+<b class="fc">&nbsp;            String file = &quot;&quot;;</b>
+<b class="fc">&nbsp;            s.append(&quot; (&quot;);</b>
+<b class="fc">&nbsp;            for (StackTraceElement element : stack) {</b>
+<b class="fc">&nbsp;                if (count &gt; 0 &amp;&amp; element.getClassName().startsWith(STACK_PACKAGE)) {</b>
+<b class="fc">&nbsp;                    if (!first) {</b>
+<b class="fc">&nbsp;                        s.append(&quot; &lt; &quot;);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        first = false;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (skip) {</b>
+<b class="nc">&nbsp;                        s.append(&quot;... &lt; &quot;);</b>
+<b class="nc">&nbsp;                        skip = false;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (file.equals(element.getFileName())) {</b>
+<b class="nc">&nbsp;                        s.append(&quot;*&quot;);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        file = element.getFileName();</b>
+<b class="fc">&nbsp;                        s.append(file.substring(0, file.length() - 5)); // remove &quot;.java&quot;</b>
+<b class="fc">&nbsp;                        count -= 1;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    s.append(&quot;:&quot;).append(element.getLineNumber());</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    skip = true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (skip) {</b>
+<b class="fc">&nbsp;                if (!first) {</b>
+<b class="fc">&nbsp;                    s.append(&quot; &lt; &quot;);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                s.append(&quot;...&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            s.append(&quot;)&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return s.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Netty logger implementation
+&nbsp;     */
+<b class="nc">&nbsp;    private static class NettyInternalLogger extends AbstractInternalLogger {</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isDebugEnabled() {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isInfoEnabled() {
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isWarnEnabled() {
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean isErrorEnabled() {
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void debug(String string) {
+<b class="nc">&nbsp;            debug(string, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void debug(String string, Throwable thrwbl) {
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void info(String string) {
+<b class="nc">&nbsp;            info(string, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void info(String string, Throwable thrwbl) {
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void warn(String string) {
+<b class="nc">&nbsp;            warn(string, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void warn(String string, Throwable thrwbl) {
+<b class="nc">&nbsp;            getLogger().warn(&quot;netty warning: &quot; + string);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void error(String string) {
+<b class="nc">&nbsp;            error(string, null);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public void error(String string, Throwable thrwbl) {
+<b class="nc">&nbsp;            getLogger().error(&quot;netty error: &quot; + string);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:53</div>
+</div>
+</body>
+</html>

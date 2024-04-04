@@ -1,0 +1,260 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrailingSignatureAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: TrailingSignatureAlgorithm (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrailingSignatureAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrailingSignatureAlgorithm$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrailingSignatureAlgorithm$ECDSASignatureAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.security.GeneralSecurityException;
+&nbsp;import java.security.KeyPair;
+&nbsp;import java.security.KeyPairGenerator;
+&nbsp;import java.security.PublicKey;
+&nbsp;
+&nbsp;import org.bouncycastle.crypto.params.ECDomainParameters;
+&nbsp;import org.bouncycastle.crypto.params.ECPublicKeyParameters;
+&nbsp;import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
+&nbsp;import org.bouncycastle.jce.ECNamedCurveTable;
+&nbsp;import org.bouncycastle.jce.interfaces.ECPublicKey;
+&nbsp;import org.bouncycastle.jce.provider.BouncyCastleProvider;
+&nbsp;import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
+&nbsp;import org.bouncycastle.math.ec.ECPoint;
+&nbsp;
+&nbsp;import java.util.Base64;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides a consistent interface across various trailing signature algorithms.
+&nbsp; *
+&nbsp; * NOTE: This is not a stable API and may undergo breaking changes in the future.
+&nbsp; */
+<b class="nc">&nbsp;public abstract class TrailingSignatureAlgorithm {</b>
+<b class="nc">&nbsp;    private TrailingSignatureAlgorithm() {</b>
+&nbsp;        /* Do not allow arbitrary subclasses */
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract String getMessageDigestAlgorithm();
+&nbsp;    public abstract String getRawSignatureAlgorithm();
+&nbsp;    public abstract String getHashAndSignAlgorithm();
+&nbsp;    public abstract PublicKey deserializePublicKey(String keyString);
+&nbsp;    public abstract String serializePublicKey(PublicKey key);
+&nbsp;    public abstract KeyPair generateKey() throws GeneralSecurityException;
+&nbsp;
+<b class="nc">&nbsp;    private static final class ECDSASignatureAlgorithm extends TrailingSignatureAlgorithm {</b>
+&nbsp;        private final ECNamedCurveParameterSpec ecSpec;
+&nbsp;        private final String messageDigestAlgorithm;
+&nbsp;        private final String hashAndSignAlgorithm;
+&nbsp;
+<b class="nc">&nbsp;        private ECDSASignatureAlgorithm(ECNamedCurveParameterSpec ecSpec, String messageDigestAlgorithm) {</b>
+<b class="nc">&nbsp;            this.ecSpec = ecSpec;</b>
+<b class="nc">&nbsp;            this.messageDigestAlgorithm = messageDigestAlgorithm;</b>
+<b class="nc">&nbsp;            this.hashAndSignAlgorithm = messageDigestAlgorithm + &quot;withECDSA&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String toString() {
+<b class="nc">&nbsp;            return &quot;ECDSASignatureAlgorithm(curve=&quot; + ecSpec.getName() + &quot;)&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String getMessageDigestAlgorithm() {
+<b class="nc">&nbsp;            return messageDigestAlgorithm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String getRawSignatureAlgorithm() {
+<b class="nc">&nbsp;            return &quot;NONEwithECDSA&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public String getHashAndSignAlgorithm() {
+<b class="nc">&nbsp;            return hashAndSignAlgorithm;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public PublicKey deserializePublicKey(String keyString) {
+<b class="nc">&nbsp;            final ECPoint q = ecSpec.getCurve().decodePoint(Base64.getDecoder().decode(keyString));</b>
+&nbsp;
+<b class="nc">&nbsp;            ECPublicKeyParameters keyParams = new ECPublicKeyParameters(</b>
+&nbsp;                    q,
+<b class="nc">&nbsp;                    new ECDomainParameters(ecSpec.getCurve(), ecSpec.getG(), ecSpec.getN(), ecSpec.getH())</b>
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            return new BCECPublicKey(&quot;ECDSA&quot;, keyParams, ecSpec, BouncyCastleProvider.CONFIGURATION);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public String serializePublicKey(PublicKey key) {
+<b class="nc">&nbsp;            return Base64.getEncoder().encodeToString(((ECPublicKey)key).getQ().getEncoded(true));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public KeyPair generateKey() throws GeneralSecurityException {
+<b class="nc">&nbsp;            KeyPairGenerator keyGen = KeyPairGenerator.getInstance(&quot;ECDSA&quot;, &quot;BC&quot;);</b>
+<b class="nc">&nbsp;            keyGen.initialize(ecSpec, Utils.getSecureRandom());</b>
+&nbsp;
+<b class="nc">&nbsp;            return keyGen.generateKeyPair();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final ECDSASignatureAlgorithm SHA256_ECDSA_P256</b>
+<b class="nc">&nbsp;            = new ECDSASignatureAlgorithm(ECNamedCurveTable.getParameterSpec(&quot;secp256r1&quot;), &quot;SHA256&quot;);</b>
+<b class="nc">&nbsp;    private static final ECDSASignatureAlgorithm SHA384_ECDSA_P384</b>
+<b class="nc">&nbsp;            = new ECDSASignatureAlgorithm(ECNamedCurveTable.getParameterSpec(&quot;secp384r1&quot;), &quot;SHA384&quot;);</b>
+&nbsp;
+&nbsp;    public static TrailingSignatureAlgorithm forCryptoAlgorithm(CryptoAlgorithm algorithm) {
+<b class="nc">&nbsp;        switch (algorithm) {</b>
+&nbsp;            case ALG_AES_128_GCM_IV12_TAG16_HKDF_SHA256_ECDSA_P256:
+<b class="nc">&nbsp;                return SHA256_ECDSA_P256;</b>
+&nbsp;            case ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384:
+&nbsp;            case ALG_AES_256_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384:
+<b class="nc">&nbsp;                return SHA384_ECDSA_P384;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Algorithm does not support trailing signature&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:05</div>
+</div>
+</body>
+</html>
