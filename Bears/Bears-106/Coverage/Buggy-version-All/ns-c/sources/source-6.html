@@ -1,0 +1,350 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractPeriod</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.base</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractPeriod (org.joda.time.base)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractPeriod</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2010 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.base;
+&nbsp;
+&nbsp;import org.joda.convert.ToString;
+&nbsp;import org.joda.time.DurationFieldType;
+&nbsp;import org.joda.time.MutablePeriod;
+&nbsp;import org.joda.time.Period;
+&nbsp;import org.joda.time.ReadablePeriod;
+&nbsp;import org.joda.time.format.ISOPeriodFormat;
+&nbsp;import org.joda.time.format.PeriodFormatter;
+&nbsp;
+&nbsp;/**
+&nbsp; * AbstractPeriod provides the common behaviour for period classes.
+&nbsp; * &lt;p&gt;
+&nbsp; * This class should generally not be used directly by API users. The 
+&nbsp; * {@link ReadablePeriod} interface should be used when different 
+&nbsp; * kinds of periods are to be referenced.
+&nbsp; * &lt;p&gt;
+&nbsp; * AbstractPeriod subclasses may be mutable and not thread-safe.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public abstract class AbstractPeriod implements ReadablePeriod {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     */
+&nbsp;    protected AbstractPeriod() {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the number of fields that this period supports.
+&nbsp;     *
+&nbsp;     * @return the number of fields supported
+&nbsp;     * @since 2.0 (previously on BasePeriod)
+&nbsp;     */
+&nbsp;    public int size() {
+<b class="nc">&nbsp;        return getPeriodType().size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the field type at the specified index.
+&nbsp;     *
+&nbsp;     * @param index  the index to retrieve
+&nbsp;     * @return the field at the specified index
+&nbsp;     * @throws IndexOutOfBoundsException if the index is invalid
+&nbsp;     * @since 2.0 (previously on BasePeriod)
+&nbsp;     */
+&nbsp;    public DurationFieldType getFieldType(int index) {
+<b class="nc">&nbsp;        return getPeriodType().getFieldType(index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the field types that this period supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest, for example Hours, Minutes, Seconds.
+&nbsp;     *
+&nbsp;     * @return the fields supported in an array that may be altered, largest to smallest
+&nbsp;     */
+&nbsp;    public DurationFieldType[] getFieldTypes() {
+<b class="nc">&nbsp;        DurationFieldType[] result = new DurationFieldType[size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; result.length; i++) {</b>
+<b class="nc">&nbsp;            result[i] = getFieldType(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an array of the value of each of the fields that this period supports.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The fields are returned largest to smallest, for example Hours, Minutes, Seconds.
+&nbsp;     * Each value corresponds to the same array index as &lt;code&gt;getFields()&lt;/code&gt;
+&nbsp;     *
+&nbsp;     * @return the current values of each field in an array that may be altered, largest to smallest
+&nbsp;     */
+&nbsp;    public int[] getValues() {
+<b class="nc">&nbsp;        int[] result = new int[size()];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; result.length; i++) {</b>
+<b class="nc">&nbsp;            result[i] = getValue(i);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value of one of the fields.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the field type specified is not supported by the period then zero
+&nbsp;     * is returned.
+&nbsp;     *
+&nbsp;     * @param type  the field type to query, null returns zero
+&nbsp;     * @return the value of that field, zero if field not supported
+&nbsp;     */
+&nbsp;    public int get(DurationFieldType type) {
+<b class="nc">&nbsp;        int index = indexOf(type);</b>
+<b class="nc">&nbsp;        if (index == -1) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return getValue(index);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the field specified is supported by this period.
+&nbsp;     *
+&nbsp;     * @param type  the type to check, may be null which returns false
+&nbsp;     * @return true if the field is supported
+&nbsp;     */
+&nbsp;    public boolean isSupported(DurationFieldType type) {
+<b class="nc">&nbsp;        return getPeriodType().isSupported(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the index of the field in this period.
+&nbsp;     *
+&nbsp;     * @param type  the type to check, may be null which returns -1
+&nbsp;     * @return the index of -1 if not supported
+&nbsp;     */
+&nbsp;    public int indexOf(DurationFieldType type) {
+<b class="nc">&nbsp;        return getPeriodType().indexOf(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get this period as an immutable &lt;code&gt;Period&lt;/code&gt; object.
+&nbsp;     * 
+&nbsp;     * @return a Period using the same field set and values
+&nbsp;     */
+&nbsp;    public Period toPeriod() {
+<b class="nc">&nbsp;        return new Period(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a &lt;code&gt;MutablePeriod&lt;/code&gt;.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This will always return a new &lt;code&gt;MutablePeriod&lt;/code&gt; with the same fields.
+&nbsp;     * 
+&nbsp;     * @return a MutablePeriod using the same field set and values
+&nbsp;     */
+&nbsp;    public MutablePeriod toMutablePeriod() {
+<b class="nc">&nbsp;        return new MutablePeriod(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Compares this object with the specified object for equality based
+&nbsp;     * on the value of each field. All ReadablePeriod instances are accepted.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Note that a period of 1 day is not equal to a period of 24 hours,
+&nbsp;     * nor is 1 hour equal to 60 minutes. Only periods with the same amount
+&nbsp;     * in each field are equal.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This is because periods represent an abstracted definition of a time
+&nbsp;     * period (eg. a day may not actually be 24 hours, it might be 23 or 25
+&nbsp;     * at daylight savings boundary).
+&nbsp;     * &lt;p&gt;
+&nbsp;     * To compare the actual duration of two periods, convert both to
+&nbsp;     * {@link org.joda.time.Duration Duration}s, an operation that emphasises
+&nbsp;     * that the result may differ according to the date you choose.
+&nbsp;     *
+&nbsp;     * @param period  a readable period to check against
+&nbsp;     * @return true if all the field values are equal, false if
+&nbsp;     *  not or the period is null or of an incorrect type
+&nbsp;     */
+&nbsp;    public boolean equals(Object period) {
+<b class="nc">&nbsp;        if (this == period) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (period instanceof ReadablePeriod == false) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        ReadablePeriod other = (ReadablePeriod) period;</b>
+<b class="nc">&nbsp;        if (size() != other.size()) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = 0, isize = size(); i &lt; isize; i++) {</b>
+<b class="nc">&nbsp;            if (getValue(i) != other.getValue(i) || getFieldType(i) != other.getFieldType(i)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a hash code for the period as defined by ReadablePeriod.
+&nbsp;     *
+&nbsp;     * @return a hash code
+&nbsp;     */
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int total = 17;</b>
+<b class="nc">&nbsp;        for (int i = 0, isize = size(); i &lt; isize; i++) {</b>
+<b class="nc">&nbsp;            total = 27 * total + getValue(i);</b>
+<b class="nc">&nbsp;            total = 27 * total + getFieldType(i).hashCode();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return total;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Gets the value as a String in the ISO8601 duration format.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For example, &quot;PT6H3M7S&quot; represents 6 hours, 3 minutes, 7 seconds.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * For more control over the output, see
+&nbsp;     * {@link org.joda.time.format.PeriodFormatterBuilder PeriodFormatterBuilder}.
+&nbsp;     *
+&nbsp;     * @return the value as an ISO8601 string
+&nbsp;     */
+&nbsp;    @ToString
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return ISOPeriodFormat.standard().print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Uses the specified formatter to convert this period to a String.
+&nbsp;     *
+&nbsp;     * @param formatter  the formatter to use, null means use &lt;code&gt;toString()&lt;/code&gt;.
+&nbsp;     * @return the formatted string
+&nbsp;     * @since 1.5
+&nbsp;     */
+&nbsp;    public String toString(PeriodFormatter formatter) {
+<b class="nc">&nbsp;        if (formatter == null) {</b>
+<b class="nc">&nbsp;            return toString();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return formatter.print(this);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

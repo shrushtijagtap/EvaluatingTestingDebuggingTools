@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AliasesManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: AliasesManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AliasesManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; * Copyright 2016 Andrey Kunitsyn (andrey@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.AttributeAlias;
+&nbsp;
+&nbsp;public class AliasesManager {
+&nbsp;
+&nbsp;    private final DataManager dataManager;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;AttributeAlias&gt;&gt; deviceAliases = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, AttributeAlias&gt; aliasesById = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public AliasesManager(DataManager dataManager) {</b>
+<b class="nc">&nbsp;        this.dataManager = dataManager;</b>
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                for (AttributeAlias attributeAlias : dataManager.getAttributeAliases()) {</b>
+<b class="nc">&nbsp;                    getAttributeAliases(attributeAlias.getDeviceId())</b>
+<b class="nc">&nbsp;                            .add(attributeAlias);</b>
+<b class="nc">&nbsp;                    aliasesById.put(attributeAlias.getId(), attributeAlias);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Set&lt;AttributeAlias&gt; getAttributeAliases(long deviceId) {
+<b class="nc">&nbsp;        if (!deviceAliases.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceAliases.put(deviceId, new HashSet&lt;AttributeAlias&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceAliases.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeDevice(long deviceId) {
+<b class="nc">&nbsp;        for (AttributeAlias attributeAlias : getAttributeAliases(deviceId)) {</b>
+<b class="nc">&nbsp;            aliasesById.remove(attributeAlias.getId());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        deviceAliases.remove(deviceId);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void addAttributeAlias(AttributeAlias attributeAlias) throws SQLException {
+<b class="nc">&nbsp;        dataManager.addAttributeAlias(attributeAlias);</b>
+<b class="nc">&nbsp;        aliasesById.put(attributeAlias.getId(), attributeAlias);</b>
+<b class="nc">&nbsp;        getAttributeAliases(attributeAlias.getDeviceId()).add(attributeAlias);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateAttributeAlias(AttributeAlias attributeAlias) throws SQLException {
+<b class="nc">&nbsp;        dataManager.updateAttributeAlias(attributeAlias);</b>
+<b class="nc">&nbsp;        AttributeAlias cachedAlias = aliasesById.get(attributeAlias.getId());</b>
+<b class="nc">&nbsp;        if (cachedAlias.getDeviceId() != attributeAlias.getDeviceId()) {</b>
+<b class="nc">&nbsp;            getAttributeAliases(cachedAlias.getDeviceId()).remove(cachedAlias);</b>
+<b class="nc">&nbsp;            cachedAlias.setDeviceId(attributeAlias.getDeviceId());</b>
+<b class="nc">&nbsp;            getAttributeAliases(cachedAlias.getDeviceId()).add(cachedAlias);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        cachedAlias.setAttribute(attributeAlias.getAttribute());</b>
+<b class="nc">&nbsp;        cachedAlias.setAlias(attributeAlias.getAlias());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeArrtibuteAlias(long attributeAliasId) throws SQLException {
+<b class="nc">&nbsp;        dataManager.removeAttributeAlias(attributeAliasId);</b>
+<b class="nc">&nbsp;        AttributeAlias cachedAlias = aliasesById.get(attributeAliasId);</b>
+<b class="nc">&nbsp;        getAttributeAliases(cachedAlias.getDeviceId()).remove(cachedAlias);</b>
+<b class="nc">&nbsp;        aliasesById.remove(attributeAliasId);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public AttributeAlias getAttributeAlias(long deviceId, String attribute) {
+<b class="nc">&nbsp;        for (AttributeAlias alias : getAttributeAliases(deviceId)) {</b>
+<b class="nc">&nbsp;            if (alias.getAttribute().equals(attribute)) {</b>
+<b class="nc">&nbsp;                return alias;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;AttributeAlias&gt; getAllAttributeAliases(long userId) {
+<b class="nc">&nbsp;        Collection&lt;AttributeAlias&gt; userDevicesAliases = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long deviceId : Context.getPermissionsManager().getDevicePermissions(userId)) {</b>
+<b class="nc">&nbsp;            userDevicesAliases.addAll(getAttributeAliases(deviceId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return userDevicesAliases;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AttributeAlias getAttributeAlias(long id) {
+<b class="nc">&nbsp;        return aliasesById.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

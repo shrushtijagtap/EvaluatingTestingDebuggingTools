@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FlexCommProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: FlexCommProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FlexCommProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class FlexCommProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public FlexCommProtocolDecoder(FlexCommProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;7E&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)&quot;)                      // status</b>
+<b class="nc">&nbsp;            .number(&quot;(d{15})&quot;)                   // imei</b>
+<b class="nc">&nbsp;            .number(&quot;(dddd)(dd)(dd)&quot;)            // date (yyyymmdd)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // time (hhmmss)</b>
+<b class="nc">&nbsp;            .expression(&quot;([01])&quot;)                // valid</b>
+<b class="nc">&nbsp;            .number(&quot;(d{9})&quot;)                    // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d{10})&quot;)                   // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(d{4})&quot;)                    // altitude</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // course</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)&quot;)                      // satellites view</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)&quot;)                      // satellites used</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)&quot;)                      // rssi</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // mcc</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // mnc</b>
+<b class="nc">&nbsp;            .number(&quot;(x{6})&quot;)                    // lac</b>
+<b class="nc">&nbsp;            .number(&quot;(x{6})&quot;)                    // cid</b>
+<b class="nc">&nbsp;            .expression(&quot;([01]{3})&quot;)             // input</b>
+<b class="nc">&nbsp;            .expression(&quot;([01]{2})&quot;)             // output</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // fuel</b>
+<b class="nc">&nbsp;            .number(&quot;(d{4})&quot;)                    // temperature</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // battery</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)&quot;)                     // power</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private static double parseSignedValue(Parser parser, int decimalPoints) {
+<b class="nc">&nbsp;        String stringValue = parser.next();</b>
+<b class="nc">&nbsp;        boolean negative = stringValue.charAt(0) == &#39;1&#39;;</b>
+<b class="nc">&nbsp;        double value = Integer.parseInt(stringValue.substring(1)) * Math.pow(10, -decimalPoints);</b>
+<b class="nc">&nbsp;        return negative ? -value : value;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN, (String) msg);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_STATUS, parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(parser.next().equals(&quot;1&quot;));</b>
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime());</b>
+<b class="nc">&nbsp;        position.setLatitude(parseSignedValue(parser, 6));</b>
+<b class="nc">&nbsp;        position.setLongitude(parseSignedValue(parser, 6));</b>
+<b class="nc">&nbsp;        position.setAltitude(parseSignedValue(parser, 0));</b>
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextInt()));</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble(0));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES_VISIBLE, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_RSSI, parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setNetwork(new Network(CellTower.from(</b>
+<b class="nc">&nbsp;                parser.nextInt(), parser.nextInt(), parser.nextHexInt(), parser.nextHexInt())));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_INPUT, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_OUTPUT, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_FUEL_LEVEL, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.PREFIX_TEMP + 1, parseSignedValue(parser, 0));</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_POWER, parser.nextInt() * 0.1);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(&quot;{01}&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:00</div>
+</div>
+</body>
+</html>

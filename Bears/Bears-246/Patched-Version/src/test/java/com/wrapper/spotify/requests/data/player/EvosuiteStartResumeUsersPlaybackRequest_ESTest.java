@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStartResumeUsersPlaybackRequest_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Source byte array");
       startResumeUsersPlaybackRequest_Builder0.setScheme("Source byte array");
@@ -45,7 +45,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
     Future<?> future = executor.submit(new Runnable(){ 
             @Override public void run() { 
@@ -112,7 +112,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
     future.get(4000, TimeUnit.MILLISECONDS);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("6Nf28i|a2EX^Ka[");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.context_uri("6Nf28i|a2EX^Ka[");
@@ -131,7 +131,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       String string0 = null;
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder((String) null);
@@ -147,7 +147,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Yybl{.1RU{qbb(-j");
       JsonObject jsonObject0 = new JsonObject();
@@ -168,7 +168,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       String string0 = null;
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder((String) null);
@@ -188,7 +188,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Source byte array");
       JsonArray jsonArray0 = new JsonArray(0);
@@ -209,7 +209,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Yybl{.1RU{qbb(-j");
       JsonObject jsonObject0 = new JsonObject();
@@ -228,7 +228,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       String string0 = "c4v6PjpF\\";
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("c4v6PjpF");
@@ -245,7 +245,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("9\"c{,%22OEK(>{Kf");
       JsonObject jsonObject0 = new JsonObject();
@@ -259,7 +259,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       assertSame(startResumeUsersPlaybackRequest_Builder4, startResumeUsersPlaybackRequest_Builder5);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder(".");
       Integer integer0 = null;
@@ -275,7 +275,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("n\u0007` C`kly`3$Bu0n.");
       startResumeUsersPlaybackRequest_Builder0.device_id("n\u0007` C`kly`3$Bu0n.");
@@ -284,7 +284,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       SpotifyHttpManager spotifyHttpManager0 = new SpotifyHttpManager(spotifyHttpManager_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Source byte array");
       JsonArray jsonArray0 = new JsonArray(0);
@@ -295,7 +295,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       assertSame(startResumeUsersPlaybackRequest_Builder2, startResumeUsersPlaybackRequest_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       String string0 = "";
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
@@ -311,7 +311,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("u:");
       JsonArray jsonArray0 = new JsonArray();
@@ -333,7 +333,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder((String) null);
       String string0 = null;
@@ -349,7 +349,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder((String) null);
       JsonArray jsonArray0 = new JsonArray(5136);
@@ -366,7 +366,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       String string0 = "";
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
@@ -382,7 +382,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("-T@yqx2");
       JsonArray jsonArray0 = new JsonArray();
@@ -404,7 +404,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("QH}m5ORa");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.context_uri("3!MB");
@@ -413,7 +413,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       assertNotNull(startResumeUsersPlaybackRequest0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("oY'Fn");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.context_uri(" is not Comparable");
@@ -429,7 +429,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -444,7 +444,7 @@ public class EvosuiteStartResumeUsersPlaybackRequest_ESTest extends EvosuiteStar
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("q%'");
       Integer integer0 = new Integer(0);

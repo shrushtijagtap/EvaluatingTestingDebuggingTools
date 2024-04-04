@@ -1,0 +1,408 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GeofenceManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: GeofenceManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GeofenceManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/151)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.locks.ReadWriteLock;
+&nbsp;import java.util.concurrent.locks.ReentrantReadWriteLock;
+&nbsp;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.DeviceGeofence;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.GeofencePermission;
+&nbsp;import org.traccar.model.GroupGeofence;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;public class GeofenceManager {
+&nbsp;
+&nbsp;    private final DataManager dataManager;
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Geofence&gt; geofences = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; userGeofences = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; groupGeofences = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; deviceGeofencesWithGroups = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;    private final Map&lt;Long, Set&lt;Long&gt;&gt; deviceGeofences = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    private final ReadWriteLock deviceGeofencesLock = new ReentrantReadWriteLock();</b>
+<b class="nc">&nbsp;    private final ReadWriteLock geofencesLock = new ReentrantReadWriteLock();</b>
+<b class="nc">&nbsp;    private final ReadWriteLock groupGeofencesLock = new ReentrantReadWriteLock();</b>
+<b class="nc">&nbsp;    private final ReadWriteLock userGeofencesLock = new ReentrantReadWriteLock();</b>
+&nbsp;
+<b class="nc">&nbsp;    public GeofenceManager(DataManager dataManager) {</b>
+<b class="nc">&nbsp;        this.dataManager = dataManager;</b>
+<b class="nc">&nbsp;        refreshGeofences();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;Long&gt; getUserGeofences(long userId) {
+<b class="nc">&nbsp;        if (!userGeofences.containsKey(userId)) {</b>
+<b class="nc">&nbsp;            userGeofences.put(userId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return userGeofences.get(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getUserGeofencesIds(long userId) {
+<b class="nc">&nbsp;        userGeofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return getUserGeofences(userId);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            userGeofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;Long&gt; getGroupGeofences(long groupId) {
+<b class="nc">&nbsp;        if (!groupGeofences.containsKey(groupId)) {</b>
+<b class="nc">&nbsp;            groupGeofences.put(groupId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return groupGeofences.get(groupId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getGroupGeofencesIds(long groupId) {
+<b class="nc">&nbsp;        groupGeofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return getGroupGeofences(groupId);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            groupGeofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getAllDeviceGeofences(long deviceId) {
+<b class="nc">&nbsp;        deviceGeofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return getDeviceGeofences(deviceGeofencesWithGroups, deviceId);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            deviceGeofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Long&gt; getDeviceGeofencesIds(long deviceId) {
+<b class="nc">&nbsp;        deviceGeofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return getDeviceGeofences(deviceGeofences, deviceId);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            deviceGeofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Set&lt;Long&gt; getDeviceGeofences(Map&lt;Long, Set&lt;Long&gt;&gt; deviceGeofences, long deviceId) {
+<b class="nc">&nbsp;        if (!deviceGeofences.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            deviceGeofences.put(deviceId, new HashSet&lt;Long&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return deviceGeofences.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void refreshGeofences() {
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                geofencesLock.writeLock().lock();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    geofences.clear();</b>
+<b class="nc">&nbsp;                    for (Geofence geofence : dataManager.getGeofences()) {</b>
+<b class="nc">&nbsp;                        geofences.put(geofence.getId(), geofence);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    geofencesLock.writeLock().unlock();</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        refreshUserGeofences();</b>
+<b class="nc">&nbsp;        refresh();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void refreshUserGeofences() {
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                userGeofencesLock.writeLock().lock();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    userGeofences.clear();</b>
+<b class="nc">&nbsp;                    for (GeofencePermission geofencePermission : dataManager.getGeofencePermissions()) {</b>
+<b class="nc">&nbsp;                        getUserGeofences(geofencePermission.getUserId()).add(geofencePermission.getGeofenceId());</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    userGeofencesLock.writeLock().unlock();</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void refresh() {
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+&nbsp;
+<b class="nc">&nbsp;                Collection&lt;GroupGeofence&gt; databaseGroupGeofences = dataManager.getGroupGeofences();</b>
+<b class="nc">&nbsp;                groupGeofencesLock.writeLock().lock();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    groupGeofences.clear();</b>
+<b class="nc">&nbsp;                    for (GroupGeofence groupGeofence : databaseGroupGeofences) {</b>
+<b class="nc">&nbsp;                        getGroupGeofences(groupGeofence.getGroupId()).add(groupGeofence.getGeofenceId());</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    groupGeofencesLock.writeLock().unlock();</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                Collection&lt;DeviceGeofence&gt; databaseDeviceGeofences = dataManager.getDeviceGeofences();</b>
+<b class="nc">&nbsp;                Collection&lt;Device&gt; allDevices = Context.getDeviceManager().getAllDevices();</b>
+&nbsp;
+<b class="nc">&nbsp;                groupGeofencesLock.readLock().lock();</b>
+<b class="nc">&nbsp;                deviceGeofencesLock.writeLock().lock();</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    deviceGeofences.clear();</b>
+<b class="nc">&nbsp;                    deviceGeofencesWithGroups.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (DeviceGeofence deviceGeofence : databaseDeviceGeofences) {</b>
+<b class="nc">&nbsp;                        getDeviceGeofences(deviceGeofences, deviceGeofence.getDeviceId())</b>
+<b class="nc">&nbsp;                            .add(deviceGeofence.getGeofenceId());</b>
+<b class="nc">&nbsp;                        getDeviceGeofences(deviceGeofencesWithGroups, deviceGeofence.getDeviceId())</b>
+<b class="nc">&nbsp;                            .add(deviceGeofence.getGeofenceId());</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;
+<b class="nc">&nbsp;                    for (Device device : allDevices) {</b>
+<b class="nc">&nbsp;                        long groupId = device.getGroupId();</b>
+<b class="nc">&nbsp;                        while (groupId != 0) {</b>
+<b class="nc">&nbsp;                            getDeviceGeofences(deviceGeofencesWithGroups,</b>
+<b class="nc">&nbsp;                                    device.getId()).addAll(getGroupGeofences(groupId));</b>
+<b class="nc">&nbsp;                            if (Context.getDeviceManager().getGroupById(groupId) != null) {</b>
+<b class="nc">&nbsp;                                groupId = Context.getDeviceManager().getGroupById(groupId).getGroupId();</b>
+&nbsp;                            } else {
+<b class="nc">&nbsp;                                groupId = 0;</b>
+&nbsp;                            }
+&nbsp;                        }
+<b class="nc">&nbsp;                        List&lt;Long&gt; deviceGeofenceIds = device.getGeofenceIds();</b>
+<b class="nc">&nbsp;                        if (deviceGeofenceIds == null) {</b>
+<b class="nc">&nbsp;                            deviceGeofenceIds = new ArrayList&lt;&gt;();</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            deviceGeofenceIds.clear();</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        Position lastPosition = Context.getIdentityManager().getLastPosition(device.getId());</b>
+<b class="nc">&nbsp;                        if (lastPosition != null &amp;&amp; deviceGeofencesWithGroups.containsKey(device.getId())) {</b>
+<b class="nc">&nbsp;                            for (long geofenceId : deviceGeofencesWithGroups.get(device.getId())) {</b>
+<b class="nc">&nbsp;                                Geofence geofence = getGeofence(geofenceId);</b>
+<b class="nc">&nbsp;                                if (geofence != null &amp;&amp; geofence.getGeometry()</b>
+<b class="nc">&nbsp;                                        .containsPoint(lastPosition.getLatitude(), lastPosition.getLongitude())) {</b>
+<b class="nc">&nbsp;                                    deviceGeofenceIds.add(geofenceId);</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        device.setGeofenceIds(deviceGeofenceIds);</b>
+<b class="nc">&nbsp;                    }</b>
+&nbsp;
+&nbsp;                } finally {
+<b class="nc">&nbsp;                    deviceGeofencesLock.writeLock().unlock();</b>
+<b class="nc">&nbsp;                    groupGeofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Collection&lt;Geofence&gt; getAllGeofences() {
+<b class="nc">&nbsp;        geofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return geofences.values();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            geofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Set&lt;Long&gt; getAllGeofencesIds() {
+<b class="nc">&nbsp;        geofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return geofences.keySet();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            geofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Set&lt;Long&gt; getManagedGeofencesIds(long userId) {
+<b class="nc">&nbsp;        Set&lt;Long&gt; geofences = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        geofences.addAll(getUserGeofencesIds(userId));</b>
+<b class="nc">&nbsp;        for (long managedUserId : Context.getPermissionsManager().getUserPermissions(userId)) {</b>
+<b class="nc">&nbsp;            geofences.addAll(getUserGeofencesIds(managedUserId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return geofences;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Collection&lt;Geofence&gt; getGeofences(Set&lt;Long&gt; geofencesIds) {
+<b class="nc">&nbsp;        geofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            Collection&lt;Geofence&gt; result = new LinkedList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (long geofenceId : geofencesIds) {</b>
+<b class="nc">&nbsp;                result.add(getGeofence(geofenceId));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            geofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final Geofence getGeofence(long geofenceId) {
+<b class="nc">&nbsp;        geofencesLock.readLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            return geofences.get(geofenceId);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            geofencesLock.readLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void updateGeofence(Geofence geofence) {
+<b class="nc">&nbsp;        geofencesLock.writeLock().lock();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            geofences.put(geofence.getId(), geofence);</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            geofencesLock.writeLock().unlock();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            dataManager.updateGeofence(geofence);</b>
+<b class="nc">&nbsp;        } catch (SQLException error) {</b>
+<b class="nc">&nbsp;            Log.warning(error);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean checkGeofence(long userId, long geofenceId) {
+<b class="nc">&nbsp;        return getUserGeofencesIds(userId).contains(geofenceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Long&gt; getCurrentDeviceGeofences(Position position) {
+<b class="nc">&nbsp;        List&lt;Long&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long geofenceId : getAllDeviceGeofences(position.getDeviceId())) {</b>
+<b class="nc">&nbsp;            if (getGeofence(geofenceId).getGeometry().containsPoint(position.getLatitude(), position.getLongitude())) {</b>
+<b class="nc">&nbsp;                result.add(geofenceId);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:56</div>
+</div>
+</body>
+</html>

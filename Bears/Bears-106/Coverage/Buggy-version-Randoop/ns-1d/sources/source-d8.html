@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PathAwayProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: PathAwayProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PathAwayProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.jboss.netty.channel.ChannelFutureListener;
+&nbsp;import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpRequest;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponse;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+&nbsp;import org.jboss.netty.handler.codec.http.HttpVersion;
+&nbsp;import org.jboss.netty.handler.codec.http.QueryStringDecoder;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class PathAwayProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public PathAwayProtocolDecoder(PathAwayProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;$PWS,&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;d+,&quot;)                       // version</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]*,&quot;)                // name</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]*,&quot;)                // icon</b>
+<b class="nc">&nbsp;            .expression(&quot;[^,]*,&quot;)                // color</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="nc">&nbsp;            .number(&quot;(-?d+.d+),&quot;)                // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(-?d+.d+),&quot;)                // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(-?d+.?d*),&quot;)               // altitude</b>
+<b class="nc">&nbsp;            .number(&quot;(-?d+.?d*),&quot;)               // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(-?d+.?d*),&quot;)               // course</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        HttpRequest request = (HttpRequest) msg;</b>
+<b class="nc">&nbsp;        QueryStringDecoder decoder = new QueryStringDecoder(request.getUri());</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(</b>
+<b class="nc">&nbsp;                channel, remoteAddress, decoder.getParameters().get(&quot;UserName&quot;).get(0));</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN, decoder.getParameters().get(&quot;LOC&quot;).get(0));</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(true);</b>
+<b class="nc">&nbsp;        position.setLatitude(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setLongitude(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setAltitude(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setSpeed(parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.setCourse(parser.nextDouble());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);</b>
+<b class="nc">&nbsp;            channel.write(response).addListener(ChannelFutureListener.CLOSE);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:38</div>
+</div>
+</body>
+</html>

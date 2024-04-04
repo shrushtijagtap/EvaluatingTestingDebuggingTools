@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GJDayOfWeekDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: GJDayOfWeekDateTimeField (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GJDayOfWeekDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.field.PreciseDurationDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * GJDayOfWeekDateTimeField provides time calculations for the
+&nbsp; * day of the week component of time.
+&nbsp; *
+&nbsp; * @since 1.0
+&nbsp; * @author Guy Allard
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; */
+&nbsp;final class GJDayOfWeekDateTimeField extends PreciseDurationDateTimeField {
+&nbsp;    
+&nbsp;    /** Serialization version */
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = -3857947176719041436L;
+&nbsp;
+&nbsp;    private final BasicChronology iChronology;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     */
+&nbsp;    GJDayOfWeekDateTimeField(BasicChronology chronology, DurationField days) {
+<b class="nc">&nbsp;        super(DateTimeFieldType.dayOfWeek(), days);</b>
+<b class="nc">&nbsp;        iChronology = chronology;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the value of the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to query
+&nbsp;     * @return the day of the week extracted from the input
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return iChronology.getDayOfWeek(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the textual value of the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param fieldValue  the field value to query
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @return the day of the week, such as &#39;Monday&#39;
+&nbsp;     */
+&nbsp;    public String getAsText(int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        return GJLocaleSymbols.forLocale(locale).dayOfWeekValueToText(fieldValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the abbreviated textual value of the specified time instant.
+&nbsp;     * 
+&nbsp;     * @param fieldValue  the field value to query
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @return the day of the week, such as &#39;Mon&#39;
+&nbsp;     */
+&nbsp;    public String getAsShortText(int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        return GJLocaleSymbols.forLocale(locale).dayOfWeekValueToShortText(fieldValue);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Convert the specified text and locale into a value.
+&nbsp;     * 
+&nbsp;     * @param text  the text to convert
+&nbsp;     * @param locale  the locale to convert using
+&nbsp;     * @return the value extracted from the text
+&nbsp;     * @throws IllegalArgumentException if the text is invalid
+&nbsp;     */
+&nbsp;    protected int convertText(String text, Locale locale) {
+<b class="nc">&nbsp;        return GJLocaleSymbols.forLocale(locale).dayOfWeekTextToValue(text);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="nc">&nbsp;        return iChronology.weeks();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minimum value that this field can have.
+&nbsp;     * 
+&nbsp;     * @return the field&#39;s minimum value
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        return DateTimeConstants.MONDAY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum value that this field can have.
+&nbsp;     * 
+&nbsp;     * @return the field&#39;s maximum value
+&nbsp;     */
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return DateTimeConstants.SUNDAY;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum length of the text returned by this field.
+&nbsp;     * 
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @return the maximum textual length
+&nbsp;     */
+&nbsp;    public int getMaximumTextLength(Locale locale) {
+<b class="nc">&nbsp;        return GJLocaleSymbols.forLocale(locale).getDayOfWeekMaxTextLength();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the maximum length of the abbreviated text returned by this field.
+&nbsp;     * 
+&nbsp;     * @param locale  the locale to use
+&nbsp;     * @return the maximum abbreviated textual length
+&nbsp;     */
+&nbsp;    public int getMaximumShortTextLength(Locale locale) {
+<b class="nc">&nbsp;        return GJLocaleSymbols.forLocale(locale).getDayOfWeekMaxShortTextLength();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialization singleton
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return iChronology.dayOfWeek();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:38</div>
+</div>
+</body>
+</html>

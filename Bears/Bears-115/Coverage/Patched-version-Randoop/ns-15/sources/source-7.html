@@ -1,0 +1,610 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DeviceManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: DeviceManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeviceManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/259)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.atomic.AtomicLong;
+&nbsp;
+&nbsp;import org.traccar.BaseProtocol;
+&nbsp;import org.traccar.Config;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;import org.traccar.model.CommandType;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.DeviceTotalDistance;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.Server;
+&nbsp;
+&nbsp;public class DeviceManager implements IdentityManager {
+&nbsp;
+&nbsp;    public static final long DEFAULT_REFRESH_DELAY = 300;
+&nbsp;
+&nbsp;    private final Config config;
+&nbsp;    private final DataManager dataManager;
+&nbsp;    private final long dataRefreshDelay;
+&nbsp;    private boolean lookupGroupsAttribute;
+&nbsp;
+&nbsp;    private Map&lt;Long, Device&gt; devicesById;
+&nbsp;    private Map&lt;String, Device&gt; devicesByUniqueId;
+&nbsp;    private Map&lt;String, Device&gt; devicesByPhone;
+<b class="nc">&nbsp;    private AtomicLong devicesLastUpdate = new AtomicLong();</b>
+&nbsp;
+&nbsp;    private Map&lt;Long, Group&gt; groupsById;
+<b class="nc">&nbsp;    private AtomicLong groupsLastUpdate = new AtomicLong();</b>
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, Position&gt; positions = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    private boolean fallbackToText;
+&nbsp;
+<b class="nc">&nbsp;    public DeviceManager(DataManager dataManager) {</b>
+<b class="nc">&nbsp;        this.dataManager = dataManager;</b>
+<b class="nc">&nbsp;        this.config = Context.getConfig();</b>
+<b class="nc">&nbsp;        dataRefreshDelay = config.getLong(&quot;database.refreshDelay&quot;, DEFAULT_REFRESH_DELAY) * 1000;</b>
+<b class="nc">&nbsp;        lookupGroupsAttribute = config.getBoolean(&quot;deviceManager.lookupGroupsAttribute&quot;);</b>
+<b class="nc">&nbsp;        fallbackToText = config.getBoolean(&quot;command.fallbackToSms&quot;);</b>
+<b class="nc">&nbsp;        if (dataManager != null) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                updateGroupCache(true);</b>
+<b class="nc">&nbsp;                updateDeviceCache(true);</b>
+<b class="nc">&nbsp;                for (Position position : dataManager.getLatestPositions()) {</b>
+<b class="nc">&nbsp;                    positions.put(position.getDeviceId(), position);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } catch (SQLException error) {</b>
+<b class="nc">&nbsp;                Log.warning(error);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateDeviceCache(boolean force) throws SQLException {
+&nbsp;
+<b class="nc">&nbsp;        long lastUpdate = devicesLastUpdate.get();</b>
+<b class="nc">&nbsp;        if ((force || System.currentTimeMillis() - lastUpdate &gt; dataRefreshDelay)</b>
+<b class="nc">&nbsp;                &amp;&amp; devicesLastUpdate.compareAndSet(lastUpdate, System.currentTimeMillis())) {</b>
+<b class="nc">&nbsp;            GeofenceManager geofenceManager = Context.getGeofenceManager();</b>
+<b class="nc">&nbsp;            Collection&lt;Device&gt; databaseDevices = dataManager.getAllDevices();</b>
+<b class="nc">&nbsp;            if (devicesById == null) {</b>
+<b class="nc">&nbsp;                devicesById = new ConcurrentHashMap&lt;&gt;(databaseDevices.size());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (devicesByUniqueId == null) {</b>
+<b class="nc">&nbsp;                devicesByUniqueId = new ConcurrentHashMap&lt;&gt;(databaseDevices.size());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (devicesByPhone == null) {</b>
+<b class="nc">&nbsp;                devicesByPhone = new ConcurrentHashMap&lt;&gt;(databaseDevices.size());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Set&lt;Long&gt; databaseDevicesIds = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; databaseDevicesUniqueIds = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; databaseDevicesPhones = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (Device device : databaseDevices) {</b>
+<b class="nc">&nbsp;                databaseDevicesIds.add(device.getId());</b>
+<b class="nc">&nbsp;                databaseDevicesUniqueIds.add(device.getUniqueId());</b>
+<b class="nc">&nbsp;                databaseDevicesPhones.add(device.getPhone());</b>
+<b class="nc">&nbsp;                if (devicesById.containsKey(device.getId())) {</b>
+<b class="nc">&nbsp;                    Device cachedDevice = devicesById.get(device.getId());</b>
+<b class="nc">&nbsp;                    cachedDevice.setName(device.getName());</b>
+<b class="nc">&nbsp;                    cachedDevice.setGroupId(device.getGroupId());</b>
+<b class="nc">&nbsp;                    cachedDevice.setCategory(device.getCategory());</b>
+<b class="nc">&nbsp;                    cachedDevice.setContact(device.getContact());</b>
+<b class="nc">&nbsp;                    cachedDevice.setModel(device.getModel());</b>
+<b class="nc">&nbsp;                    cachedDevice.setAttributes(device.getAttributes());</b>
+<b class="nc">&nbsp;                    if (!device.getUniqueId().equals(cachedDevice.getUniqueId())) {</b>
+<b class="nc">&nbsp;                        devicesByUniqueId.put(device.getUniqueId(), cachedDevice);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    cachedDevice.setUniqueId(device.getUniqueId());</b>
+<b class="nc">&nbsp;                    if (device.getPhone() != null &amp;&amp; !device.getPhone().isEmpty()</b>
+<b class="nc">&nbsp;                            &amp;&amp; !device.getPhone().equals(cachedDevice.getPhone())) {</b>
+<b class="nc">&nbsp;                        devicesByPhone.put(device.getPhone(), cachedDevice);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    cachedDevice.setPhone(device.getPhone());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    devicesById.put(device.getId(), device);</b>
+<b class="nc">&nbsp;                    devicesByUniqueId.put(device.getUniqueId(), device);</b>
+<b class="nc">&nbsp;                    if (device.getPhone() != null &amp;&amp; !device.getPhone().isEmpty()) {</b>
+<b class="nc">&nbsp;                        devicesByPhone.put(device.getPhone(), device);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    if (geofenceManager != null) {</b>
+<b class="nc">&nbsp;                        Position lastPosition = getLastPosition(device.getId());</b>
+<b class="nc">&nbsp;                        if (lastPosition != null) {</b>
+<b class="nc">&nbsp;                            device.setGeofenceIds(geofenceManager.getCurrentDeviceGeofences(lastPosition));</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            for (Iterator&lt;Long&gt; iterator = devicesById.keySet().iterator(); iterator.hasNext();) {</b>
+<b class="nc">&nbsp;                if (!databaseDevicesIds.contains(iterator.next())) {</b>
+<b class="nc">&nbsp;                    iterator.remove();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            for (Iterator&lt;String&gt; iterator = devicesByUniqueId.keySet().iterator(); iterator.hasNext();) {</b>
+<b class="nc">&nbsp;                if (!databaseDevicesUniqueIds.contains(iterator.next())) {</b>
+<b class="nc">&nbsp;                    iterator.remove();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            for (Iterator&lt;String&gt; iterator = devicesByPhone.keySet().iterator(); iterator.hasNext();) {</b>
+<b class="nc">&nbsp;                if (!databaseDevicesPhones.contains(iterator.next())) {</b>
+<b class="nc">&nbsp;                    iterator.remove();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Device getDeviceById(long id) {
+<b class="nc">&nbsp;        return devicesById.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Device getDeviceByUniqueId(String uniqueId) throws SQLException {
+<b class="nc">&nbsp;        boolean forceUpdate = !devicesByUniqueId.containsKey(uniqueId) &amp;&amp; !config.getBoolean(&quot;database.ignoreUnknown&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        updateDeviceCache(forceUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;        return devicesByUniqueId.get(uniqueId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Device getDeviceByPhone(String phone) {
+<b class="nc">&nbsp;        return devicesByPhone.get(phone);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Device&gt; getAllDevices() {
+<b class="nc">&nbsp;        boolean forceUpdate = devicesById.isEmpty();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            updateDeviceCache(forceUpdate);</b>
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            Log.warning(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return devicesById.values();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Device&gt; getDevices(long userId) throws SQLException {
+<b class="nc">&nbsp;        Collection&lt;Device&gt; devices = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long id : Context.getPermissionsManager().getDevicePermissions(userId)) {</b>
+<b class="nc">&nbsp;            devices.add(devicesById.get(id));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return devices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Device&gt; getManagedDevices(long userId) throws SQLException {
+<b class="nc">&nbsp;        Collection&lt;Device&gt; devices = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        devices.addAll(getDevices(userId));</b>
+<b class="nc">&nbsp;        for (long managedUserId : Context.getPermissionsManager().getUserPermissions(userId)) {</b>
+<b class="nc">&nbsp;            devices.addAll(getDevices(managedUserId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return devices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addDevice(Device device) throws SQLException {
+<b class="nc">&nbsp;        dataManager.addDevice(device);</b>
+&nbsp;
+<b class="nc">&nbsp;        devicesById.put(device.getId(), device);</b>
+<b class="nc">&nbsp;        devicesByUniqueId.put(device.getUniqueId(), device);</b>
+<b class="nc">&nbsp;        if (device.getPhone() != null  &amp;&amp; !device.getPhone().isEmpty()) {</b>
+<b class="nc">&nbsp;            devicesByPhone.put(device.getPhone(), device);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateDevice(Device device) throws SQLException {
+<b class="nc">&nbsp;        dataManager.updateDevice(device);</b>
+&nbsp;
+<b class="nc">&nbsp;        devicesById.put(device.getId(), device);</b>
+<b class="nc">&nbsp;        devicesByUniqueId.put(device.getUniqueId(), device);</b>
+<b class="nc">&nbsp;        if (device.getPhone() != null &amp;&amp; !device.getPhone().isEmpty()) {</b>
+<b class="nc">&nbsp;            devicesByPhone.put(device.getPhone(), device);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateDeviceStatus(Device device) throws SQLException {
+<b class="nc">&nbsp;        dataManager.updateDeviceStatus(device);</b>
+<b class="nc">&nbsp;        if (devicesById.containsKey(device.getId())) {</b>
+<b class="nc">&nbsp;            Device cachedDevice = devicesById.get(device.getId());</b>
+<b class="nc">&nbsp;            cachedDevice.setStatus(device.getStatus());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeDevice(long deviceId) throws SQLException {
+<b class="nc">&nbsp;        dataManager.removeDevice(deviceId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (devicesById.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;            String deviceUniqueId = devicesById.get(deviceId).getUniqueId();</b>
+<b class="nc">&nbsp;            String phone = devicesById.get(deviceId).getPhone();</b>
+<b class="nc">&nbsp;            devicesById.remove(deviceId);</b>
+<b class="nc">&nbsp;            devicesByUniqueId.remove(deviceUniqueId);</b>
+<b class="nc">&nbsp;            if (phone != null &amp;&amp; !phone.isEmpty()) {</b>
+<b class="nc">&nbsp;                devicesByPhone.remove(phone);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        positions.remove(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLatestPosition(Position position) {
+<b class="nc">&nbsp;        Position lastPosition = getLastPosition(position.getDeviceId());</b>
+<b class="nc">&nbsp;        return lastPosition == null || position.getFixTime().compareTo(lastPosition.getFixTime()) &gt;= 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateLatestPosition(Position position) throws SQLException {
+&nbsp;
+<b class="nc">&nbsp;        if (isLatestPosition(position)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            dataManager.updateLatestPosition(position);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (devicesById.containsKey(position.getDeviceId())) {</b>
+<b class="nc">&nbsp;                devicesById.get(position.getDeviceId()).setPositionId(position.getId());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            positions.put(position.getDeviceId(), position);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (Context.getConnectionManager() != null) {</b>
+<b class="nc">&nbsp;                Context.getConnectionManager().updatePosition(position);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Position getLastPosition(long deviceId) {
+<b class="nc">&nbsp;        return positions.get(deviceId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Position&gt; getInitialState(long userId) {
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Position&gt; result = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Context.getPermissionsManager() != null) {</b>
+<b class="nc">&nbsp;            for (long deviceId : Context.getPermissionsManager().getDevicePermissions(userId)) {</b>
+<b class="nc">&nbsp;                if (positions.containsKey(deviceId)) {</b>
+<b class="nc">&nbsp;                    result.add(positions.get(deviceId));</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateGroupCache(boolean force) throws SQLException {
+&nbsp;
+<b class="nc">&nbsp;        long lastUpdate = groupsLastUpdate.get();</b>
+<b class="nc">&nbsp;        if ((force || System.currentTimeMillis() - lastUpdate &gt; dataRefreshDelay)</b>
+<b class="nc">&nbsp;                &amp;&amp; groupsLastUpdate.compareAndSet(lastUpdate, System.currentTimeMillis())) {</b>
+<b class="nc">&nbsp;            Collection&lt;Group&gt; databaseGroups = dataManager.getAllGroups();</b>
+<b class="nc">&nbsp;            if (groupsById == null) {</b>
+<b class="nc">&nbsp;                groupsById = new ConcurrentHashMap&lt;&gt;(databaseGroups.size());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Set&lt;Long&gt; databaseGroupsIds = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (Group group : databaseGroups) {</b>
+<b class="nc">&nbsp;                databaseGroupsIds.add(group.getId());</b>
+<b class="nc">&nbsp;                if (groupsById.containsKey(group.getId())) {</b>
+<b class="nc">&nbsp;                    Group cachedGroup = groupsById.get(group.getId());</b>
+<b class="nc">&nbsp;                    cachedGroup.setName(group.getName());</b>
+<b class="nc">&nbsp;                    cachedGroup.setGroupId(group.getGroupId());</b>
+<b class="nc">&nbsp;                } else {</b>
+<b class="nc">&nbsp;                    groupsById.put(group.getId(), group);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            for (Long cachedGroupId : groupsById.keySet()) {</b>
+<b class="nc">&nbsp;                if (!databaseGroupsIds.contains(cachedGroupId)) {</b>
+<b class="nc">&nbsp;                    devicesById.remove(cachedGroupId);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            databaseGroupsIds.clear();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Group getGroupById(long id) {
+<b class="nc">&nbsp;        return groupsById.get(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Group&gt; getAllGroups() {
+<b class="nc">&nbsp;        boolean forceUpdate = groupsById.isEmpty();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            updateGroupCache(forceUpdate);</b>
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            Log.warning(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return groupsById.values();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Group&gt; getGroups(long userId) throws SQLException {
+<b class="nc">&nbsp;        Collection&lt;Group&gt; groups = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (long id : Context.getPermissionsManager().getGroupPermissions(userId)) {</b>
+<b class="nc">&nbsp;            groups.add(getGroupById(id));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return groups;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Group&gt; getManagedGroups(long userId) throws SQLException {
+<b class="nc">&nbsp;        Collection&lt;Group&gt; groups = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        groups.addAll(getGroups(userId));</b>
+<b class="nc">&nbsp;        for (long managedUserId : Context.getPermissionsManager().getUserPermissions(userId)) {</b>
+<b class="nc">&nbsp;            groups.addAll(getGroups(managedUserId));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return groups;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkGroupCycles(Group group) {
+<b class="nc">&nbsp;        Set&lt;Long&gt; groups = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        while (group != null) {</b>
+<b class="nc">&nbsp;            if (groups.contains(group.getId())) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Cycle in group hierarchy&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            groups.add(group.getId());</b>
+<b class="nc">&nbsp;            group = groupsById.get(group.getGroupId());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addGroup(Group group) throws SQLException {
+<b class="nc">&nbsp;        checkGroupCycles(group);</b>
+<b class="nc">&nbsp;        dataManager.addGroup(group);</b>
+<b class="nc">&nbsp;        groupsById.put(group.getId(), group);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateGroup(Group group) throws SQLException {
+<b class="nc">&nbsp;        checkGroupCycles(group);</b>
+<b class="nc">&nbsp;        dataManager.updateGroup(group);</b>
+<b class="nc">&nbsp;        groupsById.put(group.getId(), group);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeGroup(long groupId) throws SQLException {
+<b class="nc">&nbsp;        dataManager.removeGroup(groupId);</b>
+<b class="nc">&nbsp;        groupsById.remove(groupId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean lookupAttributeBoolean(
+&nbsp;            long deviceId, String attributeName, boolean defaultValue, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = lookupAttribute(deviceId, attributeName, lookupConfig);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return Boolean.parseBoolean(result);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String lookupAttributeString(
+&nbsp;            long deviceId, String attributeName, String defaultValue, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = lookupAttribute(deviceId, attributeName, lookupConfig);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return result;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int lookupAttributeInteger(long deviceId, String attributeName, int defaultValue, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = lookupAttribute(deviceId, attributeName, lookupConfig);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return Integer.parseInt(result);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long lookupAttributeLong(
+&nbsp;            long deviceId, String attributeName, long defaultValue, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = lookupAttribute(deviceId, attributeName, lookupConfig);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return Long.parseLong(result);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double lookupAttributeDouble(
+&nbsp;            long deviceId, String attributeName, double defaultValue, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = lookupAttribute(deviceId, attributeName, lookupConfig);</b>
+<b class="nc">&nbsp;        if (result != null) {</b>
+<b class="nc">&nbsp;            return Double.parseDouble(result);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return defaultValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String lookupAttribute(long deviceId, String attributeName, boolean lookupConfig) {
+<b class="nc">&nbsp;        String result = null;</b>
+<b class="nc">&nbsp;        Device device = getDeviceById(deviceId);</b>
+<b class="nc">&nbsp;        if (device != null) {</b>
+<b class="nc">&nbsp;            result = device.getString(attributeName);</b>
+<b class="nc">&nbsp;            if (result == null &amp;&amp; lookupGroupsAttribute) {</b>
+<b class="nc">&nbsp;                long groupId = device.getGroupId();</b>
+<b class="nc">&nbsp;                while (groupId != 0) {</b>
+<b class="nc">&nbsp;                    if (getGroupById(groupId) != null) {</b>
+<b class="nc">&nbsp;                        result = getGroupById(groupId).getString(attributeName);</b>
+<b class="nc">&nbsp;                        if (result != null) {</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        groupId = getGroupById(groupId).getGroupId();</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        groupId = 0;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            if (result == null) {</b>
+<b class="nc">&nbsp;                if (lookupConfig) {</b>
+<b class="nc">&nbsp;                    result = Context.getConfig().getString(attributeName);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    Server server = Context.getPermissionsManager().getServer();</b>
+<b class="nc">&nbsp;                    result = server.getString(attributeName);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void resetTotalDistance(DeviceTotalDistance deviceTotalDistance) throws SQLException {
+<b class="nc">&nbsp;        Position last = positions.get(deviceTotalDistance.getDeviceId());</b>
+<b class="nc">&nbsp;        if (last != null) {</b>
+<b class="nc">&nbsp;            last.getAttributes().put(Position.KEY_TOTAL_DISTANCE, deviceTotalDistance.getTotalDistance());</b>
+<b class="nc">&nbsp;            dataManager.addPosition(last);</b>
+<b class="nc">&nbsp;            updateLatestPosition(last);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void sendCommand(Command command) throws Exception {
+<b class="nc">&nbsp;        long deviceId = command.getDeviceId();</b>
+<b class="nc">&nbsp;        if (command.getTextChannel()) {</b>
+<b class="nc">&nbsp;            Position lastPosition = getLastPosition(deviceId);</b>
+<b class="nc">&nbsp;            if (lastPosition != null) {</b>
+<b class="nc">&nbsp;                BaseProtocol protocol = Context.getServerManager().getProtocol(lastPosition.getProtocol());</b>
+<b class="nc">&nbsp;                protocol.sendTextCommand(devicesById.get(deviceId).getPhone(), command);</b>
+<b class="nc">&nbsp;            } else if (command.getType().equals(Command.TYPE_CUSTOM)) {</b>
+<b class="nc">&nbsp;                Context.getSmppManager().sendMessageSync(devicesById.get(deviceId).getPhone(),</b>
+<b class="nc">&nbsp;                        command.getString(Command.KEY_DATA), true);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Command &quot; + command.getType() + &quot; is not supported&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            ActiveDevice activeDevice = Context.getConnectionManager().getActiveDevice(deviceId);</b>
+<b class="nc">&nbsp;            if (activeDevice != null) {</b>
+<b class="nc">&nbsp;                activeDevice.sendCommand(command);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                if (fallbackToText) {</b>
+<b class="nc">&nbsp;                    command.setTextChannel(true);</b>
+<b class="nc">&nbsp;                    sendCommand(command);</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    throw new RuntimeException(&quot;Device is not online&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;CommandType&gt; getCommandTypes(long deviceId, boolean textChannel) {
+<b class="nc">&nbsp;        List&lt;CommandType&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Position lastPosition = Context.getDeviceManager().getLastPosition(deviceId);</b>
+<b class="nc">&nbsp;        if (lastPosition != null) {</b>
+<b class="nc">&nbsp;            BaseProtocol protocol = Context.getServerManager().getProtocol(lastPosition.getProtocol());</b>
+&nbsp;            Collection&lt;String&gt; commands;
+<b class="nc">&nbsp;            commands = textChannel ? protocol.getSupportedTextCommands() : protocol.getSupportedDataCommands();</b>
+<b class="nc">&nbsp;            for (String commandKey : commands) {</b>
+<b class="nc">&nbsp;                result.add(new CommandType(commandKey));</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            result.add(new CommandType(Command.TYPE_CUSTOM));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:05</div>
+</div>
+</body>
+</html>

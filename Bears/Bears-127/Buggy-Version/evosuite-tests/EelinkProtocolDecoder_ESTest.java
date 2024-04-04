@@ -25,7 +25,7 @@ import org.traccar.protocol.EelinkProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EelinkProtocolDecoder_ESTest extends EelinkProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       EelinkProtocol eelinkProtocol0 = new EelinkProtocol();
       MockInetSocketAddress mockInetSocketAddress0 = new MockInetSocketAddress(0);
@@ -46,7 +46,7 @@ public class EelinkProtocolDecoder_ESTest extends EelinkProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       EelinkProtocol eelinkProtocol0 = new EelinkProtocol();
       MockInetSocketAddress mockInetSocketAddress0 = new MockInetSocketAddress(0);
@@ -68,7 +68,7 @@ public class EelinkProtocolDecoder_ESTest extends EelinkProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       EelinkProtocol eelinkProtocol0 = new EelinkProtocol();
       EelinkProtocolDecoder eelinkProtocolDecoder0 = new EelinkProtocolDecoder(eelinkProtocol0);

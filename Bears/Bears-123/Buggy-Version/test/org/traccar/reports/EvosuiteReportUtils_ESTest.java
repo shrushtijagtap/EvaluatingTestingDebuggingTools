@@ -31,7 +31,7 @@ import org.traccar.reports.model.TripsConfig;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       Position position0 = new Position();
       assertNull(position0.getProtocol());
@@ -166,7 +166,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getLatitude(), 0.01);
@@ -238,7 +238,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getLatitude(), 0.01);
@@ -325,7 +325,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getAccuracy(), 0.01);
@@ -392,7 +392,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getCourse(), 0.01);
@@ -461,7 +461,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotSame(position1, position0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       Position position0 = new Position();
       assertFalse(position0.getOutdated());
@@ -515,7 +515,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       LinkedList<Long> linkedList0 = new LinkedList<Long>();
       assertEquals(0, linkedList0.size());
@@ -543,7 +543,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getLatitude(), 0.01);
@@ -597,7 +597,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertEquals(0.0, double1, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       Double double0 = new Double((-1.0));
       assertNotNull(double0);
@@ -685,7 +685,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotSame(position1, position0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       Position position0 = new Position();
       assertNull(position0.getProtocol());
@@ -775,7 +775,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotSame(position1, position0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
       assertEquals("", byteArrayOutputStream0.toString());
@@ -795,7 +795,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -810,7 +810,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getLatitude(), 0.01);
@@ -886,7 +886,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -901,7 +901,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       Class<TripReport> class0 = TripReport.class;
       List<String> list0 = ResourceBundle.Control.FORMAT_DEFAULT;
@@ -937,7 +937,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -952,7 +952,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -967,7 +967,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -982,7 +982,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -997,7 +997,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getAltitude(), 0.01);
@@ -1085,7 +1085,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotSame(position1, position0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getSpeed(), 0.01);
@@ -1131,7 +1131,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getCourse(), 0.01);
@@ -1166,7 +1166,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -1181,7 +1181,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test23()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getAccuracy(), 0.01);
@@ -1264,7 +1264,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertTrue(linkedHashSet0.contains(position0));
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test24()  throws Throwable  {
       LinkedHashSet<Position> linkedHashSet0 = new LinkedHashSet<Position>();
       assertEquals(0, linkedHashSet0.size());
@@ -1278,7 +1278,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test25()  throws Throwable  {
       Position position0 = new Position();
       assertEquals(0.0, position0.getLatitude(), 0.01);
@@ -1362,7 +1362,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test26()  throws Throwable  {
       LinkedHashSet<Position> linkedHashSet0 = new LinkedHashSet<Position>();
       assertEquals(0, linkedHashSet0.size());
@@ -1426,7 +1426,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test27()  throws Throwable  {
       Position position0 = new Position();
       LinkedHashSet<Position> linkedHashSet0 = new LinkedHashSet<Position>();
@@ -1448,19 +1448,19 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test28()  throws Throwable  {
       String string0 = ReportUtils.findDriverName("driverUniqueId");
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test29()  throws Throwable  {
       String string0 = ReportUtils.findDriverName((String) null);
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test30()  throws Throwable  {
       Position position0 = new Position();
       position0.set("driverUniqueId", "totalDistance");
@@ -1469,14 +1469,14 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertEquals("totalDistance", string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test31()  throws Throwable  {
       Position position0 = new Position();
       String string0 = ReportUtils.findDriver(position0, position0);
       assertNull(string0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test32()  throws Throwable  {
       Position position0 = new Position();
       position0.set("totalDistance", "satVisible");
@@ -1493,7 +1493,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test33()  throws Throwable  {
       Position position0 = new Position();
       Short short0 = new Short((short)1243);
@@ -1502,7 +1502,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertEquals(0.0, double0, 0.01);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test34()  throws Throwable  {
       LinkedList<Long> linkedList0 = new LinkedList<Long>();
       LinkedHashSet<Long> linkedHashSet0 = new LinkedHashSet<Long>();
@@ -1510,7 +1510,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       assertNotNull(collection0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test35()  throws Throwable  {
       // Undeclared exception!
       try { 
@@ -1525,7 +1525,7 @@ public class EvosuiteReportUtils_ESTest extends EvosuiteReportUtils_ESTest_scaff
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test36()  throws Throwable  {
       // Undeclared exception!
       try { 

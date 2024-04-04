@@ -26,7 +26,7 @@ import org.traccar.protocol.TotemFrameDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class TotemFrameDecoder_ESTest extends TotemFrameDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -39,7 +39,7 @@ public class TotemFrameDecoder_ESTest extends TotemFrameDecoder_ESTest_scaffoldi
       //  // Unstable assertion: assertEquals(20, (int)localServerChannel0.getId());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -51,7 +51,7 @@ public class TotemFrameDecoder_ESTest extends TotemFrameDecoder_ESTest_scaffoldi
       totemFrameDecoder0.decode((ChannelHandlerContext) null, localServerChannel0, channelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -69,7 +69,7 @@ public class TotemFrameDecoder_ESTest extends TotemFrameDecoder_ESTest_scaffoldi
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test3()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       DefaultLocalClientChannelFactory defaultLocalClientChannelFactory0 = new DefaultLocalClientChannelFactory();

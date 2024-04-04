@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlaybackRequest_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       Integer integer0 = new Integer(0);
@@ -26,7 +26,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder1, startResumeUsersPlaybackRequest_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       Integer integer0 = new Integer((-179));
@@ -42,7 +42,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -57,7 +57,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.wrapper.spotify.exceptions.detailed.UnauthorizedException");
       Integer integer0 = new Integer(1416);
@@ -65,7 +65,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder1, startResumeUsersPlaybackRequest_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -80,7 +80,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Error consuming content after an exception.");
       JsonObject jsonObject0 = new JsonObject();
@@ -88,7 +88,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("5pF>gdDIixKha-r");
       // Undeclared exception!
@@ -103,7 +103,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.wrapper.spotify.exceptions.detailed.UnauthorizedException");
       JsonArray jsonArray0 = new JsonArray(1416);
@@ -111,14 +111,14 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder1, startResumeUsersPlaybackRequest_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("5pF>gdDIixKha-r");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.context_uri("9?");
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -133,7 +133,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Tg9#");
       // Undeclared exception!
@@ -148,7 +148,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder((String) null);
       // Undeclared exception!
@@ -163,14 +163,14 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("Error consuming content after an exception.");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.device_id("Error consuming content after an exception.");
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.wrapper.spotify.exceptions.detailed.UnauthorizedException");
       // Undeclared exception!

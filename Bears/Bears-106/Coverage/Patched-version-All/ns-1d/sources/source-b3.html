@@ -1,0 +1,497 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MeiligaoProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: MeiligaoProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MeiligaoProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.4%
+  </span>
+  <span class="absValue">
+    (172/228)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.InetSocketAddress;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class MeiligaoProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public MeiligaoProtocolDecoder(MeiligaoProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd).?d*,&quot;)         // time (hhmmss)</b>
+<b class="fc">&nbsp;            .expression(&quot;([AV]),&quot;)               // validity</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // latitude</b>
+<b class="fc">&nbsp;            .expression(&quot;([NS]),&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // longitude</b>
+<b class="fc">&nbsp;            .expression(&quot;([EW]),&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,&quot;)                // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*)?,&quot;)                // course</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (ddmmyy)</b>
+<b class="fc">&nbsp;            .expression(&quot;[^\\|]*&quot;)</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .number(&quot;|(d+.d+)?&quot;)                 // hdop</b>
+<b class="fc">&nbsp;            .number(&quot;|(-?d+.?d*)?&quot;)              // altitude</b>
+<b class="fc">&nbsp;            .number(&quot;|(xxxx)?&quot;)                  // state</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .number(&quot;|(xxxx),(xxxx)&quot;)            // adc</b>
+<b class="fc">&nbsp;            .number(&quot;(?:,(xxxx),(xxxx),(xxxx),(xxxx),(xxxx),(xxxx))?&quot;)</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .number(&quot;|x{16}&quot;)                    // cell</b>
+<b class="fc">&nbsp;            .number(&quot;|(xx)&quot;)                     // gsm</b>
+<b class="fc">&nbsp;            .number(&quot;|(x{8})&quot;)                   // odometer</b>
+<b class="fc">&nbsp;            .or()</b>
+<b class="fc">&nbsp;            .number(&quot;|(x{9})&quot;)                   // odometer</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .number(&quot;|(x{5,})&quot;)                  // rfid</b>
+<b class="fc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="fc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="fc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="fc">&nbsp;            .groupEnd(&quot;?&quot;)</b>
+<b class="fc">&nbsp;            .any()</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_RFID = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .number(&quot;|(dd)(dd)(dd),&quot;)            // time (hhmmss)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // date (ddmmyy)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // latitude</b>
+<b class="fc">&nbsp;            .expression(&quot;([NS]),&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)(dd.d+),&quot;)              // longitude</b>
+<b class="fc">&nbsp;            .expression(&quot;([EW])&quot;)</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_OBD = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // battery</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // rpm</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // throttle</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // engine load</b>
+<b class="fc">&nbsp;            .number(&quot;(-?d+),&quot;)                   // coolant temp</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // instantaneous fuel</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // average fuel</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // driving range</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // odometer</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // single fuel consumption</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // total fuel consumption</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // error code count</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // harsh acceleration count</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)&quot;)                      // harsh break count</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN_OBDA = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // total ignition</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // total driving time</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.d+),&quot;)                  // total idling time</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // average hot start time</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // average speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // history highest speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // history highest rpm</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // total harsh acceleration</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)&quot;)                      // total harsh break n0</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    public static final int MSG_HEARTBEAT = 0x0001;
+&nbsp;    public static final int MSG_SERVER = 0x0002;
+&nbsp;    public static final int MSG_LOGIN = 0x5000;
+&nbsp;    public static final int MSG_LOGIN_RESPONSE = 0x4000;
+&nbsp;    public static final int MSG_POSITION = 0x9955;
+&nbsp;    public static final int MSG_POSITION_LOGGED = 0x9016;
+&nbsp;    public static final int MSG_ALARM = 0x9999;
+&nbsp;    public static final int MSG_RFID = 0x9966;
+&nbsp;
+&nbsp;    public static final int MSG_OBD_RT = 0x9901;
+&nbsp;    public static final int MSG_OBD_RTA = 0x9902;
+&nbsp;
+&nbsp;    private DeviceSession identify(ChannelBuffer buf, Channel channel, SocketAddress remoteAddress) {
+<b class="fc">&nbsp;        StringBuilder builder = new StringBuilder();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 7; i++) {</b>
+<b class="fc">&nbsp;            int b = buf.readUnsignedByte();</b>
+&nbsp;
+&nbsp;            // First digit
+<b class="fc">&nbsp;            int d1 = (b &amp; 0xf0) &gt;&gt; 4;</b>
+<b class="fc">&nbsp;            if (d1 == 0xf) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            builder.append(d1);</b>
+&nbsp;
+&nbsp;            // Second digit
+<b class="fc">&nbsp;            int d2 = b &amp; 0x0f;</b>
+<b class="fc">&nbsp;            if (d2 == 0xf) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            builder.append(d2);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String id = builder.toString();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (id.length() == 14) {</b>
+<b class="fc">&nbsp;            return getDeviceSession(channel, remoteAddress, id, id + Checksum.luhn(Long.parseLong(id)));</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return getDeviceSession(channel, remoteAddress, id);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void sendResponse(
+&nbsp;            Channel channel, SocketAddress remoteAddress, ChannelBuffer id, int type, ChannelBuffer msg) {
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer buf = ChannelBuffers.buffer(</b>
+<b class="nc">&nbsp;                    2 + 2 + id.readableBytes() + 2 + msg.readableBytes() + 2 + 2);</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.writeByte(&#39;@&#39;);</b>
+<b class="nc">&nbsp;            buf.writeByte(&#39;@&#39;);</b>
+<b class="nc">&nbsp;            buf.writeShort(buf.capacity());</b>
+<b class="nc">&nbsp;            buf.writeBytes(id);</b>
+<b class="nc">&nbsp;            buf.writeShort(type);</b>
+<b class="nc">&nbsp;            buf.writeBytes(msg);</b>
+<b class="nc">&nbsp;            buf.writeShort(Checksum.crc16(Checksum.CRC16_CCITT_FALSE, buf.toByteBuffer()));</b>
+<b class="nc">&nbsp;            buf.writeByte(&#39;\r&#39;);</b>
+<b class="nc">&nbsp;            buf.writeByte(&#39;\n&#39;);</b>
+&nbsp;
+<b class="nc">&nbsp;            channel.write(buf, remoteAddress);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getServer(Channel channel) {
+<b class="nc">&nbsp;        String server = Context.getConfig().getString(getProtocolName() + &quot;.server&quot;);</b>
+<b class="nc">&nbsp;        if (server == null) {</b>
+<b class="nc">&nbsp;            InetSocketAddress address = (InetSocketAddress) channel.getLocalAddress();</b>
+<b class="nc">&nbsp;            server = address.getAddress().getHostAddress() + &quot;:&quot; + address.getPort();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return server;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String decodeAlarm(short value) {
+<b class="fc">&nbsp;        switch (value) {</b>
+&nbsp;            case 0x01:
+<b class="nc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 0x10:
+<b class="nc">&nbsp;                return Position.ALARM_LOW_BATTERY;</b>
+&nbsp;            case 0x11:
+<b class="nc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case 0x12:
+<b class="nc">&nbsp;                return Position.ALARM_MOVEMENT;</b>
+&nbsp;            case 0x13:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_ENTER;</b>
+&nbsp;            case 0x50:
+<b class="fc">&nbsp;                return Position.ALARM_POWER_OFF;</b>
+&nbsp;            case 0x53:
+<b class="nc">&nbsp;                return Position.ALARM_GPS_ANTENNA_CUT;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeRegular(Position position, String sentence) {
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN, sentence);</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="fc">&nbsp;                .setTime(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="fc">&nbsp;        position.setLatitude(parser.nextCoordinate());</b>
+<b class="fc">&nbsp;        position.setLongitude(parser.nextCoordinate());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.setSpeed(parser.nextDouble());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.setCourse(parser.nextDouble());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        dateBuilder.setDateReverse(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+<b class="fc">&nbsp;        position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_HDOP, parser.next());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.setAltitude(parser.nextDouble());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_STATUS, parser.next());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 1; i &lt;= 8; i++) {</b>
+<b class="fc">&nbsp;            if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;                position.set(Position.PREFIX_ADC + i, parser.nextInt(16));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RSSI, parser.nextInt(16));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, parser.nextLong(16));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, parser.nextLong(16));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RFID, parser.nextInt(16));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeRfid(Position position, String sentence) {
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN_RFID, sentence);</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.setTime(parser.nextDateTime(Parser.DateTimeFormat.HMS_DMY));</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setValid(true);</b>
+<b class="fc">&nbsp;        position.setLatitude(parser.nextCoordinate());</b>
+<b class="fc">&nbsp;        position.setLongitude(parser.nextCoordinate());</b>
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeObd(Position position, String sentence) {
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN_OBD, sentence);</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_BATTERY, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_RPM, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_OBD_SPEED, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_THROTTLE, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(&quot;engineLoad&quot;, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(Position.PREFIX_TEMP + 1, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_FUEL_CONSUMPTION, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(&quot;averageFuelConsumption&quot;, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(&quot;drivingRange&quot;, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_ODOMETER, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(&quot;singleFuelConsumption&quot;, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(&quot;totalFuelConsumption&quot;, parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_DTCS, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(&quot;harshAcelerationNo&quot;, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(&quot;harshBreakerNo&quot;, parser.nextInt());</b>
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeObdA(Position position, String sentence) {
+<b class="nc">&nbsp;        Parser parser = new Parser(PATTERN_OBDA, sentence);</b>
+<b class="nc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;totalIgnitionNo&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;totalDrivingTime&quot;, parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.set(&quot;totalIdlingTime&quot;, parser.nextDouble());</b>
+<b class="nc">&nbsp;        position.set(&quot;averageHotStartTime&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;averageSpeed&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;historyHighestSpeed&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;historyHighestRpm&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;totalHarshAccerleration&quot;, parser.nextInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;totalHarshBrake&quot;, parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+<b class="fc">&nbsp;        buf.skipBytes(2); // header</b>
+<b class="fc">&nbsp;        buf.readShort(); // length</b>
+<b class="fc">&nbsp;        ChannelBuffer id = buf.readBytes(7);</b>
+<b class="fc">&nbsp;        int command = buf.readUnsignedShort();</b>
+&nbsp;        ChannelBuffer response;
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            if (command == MSG_LOGIN) {</b>
+<b class="nc">&nbsp;                response = ChannelBuffers.wrappedBuffer(new byte[]{0x01});</b>
+<b class="nc">&nbsp;                sendResponse(channel, remoteAddress, id, MSG_LOGIN_RESPONSE, response);</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            } else if (command == MSG_HEARTBEAT) {</b>
+<b class="nc">&nbsp;                response = ChannelBuffers.wrappedBuffer(new byte[]{0x01});</b>
+<b class="nc">&nbsp;                sendResponse(channel, remoteAddress, id, MSG_HEARTBEAT, response);</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            } else if (command == MSG_SERVER) {</b>
+<b class="nc">&nbsp;                response = ChannelBuffers.copiedBuffer(getServer(channel), StandardCharsets.US_ASCII);</b>
+<b class="nc">&nbsp;                sendResponse(channel, remoteAddress, id, MSG_SERVER, response);</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (command == MSG_ALARM) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ALARM, decodeAlarm(buf.readUnsignedByte()));</b>
+<b class="fc">&nbsp;        } else if (command == MSG_POSITION_LOGGED) {</b>
+<b class="nc">&nbsp;            buf.skipBytes(6);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = identify(id, channel, remoteAddress);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (command == MSG_RFID) {</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; 15; i++) {</b>
+<b class="fc">&nbsp;                long rfid = buf.readUnsignedInt();</b>
+<b class="fc">&nbsp;                if (rfid != 0) {</b>
+<b class="fc">&nbsp;                    String card = String.format(&quot;%010d&quot;, rfid);</b>
+<b class="fc">&nbsp;                    position.set(&quot;card&quot; + (i + 1), card);</b>
+<b class="fc">&nbsp;                    position.set(Position.KEY_RFID, card);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String sentence = buf.toString(buf.readerIndex(), buf.readableBytes() - 4, StandardCharsets.US_ASCII);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (command == MSG_POSITION || command == MSG_POSITION_LOGGED || command == MSG_ALARM) {</b>
+<b class="fc">&nbsp;            return decodeRegular(position, sentence);</b>
+<b class="fc">&nbsp;        } else if (command == MSG_RFID) {</b>
+<b class="fc">&nbsp;            return decodeRfid(position, sentence);</b>
+<b class="fc">&nbsp;        } else if (command == MSG_OBD_RT) {</b>
+<b class="fc">&nbsp;            return decodeObd(position, sentence);</b>
+<b class="fc">&nbsp;        } else if (command == MSG_OBD_RTA) {</b>
+<b class="nc">&nbsp;            return decodeObdA(position, sentence);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:42</div>
+</div>
+</body>
+</html>

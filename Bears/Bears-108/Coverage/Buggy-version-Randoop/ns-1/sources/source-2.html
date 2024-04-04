@@ -1,0 +1,445 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CryptoAlgorithm</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk</a>
+</div>
+
+<h1>Coverage Summary for Class: CryptoAlgorithm (com.amazonaws.encryptionsdk)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CryptoAlgorithm</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/76)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CryptoAlgorithm$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk;
+&nbsp;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.security.InvalidKeyException;
+&nbsp;import java.security.Provider;
+&nbsp;import java.security.Security;
+&nbsp;import java.util.EnumSet;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;import javax.crypto.spec.SecretKeySpec;
+&nbsp;
+&nbsp;import org.bouncycastle.crypto.Digest;
+&nbsp;import org.bouncycastle.crypto.digests.SHA256Digest;
+&nbsp;import org.bouncycastle.crypto.digests.SHA384Digest;
+&nbsp;import org.bouncycastle.crypto.generators.HKDFBytesGenerator;
+&nbsp;import org.bouncycastle.crypto.params.HKDFParameters;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.model.CiphertextHeaders;
+&nbsp;
+&nbsp;/**
+&nbsp; * Describes the cryptographic algorithms available for use in this library.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Format: CryptoAlgorithm(block size, nonce length, tag length, max content length, key algo, key
+&nbsp; * length, short value representing this algorithm, trailing signature alg, trailing signature
+&nbsp; * length)
+&nbsp; */
+<b class="nc">&nbsp;public enum CryptoAlgorithm {</b>
+&nbsp;    /**
+&nbsp;     * AES-GCM 128
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_128_GCM_IV12_TAG16_NO_KDF(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 16, 0x0014, &quot;AES&quot;, 16, false),</b>
+&nbsp;    /**
+&nbsp;     * AES-GCM 192
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_192_GCM_IV12_TAG16_NO_KDF(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 24, 0x0046, &quot;AES&quot;, 24, false),</b>
+&nbsp;    /**
+&nbsp;     * AES-GCM 256
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_256_GCM_IV12_TAG16_NO_KDF(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 32, 0x0078, &quot;AES&quot;, 32, false),</b>
+&nbsp;    /**
+&nbsp;     * AES-GCM 128 with HKDF-SHA256
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_128_GCM_IV12_TAG16_HKDF_SHA256(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 16, 0x0114, &quot;HkdfSHA256&quot;,</b>
+&nbsp;                                           16, true),
+&nbsp;    /**
+&nbsp;     * AES-GCM 192
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA256(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 24, 0x0146, &quot;HkdfSHA256&quot;,</b>
+&nbsp;                                           24, true),
+&nbsp;    /**
+&nbsp;     * AES-GCM 256
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_256_GCM_IV12_TAG16_HKDF_SHA256(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 32, 0x0178, &quot;HkdfSHA256&quot;,</b>
+&nbsp;                                           32, true),
+&nbsp;
+&nbsp;    /**
+&nbsp;     * AES-GCM 128 with ECDSA (SHA256 with the secp256r1 curve)
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_128_GCM_IV12_TAG16_HKDF_SHA256_ECDSA_P256(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 16, 0x0214,</b>
+&nbsp;                                                      &quot;HkdfSHA256&quot;, 16,
+&nbsp;                                                      true, &quot;SHA256withECDSA&quot;, 71),
+&nbsp;    /**
+&nbsp;     * AES-GCM 192 with ECDSA (SHA384 with the secp384r1 curve)
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 24, 0x0346,</b>
+&nbsp;                                                      &quot;HkdfSHA384&quot;, 24,
+&nbsp;                                                      true, &quot;SHA384withECDSA&quot;, 103),
+&nbsp;    /**
+&nbsp;     * AES-GCM 256 with ECDSA (SHA384 with the secp384r1 curve)
+&nbsp;     */
+<b class="nc">&nbsp;    ALG_AES_256_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384(128, 12, 16, Constants.GCM_MAX_CONTENT_LEN, &quot;AES&quot;, 32, 0x0378,</b>
+&nbsp;                                                      &quot;HkdfSHA384&quot;, 32,
+&nbsp;                                                      true, &quot;SHA384withECDSA&quot;, 103);
+&nbsp;
+&nbsp;    private final int blockSizeBits_;
+&nbsp;    private final byte nonceLenBytes_;
+&nbsp;    private final int tagLenBytes_;
+&nbsp;    private final long maxContentLen_;
+&nbsp;    private final String keyAlgo_;
+&nbsp;    private final int keyLenBytes_;
+&nbsp;    private final short value_;
+&nbsp;    private final String trailingSigAlgo_;
+&nbsp;    private final short trailingSigLen_;
+&nbsp;    private final String dataKeyAlgo_;
+&nbsp;    private final int dataKeyLen_;
+&nbsp;    private final boolean safeToCache_;
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+<b class="nc">&nbsp;            Security.addProvider((Provider)</b>
+<b class="nc">&nbsp;                    Class.forName(&quot;org.bouncycastle.jce.provider.BouncyCastleProvider&quot;).newInstance());</b>
+<b class="nc">&nbsp;        } catch (final Throwable ex) {</b>
+&nbsp;            // Swallow this error. We&#39;ll either succeed or fail later with reasonable
+&nbsp;            // stacktraces.
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Create a mapping between the CiphertextType object and its byte value representation. Make
+&nbsp;     * this is a static method so the map is created when the object is created. This enables fast
+&nbsp;     * lookups of the CryptoAlgorithm given its short value representation.
+&nbsp;     */
+<b class="nc">&nbsp;    private static final Map&lt;Short, CryptoAlgorithm&gt; ID_MAPPING = new HashMap&lt;Short, CryptoAlgorithm&gt;();</b>
+&nbsp;    static {
+<b class="nc">&nbsp;        for (final CryptoAlgorithm s : EnumSet.allOf(CryptoAlgorithm.class)) {</b>
+<b class="nc">&nbsp;            ID_MAPPING.put(s.value_, s);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private CryptoAlgorithm(
+&nbsp;            final int blockSizeBits, final int nonceLenBytes, final int tagLenBytes,
+&nbsp;            final long maxContentLen, final String keyAlgo, final int keyLenBytes, final int value,
+&nbsp;            final String dataKeyAlgo, final int dataKeyLen, boolean safeToCache
+&nbsp;    ) {
+<b class="nc">&nbsp;        this(blockSizeBits, nonceLenBytes, tagLenBytes,</b>
+&nbsp;             maxContentLen, keyAlgo, keyLenBytes, value,
+&nbsp;             dataKeyAlgo, dataKeyLen, safeToCache, null, 0);
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private CryptoAlgorithm(
+&nbsp;            final int blockSizeBits, final int nonceLenBytes, final int tagLenBytes,
+&nbsp;            final long maxContentLen, final String keyAlgo, final int keyLenBytes, final int value,
+&nbsp;            final String dataKeyAlgo, final int dataKeyLen,
+&nbsp;            boolean safeToCache, final String trailingSignatureAlgo, final int trailingSignatureLength
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        blockSizeBits_ = blockSizeBits;</b>
+<b class="nc">&nbsp;        nonceLenBytes_ = (byte) nonceLenBytes;</b>
+<b class="nc">&nbsp;        tagLenBytes_ = tagLenBytes;</b>
+<b class="nc">&nbsp;        keyAlgo_ = keyAlgo;</b>
+<b class="nc">&nbsp;        keyLenBytes_ = keyLenBytes;</b>
+<b class="nc">&nbsp;        maxContentLen_ = maxContentLen;</b>
+<b class="nc">&nbsp;        safeToCache_ = safeToCache;</b>
+<b class="nc">&nbsp;        if (value &gt; Short.MAX_VALUE || value &lt; Short.MIN_VALUE) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid value &quot; + value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        value_ = (short) value;</b>
+<b class="nc">&nbsp;        dataKeyAlgo_ = dataKeyAlgo;</b>
+<b class="nc">&nbsp;        dataKeyLen_ = dataKeyLen;</b>
+<b class="nc">&nbsp;        trailingSigAlgo_ = trailingSignatureAlgo;</b>
+<b class="nc">&nbsp;        if (trailingSignatureLength &gt; Short.MAX_VALUE || trailingSignatureLength &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid value &quot; + trailingSignatureLength);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        trailingSigLen_ = (short) trailingSignatureLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the CryptoAlgorithm object that matches the given value.
+&nbsp;     *
+&nbsp;     * @param value
+&nbsp;     *            the value of the object
+&nbsp;     * @return the CryptoAlgorithm object that matches the given value, null if no match is found.
+&nbsp;     */
+&nbsp;    public static CryptoAlgorithm deserialize(final short value) {
+<b class="nc">&nbsp;        final CryptoAlgorithm result = ID_MAPPING.get(value);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the block size of this algorithm in bytes.
+&nbsp;     */
+&nbsp;    public int getBlockSize() {
+<b class="nc">&nbsp;        return blockSizeBits_ / 8;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the nonce length used in this algorithm in bytes.
+&nbsp;     */
+&nbsp;    public byte getNonceLen() {
+<b class="nc">&nbsp;        return nonceLenBytes_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the tag length used in this algorithm in bytes.
+&nbsp;     */
+&nbsp;    public int getTagLen() {
+<b class="nc">&nbsp;        return tagLenBytes_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the maximum content length in bytes that can be processed under a single data key in
+&nbsp;     * this algorithm.
+&nbsp;     */
+&nbsp;    public long getMaxContentLen() {
+<b class="nc">&nbsp;        return maxContentLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the algorithm used for encrypting the plaintext data.
+&nbsp;     */
+&nbsp;    public String getKeyAlgo() {
+<b class="nc">&nbsp;        return keyAlgo_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the length of the key used in this algorithm in bytes.
+&nbsp;     */
+&nbsp;    public int getKeyLength() {
+<b class="nc">&nbsp;        return keyLenBytes_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the value used to encode this algorithm in the ciphertext.
+&nbsp;     */
+&nbsp;    public short getValue() {
+<b class="nc">&nbsp;        return value_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the algorithm associated with the data key.
+&nbsp;     */
+&nbsp;    public String getDataKeyAlgo() {
+<b class="nc">&nbsp;        return dataKeyAlgo_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the length of the data key in bytes.
+&nbsp;     */
+&nbsp;    public int getDataKeyLength() {
+<b class="nc">&nbsp;        return dataKeyLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the algorithm used to calculate the trailing signature
+&nbsp;     */
+&nbsp;    public String getTrailingSignatureAlgo() {
+<b class="nc">&nbsp;        return trailingSigAlgo_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether data keys used with this crypto algorithm can safely be cached and reused for a different
+&nbsp;     * message. If this returns false, reuse of data keys is likely to result in severe cryptographic weaknesses,
+&nbsp;     * potentially even with only a single such use.
+&nbsp;     */
+&nbsp;    public boolean isSafeToCache() {
+<b class="nc">&nbsp;        return safeToCache_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the length of the trailing signature generated by this algorithm. The actual trailing
+&nbsp;     * signature may be shorter than this.
+&nbsp;     */
+&nbsp;    public short getTrailingSignatureLength() {
+<b class="nc">&nbsp;        return trailingSigLen_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SecretKey getEncryptionKeyFromDataKey(final SecretKey dataKey, final CiphertextHeaders headers)
+&nbsp;            throws InvalidKeyException {
+<b class="nc">&nbsp;        if (!dataKey.getAlgorithm().equalsIgnoreCase(getDataKeyAlgo())) {</b>
+<b class="nc">&nbsp;            throw new InvalidKeyException(&quot;DataKey of incorrect algorithm. Expected &quot; + getDataKeyAlgo() + &quot; but was &quot;</b>
+<b class="nc">&nbsp;                    + dataKey.getAlgorithm());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        final Digest dgst;
+&nbsp;
+<b class="nc">&nbsp;        switch (this) {</b>
+&nbsp;            case ALG_AES_128_GCM_IV12_TAG16_NO_KDF:
+&nbsp;            case ALG_AES_192_GCM_IV12_TAG16_NO_KDF:
+&nbsp;            case ALG_AES_256_GCM_IV12_TAG16_NO_KDF:
+<b class="nc">&nbsp;                return dataKey;</b>
+&nbsp;            case ALG_AES_128_GCM_IV12_TAG16_HKDF_SHA256:
+&nbsp;            case ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA256:
+&nbsp;            case ALG_AES_256_GCM_IV12_TAG16_HKDF_SHA256:
+&nbsp;            case ALG_AES_128_GCM_IV12_TAG16_HKDF_SHA256_ECDSA_P256:
+<b class="nc">&nbsp;                dgst = new SHA256Digest();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case ALG_AES_192_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384:
+&nbsp;            case ALG_AES_256_GCM_IV12_TAG16_HKDF_SHA384_ECDSA_P384:
+<b class="nc">&nbsp;                dgst = new SHA384Digest();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new UnsupportedOperationException(&quot;Support for &quot; + this + &quot; not yet built.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (!dataKey.getFormat().equalsIgnoreCase(&quot;RAW&quot;)) {</b>
+<b class="nc">&nbsp;            throw new InvalidKeyException(</b>
+&nbsp;                    &quot;Currently only RAW format keys are supported for HKDF algorithms. Actual format was &quot;
+<b class="nc">&nbsp;                            + dataKey.getFormat());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final byte[] messageId = headers.getMessageId();</b>
+<b class="nc">&nbsp;        final ByteBuffer info = ByteBuffer.allocate(messageId.length + 2);</b>
+<b class="nc">&nbsp;        info.order(ByteOrder.BIG_ENDIAN);</b>
+<b class="nc">&nbsp;        info.putShort(getValue());</b>
+<b class="nc">&nbsp;        info.put(messageId);</b>
+&nbsp;
+<b class="nc">&nbsp;        final byte[] rawDataKey = dataKey.getEncoded();</b>
+<b class="nc">&nbsp;        if (rawDataKey.length != getDataKeyLength()) {</b>
+<b class="nc">&nbsp;            throw new InvalidKeyException(&quot;DataKey of incorrect length. Expected &quot; + getDataKeyLength() + &quot; but was &quot;</b>
+&nbsp;                    + rawDataKey.length);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final byte[] rawEncKey = new byte[getKeyLength()];</b>
+<b class="nc">&nbsp;        final HKDFBytesGenerator hkdf = new HKDFBytesGenerator(dgst);</b>
+<b class="nc">&nbsp;        hkdf.init(new HKDFParameters(rawDataKey, null, info.array()));</b>
+<b class="nc">&nbsp;        hkdf.generateBytes(rawEncKey, 0, getKeyLength());</b>
+<b class="nc">&nbsp;        return new SecretKeySpec(rawEncKey, getKeyAlgo());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:50</div>
+</div>
+</body>
+</html>

@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSerializerBase_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -48,7 +48,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       Date date0 = new Date(38793L);
@@ -56,7 +56,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
@@ -65,7 +65,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(javaType0.hasValueHandler());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
       Boolean boolean0 = new Boolean("JSON");
@@ -75,7 +75,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -92,7 +92,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       // Undeclared exception!
@@ -108,7 +108,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       PropertyName propertyName0 = PropertyName.NO_NAME;
@@ -130,7 +130,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = CalendarSerializer.instance;
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
@@ -149,7 +149,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -166,7 +166,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = CalendarSerializer.instance;
       // Undeclared exception!
@@ -182,7 +182,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       JavaType javaType0 = TypeFactory.unknownType();
@@ -193,7 +193,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(javaType0.isAbstract());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = CalendarSerializer.instance;
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
@@ -204,7 +204,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(calendarSerializer0.isUnwrappingSerializer());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       DateFormat dateFormat0 = MockDateFormat.getDateInstance();
       CalendarSerializer calendarSerializer0 = new CalendarSerializer((Boolean) null, dateFormat0);
@@ -224,7 +224,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
       Boolean boolean0 = new Boolean("JSON");
@@ -236,7 +236,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertEquals(1, jsonNode0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -247,7 +247,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertEquals(1, jsonNode0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -257,7 +257,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = CalendarSerializer.instance;
       MockGregorianCalendar mockGregorianCalendar0 = new MockGregorianCalendar((-1218), (-1218), (-1218));
@@ -265,7 +265,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -273,7 +273,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       Date date0 = new Date(0);
@@ -281,7 +281,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       Date date0 = new Date((-1779L));
@@ -289,7 +289,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       Boolean boolean0 = Boolean.valueOf(false);
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer(boolean0);
@@ -297,7 +297,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       PropertyName propertyName0 = PropertyName.NO_NAME;
@@ -311,7 +311,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertSame(sqlDateSerializer0, jsonSerializer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = CalendarSerializer.instance;
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
@@ -328,7 +328,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test23()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       ObjectMapper objectMapper0 = new ObjectMapper();

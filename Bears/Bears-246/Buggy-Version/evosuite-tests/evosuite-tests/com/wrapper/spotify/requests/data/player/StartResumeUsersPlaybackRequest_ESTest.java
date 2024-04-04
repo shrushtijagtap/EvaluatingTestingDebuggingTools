@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlaybackRequest_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.google.gson.internal.LazilyParsedNumber");
       Integer integer0 = new Integer(0);
@@ -26,7 +26,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("text/plain");
       Integer integer0 = new Integer((-1));
@@ -42,7 +42,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.wrapper.spotify.exceptions.detailed.NotFoundException");
       // Undeclared exception!
@@ -57,7 +57,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       Integer integer0 = new Integer(883);
@@ -65,7 +65,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -80,7 +80,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("_v&`5O");
       JsonObject jsonObject0 = new JsonObject();
@@ -88,7 +88,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder1, startResumeUsersPlaybackRequest_Builder0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("com.wrapper.spotify.exceptions.detailed.NotFoundException");
       // Undeclared exception!
@@ -103,7 +103,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("uris");
       JsonArray jsonArray0 = new JsonArray();
@@ -111,7 +111,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -126,7 +126,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("uris");
       // Undeclared exception!
@@ -141,14 +141,14 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("uris");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.context_uri("uris");
       assertSame(startResumeUsersPlaybackRequest_Builder0, startResumeUsersPlaybackRequest_Builder1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("");
       // Undeclared exception!
@@ -163,7 +163,7 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("I$2@<{");
       // Undeclared exception!
@@ -178,14 +178,14 @@ public class StartResumeUsersPlaybackRequest_ESTest extends StartResumeUsersPlay
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("_v&`5O");
       StartResumeUsersPlaybackRequest startResumeUsersPlaybackRequest0 = startResumeUsersPlaybackRequest_Builder0.build();
       assertNotNull(startResumeUsersPlaybackRequest0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder0 = new StartResumeUsersPlaybackRequest.Builder("uris");
       StartResumeUsersPlaybackRequest.Builder startResumeUsersPlaybackRequest_Builder1 = startResumeUsersPlaybackRequest_Builder0.device_id("uris");

@@ -44,7 +44,7 @@ import org.traccar.protocol.H02FrameDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(614);
       assertEquals(0, h02FrameDecoder0.getMaxCumulationBufferCapacity());
@@ -79,7 +79,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       h02FrameDecoder1.decode((ChannelHandlerContext) null, nioSocketChannel0, bigEndianHeapChannelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(614);
       byte[] byteArray0 = new byte[9];
@@ -103,7 +103,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       System.setCurrentTimeMillis((-828L));
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(614);
       byte[] byteArray0 = new byte[9];
@@ -136,7 +136,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       System.setCurrentTimeMillis((-1L));
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-246));
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -158,7 +158,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       assertNull(object0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(1);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -176,7 +176,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       System.setCurrentTimeMillis(443L);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(407);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -191,7 +191,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       assertNull(object0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-246));
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -212,7 +212,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(833);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -243,7 +243,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(1);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -266,7 +266,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       System.setCurrentTimeMillis((-275L));
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-1321));
       ChannelHandlerContext channelHandlerContext0 = null;
@@ -293,7 +293,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-428));
       DefaultLocalServerChannelFactory defaultLocalServerChannelFactory0 = new DefaultLocalServerChannelFactory();
@@ -306,7 +306,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       //  // Unstable assertion: assertEquals(15, (int)localServerChannel0.getId());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-428));
       DefaultLocalServerChannelFactory defaultLocalServerChannelFactory0 = new DefaultLocalServerChannelFactory();
@@ -331,7 +331,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       System.setCurrentTimeMillis(2162L);
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-274));
@@ -350,7 +350,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(35);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();
@@ -370,7 +370,7 @@ public class H02FrameDecoder_ESTest extends H02FrameDecoder_ESTest_scaffolding {
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(0);
       DefaultChannelPipeline defaultChannelPipeline0 = new DefaultChannelPipeline();

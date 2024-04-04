@@ -20,7 +20,7 @@ import org.traccar.protocol.TelicProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class TelicProtocolDecoder_ESTest extends TelicProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       TelicProtocol telicProtocol0 = new TelicProtocol();
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder(telicProtocol0);
@@ -36,7 +36,7 @@ public class TelicProtocolDecoder_ESTest extends TelicProtocolDecoder_ESTest_sca
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       TelicProtocol telicProtocol0 = new TelicProtocol();
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder(telicProtocol0);
@@ -54,7 +54,7 @@ public class TelicProtocolDecoder_ESTest extends TelicProtocolDecoder_ESTest_sca
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       TelicProtocol telicProtocol0 = new TelicProtocol();
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder(telicProtocol0);

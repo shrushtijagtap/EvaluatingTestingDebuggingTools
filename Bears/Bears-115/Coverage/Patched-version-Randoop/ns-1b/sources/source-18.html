@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Network</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Network (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Network</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;public class Network {
+&nbsp;
+<b class="nc">&nbsp;    public Network() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Network(CellTower cellTower) {</b>
+<b class="nc">&nbsp;        addCellTower(cellTower);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer homeMobileCountryCode;
+&nbsp;
+&nbsp;    public Integer getHomeMobileCountryCode() {
+<b class="nc">&nbsp;        return homeMobileCountryCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHomeMobileCountryCode(Integer homeMobileCountryCode) {
+<b class="nc">&nbsp;        this.homeMobileCountryCode = homeMobileCountryCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer homeMobileNetworkCode;
+&nbsp;
+&nbsp;    public Integer getHomeMobileNetworkCode() {
+<b class="nc">&nbsp;        return homeMobileNetworkCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHomeMobileNetworkCode(Integer homeMobileNetworkCode) {
+<b class="nc">&nbsp;        this.homeMobileNetworkCode = homeMobileNetworkCode;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private String radioType = &quot;gsm&quot;;</b>
+&nbsp;
+&nbsp;    public String getRadioType() {
+<b class="nc">&nbsp;        return radioType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRadioType(String radioType) {
+<b class="nc">&nbsp;        this.radioType = radioType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String carrier;
+&nbsp;
+&nbsp;    public String getCarrier() {
+<b class="nc">&nbsp;        return carrier;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCarrier(String carrier) {
+<b class="nc">&nbsp;        this.carrier = carrier;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private Boolean considerIp = false;</b>
+&nbsp;
+&nbsp;    public Boolean getConsiderIp() {
+<b class="nc">&nbsp;        return considerIp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setConsiderIp(Boolean considerIp) {
+<b class="nc">&nbsp;        this.considerIp = considerIp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Collection&lt;CellTower&gt; cellTowers;
+&nbsp;
+&nbsp;    public Collection&lt;CellTower&gt; getCellTowers() {
+<b class="nc">&nbsp;        return cellTowers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCellTowers(Collection&lt;CellTower&gt; cellTowers) {
+<b class="nc">&nbsp;        this.cellTowers = cellTowers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addCellTower(CellTower cellTower) {
+<b class="nc">&nbsp;        if (cellTowers == null) {</b>
+<b class="nc">&nbsp;            cellTowers = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        cellTowers.add(cellTower);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Collection&lt;WifiAccessPoint&gt; wifiAccessPoints;
+&nbsp;
+&nbsp;    public Collection&lt;WifiAccessPoint&gt; getWifiAccessPoints() {
+<b class="nc">&nbsp;        return wifiAccessPoints;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setWifiAccessPoints(Collection&lt;WifiAccessPoint&gt; wifiAccessPoints) {
+<b class="nc">&nbsp;        this.wifiAccessPoints = wifiAccessPoints;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addWifiAccessPoint(WifiAccessPoint wifiAccessPoint) {
+<b class="nc">&nbsp;        if (wifiAccessPoints == null) {</b>
+<b class="nc">&nbsp;            wifiAccessPoints = new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        wifiAccessPoints.add(wifiAccessPoint);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:05</div>
+</div>
+</body>
+</html>

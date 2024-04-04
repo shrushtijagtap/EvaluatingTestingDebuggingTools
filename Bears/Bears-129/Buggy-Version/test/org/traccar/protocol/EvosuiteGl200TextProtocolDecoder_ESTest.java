@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteGl200TextProtocolDecoder_ESTest extends EvosuiteGl200TextProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       Gl200Protocol gl200Protocol0 = new Gl200Protocol();
       Gl200TextProtocolDecoder gl200TextProtocolDecoder0 = null;

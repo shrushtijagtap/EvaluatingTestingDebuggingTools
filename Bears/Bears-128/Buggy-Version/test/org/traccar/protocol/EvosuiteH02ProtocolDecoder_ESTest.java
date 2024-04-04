@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteH02ProtocolDecoder_ESTest extends EvosuiteH02ProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       H02Protocol h02Protocol0 = new H02Protocol();
       H02ProtocolDecoder h02ProtocolDecoder0 = new H02ProtocolDecoder(h02Protocol0);
@@ -36,7 +36,7 @@ public class EvosuiteH02ProtocolDecoder_ESTest extends EvosuiteH02ProtocolDecode
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       H02Protocol h02Protocol0 = new H02Protocol();
       H02ProtocolDecoder h02ProtocolDecoder0 = new H02ProtocolDecoder(h02Protocol0);
@@ -54,7 +54,7 @@ public class EvosuiteH02ProtocolDecoder_ESTest extends EvosuiteH02ProtocolDecode
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       H02Protocol h02Protocol0 = new H02Protocol();
       H02ProtocolDecoder h02ProtocolDecoder0 = new H02ProtocolDecoder(h02Protocol0);

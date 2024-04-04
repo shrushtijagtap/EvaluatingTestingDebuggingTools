@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteCguardProtocolDecoder_ESTest extends EvosuiteCguardProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       CguardProtocolDecoder cguardProtocolDecoder0 = new CguardProtocolDecoder(cguardProtocol0);
@@ -38,7 +38,7 @@ public class EvosuiteCguardProtocolDecoder_ESTest extends EvosuiteCguardProtocol
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       MockInetSocketAddress mockInetSocketAddress0 = new MockInetSocketAddress(1439);
@@ -55,7 +55,7 @@ public class EvosuiteCguardProtocolDecoder_ESTest extends EvosuiteCguardProtocol
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       CguardProtocolDecoder cguardProtocolDecoder0 = new CguardProtocolDecoder(cguardProtocol0);
@@ -75,7 +75,7 @@ public class EvosuiteCguardProtocolDecoder_ESTest extends EvosuiteCguardProtocol
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test3()  throws Throwable  {
       CguardProtocol cguardProtocol0 = new CguardProtocol();
       CguardProtocolDecoder cguardProtocolDecoder0 = new CguardProtocolDecoder(cguardProtocol0);

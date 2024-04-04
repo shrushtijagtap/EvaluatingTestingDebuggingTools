@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class UserDetailsServiceImpl_ESTest extends UserDetailsServiceImpl_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       UserDetailsServiceImpl userDetailsServiceImpl0 = new UserDetailsServiceImpl();
       // Undeclared exception!

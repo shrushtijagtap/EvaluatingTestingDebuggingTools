@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ReadableDateTime</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time</a>
+</div>
+
+<h1>Coverage Summary for Class: ReadableDateTime (org.joda.time)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadableDateTime</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2011 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time;
+&nbsp;
+&nbsp;import java.util.Locale;
+&nbsp;
+&nbsp;/**
+&nbsp; * Defines an instant in time that can be queried using datetime fields.
+&nbsp; * &lt;p&gt;
+&nbsp; * The implementation of this interface may be mutable or immutable.
+&nbsp; * This interface only gives access to retrieve data, never to change it.
+&nbsp; * &lt;p&gt;
+&nbsp; * Methods in your application should be defined using &lt;code&gt;ReadableDateTime&lt;/code&gt;
+&nbsp; * as a parameter if the method only wants to read the datetime, and not perform
+&nbsp; * any advanced manipulations.
+&nbsp; *
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public interface ReadableDateTime extends ReadableInstant {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of week field value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The values for the day of week are defined in {@link DateTimeConstants}.
+&nbsp;     * 
+&nbsp;     * @return the day of week
+&nbsp;     */
+&nbsp;    int getDayOfWeek();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of month field value.
+&nbsp;     * 
+&nbsp;     * @return the day of month
+&nbsp;     */
+&nbsp;    int getDayOfMonth();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the day of year field value.
+&nbsp;     * 
+&nbsp;     * @return the day of year
+&nbsp;     */
+&nbsp;    int getDayOfYear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the week of weekyear field value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This field is associated with the &quot;weekyear&quot; via {@link #getWeekyear()}.
+&nbsp;     * In the standard ISO8601 week algorithm, the first week of the year
+&nbsp;     * is that in which at least 4 days are in the year. As a result of this
+&nbsp;     * definition, day 1 of the first week may be in the previous year.
+&nbsp;     * 
+&nbsp;     * @return the week of a week based year
+&nbsp;     */
+&nbsp;    int getWeekOfWeekyear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the weekyear field value.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * The weekyear is the year that matches with the weekOfWeekyear field.
+&nbsp;     * In the standard ISO8601 week algorithm, the first week of the year
+&nbsp;     * is that in which at least 4 days are in the year. As a result of this
+&nbsp;     * definition, day 1 of the first week may be in the previous year.
+&nbsp;     * The weekyear allows you to query the effective year for that day.
+&nbsp;     * 
+&nbsp;     * @return the year of a week based year
+&nbsp;     */
+&nbsp;    int getWeekyear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the month of year field value.
+&nbsp;     * 
+&nbsp;     * @return the month of year
+&nbsp;     */
+&nbsp;    int getMonthOfYear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year field value.
+&nbsp;     * 
+&nbsp;     * @return the year
+&nbsp;     */
+&nbsp;    int getYear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of era field value.
+&nbsp;     * 
+&nbsp;     * @return the year of era
+&nbsp;     */
+&nbsp;    int getYearOfEra();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of century field value.
+&nbsp;     * 
+&nbsp;     * @return the year of century
+&nbsp;     */
+&nbsp;    int getYearOfCentury();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the year of era field value.
+&nbsp;     * 
+&nbsp;     * @return the year of era
+&nbsp;     */
+&nbsp;    int getCenturyOfEra();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the era field value.
+&nbsp;     * 
+&nbsp;     * @return the era
+&nbsp;     */
+&nbsp;    int getEra();
+&nbsp;
+&nbsp;    // Time field access methods
+&nbsp;    //-----------------------------------------------------------
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millis of second field value.
+&nbsp;     *
+&nbsp;     * @return the millis of second
+&nbsp;     */
+&nbsp;    int getMillisOfSecond();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the millis of day field value.
+&nbsp;     *
+&nbsp;     * @return the millis of day
+&nbsp;     */
+&nbsp;    int getMillisOfDay();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of minute field value.
+&nbsp;     *
+&nbsp;     * @return the second of minute
+&nbsp;     */
+&nbsp;    int getSecondOfMinute();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the second of day field value.
+&nbsp;     *
+&nbsp;     * @return the second of day
+&nbsp;     */
+&nbsp;    int getSecondOfDay();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of hour field value.
+&nbsp;     *
+&nbsp;     * @return the minute of hour
+&nbsp;     */
+&nbsp;    int getMinuteOfHour();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the minute of day field value.
+&nbsp;     *
+&nbsp;     * @return the minute of day
+&nbsp;     */
+&nbsp;    int getMinuteOfDay();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the hour of day field value.
+&nbsp;     *
+&nbsp;     * @return the hour of day
+&nbsp;     */
+&nbsp;    int getHourOfDay();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a DateTime.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If the implementation of the interface is a DateTime, it is returned directly.
+&nbsp;     * 
+&nbsp;     * @return a DateTime using the same millis
+&nbsp;     */
+&nbsp;    DateTime toDateTime();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get this object as a MutableDateTime, always returning a new instance.
+&nbsp;     * 
+&nbsp;     * @return a MutableDateTime using the same millis
+&nbsp;     */
+&nbsp;    MutableDateTime toMutableDateTime();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the instant using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @throws IllegalArgumentException  if pattern is invalid
+&nbsp;     * @see  org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    String toString(String pattern) throws IllegalArgumentException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Output the instant using the specified format pattern.
+&nbsp;     *
+&nbsp;     * @param pattern  pattern specification
+&nbsp;     * @param locale  Locale to use, or null for default
+&nbsp;     * @throws IllegalArgumentException  if pattern is invalid
+&nbsp;     * @see  org.joda.time.format.DateTimeFormat
+&nbsp;     */
+&nbsp;    String toString(String pattern, Locale locale) throws IllegalArgumentException;
+&nbsp;    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:03</div>
+</div>
+</body>
+</html>
