@@ -1,0 +1,35 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-05T18:28:32-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 8
+
+Apache Licensed: 8
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/test/groovy/org/apache/shiro/web/jaxrs/ContainerIntegrationIT.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/resources/logback.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/resources/shiro.ini
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/webapp/WEB-INF/web.cxf.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/java/org/apache/shiro/samples/jaxrs/SampleApplication.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/java/org/apache/shiro/samples/jaxrs/resources/SecureResource.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/jaxrs/src/main/java/org/apache/shiro/samples/jaxrs/resources/HelloResource.java
+ 
+*****************************************************

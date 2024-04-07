@@ -1,0 +1,60 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-05T18:28:27-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 33
+
+Apache Licensed: 33
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/DefaultHashServiceTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/HashRequestBuilderTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/ToStringHashFormat.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/Base64FormatTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/DefaultHashFormatFactoryTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/Shiro1CryptFormatTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/ProvidedHashFormatTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/test/groovy/org/apache/shiro/crypto/hash/format/HexFormatTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/HashRequest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Md5Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/SimpleHashRequest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/HashService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Sha256Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Sha384Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Sha512Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Md2Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/ConfigurableHashService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/AbstractHash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/SimpleHash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/ProvidedHashFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/Shiro1CryptFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/Base64Format.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/DefaultHashFormatFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/HexFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/ParsableHashFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/HashFormatFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/ModularCryptFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/format/HashFormat.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/Sha1Hash.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/hash/src/main/java/org/apache/shiro/crypto/hash/DefaultHashService.java
+ 
+*****************************************************

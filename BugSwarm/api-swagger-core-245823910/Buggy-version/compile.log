@@ -1,0 +1,73 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for io.swagger:swagger-models:bundle:2.0.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.fasterxml.jackson.core:jackson-databind:jar -> version ${jackson-version} vs 2.8.6 @ line 83, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[WARNING] The project io.swagger:swagger-project:pom:2.0.0-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] swagger-project                                                    [pom]
+[INFO] swagger-annotations                                             [bundle]
+[INFO] swagger-models                                                  [bundle]
+[INFO] swagger-core                                                    [bundle]
+[INFO] swagger-jaxrs2                                                     [jar]
+[INFO] 
+[INFO] ---------------------< io.swagger:swagger-project >---------------------
+[INFO] Building swagger-project 2.0.0-SNAPSHOT                            [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.6.1:build-classpath (default-cli) @ swagger-project ---
+[INFO] No dependencies found.
+[INFO] Wrote classpath file '/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/cp.txt'.
+[INFO] 
+[INFO] -------------------< io.swagger:swagger-annotations >-------------------
+[INFO] Building swagger-annotations 2.0.0-SNAPSHOT                        [2/5]
+[INFO]   from modules/swagger-annotations/pom.xml
+[INFO] -------------------------------[ bundle ]-------------------------------
+[INFO] 
+[INFO] --- dependency:3.6.1:build-classpath (default-cli) @ swagger-annotations ---
+[INFO] Wrote classpath file '/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/cp.txt'.
+[INFO] 
+[INFO] ---------------------< io.swagger:swagger-models >----------------------
+[INFO] Building swagger-models 2.0.0-SNAPSHOT                             [3/5]
+[INFO]   from modules/swagger-models/pom.xml
+[INFO] -------------------------------[ bundle ]-------------------------------
+[INFO] 
+[INFO] --- dependency:3.6.1:build-classpath (default-cli) @ swagger-models ---
+[INFO] Wrote classpath file '/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/cp.txt'.
+[INFO] 
+[INFO] ----------------------< io.swagger:swagger-core >-----------------------
+[INFO] Building swagger-core 2.0.0-SNAPSHOT                               [4/5]
+[INFO]   from modules/swagger-core/pom.xml
+[INFO] -------------------------------[ bundle ]-------------------------------
+[INFO] 
+[INFO] --- dependency:3.6.1:build-classpath (default-cli) @ swagger-core ---
+[INFO] Wrote classpath file '/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-core/cp.txt'.
+[INFO] 
+[INFO] ---------------------< io.swagger:swagger-jaxrs2 >----------------------
+[INFO] Building swagger-jaxrs2 2.0.0-SNAPSHOT                             [5/5]
+[INFO]   from modules/swagger-jaxrs2/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.6.1:build-classpath (default-cli) @ swagger-jaxrs2 ---
+[INFO] Wrote classpath file '/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-jaxrs2/cp.txt'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for swagger-project 2.0.0-SNAPSHOT:
+[INFO] 
+[INFO] swagger-project .................................... SUCCESS [  2.177 s]
+[INFO] swagger-annotations ................................ SUCCESS [  0.663 s]
+[INFO] swagger-models ..................................... SUCCESS [  0.090 s]
+[INFO] swagger-core ....................................... SUCCESS [  0.088 s]
+[INFO] swagger-jaxrs2 ..................................... SUCCESS [  0.195 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.860 s
+[INFO] Finished at: 2024-04-05T19:55:40-05:00
+[INFO] ------------------------------------------------------------------------

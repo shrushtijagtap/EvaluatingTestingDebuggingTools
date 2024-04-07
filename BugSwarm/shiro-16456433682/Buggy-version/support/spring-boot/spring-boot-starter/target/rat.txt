@@ -1,0 +1,49 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-05T18:28:31-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 22
+
+Apache Licensed: 22
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/resources/logback.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/java/org/apache/shiro/spring/boot/autoconfigure/AspectjEnabledApplication.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/java/org/apache/shiro/spring/boot/autoconfigure/web/application/ShiroWebAutoConfigurationTestApplication.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/java/org/apache/shiro/spring/boot/autoconfigure/AspectjAndDefaultProxyCreatorApplication.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/java/org/apache/shiro/spring/boot/autoconfigure/application/ShiroAutoConfigurationTestApplication.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/ShiroSpringAutoConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/AspectjAndDefaultProxyCreatorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/web/ConfiguredGlobalFiltersTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/web/DisabledGlobalFiltersTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/web/ShiroWebSpringAutoConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/test/groovy/org/apache/shiro/spring/boot/autoconfigure/SpringFactoriesTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/boot/autoconfigure/ShiroNoRealmConfiguredFailureAnalyzer.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/boot/autoconfigure/exception/NoRealmBeanConfiguredException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/config/web/autoconfigure/ShiroWebMvcAutoConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/config/web/autoconfigure/ShiroWebFilterConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring-boot/spring-boot-starter/src/main/java/org/apache/shiro/spring/config/web/autoconfigure/ShiroEnvironmentPostProcessor.java
+ 
+*****************************************************

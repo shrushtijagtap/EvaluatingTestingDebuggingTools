@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/processor/AttributeInfo.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/processor/StructInfo.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/processor/Analysis.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/processor/JSONCompiledAnnotationProcessor.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/processor/CodeGenUtils.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/codegen/MethodWriter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/codegen/FieldWriter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/codegen/ClassWriter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/codegen/Opcodes.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/main/java/com/alibaba/fastjson2/internal/codegen/Block.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/test/java/com/alibaba/fastjson2/internal/processor/CodeGenUtilsTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/test/java/com/alibaba/fastjson2/internal/processor/APTTest0.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/codegen/src/test/java/com/alibaba/fastjson2/internal/processor/Bean.java">
+</file>
+</checkstyle>

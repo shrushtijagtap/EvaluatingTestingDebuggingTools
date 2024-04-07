@@ -1,0 +1,69 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-05T18:28:32-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 42
+
+Apache Licensed: 42
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/resources/log4j2-test.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/ShiroMatchersTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/BeanTypeListenerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/DestroyableInjectionListenerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/FilterChainResolverProviderTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/GuiceShiroFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/AbstractInjectionProviderTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/PathMatchingFilterProviderTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/FilterConfigTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/DefaultFiltersTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/SimpleFilterChainResolverTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/ShiroWebModuleTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/SimpleFilterChainTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/web/WebGuiceEnvironmentTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/InitializableInjectionListenerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/LifecycleTypeListenerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/aop/AopAllianceMethodInterceptorAdapterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/aop/AopAllianceMethodInvocationAdapterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/aop/ShiroAopModuleTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/ShiroSessionScopeTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/GuiceEnvironmentTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/test/java/org/apache/shiro/guice/ShiroModuleTest.java
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/BeanTypeListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/GuiceEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/DestroyableInjectionListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/InitializableInjectionListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/SimpleFilterChainResolver.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/AbstractInjectionProvider.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/WebGuiceEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/PathMatchingFilterProvider.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/SimpleFilterChain.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/FilterChainResolverProvider.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/ShiroWebModule.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/web/GuiceShiroFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/ShiroModule.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/aop/AopAllianceMethodInterceptorAdapter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/aop/AopAllianceMethodInvocationAdapter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/aop/ShiroAopModule.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/ShiroMatchers.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/LifecycleTypeListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/guice/src/main/java/org/apache/shiro/guice/ShiroSessionScope.java
+ 
+*****************************************************

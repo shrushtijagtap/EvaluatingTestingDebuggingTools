@@ -1,2 +1,1 @@
-src/main/java/com/alibaba/fastjson2/JSONWriter.java
-src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java
+core/src/

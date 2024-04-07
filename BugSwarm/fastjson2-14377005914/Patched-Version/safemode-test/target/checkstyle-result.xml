@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/safemode-test/src/test/java/com/alibaba/fastjson2/SafeModeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/safemode-test/src/test/java/com/alibaba/fastjson2/issues_1500/Issue1503S.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14377005914/Patched-Version/safemode-test/src/test/resources/fastjson2.properties">
+</file>
+</checkstyle>

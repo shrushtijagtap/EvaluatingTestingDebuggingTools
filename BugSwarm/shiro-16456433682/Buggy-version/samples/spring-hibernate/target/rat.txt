@@ -1,0 +1,64 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-05T18:28:32-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 37
+
+Apache Licensed: 37
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/test/java/org/apache/shiro/samples/ContainerIntegrationIT.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/resources/log4j2.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/resources/ehcache.xml
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/resources/hibernate.cfg.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/resources/log4j.properties
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/styles/sample.css
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/index.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/applicationContext.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/web.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/sprhib-servlet.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/jsp/signup.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/jsp/login.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/jsp/manageUsers.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/jsp/editUser.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/WEB-INF/jsp/home.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/webapp/unauthorized.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/security/SampleRealm.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/ManageUsersController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/LoginCommand.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/LoginValidator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/EditUserValidator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/EditUserCommand.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/SignupValidator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/SecurityController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/HomeController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/CurrentUserInterceptor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/SignupController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/web/SignupCommand.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/dao/BootstrapDataPopulator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/dao/UserDAO.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/dao/HibernateUserDAO.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/dao/HibernateDao.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/model/User.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/model/Role.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/service/UserService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-hibernate/src/main/java/org/apache/shiro/samples/sprhib/service/DefaultUserService.java
+ 
+*****************************************************

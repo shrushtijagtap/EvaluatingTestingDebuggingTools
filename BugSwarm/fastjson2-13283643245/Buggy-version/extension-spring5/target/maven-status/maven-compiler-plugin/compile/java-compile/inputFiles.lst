@@ -1,0 +1,15 @@
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonMessageConverter.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonJSONBRedisSerializer.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonJSONBRedisSerializer.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonWriterModule.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/webservlet/view/FastJsonJsonView.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/codec/Fastjson2Decoder.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonReaderModule.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/websocket/sockjs/FastjsonSockJsMessageCodec.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/codec/Fastjson2Encoder.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonRedisSerializer.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonRedisSerializer.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonJSONBMessageConverter.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPointReader.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPolygonReader.java
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643245/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/converter/FastJsonHttpMessageConverter.java
