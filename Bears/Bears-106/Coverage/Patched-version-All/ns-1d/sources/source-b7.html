@@ -1,0 +1,395 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MeitrackProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: MeitrackProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MeitrackProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.2%
+  </span>
+  <span class="absValue">
+    (137/159)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class MeitrackProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public MeitrackProtocolDecoder(MeitrackProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="fc">&nbsp;            .text(&quot;$$&quot;).expression(&quot;.&quot;)          // flag</b>
+<b class="fc">&nbsp;            .number(&quot;d+,&quot;)                       // length</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // imei</b>
+<b class="fc">&nbsp;            .number(&quot;xxx,&quot;)                      // command</b>
+<b class="fc">&nbsp;            .number(&quot;d+,&quot;).optional()</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // event</b>
+<b class="fc">&nbsp;            .number(&quot;(-?d+.d+),&quot;)                // latitude</b>
+<b class="fc">&nbsp;            .number(&quot;(-?d+.d+),&quot;)                // longitude</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (yymmdd)</b>
+<b class="fc">&nbsp;            .number(&quot;(dd)(dd)(dd),&quot;)             // time (hhmmss)</b>
+<b class="fc">&nbsp;            .number(&quot;([AV]),&quot;)                   // validity</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // satellites</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // rssi</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // speed</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // course</b>
+<b class="fc">&nbsp;            .number(&quot;(d+.?d*),&quot;)                 // hdop</b>
+<b class="fc">&nbsp;            .number(&quot;(-?d+),&quot;)                   // altitude</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // odometer</b>
+<b class="fc">&nbsp;            .number(&quot;(d+),&quot;)                     // runtime</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)|&quot;)                     // mcc</b>
+<b class="fc">&nbsp;            .number(&quot;(d+)|&quot;)                     // mnc</b>
+<b class="fc">&nbsp;            .number(&quot;(x+)|&quot;)                     // lac</b>
+<b class="fc">&nbsp;            .number(&quot;(x+),&quot;)                     // cid</b>
+<b class="fc">&nbsp;            .number(&quot;(x+),&quot;)                     // state</b>
+<b class="fc">&nbsp;            .number(&quot;(x+)?|&quot;)                    // adc1</b>
+<b class="fc">&nbsp;            .number(&quot;(x+)?|&quot;)                    // adc2</b>
+<b class="fc">&nbsp;            .number(&quot;(x+)?|&quot;)                    // adc3</b>
+<b class="fc">&nbsp;            .number(&quot;(x+)|&quot;)                     // battery</b>
+<b class="fc">&nbsp;            .number(&quot;(x+),&quot;)                     // power</b>
+<b class="fc">&nbsp;            .groupBegin()</b>
+<b class="fc">&nbsp;            .expression(&quot;([^,]+)?,&quot;)             // event specific</b>
+<b class="fc">&nbsp;            .expression(&quot;[^,]*,&quot;)                // reserved</b>
+<b class="fc">&nbsp;            .number(&quot;d*,&quot;)                       // protocol</b>
+<b class="fc">&nbsp;            .number(&quot;(x{4})?&quot;)                   // fuel</b>
+<b class="fc">&nbsp;            .number(&quot;(?:,(x{6}(?:|x{6})*))?&quot;)    // temperature</b>
+<b class="fc">&nbsp;            .or()</b>
+<b class="fc">&nbsp;            .any()</b>
+<b class="fc">&nbsp;            .groupEnd()</b>
+<b class="fc">&nbsp;            .text(&quot;*&quot;)</b>
+<b class="fc">&nbsp;            .number(&quot;xx&quot;)</b>
+<b class="fc">&nbsp;            .text(&quot;\r\n&quot;).optional()</b>
+<b class="fc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private String decodeAlarm(int event) {
+<b class="fc">&nbsp;        switch (event) {</b>
+&nbsp;            case 1:
+<b class="fc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 17:
+<b class="nc">&nbsp;                return Position.ALARM_LOW_BATTERY;</b>
+&nbsp;            case 18:
+<b class="nc">&nbsp;                return Position.ALARM_POWER_CUT;</b>
+&nbsp;            case 19:
+<b class="nc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case 20:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_ENTER;</b>
+&nbsp;            case 21:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_EXIT;</b>
+&nbsp;            case 36:
+<b class="nc">&nbsp;                return Position.ALARM_TOW;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position decodeRegularMessage(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        Parser parser = new Parser(PATTERN, buf.toString(StandardCharsets.US_ASCII));</b>
+<b class="fc">&nbsp;        if (!parser.matches()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        int event = parser.nextInt();</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_EVENT, event);</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_ALARM, decodeAlarm(event));</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setLatitude(parser.nextDouble());</b>
+<b class="fc">&nbsp;        position.setLongitude(parser.nextDouble());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setTime(parser.nextDateTime());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setValid(parser.next().equals(&quot;A&quot;));</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_SATELLITES, parser.next());</b>
+<b class="fc">&nbsp;        int rssi = parser.nextInt();</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble()));</b>
+<b class="fc">&nbsp;        position.setCourse(parser.nextDouble());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_HDOP, parser.next());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setAltitude(parser.nextDouble());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_ODOMETER, parser.nextInt());</b>
+<b class="fc">&nbsp;        position.set(&quot;runtime&quot;, parser.next());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setNetwork(new Network(</b>
+<b class="fc">&nbsp;                CellTower.from(parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), rssi)));</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_STATUS, parser.next());</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 1; i &lt;= 3; i++) {</b>
+<b class="fc">&nbsp;            if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;                position.set(Position.PREFIX_ADC + i, parser.nextInt(16));</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_BATTERY, parser.nextInt(16));</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_POWER, parser.nextInt(16));</b>
+&nbsp;
+<b class="fc">&nbsp;        String eventData = parser.next();</b>
+<b class="fc">&nbsp;        if (eventData != null &amp;&amp; !eventData.isEmpty()) {</b>
+<b class="fc">&nbsp;            switch (event) {</b>
+&nbsp;                case 37:
+<b class="fc">&nbsp;                    position.set(Position.KEY_RFID, eventData);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    position.set(&quot;eventData&quot;, eventData);</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            String fuel = parser.next();</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_FUEL_LEVEL,</b>
+<b class="fc">&nbsp;                    Integer.parseInt(fuel.substring(0, 2), 16) + Integer.parseInt(fuel.substring(2), 16) * 0.01);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (parser.hasNext()) {</b>
+<b class="fc">&nbsp;            for (String temp : parser.next().split(&quot;\\|&quot;)) {</b>
+<b class="fc">&nbsp;                int index = Integer.valueOf(temp.substring(0, 2), 16);</b>
+<b class="fc">&nbsp;                int value = Integer.valueOf(temp.substring(2), 16);</b>
+<b class="fc">&nbsp;                position.set(Position.PREFIX_TEMP + index, value);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Position&gt; decodeBinaryMessage(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) {
+<b class="fc">&nbsp;        List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        String flag = buf.toString(2, 1, StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;        int index = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) &#39;,&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;        String imei = buf.toString(index + 1, 15, StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(index + 1 + 15 + 1 + 3 + 1 + 2 + 2 + 4);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (buf.readableBytes() &gt;= 0x34) {</b>
+&nbsp;
+<b class="fc">&nbsp;            Position position = new Position();</b>
+<b class="fc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_EVENT, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setLatitude(buf.readInt() * 0.000001);</b>
+<b class="fc">&nbsp;            position.setLongitude(buf.readInt() * 0.000001);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setTime(new Date((946684800 + buf.readUnsignedInt()) * 1000)); // 946684800 = 2000-01-01</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setValid(buf.readUnsignedByte() == 1);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            int rssi = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort()));</b>
+<b class="fc">&nbsp;            position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_HDOP, buf.readUnsignedShort() * 0.1);</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+<b class="fc">&nbsp;            position.set(&quot;runtime&quot;, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.setNetwork(new Network(CellTower.from(</b>
+<b class="fc">&nbsp;                    buf.readUnsignedShort(), buf.readUnsignedShort(),</b>
+<b class="fc">&nbsp;                    buf.readUnsignedShort(), buf.readUnsignedShort(),</b>
+&nbsp;                    rssi)));
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.KEY_STATUS, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.01);</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.readUnsignedInt(); // geo-fence</b>
+&nbsp;
+<b class="fc">&nbsp;            positions.add(position);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            StringBuilder command = new StringBuilder(&quot;@@&quot;);</b>
+<b class="nc">&nbsp;            command.append(flag).append(27 + positions.size() / 10).append(&quot;,&quot;);</b>
+<b class="nc">&nbsp;            command.append(imei).append(&quot;,CCC,&quot;).append(positions.size()).append(&quot;*&quot;);</b>
+<b class="nc">&nbsp;            int checksum = 0;</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; command.length(); i += 1) {</b>
+<b class="nc">&nbsp;                checksum += command.charAt(i);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            command.append(String.format(&quot;%02x&quot;, checksum &amp; 0xff).toUpperCase());</b>
+<b class="nc">&nbsp;            command.append(&quot;\r\n&quot;);</b>
+<b class="nc">&nbsp;            channel.write(command.toString()); // delete processed data</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+&nbsp;        // Find type
+<b class="fc">&nbsp;        int index = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) &#39;,&#39;);</b>
+<b class="fc">&nbsp;        index = buf.indexOf(index + 1, buf.writerIndex(), (byte) &#39;,&#39;);</b>
+&nbsp;
+<b class="fc">&nbsp;        String type = buf.toString(index + 1, 3, StandardCharsets.US_ASCII);</b>
+<b class="fc">&nbsp;        switch (type) {</b>
+&nbsp;            case &quot;D03&quot;:
+<b class="fc">&nbsp;                if (channel != null) {</b>
+<b class="nc">&nbsp;                    DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;                    String imei = Context.getIdentityManager().getDeviceById(deviceSession.getDeviceId()).getUniqueId();</b>
+<b class="nc">&nbsp;                    channel.write(&quot;@@O46,&quot; + imei + &quot;,D00,camera_picture.jpg,0*00\r\n&quot;);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            case &quot;CCC&quot;:
+<b class="fc">&nbsp;                return decodeBinaryMessage(channel, remoteAddress, buf);</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return decodeRegularMessage(channel, remoteAddress, buf);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:42</div>
+</div>
+</body>
+</html>

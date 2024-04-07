@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ISOPeriodFormat</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.format</a>
+</div>
+
+<h1>Coverage Summary for Class: ISOPeriodFormat (org.joda.time.format)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ISOPeriodFormat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    17.6%
+  </span>
+  <span class="absValue">
+    (3/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2005 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.format;
+&nbsp;
+&nbsp;/**
+&nbsp; * Factory that creates instances of PeriodFormatter for the ISO8601 standard.
+&nbsp; * &lt;p&gt;
+&nbsp; * Period formatting is performed by the {@link PeriodFormatter} class.
+&nbsp; * Three classes provide factory methods to create formatters, and this is one.
+&nbsp; * The others are {@link PeriodFormat} and {@link PeriodFormatterBuilder}.
+&nbsp; * &lt;p&gt;
+&nbsp; * ISOPeriodFormat is thread-safe and immutable, and the formatters it
+&nbsp; * returns are as well.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; * @see PeriodFormat
+&nbsp; * @see PeriodFormatterBuilder
+&nbsp; */
+&nbsp;public class ISOPeriodFormat {
+&nbsp;
+&nbsp;    /** Cache of standard format. */
+&nbsp;    private static PeriodFormatter cStandard;
+&nbsp;    /** Cache of alternate months format. */
+&nbsp;    private static PeriodFormatter cAlternate;
+&nbsp;    /** Cache of alternate extended months format. */
+&nbsp;    private static PeriodFormatter cAlternateExtended;
+&nbsp;    /** Cache of alternate weeks format. */
+&nbsp;    private static PeriodFormatter cAlternateWithWeeks;
+&nbsp;    /** Cache of alternate extended weeks format. */
+&nbsp;    private static PeriodFormatter cAlternateExtendedWihWeeks;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     *
+&nbsp;     * @since 1.1 (previously private)
+&nbsp;     */
+&nbsp;    protected ISOPeriodFormat() {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * The standard ISO format - PyYmMwWdDThHmMsS.
+&nbsp;     * Milliseconds are not output.
+&nbsp;     * Note that the ISO8601 standard actually indicates weeks should not
+&nbsp;     * be shown if any other field is present and vice versa.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static PeriodFormatter standard() {
+<b class="fc">&nbsp;        if (cStandard == null) {</b>
+<b class="fc">&nbsp;            cStandard = new PeriodFormatterBuilder()</b>
+&nbsp;                .appendLiteral(&quot;P&quot;)
+&nbsp;                .appendYears()
+&nbsp;                .appendSuffix(&quot;Y&quot;)
+&nbsp;                .appendMonths()
+&nbsp;                .appendSuffix(&quot;M&quot;)
+&nbsp;                .appendWeeks()
+&nbsp;                .appendSuffix(&quot;W&quot;)
+&nbsp;                .appendDays()
+&nbsp;                .appendSuffix(&quot;D&quot;)
+&nbsp;                .appendSeparatorIfFieldsAfter(&quot;T&quot;)
+&nbsp;                .appendHours()
+&nbsp;                .appendSuffix(&quot;H&quot;)
+&nbsp;                .appendMinutes()
+&nbsp;                .appendSuffix(&quot;M&quot;)
+&nbsp;                .appendSecondsWithOptionalMillis()
+&nbsp;                .appendSuffix(&quot;S&quot;)
+&nbsp;                .toFormatter();
+&nbsp;        }
+<b class="fc">&nbsp;        return cStandard;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The alternate ISO format, PyyyymmddThhmmss, which excludes weeks.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Even if weeks are present in the period, they are not output.
+&nbsp;     * Fractional seconds (milliseconds) will appear if required.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static PeriodFormatter alternate() {
+<b class="nc">&nbsp;        if (cAlternate == null) {</b>
+<b class="nc">&nbsp;            cAlternate = new PeriodFormatterBuilder()</b>
+&nbsp;                .appendLiteral(&quot;P&quot;)
+&nbsp;                .printZeroAlways()
+&nbsp;                .minimumPrintedDigits(4)
+&nbsp;                .appendYears()
+&nbsp;                .minimumPrintedDigits(2)
+&nbsp;                .appendMonths()
+&nbsp;                .appendDays()
+&nbsp;                .appendSeparatorIfFieldsAfter(&quot;T&quot;)
+&nbsp;                .appendHours()
+&nbsp;                .appendMinutes()
+&nbsp;                .appendSecondsWithOptionalMillis()
+&nbsp;                .toFormatter();
+&nbsp;        }
+<b class="nc">&nbsp;        return cAlternate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The alternate ISO format, Pyyyy-mm-ddThh:mm:ss, which excludes weeks.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Even if weeks are present in the period, they are not output.
+&nbsp;     * Fractional seconds (milliseconds) will appear if required.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static PeriodFormatter alternateExtended() {
+<b class="nc">&nbsp;        if (cAlternateExtended == null) {</b>
+<b class="nc">&nbsp;            cAlternateExtended = new PeriodFormatterBuilder()</b>
+&nbsp;                .appendLiteral(&quot;P&quot;)
+&nbsp;                .printZeroAlways()
+&nbsp;                .minimumPrintedDigits(4)
+&nbsp;                .appendYears()
+&nbsp;                .appendSeparator(&quot;-&quot;)
+&nbsp;                .minimumPrintedDigits(2)
+&nbsp;                .appendMonths()
+&nbsp;                .appendSeparator(&quot;-&quot;)
+&nbsp;                .appendDays()
+&nbsp;                .appendSeparatorIfFieldsAfter(&quot;T&quot;)
+&nbsp;                .appendHours()
+&nbsp;                .appendSeparator(&quot;:&quot;)
+&nbsp;                .appendMinutes()
+&nbsp;                .appendSeparator(&quot;:&quot;)
+&nbsp;                .appendSecondsWithOptionalMillis()
+&nbsp;                .toFormatter();
+&nbsp;        }
+<b class="nc">&nbsp;        return cAlternateExtended;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The alternate ISO format, PyyyyWwwddThhmmss, which excludes months.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Even if months are present in the period, they are not output.
+&nbsp;     * Fractional seconds (milliseconds) will appear if required.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static PeriodFormatter alternateWithWeeks() {
+<b class="nc">&nbsp;        if (cAlternateWithWeeks == null) {</b>
+<b class="nc">&nbsp;            cAlternateWithWeeks = new PeriodFormatterBuilder()</b>
+&nbsp;                .appendLiteral(&quot;P&quot;)
+&nbsp;                .printZeroAlways()
+&nbsp;                .minimumPrintedDigits(4)
+&nbsp;                .appendYears()
+&nbsp;                .minimumPrintedDigits(2)
+&nbsp;                .appendPrefix(&quot;W&quot;)
+&nbsp;                .appendWeeks()
+&nbsp;                .appendDays()
+&nbsp;                .appendSeparatorIfFieldsAfter(&quot;T&quot;)
+&nbsp;                .appendHours()
+&nbsp;                .appendMinutes()
+&nbsp;                .appendSecondsWithOptionalMillis()
+&nbsp;                .toFormatter();
+&nbsp;        }
+<b class="nc">&nbsp;        return cAlternateWithWeeks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The alternate ISO format, Pyyyy-Www-ddThh:mm:ss, which excludes months.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Even if months are present in the period, they are not output.
+&nbsp;     * Fractional seconds (milliseconds) will appear if required.
+&nbsp;     * 
+&nbsp;     * @return the formatter
+&nbsp;     */
+&nbsp;    public static PeriodFormatter alternateExtendedWithWeeks() {
+<b class="nc">&nbsp;        if (cAlternateExtendedWihWeeks == null) {</b>
+<b class="nc">&nbsp;            cAlternateExtendedWihWeeks = new PeriodFormatterBuilder()</b>
+&nbsp;                .appendLiteral(&quot;P&quot;)
+&nbsp;                .printZeroAlways()
+&nbsp;                .minimumPrintedDigits(4)
+&nbsp;                .appendYears()
+&nbsp;                .appendSeparator(&quot;-&quot;)
+&nbsp;                .minimumPrintedDigits(2)
+&nbsp;                .appendPrefix(&quot;W&quot;)
+&nbsp;                .appendWeeks()
+&nbsp;                .appendSeparator(&quot;-&quot;)
+&nbsp;                .appendDays()
+&nbsp;                .appendSeparatorIfFieldsAfter(&quot;T&quot;)
+&nbsp;                .appendHours()
+&nbsp;                .appendSeparator(&quot;:&quot;)
+&nbsp;                .appendMinutes()
+&nbsp;                .appendSeparator(&quot;:&quot;)
+&nbsp;                .appendSecondsWithOptionalMillis()
+&nbsp;                .toFormatter();
+&nbsp;        }
+<b class="nc">&nbsp;        return cAlternateExtendedWihWeeks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

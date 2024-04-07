@@ -1,0 +1,816 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KmsMasterKeyProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.kms</a>
+</div>
+
+<h1>Coverage Summary for Class: KmsMasterKeyProvider (com.amazonaws.encryptionsdk.kms)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KmsMasterKeyProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/89)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KmsMasterKeyProvider$1</td>
+  </tr>
+  <tr>
+    <td class="name">KmsMasterKeyProvider$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KmsMasterKeyProvider$RegionalClientSupplier</td>
+  </tr>
+  <tr>
+    <td class="name">KmsMasterKeyProvider$SuccessfulRequestCacher</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/175)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.kms;
+&nbsp;
+&nbsp;import static java.util.Arrays.asList;
+&nbsp;import static java.util.Collections.emptyList;
+&nbsp;import static java.util.Collections.singletonList;
+&nbsp;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.function.Supplier;
+&nbsp;
+&nbsp;import com.amazonaws.AmazonServiceException;
+&nbsp;import com.amazonaws.ClientConfiguration;
+&nbsp;import com.amazonaws.Request;
+&nbsp;import com.amazonaws.Response;
+&nbsp;import com.amazonaws.auth.AWSCredentials;
+&nbsp;import com.amazonaws.auth.AWSCredentialsProvider;
+&nbsp;import com.amazonaws.auth.AWSStaticCredentialsProvider;
+&nbsp;import com.amazonaws.encryptionsdk.CryptoAlgorithm;
+&nbsp;import com.amazonaws.encryptionsdk.DataKey;
+&nbsp;import com.amazonaws.encryptionsdk.EncryptedDataKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKey;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyProvider;
+&nbsp;import com.amazonaws.encryptionsdk.MasterKeyRequest;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.NoSuchMasterKeyException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.UnsupportedProviderException;
+&nbsp;import com.amazonaws.handlers.RequestHandler2;
+&nbsp;import com.amazonaws.regions.Region;
+&nbsp;import com.amazonaws.regions.Regions;
+&nbsp;import com.amazonaws.regions.RegionUtils;
+&nbsp;import com.amazonaws.services.kms.AWSKMS;
+&nbsp;import com.amazonaws.services.kms.AWSKMSClient;
+&nbsp;import com.amazonaws.services.kms.AWSKMSClientBuilder;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides {@link MasterKey}s backed by the AWS Key Management Service. This object is regional and
+&nbsp; * if you want to use keys from multiple regions, you&#39;ll need multiple copies of this object.
+&nbsp; */
+<b class="nc">&nbsp;public class KmsMasterKeyProvider extends MasterKeyProvider&lt;KmsMasterKey&gt; implements KmsMethods {</b>
+&nbsp;    private static final String PROVIDER_NAME = &quot;aws-kms&quot;;
+&nbsp;    private final List&lt;String&gt; keyIds_;
+&nbsp;    private final List&lt;String&gt; grantTokens_;
+&nbsp;
+&nbsp;    private final RegionalClientSupplier regionalClientSupplier_;
+&nbsp;    private final String defaultRegion_;
+&nbsp;
+&nbsp;    @FunctionalInterface
+&nbsp;    public interface RegionalClientSupplier {
+&nbsp;        /**
+&nbsp;         * Supplies an AWSKMS instance to use for a given region. The {@link KmsMasterKeyProvider} will not cache the
+&nbsp;         * result of this function.
+&nbsp;         *
+&nbsp;         * @param regionName The region to get a client for
+&nbsp;         * @return The client to use, or null if this region cannot or should not be used.
+&nbsp;         */
+&nbsp;        AWSKMS getClient(String regionName);
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Builder implements Cloneable {</b>
+<b class="nc">&nbsp;        private String defaultRegion_ = null;</b>
+<b class="nc">&nbsp;        private RegionalClientSupplier regionalClientSupplier_ = null;</b>
+<b class="nc">&nbsp;        private AWSKMSClientBuilder templateBuilder_ = null;</b>
+<b class="nc">&nbsp;        private List&lt;String&gt; keyIds_ = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        Builder() {</b>
+&nbsp;            // Default access: Don&#39;t allow outside classes to extend this class
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder clone() {
+&nbsp;            try {
+<b class="nc">&nbsp;                Builder cloned = (Builder) super.clone();</b>
+&nbsp;
+<b class="nc">&nbsp;                if (templateBuilder_ != null) {</b>
+<b class="nc">&nbsp;                    cloned.templateBuilder_ = cloneClientBuilder(templateBuilder_);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                cloned.keyIds_ = new ArrayList&lt;&gt;(keyIds_);</b>
+&nbsp;
+<b class="nc">&nbsp;                return cloned;</b>
+<b class="nc">&nbsp;            } catch (CloneNotSupportedException e) {</b>
+<b class="nc">&nbsp;                throw new Error(&quot;Impossible: CloneNotSupportedException&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds key ID(s) to the list of keys to use on encryption.
+&nbsp;         *
+&nbsp;         * @param keyIds
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withKeysForEncryption(String... keyIds) {
+<b class="nc">&nbsp;            keyIds_.addAll(asList(keyIds));</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds key ID(s) to the list of keys to use on encryption.
+&nbsp;         *
+&nbsp;         * @param keyIds
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withKeysForEncryption(List&lt;String&gt; keyIds) {
+<b class="nc">&nbsp;            keyIds_.addAll(keyIds);</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Sets the default region. This region will be used when specifying key IDs for encryption or in
+&nbsp;         * {@link KmsMasterKeyProvider#getMasterKey(String)} that are not full ARNs, but are instead bare key IDs or
+&nbsp;         * aliases.
+&nbsp;         *
+&nbsp;         * If the default region is not specified, only full key ARNs will be usable.
+&nbsp;         *
+&nbsp;         * @param defaultRegion The default region to use.
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withDefaultRegion(String defaultRegion) {
+<b class="nc">&nbsp;            this.defaultRegion_ = defaultRegion;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Provides a custom factory function that will vend KMS clients. This is provided for advanced use cases which
+&nbsp;         * require complete control over the client construction process.
+&nbsp;         *
+&nbsp;         * Because the regional client supplier fully controls the client construction process, it is not possible to
+&nbsp;         * configure the client through methods such as {@link #withCredentials(AWSCredentialsProvider)} or
+&nbsp;         * {@link #withClientBuilder(AWSKMSClientBuilder)}; if you try to use these in combination, an
+&nbsp;         * {@link IllegalStateException} will be thrown.
+&nbsp;         *
+&nbsp;         * @param regionalClientSupplier
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withCustomClientFactory(RegionalClientSupplier regionalClientSupplier) {
+<b class="nc">&nbsp;            if (templateBuilder_ != null) {</b>
+<b class="nc">&nbsp;                throw clientSupplierComboException();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            regionalClientSupplier_ = regionalClientSupplier;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private RuntimeException clientSupplierComboException() {
+<b class="nc">&nbsp;            return new IllegalStateException(&quot;withCustomClientFactory cannot be used in conjunction with &quot; +</b>
+&nbsp;                                                    &quot;withCredentials or withClientBuilder&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Configures the {@link KmsMasterKeyProvider} to use specific credentials. If a builder was previously set,
+&nbsp;         * this will override whatever credentials it set.
+&nbsp;         * @param credentialsProvider
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withCredentials(AWSCredentialsProvider credentialsProvider) {
+<b class="nc">&nbsp;            if (regionalClientSupplier_ != null) {</b>
+<b class="nc">&nbsp;                throw clientSupplierComboException();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (templateBuilder_ == null) {</b>
+<b class="nc">&nbsp;                templateBuilder_ = AWSKMSClientBuilder.standard();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            templateBuilder_.setCredentials(credentialsProvider);</b>
+&nbsp;
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Configures the {@link KmsMasterKeyProvider} to use specific credentials. If a builder was previously set,
+&nbsp;         * this will override whatever credentials it set.
+&nbsp;         * @param credentials
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withCredentials(AWSCredentials credentials) {
+<b class="nc">&nbsp;            return withCredentials(new AWSStaticCredentialsProvider(credentials));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Configures the {@link KmsMasterKeyProvider} to use settings from this {@link AWSKMSClientBuilder} to
+&nbsp;         * configure KMS clients. Note that the region set on this builder will be ignored, but all other settings
+&nbsp;         * will be propagated into the regional clients.
+&nbsp;         *
+&nbsp;         * This method will overwrite any credentials set using {@link #withCredentials(AWSCredentialsProvider)}.
+&nbsp;         *
+&nbsp;         * @param builder
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public Builder withClientBuilder(AWSKMSClientBuilder builder) {
+<b class="nc">&nbsp;            if (regionalClientSupplier_ != null) {</b>
+<b class="nc">&nbsp;                throw clientSupplierComboException();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            final AWSKMSClientBuilder newBuilder = cloneClientBuilder(builder);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;            this.templateBuilder_ = newBuilder;</b>
+&nbsp;
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private AWSKMSClientBuilder cloneClientBuilder(final AWSKMSClientBuilder builder) {
+&nbsp;            // We need to copy all arguments out of the builder in case it&#39;s mutated later on.
+&nbsp;            // Unfortunately AWSKMSClientBuilder doesn&#39;t support .clone() so we&#39;ll have to do it by hand.
+&nbsp;
+<b class="nc">&nbsp;            if (builder.getEndpoint() != null) {</b>
+&nbsp;                // We won&#39;t be able to set the region later if a custom endpoint is set.
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Setting endpoint configuration is not compatible with passing a &quot; +</b>
+&nbsp;                                                   &quot;builder to the KmsMasterKeyProvider. Use withCustomClientFactory&quot; +
+&nbsp;                                                   &quot; instead.&quot;);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final AWSKMSClientBuilder newBuilder = AWSKMSClient.builder();</b>
+<b class="nc">&nbsp;            newBuilder.setClientConfiguration(builder.getClientConfiguration());</b>
+<b class="nc">&nbsp;            newBuilder.setCredentials(builder.getCredentials());</b>
+<b class="nc">&nbsp;            newBuilder.setEndpointConfiguration(builder.getEndpoint());</b>
+<b class="nc">&nbsp;            newBuilder.setMetricsCollector(builder.getMetricsCollector());</b>
+<b class="nc">&nbsp;            if (builder.getRequestHandlers() != null) {</b>
+<b class="nc">&nbsp;                newBuilder.setRequestHandlers(builder.getRequestHandlers().toArray(new RequestHandler2[0]));</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return newBuilder;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Builds the master key provider.
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public KmsMasterKeyProvider build() {
+&nbsp;            // If we don&#39;t have a default region, we need to check that all key IDs will be usable
+<b class="nc">&nbsp;            if (defaultRegion_ == null) {</b>
+<b class="nc">&nbsp;                for (String keyId : keyIds_) {</b>
+<b class="nc">&nbsp;                    if (parseRegionfromKeyArn(keyId) == null) {</b>
+<b class="nc">&nbsp;                        throw new AwsCryptoException(&quot;Can&#39;t use non-ARN key identifiers or aliases when &quot; +</b>
+&nbsp;                                                             &quot;no default region is set&quot;);
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            RegionalClientSupplier supplier = clientFactory();</b>
+&nbsp;
+<b class="nc">&nbsp;            return new KmsMasterKeyProvider(supplier, defaultRegion_, keyIds_, emptyList(), false);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private RegionalClientSupplier clientFactory() {
+<b class="nc">&nbsp;            if (regionalClientSupplier_ != null) {</b>
+<b class="nc">&nbsp;                return regionalClientSupplier_;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // Clone again; this MKP builder might be reused to build a second MKP with different creds.
+<b class="nc">&nbsp;            AWSKMSClientBuilder builder = templateBuilder_ != null ? cloneClientBuilder(templateBuilder_)</b>
+<b class="nc">&nbsp;                                                                   : AWSKMSClientBuilder.standard();</b>
+&nbsp;
+<b class="nc">&nbsp;            ConcurrentHashMap&lt;String, AWSKMS&gt; clientCache = new ConcurrentHashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            snoopClientCache(clientCache);</b>
+&nbsp;
+<b class="nc">&nbsp;            return region -&gt; {</b>
+<b class="nc">&nbsp;                AWSKMS kms = clientCache.get(region);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (kms != null) return kms;</b>
+&nbsp;
+&nbsp;                // We can&#39;t just use computeIfAbsent as we need to avoid leaking KMS clients if we&#39;re asked to decrypt
+&nbsp;                // an EDK with a bogus region in its ARN. So we&#39;ll install a request handler to identify the first
+&nbsp;                // successful call, and cache it when we see that.
+<b class="nc">&nbsp;                SuccessfulRequestCacher cacher = new SuccessfulRequestCacher(clientCache, region);</b>
+<b class="nc">&nbsp;                ArrayList&lt;RequestHandler2&gt; handlers = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                if (builder.getRequestHandlers() != null) {</b>
+<b class="nc">&nbsp;                    handlers.addAll(builder.getRequestHandlers());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                handlers.add(cacher);</b>
+&nbsp;
+<b class="nc">&nbsp;                kms = cloneClientBuilder(builder)</b>
+<b class="nc">&nbsp;                        .withRegion(region)</b>
+<b class="nc">&nbsp;                        .withRequestHandlers(handlers.toArray(new RequestHandler2[handlers.size()]))</b>
+<b class="nc">&nbsp;                        .build();</b>
+<b class="nc">&nbsp;                cacher.client_ = kms;</b>
+&nbsp;
+<b class="nc">&nbsp;                return kms;</b>
+&nbsp;            };
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void snoopClientCache(ConcurrentHashMap&lt;String, AWSKMS&gt; map) {
+&nbsp;            // no-op - this is a test hook
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static class SuccessfulRequestCacher extends RequestHandler2 {</b>
+&nbsp;        private final ConcurrentHashMap&lt;String, AWSKMS&gt; cache_;
+&nbsp;        private final String region_;
+&nbsp;        private AWSKMS client_;
+&nbsp;
+<b class="nc">&nbsp;        volatile boolean ranBefore_ = false;</b>
+&nbsp;
+&nbsp;        private SuccessfulRequestCacher(
+&nbsp;                final ConcurrentHashMap&lt;String, AWSKMS&gt; cache,
+&nbsp;                final String region
+<b class="nc">&nbsp;        ) {</b>
+<b class="nc">&nbsp;            this.region_ = region;</b>
+<b class="nc">&nbsp;            this.cache_ = cache;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public void afterResponse(final Request&lt;?&gt; request, final Response&lt;?&gt; response) {
+<b class="nc">&nbsp;            if (ranBefore_) return;</b>
+<b class="nc">&nbsp;            ranBefore_ = true;</b>
+&nbsp;
+<b class="nc">&nbsp;            cache_.putIfAbsent(region_, client_);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public void afterError(final Request&lt;?&gt; request, final Response&lt;?&gt; response, final Exception e) {
+<b class="nc">&nbsp;            if (ranBefore_) return;</b>
+<b class="nc">&nbsp;            if (e instanceof AmazonServiceException) {</b>
+<b class="nc">&nbsp;                ranBefore_ = true;</b>
+<b class="nc">&nbsp;                cache_.putIfAbsent(region_, client_);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Builder builder() {
+<b class="nc">&nbsp;        return new Builder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private KmsMasterKeyProvider(
+&nbsp;            RegionalClientSupplier supplier,
+&nbsp;            String defaultRegion,
+&nbsp;            List&lt;String&gt; keyIds,
+&nbsp;            List&lt;String&gt; grantTokens,
+&nbsp;            boolean onlyOneRegion
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        if (onlyOneRegion) {</b>
+&nbsp;            // restrict this provider to only the default region to avoid code using the legacy ctors from unexpectedly
+&nbsp;            // starting to make cross-region calls
+<b class="nc">&nbsp;            RegionalClientSupplier originalSupplier = supplier;</b>
+&nbsp;
+<b class="nc">&nbsp;            supplier = region -&gt; {</b>
+<b class="nc">&nbsp;                if (!Objects.equals(region, defaultRegion)) {</b>
+&nbsp;                    // An appropriate exception will be thrown elsewhere if return null
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return originalSupplier.getClient(region);</b>
+&nbsp;            };
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.regionalClientSupplier_ = supplier;</b>
+<b class="nc">&nbsp;        this.defaultRegion_ = defaultRegion;</b>
+<b class="nc">&nbsp;        this.keyIds_ = Collections.unmodifiableList(new ArrayList&lt;&gt;(keyIds));</b>
+&nbsp;
+<b class="nc">&nbsp;        this.grantTokens_ = grantTokens;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Helper ctor for legacy ctors
+&nbsp;    private KmsMasterKeyProvider(RegionalClientSupplier supplier, String defaultRegion, List&lt;String&gt; keyIds) {
+<b class="nc">&nbsp;        this(supplier, defaultRegion, keyIds, new ArrayList&lt;&gt;(), true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static RegionalClientSupplier defaultProvider() {
+<b class="nc">&nbsp;        return builder().clientFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings, default credentials, and configured
+&nbsp;     * to talk to the {@link Regions#DEFAULT_REGION}.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider() {
+<b class="nc">&nbsp;        this(defaultProvider(), Regions.DEFAULT_REGION.getName(), emptyList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings and credentials configured to speak
+&nbsp;     * to the region specified by {@code keyId} (if specified). Data will be protected with
+&nbsp;     * {@code keyId} as appropriate.
+&nbsp;     *
+&nbsp;     * The default region will be set to that of the given key ID, or to the AWS SDK default region if a bare key ID or
+&nbsp;     * alias is passed.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final String keyId) {
+<b class="nc">&nbsp;        this(defaultProvider(), getStartingRegion(keyId).getName(), singletonList(keyId));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings configured to speak to the region
+&nbsp;     * specified by {@code keyId} (if specified). Data will be protected with {@code keyId} as
+&nbsp;     * appropriate.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentials creds, final String keyId) {
+<b class="nc">&nbsp;        this(new AWSStaticCredentialsProvider(creds), getStartingRegion(keyId), new ClientConfiguration(),</b>
+&nbsp;             keyId);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings configured to speak to the region
+&nbsp;     * specified by {@code keyId} (if specified). Data will be protected with {@code keyId} as
+&nbsp;     * appropriate.
+&nbsp;     *
+&nbsp;     * The default region will be set to that of the given key ID, or to the AWS SDK default region if a bare key ID or
+&nbsp;     * alias is passed.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentialsProvider creds, final String keyId) {
+<b class="nc">&nbsp;        this(creds, getStartingRegion(keyId), new ClientConfiguration(), keyId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings and configured to talk to the
+&nbsp;     * {@link Regions#DEFAULT_REGION}.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentials creds) {
+<b class="nc">&nbsp;        this(new AWSStaticCredentialsProvider(creds), Region.getRegion(Regions.DEFAULT_REGION), new ClientConfiguration(),</b>
+<b class="nc">&nbsp;                Collections.&lt;String&gt; emptyList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with default settings and configured to talk to the
+&nbsp;     * {@link Regions#DEFAULT_REGION}.
+&nbsp;     *
+&nbsp;     * @deprecated The default region set by this constructor is subject to change. Use the builder method to construct
+&nbsp;     * instances of this class for better control.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentialsProvider creds) {
+<b class="nc">&nbsp;        this(creds, Region.getRegion(Regions.DEFAULT_REGION), new ClientConfiguration(), Collections</b>
+<b class="nc">&nbsp;                .&lt;String&gt; emptyList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with the supplied configuration and credentials.
+&nbsp;     * {@code keyId} will be used to protect data.
+&nbsp;     */
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentialsProvider creds, final Region region,
+&nbsp;            final ClientConfiguration clientConfiguration, final String keyId) {
+<b class="nc">&nbsp;        this(creds, region, clientConfiguration, singletonList(keyId));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with the supplied configuration and credentials. all keys
+&nbsp;     * listed in {@code keyIds} will be used to protect data.
+&nbsp;     */
+&nbsp;    public KmsMasterKeyProvider(final AWSCredentialsProvider creds, final Region region,
+&nbsp;            final ClientConfiguration clientConfiguration, final List&lt;String&gt; keyIds) {
+<b class="nc">&nbsp;        this(builder().withClientBuilder(AWSKMSClientBuilder.standard()</b>
+<b class="nc">&nbsp;                                                            .withClientConfiguration(clientConfiguration)</b>
+<b class="nc">&nbsp;                                                            .withCredentials(creds))</b>
+<b class="nc">&nbsp;                      .clientFactory(),</b>
+<b class="nc">&nbsp;             region.getName(),</b>
+&nbsp;             keyIds
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an instance of this object with the supplied client and region; the client will be 
+&nbsp;     * configured to use the provided region. All keys listed in {@code keyIds} will be used to 
+&nbsp;     * protect data.
+&nbsp;     *
+&nbsp;     * @deprecated This constructor modifies the passed-in KMS client by setting its region. This functionality may be
+&nbsp;     * removed in future releases. Use the builder to construct instances of this class instead.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    public KmsMasterKeyProvider(final AWSKMS kms, final Region region, final List&lt;String&gt; keyIds) {
+<b class="nc">&nbsp;        this(requestedRegion -&gt; kms, region.getName(), keyIds);</b>
+&nbsp;
+<b class="nc">&nbsp;        kms.setRegion(region);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns &quot;aws-kms&quot;
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String getDefaultProviderId() {
+<b class="nc">&nbsp;        return PROVIDER_NAME;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public KmsMasterKey getMasterKey(final String provider, final String keyId) throws UnsupportedProviderException,
+&nbsp;            NoSuchMasterKeyException {
+<b class="nc">&nbsp;        if (!canProvide(provider)) {</b>
+<b class="nc">&nbsp;            throw new UnsupportedProviderException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String regionName = parseRegionfromKeyArn(keyId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (regionName == null &amp;&amp; defaultRegion_ != null) {</b>
+<b class="nc">&nbsp;            regionName = defaultRegion_;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        String regionName_ = regionName;</b>
+&nbsp;
+<b class="nc">&nbsp;        Supplier&lt;AWSKMS&gt; kmsSupplier = () -&gt; {</b>
+<b class="nc">&nbsp;            AWSKMS kms = regionalClientSupplier_.getClient(regionName_);</b>
+<b class="nc">&nbsp;            if (kms == null) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(&quot;Can&#39;t use keys from region &quot; + regionName_);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return kms;</b>
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        final KmsMasterKey result = KmsMasterKey.getInstance(kmsSupplier, keyId, this);</b>
+<b class="nc">&nbsp;        result.setGrantTokens(grantTokens_);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all CMKs provided to the constructor of this object.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;KmsMasterKey&gt; getMasterKeysForEncryption(final MasterKeyRequest request) {
+<b class="nc">&nbsp;        if (keyIds_ == null) {</b>
+<b class="nc">&nbsp;            return emptyList();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        List&lt;KmsMasterKey&gt; result = new ArrayList&lt;&gt;(keyIds_.size());</b>
+<b class="nc">&nbsp;        for (String id : keyIds_) {</b>
+<b class="nc">&nbsp;            result.add(getMasterKey(id));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DataKey&lt;KmsMasterKey&gt; decryptDataKey(final CryptoAlgorithm algorithm,
+&nbsp;            final Collection&lt;? extends EncryptedDataKey&gt; encryptedDataKeys, final Map&lt;String, String&gt; encryptionContext)
+&nbsp;            throws AwsCryptoException {
+<b class="nc">&nbsp;        final List&lt;Exception&gt; exceptions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (final EncryptedDataKey edk : encryptedDataKeys) {</b>
+<b class="nc">&nbsp;            if (canProvide(edk.getProviderId())) {</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    final String keyArn = new String(edk.getProviderInformation(), StandardCharsets.UTF_8);</b>
+&nbsp;                    // This will throw if we can&#39;t use this key for whatever reason
+<b class="nc">&nbsp;                    return getMasterKey(keyArn).decryptDataKey(algorithm, singletonList(edk), encryptionContext);</b>
+<b class="nc">&nbsp;                } catch (final Exception asex) {</b>
+<b class="nc">&nbsp;                    exceptions.add(asex);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        throw buildCannotDecryptDksException(exceptions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated This method is inherently not thread safe. Use {@link KmsMasterKey#setGrantTokens(List)} instead.
+&nbsp;     * {@link KmsMasterKeyProvider}s constructed using the builder will throw an exception on attempts to modify the
+&nbsp;     * list of grant tokens.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void setGrantTokens(final List&lt;String&gt; grantTokens) {
+&nbsp;        try {
+<b class="nc">&nbsp;            this.grantTokens_.clear();</b>
+<b class="nc">&nbsp;            this.grantTokens_.addAll(grantTokens);</b>
+<b class="nc">&nbsp;        } catch (UnsupportedOperationException e) {</b>
+<b class="nc">&nbsp;            throw grantTokenError();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;String&gt; getGrantTokens() {
+<b class="nc">&nbsp;        return new ArrayList&lt;&gt;(grantTokens_);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @deprecated This method is inherently not thread safe. Use {@link #withGrantTokens(List)} or
+&nbsp;     * {@link KmsMasterKey#setGrantTokens(List)} instead. {@link KmsMasterKeyProvider}s constructed using the builder
+&nbsp;     * will throw an exception on attempts to modify the list of grant tokens.
+&nbsp;     */
+&nbsp;    @Deprecated
+&nbsp;    @Override
+&nbsp;    public void addGrantToken(final String grantToken) {
+&nbsp;        try {
+<b class="nc">&nbsp;            grantTokens_.add(grantToken);</b>
+<b class="nc">&nbsp;        } catch (UnsupportedOperationException e) {</b>
+<b class="nc">&nbsp;            throw grantTokenError();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private RuntimeException grantTokenError() {
+<b class="nc">&nbsp;        return new IllegalStateException(&quot;This master key provider is immutable. Use withGrantTokens instead.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new {@link KmsMasterKeyProvider} that is configured identically to this one, except with the given list
+&nbsp;     * of grant tokens. The grant token list in the returned provider is immutable (but can be further overridden by
+&nbsp;     * invoking withGrantTokens again).
+&nbsp;     * @param grantTokens
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public KmsMasterKeyProvider withGrantTokens(List&lt;String&gt; grantTokens) {
+<b class="nc">&nbsp;        grantTokens = Collections.unmodifiableList(new ArrayList&lt;&gt;(grantTokens));</b>
+&nbsp;
+<b class="nc">&nbsp;        return new KmsMasterKeyProvider(regionalClientSupplier_, defaultRegion_, keyIds_, grantTokens, false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a new {@link KmsMasterKeyProvider} that is configured identically to this one, except with the given list
+&nbsp;     * of grant tokens. The grant token list in the returned provider is immutable (but can be further overridden by
+&nbsp;     * invoking withGrantTokens again).
+&nbsp;     * @param grantTokens
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public KmsMasterKeyProvider withGrantTokens(String... grantTokens) {
+<b class="nc">&nbsp;        return withGrantTokens(asList(grantTokens));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Region getStartingRegion(final String keyArn) {
+<b class="nc">&nbsp;        final String region = parseRegionfromKeyArn(keyArn);</b>
+<b class="nc">&nbsp;        if (region != null) {</b>
+<b class="nc">&nbsp;            return RegionUtils.getRegion(region);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final Region currentRegion = Regions.getCurrentRegion();</b>
+<b class="nc">&nbsp;        if (currentRegion != null) {</b>
+<b class="nc">&nbsp;            return currentRegion;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return Region.getRegion(Regions.DEFAULT_REGION);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String parseRegionfromKeyArn(final String keyArn) {
+<b class="nc">&nbsp;        final String[] parts = keyArn.split(&quot;:&quot;, 5);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!parts[0].equals(&quot;arn&quot;)) {</b>
+&nbsp;            // Not an arn
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;        // parts[1].equals(&quot;aws&quot;); // This can vary
+<b class="nc">&nbsp;        if (!parts[2].equals(&quot;kms&quot;)) {</b>
+&nbsp;            // Not a kms arn
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return parts[3]; // return region</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:50</div>
+</div>
+</body>
+</html>

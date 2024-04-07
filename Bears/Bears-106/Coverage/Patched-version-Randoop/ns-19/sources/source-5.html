@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UniversalGeolocationProvider</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.geolocation</a>
+</div>
+
+<h1>Coverage Summary for Class: UniversalGeolocationProvider (org.traccar.geolocation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UniversalGeolocationProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UniversalGeolocationProvider$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.geolocation;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.ning.http.client.AsyncCompletionHandler;
+&nbsp;import com.ning.http.client.Response;
+&nbsp;import org.traccar.Context;
+&nbsp;import org.traccar.model.Network;
+&nbsp;
+&nbsp;import javax.json.Json;
+&nbsp;import javax.json.JsonObject;
+&nbsp;import javax.json.JsonReader;
+&nbsp;import javax.ws.rs.core.HttpHeaders;
+&nbsp;import javax.ws.rs.core.MediaType;
+&nbsp;
+&nbsp;public class UniversalGeolocationProvider implements GeolocationProvider {
+&nbsp;
+&nbsp;    private String url;
+&nbsp;
+<b class="nc">&nbsp;    public UniversalGeolocationProvider(String url, String key) {</b>
+<b class="nc">&nbsp;        this.url = url + &quot;?key=&quot; + key;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void getLocation(Network network, final LocationProviderCallback callback) {
+&nbsp;        try {
+<b class="nc">&nbsp;            String request = Context.getObjectMapper().writeValueAsString(network);</b>
+<b class="nc">&nbsp;            Context.getAsyncHttpClient().preparePost(url)</b>
+<b class="nc">&nbsp;                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)</b>
+<b class="nc">&nbsp;                    .setHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(request.length()))</b>
+<b class="nc">&nbsp;                    .setBody(request).execute(new AsyncCompletionHandler() {</b>
+&nbsp;                @Override
+&nbsp;                public Object onCompleted(Response response) throws Exception {
+<b class="nc">&nbsp;                    try (JsonReader reader = Json.createReader(response.getResponseBodyAsStream())) {</b>
+<b class="nc">&nbsp;                        JsonObject json = reader.readObject();</b>
+<b class="nc">&nbsp;                        if (json.containsKey(&quot;error&quot;)) {</b>
+<b class="nc">&nbsp;                            callback.onFailure(</b>
+<b class="nc">&nbsp;                                    new GeolocationException(json.getJsonObject(&quot;error&quot;).getString(&quot;message&quot;)));</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            JsonObject location = json.getJsonObject(&quot;location&quot;);</b>
+<b class="nc">&nbsp;                            callback.onSuccess(</b>
+<b class="nc">&nbsp;                                    location.getJsonNumber(&quot;lat&quot;).doubleValue(),</b>
+<b class="nc">&nbsp;                                    location.getJsonNumber(&quot;lng&quot;).doubleValue(),</b>
+<b class="nc">&nbsp;                                    json.getJsonNumber(&quot;accuracy&quot;).doubleValue());</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                @Override
+&nbsp;                public void onThrowable(Throwable t) {
+<b class="nc">&nbsp;                    callback.onFailure(t);</b>
+&nbsp;                }
+&nbsp;            });
+<b class="nc">&nbsp;        } catch (JsonProcessingException e) {</b>
+<b class="nc">&nbsp;            callback.onFailure(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:44</div>
+</div>
+</body>
+</html>

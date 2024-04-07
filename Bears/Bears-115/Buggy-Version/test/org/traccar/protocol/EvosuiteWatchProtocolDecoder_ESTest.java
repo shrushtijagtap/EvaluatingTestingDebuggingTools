@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteWatchProtocolDecoder_ESTest extends EvosuiteWatchProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       WatchProtocolDecoder watchProtocolDecoder0 = new WatchProtocolDecoder(watchProtocol0);
@@ -36,7 +36,7 @@ public class EvosuiteWatchProtocolDecoder_ESTest extends EvosuiteWatchProtocolDe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       WatchProtocolDecoder watchProtocolDecoder0 = new WatchProtocolDecoder(watchProtocol0);
@@ -54,7 +54,7 @@ public class EvosuiteWatchProtocolDecoder_ESTest extends EvosuiteWatchProtocolDe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       WatchProtocolDecoder watchProtocolDecoder0 = new WatchProtocolDecoder(watchProtocol0);

@@ -1,0 +1,314 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RuptelaProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: RuptelaProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RuptelaProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/85)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import javax.xml.bind.DatatypeConverter;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class RuptelaProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public RuptelaProtocolDecoder(RuptelaProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_RECORDS = 1;
+&nbsp;    public static final int MSG_DEVICE_CONFIGURATION = 2;
+&nbsp;    public static final int MSG_DEVICE_VERSION = 3;
+&nbsp;    public static final int MSG_FIRMWARE_UPDATE = 4;
+&nbsp;    public static final int MSG_SET_CONNECTION = 5;
+&nbsp;    public static final int MSG_SET_ODOMETER = 6;
+&nbsp;    public static final int MSG_SMS_VIA_GPRS_RESPONSE = 7;
+&nbsp;    public static final int MSG_SMS_VIA_GPRS = 8;
+&nbsp;    public static final int MSG_DTCS = 9;
+&nbsp;    public static final int MSG_SET_IO = 17;
+&nbsp;    public static final int MSG_EXTENDED_RECORDS = 68;
+&nbsp;
+&nbsp;    private Position decodeCommandResponse(DeviceSession deviceSession, int type, ChannelBuffer buf) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        getLastLocation(position, null);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_TYPE, type);</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (type) {</b>
+&nbsp;            case MSG_DEVICE_CONFIGURATION:
+&nbsp;            case MSG_DEVICE_VERSION:
+&nbsp;            case MSG_FIRMWARE_UPDATE:
+&nbsp;            case MSG_SMS_VIA_GPRS_RESPONSE:
+<b class="nc">&nbsp;                position.set(Position.KEY_RESULT,</b>
+<b class="nc">&nbsp;                        buf.toString(buf.readerIndex(), buf.readableBytes() - 2, StandardCharsets.US_ASCII).trim());</b>
+<b class="nc">&nbsp;                return position;</b>
+&nbsp;            case MSG_SET_IO:
+<b class="nc">&nbsp;                position.set(Position.KEY_RESULT,</b>
+<b class="nc">&nbsp;                        String.valueOf(buf.readUnsignedByte()));</b>
+<b class="nc">&nbsp;                return position;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // data length</b>
+&nbsp;
+<b class="nc">&nbsp;        String imei = String.format(&quot;%015d&quot;, buf.readLong());</b>
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_RECORDS || type == MSG_EXTENDED_RECORDS) {</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            buf.readUnsignedByte(); // records left</b>
+<b class="nc">&nbsp;            int count = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // timestamp extension</b>
+&nbsp;
+<b class="nc">&nbsp;                if (type == MSG_EXTENDED_RECORDS) {</b>
+<b class="nc">&nbsp;                    buf.readUnsignedByte(); // record extension</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // priority (reserved)</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setValid(true);</b>
+<b class="nc">&nbsp;                position.setLongitude(buf.readInt() / 10000000.0);</b>
+<b class="nc">&nbsp;                position.setLatitude(buf.readInt() / 10000000.0);</b>
+<b class="nc">&nbsp;                position.setAltitude(buf.readUnsignedShort() / 10.0);</b>
+<b class="nc">&nbsp;                position.setCourse(buf.readUnsignedShort() / 100.0);</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedShort()));</b>
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_HDOP, buf.readUnsignedByte() / 10.0);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (type == MSG_EXTENDED_RECORDS) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_EVENT, buf.readUnsignedShort());</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    position.set(Position.KEY_EVENT, buf.readUnsignedByte());</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Read 1 byte data
+<b class="nc">&nbsp;                int cnt = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="nc">&nbsp;                    int id = type == MSG_EXTENDED_RECORDS ? buf.readUnsignedShort() : buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_IO + id, buf.readUnsignedByte());</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Read 2 byte data
+<b class="nc">&nbsp;                cnt = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="nc">&nbsp;                    int id = type == MSG_EXTENDED_RECORDS ? buf.readUnsignedShort() : buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_IO + id, buf.readUnsignedShort());</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Read 4 byte data
+<b class="nc">&nbsp;                cnt = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="nc">&nbsp;                    int id = type == MSG_EXTENDED_RECORDS ? buf.readUnsignedShort() : buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_IO + id, buf.readUnsignedInt());</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Read 8 byte data
+<b class="nc">&nbsp;                cnt = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="nc">&nbsp;                    int id = type == MSG_EXTENDED_RECORDS ? buf.readUnsignedShort() : buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;                    position.set(Position.PREFIX_IO + id, buf.readLong());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(ChannelBuffers.wrappedBuffer(DatatypeConverter.parseHexBinary(&quot;0002640113bc&quot;)));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_DTCS) {</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;Position&gt; positions = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            int count = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;                Position position = new Position();</b>
+<b class="nc">&nbsp;                position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;                position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;                buf.readUnsignedByte(); // reserved</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setTime(new Date(buf.readUnsignedInt() * 1000));</b>
+&nbsp;
+<b class="nc">&nbsp;                position.setValid(true);</b>
+<b class="nc">&nbsp;                position.setLongitude(buf.readInt() / 10000000.0);</b>
+<b class="nc">&nbsp;                position.setLatitude(buf.readInt() / 10000000.0);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (buf.readUnsignedByte() == 2) {</b>
+<b class="nc">&nbsp;                    position.set(Position.KEY_ARCHIVE, true);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                position.set(Position.KEY_DTCS, buf.readBytes(5).toString(StandardCharsets.US_ASCII));</b>
+&nbsp;
+<b class="nc">&nbsp;                positions.add(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (channel != null) {</b>
+<b class="nc">&nbsp;                channel.write(ChannelBuffers.wrappedBuffer(DatatypeConverter.parseHexBinary(&quot;00026d01c4a4&quot;)));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return positions;</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            return decodeCommandResponse(deviceSession, type, buf);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:36</div>
+</div>
+</body>
+</html>

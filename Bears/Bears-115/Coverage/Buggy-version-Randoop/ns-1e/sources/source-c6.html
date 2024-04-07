@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MiniFinderProtocolEncoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: MiniFinderProtocolEncoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MiniFinderProtocolEncoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.traccar.StringProtocolEncoder;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.Command;
+&nbsp;
+<b class="nc">&nbsp;public class MiniFinderProtocolEncoder extends StringProtocolEncoder implements StringProtocolEncoder.ValueFormatter {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String formatValue(String key, Object value) {
+&nbsp;
+<b class="nc">&nbsp;        if (key.equals(Command.KEY_ENABLE)) {</b>
+<b class="nc">&nbsp;            return (Boolean) value ? &quot;1&quot; : &quot;0&quot;;</b>
+<b class="nc">&nbsp;        } else if (key.equals(Command.KEY_TIMEZONE)) {</b>
+<b class="nc">&nbsp;            return String.format(&quot;%+03d&quot;, ((Number) value).longValue() / 3600);</b>
+<b class="nc">&nbsp;        } else if (key.equals(Command.KEY_INDEX)) {</b>
+<b class="nc">&nbsp;            switch (((Number) value).intValue()) {</b>
+&nbsp;                case 0:
+<b class="nc">&nbsp;                    return &quot;A&quot;;</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    return &quot;B&quot;;</b>
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    return &quot;C&quot;;</b>
+&nbsp;                default:
+<b class="nc">&nbsp;                    return null;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object encodeCommand(Command command) {
+&nbsp;
+<b class="nc">&nbsp;        initDevicePassword(command, &quot;123456&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        switch (command.getType()) {</b>
+&nbsp;            case Command.TYPE_SET_TIMEZONE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}L{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_TIMEZONE);</b>
+&nbsp;            case Command.TYPE_VOICE_MONITORING:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}P{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_ENABLE);</b>
+&nbsp;            case Command.TYPE_ALARM_SPEED:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}J1{%s}&quot;, Command.KEY_DEVICE_PASSWORD, Command.KEY_DATA);</b>
+&nbsp;            case Command.TYPE_ALARM_GEOFENCE:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}R1{%s}&quot;, Command.KEY_DEVICE_PASSWORD, Command.KEY_RADIUS);</b>
+&nbsp;            case Command.TYPE_ALARM_VIBRATION:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}W1,{%s}&quot;, Command.KEY_DEVICE_PASSWORD, Command.KEY_DATA);</b>
+&nbsp;            case Command.TYPE_SET_AGPS:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}AGPS{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_ENABLE);</b>
+&nbsp;            case Command.TYPE_ALARM_FALL:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}F{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_ENABLE);</b>
+&nbsp;            case Command.TYPE_MODE_POWER_SAVING:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}SP{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_ENABLE);</b>
+&nbsp;            case Command.TYPE_MODE_DEEP_SLEEP:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}DS{%s}&quot;, this, Command.KEY_DEVICE_PASSWORD, Command.KEY_ENABLE);</b>
+&nbsp;            case Command.TYPE_SOS_NUMBER:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}{%s}1,{%s}&quot;, this,</b>
+&nbsp;                        Command.KEY_DEVICE_PASSWORD, Command.KEY_INDEX, Command.KEY_PHONE);
+&nbsp;            case Command.TYPE_SET_INDICATOR:
+<b class="nc">&nbsp;                return formatCommand(command, &quot;{%s}LED{%s}&quot;, Command.KEY_DEVICE_PASSWORD, Command.KEY_DATA);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(command.getType()));</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 11:00</div>
+</div>
+</body>
+</html>

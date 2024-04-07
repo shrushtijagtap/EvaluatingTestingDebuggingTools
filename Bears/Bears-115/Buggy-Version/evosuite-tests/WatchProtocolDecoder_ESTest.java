@@ -19,7 +19,7 @@ import org.traccar.protocol.WatchProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class WatchProtocolDecoder_ESTest extends WatchProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       MockInetSocketAddress mockInetSocketAddress0 = new MockInetSocketAddress(584);
@@ -35,7 +35,7 @@ public class WatchProtocolDecoder_ESTest extends WatchProtocolDecoder_ESTest_sca
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       MockInetSocketAddress mockInetSocketAddress0 = new MockInetSocketAddress(4);
@@ -52,7 +52,7 @@ public class WatchProtocolDecoder_ESTest extends WatchProtocolDecoder_ESTest_sca
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       WatchProtocol watchProtocol0 = new WatchProtocol();
       WatchProtocolDecoder watchProtocolDecoder0 = new WatchProtocolDecoder(watchProtocol0);

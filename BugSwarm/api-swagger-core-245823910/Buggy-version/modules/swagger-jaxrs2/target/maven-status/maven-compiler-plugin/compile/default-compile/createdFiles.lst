@@ -1,0 +1,11 @@
+io/swagger/jaxrs2/config/DefaultReaderConfig.class
+io/swagger/jaxrs2/Reader$1.class
+io/swagger/jaxrs2/Reader.class
+io/swagger/jaxrs2/ext/OpenAPIExtension.class
+io/swagger/jaxrs2/DefaultParameterExtension.class
+io/swagger/jaxrs2/ext/OpenAPIExtensions.class
+io/swagger/jaxrs2/util/ReaderUtils.class
+io/swagger/jaxrs2/OperationParser.class
+io/swagger/jaxrs2/SecurityParser.class
+io/swagger/jaxrs2/config/ReaderConfig.class
+io/swagger/jaxrs2/ext/AbstractOpenAPIExtension.class

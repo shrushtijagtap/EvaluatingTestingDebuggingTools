@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Tk102ProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: Tk102ProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Tk102ProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 - 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.helper.Parser;
+&nbsp;import org.traccar.helper.PatternBuilder;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class Tk102ProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public Tk102ProtocolDecoder(Tk102Protocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final int MSG_LOGIN_REQUEST = 0x80;
+&nbsp;    public static final int MSG_LOGIN_REQUEST_2 = 0x21;
+&nbsp;    public static final int MSG_LOGIN_RESPONSE = 0x00;
+&nbsp;    public static final int MSG_HEARTBEAT_REQUEST = 0xF0;
+&nbsp;    public static final int MSG_HEARTBEAT_RESPONSE = 0xFF;
+&nbsp;    public static final int MSG_REPORT_ONCE = 0x90;
+&nbsp;    public static final int MSG_REPORT_INTERVAL = 0x93;
+&nbsp;
+&nbsp;    public static final int MODE_GPRS = 0x30;
+&nbsp;    public static final int MODE_GPRS_SMS = 0x33;
+&nbsp;
+<b class="nc">&nbsp;    private static final Pattern PATTERN = new PatternBuilder()</b>
+<b class="nc">&nbsp;            .text(&quot;(&quot;)</b>
+<b class="nc">&nbsp;            .expression(&quot;[A-Z]+&quot;)</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // time (hhmmss)</b>
+<b class="nc">&nbsp;            .expression(&quot;([AV])&quot;)                // validity</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd.dddd)([NS])&quot;)       // latitude</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd)(dd.dddd)([EW])&quot;)      // longitude</b>
+<b class="nc">&nbsp;            .number(&quot;(ddd.ddd)&quot;)                 // speed</b>
+<b class="nc">&nbsp;            .number(&quot;(dd)(dd)(dd)&quot;)              // date (ddmmyy)</b>
+<b class="nc">&nbsp;            .any()</b>
+<b class="nc">&nbsp;            .text(&quot;)&quot;)</b>
+<b class="nc">&nbsp;            .compile();</b>
+&nbsp;
+&nbsp;    private void sendResponse(Channel channel, int type, ChannelBuffer dataSequence, ChannelBuffer content) {
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;            response.writeByte(&#39;[&#39;);</b>
+<b class="nc">&nbsp;            response.writeByte(type);</b>
+<b class="nc">&nbsp;            response.writeBytes(dataSequence);</b>
+<b class="nc">&nbsp;            response.writeByte(content.readableBytes());</b>
+<b class="nc">&nbsp;            response.writeBytes(content);</b>
+<b class="nc">&nbsp;            response.writeByte(&#39;]&#39;);</b>
+<b class="nc">&nbsp;            channel.write(response);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.skipBytes(1); // header</b>
+<b class="nc">&nbsp;        int type = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        ChannelBuffer dataSequence = buf.readBytes(10);</b>
+<b class="nc">&nbsp;        int length = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (type == MSG_LOGIN_REQUEST || type == MSG_LOGIN_REQUEST_2) {</b>
+&nbsp;
+<b class="nc">&nbsp;            ChannelBuffer data = buf.readBytes(length);</b>
+&nbsp;
+&nbsp;            String id;
+<b class="nc">&nbsp;            if (type == MSG_LOGIN_REQUEST) {</b>
+<b class="nc">&nbsp;                id =  data.toString(StandardCharsets.US_ASCII);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                id = data.copy(1, 15).toString(StandardCharsets.US_ASCII);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (getDeviceSession(channel, remoteAddress, id) != null) {</b>
+<b class="nc">&nbsp;                ChannelBuffer response = ChannelBuffers.dynamicBuffer();</b>
+<b class="nc">&nbsp;                response.writeByte(MODE_GPRS);</b>
+<b class="nc">&nbsp;                response.writeBytes(data);</b>
+<b class="nc">&nbsp;                sendResponse(channel, MSG_LOGIN_RESPONSE, dataSequence, response);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } else if (type == MSG_HEARTBEAT_REQUEST) {</b>
+&nbsp;
+<b class="nc">&nbsp;            sendResponse(channel, MSG_HEARTBEAT_RESPONSE, dataSequence, buf.readBytes(length));</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);</b>
+<b class="nc">&nbsp;            if (deviceSession == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Parser parser = new Parser(PATTERN, buf.readBytes(length).toString(StandardCharsets.US_ASCII));</b>
+<b class="nc">&nbsp;            if (!parser.matches()) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            Position position = new Position();</b>
+<b class="nc">&nbsp;            position.setProtocol(getProtocolName());</b>
+<b class="nc">&nbsp;            position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;            DateBuilder dateBuilder = new DateBuilder()</b>
+<b class="nc">&nbsp;                    .setTime(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+&nbsp;
+<b class="nc">&nbsp;            position.setValid(parser.next().equals(&quot;A&quot;));</b>
+<b class="nc">&nbsp;            position.setLatitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;            position.setLongitude(parser.nextCoordinate());</b>
+<b class="nc">&nbsp;            position.setSpeed(parser.nextDouble());</b>
+&nbsp;
+<b class="nc">&nbsp;            dateBuilder.setDateReverse(parser.nextInt(), parser.nextInt(), parser.nextInt());</b>
+<b class="nc">&nbsp;            position.setTime(dateBuilder.getDate());</b>
+&nbsp;
+<b class="nc">&nbsp;            return position;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CryptoMaterialsCache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.caching</a>
+</div>
+
+<h1>Coverage Summary for Class: CryptoMaterialsCache (com.amazonaws.encryptionsdk.caching)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">CryptoMaterialsCache$CacheHint</td>
+  </tr>
+  <tr>
+    <td class="name">CryptoMaterialsCache$DecryptCacheEntry</td>
+  </tr>
+  <tr>
+    <td class="name">CryptoMaterialsCache$EncryptCacheEntry</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CryptoMaterialsCache$UsageStats</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.amazonaws.encryptionsdk.caching;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Utils;
+&nbsp;import com.amazonaws.encryptionsdk.model.DecryptionMaterials;
+&nbsp;import com.amazonaws.encryptionsdk.model.EncryptionMaterials;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a generic cache for cryptographic materials. MaterialsCaches store mappings from abstract bytestring
+&nbsp; * identifiers to MaterialsResults and DecryptResults.
+&nbsp; *
+&nbsp; * In general, the materials cache is concerned about the proper storage of these materials, and managing size limits
+&nbsp; * on the cache. While it stores statistics about cache usage limits, the enforcement of these limits is left to the
+&nbsp; * caller (typically, a {@link CachingCryptoMaterialsManager}).
+&nbsp; *
+&nbsp; * For encrypt, a cache implementation may store multiple cache entries for the same identifier. This allows for usage
+&nbsp; * limits to be enforced even when doing multiple streaming requests in parallel. However, the cache is permitted to
+&nbsp; * set a limit on the number of such entries (even as low as only allowing one entry per identifier), and if it does so
+&nbsp; * should evict the excess entries.
+&nbsp; *
+&nbsp; * Being a cache, a CryptoMaterialsCache is permitted to evict entries at any time. However, a caller can explicitly hint
+&nbsp; * the cache to invalidate an entry in the encrypt-side cache. This is generally done when usage limits are exceeded.
+&nbsp; * The cache is not required to respect this invalidation hint.
+&nbsp; *
+&nbsp; * Likewise, the CacheHint passed to the put calls on caches will indicate the maximum lifetime of entries; the cache
+&nbsp; * is allowed - but not required - to evict entries automatically upon expiration of this lifetime.
+&nbsp; */
+&nbsp;public interface CryptoMaterialsCache {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches for an entry in the encrypt cache matching a particular cache identifier, and returns one if found.
+&nbsp;     *
+&nbsp;     * @param cacheId The identifier for the item in the cache
+&nbsp;     * @param usageIncrement The amount of usage to atomically add to the returned entry. This usage increment must be
+&nbsp;     *                       reflected in the getUsageStats() method on the returned cache entry.
+&nbsp;     * @return The entry, or null if not found or an error occurred
+&nbsp;     */
+&nbsp;    EncryptCacheEntry getEntryForEncrypt(
+&nbsp;            byte[] cacheId, final UsageStats usageIncrement
+&nbsp;    );
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempts to add a new entry to the encrypt cache to be returned on subsequent
+&nbsp;     * {@link #getEntryForEncrypt(byte[], UsageStats)} calls.
+&nbsp;     *
+&nbsp;     * In the event that an error occurs when adding the entry to the cache, this function shall still return a
+&nbsp;     * EncryptCacheEntry instance, which shall act as if the cache entry was immediately evicted and/or invalidated.
+&nbsp;     *
+&nbsp;     * @param cacheId The identifier for the item in the cache
+&nbsp;     * @param encryptionMaterials The {@link EncryptionMaterials} to associate with this new entry
+&nbsp;     * @param initialUsage The initial usage stats for the cache entry
+&nbsp;     * @return A new, locked EncryptCacheEntry instance containing the given encryptionMaterials
+&nbsp;     */
+&nbsp;    EncryptCacheEntry putEntryForEncrypt(
+&nbsp;            byte[] cacheId,
+&nbsp;            EncryptionMaterials encryptionMaterials,
+&nbsp;            CacheHint hint,
+&nbsp;            UsageStats initialUsage
+&nbsp;    );
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches for an entry in the encrypt cache matching a particular cache identifier, and returns one if found.
+&nbsp;     *
+&nbsp;     * In the event of an error accessing the cache, this function will return null.
+&nbsp;     *
+&nbsp;     * @param cacheId The identifier for the item in the cache
+&nbsp;     * @return The cached decryption result, or null if none was found or an error occurred.
+&nbsp;     */
+&nbsp;    DecryptCacheEntry getEntryForDecrypt(byte[] cacheId);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a new entry to the decrypt cache. In the event of an error, this function will return silently without
+&nbsp;     * propagating the exception.
+&nbsp;     *
+&nbsp;     * If an entry already exists for this cache ID, the cache may either overwrite the entry in its entirety, or update
+&nbsp;     * the creation timestamp for the existing entry, at its option.
+&nbsp;     *
+&nbsp;     * @param cacheId The identifier for the item in the cache
+&nbsp;     * @param decryptionMaterials The {@link DecryptionMaterials} to associate with the new entry.
+&nbsp;     */
+&nbsp;    void putEntryForDecrypt(byte[] cacheId, DecryptionMaterials decryptionMaterials, CacheHint hint);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Contains some additional information associated with a cache entry. The cache receiving this hint may take some
+&nbsp;     * actions based on the hint, or it may ignore it entirely.
+&nbsp;     */
+&nbsp;    interface CacheHint {
+&nbsp;        /**
+&nbsp;         * Returns the lifetime of the cache entry. This hint suggests to the cache that the entry will not be useful
+&nbsp;         * after the provided number of milliseconds passes, and suggests that the cache should discard the entry when
+&nbsp;         * this interval elapses even if it is not explicitly invalidated.
+&nbsp;         *
+&nbsp;         * Note that this time counts from the &lt;i&gt;creation&lt;/i&gt; of the entry, not from last use.
+&nbsp;         *
+&nbsp;         * @return The lifetime of this entry, in milliseconds. If the lifetime is unknown or irrelevant, this will
+&nbsp;         * return {@link Long#MAX_VALUE}.
+&nbsp;         */
+&nbsp;        long getMaxAgeMillis();
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Represents an entry in the encrypt cache, and provides methods for manipulating the entry.
+&nbsp;     *
+&nbsp;     * Note that the EncryptCacheEntry Java object remains valid even after the cache entry is invalidated or evicted;
+&nbsp;     * getResult will still return a valid result, for example.
+&nbsp;     */
+&nbsp;    interface EncryptCacheEntry {
+&nbsp;        /**
+&nbsp;         * @return The current usage statistics for this entry. The caller should be aware that these statistics may be
+&nbsp;         * stale by the time they are returned.
+&nbsp;         */
+&nbsp;        UsageStats getUsageStats();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return The unix timestamp at which this entry was added to the cache, in milliseconds
+&nbsp;         */
+&nbsp;        long getEntryCreationTime();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return The EncryptionMaterials associated with this cache entry. The encrypt completion callback should be a
+&nbsp;         * no-op.
+&nbsp;         */
+&nbsp;        EncryptionMaterials getResult();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Suggests to the cache that this entry should be removed from the cache.
+&nbsp;         */
+<b class="nc">&nbsp;        default void invalidate() {}</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final class UsageStats {
+<b class="nc">&nbsp;        public static final UsageStats ZERO = new UsageStats(0, 0);</b>
+&nbsp;
+&nbsp;        private final long bytesEncrypted;
+&nbsp;        private final long messagesEncrypted;
+&nbsp;
+<b class="nc">&nbsp;        public UsageStats(long bytesEncrypted, long messagesEncrypted) {</b>
+<b class="nc">&nbsp;            if (bytesEncrypted &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Negative bytes encrypted is not permitted&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (messagesEncrypted &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Negative messages encrypted is not permitted&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            this.bytesEncrypted = bytesEncrypted;</b>
+<b class="nc">&nbsp;            this.messagesEncrypted = messagesEncrypted;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getBytesEncrypted() {
+<b class="nc">&nbsp;            return bytesEncrypted;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getMessagesEncrypted() {
+<b class="nc">&nbsp;            return messagesEncrypted;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Performs a pairwise add of two UsageStats objects. In the event of overflow, counters saturate at
+&nbsp;         * {@link Long#MAX_VALUE}
+&nbsp;         *
+&nbsp;         * @param other
+&nbsp;         * @return
+&nbsp;         */
+&nbsp;        public UsageStats add(UsageStats other) {
+<b class="nc">&nbsp;            return new UsageStats(</b>
+<b class="nc">&nbsp;                    saturatingAdd(getBytesEncrypted(), other.getBytesEncrypted()),</b>
+<b class="nc">&nbsp;                    saturatingAdd(getMessagesEncrypted(), other.getMessagesEncrypted())</b>
+&nbsp;            );
+&nbsp;        }
+&nbsp;
+&nbsp;        static long saturatingAdd(long a, long b) {
+<b class="nc">&nbsp;            if (a &lt; 0 || b &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Negative usage values are not permitted&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return Utils.saturatingAdd(a, b);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public boolean equals(Object o) {
+<b class="nc">&nbsp;            if (this == o) return true;</b>
+<b class="nc">&nbsp;            if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="nc">&nbsp;            UsageStats that = (UsageStats) o;</b>
+<b class="nc">&nbsp;            return getBytesEncrypted() == that.getBytesEncrypted() &amp;&amp;</b>
+<b class="nc">&nbsp;                    getMessagesEncrypted() == that.getMessagesEncrypted();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public int hashCode() {
+<b class="nc">&nbsp;            return Objects.hash(getBytesEncrypted(), getMessagesEncrypted());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override public String toString() {
+<b class="nc">&nbsp;            return &quot;UsageStats{&quot; +</b>
+&nbsp;                    &quot;bytesEncrypted=&quot; + bytesEncrypted +
+&nbsp;                    &quot;, messagesEncrypted=&quot; + messagesEncrypted +
+&nbsp;                    &#39;}&#39;;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Represents an entry in the decrypt cache, and provides methods for manipulating the entry.
+&nbsp;     *
+&nbsp;     * Note that the DecryptCacheEntry JAva object remains valid even after the cache entry is invalidated or evicted;
+&nbsp;     * getResult will still return a valid result, for example.
+&nbsp;     */
+&nbsp;    interface DecryptCacheEntry {
+&nbsp;        /**
+&nbsp;         * Returns the DecryptionMaterials associated with this entry.
+&nbsp;         */
+&nbsp;        DecryptionMaterials getResult();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Advises the cache that this entry should be removed from the cache.
+&nbsp;         */
+&nbsp;        void invalidate();
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return The unix timestamp at which this entry was added to the cache, in milliseconds
+&nbsp;         */
+&nbsp;        long getEntryCreationTime();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:58</div>
+</div>
+</body>
+</html>

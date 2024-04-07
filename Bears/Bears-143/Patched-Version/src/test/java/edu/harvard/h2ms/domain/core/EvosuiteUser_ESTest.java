@@ -24,12 +24,12 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       User user0 = new User("{d", "{d", "{d", "{d", "", "");
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       User user0 = new User();
       user0.setEmail("users (after) ");
@@ -37,7 +37,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       User user0 = new User();
       user0.setEmail("");
@@ -45,7 +45,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       User user0 = new User();
       user0.setType("Sbdvg");
@@ -53,7 +53,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       User user0 = new User();
       user0.setType("");
@@ -61,7 +61,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       User user0 = new User();
       LinkedHashSet<Role> linkedHashSet0 = new LinkedHashSet<Role>();
@@ -70,7 +70,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       User user0 = new User();
       LinkedHashSet<Role> linkedHashSet0 = new LinkedHashSet<Role>();
@@ -81,7 +81,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       User user0 = new User();
       user0.setResetToken("Ta(LVwi X3v");
@@ -89,7 +89,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       User user0 = new User();
       user0.setResetToken("");
@@ -97,7 +97,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       User user0 = new User();
       user0.setNotificationFrequency("#b`;1@_. 6A&Bpa3K0e");
@@ -105,7 +105,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       User user0 = new User();
       user0.setNotificationFrequency("");
@@ -113,7 +113,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       User user0 = new User();
       user0.setMiddleName("User [id=null, firstName=null, middleName=null, lastName=null, email=null, typenull, notificationFrequency=null");
@@ -121,7 +121,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       User user0 = new User((String) null, "", "", "User [id=", (String) null, "3I9Op<=Qp");
       String string0 = user0.getMiddleName();
@@ -133,7 +133,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertEquals("", user0.getLastName());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       User user0 = new User();
       user0.setLastName("t+f");
@@ -141,7 +141,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       User user0 = new User();
       user0.setLastName("");
@@ -149,7 +149,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       User user0 = new User();
       ZoneOffset zoneOffset0 = ZoneOffset.ofTotalSeconds((-1651));
@@ -161,7 +161,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long(0L);
@@ -170,7 +170,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long(801L);
@@ -179,7 +179,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       User user0 = new User();
       Long long0 = new Long((-1L));
@@ -188,7 +188,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       User user0 = new User();
       user0.setFirstName(", type");
@@ -196,7 +196,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       User user0 = new User();
       user0.setFirstName("");
@@ -204,7 +204,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       User user0 = new User();
       user0.setEmail("5Jz8");
@@ -212,7 +212,7 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test22()  throws Throwable  {
       User user0 = new User((String) null, (String) null, "O,", "", (String) null, "");
       MockDate mockDate0 = new MockDate();
@@ -224,21 +224,21 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertEquals("", user0.getType());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test23()  throws Throwable  {
       User user0 = new User();
       // Undeclared exception!
       user0.setPassword("I)t`)J_");
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test24()  throws Throwable  {
       User user0 = new User();
       user0.setPassword((String) null);
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test25()  throws Throwable  {
       User user0 = new User();
       user0.setEmail("");
@@ -246,48 +246,48 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test26()  throws Throwable  {
       User user0 = new User((String) null, (String) null, (String) null, (String) null, (String) null, (String) null);
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test27()  throws Throwable  {
       User user0 = new User();
       user0.setEmail((String) null);
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test28()  throws Throwable  {
       User user0 = new User();
       user0.getLastLogin();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test29()  throws Throwable  {
       User user0 = new User();
       user0.getNotificationFrequency();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test30()  throws Throwable  {
       User user0 = new User();
       user0.getResetToken();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test31()  throws Throwable  {
       User user0 = new User();
       user0.getMiddleName();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test32()  throws Throwable  {
       User user0 = new User();
       String string0 = user0.toString();
@@ -295,14 +295,14 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test33()  throws Throwable  {
       User user0 = new User();
       user0.getId();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test34()  throws Throwable  {
       User user0 = new User();
       assertTrue(user0.isEnabled());
@@ -312,35 +312,35 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test35()  throws Throwable  {
       User user0 = new User();
       user0.getAuthorities();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test36()  throws Throwable  {
       User user0 = new User();
       user0.getPassword();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test37()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isEnabled();
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test38()  throws Throwable  {
       User user0 = new User();
       user0.getFirstName();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test39()  throws Throwable  {
       User user0 = new User();
       user0.setVerified(true);
@@ -348,14 +348,14 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test40()  throws Throwable  {
       User user0 = new User();
       user0.getEmail();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test41()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isAccountNonLocked();
@@ -363,14 +363,14 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test42()  throws Throwable  {
       User user0 = new User();
       user0.getUsername();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test43()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isAccountNonExpired();
@@ -378,21 +378,21 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test44()  throws Throwable  {
       User user0 = new User();
       user0.getLastName();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test45()  throws Throwable  {
       User user0 = new User();
       user0.getCreatedOn();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test46()  throws Throwable  {
       User user0 = new User();
       boolean boolean0 = user0.isCredentialsNonExpired();
@@ -400,21 +400,21 @@ public class EvosuiteUser_ESTest extends EvosuiteUser_ESTest_scaffolding {
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test47()  throws Throwable  {
       User user0 = new User();
       user0.isVerified();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test48()  throws Throwable  {
       User user0 = new User();
       user0.getType();
       assertTrue(user0.isEnabled());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test49()  throws Throwable  {
       User user0 = new User();
       user0.getRoles();

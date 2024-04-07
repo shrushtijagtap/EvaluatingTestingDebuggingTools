@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CellTower</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CellTower (org.traccar.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CellTower</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (24/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.model;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import org.traccar.Context;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+<b class="fc">&nbsp;public class CellTower {</b>
+&nbsp;
+&nbsp;    public static CellTower from(int mcc, int mnc, int lac, long cid) {
+<b class="fc">&nbsp;        CellTower cellTower = new CellTower();</b>
+<b class="fc">&nbsp;        cellTower.setMobileCountryCode(mcc);</b>
+<b class="fc">&nbsp;        cellTower.setMobileNetworkCode(mnc);</b>
+<b class="fc">&nbsp;        cellTower.setLocationAreaCode(lac);</b>
+<b class="fc">&nbsp;        cellTower.setCellId(cid);</b>
+<b class="fc">&nbsp;        return cellTower;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CellTower from(int mcc, int mnc, int lac, long cid, int rssi) {
+<b class="fc">&nbsp;        CellTower cellTower = CellTower.from(mcc, mnc, lac, cid);</b>
+<b class="fc">&nbsp;        cellTower.setSignalStrength(rssi);</b>
+<b class="fc">&nbsp;        return cellTower;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CellTower fromLacCid(int lac, long cid) {
+<b class="fc">&nbsp;        return from(</b>
+<b class="fc">&nbsp;                Context.getConfig().getInteger(&quot;geolocation.mcc&quot;),</b>
+<b class="fc">&nbsp;                Context.getConfig().getInteger(&quot;geolocation.mnc&quot;), lac, cid);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CellTower fromCidLac(long cid, int lac) {
+<b class="fc">&nbsp;        return fromLacCid(lac, cid);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String radioType;
+&nbsp;
+&nbsp;    public String getRadioType() {
+<b class="nc">&nbsp;        return radioType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRadioType(String radioType) {
+<b class="nc">&nbsp;        this.radioType = radioType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Long cellId;
+&nbsp;
+&nbsp;    public Long getCellId() {
+<b class="fc">&nbsp;        return cellId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCellId(Long cellId) {
+<b class="fc">&nbsp;        this.cellId = cellId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer locationAreaCode;
+&nbsp;
+&nbsp;    public Integer getLocationAreaCode() {
+<b class="fc">&nbsp;        return locationAreaCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLocationAreaCode(Integer locationAreaCode) {
+<b class="fc">&nbsp;        this.locationAreaCode = locationAreaCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer mobileCountryCode;
+&nbsp;
+&nbsp;    public Integer getMobileCountryCode() {
+<b class="fc">&nbsp;        return mobileCountryCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMobileCountryCode(Integer mobileCountryCode) {
+<b class="fc">&nbsp;        this.mobileCountryCode = mobileCountryCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer mobileNetworkCode;
+&nbsp;
+&nbsp;    public Integer getMobileNetworkCode() {
+<b class="fc">&nbsp;        return mobileNetworkCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMobileNetworkCode(Integer mobileNetworkCode) {
+<b class="fc">&nbsp;        this.mobileNetworkCode = mobileNetworkCode;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer signalStrength;
+&nbsp;
+&nbsp;    public Integer getSignalStrength() {
+<b class="fc">&nbsp;        return signalStrength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setSignalStrength(Integer signalStrength) {
+<b class="fc">&nbsp;        this.signalStrength = signalStrength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BasicMonthOfYearDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.chrono</a>
+</div>
+
+<h1>Coverage Summary for Class: BasicMonthOfYearDateTimeField (org.joda.time.chrono)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasicMonthOfYearDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.8%
+  </span>
+  <span class="absValue">
+    (5/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    13.2%
+  </span>
+  <span class="absValue">
+    (15/114)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2013 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.chrono;
+&nbsp;
+&nbsp;import org.joda.time.DateTimeConstants;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DateTimeUtils;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;import org.joda.time.field.FieldUtils;
+&nbsp;import org.joda.time.field.ImpreciseDateTimeField;
+&nbsp;
+&nbsp;/**
+&nbsp; * Provides time calculations for the month of the year component of time.
+&nbsp; *
+&nbsp; * @author Guy Allard
+&nbsp; * @author Stephen Colebourne
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.2, refactored from GJMonthOfYearDateTimeField
+&nbsp; */
+&nbsp;class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {
+&nbsp;
+&nbsp;    /** Serialization version */
+&nbsp;    @SuppressWarnings(&quot;unused&quot;)
+&nbsp;    private static final long serialVersionUID = -8258715387168736L;
+&nbsp;
+&nbsp;    private static final int MIN = DateTimeConstants.JANUARY;
+&nbsp;
+&nbsp;    private final BasicChronology iChronology;
+&nbsp;    private final int iMax;
+&nbsp;    private final int iLeapMonth;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restricted constructor.
+&nbsp;     * 
+&nbsp;     * @param leapMonth the month of year that leaps
+&nbsp;     */
+&nbsp;    BasicMonthOfYearDateTimeField(BasicChronology chronology, int leapMonth) {
+<b class="fc">&nbsp;        super(DateTimeFieldType.monthOfYear(), chronology.getAverageMillisPerMonth());</b>
+<b class="fc">&nbsp;        iChronology = chronology;</b>
+<b class="fc">&nbsp;        iMax = iChronology.getMaxMonth();</b>
+<b class="fc">&nbsp;        iLeapMonth = leapMonth;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public boolean isLenient() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get the Month component of the specified time instant.
+&nbsp;     *
+&nbsp;     * @see org.joda.time.DateTimeField#get(long)
+&nbsp;     * @see org.joda.time.ReadableDateTime#getMonthOfYear()
+&nbsp;     * @param instant  the time instant in millis to query.
+&nbsp;     * @return the month extracted from the input.
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        return iChronology.getMonthOfYear(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Add the specified month to the specified time instant.
+&nbsp;     * The amount added may be negative.&lt;p&gt;
+&nbsp;     * If the new month has less total days than the specified
+&nbsp;     * day of the month, this value is coerced to the nearest
+&nbsp;     * sane value. e.g.&lt;p&gt;
+&nbsp;     * 07-31 - (1 month) = 06-30&lt;p&gt;
+&nbsp;     * 03-31 - (1 month) = 02-28 or 02-29 depending&lt;p&gt;
+&nbsp;     * 
+&nbsp;     * @see org.joda.time.DateTimeField#add
+&nbsp;     * @see org.joda.time.ReadWritableDateTime#addMonths(int)
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param months  the months to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long add(long instant, int months) {
+<b class="nc">&nbsp;        if (months == 0) {</b>
+<b class="nc">&nbsp;            return instant; // the easy case</b>
+&nbsp;        }
+&nbsp;        //
+&nbsp;        // Save time part first.
+&nbsp;        //
+<b class="nc">&nbsp;        long timePart = iChronology.getMillisOfDay(instant);</b>
+&nbsp;        //
+&nbsp;        //
+&nbsp;        // Get this year and month.
+&nbsp;        //
+<b class="nc">&nbsp;        int thisYear = iChronology.getYear(instant);</b>
+<b class="nc">&nbsp;        int thisMonth = iChronology.getMonthOfYear(instant, thisYear);</b>
+&nbsp;        // ----------------------------------------------------------
+&nbsp;        //
+&nbsp;        // Do not refactor without careful consideration.
+&nbsp;        // Order of calculation is important.
+&nbsp;        //
+<b class="nc">&nbsp;        int yearToUse;</b>
+&nbsp;        // Initially, monthToUse is zero-based
+<b class="nc">&nbsp;        int monthToUse = thisMonth - 1 + months;</b>
+<b class="nc">&nbsp;        if (monthToUse &gt;= 0) {</b>
+<b class="nc">&nbsp;            yearToUse = thisYear + (monthToUse / iMax);</b>
+<b class="nc">&nbsp;            monthToUse = (monthToUse % iMax) + 1;</b>
+<b class="nc">&nbsp;        } else {</b>
+&nbsp;            yearToUse = thisYear + (monthToUse / iMax) - 1;
+<b class="nc">&nbsp;            monthToUse = Math.abs(monthToUse);</b>
+<b class="nc">&nbsp;            int remMonthToUse = monthToUse % iMax;</b>
+<b class="nc">&nbsp;            // Take care of the boundary condition</b>
+&nbsp;            if (remMonthToUse == 0) {
+<b class="nc">&nbsp;                remMonthToUse = iMax;</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            monthToUse = iMax - remMonthToUse + 1;</b>
+&nbsp;            // Take care of the boundary condition
+<b class="nc">&nbsp;            if (monthToUse == 1) {</b>
+<b class="nc">&nbsp;                yearToUse += 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;        // End of do not refactor.
+<b class="nc">&nbsp;        // ----------------------------------------------------------</b>
+<b class="nc">&nbsp;</b>
+&nbsp;        //
+&nbsp;        // Quietly force DOM to nearest sane value.
+&nbsp;        //
+&nbsp;        int dayToUse = iChronology.getDayOfMonth(instant, thisYear, thisMonth);
+&nbsp;        int maxDay = iChronology.getDaysInYearMonth(yearToUse, monthToUse);
+&nbsp;        if (dayToUse &gt; maxDay) {
+&nbsp;            dayToUse = maxDay;
+&nbsp;        }
+<b class="nc">&nbsp;        //</b>
+<b class="nc">&nbsp;        // get proper date part, and return result</b>
+<b class="nc">&nbsp;        //</b>
+<b class="nc">&nbsp;        long datePart =</b>
+&nbsp;            iChronology.getYearMonthDayMillis(yearToUse, monthToUse, dayToUse);
+&nbsp;        return datePart + timePart;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+&nbsp;    public long add(long instant, long months) {
+<b class="nc">&nbsp;        int i_months = (int)months;</b>
+&nbsp;        if (i_months == months) {
+&nbsp;            return add(instant, i_months);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        // Copied from add(long, int) and modified slightly:</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        long timePart = iChronology.getMillisOfDay(instant);</b>
+&nbsp;
+&nbsp;        int thisYear = iChronology.getYear(instant);
+&nbsp;        int thisMonth = iChronology.getMonthOfYear(instant, thisYear);
+&nbsp;
+<b class="nc">&nbsp;        long yearToUse;</b>
+&nbsp;        long monthToUse = thisMonth - 1 + months;
+<b class="nc">&nbsp;        if (monthToUse &gt;= 0) {</b>
+<b class="nc">&nbsp;            yearToUse = thisYear + (monthToUse / iMax);</b>
+&nbsp;            monthToUse = (monthToUse % iMax) + 1;
+&nbsp;        } else {
+<b class="nc">&nbsp;            yearToUse = thisYear + (monthToUse / iMax) - 1;</b>
+<b class="nc">&nbsp;            monthToUse = Math.abs(monthToUse);</b>
+<b class="nc">&nbsp;            int remMonthToUse = (int)(monthToUse % iMax);</b>
+<b class="nc">&nbsp;            if (remMonthToUse == 0) {</b>
+&nbsp;                remMonthToUse = iMax;
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            monthToUse = iMax - remMonthToUse + 1;</b>
+<b class="nc">&nbsp;            if (monthToUse == 1) {</b>
+<b class="nc">&nbsp;                yearToUse += 1;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (yearToUse &lt; iChronology.getMinYear() ||</b>
+<b class="nc">&nbsp;            yearToUse &gt; iChronology.getMaxYear()) {</b>
+&nbsp;
+&nbsp;            throw new IllegalArgumentException
+&nbsp;                (&quot;Magnitude of add amount is too large: &quot; + months);
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        int i_yearToUse = (int)yearToUse;
+<b class="nc">&nbsp;        int i_monthToUse = (int)monthToUse;</b>
+&nbsp;
+&nbsp;        int dayToUse = iChronology.getDayOfMonth(instant, thisYear, thisMonth);
+&nbsp;        int maxDay = iChronology.getDaysInYearMonth(i_yearToUse, i_monthToUse);
+<b class="nc">&nbsp;        if (dayToUse &gt; maxDay) {</b>
+<b class="nc">&nbsp;            dayToUse = maxDay;</b>
+&nbsp;        }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        long datePart =</b>
+<b class="nc">&nbsp;            iChronology.getYearMonthDayMillis(i_yearToUse, i_monthToUse, dayToUse);</b>
+<b class="nc">&nbsp;        return datePart + timePart;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+&nbsp;    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {
+<b class="nc">&nbsp;        // overridden as superclass algorithm can&#39;t handle</b>
+&nbsp;        // 2004-02-29 + 48 months -&gt; 2008-02-29 type dates
+&nbsp;        if (valueToAdd == 0) {
+&nbsp;            return values;
+&nbsp;        }
+&nbsp;        if (partial.size() &gt; 0 &amp;&amp; partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) &amp;&amp; fieldIndex == 0) {
+&nbsp;            // month is largest field and being added to, such as month-day
+<b class="nc">&nbsp;            int curMonth0 = partial.getValue(0) - 1;</b>
+<b class="nc">&nbsp;            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;</b>
+&nbsp;            return set(partial, 0, values, newMonth);
+<b class="nc">&nbsp;        }</b>
+&nbsp;        if (DateTimeUtils.isContiguous(partial)) {
+<b class="nc">&nbsp;            long instant = 0L;</b>
+<b class="nc">&nbsp;            for (int i = 0, isize = partial.size(); i &lt; isize; i++) {</b>
+<b class="nc">&nbsp;                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            instant = add(instant, valueToAdd);</b>
+<b class="nc">&nbsp;            return iChronology.get(partial, instant);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            return super.add(partial, fieldIndex, values, valueToAdd);</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    //-----------------------------------------------------------------------
+<b class="nc">&nbsp;    /**</b>
+&nbsp;     * Add to the Month component of the specified time instant
+&nbsp;     * wrapping around within that component if necessary.
+&nbsp;     * 
+&nbsp;     * @see org.joda.time.DateTimeField#addWrapField
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param months  the months to add (can be negative).
+&nbsp;     * @return the updated time instant.
+&nbsp;     */
+&nbsp;    public long addWrapField(long instant, int months) {
+&nbsp;        return set(instant, FieldUtils.getWrappedValue(get(instant), months, MIN, iMax));
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        if (minuendInstant &lt; subtrahendInstant) {</b>
+&nbsp;            return -getDifference(subtrahendInstant, minuendInstant);
+&nbsp;        }
+&nbsp;
+&nbsp;        int minuendYear = iChronology.getYear(minuendInstant);
+<b class="nc">&nbsp;        int minuendMonth = iChronology.getMonthOfYear(minuendInstant, minuendYear);</b>
+<b class="nc">&nbsp;        int subtrahendYear = iChronology.getYear(subtrahendInstant);</b>
+&nbsp;        int subtrahendMonth = iChronology.getMonthOfYear(subtrahendInstant, subtrahendYear);
+&nbsp;
+<b class="nc">&nbsp;        long difference = (minuendYear - subtrahendYear) * ((long) iMax) + minuendMonth - subtrahendMonth;</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        // Before adjusting for remainder, account for special case of add</b>
+<b class="nc">&nbsp;        // where the day-of-month is forced to the nearest sane value.</b>
+&nbsp;        int minuendDom = iChronology.getDayOfMonth
+<b class="nc">&nbsp;            (minuendInstant, minuendYear, minuendMonth);</b>
+&nbsp;        if (minuendDom == iChronology.getDaysInYearMonth(minuendYear, minuendMonth)) {
+&nbsp;            // Last day of the minuend month...
+&nbsp;            int subtrahendDom = iChronology.getDayOfMonth
+<b class="nc">&nbsp;                (subtrahendInstant, subtrahendYear, subtrahendMonth);</b>
+&nbsp;            if (subtrahendDom &gt; minuendDom) {
+<b class="nc">&nbsp;                // ...and day of subtrahend month is larger.</b>
+&nbsp;                // Note: This works fine, but it ideally shouldn&#39;t invoke other
+<b class="nc">&nbsp;                // fields from within a field.</b>
+&nbsp;                subtrahendInstant = iChronology.dayOfMonth().set(subtrahendInstant, minuendDom);
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Inlined remainder method to avoid duplicate calls.
+<b class="nc">&nbsp;        long minuendRem = minuendInstant</b>
+&nbsp;            - iChronology.getYearMonthMillis(minuendYear, minuendMonth);
+&nbsp;        long subtrahendRem = subtrahendInstant
+&nbsp;            - iChronology.getYearMonthMillis(subtrahendYear, subtrahendMonth);
+&nbsp;
+<b class="nc">&nbsp;        if (minuendRem &lt; subtrahendRem) {</b>
+&nbsp;            difference--;
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return difference;
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+<b class="nc">&nbsp;     * Set the Month component of the specified time instant.&lt;p&gt;</b>
+&nbsp;     * If the new month has less total days than the specified
+&nbsp;     * day of the month, this value is coerced to the nearest
+&nbsp;     * sane value. e.g.&lt;p&gt;
+&nbsp;     * 07-31 to month 6 = 06-30&lt;p&gt;
+&nbsp;     * 03-31 to month 2 = 02-28 or 02-29 depending&lt;p&gt;
+&nbsp;     * 
+&nbsp;     * @param instant  the time instant in millis to update.
+&nbsp;     * @param month  the month (1,12) to update the time to.
+&nbsp;     * @return the updated time instant.
+&nbsp;     * @throws IllegalArgumentException  if month is invalid
+&nbsp;     */
+&nbsp;    public long set(long instant, int month) {
+&nbsp;        FieldUtils.verifyValueBounds(this, month, MIN, iMax);
+&nbsp;        //
+&nbsp;        int thisYear = iChronology.getYear(instant);
+&nbsp;        //
+&nbsp;        int thisDom = iChronology.getDayOfMonth(instant, thisYear);
+<b class="fc">&nbsp;        int maxDom = iChronology.getDaysInYearMonth(thisYear, month);</b>
+&nbsp;        if (thisDom &gt; maxDom) {
+<b class="fc">&nbsp;            // Quietly force DOM to nearest sane value.</b>
+&nbsp;            thisDom = maxDom;
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        // Return newly calculated millis value</b>
+<b class="fc">&nbsp;        return iChronology.getYearMonthDayMillis(thisYear, month, thisDom) +</b>
+&nbsp;            iChronology.getMillisOfDay(instant);
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+<b class="fc">&nbsp;    public DurationField getRangeDurationField() {</b>
+&nbsp;        return iChronology.years();
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public boolean isLeap(long instant) {
+<b class="fc">&nbsp;        int thisYear = iChronology.getYear(instant);</b>
+&nbsp;        if (iChronology.isLeapYear(thisYear)) {
+&nbsp;            return (iChronology.getMonthOfYear(instant, thisYear) == iLeapMonth);
+&nbsp;        }
+&nbsp;        return false;
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    //-----------------------------------------------------------------------</b>
+&nbsp;    public int getLeapAmount(long instant) {
+<b class="nc">&nbsp;        return isLeap(instant) ? 1 : 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public DurationField getLeapDurationField() {
+<b class="nc">&nbsp;        return iChronology.days();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public int getMinimumValue() {
+<b class="fc">&nbsp;        return MIN;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        return iMax;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        int year = iChronology.getYear(instant);</b>
+&nbsp;        int month = iChronology.getMonthOfYear(instant, year);
+&nbsp;        return iChronology.getYearMonthMillis(year, month);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    //-----------------------------------------------------------------------</b>
+<b class="fc">&nbsp;    public long remainder(long instant) {</b>
+<b class="fc">&nbsp;        return instant - roundFloor(instant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    /**
+<b class="nc">&nbsp;     * Serialization singleton</b>
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+&nbsp;        return iChronology.monthOfYear();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:42</div>
+</div>
+</body>
+</html>

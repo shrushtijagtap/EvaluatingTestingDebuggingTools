@@ -1,0 +1,435 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CipherFrameHeaders</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CipherFrameHeaders (com.amazonaws.encryptionsdk.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CipherFrameHeaders</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.model;
+&nbsp;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.DataOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.BadCiphertextException;
+&nbsp;import com.amazonaws.encryptionsdk.exception.ParseException;
+&nbsp;import com.amazonaws.encryptionsdk.internal.Constants;
+&nbsp;import com.amazonaws.encryptionsdk.internal.PrimitivesParser;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class implements the headers for the encrypted content stored in a
+&nbsp; * frame. These headers are parsed and used when the encrypted content in the
+&nbsp; * frame is decrypted.
+&nbsp; * 
+&nbsp; * &lt;p&gt;
+&nbsp; * It contains the following fields in order:
+&nbsp; * &lt;ol&gt;
+&nbsp; * &lt;li&gt;final sequence number marker if final frame&lt;/li&gt;
+&nbsp; * &lt;li&gt;sequence number&lt;/li&gt;
+&nbsp; * &lt;li&gt;nonce&lt;/li&gt;
+&nbsp; * &lt;li&gt;length of content in frame&lt;/li&gt;
+&nbsp; * &lt;/ol&gt;
+&nbsp; */
+&nbsp;public final class CipherFrameHeaders {
+<b class="nc">&nbsp;    private int sequenceNumber_ = 0; // this is okay since sequence numbers in</b>
+&nbsp;                                     // frames start at 1
+&nbsp;    private byte[] nonce_;
+<b class="nc">&nbsp;    private int frameContentLength_ = -1;</b>
+&nbsp;
+&nbsp;    // This is set after the nonce length is parsed in the CiphertextHeaders
+&nbsp;    // during decryption. This can be set only using its setter.
+<b class="nc">&nbsp;    private short nonceLength_ = 0;</b>
+&nbsp;
+&nbsp;    private boolean includeFrameSize_;
+&nbsp;    private boolean isComplete_;
+&nbsp;    private boolean isFinalFrame_;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default constructor.
+&nbsp;     */
+<b class="nc">&nbsp;    public CipherFrameHeaders() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construct the frame headers using the provided sequence number, nonce,
+&nbsp;     * length of content, and boolean value indicating if it is the final frame.
+&nbsp;     * 
+&nbsp;     * @param sequenceNumber
+&nbsp;     *            the sequence number of the frame
+&nbsp;     * @param nonce
+&nbsp;     *            the bytes containing the nonce.
+&nbsp;     * @param frameContentLen
+&nbsp;     *            the length of the content in the frame.
+&nbsp;     * @param isFinal
+&nbsp;     *            boolean value indicating if it is the final frame.
+&nbsp;     */
+&nbsp;    public CipherFrameHeaders(final int sequenceNumber, final byte[] nonce, final int frameContentLen,
+<b class="nc">&nbsp;            final boolean isFinal) {</b>
+<b class="nc">&nbsp;        sequenceNumber_ = sequenceNumber;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (nonce == null) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(&quot;Nonce cannot be null.&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (nonce.length &gt; Constants.MAX_NONCE_LENGTH) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;Nonce length is greater than the maximum value of an unsigned byte.&quot;);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        nonce_ = nonce.clone();</b>
+<b class="nc">&nbsp;        isFinalFrame_ = isFinal;</b>
+<b class="nc">&nbsp;        frameContentLength_ = frameContentLen;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize the header into a byte array.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the serialized bytes of the header.
+&nbsp;     */
+&nbsp;    public byte[] toByteArray() {
+&nbsp;        try {
+<b class="nc">&nbsp;            ByteArrayOutputStream outBytes = new ByteArrayOutputStream();</b>
+<b class="nc">&nbsp;            DataOutputStream dataStream = new DataOutputStream(outBytes);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (isFinalFrame_) {</b>
+<b class="nc">&nbsp;                dataStream.writeInt(Constants.ENDFRAME_SEQUENCE_NUMBER);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            dataStream.writeInt(sequenceNumber_);</b>
+<b class="nc">&nbsp;            dataStream.write(nonce_);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (includeFrameSize_ || isFinalFrame_) {</b>
+<b class="nc">&nbsp;                dataStream.writeInt(frameContentLength_);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            dataStream.close();</b>
+<b class="nc">&nbsp;            return outBytes.toByteArray();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Failed to serialize cipher frame headers&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the sequence number in the provided bytes. It looks for 4 bytes
+&nbsp;     * representing a integer primitive type in the provided bytes starting at
+&nbsp;     * the specified offset.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the integer primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the integer
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the sequence
+&nbsp;     *             number.
+&nbsp;     */
+&nbsp;    private int parseSequenceNumber(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        sequenceNumber_ = PrimitivesParser.parseInt(b, off);</b>
+<b class="nc">&nbsp;        return Integer.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the nonce in the provided bytes. It looks for bytes of size
+&nbsp;     * defined by the nonce length in the provided bytes starting at the
+&nbsp;     * specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the nonce
+&nbsp;     * length. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the nonce length.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the nonce.
+&nbsp;     */
+&nbsp;    private int parseNonce(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        final int bytesToParseLen = b.length - off;</b>
+<b class="nc">&nbsp;        if (bytesToParseLen &gt;= nonceLength_) {</b>
+<b class="nc">&nbsp;            nonce_ = Arrays.copyOfRange(b, off, off + nonceLength_);</b>
+<b class="nc">&nbsp;            return nonceLength_;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ParseException(&quot;Not enough bytes to parse nonce&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the frame content length in the provided bytes. It looks for 4
+&nbsp;     * bytes representing an integer primitive type in the provided bytes
+&nbsp;     * starting at the specified off.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * If successful, it returns the size of the parsed bytes which is the size
+&nbsp;     * of the integer primitive type. On failure, it throws a parse exception.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to parse.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use when parsing.
+&nbsp;     * @return
+&nbsp;     *         the size of the parsed bytes which is the size of the integer
+&nbsp;     *         primitive type.
+&nbsp;     * @throws ParseException
+&nbsp;     *             if there are not sufficient bytes to parse the frame content
+&nbsp;     *             length.
+&nbsp;     */
+&nbsp;    private int parseFrameContentLength(final byte[] b, final int off) throws ParseException {
+<b class="nc">&nbsp;        frameContentLength_ = PrimitivesParser.parseInt(b, off);</b>
+<b class="nc">&nbsp;        if (frameContentLength_ &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new BadCiphertextException(&quot;Invalid frame length in ciphertext&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Integer.SIZE / Byte.SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialize the provided bytes starting at the specified offset to
+&nbsp;     * construct an instance of this class.
+&nbsp;     * 
+&nbsp;     * &lt;p&gt;
+&nbsp;     * This method parses the provided bytes for the individual fields in this
+&nbsp;     * class. This methods also supports partial parsing where not all the bytes
+&nbsp;     * required for parsing the fields successfully are available.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the byte array to deserialize.
+&nbsp;     * @param off
+&nbsp;     *            the offset in the byte array to use for deserialization.
+&nbsp;     * @return
+&nbsp;     *         the number of bytes consumed in deserialization.
+&nbsp;     */
+&nbsp;    public int deserialize(final byte[] b, final int off) {
+<b class="nc">&nbsp;        if (b == null) {</b>
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int parsedBytes = 0;</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            if (sequenceNumber_ == 0) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseSequenceNumber(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // parse the sequence number again if the sequence number parsed in
+&nbsp;            // the previous call is the final frame marker and this frame hasn&#39;t
+&nbsp;            // already been marked final.
+<b class="nc">&nbsp;            if (sequenceNumber_ == Constants.ENDFRAME_SEQUENCE_NUMBER &amp;&amp; !isFinalFrame_) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseSequenceNumber(b, off + parsedBytes);</b>
+<b class="nc">&nbsp;                isFinalFrame_ = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (nonceLength_ &gt; 0 &amp;&amp; nonce_ == null) {</b>
+<b class="nc">&nbsp;                parsedBytes += parseNonce(b, off + parsedBytes);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (includeFrameSize_ || isFinalFrame_) {</b>
+<b class="nc">&nbsp;                if (frameContentLength_ &lt; 0) {</b>
+<b class="nc">&nbsp;                    parsedBytes += parseFrameContentLength(b, off + parsedBytes);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            isComplete_ = true;</b>
+<b class="nc">&nbsp;        } catch (ParseException e) {</b>
+&nbsp;            // this results when we do partial parsing and there aren&#39;t enough
+&nbsp;            // bytes to parse; so just return the bytes parsed thus far.
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return parsedBytes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return if the frame is a final frame. The final frame is identified as
+&nbsp;     * the frame containing the final sequence number marker.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         true if final frame; false otherwise.
+&nbsp;     */
+&nbsp;    public boolean isFinalFrame() {
+<b class="nc">&nbsp;        return isFinalFrame_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Check if this object has all the header fields populated and available
+&nbsp;     * for reading.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         true if this object containing the single block header fields
+&nbsp;     *         is complete; false otherwise.
+&nbsp;     */
+&nbsp;    public boolean isComplete() {
+<b class="nc">&nbsp;        return isComplete_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the nonce set in the frame header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the bytes containing the nonce set in the frame header.
+&nbsp;     */
+&nbsp;    public byte[] getNonce() {
+<b class="nc">&nbsp;        return nonce_ != null ? nonce_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the frame content length set in the frame header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the frame content length set in the frame header.
+&nbsp;     */
+&nbsp;    public int getFrameContentLength() {
+<b class="nc">&nbsp;        return frameContentLength_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return the frame sequence number set in the frame header.
+&nbsp;     * 
+&nbsp;     * @return
+&nbsp;     *         the frame sequence number set in the frame header.
+&nbsp;     */
+&nbsp;    public int getSequenceNumber() {
+<b class="nc">&nbsp;        return sequenceNumber_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the length of the nonce used in the encryption of the content in the
+&nbsp;     * frame.
+&nbsp;     * 
+&nbsp;     * @param nonceLength
+&nbsp;     *            the length of the nonce used in the encryption of the content
+&nbsp;     *            in the frame.
+&nbsp;     */
+&nbsp;    public void setNonceLength(final short nonceLength) {
+<b class="nc">&nbsp;        nonceLength_ = nonceLength;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the flag to specify whether the frame length needs to be included or
+&nbsp;     * parsed in the header.
+&nbsp;     * 
+&nbsp;     * @param value
+&nbsp;     *            true if the frame length needs to be included or parsed in the
+&nbsp;     *            header; false otherwise
+&nbsp;     */
+&nbsp;    public void includeFrameSize(final boolean value) {
+<b class="nc">&nbsp;        includeFrameSize_ = true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:47</div>
+</div>
+</body>
+</html>

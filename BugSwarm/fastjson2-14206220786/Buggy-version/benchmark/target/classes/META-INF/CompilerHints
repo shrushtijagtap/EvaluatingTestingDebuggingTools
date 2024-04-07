@@ -1,0 +1,14 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,com/alibaba/fastjson2/benchmark/ASCIICheck.f0_vec
+inline,com/alibaba/fastjson2/benchmark/ASCIICheck.f1
+inline,com/alibaba/fastjson2/benchmark/ASCIICheck.f2_vec
+inline,com/alibaba/fastjson2/benchmark/ASCIICheck.f3
+inline,com/alibaba/fastjson2/benchmark/SpaceCheckWorestBenchmark.CharacterIsWhitespace
+inline,com/alibaba/fastjson2/benchmark/SpaceCheckWorestBenchmark.spaceBitAnd
+inline,com/alibaba/fastjson2/benchmark/SpaceCheckWorestBenchmark.spaceOr
+inline,com/alibaba/fastjson2/benchmark/SpaceCheckWorestBenchmark.spaceOrPreCheck
+inline,com/alibaba/fastjson2/benchmark/SpaceCheckWorestBenchmark.spaceSwitch

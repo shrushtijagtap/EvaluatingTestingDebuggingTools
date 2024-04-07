@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GroupTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: GroupTree (org.traccar.database)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GroupTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GroupTree$TreeNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.Group;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class GroupTree {
+&nbsp;
+&nbsp;    private static class TreeNode {
+&nbsp;
+&nbsp;        private Group group;
+&nbsp;        private Device device;
+<b class="nc">&nbsp;        private Collection&lt;TreeNode&gt; children = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        TreeNode(Group group) {</b>
+<b class="nc">&nbsp;            this.group = group;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TreeNode(Device device) {</b>
+<b class="nc">&nbsp;            this.device = device;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public int hashCode() {
+<b class="nc">&nbsp;            if (group != null) {</b>
+<b class="nc">&nbsp;                return (int) group.getId();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return (int) device.getId();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public boolean equals(Object obj) {
+<b class="nc">&nbsp;            if (!(obj instanceof TreeNode)) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            TreeNode other = (TreeNode) obj;</b>
+<b class="nc">&nbsp;            if (other == this) {</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (group != null &amp;&amp; other.group != null) {</b>
+<b class="nc">&nbsp;                return group.getId() == other.group.getId();</b>
+<b class="nc">&nbsp;            } else if (device != null &amp;&amp; other.device != null) {</b>
+<b class="nc">&nbsp;                return device.getId() == other.device.getId();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Group getGroup() {
+<b class="nc">&nbsp;            return group;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Device getDevice() {
+<b class="nc">&nbsp;            return device;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setParent(TreeNode parent) {
+<b class="nc">&nbsp;            if (parent != null) {</b>
+<b class="nc">&nbsp;                parent.children.add(this);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Collection&lt;TreeNode&gt; getChildren() {
+<b class="nc">&nbsp;            return children;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private final Map&lt;Long, TreeNode&gt; groupMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public GroupTree(Collection&lt;Group&gt; groups, Collection&lt;Device&gt; devices) {</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Group group : groups) {</b>
+<b class="nc">&nbsp;            groupMap.put(group.getId(), new TreeNode(group));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (TreeNode node : groupMap.values()) {</b>
+<b class="nc">&nbsp;            if (node.getGroup().getGroupId() != 0) {</b>
+<b class="nc">&nbsp;                node.setParent(groupMap.get(node.getGroup().getGroupId()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        Map&lt;Long, TreeNode&gt; deviceMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Device device : devices) {</b>
+<b class="nc">&nbsp;            deviceMap.put(device.getId(), new TreeNode(device));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for (TreeNode node : deviceMap.values()) {</b>
+<b class="nc">&nbsp;            if (node.getDevice().getGroupId() != 0) {</b>
+<b class="nc">&nbsp;                node.setParent(groupMap.get(node.getDevice().getGroupId()));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Group&gt; getGroups(long groupId) {
+<b class="nc">&nbsp;        Set&lt;TreeNode&gt; results = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        getNodes(results, groupMap.get(groupId));</b>
+<b class="nc">&nbsp;        Collection&lt;Group&gt; groups = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (TreeNode node : results) {</b>
+<b class="nc">&nbsp;            if (node.getGroup() != null) {</b>
+<b class="nc">&nbsp;                groups.add(node.getGroup());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return groups;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Device&gt; getDevices(long groupId) {
+<b class="nc">&nbsp;        Set&lt;TreeNode&gt; results = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        getNodes(results, groupMap.get(groupId));</b>
+<b class="nc">&nbsp;        Collection&lt;Device&gt; devices = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (TreeNode node : results) {</b>
+<b class="nc">&nbsp;            if (node.getDevice() != null) {</b>
+<b class="nc">&nbsp;                devices.add(node.getDevice());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return devices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void getNodes(Set&lt;TreeNode&gt; results, TreeNode node) {
+<b class="nc">&nbsp;        if (node != null) {</b>
+<b class="nc">&nbsp;            for (TreeNode child : node.getChildren()) {</b>
+<b class="nc">&nbsp;                results.add(child);</b>
+<b class="nc">&nbsp;                getNodes(results, child);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:56</div>
+</div>
+</body>
+</html>

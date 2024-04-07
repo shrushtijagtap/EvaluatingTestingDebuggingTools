@@ -1,0 +1,421 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NavigilProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: NavigilProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NavigilProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/154)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2013 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.Checksum;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.helper.UnitsConverter;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class NavigilProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public NavigilProtocolDecoder(NavigilProtocol protocol) {
+<b class="nc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final int LEAP_SECONDS_DELTA = 25;
+&nbsp;
+&nbsp;    public static final int MSG_ERROR = 2;
+&nbsp;    public static final int MSG_INDICATION = 4;
+&nbsp;    public static final int MSG_CONN_OPEN = 5;
+&nbsp;    public static final int MSG_CONN_CLOSE = 6;
+&nbsp;    public static final int MSG_SYSTEM_REPORT = 7;
+&nbsp;    public static final int MSG_UNIT_REPORT = 8;
+&nbsp;    public static final int MSG_GEOFENCE_ALARM = 10;
+&nbsp;    public static final int MSG_INPUT_ALARM = 11;
+&nbsp;    public static final int MSG_TG2_REPORT = 12;
+&nbsp;    public static final int MSG_POSITION_REPORT = 13;
+&nbsp;    public static final int MSG_POSITION_REPORT_2 = 15;
+&nbsp;    public static final int MSG_SNAPSHOT4 = 17;
+&nbsp;    public static final int MSG_TRACKING_DATA = 18;
+&nbsp;    public static final int MSG_MOTION_ALARM = 19;
+&nbsp;    public static final int MSG_ACKNOWLEDGEMENT = 255;
+&nbsp;
+&nbsp;    private static Date convertTimestamp(long timestamp) {
+<b class="nc">&nbsp;        return new Date((timestamp - LEAP_SECONDS_DELTA) * 1000);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private int senderSequenceNumber = 1;</b>
+&nbsp;
+&nbsp;    private void sendAcknowledgment(Channel channel, int sequenceNumber) {
+<b class="nc">&nbsp;        ChannelBuffer data = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 4);</b>
+<b class="nc">&nbsp;        data.writeShort(sequenceNumber);</b>
+<b class="nc">&nbsp;        data.writeShort(0); // OK</b>
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer header = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 20);</b>
+<b class="nc">&nbsp;        header.writeByte(1); header.writeByte(0);</b>
+<b class="nc">&nbsp;        header.writeShort(senderSequenceNumber++);</b>
+<b class="nc">&nbsp;        header.writeShort(MSG_ACKNOWLEDGEMENT);</b>
+<b class="nc">&nbsp;        header.writeShort(header.capacity() + data.capacity());</b>
+<b class="nc">&nbsp;        header.writeShort(0);</b>
+<b class="nc">&nbsp;        header.writeShort(Checksum.crc16(Checksum.CRC16_CCITT_FALSE, data.toByteBuffer()));</b>
+<b class="nc">&nbsp;        header.writeInt(0);</b>
+<b class="nc">&nbsp;        header.writeInt((int) (System.currentTimeMillis() / 1000) + LEAP_SECONDS_DELTA);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (channel != null) {</b>
+<b class="nc">&nbsp;            channel.write(ChannelBuffers.copiedBuffer(header, data));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseUnitReport(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(true);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // report trigger</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_FLAGS, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES_VISIBLE, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;        position.set(&quot;gpsAntennaState&quot;, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(buf.readUnsignedShort() * 0.194384);</b>
+<b class="nc">&nbsp;        position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_DISTANCE, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_CHARGE, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(buf.readUnsignedInt()));</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseTg2Report(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setValid(true);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // report trigger</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // reserved</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // assisted GPS age</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(buf.readUnsignedInt()));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES_VISIBLE, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(buf.readUnsignedShort() * 0.194384);</b>
+<b class="nc">&nbsp;        position.setCourse(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+<b class="nc">&nbsp;        position.set(&quot;maximumSpeed&quot;, buf.readUnsignedShort());</b>
+<b class="nc">&nbsp;        position.set(&quot;minimumSpeed&quot;, buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.PREFIX_IO + 1, buf.readUnsignedShort()); // VSAUT1 voltage</b>
+<b class="nc">&nbsp;        position.set(Position.PREFIX_IO + 2, buf.readUnsignedShort()); // VSAUT2 voltage</b>
+<b class="nc">&nbsp;        position.set(Position.PREFIX_IO + 3, buf.readUnsignedShort()); // solar voltage</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parsePositionReport(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber, long timestamp) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(timestamp));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readMedium() * 0.00002);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readMedium() * 0.00002);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+<b class="nc">&nbsp;        position.setCourse(buf.readUnsignedByte() * 2);</b>
+&nbsp;
+<b class="nc">&nbsp;        short flags = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        position.setValid((flags &amp; 0x80) == 0x80 &amp;&amp; (flags &amp; 0x40) == 0x40);</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // reserved</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parsePositionReport2(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber, long timestamp) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(timestamp));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // report trigger</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+&nbsp;
+<b class="nc">&nbsp;        short flags = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        position.setValid((flags &amp; 0x80) == 0x80 &amp;&amp; (flags &amp; 0x40) == 0x40);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseSnapshot4(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // report trigger</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // position fix source</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // GNSS fix quality</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // GNSS assistance age</b>
+&nbsp;
+<b class="nc">&nbsp;        long flags = buf.readUnsignedInt();</b>
+<b class="nc">&nbsp;        position.setValid((flags &amp; 0x0400) == 0x0400);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(buf.readUnsignedInt()));</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setAltitude(buf.readUnsignedShort());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES_VISIBLE, buf.readUnsignedByte());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(buf.readUnsignedShort() * 0.194384);</b>
+<b class="nc">&nbsp;        position.setCourse(buf.readUnsignedShort() * 0.1);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(&quot;maximumSpeed&quot;, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(&quot;minimumSpeed&quot;, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.PREFIX_IO + 1, buf.readUnsignedByte()); // supply voltage 1</b>
+<b class="nc">&nbsp;        position.set(Position.PREFIX_IO + 2, buf.readUnsignedByte()); // supply voltage 2</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Position parseTrackingData(
+&nbsp;            DeviceSession deviceSession, ChannelBuffer buf, int sequenceNumber, long timestamp) {
+<b class="nc">&nbsp;        Position position = new Position();</b>
+<b class="nc">&nbsp;        position.setProtocol(getProtocolName());</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_INDEX, sequenceNumber);</b>
+<b class="nc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+<b class="nc">&nbsp;        position.setTime(convertTimestamp(timestamp));</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // tracking mode</b>
+&nbsp;
+<b class="nc">&nbsp;        short flags = buf.readUnsignedByte();</b>
+<b class="nc">&nbsp;        position.setValid((flags &amp; 0x01) == 0x01);</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // duration</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setLatitude(buf.readInt() * 0.0000001);</b>
+<b class="nc">&nbsp;        position.setLongitude(buf.readInt() * 0.0000001);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));</b>
+<b class="nc">&nbsp;        position.setCourse(buf.readUnsignedByte() * 2.0);</b>
+&nbsp;
+<b class="nc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_BATTERY, buf.readUnsignedShort() * 0.001);</b>
+<b class="nc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());</b>
+&nbsp;
+<b class="nc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // protocol version</b>
+<b class="nc">&nbsp;        buf.readUnsignedByte(); // version id</b>
+<b class="nc">&nbsp;        int sequenceNumber = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        int messageId = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="nc">&nbsp;        int flags = buf.readUnsignedShort();</b>
+<b class="nc">&nbsp;        buf.readUnsignedShort(); // checksum</b>
+&nbsp;
+<b class="nc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, String.valueOf(buf.readUnsignedInt()));</b>
+<b class="nc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        long timestamp = buf.readUnsignedInt();</b>
+&nbsp;
+<b class="nc">&nbsp;        if ((flags &amp; 0x1) == 0x0) {</b>
+<b class="nc">&nbsp;            sendAcknowledgment(channel, sequenceNumber);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        switch (messageId) {</b>
+&nbsp;            case MSG_UNIT_REPORT:
+<b class="nc">&nbsp;                return parseUnitReport(deviceSession, buf, sequenceNumber);</b>
+&nbsp;            case MSG_TG2_REPORT:
+<b class="nc">&nbsp;                return parseTg2Report(deviceSession, buf, sequenceNumber);</b>
+&nbsp;            case MSG_POSITION_REPORT:
+<b class="nc">&nbsp;                return parsePositionReport(deviceSession, buf, sequenceNumber, timestamp);</b>
+&nbsp;            case MSG_POSITION_REPORT_2:
+<b class="nc">&nbsp;                return parsePositionReport2(deviceSession, buf, sequenceNumber, timestamp);</b>
+&nbsp;            case MSG_SNAPSHOT4:
+<b class="nc">&nbsp;                return parseSnapshot4(deviceSession, buf, sequenceNumber);</b>
+&nbsp;            case MSG_TRACKING_DATA:
+<b class="nc">&nbsp;                return parseTrackingData(deviceSession, buf, sequenceNumber, timestamp);</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                Log.warning(new UnsupportedOperationException(String.valueOf(messageId)));</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:38</div>
+</div>
+</body>
+</html>

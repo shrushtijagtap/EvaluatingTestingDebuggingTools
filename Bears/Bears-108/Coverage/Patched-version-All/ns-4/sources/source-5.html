@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EncryptionContextSerializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk.internal</a>
+</div>
+
+<h1>Coverage Summary for Class: EncryptionContextSerializer (com.amazonaws.encryptionsdk.internal)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EncryptionContextSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk.internal;
+&nbsp;
+&nbsp;import java.nio.BufferOverflowException;
+&nbsp;import java.nio.BufferUnderflowException;
+&nbsp;import java.nio.ByteBuffer;
+&nbsp;import java.nio.ByteOrder;
+&nbsp;import java.nio.CharBuffer;
+&nbsp;import java.nio.charset.CharacterCodingException;
+&nbsp;import java.nio.charset.CharsetDecoder;
+&nbsp;import java.nio.charset.CharsetEncoder;
+&nbsp;import java.nio.charset.CodingErrorAction;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Map.Entry;
+&nbsp;import java.util.SortedMap;
+&nbsp;import java.util.TreeMap;
+&nbsp;
+&nbsp;import com.amazonaws.encryptionsdk.exception.AwsCryptoException;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class provides methods that serialize and deserialize the encryption
+&nbsp; * context provided as a map containing key-value pairs comprised of strings.
+&nbsp; */
+&nbsp;public class EncryptionContextSerializer {
+&nbsp;    private EncryptionContextSerializer() {
+&nbsp;        // Prevent instantiation
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Serialize the encryption context provided as a map containing key-value
+&nbsp;     * pairs comprised of strings into a byte array.
+&nbsp;     * 
+&nbsp;     * @param encryptionContext
+&nbsp;     *            the map containing the encryption context to serialize.
+&nbsp;     * @return
+&nbsp;     *         serialized bytes of the encryption context.
+&nbsp;     */
+&nbsp;    public static byte[] serialize(Map&lt;String, String&gt; encryptionContext) {
+<b class="nc">&nbsp;        if (encryptionContext == null)</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (encryptionContext.size() == 0) {</b>
+<b class="nc">&nbsp;            return new byte[0];</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Make sure we don&#39;t accidentally overwrite anything.
+<b class="nc">&nbsp;        encryptionContext = Collections.unmodifiableMap(encryptionContext);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (encryptionContext.size() &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;The number of entries in encryption context exceeds the allowed maximum &quot; + Short.MAX_VALUE);
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final ByteBuffer result = ByteBuffer.allocate(Short.MAX_VALUE);</b>
+<b class="nc">&nbsp;        result.order(ByteOrder.BIG_ENDIAN);</b>
+&nbsp;        // write the number of key-value entries first
+<b class="nc">&nbsp;        result.putShort((short) encryptionContext.size());</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            final CharsetEncoder encoder = StandardCharsets.UTF_8.newEncoder();</b>
+&nbsp;
+&nbsp;            // ensure all failures in encoder are reported.
+<b class="nc">&nbsp;            encoder.onMalformedInput(CodingErrorAction.REPORT);</b>
+<b class="nc">&nbsp;            encoder.onUnmappableCharacter(CodingErrorAction.REPORT);</b>
+&nbsp;
+<b class="nc">&nbsp;            final SortedMap&lt;ByteBuffer, ByteBuffer&gt; binaryEntries = new TreeMap&lt;&gt;(new Utils.ComparingByteBuffers());</b>
+<b class="nc">&nbsp;            for (Entry&lt;String, String&gt; mapEntry : encryptionContext.entrySet()) {</b>
+<b class="nc">&nbsp;                if (mapEntry.getKey() == null || mapEntry.getValue() == null) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(</b>
+&nbsp;                            &quot;All keys and values in excryption context must be non-null.&quot;);
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (mapEntry.getKey().isEmpty() || mapEntry.getValue().isEmpty()) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(</b>
+&nbsp;                            &quot;All keys and values in excryption context must be non-empty.&quot;);
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                final ByteBuffer keyBytes = encoder.encode(CharBuffer.wrap(mapEntry.getKey()));</b>
+<b class="nc">&nbsp;                final ByteBuffer valueBytes = encoder.encode(CharBuffer.wrap(mapEntry.getValue()));</b>
+&nbsp;
+&nbsp;                // check for duplicate entries.
+<b class="nc">&nbsp;                if (binaryEntries.put(keyBytes, valueBytes) != null) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Encryption context contains duplicate entries.&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (keyBytes.limit() &gt; Short.MAX_VALUE || valueBytes.limit() &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(</b>
+&nbsp;                            &quot;All keys and values in excryption context must be shorter than &quot; + Short.MAX_VALUE);
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            for (final Entry&lt;ByteBuffer, ByteBuffer&gt; entry : binaryEntries.entrySet()) {</b>
+&nbsp;                // actual serialization happens here
+<b class="nc">&nbsp;                result.putShort((short) entry.getKey().limit());</b>
+<b class="nc">&nbsp;                result.put(entry.getKey());</b>
+<b class="nc">&nbsp;                result.putShort((short) entry.getValue().limit());</b>
+<b class="nc">&nbsp;                result.put(entry.getValue());</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            // get and return the bytes that have been serialized
+<b class="nc">&nbsp;            result.flip();</b>
+<b class="nc">&nbsp;            final byte[] encryptionContextBytes = new byte[result.limit()];</b>
+<b class="nc">&nbsp;            result.get(encryptionContextBytes);</b>
+&nbsp;
+<b class="nc">&nbsp;            return encryptionContextBytes;</b>
+<b class="nc">&nbsp;        } catch (CharacterCodingException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Encryption context contains an invalid unicode character&quot;);</b>
+<b class="nc">&nbsp;        } catch (BufferOverflowException e) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(</b>
+&nbsp;                    &quot;The number of bytes in encryption context exceeds the allowed maximum &quot; + Short.MAX_VALUE,
+&nbsp;                    e);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deserialize the provided byte array into a map containing key-value
+&nbsp;     * pairs comprised of strings.
+&nbsp;     * 
+&nbsp;     * @param b
+&nbsp;     *            the bytes to deserialize into a map representing the
+&nbsp;     *            encryption context.
+&nbsp;     * @return
+&nbsp;     *         the map containing key-value pairs comprised of strings.
+&nbsp;     */
+&nbsp;    public static Map&lt;String, String&gt; deserialize(final byte[] b) {
+&nbsp;        try {
+<b class="nc">&nbsp;            if (b == null) {</b>
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (b.length == 0) {</b>
+<b class="nc">&nbsp;                return (Collections.&lt;String, String&gt; emptyMap());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final ByteBuffer encryptionContextBytes = ByteBuffer.wrap(b);</b>
+&nbsp;
+&nbsp;            // retrieve the number of entries first
+<b class="nc">&nbsp;            final int entryCount = encryptionContextBytes.getShort();</b>
+<b class="nc">&nbsp;            if (entryCount &lt;= 0 || entryCount &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                throw new AwsCryptoException(</b>
+&nbsp;                        &quot;The number of entries in encryption context must be greater than 0 and smaller than &quot;
+&nbsp;                                + Short.MAX_VALUE);
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            final CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();</b>
+&nbsp;
+&nbsp;            // ensure all failures in decoder are reported.
+<b class="nc">&nbsp;            decoder.onMalformedInput(CodingErrorAction.REPORT);</b>
+<b class="nc">&nbsp;            decoder.onUnmappableCharacter(CodingErrorAction.REPORT);</b>
+&nbsp;
+<b class="nc">&nbsp;            final Map&lt;String, String&gt; result = new HashMap&lt;&gt;(entryCount);</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; entryCount; i++) {</b>
+&nbsp;                // retrieve key
+<b class="nc">&nbsp;                final int keyLen = encryptionContextBytes.getShort();</b>
+<b class="nc">&nbsp;                if (keyLen &lt;= 0 || keyLen &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Key length must be greater than 0 and smaller than &quot;</b>
+&nbsp;                            + Short.MAX_VALUE);
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                final ByteBuffer keyBytes = encryptionContextBytes.slice();</b>
+<b class="nc">&nbsp;                keyBytes.limit(keyLen);</b>
+<b class="nc">&nbsp;                encryptionContextBytes.position(encryptionContextBytes.position() + keyLen);</b>
+&nbsp;
+<b class="nc">&nbsp;                final int valueLen = encryptionContextBytes.getShort();</b>
+<b class="nc">&nbsp;                if (valueLen &lt;= 0 || valueLen &gt; Short.MAX_VALUE) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Value length must be greater than 0 and smaller than &quot;</b>
+&nbsp;                            + Short.MAX_VALUE);
+&nbsp;                }
+&nbsp;
+&nbsp;                // retrieve value
+<b class="nc">&nbsp;                final ByteBuffer valueBytes = encryptionContextBytes.slice();</b>
+<b class="nc">&nbsp;                valueBytes.limit(valueLen);</b>
+<b class="nc">&nbsp;                encryptionContextBytes.position(encryptionContextBytes.position() + valueLen);</b>
+&nbsp;
+<b class="nc">&nbsp;                final CharBuffer keyChars = decoder.decode(keyBytes);</b>
+<b class="nc">&nbsp;                final CharBuffer valueChars = decoder.decode(valueBytes);</b>
+&nbsp;
+&nbsp;                // check for duplicate entries.
+<b class="nc">&nbsp;                if (result.put(keyChars.toString(), valueChars.toString()) != null) {</b>
+<b class="nc">&nbsp;                    throw new AwsCryptoException(&quot;Encryption context contains duplicate entries.&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            return result;</b>
+<b class="nc">&nbsp;        } catch (CharacterCodingException e) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Encryption context contains an invalid unicode character&quot;);</b>
+<b class="nc">&nbsp;        } catch (BufferUnderflowException e) {</b>
+<b class="nc">&nbsp;            throw new AwsCryptoException(&quot;Invalid encryption context. Expected more bytes.&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:53</div>
+</div>
+</body>
+</html>

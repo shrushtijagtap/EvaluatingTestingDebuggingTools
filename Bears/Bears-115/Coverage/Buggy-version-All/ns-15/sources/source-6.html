@@ -1,0 +1,745 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DataManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.database</a>
+</div>
+
+<h1>Coverage Summary for Class: DataManager (org.traccar.database)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/82)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/348)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.database;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLClassLoader;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import javax.naming.InitialContext;
+&nbsp;import javax.sql.DataSource;
+&nbsp;
+&nbsp;import liquibase.Contexts;
+&nbsp;import liquibase.Liquibase;
+&nbsp;import liquibase.database.Database;
+&nbsp;import liquibase.database.DatabaseFactory;
+&nbsp;import liquibase.exception.LiquibaseException;
+&nbsp;import liquibase.resource.FileSystemResourceAccessor;
+&nbsp;import liquibase.resource.ResourceAccessor;
+&nbsp;
+&nbsp;import org.traccar.Config;
+&nbsp;import org.traccar.helper.Log;
+&nbsp;import org.traccar.model.AttributeAlias;
+&nbsp;import org.traccar.model.AttributePermission;
+&nbsp;import org.traccar.model.Calendar;
+&nbsp;import org.traccar.model.CalendarPermission;
+&nbsp;import org.traccar.model.Attribute;
+&nbsp;import org.traccar.model.Device;
+&nbsp;import org.traccar.model.DeviceAttribute;
+&nbsp;import org.traccar.model.DevicePermission;
+&nbsp;import org.traccar.model.Event;
+&nbsp;import org.traccar.model.Geofence;
+&nbsp;import org.traccar.model.Group;
+&nbsp;import org.traccar.model.GroupAttribute;
+&nbsp;import org.traccar.model.GroupGeofence;
+&nbsp;import org.traccar.model.GroupPermission;
+&nbsp;import org.traccar.model.Notification;
+&nbsp;import org.traccar.model.Position;
+&nbsp;import org.traccar.model.Server;
+&nbsp;import org.traccar.model.Statistics;
+&nbsp;import org.traccar.model.User;
+&nbsp;import org.traccar.model.UserPermission;
+&nbsp;import org.traccar.model.DeviceGeofence;
+&nbsp;import org.traccar.model.GeofencePermission;
+&nbsp;
+&nbsp;import com.zaxxer.hikari.HikariConfig;
+&nbsp;import com.zaxxer.hikari.HikariDataSource;
+&nbsp;
+&nbsp;public class DataManager {
+&nbsp;
+&nbsp;    private final Config config;
+&nbsp;
+&nbsp;    private DataSource dataSource;
+&nbsp;
+<b class="nc">&nbsp;    public DataManager(Config config) throws Exception {</b>
+<b class="nc">&nbsp;        this.config = config;</b>
+&nbsp;
+<b class="nc">&nbsp;        initDatabase();</b>
+<b class="nc">&nbsp;        initDatabaseSchema();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public DataSource getDataSource() {
+<b class="nc">&nbsp;        return dataSource;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initDatabase() throws Exception {
+&nbsp;
+<b class="nc">&nbsp;        String jndiName = config.getString(&quot;database.jndi&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (jndiName != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            dataSource = (DataSource) new InitialContext().lookup(jndiName);</b>
+&nbsp;
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            String driverFile = config.getString(&quot;database.driverFile&quot;);</b>
+<b class="nc">&nbsp;            if (driverFile != null) {</b>
+<b class="nc">&nbsp;                URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();</b>
+<b class="nc">&nbsp;                Method method = URLClassLoader.class.getDeclaredMethod(&quot;addURL&quot;, URL.class);</b>
+<b class="nc">&nbsp;                method.setAccessible(true);</b>
+<b class="nc">&nbsp;                method.invoke(classLoader, new File(driverFile).toURI().toURL());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String driver = config.getString(&quot;database.driver&quot;);</b>
+<b class="nc">&nbsp;            if (driver != null) {</b>
+<b class="nc">&nbsp;                Class.forName(driver);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            HikariConfig hikariConfig = new HikariConfig();</b>
+<b class="nc">&nbsp;            hikariConfig.setDriverClassName(config.getString(&quot;database.driver&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setJdbcUrl(config.getString(&quot;database.url&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setUsername(config.getString(&quot;database.user&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setPassword(config.getString(&quot;database.password&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setConnectionInitSql(config.getString(&quot;database.checkConnection&quot;, &quot;SELECT 1&quot;));</b>
+<b class="nc">&nbsp;            hikariConfig.setIdleTimeout(600000);</b>
+&nbsp;
+<b class="nc">&nbsp;            int maxPoolSize = config.getInteger(&quot;database.maxPoolSize&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (maxPoolSize != 0) {</b>
+<b class="nc">&nbsp;                hikariConfig.setMaximumPoolSize(maxPoolSize);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            dataSource = new HikariDataSource(hikariConfig);</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private String getQuery(String key) {
+<b class="nc">&nbsp;        String query = config.getString(key);</b>
+<b class="nc">&nbsp;        if (query == null) {</b>
+<b class="nc">&nbsp;            Log.info(&quot;Query not provided: &quot; + key);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return query;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initDatabaseSchema() throws SQLException, LiquibaseException {
+&nbsp;
+<b class="nc">&nbsp;        if (config.hasKey(&quot;database.changelog&quot;)) {</b>
+&nbsp;
+<b class="nc">&nbsp;            ResourceAccessor resourceAccessor = new FileSystemResourceAccessor();</b>
+&nbsp;
+<b class="nc">&nbsp;            Database database = DatabaseFactory.getInstance().openDatabase(</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.url&quot;),</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.user&quot;),</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.password&quot;),</b>
+&nbsp;                    null, resourceAccessor);
+&nbsp;
+<b class="nc">&nbsp;            Liquibase liquibase = new Liquibase(</b>
+<b class="nc">&nbsp;                    config.getString(&quot;database.changelog&quot;), resourceAccessor, database);</b>
+&nbsp;
+<b class="nc">&nbsp;            liquibase.clearCheckSums();</b>
+&nbsp;
+<b class="nc">&nbsp;            liquibase.update(new Contexts());</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public User login(String email, String password) throws SQLException {
+<b class="nc">&nbsp;        User user = QueryBuilder.create(dataSource, getQuery(&quot;database.loginUser&quot;))</b>
+<b class="nc">&nbsp;                .setString(&quot;email&quot;, email)</b>
+<b class="nc">&nbsp;                .executeQuerySingle(User.class);</b>
+<b class="nc">&nbsp;        if (user != null &amp;&amp; user.isPasswordValid(password)) {</b>
+<b class="nc">&nbsp;            return user;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;User&gt; getUsers() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectUsersAll&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(User.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addUser(User user) throws SQLException {
+<b class="nc">&nbsp;        user.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertUser&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(user)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateUser(User user) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateUser&quot;))</b>
+<b class="nc">&nbsp;                .setObject(user)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;        if (user.getHashedPassword() != null) {</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(&quot;database.updateUserPassword&quot;))</b>
+<b class="nc">&nbsp;                .setObject(user)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeUser(long userId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteUser&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, userId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;DevicePermission&gt; getDevicePermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectDevicePermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(DevicePermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;GroupPermission&gt; getGroupPermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGroupPermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(GroupPermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Device&gt; getAllDevices() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectDevicesAll&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Device.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addDevice(Device device) throws SQLException {
+<b class="nc">&nbsp;        device.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertDevice&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(device)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateDevice(Device device) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateDevice&quot;))</b>
+<b class="nc">&nbsp;                .setObject(device)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateDeviceStatus(Device device) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateDeviceStatus&quot;))</b>
+<b class="nc">&nbsp;                .setObject(device)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeDevice(long deviceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteDevice&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void linkDevice(long userId, long deviceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkDevice&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkDevice(long userId, long deviceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkDevice&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Group&gt; getAllGroups() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGroupsAll&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Group.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addGroup(Group group) throws SQLException {
+<b class="nc">&nbsp;        group.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertGroup&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(group)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateGroup(Group group) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateGroup&quot;))</b>
+<b class="nc">&nbsp;                .setObject(group)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeGroup(long groupId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteGroup&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, groupId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void linkGroup(long userId, long groupId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkGroup&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkGroup(long userId, long groupId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkGroup&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Position&gt; getPositions(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectPositions&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Position.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Position getPosition(long positionId) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectPosition&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, positionId)</b>
+<b class="nc">&nbsp;                .executeQuerySingle(Position.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addPosition(Position position) throws SQLException {
+<b class="nc">&nbsp;        position.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertPosition&quot;), true)</b>
+<b class="nc">&nbsp;                .setDate(&quot;now&quot;, new Date())</b>
+<b class="nc">&nbsp;                .setObject(position)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateLatestPosition(Position position) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateLatestPosition&quot;))</b>
+<b class="nc">&nbsp;                .setDate(&quot;now&quot;, new Date())</b>
+<b class="nc">&nbsp;                .setObject(position)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Position&gt; getLatestPositions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectLatestPositions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Position.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clearHistory() throws SQLException {
+<b class="nc">&nbsp;        long historyDays = config.getInteger(&quot;database.historyDays&quot;);</b>
+<b class="nc">&nbsp;        if (historyDays != 0) {</b>
+<b class="nc">&nbsp;            Date timeLimit = new Date(System.currentTimeMillis() - historyDays * 24 * 3600 * 1000);</b>
+<b class="nc">&nbsp;            Log.debug(&quot;Clearing history earlier than &quot; + new SimpleDateFormat(Log.DATE_FORMAT).format(timeLimit));</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(&quot;database.deletePositions&quot;))</b>
+<b class="nc">&nbsp;                    .setDate(&quot;serverTime&quot;, timeLimit)</b>
+<b class="nc">&nbsp;                    .executeUpdate();</b>
+<b class="nc">&nbsp;            QueryBuilder.create(dataSource, getQuery(&quot;database.deleteEvents&quot;))</b>
+<b class="nc">&nbsp;                    .setDate(&quot;serverTime&quot;, timeLimit)</b>
+<b class="nc">&nbsp;                    .executeUpdate();</b>
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Server getServer() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectServers&quot;))</b>
+<b class="nc">&nbsp;                .executeQuerySingle(Server.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateServer(Server server) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateServer&quot;))</b>
+<b class="nc">&nbsp;                .setObject(server)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Event getEvent(long eventId) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectEvent&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, eventId)</b>
+<b class="nc">&nbsp;                .executeQuerySingle(Event.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addEvent(Event event) throws SQLException {
+<b class="nc">&nbsp;        event.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertEvent&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(event)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Event&gt; getEvents(long deviceId, Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectEvents&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Event.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Geofence&gt; getGeofences() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGeofencesAll&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Geofence.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addGeofence(Geofence geofence) throws SQLException {
+<b class="nc">&nbsp;        geofence.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertGeofence&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(geofence)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateGeofence(Geofence geofence) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setObject(geofence)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeGeofence(long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;GeofencePermission&gt; getGeofencePermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGeofencePermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(GeofencePermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkGeofence(long userId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkGeofence(long userId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;GroupGeofence&gt; getGroupGeofences() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGroupGeofences&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(GroupGeofence.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkGroupGeofence(long groupId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkGroupGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkGroupGeofence(long groupId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkGroupGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;DeviceGeofence&gt; getDeviceGeofences() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectDeviceGeofences&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(DeviceGeofence.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkDeviceGeofence(long deviceId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkDeviceGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkDeviceGeofence(long deviceId, long geofenceId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkDeviceGeofence&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;geofenceId&quot;, geofenceId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Notification&gt; getNotifications() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectNotifications&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Notification.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addNotification(Notification notification) throws SQLException {
+<b class="nc">&nbsp;        notification.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertNotification&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(notification)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateNotification(Notification notification) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateNotification&quot;))</b>
+<b class="nc">&nbsp;                .setObject(notification)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeNotification(Notification notification) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteNotification&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, notification.getId())</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;AttributeAlias&gt; getAttributeAliases() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectAttributeAliases&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(AttributeAlias.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAttributeAlias(AttributeAlias attributeAlias) throws SQLException {
+<b class="nc">&nbsp;        attributeAlias.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertAttributeAlias&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(attributeAlias)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateAttributeAlias(AttributeAlias attributeAlias) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateAttributeAlias&quot;))</b>
+<b class="nc">&nbsp;                .setObject(attributeAlias)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeAttributeAlias(long attributeAliasId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteAttributeAlias&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, attributeAliasId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Statistics&gt; getStatistics(Date from, Date to) throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectStatistics&quot;))</b>
+<b class="nc">&nbsp;                .setDate(&quot;from&quot;, from)</b>
+<b class="nc">&nbsp;                .setDate(&quot;to&quot;, to)</b>
+<b class="nc">&nbsp;                .executeQuery(Statistics.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addStatistics(Statistics statistics) throws SQLException {
+<b class="nc">&nbsp;        statistics.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertStatistics&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(statistics)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Calendar&gt; getCalendars() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectCalendarsAll&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Calendar.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addCalendar(Calendar calendar) throws SQLException {
+<b class="nc">&nbsp;        calendar.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertCalendar&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(calendar)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateCalendar(Calendar calendar) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateCalendar&quot;))</b>
+<b class="nc">&nbsp;                .setObject(calendar)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeCalendar(long calendarId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteCalendar&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, calendarId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;CalendarPermission&gt; getCalendarPermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectCalendarPermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(CalendarPermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkCalendar(long userId, long calendarId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkCalendar&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;calendarId&quot;, calendarId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkCalendar(long userId, long calendarId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkCalendar&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;calendarId&quot;, calendarId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;UserPermission&gt; getUserPermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectUserPermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(UserPermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkUser(long userId, long managedUserId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkUser&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;managedUserId&quot;, managedUserId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkUser(long userId, long managedUserId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkUser&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;managedUserId&quot;, managedUserId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Attribute&gt; getAttributes() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectAttributes&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(Attribute.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAttribute(Attribute attribute) throws SQLException {
+<b class="nc">&nbsp;        attribute.setId(QueryBuilder.create(dataSource, getQuery(&quot;database.insertAttribute&quot;), true)</b>
+<b class="nc">&nbsp;                .setObject(attribute)</b>
+<b class="nc">&nbsp;                .executeUpdate());</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void updateAttribute(Attribute attribute) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.updateAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setObject(attribute)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void removeAttribute(long computedAttributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.deleteAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;id&quot;, computedAttributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;AttributePermission&gt; getAttributePermissions() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectAttributePermissions&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(AttributePermission.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkAttribute(long userId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkAttribute(long userId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;userId&quot;, userId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;GroupAttribute&gt; getGroupAttributes() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectGroupAttributes&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(GroupAttribute.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkGroupAttribute(long groupId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkGroupAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkGroupAttribute(long groupId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkGroupAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;groupId&quot;, groupId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;DeviceAttribute&gt; getDeviceAttributes() throws SQLException {
+<b class="nc">&nbsp;        return QueryBuilder.create(dataSource, getQuery(&quot;database.selectDeviceAttributes&quot;))</b>
+<b class="nc">&nbsp;                .executeQuery(DeviceAttribute.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void linkDeviceAttribute(long deviceId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.linkDeviceAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void unlinkDeviceAttribute(long deviceId, long attributeId) throws SQLException {
+<b class="nc">&nbsp;        QueryBuilder.create(dataSource, getQuery(&quot;database.unlinkDeviceAttribute&quot;))</b>
+<b class="nc">&nbsp;                .setLong(&quot;deviceId&quot;, deviceId)</b>
+<b class="nc">&nbsp;                .setLong(&quot;attributeId&quot;, attributeId)</b>
+<b class="nc">&nbsp;                .executeUpdate();</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:58</div>
+</div>
+</body>
+</html>

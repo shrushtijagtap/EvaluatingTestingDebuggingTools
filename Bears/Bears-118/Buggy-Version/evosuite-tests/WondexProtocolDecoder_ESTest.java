@@ -26,7 +26,7 @@ import org.traccar.protocol.WondexProtocolDecoder;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class WondexProtocolDecoder_ESTest extends WondexProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       WondexProtocol wondexProtocol0 = new WondexProtocol();
       WondexProtocolDecoder wondexProtocolDecoder0 = new WondexProtocolDecoder(wondexProtocol0);
@@ -46,7 +46,7 @@ public class WondexProtocolDecoder_ESTest extends WondexProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       WondexProtocol wondexProtocol0 = new WondexProtocol();
       WondexProtocolDecoder wondexProtocolDecoder0 = new WondexProtocolDecoder(wondexProtocol0);
@@ -66,7 +66,7 @@ public class WondexProtocolDecoder_ESTest extends WondexProtocolDecoder_ESTest_s
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       WondexProtocol wondexProtocol0 = new WondexProtocol();
       WondexProtocolDecoder wondexProtocolDecoder0 = new WondexProtocolDecoder(wondexProtocol0);

@@ -1,0 +1,339 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TzoneProtocolDecoder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.protocol</a>
+</div>
+
+<h1>Coverage Summary for Class: TzoneProtocolDecoder (org.traccar.protocol)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TzoneProtocolDecoder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (92/104)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.protocol;
+&nbsp;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffer;
+&nbsp;import org.jboss.netty.buffer.ChannelBuffers;
+&nbsp;import org.jboss.netty.channel.Channel;
+&nbsp;import org.traccar.BaseProtocolDecoder;
+&nbsp;import org.traccar.DeviceSession;
+&nbsp;import org.traccar.helper.BitUtil;
+&nbsp;import org.traccar.helper.DateBuilder;
+&nbsp;import org.traccar.model.CellTower;
+&nbsp;import org.traccar.model.Network;
+&nbsp;import org.traccar.model.Position;
+&nbsp;
+&nbsp;import java.net.SocketAddress;
+&nbsp;
+&nbsp;public class TzoneProtocolDecoder extends BaseProtocolDecoder {
+&nbsp;
+&nbsp;    public TzoneProtocolDecoder(TzoneProtocol protocol) {
+<b class="fc">&nbsp;        super(protocol);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String decodeAlarm(Short value) {
+<b class="fc">&nbsp;        switch (value) {</b>
+&nbsp;            case 0x01:
+<b class="nc">&nbsp;                return Position.ALARM_SOS;</b>
+&nbsp;            case 0x10:
+<b class="nc">&nbsp;                return Position.ALARM_LOW_BATTERY;</b>
+&nbsp;            case 0x11:
+<b class="nc">&nbsp;                return Position.ALARM_OVERSPEED;</b>
+&nbsp;            case 0x14:
+<b class="nc">&nbsp;                return Position.ALARM_BREAKING;</b>
+&nbsp;            case 0x15:
+<b class="nc">&nbsp;                return Position.ALARM_ACCELERATION;</b>
+&nbsp;            case 0x30:
+<b class="nc">&nbsp;                return Position.ALARM_PARKING;</b>
+&nbsp;            case 0x42:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_EXIT;</b>
+&nbsp;            case 0x43:
+<b class="nc">&nbsp;                return Position.ALARM_GEOFENCE_ENTER;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodeCards(Position position, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        int index = 1;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 4; i++) {</b>
+&nbsp;
+<b class="fc">&nbsp;            int blockLength = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;            int blockEnd = buf.readerIndex() + blockLength;</b>
+&nbsp;
+<b class="fc">&nbsp;            if (blockLength &gt; 0) {</b>
+&nbsp;
+<b class="fc">&nbsp;                int count = buf.readUnsignedByte();</b>
+<b class="fc">&nbsp;                for (int j = 0; j &lt; count; j++) {</b>
+&nbsp;
+<b class="fc">&nbsp;                    int length = buf.readUnsignedByte();</b>
+&nbsp;
+<b class="fc">&nbsp;                    boolean odd = length % 2 != 0;</b>
+<b class="fc">&nbsp;                    if (odd) {</b>
+<b class="fc">&nbsp;                        length += 1;</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    String num = ChannelBuffers.hexDump(buf.readBytes(length / 2));</b>
+&nbsp;
+<b class="fc">&nbsp;                    if (odd) {</b>
+<b class="fc">&nbsp;                        num = num.substring(1);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    position.set(&quot;card&quot; + index, num);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            buf.readerIndex(blockEnd);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void decodePassengers(Position position, ChannelBuffer buf) {
+&nbsp;
+<b class="fc">&nbsp;        int blockLength = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        int blockEnd = buf.readerIndex() + blockLength;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (blockLength &gt; 0) {</b>
+&nbsp;
+<b class="nc">&nbsp;            position.set(&quot;passengersOn&quot;, buf.readUnsignedMedium());</b>
+<b class="nc">&nbsp;            position.set(&quot;passengersOff&quot;, buf.readUnsignedMedium());</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.readerIndex(blockEnd);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Object decode(
+&nbsp;            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+&nbsp;
+<b class="fc">&nbsp;        ChannelBuffer buf = (ChannelBuffer) msg;</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.skipBytes(2); // header</b>
+<b class="fc">&nbsp;        buf.readUnsignedShort(); // length</b>
+<b class="fc">&nbsp;        if (buf.readUnsignedShort() != 0x2424) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int hardware = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        long firmware = buf.readUnsignedInt();</b>
+&nbsp;
+<b class="fc">&nbsp;        String imei = ChannelBuffers.hexDump(buf.readBytes(8)).substring(1);</b>
+<b class="fc">&nbsp;        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);</b>
+<b class="fc">&nbsp;        if (deviceSession == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Position position = new Position();</b>
+<b class="fc">&nbsp;        position.setProtocol(getProtocolName());</b>
+<b class="fc">&nbsp;        position.setDeviceId(deviceSession.getDeviceId());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_VERSION_HW, hardware);</b>
+<b class="fc">&nbsp;        position.set(Position.KEY_VERSION_FW, firmware);</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setDeviceTime(new DateBuilder()</b>
+<b class="fc">&nbsp;                .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="fc">&nbsp;                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte()).getDate());</b>
+&nbsp;
+&nbsp;        // GPS info
+&nbsp;
+<b class="fc">&nbsp;        int blockLength = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        int blockEnd = buf.readerIndex() + blockLength;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (blockLength &lt; 22) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());</b>
+&nbsp;
+&nbsp;        double lat;
+&nbsp;        double lon;
+&nbsp;
+<b class="fc">&nbsp;        if (hardware == 0x10A || hardware == 0x10B) {</b>
+<b class="fc">&nbsp;            lat = buf.readUnsignedInt() / 600000.0;</b>
+<b class="fc">&nbsp;            lon = buf.readUnsignedInt() / 600000.0;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            lat = buf.readUnsignedInt() / 100000.0 / 60.0;</b>
+<b class="fc">&nbsp;            lon = buf.readUnsignedInt() / 100000.0 / 60.0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        position.setFixTime(new DateBuilder()</b>
+<b class="fc">&nbsp;                .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())</b>
+<b class="fc">&nbsp;                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte()).getDate());</b>
+&nbsp;
+<b class="fc">&nbsp;        position.setSpeed(buf.readUnsignedShort() * 0.01);</b>
+&nbsp;
+<b class="fc">&nbsp;        position.set(Position.KEY_ODOMETER, buf.readUnsignedMedium());</b>
+&nbsp;
+<b class="fc">&nbsp;        int flags = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        position.setCourse(BitUtil.to(flags, 9));</b>
+<b class="fc">&nbsp;        if (!BitUtil.check(flags, 10)) {</b>
+<b class="fc">&nbsp;            lat = -lat;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setLatitude(lat);</b>
+<b class="fc">&nbsp;        if (BitUtil.check(flags, 9)) {</b>
+<b class="fc">&nbsp;            lon = -lon;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        position.setLongitude(lon);</b>
+<b class="fc">&nbsp;        position.setValid(BitUtil.check(flags, 11));</b>
+&nbsp;
+<b class="fc">&nbsp;        buf.readerIndex(blockEnd);</b>
+&nbsp;
+&nbsp;        // LBS info
+&nbsp;
+<b class="fc">&nbsp;        blockLength = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        blockEnd = buf.readerIndex() + blockLength;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (blockLength &gt; 0 &amp;&amp; (hardware == 0x10A || hardware == 0x10B)) {</b>
+<b class="fc">&nbsp;            position.setNetwork(new Network(</b>
+<b class="fc">&nbsp;                    CellTower.fromLacCid(buf.readUnsignedShort(), buf.readUnsignedShort())));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.readerIndex(blockEnd);</b>
+&nbsp;
+&nbsp;        // Status info
+&nbsp;
+<b class="fc">&nbsp;        blockLength = buf.readUnsignedShort();</b>
+<b class="fc">&nbsp;        blockEnd = buf.readerIndex() + blockLength;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (blockLength &gt;= 13) {</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_ALARM, decodeAlarm(buf.readUnsignedByte()));</b>
+<b class="fc">&nbsp;            position.set(&quot;terminalInfo&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_IO + 1, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_RSSI, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(&quot;gsmStatus&quot;, buf.readUnsignedByte());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_BATTERY, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.KEY_POWER, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_ADC + 2, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (blockLength &gt;= 15) {</b>
+<b class="fc">&nbsp;            position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedShort());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        buf.readerIndex(blockEnd);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (hardware == 0x10A || hardware == 0x10B) {</b>
+&nbsp;
+<b class="fc">&nbsp;            decodeCards(position, buf);</b>
+&nbsp;
+<b class="fc">&nbsp;            buf.skipBytes(buf.readUnsignedShort()); // temperature</b>
+<b class="fc">&nbsp;            buf.skipBytes(buf.readUnsignedShort()); // lock</b>
+&nbsp;
+<b class="fc">&nbsp;            decodePassengers(position, buf);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:47</div>
+</div>
+</body>
+</html>

@@ -41,7 +41,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSerializerBase_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       Date date0 = new Date(1L);
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -50,7 +50,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       System.setCurrentTimeMillis((-125L));
@@ -60,7 +60,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
@@ -68,7 +68,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(sqlDateSerializer0.isUnwrappingSerializer());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
       TypeFactory typeFactory0 = TypeFactory.defaultInstance();
@@ -80,7 +80,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(arrayType0.isMapLikeType());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       JsonFactory jsonFactory0 = new JsonFactory();
       ObjectMapper objectMapper0 = new ObjectMapper(jsonFactory0);
@@ -90,7 +90,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer();
       JsonFactory jsonFactory0 = new JsonFactory();
@@ -100,7 +100,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -117,7 +117,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       JsonFormatVisitorWrapper.Base jsonFormatVisitorWrapper_Base0 = new JsonFormatVisitorWrapper.Base();
       TypeFactory typeFactory0 = TypeFactory.defaultInstance();
@@ -139,7 +139,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -156,7 +156,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       // Undeclared exception!
@@ -172,7 +172,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       Boolean boolean0 = Boolean.TRUE;
       SqlDateSerializer sqlDateSerializer0 = new SqlDateSerializer(boolean0);
@@ -181,7 +181,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(sqlDateSerializer0.isUnwrappingSerializer());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       JsonFactory jsonFactory0 = new JsonFactory();
       Class<StdDateFormat> class0 = StdDateFormat.class;
@@ -193,7 +193,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertEquals(1, jsonNode0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       Class<StdDateFormat> class0 = StdDateFormat.class;
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -203,7 +203,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertEquals(1, jsonNode0.size());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       Date date0 = new Date(0L);
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -212,7 +212,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       Date date0 = new Date((-1524L));
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -221,7 +221,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       DateSerializer dateSerializer0 = DateSerializer.instance;
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -229,7 +229,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       Date date0 = new Date(1L);
       DateSerializer dateSerializer0 = DateSerializer.instance;
@@ -237,7 +237,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertFalse(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       Instant instant0 = MockInstant.ofEpochSecond((long) 0, (long) 0);
@@ -246,14 +246,14 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test18()  throws Throwable  {
       CalendarSerializer calendarSerializer0 = new CalendarSerializer();
       boolean boolean0 = calendarSerializer0.isEmpty((Calendar) null);
       assertTrue(boolean0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test19()  throws Throwable  {
       DateSerializer dateSerializer0 = DateSerializer.instance;
       ObjectMapper objectMapper0 = new ObjectMapper();
@@ -262,7 +262,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       assertSame(dateSerializer0, jsonSerializer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test20()  throws Throwable  {
       DateSerializer dateSerializer0 = new DateSerializer();
       DefaultSerializerProvider.Impl defaultSerializerProvider_Impl0 = new DefaultSerializerProvider.Impl();
@@ -284,7 +284,7 @@ public class EvosuiteDateTimeSerializerBase_ESTest extends EvosuiteDateTimeSeria
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test21()  throws Throwable  {
       TypeFactory typeFactory0 = TypeFactory.defaultInstance();
       Class<Object> class0 = Object.class;

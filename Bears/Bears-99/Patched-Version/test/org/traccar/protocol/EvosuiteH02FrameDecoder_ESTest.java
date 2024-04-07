@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test00()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-759));
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -70,7 +70,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test01()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -96,7 +96,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext2, channel1, channelBuffer2);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test02()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-759));
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -137,7 +137,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test03()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-759));
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -180,7 +180,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test04()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -205,7 +205,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext2, channel1, channelBuffer2);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test05()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -217,7 +217,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext0, channel0, channelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test06()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -240,7 +240,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext2, channel1, channelBuffer1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test07()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(0);
       assertEquals(1024, h02FrameDecoder0.getMaxCumulationBufferComponents());
@@ -270,7 +270,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder1.decode(channelHandlerContext2, channel2, channelBuffer2);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test08()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5795);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -289,7 +289,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder2.decode(channelHandlerContext1, (Channel) null, channelBuffer1);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test09()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5795);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -318,7 +318,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test10()  throws Throwable  {
       int int0 = 42;
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(42);
@@ -334,7 +334,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext1, channel0, channelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test11()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(5);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -346,7 +346,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode(channelHandlerContext0, channel0, channelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test12()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(255);
       Channel channel0 = mock(Channel.class, new ViolatedAssumptionAnswer());
@@ -357,7 +357,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.decode((ChannelHandlerContext) null, channel0, channelBuffer0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test13()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(0);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -366,7 +366,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       Channel channel0 = mock(Channel.class, new ViolatedAssumptionAnswer());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test14()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder((-622));
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -376,14 +376,14 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       h02FrameDecoder0.childChannelOpen(channelHandlerContext1, childChannelStateEvent0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test15()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(1434);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
       Channel channel0 = mock(Channel.class, new ViolatedAssumptionAnswer());
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test16()  throws Throwable  {
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(0);
       ChannelHandlerContext channelHandlerContext0 = mock(ChannelHandlerContext.class, new ViolatedAssumptionAnswer());
@@ -401,7 +401,7 @@ public class EvosuiteH02FrameDecoder_ESTest extends EvosuiteH02FrameDecoder_ESTe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test17()  throws Throwable  {
       int int0 = 0;
       H02FrameDecoder h02FrameDecoder0 = new H02FrameDecoder(0);

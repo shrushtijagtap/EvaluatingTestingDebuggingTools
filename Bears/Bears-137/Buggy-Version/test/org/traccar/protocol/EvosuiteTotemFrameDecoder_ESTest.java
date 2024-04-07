@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteTotemFrameDecoder_ESTest extends EvosuiteTotemFrameDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       byte[] byteArray0 = new byte[18];
@@ -31,7 +31,7 @@ public class EvosuiteTotemFrameDecoder_ESTest extends EvosuiteTotemFrameDecoder_
       assertNull(object0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       DefaultLocalServerChannelFactory defaultLocalServerChannelFactory0 = new DefaultLocalServerChannelFactory();
@@ -49,7 +49,7 @@ public class EvosuiteTotemFrameDecoder_ESTest extends EvosuiteTotemFrameDecoder_
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       byte[] byteArray0 = new byte[0];
@@ -58,7 +58,7 @@ public class EvosuiteTotemFrameDecoder_ESTest extends EvosuiteTotemFrameDecoder_
       assertNull(object0);
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test3()  throws Throwable  {
       TotemFrameDecoder totemFrameDecoder0 = new TotemFrameDecoder();
       byte[] byteArray0 = new byte[10];

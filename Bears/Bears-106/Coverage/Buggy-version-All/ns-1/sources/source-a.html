@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MasterKeyRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.amazonaws.encryptionsdk</a>
+</div>
+
+<h1>Coverage Summary for Class: MasterKeyRequest (com.amazonaws.encryptionsdk)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MasterKeyRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MasterKeyRequest$1</td>
+  </tr>
+  <tr>
+    <td class="name">MasterKeyRequest$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+&nbsp; * 
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You may not use this file except
+&nbsp; * in compliance with the License. A copy of the License is located at
+&nbsp; * 
+&nbsp; * http://aws.amazon.com/apache2.0
+&nbsp; * 
+&nbsp; * or in the &quot;license&quot; file accompanying this file. This file is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+&nbsp; * specific language governing permissions and limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.amazonaws.encryptionsdk;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;
+&nbsp;/**
+&nbsp; * Contains information which {@link MasterKeyProvider}s can use to select which {@link MasterKey}s
+&nbsp; * to use to protect a given plaintext. This class is immutable.
+&nbsp; */
+<b class="nc">&nbsp;public final class MasterKeyRequest {</b>
+&nbsp;    private final Map&lt;String, String&gt; encryptionContext_;
+&nbsp;    private final boolean isStreaming_;
+&nbsp;    private final byte[] plaintext_;
+&nbsp;    private final long size_;
+&nbsp;
+&nbsp;    private MasterKeyRequest(final Map&lt;String, String&gt; encryptionContext, final boolean isStreaming,
+<b class="nc">&nbsp;            final byte[] plaintext, final long size) {</b>
+<b class="nc">&nbsp;        encryptionContext_ = encryptionContext;</b>
+<b class="nc">&nbsp;        isStreaming_ = isStreaming;</b>
+<b class="nc">&nbsp;        plaintext_ = plaintext;</b>
+<b class="nc">&nbsp;        size_ = size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;        return encryptionContext_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isStreaming() {
+<b class="nc">&nbsp;        return isStreaming_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The plaintext, if available, to be protected by this request. Otherwise, {@code null}.
+&nbsp;     */
+&nbsp;    public byte[] getPlaintext() {
+<b class="nc">&nbsp;        return plaintext_ != null ? plaintext_.clone() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The size of the plaintext, if available. Otherwise {@code -1}.
+&nbsp;     */
+&nbsp;    public long getSize() {
+<b class="nc">&nbsp;        return size_;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Builder newBuilder() {
+<b class="nc">&nbsp;        return new Builder();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public final static class Builder {</b>
+<b class="nc">&nbsp;        private Map&lt;String, String&gt; encryptionContext_ = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        private boolean isStreaming_ = false;</b>
+<b class="nc">&nbsp;        private byte[] plaintext_ = null;</b>
+<b class="nc">&nbsp;        private long size_ = -1;</b>
+&nbsp;
+&nbsp;        public Map&lt;String, String&gt; getEncryptionContext() {
+<b class="nc">&nbsp;            return encryptionContext_;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setEncryptionContext(final Map&lt;String, String&gt; encryptionContext) {
+<b class="nc">&nbsp;            encryptionContext_ = encryptionContext;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isStreaming() {
+<b class="nc">&nbsp;            return isStreaming_;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setStreaming(final boolean isStreaming) {
+<b class="nc">&nbsp;            isStreaming_ = isStreaming;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Please note that this does not make a defensive copy of the plaintext and so any
+&nbsp;         * modifications made to the backing array will be reflected in this Builder.
+&nbsp;         */
+&nbsp;        @SuppressFBWarnings(&quot;EI_EXPOSE_REP&quot;)
+&nbsp;        public byte[] getPlaintext() {
+<b class="nc">&nbsp;            return plaintext_;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Please note that this does not make a defensive copy of the plaintext and so any
+&nbsp;         * modifications made to the backing array will be reflected in this Builder.
+&nbsp;         */
+&nbsp;        @SuppressFBWarnings(&quot;EI_EXPOSE_REP&quot;)
+&nbsp;        public Builder setPlaintext(final byte[] plaintext) {
+<b class="nc">&nbsp;            if (size_ != -1) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;The plaintext may only be set if the size has not been explicitly set&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            plaintext_ = plaintext;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder setSize(final long size) {
+<b class="nc">&nbsp;            if (plaintext_ != null) {</b>
+<b class="nc">&nbsp;                throw new IllegalStateException(&quot;Size may only explicitly set when the plaintext is not set&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            size_ = size;</b>
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public long getSize() {
+<b class="nc">&nbsp;            return size_;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public MasterKeyRequest build() {
+<b class="nc">&nbsp;            return new MasterKeyRequest(</b>
+<b class="nc">&nbsp;                    Collections.unmodifiableMap(new HashMap&lt;&gt;(encryptionContext_)),</b>
+&nbsp;                    isStreaming_,
+&nbsp;                    plaintext_,
+&nbsp;                    plaintext_ != null ? plaintext_.length : size_);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:34</div>
+</div>
+</body>
+</html>

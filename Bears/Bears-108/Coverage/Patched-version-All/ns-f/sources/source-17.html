@@ -1,0 +1,651 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UnsupportedDateTimeField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.joda.time.field</a>
+</div>
+
+<h1>Coverage Summary for Class: UnsupportedDateTimeField (org.joda.time.field)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UnsupportedDateTimeField</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/54)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; *  Copyright 2001-2009 Stephen Colebourne
+&nbsp; *
+&nbsp; *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; *  you may not use this file except in compliance with the License.
+&nbsp; *  You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *      http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; *  Unless required by applicable law or agreed to in writing, software
+&nbsp; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; *  See the License for the specific language governing permissions and
+&nbsp; *  limitations under the License.
+&nbsp; */
+&nbsp;package org.joda.time.field;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Locale;
+&nbsp;import org.joda.time.DateTimeField;
+&nbsp;import org.joda.time.DateTimeFieldType;
+&nbsp;import org.joda.time.DurationField;
+&nbsp;import org.joda.time.ReadablePartial;
+&nbsp;
+&nbsp;/**
+&nbsp; * A placeholder implementation to use when a datetime field is not supported.
+&nbsp; * &lt;p&gt;
+&nbsp; * UnsupportedDateTimeField is thread-safe and immutable.
+&nbsp; *
+&nbsp; * @author Brian S O&#39;Neill
+&nbsp; * @since 1.0
+&nbsp; */
+&nbsp;public final class UnsupportedDateTimeField extends DateTimeField implements Serializable {
+&nbsp;
+&nbsp;    /** Serialilzation version */
+&nbsp;    private static final long serialVersionUID = -1934618396111902255L;
+&nbsp;
+&nbsp;    /** The cache of unsupported datetime field instances */
+&nbsp;    private static HashMap&lt;DateTimeFieldType, UnsupportedDateTimeField&gt; cCache;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an instance of UnsupportedDateTimeField for a specific named field.
+&nbsp;     * Names should be of standard format, such as &#39;monthOfYear&#39; or &#39;hourOfDay&#39;.
+&nbsp;     * The returned instance is cached.
+&nbsp;     * 
+&nbsp;     * @param type  the type to obtain
+&nbsp;     * @return the instance
+&nbsp;     * @throws IllegalArgumentException if durationField is null
+&nbsp;     */
+&nbsp;    public static synchronized UnsupportedDateTimeField getInstance(
+&nbsp;            DateTimeFieldType type, DurationField durationField) {
+&nbsp;
+&nbsp;        UnsupportedDateTimeField field;
+<b class="nc">&nbsp;        if (cCache == null) {</b>
+<b class="nc">&nbsp;            cCache = new HashMap&lt;DateTimeFieldType, UnsupportedDateTimeField&gt;(7);</b>
+<b class="nc">&nbsp;            field = null;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            field = cCache.get(type);</b>
+<b class="nc">&nbsp;            if (field != null &amp;&amp; field.getDurationField() != durationField) {</b>
+<b class="nc">&nbsp;                field = null;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (field == null) {</b>
+<b class="nc">&nbsp;            field = new UnsupportedDateTimeField(type, durationField);</b>
+<b class="nc">&nbsp;            cCache.put(type, field);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return field;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** The field type */
+&nbsp;    private final DateTimeFieldType iType;
+&nbsp;    /** The duration of the datetime field */
+&nbsp;    private final DurationField iDurationField;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     * 
+&nbsp;     * @param type  the field type
+&nbsp;     * @param durationField  the duration to use
+&nbsp;     */
+<b class="nc">&nbsp;    private UnsupportedDateTimeField(DateTimeFieldType type, DurationField durationField) {</b>
+<b class="nc">&nbsp;        if (type == null || durationField == null) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        iType = type;</b>
+<b class="nc">&nbsp;        iDurationField = durationField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //-----------------------------------------------------------------------
+&nbsp;    // Design note: Simple accessors return a suitable value, but methods
+&nbsp;    // intended to perform calculations throw an UnsupportedOperationException.
+&nbsp;
+&nbsp;    public DateTimeFieldType getType() {
+<b class="nc">&nbsp;        return iType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return iType.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This field is not supported.
+&nbsp;     *
+&nbsp;     * @return false always
+&nbsp;     */
+&nbsp;    public boolean isSupported() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This field is not lenient.
+&nbsp;     *
+&nbsp;     * @return false always
+&nbsp;     */
+&nbsp;    public boolean isLenient() {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int get(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsText(long instant, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsText(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsText(ReadablePartial partial, int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsText(ReadablePartial partial, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsText(int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsShortText(long instant, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsShortText(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsShortText(ReadablePartial partial, int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsShortText(ReadablePartial partial, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public String getAsShortText(int fieldValue, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delegates to the duration field.
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException if the duration is unsupported
+&nbsp;     */
+&nbsp;    public long add(long instant, int value) {
+<b class="nc">&nbsp;        return getDurationField().add(instant, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delegates to the duration field.
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException if the duration is unsupported
+&nbsp;     */
+&nbsp;    public long add(long instant, long value) {
+<b class="nc">&nbsp;        return getDurationField().add(instant, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int[] add(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int[] addWrapPartial(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long addWrapField(long instant, int value) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int[] addWrapField(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delegates to the duration field.
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException if the duration is unsupported
+&nbsp;     */
+&nbsp;    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        return getDurationField().getDifference(minuendInstant, subtrahendInstant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delegates to the duration field.
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException if the duration is unsupported
+&nbsp;     */
+&nbsp;    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<b class="nc">&nbsp;        return getDurationField().getDifferenceAsLong(minuendInstant, subtrahendInstant);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long set(long instant, int value) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int[] set(ReadablePartial instant, int fieldIndex, int[] values, int newValue) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long set(long instant, String text, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long set(long instant, String text) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int[] set(ReadablePartial instant, int fieldIndex, int[] values, String text, Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Even though this DateTimeField is unsupported, the duration field might
+&nbsp;     * be supported.
+&nbsp;     *
+&nbsp;     * @return a possibly supported DurationField
+&nbsp;     */
+&nbsp;    public DurationField getDurationField() {
+<b class="nc">&nbsp;        return iDurationField;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always returns null.
+&nbsp;     *
+&nbsp;     * @return null always
+&nbsp;     */
+&nbsp;    public DurationField getRangeDurationField() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public boolean isLeap(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getLeapAmount(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always returns null.
+&nbsp;     *
+&nbsp;     * @return null always
+&nbsp;     */
+&nbsp;    public DurationField getLeapDurationField() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMinimumValue() {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMinimumValue(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMinimumValue(ReadablePartial instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMinimumValue(ReadablePartial instant, int[] values) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumValue() {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumValue(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumValue(ReadablePartial instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumValue(ReadablePartial instant, int[] values) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumTextLength(Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public int getMaximumShortTextLength(Locale locale) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long roundFloor(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long roundCeiling(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long roundHalfFloor(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long roundHalfCeiling(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long roundHalfEven(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Always throws UnsupportedOperationException
+&nbsp;     *
+&nbsp;     * @throws UnsupportedOperationException
+&nbsp;     */
+&nbsp;    public long remainder(long instant) {
+<b class="nc">&nbsp;        throw unsupported();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //------------------------------------------------------------------------
+&nbsp;    /**
+&nbsp;     * Get a suitable debug string.
+&nbsp;     * 
+&nbsp;     * @return debug string
+&nbsp;     */
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;UnsupportedDateTimeField&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Ensure proper singleton serialization
+&nbsp;     */
+&nbsp;    private Object readResolve() {
+<b class="nc">&nbsp;        return getInstance(iType, iDurationField);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private UnsupportedOperationException unsupported() {
+<b class="nc">&nbsp;        return new UnsupportedOperationException(iType + &quot; field is unsupported&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:53</div>
+</div>
+</body>
+</html>

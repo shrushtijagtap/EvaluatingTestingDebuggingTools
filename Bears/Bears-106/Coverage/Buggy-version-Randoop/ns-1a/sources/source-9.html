@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocationTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.traccar.helper</a>
+</div>
+
+<h1>Coverage Summary for Class: LocationTree (org.traccar.helper)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LocationTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LocationTree$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocationTree$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LocationTree$Item</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2016 Anton Tananaev (anton@traccar.org)
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;package org.traccar.helper;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class LocationTree {
+&nbsp;
+<b class="nc">&nbsp;    public static class Item {</b>
+&nbsp;
+&nbsp;        private Item left, right;
+&nbsp;        private float x, y;
+&nbsp;        private String data;
+&nbsp;
+&nbsp;        public Item(float x, float y) {
+<b class="nc">&nbsp;            this(x, y, null);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        public Item(float x, float y, String data) {</b>
+<b class="nc">&nbsp;            this.x = x;</b>
+<b class="nc">&nbsp;            this.y = y;</b>
+<b class="nc">&nbsp;            this.data = data;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getData() {
+<b class="nc">&nbsp;            return data;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private float squaredDistance(Item item) {
+<b class="nc">&nbsp;            return (x - item.x) * (x - item.x) + (y - item.y) * (y - item.y);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private float axisSquaredDistance(Item item, int axis) {
+<b class="nc">&nbsp;            if (axis == 0) {</b>
+<b class="nc">&nbsp;                return (x - item.x) * (x - item.x);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                return (y - item.y) * (y - item.y);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private Item root;
+&nbsp;
+<b class="nc">&nbsp;    private ArrayList&lt;Comparator&lt;Item&gt;&gt; comparators = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public LocationTree(List&lt;Item&gt; items) {</b>
+<b class="nc">&nbsp;        comparators.add(new Comparator&lt;Item&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public int compare(Item o1, Item o2) {
+<b class="nc">&nbsp;                return Float.compare(o1.x, o2.x);</b>
+&nbsp;            }
+&nbsp;        });
+<b class="nc">&nbsp;        comparators.add(new Comparator&lt;Item&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public int compare(Item o1, Item o2) {
+<b class="nc">&nbsp;                return Float.compare(o1.y, o2.y);</b>
+&nbsp;            }
+&nbsp;        });
+<b class="nc">&nbsp;        root = createTree(items, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Item createTree(List&lt;Item&gt; items, int depth) {
+<b class="nc">&nbsp;        if (items.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Collections.sort(items, comparators.get(depth % 2));</b>
+<b class="nc">&nbsp;        int currentIndex = items.size() / 2;</b>
+<b class="nc">&nbsp;        Item median = items.get(currentIndex);</b>
+<b class="nc">&nbsp;        median.left = createTree(new ArrayList&lt;&gt;(items.subList(0, currentIndex)), depth + 1);</b>
+<b class="nc">&nbsp;        median.right = createTree(new ArrayList&lt;&gt;(items.subList(currentIndex + 1, items.size())), depth + 1);</b>
+<b class="nc">&nbsp;        return median;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Item findNearest(Item search) {
+<b class="nc">&nbsp;        return findNearest(root, search, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Item findNearest(Item current, Item search, int depth) {
+<b class="nc">&nbsp;        int direction = comparators.get(depth % 2).compare(search, current);</b>
+&nbsp;
+&nbsp;        Item next, other;
+<b class="nc">&nbsp;        if (direction &lt; 0) {</b>
+<b class="nc">&nbsp;            next = current.left;</b>
+<b class="nc">&nbsp;            other = current.right;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            next = current.right;</b>
+<b class="nc">&nbsp;            other = current.left;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Item best = current;</b>
+<b class="nc">&nbsp;        if (next != null) {</b>
+<b class="nc">&nbsp;            best = findNearest(next, search, depth + 1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (current.squaredDistance(search) &lt; best.squaredDistance(search)) {</b>
+<b class="nc">&nbsp;            best = current;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (other != null &amp;&amp; current.axisSquaredDistance(search, depth % 2) &lt; best.squaredDistance(search)) {</b>
+<b class="nc">&nbsp;            Item possibleBest = findNearest(other, search, depth + 1);</b>
+<b class="nc">&nbsp;            if (possibleBest.squaredDistance(search) &lt; best.squaredDistance(search)) {</b>
+<b class="nc">&nbsp;                best = possibleBest;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return best;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-03 10:38</div>
+</div>
+</body>
+</html>

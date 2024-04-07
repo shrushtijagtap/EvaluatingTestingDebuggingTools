@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 @RunWith(EvoRunner.class) @EvoRunnerParameters(mockJVMNonDeterminism = true, useVFS = true, useVNET = true, resetStaticState = true, separateClassLoader = true) 
 public class EvosuiteTelicProtocolDecoder_ESTest extends EvosuiteTelicProtocolDecoder_ESTest_scaffolding {
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test0()  throws Throwable  {
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder((TelicProtocol) null);
       try { 
@@ -33,7 +33,7 @@ public class EvosuiteTelicProtocolDecoder_ESTest extends EvosuiteTelicProtocolDe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test1()  throws Throwable  {
       TelicProtocol telicProtocol0 = mock(TelicProtocol.class, new ViolatedAssumptionAnswer());
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder(telicProtocol0);
@@ -51,7 +51,7 @@ public class EvosuiteTelicProtocolDecoder_ESTest extends EvosuiteTelicProtocolDe
       }
   }
 
-  @Test(timeout = 4000)
+  @Test(timeout = 50)
   public void test2()  throws Throwable  {
       TelicProtocolDecoder telicProtocolDecoder0 = new TelicProtocolDecoder((TelicProtocol) null);
       Object object0 = telicProtocolDecoder0.decode((Channel) null, (SocketAddress) null, "9HB(w]0b!-OSLt7V*");
