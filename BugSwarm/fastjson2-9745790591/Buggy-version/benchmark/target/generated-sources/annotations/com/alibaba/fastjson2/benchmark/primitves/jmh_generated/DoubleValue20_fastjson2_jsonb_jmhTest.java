@@ -156,4 +156,186 @@ public final class DoubleValue20_fastjson2_jsonb_jmhTest {
                     res.allOps++;
                 }
             } catch (Throwable e) {
-                if (!(e instanceof InterruptedExcept
+                if (!(e instanceof InterruptedException)) throw e;
+            }
+            control.preTearDown();
+
+            if (control.isLastIteration()) {
+                f_doublevalue200_0 = null;
+            }
+            res.allOps += res.measuredOps;
+            int batchSize = iterationParams.getBatchSize();
+            int opsPerInv = benchmarkParams.getOpsPerInvocation();
+            res.allOps *= opsPerInv;
+            res.allOps /= batchSize;
+            res.measuredOps *= opsPerInv;
+            res.measuredOps /= batchSize;
+            BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
+            results.add(new AverageTimeResult(ResultRole.PRIMARY, "fastjson2_jsonb", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
+            return results;
+        } else
+            throw new IllegalStateException("Harness failed to distribute threads among groups properly");
+    }
+
+    public static void fastjson2_jsonb_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, DoubleValue20_jmhType l_doublevalue200_0) throws Throwable {
+        long operations = 0;
+        long realTime = 0;
+        result.startTime = System.nanoTime();
+        do {
+            l_doublevalue200_0.fastjson2_jsonb(blackhole);
+            operations++;
+        } while(!control.isDone);
+        result.stopTime = System.nanoTime();
+        result.realTime = realTime;
+        result.measuredOps = operations;
+    }
+
+
+    public BenchmarkTaskResult fastjson2_jsonb_SampleTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+        this.benchmarkParams = control.benchmarkParams;
+        this.iterationParams = control.iterationParams;
+        this.threadParams    = threadParams;
+        this.notifyControl   = control.notifyControl;
+        if (this.blackhole == null) {
+            this.blackhole = new Blackhole("Today's password is swordfish. I understand instantiating Blackholes directly is dangerous.");
+        }
+        if (threadParams.getSubgroupIndex() == 0) {
+            RawResults res = new RawResults();
+            DoubleValue20_jmhType l_doublevalue200_0 = _jmh_tryInit_f_doublevalue200_0(control);
+
+            control.preSetup();
+
+
+            control.announceWarmupReady();
+            while (control.warmupShouldWait) {
+                l_doublevalue200_0.fastjson2_jsonb(blackhole);
+                res.allOps++;
+            }
+
+            notifyControl.startMeasurement = true;
+            int targetSamples = (int) (control.getDuration(TimeUnit.MILLISECONDS) * 20); // at max, 20 timestamps per millisecond
+            int batchSize = iterationParams.getBatchSize();
+            int opsPerInv = benchmarkParams.getOpsPerInvocation();
+            SampleBuffer buffer = new SampleBuffer();
+            fastjson2_jsonb_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_doublevalue200_0);
+            notifyControl.stopMeasurement = true;
+            control.announceWarmdownReady();
+            try {
+                while (control.warmdownShouldWait) {
+                    l_doublevalue200_0.fastjson2_jsonb(blackhole);
+                    res.allOps++;
+                }
+            } catch (Throwable e) {
+                if (!(e instanceof InterruptedException)) throw e;
+            }
+            control.preTearDown();
+
+            if (control.isLastIteration()) {
+                f_doublevalue200_0 = null;
+            }
+            res.allOps += res.measuredOps * batchSize;
+            res.allOps *= opsPerInv;
+            res.allOps /= batchSize;
+            res.measuredOps *= opsPerInv;
+            BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
+            results.add(new SampleTimeResult(ResultRole.PRIMARY, "fastjson2_jsonb", buffer, benchmarkParams.getTimeUnit()));
+            this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
+            return results;
+        } else
+            throw new IllegalStateException("Harness failed to distribute threads among groups properly");
+    }
+
+    public static void fastjson2_jsonb_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, DoubleValue20_jmhType l_doublevalue200_0) throws Throwable {
+        long realTime = 0;
+        long operations = 0;
+        int rnd = (int)System.nanoTime();
+        int rndMask = startRndMask;
+        long time = 0;
+        int currentStride = 0;
+        do {
+            rnd = (rnd * 1664525 + 1013904223);
+            boolean sample = (rnd & rndMask) == 0;
+            if (sample) {
+                time = System.nanoTime();
+            }
+            for (int b = 0; b < batchSize; b++) {
+                if (control.volatileSpoiler) return;
+                l_doublevalue200_0.fastjson2_jsonb(blackhole);
+            }
+            if (sample) {
+                buffer.add((System.nanoTime() - time) / opsPerInv);
+                if (currentStride++ > targetSamples) {
+                    buffer.half();
+                    currentStride = 0;
+                    rndMask = (rndMask << 1) + 1;
+                }
+            }
+            operations++;
+        } while(!control.isDone);
+        startRndMask = Math.max(startRndMask, rndMask);
+        result.realTime = realTime;
+        result.measuredOps = operations;
+    }
+
+
+    public BenchmarkTaskResult fastjson2_jsonb_SingleShotTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+        this.benchmarkParams = control.benchmarkParams;
+        this.iterationParams = control.iterationParams;
+        this.threadParams    = threadParams;
+        this.notifyControl   = control.notifyControl;
+        if (this.blackhole == null) {
+            this.blackhole = new Blackhole("Today's password is swordfish. I understand instantiating Blackholes directly is dangerous.");
+        }
+        if (threadParams.getSubgroupIndex() == 0) {
+            DoubleValue20_jmhType l_doublevalue200_0 = _jmh_tryInit_f_doublevalue200_0(control);
+
+            control.preSetup();
+
+
+            notifyControl.startMeasurement = true;
+            RawResults res = new RawResults();
+            int batchSize = iterationParams.getBatchSize();
+            fastjson2_jsonb_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_doublevalue200_0);
+            control.preTearDown();
+
+            if (control.isLastIteration()) {
+                f_doublevalue200_0 = null;
+            }
+            int opsPerInv = control.benchmarkParams.getOpsPerInvocation();
+            long totalOps = opsPerInv;
+            BenchmarkTaskResult results = new BenchmarkTaskResult(totalOps, totalOps);
+            results.add(new SingleShotResult(ResultRole.PRIMARY, "fastjson2_jsonb", res.getTime(), totalOps, benchmarkParams.getTimeUnit()));
+            this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
+            return results;
+        } else
+            throw new IllegalStateException("Harness failed to distribute threads among groups properly");
+    }
+
+    public static void fastjson2_jsonb_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, DoubleValue20_jmhType l_doublevalue200_0) throws Throwable {
+        long realTime = 0;
+        result.startTime = System.nanoTime();
+        for (int b = 0; b < batchSize; b++) {
+            if (control.volatileSpoiler) return;
+            l_doublevalue200_0.fastjson2_jsonb(blackhole);
+        }
+        result.stopTime = System.nanoTime();
+        result.realTime = realTime;
+    }
+
+    
+    DoubleValue20_jmhType f_doublevalue200_0;
+    
+    DoubleValue20_jmhType _jmh_tryInit_f_doublevalue200_0(InfraControl control) throws Throwable {
+        if (control.isFailing) throw new FailureAssistException();
+        DoubleValue20_jmhType val = f_doublevalue200_0;
+        if (val == null) {
+            val = new DoubleValue20_jmhType();
+            f_doublevalue200_0 = val;
+        }
+        return val;
+    }
+
+
+}
+

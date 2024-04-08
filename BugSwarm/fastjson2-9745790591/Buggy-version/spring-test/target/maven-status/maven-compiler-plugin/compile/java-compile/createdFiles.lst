@@ -1,0 +1,8 @@
+com/alibaba/fastjson2/example/springtest/config/WebSocketConfig.class
+com/alibaba/fastjson2/example/springtest/controller/WebSocket.class
+com/alibaba/fastjson2/example/springtest/controller/JsonViewResolver.class
+com/alibaba/fastjson2/example/springtest/controller/TestController.class
+com/alibaba/fastjson2/example/springtest/entity/User.class
+com/alibaba/fastjson2/example/springtest/SpringTestApplication.class
+com/alibaba/fastjson2/example/springtest/config/WebMvcConfigurer.class
+com/alibaba/fastjson2/example/springtest/config/ChatMessageHandler.class
