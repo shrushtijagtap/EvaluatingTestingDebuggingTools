@@ -1,4 +1,4 @@
-#Sun Apr 07 15:58:08 CDT 2024
+#Sun Apr 07 21:56:55 CDT 2024
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue337/Issue337.java=1712352680003
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonMessageConverter.java=1712352680001
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonRedisSerializerTest.java=1712352680002
@@ -20,9 +20,9 @@ configuration*?=821D83DCD7DE54E86213DD1B15BE4F9DF5A4A4A0
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonWriterModule.java=1712352680000
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPolygonReader.java=1712352680000
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/webservlet/view/FastJsonJsonView.java=1712352680002
-/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest2.java=1712352680003
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonJsonViewUnitTest.java=1712352680002
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonJSONBRedisSerializerTest.java=1712352680003
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest2.java=1712352680003
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/springfox/SwaggerJsonWriterTest.java=1712352680004
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/mock/FastJsonHttpMessageConverterMockTest.java=1712352680004
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonMessageConverterTest.java=1712352680003
@@ -36,6 +36,6 @@ configuration*?=821D83DCD7DE54E86213DD1B15BE4F9DF5A4A4A0
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/codec/Fastjson2Encoder.java=1712352680001
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/v1issues/issue_4100/Issue4138.java=1712352680004
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue256/Issue256.java=1712352680003
-/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue471/Issue471.java=1712352680004
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonJSONBMessageConverterTest.java=1712352680003
+/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue471/Issue471.java=1712352680004
 /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-13283643223/Patched-Version/extension-spring5/src/test/java/com/alibaba/fastjson2/issues/Issue483.java=1712352680002
