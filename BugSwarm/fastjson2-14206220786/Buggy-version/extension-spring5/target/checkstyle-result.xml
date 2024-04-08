@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/websocket/sockjs/FastjsonSockJsMessageCodec.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/webservlet/view/FastJsonJsonView.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/converter/FastJsonHttpMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/codec/Fastjson2Encoder.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/http/codec/Fastjson2Decoder.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonJSONBRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonJSONBRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonWriterModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPointReader.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonReaderModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPolygonReader.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonJSONBMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/springdoc/OpenApiJsonWriterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/v1issues/issue_4100/Issue4138.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/issues/Issue798.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/issues/IssueLiXiaoFei.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/issues/Issue483.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/springfox/SwaggerJsonWriterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonMessageConverterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastjsonSockJsMessageCodecTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonHttpMessageConverterUnitTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/mock/FastJsonHttpMessageConverterMockTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/mock/FastJsonJsonViewMockTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonJSONBRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonJsonViewUnitTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonJSONBMessageConverterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonJSONBRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/Issue1465.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue283/Issue283.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue342/Issue342.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue237/Issue237.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue471/Issue471.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue337/Issue337.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/issues/issue256/Issue256.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/extension-spring5/src/test/java/com/alibaba/fastjson2/spring/FastJsonRedisSerializerTest.java">
+</file>
+</checkstyle>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.alibaba.fastjson2.issues.Issue661
+-------------------------------------------------------------------------------
+Tests run: 200, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.278 s - in com.alibaba.fastjson2.issues.Issue661
