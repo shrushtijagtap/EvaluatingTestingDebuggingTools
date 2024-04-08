@@ -3332,4 +3332,528 @@
 </file>
 <file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue273.java">
 </file>
-<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fast
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue336.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue770.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue727.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue750.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue707.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue642.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue341.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue711.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue746.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue316.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue896.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue678.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue947.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue290.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue793.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue269.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue906.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue843.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue951.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue28.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue117.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue546.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue116.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue454.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue842.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue638.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue442.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue87.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue507.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue854.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue100.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue550.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue383.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue229.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue878.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue897.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue643.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue478.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue751.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue614.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue264.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue771.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue788.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue858.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue225.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue730.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue823.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue570.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue435.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue835.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue423.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue862.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue531.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue474.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue756.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue351.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue582.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue347.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue828.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue740.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue605.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue255.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue412.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue557.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue783.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue296.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue445.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue80.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue89_2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue900.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue516.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue392.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue687.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue541.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue536.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue424.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue648.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue961.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue465.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue367.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue326.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue235.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue409.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue262.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue632.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue274.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue448.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue223.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue389.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue673.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue608.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue464.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue126.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue960.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue599.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue425.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue537.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue921.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue540.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue239.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue669.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue517.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue844.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue81.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue940.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue413.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue106.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue385.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue487.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue891.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue468.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue604.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue829.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue716.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue429.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue757.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue113.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue514.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue902.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue502.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue851.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue914.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue781.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue555.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue410.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue739.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue369.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue607.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue742.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue312.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue596.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue715.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue703.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue492.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue304.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue236.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue959.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue261.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue518.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue762.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue467.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue719.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue430.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue125.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue426.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue923.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue866.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue427.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue431.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue827.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue523.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue37.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue364.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue372.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue610.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue539.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue493.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue647.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue702.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue597.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue128.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue743.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue893.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue104.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue554.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue942.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue446.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue779.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue515.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue684.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue725.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Canal_Issue4186.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue549.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue772.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue764.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue508.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue699.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue363.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue226.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue524.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue436.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue573.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue820.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue709.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue565.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue532.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue861.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue400.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue729.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue512.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue841.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue904.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue504.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue912.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue338.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue553.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue945.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue416.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue695.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue380.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue197.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue482.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue251.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue744.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue314.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue586.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue139.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue640.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue355.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue882.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue752.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue929.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue495.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue591.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue895.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue529.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue769.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue505.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue513.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue682.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue378.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue728.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue397.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue114.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue952.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue476.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue499.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue860.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue564.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue708.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue9.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue460.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue899.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue933.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue525.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue749.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue698.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue362.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue732.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue89.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue27.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/issues/Issue661.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONFactoryTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONWriterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONPathCompilerReflectTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONBTest2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/hsf/HSFTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/hsf/VeryComplexDO.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/hsf/ComponentProtocol.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/hsf/BaseDO.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/hsf/Result.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/rocketmq/RocketMQTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/rocketmq/Issue865.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/rocketmq/BrokerData.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/DoubleTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JDKUtilsTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2_demo/DecodeTest0.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2_demo/JsonGen.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2_demo/MappingDemo.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2_demo/Int2Decoder.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/test/java/com/alibaba/fastjson2_demo/ASMCodeGen.java">
+</file>
+</checkstyle>
